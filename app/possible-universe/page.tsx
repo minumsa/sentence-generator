@@ -1,4 +1,4 @@
-import Test2 from "./Test2";
+import Test2 from "./Test";
 
 export default function Test() {
   return (
