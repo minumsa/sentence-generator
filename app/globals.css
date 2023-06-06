@@ -140,3 +140,18 @@ body::-webkit-scrollbar {
     cursor: pointer;
   }
 }
+
+@media (max-width: 500px) {
+  /* body {
+    height: 50vh;
+  } */
+
+  .test30-div-1 {
+    height: 80vh;
+    width: calc(100%);
+  }
+
+  .test30-div-3-3 {
+    height: 0;
+  }
+}
