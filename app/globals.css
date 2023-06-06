@@ -159,8 +159,8 @@ body::-webkit-scrollbar {
   }
 
   .test30-div-1 {
-    height: 80vh;
-    width: 99vw;
+    height: 85%;
+    width: 100%;
   }
 
   /* .test30-div-1::-webkit-scrollbar {
