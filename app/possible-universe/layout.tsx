@@ -6,8 +6,7 @@ export const metadata = {
   // description:
   //   "데이터에 입력된 주어, 동사, 목적어가 무작위하게 조합되며 다양한 퀴어 문장을 생성한다. 모든 문장은 미래형이며 아직은 완성되지 못한 가능세계를 암시한다.",
   openGraph: {
-    // ...openGraphImage,
-    images: [{ url: "/pu-thumbnail.png", width: 800, height: 600 }],
+    images: [{ url: "/pu-thumbnail-800x400.png", width: 800, height: 400 }],
     locale: "ko_KR",
     siteName: "divdivdiv",
     title: "가능세계: 퀴어 문장 생성기",
