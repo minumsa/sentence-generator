@@ -1,22 +1,14 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
 /* @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@900&display=swap"); */
 
-.scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.target::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
-}
-
 html {
+  margin: 0;
   height: 100%;
   width: 100%;
 }
 
 body {
-  height: 100%;
-  width: 100%;
+  margin: 0;
 
   background-color: #f4f6f7;
   /* background-color: white; */
