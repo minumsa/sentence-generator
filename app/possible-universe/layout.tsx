@@ -17,7 +17,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@dev_carver",
-    images: ["/pu-thumbnail.png"],
+    images: "/pu-thumbnail.png",
     title: "가능세계 — 퀴어 문장 생성기",
   },
 };
