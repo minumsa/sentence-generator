@@ -159,11 +159,7 @@ export default function RandomSentenceGenerator({
   };
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
-
-    if (isRunning) {
-      intervalId = setInterval(generateRandomSentence, 2000);
-    }
+    const intervalId = setInterval(generateRandomSentence, 2000);
 
     // 컴포넌트가 언마운트될 때 setInterval을 정리
     return () => {
@@ -172,12 +168,8 @@ export default function RandomSentenceGenerator({
   }, [isRunning]);
 
   const handleClick = () => {
-    generateRandomSentence();
     setIsRunning(prevIsRunning => !prevIsRunning);
-
-    setTimeout(() => {
-      setIsRunning(true);
-    }, 2000);
+    generateRandomSentence();
   };
 
   const generateRandomColor = () => {
