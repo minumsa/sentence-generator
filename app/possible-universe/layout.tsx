@@ -1,6 +1,5 @@
 import React from "react";
 import RandomSentenceGenerator from "./RandomSentenceGenerator";
-import { openGraphImage } from "./openGraphImage";
 
 export const metadata = {
   title: "가능세계: 퀴어 문장 생성기",
