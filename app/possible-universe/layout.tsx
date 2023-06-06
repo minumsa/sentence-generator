@@ -1,5 +1,5 @@
 import React from "react";
-import Test2 from "./Test";
+import RandomSentenceGenerator from "./RandomSentenceGenerator";
 
 type Props = {
   children: React.ReactNode;
@@ -9,7 +9,11 @@ type Props = {
 function TestLayout() {
   return (
     <div>
-      <Test2 />
+      <RandomSentenceGenerator
+        initialSubject={"Pride"}
+        initialObject={"Month"}
+        initialVerb={"2023"}
+      />
       {/* <div className="w-full">{children}</div> */}
     </div>
   );
