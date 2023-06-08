@@ -56,6 +56,8 @@ export default function Lambs() {
     "Korean gays tend to prefer men without double eyelids. Also, the bigger the muscle, the more popular it is.",
     "Where did all the old gays go?",
     "What do you think love is? Have you ever loved someone? I have one.",
+    "I don't want you to ignore me as a sheep. I'm much more beneficial to the world than you are.",
+    "Will you stop touching me? Of course I know my fur is soft. I'll sue you if you touch more.",
   ];
 
   useEffect(() => {
@@ -156,30 +158,31 @@ export default function Lambs() {
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className={"lambs-fade-in-box"}>
-          <div>{`🐑 x ${count}`}</div>
+          <div className="sheep-count">{`🐑 x ${count}`}</div>
           <div className="sheep-timer">
             {toggleTimer ? <Timer /> : "00:00:00"}
           </div>
-
           <div className="born">{`How many seconds is a sheep born? ${seconds}s`}</div>
-          <button onClick={handleInterval}>interval</button>
-          <button
-            onClick={() => {
-              setToggle(true);
-              setToggleTimer(true);
-            }}
-          >
-            start
-          </button>
-          <button
-            onClick={() => {
-              setToggle(true);
-              setToggleTimer(true);
-            }}
-          >
-            stop
-          </button>
-          <button onClick={resetPositions}>reset</button>
+          <div className="sheep-button-container">
+            <button onClick={handleInterval}>interval</button>
+            <button
+              onClick={() => {
+                setToggle(true);
+                setToggleTimer(true);
+              }}
+            >
+              start
+            </button>
+            <button
+              onClick={() => {
+                setToggle(true);
+                setToggleTimer(true);
+              }}
+            >
+              stop
+            </button>
+            <button onClick={resetPositions}>reset</button>
+          </div>
         </div>
         {positions.map((position, index) => (
           <div
