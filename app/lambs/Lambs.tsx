@@ -23,7 +23,7 @@ export default function Lambs() {
     "I am a sheep.",
     "I am not a human slave.",
     "I dream of freedom.",
-    "I am a feminist.",
+    "I am a feminist. You don't like feminists? I don't like you either. And you obviously don't know anything about feminism.",
     "I am a homosexual sheep.",
     "I am a heterosexual sheep.",
     "Hi, is everything all right?",
