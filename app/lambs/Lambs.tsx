@@ -23,8 +23,8 @@ export default function Lambs() {
 
     if (window.innerWidth <= 500) {
       maxX = 350;
-      minY = 530;
-      maxY = 770;
+      minY = 560;
+      maxY = 850;
     }
 
     const generateRandomPosition = () => {
