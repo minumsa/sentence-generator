@@ -16,7 +16,7 @@ export default function Lambs() {
     { x: 350, y: 610, scaleX: 1, fade: false, image: "/sheep_1.png" },
   ]);
   const [count, setCount] = useState<number>(1);
-  const [value, setValue] = useState<number>(5);
+  const [value, setValue] = useState<number>(10);
 
   useEffect(() => {
     let maxX: number = 2000; // 이미지의 가로 크기
@@ -91,35 +91,16 @@ export default function Lambs() {
     }
 
     return () => clearTimeout(fadeTimeout);
-  }, [count]);
+  }, [count, positions]);
 
   const playAudio = () => {
     const audio = new Audio("/sheep.mp3");
     audio.play();
   };
 
-  useEffect(() => {
-    simulateClick();
-  }, []);
-
-  const simulateClick = (): void => {
-    const lambElement: Element | null =
-      document.querySelector(".lambs-div-1 > div");
-    if (lambElement) {
-      (lambElement as HTMLElement).click();
-    }
-  };
-
   return (
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
-        <Image
-          src="/field.jpg"
-          // layout="responsive"
-          width={1}
-          height={1}
-          alt="Picture of the field"
-        />
         <div className={"lambs-fade-in-box"}>
           {/* {count > 1 ? `There are ${count} lambs` : `There is a lamb`} */}
           <div>{`🐑 x ${count}`}</div>
@@ -127,10 +108,11 @@ export default function Lambs() {
           <input
             className="born-input"
             type="number"
-            min={1}
+            min={10}
             value={value}
+            step={10}
             onChange={e => {
-              setValue(Number(e.target.value));
+              setValue(parseInt(e.target.value, 10));
             }}
           ></input>
         </div>

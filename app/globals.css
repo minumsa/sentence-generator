@@ -190,18 +190,27 @@ body::-webkit-scrollbar {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: #0e1111;
 }
 
 .born {
   margin-top: 10px;
   margin-bottom: 0;
   font-size: 25px;
+  color: #0e1111;
 }
 
 .born-input {
   margin-top: 0;
   font-size: 25px;
   height: 35px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .born,
+  .lambs-fade-in-box {
+    color: #f4f6f7;
+  }
 }
 
 @media (max-width: 500px) {
@@ -219,5 +228,6 @@ body::-webkit-scrollbar {
 
   .born-input {
     font-size: 20px;
+    margin-top: 20px;
   }
 }
