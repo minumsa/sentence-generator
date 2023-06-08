@@ -103,7 +103,7 @@ export default function Lambs() {
       "5"
     );
     const seconds = parseInt(userInput);
-    if (!isNaN(seconds) && seconds > 0) {
+    if (!isNaN(seconds) && seconds > 2) {
       setSeconds(seconds);
       setToggle(true);
     } else {
