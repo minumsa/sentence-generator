@@ -75,10 +75,6 @@ export default function Lambs() {
       });
     }, 100);
 
-    if (count > 1) {
-      playAudio();
-    }
-
     return () => clearTimeout(fadeTimeout);
   }, [count, positions]);
 
@@ -107,23 +103,6 @@ export default function Lambs() {
     }
   };
 
-  const playAudio = () => {
-    const audio = new Audio("/sheep.mp3");
-    audio.play();
-  };
-
-  const handleSheepClick = (index: number) => {
-    const sheep = positions[index];
-    if (!sheep.fade) {
-      setPositions(prevPositions => {
-        const updatedPositions = [...prevPositions];
-        updatedPositions[index].fade = true;
-        return updatedPositions;
-      });
-      playAudio();
-    }
-  };
-
   return (
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
@@ -149,9 +128,6 @@ export default function Lambs() {
               transform: `scaleX(${position.scaleX})`,
               opacity: position.fade ? 1 : 0,
               cursor: "pointer",
-            }}
-            onClick={() => {
-              handleSheepClick(index);
             }}
           >
             <div>
