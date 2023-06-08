@@ -17,8 +17,8 @@ export default function Lambs() {
   ]);
   const [count, setCount] = useState<number>(0);
   const [toggle, setToggle] = useState<boolean>(false);
+  const [toggleTimer, setToggleTimer] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(10);
-  const [timer, setTimer] = useState<number>(0);
   const say = [
     "I am a sheep.",
     "I am not a human slave.",
@@ -100,12 +100,14 @@ export default function Lambs() {
     setCount(0);
     setSeconds(10);
     setToggle(false);
+    setToggleTimer(false);
   };
 
   const handleInterval = () => {
     setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
     setCount(0);
     setToggle(false);
+    setToggleTimer(false);
     const userInput: any = prompt(
       "How many seconds do you want a sheep to be born?",
       "10"
@@ -114,9 +116,11 @@ export default function Lambs() {
     if (!isNaN(seconds) && seconds > 2) {
       setSeconds(seconds);
       setToggle(true);
+      setToggleTimer(true);
     } else {
       setSeconds(10); // 기본값으로 5를 사용하거나 다른 처리를 수행할 수 있다
       setToggle(true);
+      setToggleTimer(true);
     }
   };
 
@@ -131,13 +135,28 @@ export default function Lambs() {
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className={"lambs-fade-in-box"}>
           <div>{`🐑 x ${count}`}</div>
-          <div>{`Timer: ${new Date(timer * 1000)
-            .toISOString()
-            .substr(11, 8)}`}</div>
+          <div className="sheep-timer">
+            {toggleTimer ? <Timer /> : "00:00:00"}
+          </div>
+
           <div className="born">{`How many seconds is a sheep born? ${seconds}s`}</div>
           <button onClick={handleInterval}>interval</button>
-          <button onClick={() => setToggle(true)}>start</button>
-          <button onClick={() => setToggle(false)}>stop</button>
+          <button
+            onClick={() => {
+              setToggle(true);
+              setToggleTimer(true);
+            }}
+          >
+            start
+          </button>
+          <button
+            onClick={() => {
+              setToggle(true);
+              setToggleTimer(true);
+            }}
+          >
+            stop
+          </button>
           <button onClick={resetPositions}>reset</button>
         </div>
         {positions.map((position, index) => (
@@ -156,7 +175,6 @@ export default function Lambs() {
               cursor: "pointer",
             }}
             onClick={handleClick}
-            // onTouchEnd={handleClick}
           >
             <div>
               <Image
@@ -171,5 +189,43 @@ export default function Lambs() {
         ))}
       </div>
     </>
+  );
+}
+
+function Timer() {
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prevSeconds => {
+        if (prevSeconds === 59) {
+          setMinutes(prevMinutes => {
+            if (prevMinutes === 59) {
+              setHours(prevHours => prevHours + 1);
+              return 0;
+            } else {
+              return prevMinutes + 1;
+            }
+          });
+          return 0;
+        } else {
+          return prevSeconds + 1;
+        }
+      });
+    }, 1000); // 밀리초 단위로 변경
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return (
+    <div>
+      {`${hours < 10 ? "0" + hours : hours}:${
+        minutes < 10 ? "0" + minutes : minutes
+      }:${seconds < 10 ? "0" + seconds : seconds}`}
+    </div>
   );
 }

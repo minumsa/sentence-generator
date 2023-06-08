@@ -194,10 +194,15 @@ body::-webkit-scrollbar {
 }
 
 .born {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 0;
   font-size: 25px;
   color: #0e1111;
+}
+
+.sheep-timer {
+  margin-top: 5px;
+  font-size: 20px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -218,10 +223,5 @@ body::-webkit-scrollbar {
 
   .born {
     font-size: 20px;
-  }
-
-  .born-input {
-    font-size: 20px;
-    margin-top: 20px;
   }
 }
