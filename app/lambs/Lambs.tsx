@@ -17,7 +17,7 @@ export default function Lambs() {
   ]);
   const [count, setCount] = useState<number>(0);
   const [toggle, setToggle] = useState<boolean>(false);
-  const [seconds, setSeconds] = useState<number>(5);
+  const [seconds, setSeconds] = useState<number>(10);
 
   useEffect(() => {
     let maxX: number = 2000; // 이미지의 가로 크기
@@ -26,7 +26,7 @@ export default function Lambs() {
 
     if (window.innerWidth <= 500) {
       maxX = 350;
-      minY = 410;
+      minY = 250;
       maxY = 610;
     }
 
@@ -90,6 +90,7 @@ export default function Lambs() {
   const resetPositions = () => {
     setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
     setCount(0);
+    setSeconds(10);
     setToggle(false);
   };
 
@@ -117,10 +118,10 @@ export default function Lambs() {
         <div className={"lambs-fade-in-box"}>
           <div>{`🐑 x ${count}`}</div>
           <div className="born">{`How many seconds is a sheep born? ${seconds}s`}</div>
+          <button onClick={handleInterval}>interval</button>
           <button onClick={() => setToggle(true)}>start</button>
           <button onClick={() => setToggle(false)}>stop</button>
           <button onClick={resetPositions}>reset</button>
-          <button onClick={handleInterval}>interval</button>
         </div>
         {positions.map((position, index) => (
           <div
