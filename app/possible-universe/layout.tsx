@@ -27,7 +27,7 @@ type Props = {
 };
 
 // function TestLayout({ children }: Props) {
-function TestLayout() {
+function Layout() {
   return (
     <div>
       <RandomSentenceGenerator
@@ -40,4 +40,4 @@ function TestLayout() {
   );
 }
 
-export default TestLayout;
+export default Layout;
