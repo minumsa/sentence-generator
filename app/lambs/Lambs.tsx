@@ -82,11 +82,6 @@ export default function Lambs() {
     return () => clearTimeout(fadeTimeout);
   }, [count, positions]);
 
-  const playAudio = () => {
-    const audio = new Audio("/sheep.mp3");
-    audio.play();
-  };
-
   const resetPositions = () => {
     setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
     setCount(0);
@@ -109,6 +104,22 @@ export default function Lambs() {
     } else {
       setSeconds(5); // 기본값으로 5를 사용하거나 다른 처리를 수행할 수 있다
       setToggle(true);
+    }
+  };
+
+  const playAudio = () => {
+    const audio = new Audio("/sheep.mp3");
+    audio.play();
+  };
+
+  const handleSheepClick = (index: number) => {
+    if (!positions[index].fade) {
+      playAudio();
+      setPositions(prevPositions => {
+        const updatedPositions = [...prevPositions];
+        updatedPositions[index].fade = true;
+        return updatedPositions;
+      });
     }
   };
 
@@ -139,7 +150,7 @@ export default function Lambs() {
               cursor: "pointer",
             }}
             onClick={() => {
-              playAudio();
+              handleSheepClick(index);
             }}
           >
             <div>
