@@ -18,6 +18,7 @@ export default function Lambs() {
   const [count, setCount] = useState<number>(0);
   const [toggle, setToggle] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(10);
+  const [timer, setTimer] = useState<number>(0);
   const say = [
     "I am a sheep.",
     "I am not a human slave.",
@@ -29,6 +30,10 @@ export default function Lambs() {
     "I’m sleepy.",
     "Do you want to hang out with me?",
     "I'd like a glass of Jack Coke.",
+    "Fuck off!",
+    "I don't like humans. Humans exploit us.",
+    "Please let me be in peace.",
+    `What is your favorite movie? I like "The Silence of the Lambs" the most.`,
   ];
 
   useEffect(() => {
@@ -126,6 +131,9 @@ export default function Lambs() {
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className={"lambs-fade-in-box"}>
           <div>{`🐑 x ${count}`}</div>
+          <div>{`Timer: ${new Date(timer * 1000)
+            .toISOString()
+            .substr(11, 8)}`}</div>
           <div className="born">{`How many seconds is a sheep born? ${seconds}s`}</div>
           <button onClick={handleInterval}>interval</button>
           <button onClick={() => setToggle(true)}>start</button>
