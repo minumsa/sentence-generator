@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 interface Position {
+  fade: boolean;
   x: number;
   y: number;
   scaleX: number;
@@ -11,7 +12,7 @@ interface Position {
 
 export default function Lambs() {
   const [positions, setPositions] = useState<Position[]>([
-    { x: 200, y: 700, scaleX: 1 },
+    { x: 200, y: 700, scaleX: 1, fade: false },
   ]);
   const [count, setCount] = useState<number>(1);
 
@@ -28,7 +29,7 @@ export default function Lambs() {
       const randomScaleX: number = Math.random() < 0.5 ? 1 : -1;
       setPositions(prevPositions => [
         ...prevPositions,
-        { x: randomX, y: randomY, scaleX: randomScaleX },
+        { x: randomX, y: randomY, scaleX: randomScaleX, fade: false },
       ]);
 
       setCount(prevCount => prevCount + 1);
@@ -66,10 +67,11 @@ export default function Lambs() {
     simulateClick();
   }, []);
 
-  const simulateClick = () => {
-    const lambElement = document.querySelector(".lambs-div-1 > div");
+  const simulateClick = (): void => {
+    const lambElement: Element | null =
+      document.querySelector(".lambs-div-1 > div");
     if (lambElement) {
-      lambElement.click();
+      (lambElement as HTMLElement).click();
     }
   };
 
