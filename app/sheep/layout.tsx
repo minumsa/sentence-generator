@@ -1,21 +1,21 @@
 import React from "react";
-import Lambs from "./Lambs";
+import Lambs from "./Sheep";
 
 export const metadata = {
-  title: "양 한 마리",
+  title: "I am a sheep",
   openGraph: {
     images: [{ url: "/lambs-thumbnail.png", width: 1800, height: 945 }],
     locale: "ko_KR",
     siteName: "",
-    title: "양 한 마리",
+    title: "Sheep",
     type: "website",
   },
   twitter: {
     card: "",
     creator: "@dev_carver",
-    description: "",
+    description: "I am a sheep",
     images: ["https://divdivdiv.com/lambs-thumbnail.png"],
-    title: "",
+    title: "I am a sheep",
   },
 };
 
