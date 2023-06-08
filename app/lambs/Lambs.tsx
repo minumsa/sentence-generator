@@ -12,7 +12,7 @@ interface Position {
 
 export default function Lambs() {
   const [positions, setPositions] = useState<Position[]>([
-    { x: 200, y: 700, scaleX: 1, fade: false },
+    { x: 350, y: 610, scaleX: 1, fade: false },
   ]);
   const [count, setCount] = useState<number>(1);
 
@@ -23,8 +23,8 @@ export default function Lambs() {
 
     if (window.innerWidth <= 500) {
       maxX = 350;
-      minY = 560;
-      maxY = 850;
+      minY = 600;
+      maxY = 750;
     }
 
     const generateRandomPosition = () => {
