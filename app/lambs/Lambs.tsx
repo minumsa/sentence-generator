@@ -113,13 +113,14 @@ export default function Lambs() {
   };
 
   const handleSheepClick = (index: number) => {
-    if (!positions[index].fade) {
-      playAudio();
+    const sheep = positions[index];
+    if (!sheep.fade) {
       setPositions(prevPositions => {
         const updatedPositions = [...prevPositions];
         updatedPositions[index].fade = true;
         return updatedPositions;
       });
+      playAudio();
     }
   };
 
