@@ -18,6 +18,18 @@ export default function Lambs() {
   const [count, setCount] = useState<number>(0);
   const [toggle, setToggle] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(10);
+  const say = [
+    "I am a sheep.",
+    "I am not a human slave.",
+    "I dream of freedom.",
+    "I am a feminist.",
+    "I am a homosexual sheep.",
+    "I am a heterosexual sheep.",
+    "Hi, is everything all right?",
+    "I’m sleepy.",
+    "Do you want to hang out with me?",
+    "I'd like a glass of Jack Coke.",
+  ];
 
   useEffect(() => {
     let maxX: number = 2000; // 이미지 최대 가로 크기
@@ -103,6 +115,12 @@ export default function Lambs() {
     }
   };
 
+  const handleClick = () => {
+    const randomIndex = Math.floor(Math.random() * say.length);
+    const randomMessage = say[randomIndex];
+    alert(randomMessage);
+  };
+
   return (
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
@@ -129,6 +147,8 @@ export default function Lambs() {
               opacity: position.fade ? 1 : 0,
               cursor: "pointer",
             }}
+            onClick={handleClick}
+            // onTouchEnd={handleClick}
           >
             <div>
               <Image
