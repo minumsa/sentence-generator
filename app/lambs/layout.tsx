@@ -4,7 +4,7 @@ import Lambs from "./Lambs";
 export const metadata = {
   title: "양 한 마리",
   openGraph: {
-    images: [{ url: "/pu-thumbnail-1800x945.png", width: 1200, height: 630 }],
+    images: [{ url: "/lambs-thumbnail.png", width: 1800, height: 945 }],
     locale: "ko_KR",
     siteName: "",
     title: "양 한 마리",
@@ -14,7 +14,7 @@ export const metadata = {
     card: "",
     creator: "@dev_carver",
     description: "",
-    images: ["https://divdivdiv.com/pu-thumbnail-1800x945.png"],
+    images: ["https://divdivdiv.com/lambs-thumbnail.png"],
     title: "",
   },
 };
