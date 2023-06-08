@@ -36,7 +36,7 @@ export default function Lambs() {
 
     const interval = setInterval(() => {
       generateRandomPosition();
-    }, 60000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
