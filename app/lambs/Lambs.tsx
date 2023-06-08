@@ -34,6 +34,13 @@ export default function Lambs() {
     "I don't like humans. Humans exploit us.",
     "Please let me be in peace.",
     `What is your favorite movie? I like "The Silence of the Lambs" the most.`,
+    "I hate Gandhi.",
+    "Have you ever traveled to India? I want to go there someday, but I'm actually scared.",
+    "Have you ever seen a wolf in a sheep's mask? Actually, that's who I am.",
+    "I hate movie critics. They are all idiots.",
+    "I have 23 billion in my bank account. But after someone cursed me to turn me into a sheep, it was of no use.",
+    "Do you want to go to the prom with me?",
+    "I hate Koreans.",
   ];
 
   useEffect(() => {
