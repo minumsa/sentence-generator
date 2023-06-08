@@ -24,8 +24,8 @@ export default function Lambs() {
 
     if (window.innerWidth <= 500) {
       maxX = 350;
-      minY = 600;
-      maxY = 750;
+      minY = 610;
+      maxY = 900;
     }
 
     const generateRandomPosition = () => {
@@ -53,7 +53,7 @@ export default function Lambs() {
 
     const interval = setInterval(() => {
       generateRandomPosition();
-    }, 5000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
