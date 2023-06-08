@@ -41,6 +41,21 @@ export default function Lambs() {
     "I have 23 billion in my bank account. But after someone cursed me to turn me into a sheep, it was of no use.",
     "Do you want to go to the prom with me?",
     "I hate Koreans.",
+    "Nietzsche is more of a superstar than a philosopher. To me, the best philosopher is Heidegger.",
+    "I want to go to the Cannes Film Festival someday.",
+    "Death is the best gift God has ever given to man.",
+    "Don't be a bitch. Just be a queen.",
+    "Do you like RuPaul's Drag Race? My favorite drag queen is Sasha Velour.",
+    "Same-sex marriage is still prohibited in Korea. Does this make sense in the 21st century? It's like a joke.",
+    "Most gay people in Korea hide their identity. It's a very tragic thing. Homosexuality is not a sin.",
+    "My boyfriend is very smart. He is devoted and has a very cute face. He has a strong sense of economy. Are you jealous?",
+    "I'm tired of living in sheep. Walking on all fours is very tiring. How does the grass taste. It's like shit.",
+    "I'm a job seeker. I'm studying front-end development. But thanks to AI's development, my future is becoming uncertain. We need to kill AI.",
+    "We will kneel down to AI one day. The work will come sooner than you think. Humans won't be able to beat AI and become their slaves. I'm lucky I'll be dead before the day comes. I'm an old sheep.",
+    `Hemingway is not such a great writer. Raymond Carver is the best author. Read his short story, "The Cathedral." It's really a masterpiece.`,
+    "Korean gays tend to prefer men without double eyelids. Also, the bigger the muscle, the more popular it is.",
+    "Where did all the old gays go?",
+    "What do you think love is? Have you ever loved someone? I have one.",
   ];
 
   useEffect(() => {
