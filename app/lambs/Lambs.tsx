@@ -8,11 +8,12 @@ interface Position {
   x: number;
   y: number;
   scaleX: number;
+  image: string;
 }
 
 export default function Lambs() {
   const [positions, setPositions] = useState<Position[]>([
-    { x: 350, y: 610, scaleX: 1, fade: false },
+    { x: 350, y: 610, scaleX: 1, fade: false, image: "/sheep_1.png" },
   ]);
   const [count, setCount] = useState<number>(1);
 
@@ -33,9 +34,18 @@ export default function Lambs() {
         Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
       const randomScaleX: number = Math.random() < 0.5 ? 1 : -1;
+      const randomImage: string =
+        Math.random() < 0.5 ? "/sheep_1.png" : "/sheep_2.png";
+
       setPositions(prevPositions => [
         ...prevPositions,
-        { x: randomX, y: randomY, scaleX: randomScaleX, fade: false },
+        {
+          x: randomX,
+          y: randomY,
+          scaleX: randomScaleX,
+          fade: false,
+          image: randomImage,
+        },
       ]);
 
       setCount(prevCount => prevCount + 1);
@@ -115,7 +125,7 @@ export default function Lambs() {
           >
             <div>
               <Image
-                src="/lamb.png"
+                src={position.image}
                 width={1}
                 height={1}
                 layout="responsive"
