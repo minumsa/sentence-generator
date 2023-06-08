@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Lambs() {
-  const [positions, setPositions] = useState([{ x: 0, y: 0 }]);
+  const [positions, setPositions] = useState([{ x: 200, y: 700 }]);
 
   useEffect(() => {
     const maxX = window.innerWidth - 100; // 이미지의 가로 크기
@@ -22,9 +22,9 @@ export default function Lambs() {
 
     const interval = setInterval(() => {
       generateRandomPosition();
-    }, 3000);
+    }, 60000);
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트시 인터벌 클리어
+    return () => clearInterval(interval);
   }, []);
 
   return (
