@@ -140,11 +140,11 @@ export default function Lambs() {
     if (!isNaN(seconds) && seconds > 2) {
       setSeconds(seconds);
       setToggle(true);
-      setToggleTimer(true);
+      setTimeout(() => setToggleTimer(true), 0); // setToggleTimer를 true로 변경하기 전에 한 프레임 지연을 추가
     } else {
       setSeconds(10); // 기본값으로 5를 사용하거나 다른 처리를 수행할 수 있다
       setToggle(true);
-      setToggleTimer(true);
+      setTimeout(() => setToggleTimer(true), 0); // setToggleTimer를 true로 변경하기 전에 한 프레임 지연을 추가
     }
   };
 
@@ -164,8 +164,8 @@ export default function Lambs() {
           </div>
           <div className="born">{`How many seconds is a sheep born? ${seconds}s`}</div>
           <div className="sheep-button-container">
-            <button onClick={handleInterval}>interval</button>
-            <button
+            <button onClick={handleInterval}>start</button>
+            {/* <button
               onClick={() => {
                 setToggle(true);
                 setToggleTimer(true);
@@ -180,7 +180,7 @@ export default function Lambs() {
               }}
             >
               stop
-            </button>
+            </button> */}
             <button onClick={resetPositions}>reset</button>
           </div>
         </div>
