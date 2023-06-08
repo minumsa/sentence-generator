@@ -163,3 +163,36 @@ body::-webkit-scrollbar {
     height: 0;
   }
 }
+
+.lambs-div-1 {
+  display: flex;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.lambs-fade-in-box {
+  position: absolute;
+  top: 11vh;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  text-align: center;
+
+  font-size: 60px;
+  font-weight: 600;
+  color: white;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 500px) {
+  .lambs-fade-in-box {
+    font-size: 40px;
+  }
+}
