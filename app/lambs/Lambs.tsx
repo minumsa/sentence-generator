@@ -104,10 +104,10 @@ export default function Lambs() {
         <div className={"lambs-fade-in-box"}>
           {/* {count > 1 ? `There are ${count} lambs` : `There is a lamb`} */}
           <div>{`🐑 x ${count}`}</div>
-          <div className="born">How many seconds is a sheep born?</div>
+          <div className="born">{`How many seconds is a sheep born? ${value}s`}</div>
           <input
             className="born-input"
-            type="number"
+            type="range"
             min={10}
             value={value}
             step={10}
