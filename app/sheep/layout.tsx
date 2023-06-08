@@ -11,7 +11,7 @@ export const metadata = {
     type: "website",
   },
   twitter: {
-    card: "",
+    card: "summary_large_image",
     creator: "@dev_carver",
     description: "I am a sheep",
     images: ["https://divdivdiv.com/lambs-thumbnail.png"],
