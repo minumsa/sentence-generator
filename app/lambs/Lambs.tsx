@@ -88,6 +88,7 @@ export default function Lambs() {
         </div>
         {positions.map((position, index) => (
           <div
+            className="lambs"
             key={index}
             style={{
               width: "10vw",

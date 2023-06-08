@@ -195,4 +195,8 @@ body::-webkit-scrollbar {
   .lambs-fade-in-box {
     font-size: 40px;
   }
+
+  .lambs {
+    scale: 2;
+  }
 }
