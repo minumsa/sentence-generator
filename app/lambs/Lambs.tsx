@@ -13,10 +13,11 @@ interface Position {
 
 export default function Lambs() {
   const [positions, setPositions] = useState<Position[]>([
-    { x: 350, y: 610, scaleX: 1, fade: false, image: "/sheep_1.png" },
+    { x: 5550, y: 610, scaleX: 1, fade: false, image: "" },
   ]);
-  const [count, setCount] = useState<number>(1);
-  const [value, setValue] = useState<number>(10);
+  const [count, setCount] = useState<number>(0);
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [seconds, setSeconds] = useState<number>(5);
 
   useEffect(() => {
     let maxX: number = 2000; // 이미지의 가로 크기
@@ -30,6 +31,10 @@ export default function Lambs() {
     }
 
     const generateRandomPosition = () => {
+      if (toggle === false) {
+        return;
+      }
+
       const randomX: number = Math.floor(Math.random() * maxX);
       const randomY: number =
         Math.floor(Math.random() * (maxY - minY + 1)) + minY;
@@ -37,24 +42,6 @@ export default function Lambs() {
       const randomScaleX: number = Math.random() < 0.5 ? 1 : -1;
       const randomImage: string =
         Math.random() < 0.5 ? "/sheep_1.png" : "/sheep_2.png";
-
-      // 이미지 배열에 있는 이전 위치들과 비교하여 겹치지 않는 위치를 찾음
-      let isOverlap = true;
-      let newX = randomX;
-      let newY = randomY;
-      while (isOverlap) {
-        isOverlap = positions.some(position => {
-          const distance = Math.sqrt(
-            Math.pow(position.x - newX, 2) + Math.pow(position.y - newY, 2)
-          );
-          return distance < 1000; // 이미지가 겹치는지 확인할 거리 (여기서는 1000으로 설정)
-        });
-
-        if (isOverlap) {
-          newX = Math.floor(Math.random() * maxX);
-          newY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
-        }
-      }
 
       setPositions(prevPositions => [
         ...prevPositions,
@@ -71,11 +58,13 @@ export default function Lambs() {
     };
 
     const interval = setInterval(() => {
-      generateRandomPosition();
-    }, value * 1000);
+      if (toggle) {
+        generateRandomPosition();
+      }
+    }, seconds * 1000);
 
     return () => clearInterval(interval);
-  }, [value]);
+  }, [toggle]);
 
   useEffect(() => {
     const fadeTimeout = setTimeout(() => {
@@ -98,23 +87,40 @@ export default function Lambs() {
     audio.play();
   };
 
+  const resetPositions = () => {
+    setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
+    setCount(0);
+    setToggle(false);
+  };
+
+  const handleInterval = () => {
+    setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
+    setCount(0);
+    setToggle(false);
+    const userInput: any = prompt(
+      "How many seconds do you want a sheep to be born?",
+      "5"
+    );
+    const seconds = parseInt(userInput);
+    if (!isNaN(seconds) && seconds > 0) {
+      setSeconds(seconds);
+      setToggle(true);
+    } else {
+      setSeconds(5); // 기본값으로 5를 사용하거나 다른 처리를 수행할 수 있다
+      setToggle(true);
+    }
+  };
+
   return (
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className={"lambs-fade-in-box"}>
-          {/* {count > 1 ? `There are ${count} lambs` : `There is a lamb`} */}
           <div>{`🐑 x ${count}`}</div>
-          <div className="born">{`How many seconds is a sheep born? ${value}s`}</div>
-          <input
-            className="born-input"
-            type="range"
-            min={10}
-            value={value}
-            step={10}
-            onChange={e => {
-              setValue(parseInt(e.target.value, 10));
-            }}
-          ></input>
+          <div className="born">{`How many seconds is a sheep born? ${seconds}s`}</div>
+          <button onClick={() => setToggle(true)}>start</button>
+          <button onClick={() => setToggle(false)}>stop</button>
+          <button onClick={resetPositions}>reset</button>
+          <button onClick={handleInterval}>interval</button>
         </div>
         {positions.map((position, index) => (
           <div
