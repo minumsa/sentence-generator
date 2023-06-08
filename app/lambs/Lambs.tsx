@@ -17,9 +17,15 @@ export default function Lambs() {
   const [count, setCount] = useState<number>(1);
 
   useEffect(() => {
-    const maxX: number = 1700; // 이미지의 가로 크기
-    const minY: number = 600; // 이미지의 최소 세로 크기
-    const maxY: number = 850; // 이미지의 최대 세로 크기
+    let maxX: number = 1700; // 이미지의 가로 크기
+    let minY: number = 600; // 이미지의 최소 세로 크기
+    let maxY: number = 850; // 이미지의 최대 세로 크기
+
+    if (window.innerWidth <= 500) {
+      maxX = 350;
+      minY = 520;
+      maxY = 740;
+    }
 
     const generateRandomPosition = () => {
       const randomX: number = Math.floor(Math.random() * maxX);
@@ -37,7 +43,7 @@ export default function Lambs() {
 
     const interval = setInterval(() => {
       generateRandomPosition();
-    }, 10000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
