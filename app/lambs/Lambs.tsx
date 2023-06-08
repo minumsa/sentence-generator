@@ -16,11 +16,12 @@ export default function Lambs() {
     { x: 350, y: 610, scaleX: 1, fade: false, image: "/sheep_1.png" },
   ]);
   const [count, setCount] = useState<number>(1);
+  const [value, setValue] = useState<number>(5);
 
   useEffect(() => {
-    let maxX: number = 1700; // 이미지의 가로 크기
+    let maxX: number = 2000; // 이미지의 가로 크기
     let minY: number = 600; // 이미지의 최소 세로 크기
-    let maxY: number = 850; // 이미지의 최대 세로 크기
+    let maxY: number = 930; // 이미지의 최대 세로 크기
 
     if (window.innerWidth <= 500) {
       maxX = 350;
@@ -36,6 +37,24 @@ export default function Lambs() {
       const randomScaleX: number = Math.random() < 0.5 ? 1 : -1;
       const randomImage: string =
         Math.random() < 0.5 ? "/sheep_1.png" : "/sheep_2.png";
+
+      // 이미지 배열에 있는 이전 위치들과 비교하여 겹치지 않는 위치를 찾음
+      let isOverlap = true;
+      let newX = randomX;
+      let newY = randomY;
+      while (isOverlap) {
+        isOverlap = positions.some(position => {
+          const distance = Math.sqrt(
+            Math.pow(position.x - newX, 2) + Math.pow(position.y - newY, 2)
+          );
+          return distance < 1000; // 이미지가 겹치는지 확인할 거리 (여기서는 1000으로 설정)
+        });
+
+        if (isOverlap) {
+          newX = Math.floor(Math.random() * maxX);
+          newY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+        }
+      }
 
       setPositions(prevPositions => [
         ...prevPositions,
@@ -53,10 +72,10 @@ export default function Lambs() {
 
     const interval = setInterval(() => {
       generateRandomPosition();
-    }, 1000);
+    }, value * 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [value]);
 
   useEffect(() => {
     const fadeTimeout = setTimeout(() => {
@@ -96,13 +115,24 @@ export default function Lambs() {
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <Image
           src="/field.jpg"
-          layout="responsive"
+          // layout="responsive"
           width={1}
           height={1}
           alt="Picture of the field"
         />
         <div className={"lambs-fade-in-box"}>
-          {count > 1 ? `There are ${count} lambs` : `There is a lamb`}
+          {/* {count > 1 ? `There are ${count} lambs` : `There is a lamb`} */}
+          <div>{`🐑 x ${count}`}</div>
+          <div className="born">How many seconds is a sheep born?</div>
+          <input
+            className="born-input"
+            type="number"
+            min={1}
+            value={value}
+            onChange={e => {
+              setValue(Number(e.target.value));
+            }}
+          ></input>
         </div>
         {positions.map((position, index) => (
           <div
