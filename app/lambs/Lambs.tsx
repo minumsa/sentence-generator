@@ -95,14 +95,14 @@ export default function Lambs() {
     setToggle(false);
     const userInput: any = prompt(
       "How many seconds do you want a sheep to be born?",
-      "5"
+      "10"
     );
     const seconds = parseInt(userInput);
     if (!isNaN(seconds) && seconds > 2) {
       setSeconds(seconds);
       setToggle(true);
     } else {
-      setSeconds(5); // 기본값으로 5를 사용하거나 다른 처리를 수행할 수 있다
+      setSeconds(10); // 기본값으로 5를 사용하거나 다른 처리를 수행할 수 있다
       setToggle(true);
     }
   };
