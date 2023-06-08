@@ -20,9 +20,9 @@ export default function Lambs() {
   const [seconds, setSeconds] = useState<number>(10);
 
   useEffect(() => {
-    let maxX: number = 2000; // 이미지의 가로 크기
-    let minY: number = 600; // 이미지의 최소 세로 크기
-    let maxY: number = 930; // 이미지의 최대 세로 크기
+    let maxX: number = 2000; // 이미지 최대 가로 크기
+    let minY: number = 580; // 이미지 최소 세로 크기
+    let maxY: number = 930; // 이미지 최대 세로 크기
 
     if (window.innerWidth <= 500) {
       maxX = 350;
