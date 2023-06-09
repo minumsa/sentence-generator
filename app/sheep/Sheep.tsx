@@ -149,11 +149,28 @@ export default function Sheep() {
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className={"lambs-container"}>
-          <div className="sheep-count">{`🐑`}</div>
+          <div
+            className="sheep-count"
+            onClick={() => {
+              alert(say[Math.floor(Math.random() * say.length)]);
+            }}
+            style={{ cursor: "pointer" }}
+          >{`🐑`}</div>
           <div className="sheep-timer">
             <Timer time={time} stop={toggle} />
           </div>
-          <div className="born">{`Let the 🐑 be born through your concentration!`}</div>
+          <div className="born">
+            <span>Let the </span>
+            <span
+              onClick={() => {
+                alert(say[Math.floor(Math.random() * say.length)]);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              🐑{" "}
+            </span>
+            <span>be born through your concentration!</span>
+          </div>
           <div className="sheep-button-container">
             <div className="sheep-test">
               <div className="sheep-plan">
