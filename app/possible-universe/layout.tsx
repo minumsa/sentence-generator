@@ -26,7 +26,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-// function TestLayout({ children }: Props) {
 function Layout() {
   return (
     <div>
@@ -35,7 +34,6 @@ function Layout() {
         initialObject={"Month"}
         initialVerb={"2023"}
       />
-      {/* <div className="w-full">{children}</div> */}
     </div>
   );
 }
