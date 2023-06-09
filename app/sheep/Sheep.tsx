@@ -259,11 +259,16 @@ export default function Sheep() {
   );
 }
 
-function Timer({ time, stop }) {
+interface SheepProps {
+  time: number;
+  stop: boolean;
+}
+
+function Timer({ time, stop }: SheepProps) {
   const [seconds, setSeconds] = useState(time * 60);
 
   useEffect(() => {
-    let interval;
+    let interval: any;
 
     if (stop === true) {
       interval = setInterval(() => {
@@ -283,7 +288,7 @@ function Timer({ time, stop }) {
     };
   }, [stop]);
 
-  const formatTime = value => {
+  const formatTime = (value: number) => {
     return value < 10 ? "0" + value : value;
   };
 
