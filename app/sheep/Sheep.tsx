@@ -11,14 +11,15 @@ interface Position {
   image: string;
 }
 
-export default function Lambs() {
+export default function Sheep() {
   const [positions, setPositions] = useState<Position[]>([
     { x: 5550, y: 610, scaleX: 1, fade: false, image: "" },
   ]);
   const [count, setCount] = useState<number>(0);
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleTimer, setToggleTimer] = useState<boolean>(false);
-  const [seconds, setSeconds] = useState<number>(10);
+  const [stopToggle, setStopToggle] = useState<boolean>(false);
+  const [time, setTime] = useState<any>(25);
   const say = [
     "I am a sheep.",
     "I am not a human slave.",
@@ -102,7 +103,7 @@ export default function Lambs() {
       if (toggle) {
         generateRandomPosition();
       }
-    }, seconds * 1000);
+    }, time * 60000);
 
     return () => clearInterval(interval);
   }, [toggle]);
@@ -122,7 +123,7 @@ export default function Lambs() {
   const resetPositions = () => {
     setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
     setCount(0);
-    setSeconds(10);
+    setTime(25);
     setToggle(false);
     setToggleTimer(false);
   };
@@ -134,15 +135,15 @@ export default function Lambs() {
     setToggleTimer(false);
     const userInput: any = prompt(
       "How many seconds do you want a sheep to be born?",
-      "10"
+      "25"
     );
     const seconds = parseInt(userInput);
     if (!isNaN(seconds) && seconds > 2) {
-      setSeconds(seconds);
+      setTime(seconds);
       setToggle(true);
       setTimeout(() => setToggleTimer(true), 0); // setToggleTimer를 true로 변경하기 전에 한 프레임 지연을 추가
     } else {
-      setSeconds(10); // 기본값으로 5를 사용하거나 다른 처리를 수행할 수 있다
+      setTime(25); // 기본값으로 25를 사용하거나 다른 처리를 수행할 수 있다
       setToggle(true);
       setTimeout(() => setToggleTimer(true), 0); // setToggleTimer를 true로 변경하기 전에 한 프레임 지연을 추가
     }
@@ -154,15 +155,19 @@ export default function Lambs() {
     alert(randomMessage);
   };
 
+  const handleStop = () => {
+    setStopToggle(true);
+  };
+
   return (
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className={"lambs-fade-in-box"}>
           <div className="sheep-count">{`🐑 x ${count}`}</div>
           <div className="sheep-timer">
-            {toggleTimer ? <Timer /> : "00:00:00"}
+            <Timer time={time} stop={stopToggle} />
           </div>
-          <div className="born">{`How many seconds is a sheep born? ${seconds}s`}</div>
+          <div className="born">{`How many minutes is a sheep born? ${time}m`}</div>
           <div className="sheep-button-container">
             <button onClick={handleInterval}>start</button>
             {/* <button
@@ -172,15 +177,8 @@ export default function Lambs() {
               }}
             >
               start
-            </button>
-            <button
-              onClick={() => {
-                setToggle(true);
-                setToggleTimer(true);
-              }}
-            >
-              stop
             </button> */}
+            <button onClick={handleStop}>stop</button>
             <button onClick={resetPositions}>reset</button>
           </div>
         </div>
@@ -217,40 +215,43 @@ export default function Lambs() {
   );
 }
 
-function Timer() {
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+function Timer({ time, stop }) {
+  const [seconds, setSeconds] = useState(time * 60);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(prevSeconds => {
-        if (prevSeconds === 59) {
-          setMinutes(prevMinutes => {
-            if (prevMinutes === 59) {
-              setHours(prevHours => prevHours + 1);
-              return 0;
-            } else {
-              return prevMinutes + 1;
-            }
-          });
-          return 0;
-        } else {
-          return prevSeconds + 1;
-        }
-      });
-    }, 1000); // 밀리초 단위로 변경
+    let interval;
+
+    if (stop === false) {
+      interval = setInterval(() => {
+        setSeconds(prevSeconds => {
+          if (prevSeconds > 0) {
+            return prevSeconds - 1;
+          } else {
+            clearInterval(interval);
+            return 0;
+          }
+        });
+      }, 1000);
+    }
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [stop]);
+
+  const formatTime = value => {
+    return value < 10 ? "0" + value : value;
+  };
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
 
   return (
     <div>
-      {`${hours < 10 ? "0" + hours : hours}:${
-        minutes < 10 ? "0" + minutes : minutes
-      }:${seconds < 10 ? "0" + seconds : seconds}`}
+      {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
+        remainingSeconds
+      )}`}
     </div>
   );
 }

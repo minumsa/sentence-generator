@@ -1,5 +1,5 @@
 import React from "react";
-import Lambs from "./Sheep";
+import Sheep from "./Sheep";
 
 export const metadata = {
   title: "I am a sheep",
@@ -26,7 +26,7 @@ type Props = {
 function Layout() {
   return (
     <div>
-      <Lambs />
+      <Sheep />
     </div>
   );
 }
