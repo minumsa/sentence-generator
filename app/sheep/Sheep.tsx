@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 interface Position {
-  fade: boolean;
   x: number;
   y: number;
   scaleX: number;
@@ -13,7 +12,7 @@ interface Position {
 
 export default function Sheep() {
   const [positions, setPositions] = useState<Position[]>([
-    { x: 5550, y: 610, scaleX: 1, fade: false, image: "" },
+    { x: 5550, y: 610, scaleX: 1, image: "" },
   ]);
   const [count, setCount] = useState<number>(0);
   const [toggle, setToggle] = useState<boolean>(false);
@@ -91,7 +90,6 @@ export default function Sheep() {
           x: randomX,
           y: randomY,
           scaleX: randomScaleX,
-          fade: false,
           image: randomImage,
         },
       ]);
@@ -105,23 +103,13 @@ export default function Sheep() {
       }
     }, time * 60000);
 
+    setToggleTimer(false);
+
     return () => clearInterval(interval);
   }, [toggle]);
 
-  useEffect(() => {
-    const fadeTimeout = setTimeout(() => {
-      setPositions(prevPositions => {
-        const updatedPositions = [...prevPositions];
-        updatedPositions[prevPositions.length - 1].fade = true;
-        return updatedPositions;
-      });
-    }, 100);
-
-    return () => clearTimeout(fadeTimeout);
-  }, [count, positions]);
-
   const resetPositions = () => {
-    setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
+    setPositions([{ x: 5550, y: 610, scaleX: 1, image: "" }]);
     setCount(0);
     setTime(25);
     setToggle(false);
@@ -129,23 +117,27 @@ export default function Sheep() {
   };
 
   const handleInterval = () => {
-    setPositions([{ x: 5550, y: 610, scaleX: 1, fade: false, image: "" }]);
+    setPositions([{ x: 5550, y: 610, scaleX: 1, image: "" }]);
     setCount(0);
     setToggle(false);
     setToggleTimer(false);
-    const userInput: any = prompt(
+    const userInput = prompt(
       "How many seconds do you want a sheep to be born?",
       "25"
     );
-    const seconds = parseInt(userInput);
-    if (!isNaN(seconds) && seconds > 2) {
-      setTime(seconds);
+    const userMinutes = parseInt(userInput);
+    if (!isNaN(userMinutes) && userMinutes > 10) {
+      setTime(userMinutes);
       setToggle(true);
-      setTimeout(() => setToggleTimer(true), 0); // setToggleTimer를 true로 변경하기 전에 한 프레임 지연을 추가
+      setTimeout(() => {
+        setToggleTimer(true);
+      }, 0);
     } else {
-      setTime(25); // 기본값으로 25를 사용하거나 다른 처리를 수행할 수 있다
+      setTime(25);
       setToggle(true);
-      setTimeout(() => setToggleTimer(true), 0); // setToggleTimer를 true로 변경하기 전에 한 프레임 지연을 추가
+      setTimeout(() => {
+        setToggleTimer(true);
+      }, 0);
     }
   };
 
@@ -159,16 +151,36 @@ export default function Sheep() {
     setStopToggle(true);
   };
 
+  useEffect(() => {
+    setToggleTimer(false); // 페이지 로드 시 타이머를 멈추기 위해 toggleTimer를 false로 설정
+  }, []); // 빈 배열을 넣어 처음 로드 시 한 번만 실행되도록 설정
+
   return (
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
-        <div className={"lambs-fade-in-box"}>
+        <div className={"lambs-container"}>
           <div className="sheep-count">{`🐑 x ${count}`}</div>
           <div className="sheep-timer">
             <Timer time={time} stop={stopToggle} />
           </div>
-          <div className="born">{`How many minutes is a sheep born? ${time}m`}</div>
+          <div className="born">{`How many minutes is a sheep born? ${time}min`}</div>
           <div className="sheep-button-container">
+            <select name="pomodoro" id="time-select">
+              <option value="5">5 min</option>
+              <option value="10">10 min</option>
+              <option value="15">15 min</option>
+              <option value="20">20 min</option>
+              <option value="25" selected>
+                25 min
+              </option>
+              <option value="30">30 min</option>
+              <option value="35">35 min</option>
+              <option value="40">40 min</option>
+              <option value="45">45 min</option>
+              <option value="50">50 min</option>
+              <option value="55">55 min</option>
+              <option value="60">60 min</option>
+            </select>
             <button onClick={handleInterval}>start</button>
             {/* <button
               onClick={() => {
@@ -192,9 +204,7 @@ export default function Sheep() {
               position: "absolute",
               top: position.y,
               left: position.x,
-              transition: "opacity 1s ease-in-out",
               transform: `scaleX(${position.scaleX})`,
-              opacity: position.fade ? 1 : 0,
               cursor: "pointer",
             }}
             onClick={handleClick}
