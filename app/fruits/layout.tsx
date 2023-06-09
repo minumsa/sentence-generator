@@ -25,7 +25,7 @@ type Props = {
 
 function Layout() {
   return (
-    <div>
+    <div style={{ backgroundColor: "black" }}>
       <Fruits />
     </div>
   );
