@@ -280,6 +280,11 @@ body::-webkit-scrollbar {
   height: 100%;
   pointer-events: none;
   overflow: hidden;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .falling-fruits div {
@@ -289,6 +294,11 @@ body::-webkit-scrollbar {
   width: 10px;
   height: 10px;
   animation: fallingAnimation 10s linear infinite;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 @keyframes fallingAnimation {
@@ -309,6 +319,9 @@ body::-webkit-scrollbar {
 }
 
 .fruit-count {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   font-family: "Pretendard Variable", Pretendard, -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
