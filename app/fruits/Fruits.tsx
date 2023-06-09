@@ -39,10 +39,7 @@ const Fruits = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const windowWidth: number = window.outerWidth;
-  let checkerWidth: number = windowWidth / 7;
-
-  windowWidth > 500 ? (checkerWidth = windowWidth / 20) : checkerWidth;
+  const checkerWidth: number = window.outerWidth / 7;
 
   return (
     <>

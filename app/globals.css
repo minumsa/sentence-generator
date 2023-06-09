@@ -28,11 +28,11 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body {
-    /* background-color: #0e1111; */
+    background-color: #0e1111;
   }
-}
+} */
 
 .test30-div-1 {
   overflow: hidden;
