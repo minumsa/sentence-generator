@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // 서버 측에서 호출되어 화면 사이즈를 계산해 이를 프론트엔드로 전달하는 비동기 함수
 // export async function getServerSideProps() {
@@ -18,8 +18,6 @@ import { useEffect } from "react";
 // }
 
 const Fruits = () => {
-  const checkerWidth: number = window.outerWidth / 7;
-
   const fruitsArr: string[] = [
     "🍇",
     "🍈",
@@ -54,6 +52,20 @@ const Fruits = () => {
     }, 300);
 
     return () => clearInterval(interval);
+  }, []);
+
+  const [checkerWidth, setCheckerWidth] = useState<number>(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (window.outerWidth < 500) {
+      setCheckerWidth(window.outerWidth / 7);
+    } else {
+      setCheckerWidth(window.outerWidth / 15);
+    }
   }, []);
 
   return (
