@@ -41,7 +41,16 @@ const Fruits = () => {
 
   return (
     <>
-      <div id="fruit-container" className="falling-fruits"></div>
+      <div
+        className="fruits-container"
+        style={{
+          backgroundSize: "111.428571428571429px 111.428571428571429px",
+          backgroundPosition:
+            "0 0, 0 55.714285714285714px, 55.714285714285714px -55.714285714285714px, -55.714285714285714px 0px",
+        }}
+      >
+        <div id="fruit-container" className="falling-fruits"></div>
+      </div>
     </>
   );
 };

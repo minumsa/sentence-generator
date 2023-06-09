@@ -24,11 +24,7 @@ type Props = {
 };
 
 function Layout() {
-  return (
-    <div style={{ backgroundColor: "black" }}>
-      <Fruits />
-    </div>
-  );
+  return <Fruits />;
 }
 
 export default Layout;
