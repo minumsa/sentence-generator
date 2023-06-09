@@ -39,14 +39,18 @@ const Fruits = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const windowWidth: number = window.outerWidth;
+  let checkerWidth: number = windowWidth / 7;
+
+  windowWidth > 500 ? (checkerWidth = windowWidth / 20) : checkerWidth;
+
   return (
     <>
       <div
         className="fruits-container"
         style={{
-          backgroundSize: "111.428571428571429px 111.428571428571429px",
-          backgroundPosition:
-            "0 0, 0 55.714285714285714px, 55.714285714285714px -55.714285714285714px, -55.714285714285714px 0px",
+          backgroundSize: `${checkerWidth * 2}px ${checkerWidth * 2}px`,
+          backgroundPosition: `0 0, 0 ${checkerWidth}px, ${checkerWidth}px -${checkerWidth}px, -${checkerWidth}px 0px`,
         }}
       >
         <div id="fruit-container" className="falling-fruits"></div>
