@@ -76,7 +76,7 @@ const Fruits = () => {
             setCount(prevCount => prevCount + 1);
             fruit.removeEventListener("touchstart", clickHandler);
             fruit.remove();
-            alert(apple[Math.floor(Math.random() * grape.length)]);
+            alert(grape[Math.floor(Math.random() * grape.length)]);
           }
         };
 
@@ -92,7 +92,7 @@ const Fruits = () => {
             setCount(prevCount => prevCount + 1);
             fruit.removeEventListener("click", clickHandler);
             fruit.remove();
-            alert(apple[Math.floor(Math.random() * grape.length)]);
+            alert(grape[Math.floor(Math.random() * grape.length)]);
           }
         };
 
