@@ -23,9 +23,11 @@ export default function Sheep() {
     { x: 5550, y: 610, scaleX: 1, image: "" },
   ]);
   const [count, setCount] = useState<number>(0);
-  const [stopToggle, setStopToggle] = useState<boolean>(false);
-  const [toggleTimer, setToggleTimer] = useState<boolean>(false);
   const [time, setTime] = useState<number>(25);
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [timerStopped, setTimerStopped] = useState<boolean>(false);
+  const [plan, setPlan] = useState<number>(8);
+  const [rest, setRest] = useState<number>(8);
   const say = [
     "I am a sheep.",
     "I am not a human slave.",
@@ -68,13 +70,13 @@ export default function Sheep() {
   ];
 
   useEffect(() => {
-    setToggleTimer(false);
+    setTimerStopped(false);
   }, []);
 
   useEffect(() => {
-    let maxX: number = 2000; // 이미지 최대 가로 크기
-    let minY: number = 580; // 이미지 최소 세로 크기
-    let maxY: number = 930; // 이미지 최대 세로 크기
+    let maxX: number = 2000;
+    let minY: number = 580;
+    let maxY: number = 930;
 
     if (window.innerWidth <= 500) {
       maxX = 350;
@@ -83,7 +85,7 @@ export default function Sheep() {
     }
 
     const generateRandomPosition = () => {
-      if (stopToggle === false) {
+      if (toggle === false) {
         return;
       }
 
@@ -109,24 +111,24 @@ export default function Sheep() {
     };
 
     const interval = setInterval(() => {
-      if (stopToggle) {
+      if (toggle) {
         generateRandomPosition();
       }
     }, time * 60000);
 
     return () => clearInterval(interval);
-  }, [stopToggle, toggleTimer]);
+  }, [toggle, timerStopped]);
 
   const handleReset = () => {
     setPositions([{ x: 5550, y: 610, scaleX: 1, image: "" }]);
-    setStopToggle(false);
-    setToggleTimer(false);
+    setToggle(false);
+    setTimerStopped(false);
   };
 
   const handleStart = () => {
     setPositions([{ x: 5550, y: 610, scaleX: 1, image: "" }]);
-    setToggleTimer(true);
-    setStopToggle(true);
+    setTimerStopped(true);
+    setToggle(true);
   };
 
   const handleClickSheep = () => {
@@ -136,49 +138,94 @@ export default function Sheep() {
   };
 
   const handleStop = () => {
-    setStopToggle(false);
+    setToggle(false);
   };
 
   useEffect(() => {
-    setToggleTimer(false); // 페이지 로드 시 타이머를 멈추기 위해 toggleTimer를 false로 설정
+    setTimerStopped(false); // 페이지 로드 시 타이머를 멈추기 위해 toggleTimer를 false로 설정
   }, []); // 빈 배열을 넣어 처음 로드 시 한 번만 실행되도록 설정
-
-  const handleTimeChange = e => {
-    setTime(Number(e.target.value));
-  };
 
   return (
     <>
       <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className={"lambs-container"}>
-          <div className="sheep-count">{`🐑 x ${count}`}</div>
+          <div className="sheep-count">{`🐑`}</div>
           <div className="sheep-timer">
-            <Timer time={time} stop={stopToggle} />
+            <Timer time={time} stop={toggle} />
           </div>
-          <div className="born">{`How many minutes is a sheep born? ${time}min`}</div>
+          <div className="born">{`Let the 🐑 be born through your concentration!`}</div>
           <div className="sheep-button-container">
-            <select
-              name="pomodoro"
-              id="time-select"
-              value={time}
-              onChange={handleTimeChange}
-            >
-              <option value="5">5 min</option>
-              <option value="10">10 min</option>
-              <option value="15">15 min</option>
-              <option value="20">20 min</option>
-              <option value="25">25 min</option>
-              <option value="30">30 min</option>
-              <option value="35">35 min</option>
-              <option value="40">40 min</option>
-              <option value="45">45 min</option>
-              <option value="50">50 min</option>
-              <option value="55">55 min</option>
-              <option value="60">60 min</option>
-            </select>
-            <button onClick={handleStart}>start</button>
-            <button onClick={handleStop}>stop</button>
-            <button onClick={handleReset}>reset</button>
+            <div className="sheep-test">
+              <div className="sheep-plan">
+                Plan :{" "}
+                <select
+                  name="plan"
+                  id="plan-select"
+                  value={plan}
+                  onChange={e => {
+                    setPlan(Number(e.target.value));
+                  }}
+                >
+                  <option value="1">1 rpt</option>
+                  <option value="2">2 rpt</option>
+                  <option value="3">3 rpt</option>
+                  <option value="4">4 rpt</option>
+                </select>
+              </div>
+              <div className="sheep-rest">
+                Rest :{" "}
+                <select
+                  name="rest"
+                  id="rest-select"
+                  value={rest}
+                  onChange={e => {
+                    setRest(Number(e.target.value));
+                  }}
+                >
+                  <option value="5">5 min</option>
+                  <option value="10">10 min</option>
+                  <option value="15">15 min</option>
+                  <option value="20">20 min</option>
+                  <option value="25">25 min</option>
+                  <option value="30">30 min</option>
+                  <option value="35">35 min</option>
+                  <option value="40">40 min</option>
+                  <option value="45">45 min</option>
+                  <option value="50">50 min</option>
+                  <option value="55">55 min</option>
+                  <option value="60">60 min</option>
+                </select>
+              </div>
+              <div className="sheep-pomodoro">
+                Pomodoro :{" "}
+                <select
+                  name="time"
+                  id="time-select"
+                  value={time}
+                  onChange={e => {
+                    setTime(Number(e.target.value));
+                  }}
+                >
+                  <option value="5">5 min</option>
+                  <option value="10">10 min</option>
+                  <option value="15">15 min</option>
+                  <option value="20">20 min</option>
+                  <option value="25">25 min</option>
+                  <option value="30">30 min</option>
+                  <option value="35">35 min</option>
+                  <option value="40">40 min</option>
+                  <option value="45">45 min</option>
+                  <option value="50">50 min</option>
+                  <option value="55">55 min</option>
+                  <option value="60">60 min</option>
+                </select>
+              </div>
+              <div>
+                <button onClick={handleStart}>start</button>
+                <button onClick={handleStop}>stop</button>
+                <button onClick={handleReset}>reset</button>
+              </div>
+            </div>
           </div>
         </div>
         {positions.map((position, index) => (
