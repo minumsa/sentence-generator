@@ -18,25 +18,7 @@ import { useEffect, useState } from "react";
 // }
 
 const Fruits = () => {
-  const fruitsArr: string[] = [
-    "🍇",
-    "🍈",
-    "🍉",
-    "🍊",
-    "🍋",
-    "🍌",
-    "🍍",
-    "🥭",
-    "🍎",
-    "🍏",
-    "🍐",
-    "🍑",
-    "🍒",
-    "🍓",
-    "🫐",
-    "🥝",
-    "🍅",
-  ];
+  const fruitsArr: string[] = [""];
 
   useEffect(() => {
     const container = document.getElementById("fruit-container");
