@@ -248,12 +248,17 @@ body::-webkit-scrollbar {
   margin-bottom: 7px;
 }
 
+.pomodoro-box-container {
+  display: flex;
+  justify-content: space-around;
+}
+
 .pomodoro-box {
   /* display: flex;
   flex-direction: row;
   justify-content: space-around; */
   margin-top: 15px;
-  /* width: 282px; */
+  width: 350px;
   height: 45vh;
   /* background-color: #0e1111; */
 }
@@ -271,7 +276,7 @@ body::-webkit-scrollbar {
 
 @media (max-width: 500px) {
   .sheep-container {
-    top: 5vh;
+    top: 3vh;
   }
 
   .sheep-count {
