@@ -248,7 +248,7 @@ function Timer({ time, stop }: SheepProps) {
     return () => {
       clearInterval(interval);
     };
-  }, [stop]);
+  }, [stop, time]);
 
   const formatTime = (value: number) => {
     return value < 10 ? "0" + value : value;
@@ -267,14 +267,17 @@ function Timer({ time, stop }: SheepProps) {
   );
 }
 
-function SheepImage({ plan }: { plan: number }) {
+interface SheepImageProps {
+  plan: number;
+}
+
+function SheepImage({ plan }: SheepImageProps) {
   const images = [];
 
   for (let i = 0; i < plan; i++) {
     images.push(
-      <span className="sheep-image">
+      <span className="sheep-image" key={i}>
         <Image
-          key={i}
           src="/sheep_3.png"
           alt="Pictures of the sheep"
           width="65"
@@ -285,5 +288,5 @@ function SheepImage({ plan }: { plan: number }) {
     );
   }
 
-  return <> {images}</>;
+  return <>{images}</>;
 }
