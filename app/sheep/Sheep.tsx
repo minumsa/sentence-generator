@@ -130,7 +130,7 @@ export default function Sheep() {
                   onChange={e => {
                     setPlan(Number(e.target.value));
                   }}
-                  style={{ fontSize: "16px", width: "60px" }}
+                  style={{ fontSize: "14px", width: "60px" }}
                 >
                   <option value="1">1회</option>
                   <option value="2">2회</option>
@@ -147,7 +147,7 @@ export default function Sheep() {
                   onChange={e => {
                     setRest(Number(e.target.value));
                   }}
-                  style={{ fontSize: "16px", width: "60px" }}
+                  style={{ fontSize: "14px", width: "60px" }}
                 >
                   <option value="5">5분</option>
                   <option value="10">10분</option>
@@ -172,7 +172,7 @@ export default function Sheep() {
                   onChange={e => {
                     setTime(Number(e.target.value));
                   }}
-                  style={{ fontSize: "16px", width: "60px" }}
+                  style={{ fontSize: "14px", width: "60px" }}
                 >
                   <option value="5">5분</option>
                   <option value="10">10분</option>
@@ -189,11 +189,18 @@ export default function Sheep() {
                 </select>
               </div>
               <div>
-                <button onClick={handleStart}>시작</button>
-                <button onClick={handleStop} style={{ margin: "0 3px" }}>
+                <button onClick={handleStart} style={{ fontSize: "14px" }}>
+                  시작
+                </button>
+                <button
+                  onClick={handleStop}
+                  style={{ margin: "0 3px", fontSize: "14px" }}
+                >
                   중지
                 </button>
-                <button onClick={handleReset}>리셋</button>
+                <button onClick={handleReset} style={{ fontSize: "14px" }}>
+                  리셋
+                </button>
               </div>
             </div>
           </div>
