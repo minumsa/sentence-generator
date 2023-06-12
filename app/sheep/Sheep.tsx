@@ -136,6 +136,14 @@ export default function Sheep() {
                   <option value="2">2회</option>
                   <option value="3">3회</option>
                   <option value="4">4회</option>
+                  <option value="5">5회</option>
+                  <option value="6">6회</option>
+                  <option value="7">7회</option>
+                  <option value="8">8회</option>
+                  <option value="9">9회</option>
+                  <option value="10">10회</option>
+                  <option value="11">11회</option>
+                  <option value="12">12회</option>
                 </select>
               </div>
               <div className="sheep-rest">
