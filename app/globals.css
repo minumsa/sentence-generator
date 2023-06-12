@@ -220,16 +220,18 @@ body::-webkit-scrollbar {
 }
 
 .sheep-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #e6e6e6;
   width: 282px;
-  height: 127px;
+  height: 135px;
   border-radius: 10px;
   font-size: 16px;
 }
 
 .sheep-plan {
   text-align: left;
-  margin-top: 10px;
   margin-left: 50px;
 }
 
