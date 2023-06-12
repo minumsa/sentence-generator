@@ -239,13 +239,13 @@ body::-webkit-scrollbar {
   margin-top: 5px;
   text-align: left;
   margin-left: 50px;
+  margin-bottom: 7px;
 }
 
 .sheep-pomodoro {
   margin-top: 5px;
   text-align: left;
   margin-left: 50px;
-  margin-bottom: 7px;
 }
 
 .pomodoro-box-container {

@@ -144,14 +144,14 @@ export default function Sheep() {
                   <option value="12">12회</option>
                 </select>
               </div>
-              <div className="sheep-rest">
-                휴식 :{" "}
+              <div className="sheep-pomodoro">
+                집중 :{" "}
                 <select
-                  name="rest"
-                  id="rest-select"
-                  value={rest}
+                  name="time"
+                  id="time-select"
+                  value={time}
                   onChange={e => {
-                    setRest(Number(e.target.value));
+                    setTime(Number(e.target.value));
                   }}
                   style={{ fontSize: "14px", width: "60px" }}
                 >
@@ -169,14 +169,14 @@ export default function Sheep() {
                   <option value="60">60분</option>
                 </select>
               </div>
-              <div className="sheep-pomodoro">
-                집중 :{" "}
+              <div className="sheep-rest">
+                휴식 :{" "}
                 <select
-                  name="time"
-                  id="time-select"
-                  value={time}
+                  name="rest"
+                  id="rest-select"
+                  value={rest}
                   onChange={e => {
-                    setTime(Number(e.target.value));
+                    setRest(Number(e.target.value));
                   }}
                   style={{ fontSize: "14px", width: "60px" }}
                 >
