@@ -73,52 +73,6 @@ export default function Sheep() {
     setTimerStopped(false);
   }, []);
 
-  useEffect(() => {
-    let maxX: number = 2000;
-    let minY: number = 580;
-    let maxY: number = 930;
-
-    if (window.innerWidth <= 500) {
-      maxX = 350;
-      minY = 250;
-      maxY = 610;
-    }
-
-    const generateRandomPosition = () => {
-      if (toggle === false) {
-        return;
-      }
-
-      const randomX: number = Math.floor(Math.random() * maxX);
-      const randomY: number =
-        Math.floor(Math.random() * (maxY - minY + 1)) + minY;
-
-      const randomScaleX: number = Math.random() < 0.5 ? 1 : -1;
-      const randomImage: string =
-        Math.random() < 0.5 ? "/sheep_1.png" : "/sheep_2.png";
-
-      setPositions(prevPositions => [
-        ...prevPositions,
-        {
-          x: randomX,
-          y: randomY,
-          scaleX: randomScaleX,
-          image: randomImage,
-        },
-      ]);
-
-      setCount(prevCount => prevCount + 1);
-    };
-
-    const interval = setInterval(() => {
-      if (toggle) {
-        generateRandomPosition();
-      }
-    }, time * 60000);
-
-    return () => clearInterval(interval);
-  }, [toggle, timerStopped]);
-
   const handleReset = () => {
     setPositions([{ x: 5550, y: 610, scaleX: 1, image: "" }]);
     setToggle(false);
@@ -131,12 +85,6 @@ export default function Sheep() {
     setToggle(true);
   };
 
-  const handleClickSheep = () => {
-    const randomIndex = Math.floor(Math.random() * say.length);
-    const randomMessage = say[randomIndex];
-    alert(randomMessage);
-  };
-
   const handleStop = () => {
     setToggle(false);
   };
@@ -147,8 +95,8 @@ export default function Sheep() {
 
   return (
     <>
-      <div className="lambs-div-1" style={{ width: "100vw", height: "100vh" }}>
-        <div className={"lambs-container"}>
+      <div className="sheep-div-1" style={{ width: "100vw", height: "100vh" }}>
+        <div className={"sheep-container"}>
           <div
             className="sheep-count"
             onClick={() => {
@@ -160,7 +108,7 @@ export default function Sheep() {
             <Timer time={time} stop={toggle} />
           </div>
           <div className="born">
-            <span>Let the </span>
+            <span>집중을 통해 오늘의 </span>
             <span
               onClick={() => {
                 alert(say[Math.floor(Math.random() * say.length)]);
@@ -169,12 +117,12 @@ export default function Sheep() {
             >
               🐑{" "}
             </span>
-            <span>be born through your concentration!</span>
+            <span>을 탄생시키세요!</span>
           </div>
           <div className="sheep-button-container">
-            <div className="sheep-test">
+            <div className="sheep-box">
               <div className="sheep-plan">
-                Plan :{" "}
+                반복 :{" "}
                 <select
                   name="plan"
                   id="plan-select"
@@ -182,15 +130,16 @@ export default function Sheep() {
                   onChange={e => {
                     setPlan(Number(e.target.value));
                   }}
+                  style={{ fontSize: "16px", width: "60px" }}
                 >
-                  <option value="1">1 rpt</option>
-                  <option value="2">2 rpt</option>
-                  <option value="3">3 rpt</option>
-                  <option value="4">4 rpt</option>
+                  <option value="1">1회</option>
+                  <option value="2">2회</option>
+                  <option value="3">3회</option>
+                  <option value="4">4회</option>
                 </select>
               </div>
               <div className="sheep-rest">
-                Rest :{" "}
+                휴식 :{" "}
                 <select
                   name="rest"
                   id="rest-select"
@@ -198,23 +147,24 @@ export default function Sheep() {
                   onChange={e => {
                     setRest(Number(e.target.value));
                   }}
+                  style={{ fontSize: "16px", width: "60px" }}
                 >
-                  <option value="5">5 min</option>
-                  <option value="10">10 min</option>
-                  <option value="15">15 min</option>
-                  <option value="20">20 min</option>
-                  <option value="25">25 min</option>
-                  <option value="30">30 min</option>
-                  <option value="35">35 min</option>
-                  <option value="40">40 min</option>
-                  <option value="45">45 min</option>
-                  <option value="50">50 min</option>
-                  <option value="55">55 min</option>
-                  <option value="60">60 min</option>
+                  <option value="5">5분</option>
+                  <option value="10">10분</option>
+                  <option value="15">15분</option>
+                  <option value="20">20분</option>
+                  <option value="25">25분</option>
+                  <option value="30">30분</option>
+                  <option value="35">35분</option>
+                  <option value="40">40분</option>
+                  <option value="45">45분</option>
+                  <option value="50">50분</option>
+                  <option value="55">55분</option>
+                  <option value="60">60분</option>
                 </select>
               </div>
               <div className="sheep-pomodoro">
-                Pomodoro :{" "}
+                집중 :{" "}
                 <select
                   name="time"
                   id="time-select"
@@ -222,55 +172,33 @@ export default function Sheep() {
                   onChange={e => {
                     setTime(Number(e.target.value));
                   }}
+                  style={{ fontSize: "16px", width: "60px" }}
                 >
-                  <option value="5">5 min</option>
-                  <option value="10">10 min</option>
-                  <option value="15">15 min</option>
-                  <option value="20">20 min</option>
-                  <option value="25">25 min</option>
-                  <option value="30">30 min</option>
-                  <option value="35">35 min</option>
-                  <option value="40">40 min</option>
-                  <option value="45">45 min</option>
-                  <option value="50">50 min</option>
-                  <option value="55">55 min</option>
-                  <option value="60">60 min</option>
+                  <option value="5">5분</option>
+                  <option value="10">10분</option>
+                  <option value="15">15분</option>
+                  <option value="20">20분</option>
+                  <option value="25">25분</option>
+                  <option value="30">30분</option>
+                  <option value="35">35분</option>
+                  <option value="40">40분</option>
+                  <option value="45">45분</option>
+                  <option value="50">50분</option>
+                  <option value="55">55분</option>
+                  <option value="60">60분</option>
                 </select>
               </div>
               <div>
-                <button onClick={handleStart}>start</button>
-                <button onClick={handleStop}>stop</button>
-                <button onClick={handleReset}>reset</button>
+                <button onClick={handleStart}>시작</button>
+                <button onClick={handleStop} style={{ margin: "0 3px" }}>
+                  중지
+                </button>
+                <button onClick={handleReset}>리셋</button>
               </div>
             </div>
           </div>
+          <div className="pomodoro-box">here</div>
         </div>
-        {positions.map((position, index) => (
-          <div
-            className="lambs"
-            key={index}
-            style={{
-              width: "10vw",
-              height: "10vh",
-              position: "absolute",
-              top: position.y,
-              left: position.x,
-              transform: `scaleX(${position.scaleX})`,
-              cursor: "pointer",
-            }}
-            onClick={handleClickSheep}
-          >
-            <div>
-              <Image
-                src={position.image}
-                width={1}
-                height={1}
-                layout="responsive"
-                alt="Picture of the lamb"
-              />
-            </div>
-          </div>
-        ))}
       </div>
     </>
   );
