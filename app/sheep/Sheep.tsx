@@ -19,10 +19,6 @@ interface Position {
 }
 
 export default function Sheep() {
-  const [positions, setPositions] = useState<Position[]>([
-    { x: 5550, y: 610, scaleX: 1, image: "" },
-  ]);
-  const [count, setCount] = useState<number>(0);
   const [time, setTime] = useState<number>(25);
   const [toggle, setToggle] = useState<boolean>(false);
   const [timerStopped, setTimerStopped] = useState<boolean>(false);
@@ -216,114 +212,7 @@ export default function Sheep() {
           </div>
           <div className="pomodoro-box-container">
             <div className="pomodoro-box">
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
-              <span className="sheep-image">
-                <Image
-                  src="/sheep_3.png"
-                  alt="Pictures of the sheep"
-                  width="65"
-                  height="65"
-                  style={{ marginBottom: "8px" }}
-                />
-              </span>
+              <SheepImage plan={plan} />
             </div>
           </div>
         </div>
@@ -376,4 +265,25 @@ function Timer({ time, stop }: SheepProps) {
       )}`}
     </div>
   );
+}
+
+function SheepImage({ plan }: { plan: number }) {
+  const images = [];
+
+  for (let i = 0; i < plan; i++) {
+    images.push(
+      <span className="sheep-image">
+        <Image
+          key={i}
+          src="/sheep_3.png"
+          alt="Pictures of the sheep"
+          width="65"
+          height="65"
+          style={{ marginBottom: "8px" }}
+        />
+      </span>
+    );
+  }
+
+  return <> {images}</>;
 }
