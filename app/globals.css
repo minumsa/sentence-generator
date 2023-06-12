@@ -260,6 +260,7 @@ body::-webkit-scrollbar {
   margin-top: 15px;
   width: 350px;
   height: 45vh;
+  opacity: 60%;
   /* background-color: #0e1111; */
 }
 
