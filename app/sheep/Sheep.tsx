@@ -74,13 +74,15 @@ export default function Sheep() {
   }, []);
 
   const handleReset = () => {
-    setPositions([{ x: 5550, y: 610, scaleX: 1, image: "" }]);
     setToggle(false);
     setTimerStopped(false);
+
+    if (window.confirm("리셋하시겠습니까? 모든 양이 사라집니다.")) {
+      window.alert("리셋되었습니다.");
+    }
   };
 
   const handleStart = () => {
-    setPositions([{ x: 5550, y: 610, scaleX: 1, image: "" }]);
     setTimerStopped(true);
     setToggle(true);
   };
