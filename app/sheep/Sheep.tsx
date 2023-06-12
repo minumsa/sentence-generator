@@ -197,7 +197,116 @@ export default function Sheep() {
               </div>
             </div>
           </div>
-          <div className="pomodoro-box">here</div>
+          <div className="pomodoro-box">
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+            <span className="sheep-image">
+              <Image
+                src="/sheep_3.png"
+                alt="Pictures of the sheep"
+                width="70"
+                height="70"
+                style={{ marginBottom: "8px" }}
+              />
+            </span>
+          </div>
         </div>
       </div>
     </>

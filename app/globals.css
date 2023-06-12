@@ -256,6 +256,10 @@ body::-webkit-scrollbar {
   /* background-color: #0e1111; */
 }
 
+.sheep-image {
+  margin: 0 5px;
+}
+
 @media (prefers-color-scheme: dark) {
   .born,
   .sheep-container {
