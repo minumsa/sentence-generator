@@ -3,27 +3,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-export async function getServerSideProps() {
-  return {
-    props: {
-      toggleTimer: false,
-    },
-  };
-}
-
-interface Position {
-  x: number;
-  y: number;
-  scaleX: number;
-  image: string;
-}
-
 export default function Sheep() {
   const [time, setTime] = useState<number>(25);
   const [toggle, setToggle] = useState<boolean>(false);
   const [timerStopped, setTimerStopped] = useState<boolean>(false);
   const [plan, setPlan] = useState<number>(8);
   const [rest, setRest] = useState<number>(8);
+  const [sheepTimerKey, setSheepTimerKey] = useState<number>(0);
   const say = [
     "I am a sheep.",
     "I am not a human slave.",
@@ -87,6 +73,11 @@ export default function Sheep() {
     setToggle(false);
   };
 
+  const updateTimeInTimer = (newTime: number) => {
+    setTime(newTime);
+    setSheepTimerKey(prevKey => prevKey + 1); // 키 값을 증가시켜 Timer 컴포넌트를 리렌더링한다
+  };
+
   useEffect(() => {
     setTimerStopped(false); // 페이지 로드 시 타이머를 멈추기 위해 toggleTimer를 false로 설정
   }, []); // 빈 배열을 넣어 처음 로드 시 한 번만 실행되도록 설정
@@ -103,7 +94,8 @@ export default function Sheep() {
             style={{ cursor: "pointer" }}
           >{`🐑`}</div>
           <div className="sheep-timer">
-            <Timer time={time} stop={toggle} />
+            <Timer time={time} stop={toggle} key={sheepTimerKey} />{" "}
+            {/* Timer 컴포넌트에 키 값을 전달한다 */}
           </div>
           <div className="born">
             <span>집중을 통해 오늘의 </span>
@@ -227,6 +219,9 @@ interface SheepProps {
 }
 
 function Timer({ time, stop }: SheepProps) {
+  // TODO: 집중 interval 끝나면 휴식 interval 자동 시작되게 하기
+  // TODO: 리셋 버튼 누르면 리셋되게
+
   const [seconds, setSeconds] = useState(time * 60);
 
   useEffect(() => {
@@ -249,6 +244,10 @@ function Timer({ time, stop }: SheepProps) {
       clearInterval(interval);
     };
   }, [stop, time]);
+
+  useEffect(() => {
+    setSeconds(time * 60);
+  }, [time]);
 
   const formatTime = (value: number) => {
     return value < 10 ? "0" + value : value;
