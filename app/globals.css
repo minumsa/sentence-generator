@@ -203,6 +203,7 @@ body::-webkit-scrollbar {
 
 .born {
   margin-bottom: 0;
+  margin-top: 5px;
   font-size: 20px;
 }
 
@@ -215,7 +216,6 @@ body::-webkit-scrollbar {
 .sheep-button-container {
   display: flex;
   flex-direction: row;
-  margin-top: 15px;
   justify-content: space-around;
 }
 
@@ -223,10 +223,11 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #e6e6e6;
+  /* background-color: #e6e6e6; */
   width: 282px;
   height: 135px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  border: solid 1px black;
   font-size: 16px;
 }
 
@@ -268,10 +269,10 @@ body::-webkit-scrollbar {
 }
 
 @media (prefers-color-scheme: dark) {
-  .born,
+  /* .born,
   .sheep-container {
     color: #f4f6f7;
-  }
+  } */
 }
 
 @media (max-width: 500px) {

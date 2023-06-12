@@ -8,7 +8,7 @@ export default function Sheep() {
   const [toggle, setToggle] = useState<boolean>(false);
   const [timerStopped, setTimerStopped] = useState<boolean>(false);
   const [plan, setPlan] = useState<number>(8);
-  const [rest, setRest] = useState<number>(8);
+  const [rest, setRest] = useState<number>(5);
   const [sheepTimerKey, setSheepTimerKey] = useState<number>(0);
   const say = [
     "I am a sheep.",
@@ -73,11 +73,6 @@ export default function Sheep() {
     setToggle(false);
   };
 
-  const updateTimeInTimer = (newTime: number) => {
-    setTime(newTime);
-    setSheepTimerKey(prevKey => prevKey + 1); // 키 값을 증가시켜 Timer 컴포넌트를 리렌더링한다
-  };
-
   useEffect(() => {
     setTimerStopped(false); // 페이지 로드 시 타이머를 멈추기 위해 toggleTimer를 false로 설정
   }, []); // 빈 배열을 넣어 처음 로드 시 한 번만 실행되도록 설정
@@ -94,20 +89,8 @@ export default function Sheep() {
             style={{ cursor: "pointer" }}
           >{`🐑`}</div>
           <div className="sheep-timer">
-            <Timer time={time} stop={toggle} key={sheepTimerKey} />{" "}
+            <Timer time={time} stop={toggle} key={sheepTimerKey} rest={rest} />{" "}
             {/* Timer 컴포넌트에 키 값을 전달한다 */}
-          </div>
-          <div className="born">
-            <span>집중을 통해 오늘의 </span>
-            <span
-              onClick={() => {
-                alert(say[Math.floor(Math.random() * say.length)]);
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              🐑{" "}
-            </span>
-            <span>을 탄생시키세요!</span>
           </div>
           <div className="sheep-button-container">
             <div className="sheep-box">
@@ -120,7 +103,11 @@ export default function Sheep() {
                   onChange={e => {
                     setPlan(Number(e.target.value));
                   }}
-                  style={{ fontSize: "14px", width: "60px" }}
+                  style={{
+                    fontSize: "14px",
+                    width: "60px",
+                    marginLeft: "12px",
+                  }}
                 >
                   <option value="1">1회</option>
                   <option value="2">2회</option>
@@ -145,8 +132,13 @@ export default function Sheep() {
                   onChange={e => {
                     setTime(Number(e.target.value));
                   }}
-                  style={{ fontSize: "14px", width: "60px" }}
+                  style={{
+                    fontSize: "14px",
+                    width: "60px",
+                    marginLeft: "12px",
+                  }}
                 >
+                  <option value="1">1분</option>
                   <option value="5">5분</option>
                   <option value="10">10분</option>
                   <option value="15">15분</option>
@@ -170,7 +162,11 @@ export default function Sheep() {
                   onChange={e => {
                     setRest(Number(e.target.value));
                   }}
-                  style={{ fontSize: "14px", width: "60px" }}
+                  style={{
+                    fontSize: "14px",
+                    width: "60px",
+                    marginLeft: "12px",
+                  }}
                 >
                   <option value="5">5분</option>
                   <option value="10">10분</option>
@@ -213,16 +209,21 @@ export default function Sheep() {
   );
 }
 
-interface SheepProps {
+interface TimerProps {
   time: number;
+  rest: number;
   stop: boolean;
+  key: any;
 }
 
-function Timer({ time, stop }: SheepProps) {
+function Timer({ time, stop, rest, key }: TimerProps) {
   // TODO: 집중 interval 끝나면 휴식 interval 자동 시작되게 하기
   // TODO: 리셋 버튼 누르면 리셋되게
 
-  const [seconds, setSeconds] = useState(time * 60);
+  const [seconds, setSeconds] = useState<number>(time * 60);
+  const [restSeconds, setRestSeconds] = useState<number>(rest * 60);
+  const [complete, setComplete] = useState<boolean>(false);
+  const [restComplete, setRestComplete] = useState<boolean>(false);
 
   useEffect(() => {
     let interval: any;
@@ -234,6 +235,7 @@ function Timer({ time, stop }: SheepProps) {
             return prevSeconds - 1;
           } else {
             clearInterval(interval);
+            setComplete(true);
             return 0;
           }
         });
@@ -246,8 +248,31 @@ function Timer({ time, stop }: SheepProps) {
   }, [stop, time]);
 
   useEffect(() => {
+    let restInterval: any;
+
+    if (stop === true) {
+      restInterval = setInterval(() => {
+        setRestSeconds(prevSeconds => {
+          if (prevSeconds > 0) {
+            return prevSeconds - 1;
+          } else {
+            clearInterval(restInterval);
+            setRestComplete(true);
+            return 0;
+          }
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(restInterval);
+    };
+  }, [stop, rest]);
+
+  useEffect(() => {
     setSeconds(time * 60);
-  }, [time]);
+    setRestSeconds(rest * 60);
+  }, [time, rest]);
 
   const formatTime = (value: number) => {
     return value < 10 ? "0" + value : value;
@@ -257,11 +282,33 @@ function Timer({ time, stop }: SheepProps) {
   const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = seconds % 60;
 
+  const restHours = Math.floor(restSeconds / 3600);
+  const restMinutes = Math.floor((restSeconds % 3600) / 60);
+  const restRemainingSeconds = restSeconds % 60;
+
   return (
     <div>
-      {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
-        remainingSeconds
-      )}`}
+      {complete ? (
+        <>
+          {`${formatTime(restHours)}:${formatTime(restMinutes)}:${formatTime(
+            restRemainingSeconds
+          )}`}
+          <div className="born">
+            이제부터 휴식을 취하세요! {/* 종료되었을 때 표시할 내용 */}
+          </div>
+        </>
+      ) : (
+        <>
+          {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
+            remainingSeconds
+          )}`}
+          <div className="born">
+            <span>집중을 통해 오늘의 </span>
+            <span>🐑 </span>
+            <span>을 탄생시키세요!</span>
+          </div>
+        </>
+      )}
     </div>
   );
 }
