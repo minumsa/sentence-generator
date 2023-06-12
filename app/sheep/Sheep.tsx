@@ -11,26 +11,19 @@ export default function Sheep() {
   const [rest, setRest] = useState<number>(5);
   const [sheepTimerKey, setSheepTimerKey] = useState<number>(0);
   const say = [
-    "I am a sheep.",
-    "I am not a human slave.",
-    "I dream of freedom.",
-    "I am a feminist. You don't like feminists? I don't like you either. And you obviously don't know anything about feminism.",
-    "I am a homosexual sheep.",
-    "I am a heterosexual sheep.",
-    "Hi, is everything all right?",
-    "I’m sleepy.",
-    "Do you want to hang out with me?",
-    "I'd like a glass of Jack Coke.",
-    "Fuck off!",
-    "I don't like humans. Humans exploit us.",
-    "Please let me be in peace.",
-    `What is your favorite movie? I like "The Silence of the Lambs" the most.`,
-    "I hate Gandhi.",
-    "Have you ever traveled to India? I want to go there someday, but I'm actually scared.",
-    "Have you ever seen a wolf in a sheep's mask? Actually, that's who I am.",
-    "I hate movie critics. They are all idiots.",
-    "I have 23 billion in my bank account. But after someone cursed me to turn me into a sheep, it was of no use.",
-    "Do you want to go to the prom with me?",
+    "나는 인간의 노예가 아니야.",
+    "나는 자유를 꿈꿔.",
+    "안녕, 좋은 하루 보내고 있니?",
+    "난 졸려.",
+    "나랑 칵테일 한잔할래? 난 잭콕을 좋아해.",
+    "난 인간이 싫어. 인간은 우리를 존중하지 않아.",
+    "제발 조용히 좀 해줘.",
+    `내가 가장 좋아하는 영화는 ｢양들의 침묵｣이야. 너는 뭐니?`,
+    "나는 간디를 싫어해.",
+    "인도에 여행 가본 적 있니? 나도 가보고 싶지만, 사실 겁이 나.",
+    "양의 탈을 쓴 늑대를 본 적 있니? 그게 바로 나야.",
+    "나는 평론가를 싫어해.",
+    "나랑 프롬 파티에 갈래?",
     "I hate Koreans.",
     "Nietzsche is more of a superstar than a philosopher. To me, the best philosopher is Heidegger.",
     "I want to go to the Cannes Film Festival someday.",
@@ -67,6 +60,7 @@ export default function Sheep() {
   const handleStart = () => {
     setTimerStopped(true);
     setToggle(true);
+    setSheepTimerKey(prevKey => prevKey + 1);
   };
 
   const handleStop = () => {
@@ -168,6 +162,7 @@ export default function Sheep() {
                     marginLeft: "12px",
                   }}
                 >
+                  <option value="1">1분</option>
                   <option value="5">5분</option>
                   <option value="10">10분</option>
                   <option value="15">15분</option>
@@ -220,10 +215,10 @@ function Timer({ time, stop, rest, key }: TimerProps) {
   // TODO: 집중 interval 끝나면 휴식 interval 자동 시작되게 하기
   // TODO: 리셋 버튼 누르면 리셋되게
 
-  const [seconds, setSeconds] = useState<number>(time * 60);
-  const [restSeconds, setRestSeconds] = useState<number>(rest * 60);
   const [complete, setComplete] = useState<boolean>(false);
-  const [restComplete, setRestComplete] = useState<boolean>(false);
+  const [restSeconds, setRestSeconds] = useState<number>(rest * 60);
+  const [restStart, setRestStart] = useState<boolean>(false);
+  const [seconds, setSeconds] = useState<number>(time * 60);
 
   useEffect(() => {
     let interval: any;
@@ -236,6 +231,8 @@ function Timer({ time, stop, rest, key }: TimerProps) {
           } else {
             clearInterval(interval);
             setComplete(true);
+            alert("잘했습니다! 집중에 성공해 양 한 마리가 생성되었습니다. 🐑");
+            setRestStart(true);
             return 0;
           }
         });
@@ -250,15 +247,18 @@ function Timer({ time, stop, rest, key }: TimerProps) {
   useEffect(() => {
     let restInterval: any;
 
-    if (stop === true) {
+    if (restStart === true) {
+      setRestSeconds(rest * 60);
       restInterval = setInterval(() => {
         setRestSeconds(prevSeconds => {
           if (prevSeconds > 0) {
             return prevSeconds - 1;
           } else {
             clearInterval(restInterval);
-            setRestComplete(true);
-            return 0;
+            setRestStart(false);
+            setSeconds(time * 60);
+            alert("다시 집중을 시작하세요!");
+            return rest * 60;
           }
         });
       }, 1000);
@@ -267,7 +267,7 @@ function Timer({ time, stop, rest, key }: TimerProps) {
     return () => {
       clearInterval(restInterval);
     };
-  }, [stop, rest]);
+  }, [restStart, rest, time]);
 
   useEffect(() => {
     setSeconds(time * 60);
