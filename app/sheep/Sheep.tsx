@@ -11,6 +11,7 @@ export default function Sheep() {
   const [restTimeToggle, setRestTimeToggle] = useState<boolean>(false);
   const [restSeconds, setRestSeconds] = useState<number>(restTime * 60);
   const [plan, setPlan] = useState<number>(8);
+  const [complete, setComplete] = useState<number>(0);
 
   // 타이머 전체를 관리하기 위해 useRef 생성
   const intervalRef = useRef<any>(null);
@@ -74,6 +75,7 @@ export default function Sheep() {
               setSeconds={setSeconds}
               restSeconds={restSeconds}
               setRestSeconds={setRestSeconds}
+              setComplete={setComplete}
             />{" "}
             {/* Timer 컴포넌트에 키 값을 전달한다 */}
           </div>
@@ -186,7 +188,11 @@ export default function Sheep() {
           </div>
           <div className="pomodoro-box-container">
             <div className="pomodoro-box">
-              <SheepImage plan={plan} restTimeToggle={restTimeToggle} />
+              <SheepImage
+                plan={plan}
+                restTimeToggle={restTimeToggle}
+                complete={complete}
+              />
             </div>
           </div>
         </div>
@@ -206,6 +212,8 @@ interface TimerProps {
   setSeconds: React.Dispatch<React.SetStateAction<number>>;
   restSeconds: number;
   setRestSeconds: React.Dispatch<React.SetStateAction<number>>;
+  complete: boolean;
+  setComplete: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function Timer({
@@ -219,6 +227,7 @@ function Timer({
   setSeconds,
   restSeconds,
   setRestSeconds,
+  setComplete,
 }: TimerProps) {
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -229,13 +238,14 @@ function Timer({
       interval = setInterval(() => {
         setSeconds(x => {
           if (x > 0) {
-            return x - 1;
+            return x - 10;
           } else {
             clearInterval(interval);
             setTimeToggle(false);
-            alert("집중에 성공해서 양 한 마리가 생성되었습니다!");
+            setComplete(x => x + 1);
             setRestTimeToggle(true);
             setSeconds(time * 60);
+            alert("집중에 성공해서 양 한 마리가 생성되었습니다!");
             return 0;
           }
         });
@@ -255,12 +265,12 @@ function Timer({
       restInterval = setInterval(() => {
         setRestSeconds(x => {
           if (x > 0) {
-            return x - 1;
+            return x - 10;
           } else {
             clearInterval(restInterval);
             setRestTimeToggle(false);
-            alert("다시 집중을 시작하세요!");
             setRestSeconds(restTime * 60);
+            alert("다시 집중을 시작하세요!");
             return restTime * 60;
           }
         });
@@ -332,39 +342,73 @@ function Timer({
 interface SheepImageProps {
   plan: number;
   restTimeToggle: boolean;
+  complete: number;
 }
 
-function SheepImage({ plan, restTimeToggle }: SheepImageProps) {
-  const images = [];
+function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
+  console.log(complete);
 
-  for (let i = 0; i < plan; i++) {
-    images.push(
-      <span className="sheep-image" key={`sheep-${i}`}>
-        <Image
-          src="/sheep_3.png"
-          alt="Pictures of the sheep"
-          width="65"
-          height="65"
-          style={{ marginBottom: "8px" }}
-        />
-      </span>
-    );
-  }
+  useEffect(() => {
+    // plan이 변경되면 렌더링 ===> 전체 양 이미지 개수 변경
+  }, [plan]);
 
-  if (restTimeToggle === true) {
-    images.pop();
-    images.unshift(
-      <span className="sheep-image" key={`sheep-${Date.now()}`}>
-        <Image
-          src="/sheep_4.png"
-          alt="Pictures of the sheep"
-          width="65"
-          height="65"
-          style={{ marginBottom: "8px" }}
-        />
-      </span>
-    );
-  }
+  useEffect(() => {
+    // restTimeToggle이 변경되면 렌더링 ===> 컬러 양 이미지 추가
+  }, [restTimeToggle]);
 
-  return <>{images}</>;
+  const generateImages = () => {
+    const images = [];
+
+    for (let i = 0; i < complete; i++) {
+      images.push(
+        <span className="sheep-image">
+          <Image
+            src="/sheep_4.png"
+            alt="Pictures of the sheep"
+            width="65"
+            height="65"
+            style={{ marginBottom: "8px" }}
+          />
+        </span>
+      );
+    }
+
+    for (let i = 0; i < plan - complete; i++) {
+      images.push(
+        <span className="sheep-image">
+          <Image
+            src="/sheep_3.png"
+            alt="Pictures of the sheep"
+            width="65"
+            height="65"
+            style={{ marginBottom: "8px" }}
+          />
+        </span>
+      );
+    }
+
+    // if (restTimeToggle === true) {
+    //   images.pop();
+    //   images.unshift(
+    //     <span className="sheep-image" key={`sheep-${Date.now()}`}>
+    //       <Image
+    //         src="/sheep_4.png"
+    //         alt="Pictures of the sheep"
+    //         width="65"
+    //         height="65"
+    //         style={{ marginBottom: "8px" }}
+    //       />
+    //     </span>
+    //   );
+    // }
+
+    return images;
+  };
+
+  return (
+    <>
+      {/* 양 이미지를 생성하는 함수 호출 */}
+      {generateImages()}
+    </>
+  );
 }
