@@ -315,8 +315,8 @@ function Timer({
               </div>
               <div className="born">
                 <span>집중을 통해 </span>
-                {/* <span>🐑</span> */}
-                <span>양을 탄생시키세요!</span>
+                <span className="sheep-point">양</span>
+                <span>을 탄생시키세요!</span>
               </div>
               <div className="born-button">
                 <span
