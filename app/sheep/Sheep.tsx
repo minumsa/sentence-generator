@@ -5,11 +5,10 @@ import Image from "next/image";
 
 export default function Sheep() {
   const [time, setTime] = useState<number>(25);
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [timeEnd, setTimeEnd] = useState<boolean>(false);
   const [timerStopped, setTimerStopped] = useState<boolean>(false);
   const [plan, setPlan] = useState<number>(8);
-  const [rest, setRest] = useState<number>(5);
-  const [sheepTimerKey, setSheepTimerKey] = useState<number>(0);
+  const [restTime, setRestTime] = useState<number>(5);
   const say = [
     "나는 인간의 노예가 아니야.",
     "나는 자유를 꿈꿔.",
@@ -49,7 +48,7 @@ export default function Sheep() {
   }, []);
 
   const handleReset = () => {
-    setToggle(false);
+    setTimeEnd(false);
     setTimerStopped(false);
 
     if (window.confirm("리셋하시겠습니까? 모든 양이 사라집니다.")) {
@@ -59,12 +58,11 @@ export default function Sheep() {
 
   const handleStart = () => {
     setTimerStopped(true);
-    setToggle(true);
-    setSheepTimerKey(prevKey => prevKey + 1);
+    setTimeEnd(true);
   };
 
   const handleStop = () => {
-    setToggle(false);
+    setTimeEnd(false);
   };
 
   useEffect(() => {
@@ -83,7 +81,7 @@ export default function Sheep() {
             style={{ cursor: "pointer" }}
           >{`🐑`}</div>
           <div className="sheep-timer">
-            <Timer time={time} stop={toggle} key={sheepTimerKey} rest={rest} />{" "}
+            <Timer time={time} timeEnd={timeEnd} restTime={restTime} />{" "}
             {/* Timer 컴포넌트에 키 값을 전달한다 */}
           </div>
           <div className="sheep-button-container">
@@ -152,9 +150,9 @@ export default function Sheep() {
                 <select
                   name="rest"
                   id="rest-select"
-                  value={rest}
+                  value={restTime}
                   onChange={e => {
-                    setRest(Number(e.target.value));
+                    setRestTime(Number(e.target.value));
                   }}
                   style={{
                     fontSize: "14px",
@@ -206,24 +204,23 @@ export default function Sheep() {
 
 interface TimerProps {
   time: number;
-  rest: number;
-  stop: boolean;
-  key: any;
+  restTime: number;
+  timeEnd: boolean;
 }
 
-function Timer({ time, stop, rest, key }: TimerProps) {
+function Timer({ timeEnd, time, restTime }: TimerProps) {
   // TODO: 집중 interval 끝나면 휴식 interval 자동 시작되게 하기
   // TODO: 리셋 버튼 누르면 리셋되게
 
   const [complete, setComplete] = useState<boolean>(false);
-  const [restSeconds, setRestSeconds] = useState<number>(rest * 60);
+  const [restSeconds, setRestSeconds] = useState<number>(restTime * 60);
   const [restStart, setRestStart] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(time * 60);
 
   useEffect(() => {
     let interval: any;
 
-    if (stop === true) {
+    if (timeEnd === true) {
       interval = setInterval(() => {
         setSeconds(prevSeconds => {
           if (prevSeconds > 0) {
@@ -242,13 +239,13 @@ function Timer({ time, stop, rest, key }: TimerProps) {
     return () => {
       clearInterval(interval);
     };
-  }, [stop, time]);
+  }, [timeEnd]);
 
   useEffect(() => {
     let restInterval: any;
 
     if (restStart === true) {
-      setRestSeconds(rest * 60);
+      setRestSeconds(restTime * 60);
       restInterval = setInterval(() => {
         setRestSeconds(prevSeconds => {
           if (prevSeconds > 0) {
@@ -258,7 +255,7 @@ function Timer({ time, stop, rest, key }: TimerProps) {
             setRestStart(false);
             setSeconds(time * 60);
             alert("다시 집중을 시작하세요!");
-            return rest * 60;
+            return restTime * 60;
           }
         });
       }, 1000);
@@ -267,12 +264,12 @@ function Timer({ time, stop, rest, key }: TimerProps) {
     return () => {
       clearInterval(restInterval);
     };
-  }, [restStart, rest, time]);
+  }, [restStart]);
 
   useEffect(() => {
     setSeconds(time * 60);
-    setRestSeconds(rest * 60);
-  }, [time, rest]);
+    setRestSeconds(restTime * 60);
+  }, [time, restTime]);
 
   const formatTime = (value: number) => {
     return value < 10 ? "0" + value : value;
@@ -322,7 +319,7 @@ function SheepImage({ plan }: SheepImageProps) {
 
   for (let i = 0; i < plan; i++) {
     images.push(
-      <span className="sheep-image" key={i}>
+      <span className="sheep-image">
         <Image
           src="/sheep_3.png"
           alt="Pictures of the sheep"
