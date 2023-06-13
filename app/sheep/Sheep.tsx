@@ -83,7 +83,7 @@ export default function Sheep() {
           <div className="sheep-button-container">
             <div className="sheep-box">
               <div className="sheep-plan">
-                반복 :{" "}
+                반복(plan) :{" "}
                 <select
                   name="plan"
                   id="plan-select"
@@ -112,7 +112,7 @@ export default function Sheep() {
                 </select>
               </div>
               <div className="sheep-pomodoro">
-                집중 :{" "}
+                집중(pomodoro)
                 <select
                   name="time"
                   id="time-select"
@@ -142,7 +142,7 @@ export default function Sheep() {
                 </select>
               </div>
               <div className="sheep-rest">
-                휴식 :{" "}
+                휴식(rest) :{" "}
                 <select
                   name="rest"
                   id="rest-select"
