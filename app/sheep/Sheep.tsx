@@ -232,8 +232,6 @@ function Timer({
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
 
-    console.log(timeToggle);
-
     if (timeToggle === true) {
       interval = setInterval(() => {
         setSeconds(x => {
@@ -303,25 +301,87 @@ function Timer({
         if (timeToggle === false && restTimeToggle === false) {
           // timeToggle이 true일 때 집중 타이머 인터페이스 출력
           return (
-            <>
-              {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
-                remainingSeconds
-              )}`}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{ width: "90px", marginLeft: "5px" }}>
+                  {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
+                    remainingSeconds
+                  )}`}{" "}
+                </div>
+                <div
+                  onClick={() => {
+                    setTimeToggle(true);
+                  }}
+                  style={{
+                    border: "solid 1px black",
+                    padding: "0 3px",
+                    fontSize: "19px",
+                    width: "40px",
+                    height: "25px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  시작
+                </div>
+                <div
+                  style={{
+                    border: "solid 1px black",
+                    padding: "0 3px",
+                    fontSize: "19px",
+                    width: "40px",
+                    height: "25px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  설정
+                </div>
+              </div>
               <div className="born">
                 <span>집중을 통해 오늘의 </span>
                 <span>🐑 </span>
                 <span>을 탄생시키세요!</span>
               </div>
-            </>
+            </div>
           );
         } else if (timeToggle === true && restTimeToggle === false) {
           return (
-            <>
-              {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
-                remainingSeconds
-              )}`}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{ width: "90px" }}>
+                  {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
+                    remainingSeconds
+                  )}`}{" "}
+                </div>
+                <div
+                  onClick={() => {
+                    setTimeToggle(false);
+                  }}
+                  style={{
+                    border: "solid 1px black",
+                    padding: "0 3px",
+                    fontSize: "19px",
+                    width: "40px",
+                    height: "25px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  중단
+                </div>
+                <div
+                  style={{
+                    border: "solid 1px black",
+                    padding: "0 3px",
+                    fontSize: "19px",
+                    width: "40px",
+                    height: "25px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  설정
+                </div>
+              </div>
               <div className="born">이제부터 집중하세요!</div>
-            </>
+            </div>
           );
         } else if (timeToggle === false && restTimeToggle === true) {
           // timeToggle이 false일 때 휴식 타이머 인터페이스 출력
