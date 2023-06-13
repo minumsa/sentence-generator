@@ -188,8 +188,9 @@ body::-webkit-scrollbar {
 
 .clone-box {
   position: absolute;
-  right: 9%;
-  top: 1%;
+  right: 35px;
+  top: 7px;
+
   font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
   text-align: center;
   display: inline-block;
@@ -203,8 +204,8 @@ body::-webkit-scrollbar {
 }
 .clone-box2 {
   position: absolute;
-  right: 2%;
-  top: 1%;
+  right: 9px;
+  top: 7px;
   font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
   text-align: center;
   display: inline-block;
