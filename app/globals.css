@@ -209,13 +209,13 @@ body::-webkit-scrollbar {
 .born {
   font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
   margin-bottom: 0;
-  margin-top: 5px;
+  margin-top: 10px;
+  height: 30px;
   font-size: 20px;
 }
 
 .born-button {
   margin-bottom: 0;
-  margin-top: 7px;
   font-size: 20px;
 }
 

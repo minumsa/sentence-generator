@@ -237,7 +237,7 @@ function Timer({
       interval = setInterval(() => {
         setSeconds(x => {
           if (x > 0) {
-            return x - 10;
+            return x - 1;
           } else {
             clearInterval(interval);
             setTimeToggle(false);
@@ -264,7 +264,7 @@ function Timer({
       restInterval = setInterval(() => {
         setRestSeconds(x => {
           if (x > 0) {
-            return x - 10;
+            return x - 1;
           } else {
             clearInterval(restInterval);
             setRestTimeToggle(false);
@@ -314,9 +314,9 @@ function Timer({
                 </div>
               </div>
               <div className="born">
-                <span>집중을 통해 오늘의 </span>
-                <span>🐑 </span>
-                <span>을 탄생시키세요!</span>
+                <span>집중을 통해 </span>
+                {/* <span>🐑</span> */}
+                <span>양을 탄생시키세요!</span>
               </div>
               <div className="born-button">
                 <span
