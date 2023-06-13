@@ -298,17 +298,17 @@ body::-webkit-scrollbar {
     font-size: 90px;
   }
 
-  .sheep-timer {
+  /* .sheep-timer {
     font-size: 18px;
-  }
+  } */
 
   .lambs {
     scale: 2;
   }
 
-  .born {
+  /* .born {
     font-size: 16px;
-  }
+  } */
 }
 
 .falling-fruits {
