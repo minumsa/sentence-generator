@@ -116,7 +116,7 @@ export default function Sheep() {
                 </select>
               </div>
               <div className="sheep-pomodoro">
-                집중(pomodoro)
+                집중(pomodoro) :
                 <select
                   name="time"
                   id="time-select"
