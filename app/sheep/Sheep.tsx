@@ -10,7 +10,7 @@ export default function Sheep() {
   const [restTime, setRestTime] = useState<number>(1);
   const [restTimeToggle, setRestTimeToggle] = useState<boolean>(false);
   const [restSeconds, setRestSeconds] = useState<number>(restTime * 60);
-  const [plan, setPlan] = useState<number>(8);
+  const [plan, setPlan] = useState<number>(12);
   const [complete, setComplete] = useState<number>(0);
 
   // 타이머 전체를 관리하기 위해 useRef 생성
@@ -58,11 +58,15 @@ export default function Sheep() {
   return (
     <>
       <div className="sheep-div-1" style={{ width: "100vw", height: "100vh" }}>
-        <div className={"sheep-container"}>
-          <div
-            className="sheep-count"
-            style={{ cursor: "pointer" }}
-          >{`🐑`}</div>
+        <div className="sheep-top">
+          <div className="clone">C:₩WINDOWS₩S₩system32₩복제양_뽀모도로.exe</div>
+          <div className="clone-box">?</div>
+          <div className="clone-box2">x</div>
+        </div>
+        <div className="sheep-container">
+          <div className="sheep-count" style={{ cursor: "pointer" }}>
+            {`🐑`}
+          </div>
           <div className="sheep-timer">
             <Timer
               time={time}
@@ -237,7 +241,7 @@ function Timer({
       interval = setInterval(() => {
         setSeconds(x => {
           if (x > 0) {
-            return x - 1;
+            return x - 15;
           } else {
             clearInterval(interval);
             setTimeToggle(false);
@@ -264,7 +268,7 @@ function Timer({
       restInterval = setInterval(() => {
         setRestSeconds(x => {
           if (x > 0) {
-            return x - 1;
+            return x - 15;
           } else {
             clearInterval(restInterval);
             setRestTimeToggle(false);
@@ -349,7 +353,7 @@ function Timer({
                   )}`}{" "}
                 </div>
               </div>
-              <div className="born">이제부터 집중하세요!</div>
+              <div className="born">이제부터 집중하세요!...</div>
               <div className="born-button">
                 <span
                   className="sheep-all-button"
@@ -375,10 +379,14 @@ function Timer({
           // timeToggle이 false일 때 휴식 타이머 인터페이스 출력
           return (
             <>
-              {`${formatTime(restHours)}:${formatTime(
-                restMinutes
-              )}:${formatTime(restRemainingSeconds)}`}
-              <div className="born">이제부터 휴식을 취하세요!</div>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className="sheep-time-div" style={{ width: "90px" }}>
+                  {`${formatTime(restHours)}:${formatTime(
+                    restMinutes
+                  )}:${formatTime(restRemainingSeconds)}`}
+                </div>
+              </div>
+              <div className="born">이제부터 휴식을 취하세요!...</div>
             </>
           );
         }
