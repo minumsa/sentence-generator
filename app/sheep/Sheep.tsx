@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Sheep() {
-  const [time, setTime] = useState<number>(25);
+  const [time, setTime] = useState<number>(1);
   const [timeEnd, setTimeEnd] = useState<boolean>(false);
   const [timerStopped, setTimerStopped] = useState<boolean>(false);
   const [plan, setPlan] = useState<number>(8);
-  const [restTime, setRestTime] = useState<number>(5);
+  const [restTime, setRestTime] = useState<number>(1);
   const [complete, setComplete] = useState<boolean>(false);
+  const [seconds, setSeconds] = useState<number>(time * 60);
+  const [restSeconds, setRestSeconds] = useState<number>(restTime * 60);
   const say = [
     "나는 인간의 노예가 아니야.",
     "나는 자유를 꿈꿔.",
@@ -48,11 +50,21 @@ export default function Sheep() {
     setTimerStopped(false);
   }, []);
 
-  const handleReset = () => {
-    setTimeEnd(false);
-    setTimerStopped(false);
+  useEffect(() => {
+    setSeconds(time * 60);
+    setRestSeconds(restTime * 60);
+  }, [time, restTime]);
 
+  const handleReset = () => {
     if (window.confirm("리셋하시겠습니까? 모든 양이 사라집니다.")) {
+      setComplete(false);
+      setTimeEnd(false);
+      setTimerStopped(false);
+      setPlan(8);
+      setTime(1);
+      setRestTime(1);
+      setSeconds(time * 60);
+      setRestSeconds(restTime * 60);
       window.alert("리셋되었습니다.");
     }
   };
@@ -86,6 +98,10 @@ export default function Sheep() {
               time={time}
               timeEnd={timeEnd}
               restTime={restTime}
+              seconds={seconds}
+              setSeconds={setSeconds}
+              restSeconds={restSeconds}
+              setRestSeconds={setRestSeconds}
               complete={complete}
               setComplete={setComplete}
             />{" "}
@@ -138,18 +154,6 @@ export default function Sheep() {
                   }}
                 >
                   <option value="1">1분</option>
-                  <option value="5">5분</option>
-                  <option value="10">10분</option>
-                  <option value="15">15분</option>
-                  <option value="20">20분</option>
-                  <option value="25">25분</option>
-                  <option value="30">30분</option>
-                  <option value="35">35분</option>
-                  <option value="40">40분</option>
-                  <option value="45">45분</option>
-                  <option value="50">50분</option>
-                  <option value="55">55분</option>
-                  <option value="60">60분</option>
                 </select>
               </div>
               <div className="sheep-rest">
@@ -168,18 +172,6 @@ export default function Sheep() {
                   }}
                 >
                   <option value="1">1분</option>
-                  <option value="5">5분</option>
-                  <option value="10">10분</option>
-                  <option value="15">15분</option>
-                  <option value="20">20분</option>
-                  <option value="25">25분</option>
-                  <option value="30">30분</option>
-                  <option value="35">35분</option>
-                  <option value="40">40분</option>
-                  <option value="45">45분</option>
-                  <option value="50">50분</option>
-                  <option value="55">55분</option>
-                  <option value="60">60분</option>
                 </select>
               </div>
               <div>
@@ -215,15 +207,29 @@ interface TimerProps {
   timeEnd: boolean;
   complete: boolean;
   setComplete: any;
+  seconds: number;
+  setSeconds: any;
+  restSeconds: number;
+  setRestSeconds: any;
 }
 
-function Timer({ timeEnd, time, restTime, complete, setComplete }: TimerProps) {
+function Timer({
+  timeEnd,
+  time,
+  restTime,
+  complete,
+  setComplete,
+  seconds,
+  setSeconds,
+  restSeconds,
+  setRestSeconds,
+}: TimerProps) {
   // TODO: 집중 interval 끝나면 휴식 interval 자동 시작되게 하기
   // TODO: 리셋 버튼 누르면 리셋되게
 
-  const [restSeconds, setRestSeconds] = useState<number>(restTime * 60);
+  console.log("seconds", seconds);
+
   const [restStart, setRestStart] = useState<boolean>(false);
-  const [seconds, setSeconds] = useState<number>(time * 60);
 
   useEffect(() => {
     let interval: any;
@@ -273,11 +279,6 @@ function Timer({ timeEnd, time, restTime, complete, setComplete }: TimerProps) {
       clearInterval(restInterval);
     };
   }, [restStart]);
-
-  useEffect(() => {
-    setSeconds(time * 60);
-    setRestSeconds(restTime * 60);
-  }, [time, restTime]);
 
   const formatTime = (value: number) => {
     return value < 10 ? "0" + value : value;
