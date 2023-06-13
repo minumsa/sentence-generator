@@ -75,6 +75,7 @@ export default function Sheep() {
               setSeconds={setSeconds}
               restSeconds={restSeconds}
               setRestSeconds={setRestSeconds}
+              complete={complete}
               setComplete={setComplete}
             />{" "}
             {/* Timer 컴포넌트에 키 값을 전달한다 */}
@@ -212,7 +213,7 @@ interface TimerProps {
   setSeconds: React.Dispatch<React.SetStateAction<number>>;
   restSeconds: number;
   setRestSeconds: React.Dispatch<React.SetStateAction<number>>;
-  complete: boolean;
+  complete: number;
   setComplete: React.Dispatch<React.SetStateAction<number>>;
 }
 
