@@ -269,7 +269,8 @@ body::-webkit-scrollbar {
   width: 290px;
   height: 120px;
   /* border-radius: 10px; */
-  box-shadow: 1px 1px 0px 2px #97958f;
+  box-shadow: -2px -2px 0px 2px white, 1px 1px 0px 2px #97958f;
+  /* box-shadow: 3px 3px #97958f, -1em 0 0.4em olive; */
   font-size: 16px;
   margin-top: 5px;
 }
