@@ -171,7 +171,7 @@ export default function Sheep() {
                   <option value="60">60분</option>
                 </select>
               </div>
-              <div>
+              {/* <div>
                 <button onClick={handleStart} style={{ fontSize: "14px" }}>
                   시작
                 </button>
@@ -184,7 +184,7 @@ export default function Sheep() {
                 <button onClick={handleReset} style={{ fontSize: "14px" }}>
                   리셋
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="pomodoro-box-container">
@@ -309,7 +309,15 @@ function Timer({
                     remainingSeconds
                   )}`}{" "}
                 </div>
-                <div
+              </div>
+              <div className="born">
+                <span>집중을 통해 오늘의 </span>
+                <span>🐑 </span>
+                <span>을 탄생시키세요!</span>
+              </div>
+              <div className="born-button">
+                <span
+                  className="sheep-start"
                   onClick={() => {
                     setTimeToggle(true);
                   }}
@@ -323,37 +331,9 @@ function Timer({
                   }}
                 >
                   시작
-                </div>
-                <div
-                  style={{
-                    border: "solid 1px black",
-                    padding: "0 3px",
-                    fontSize: "19px",
-                    width: "40px",
-                    height: "25px",
-                    marginLeft: "5px",
-                  }}
-                >
-                  설정
-                </div>
-              </div>
-              <div className="born">
-                <span>집중을 통해 오늘의 </span>
-                <span>🐑 </span>
-                <span>을 탄생시키세요!</span>
-              </div>
-            </div>
-          );
-        } else if (timeToggle === true && restTimeToggle === false) {
-          return (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <div style={{ width: "90px" }}>
-                  {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
-                    remainingSeconds
-                  )}`}{" "}
-                </div>
-                <div
+                </span>
+                <span
+                  className="sheep-stop"
                   onClick={() => {
                     setTimeToggle(false);
                   }}
@@ -367,8 +347,9 @@ function Timer({
                   }}
                 >
                   중단
-                </div>
-                <div
+                </span>
+                <span
+                  className="sheep-setting"
                   style={{
                     border: "solid 1px black",
                     padding: "0 3px",
@@ -379,9 +360,68 @@ function Timer({
                   }}
                 >
                   설정
+                </span>
+              </div>
+            </div>
+          );
+        } else if (timeToggle === true && restTimeToggle === false) {
+          return (
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{ width: "90px" }}>
+                  {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
+                    remainingSeconds
+                  )}`}{" "}
                 </div>
               </div>
               <div className="born">이제부터 집중하세요!</div>
+              <div className="born-button">
+                <span
+                  className="sheep-start"
+                  onClick={() => {
+                    setTimeToggle(true);
+                  }}
+                  style={{
+                    border: "solid 1px black",
+                    padding: "0 3px",
+                    fontSize: "19px",
+                    width: "40px",
+                    height: "25px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  시작
+                </span>
+                <span
+                  className="sheep-stop"
+                  onClick={() => {
+                    setTimeToggle(false);
+                  }}
+                  style={{
+                    border: "solid 1px black",
+                    padding: "0 3px",
+                    fontSize: "19px",
+                    width: "40px",
+                    height: "25px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  중단
+                </span>
+                <span
+                  className="sheep-setting"
+                  style={{
+                    border: "solid 1px black",
+                    padding: "0 3px",
+                    fontSize: "19px",
+                    width: "40px",
+                    height: "25px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  설정
+                </span>
+              </div>
             </div>
           );
         } else if (timeToggle === false && restTimeToggle === true) {
