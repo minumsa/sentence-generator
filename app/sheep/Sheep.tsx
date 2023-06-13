@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Sheep() {
@@ -43,6 +43,10 @@ export default function Sheep() {
     "Will you stop touching me? Of course I know my fur is soft. I'll sue you if you touch more.",
   ];
 
+  console.log(seconds);
+
+  const intervalRef = useRef<any>(null);
+
   useEffect(() => {
     setTimerStopped(false);
   }, []);
@@ -64,6 +68,11 @@ export default function Sheep() {
       setRestSeconds(restTime * 60);
       window.alert("리셋되었습니다.");
     }
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
   };
 
   const handleStart = () => {
@@ -73,6 +82,7 @@ export default function Sheep() {
 
   const handleStop = () => {
     setTimeEnd(false);
+    setTimerStopped(false);
   };
 
   useEffect(() => {
@@ -221,11 +231,6 @@ function Timer({
   restSeconds,
   setRestSeconds,
 }: TimerProps) {
-  // TODO: 집중 interval 끝나면 휴식 interval 자동 시작되게 하기
-  // TODO: 리셋 버튼 누르면 리셋되게
-
-  console.log("seconds", seconds);
-
   const [restStart, setRestStart] = useState<boolean>(false);
 
   useEffect(() => {
@@ -327,7 +332,7 @@ function SheepImage({ plan, timeEnd, complete }: SheepImageProps) {
 
   for (let i = 0; i < plan; i++) {
     images.push(
-      <span className="sheep-image">
+      <span className="sheep-image" key={`sheep-${i}`}>
         <Image
           src="/sheep_3.png"
           alt="Pictures of the sheep"
@@ -342,7 +347,7 @@ function SheepImage({ plan, timeEnd, complete }: SheepImageProps) {
   if (complete === true) {
     images.pop();
     images.unshift(
-      <span className="sheep-image">
+      <span className="sheep-image" key={`sheep-${Date.now()}`}>
         <Image
           src="/sheep_4.png"
           alt="Pictures of the sheep"
