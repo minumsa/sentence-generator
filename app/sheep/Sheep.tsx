@@ -317,50 +317,22 @@ function Timer({
               </div>
               <div className="born-button">
                 <span
-                  className="sheep-start"
+                  className="sheep-all-button"
                   onClick={() => {
                     setTimeToggle(true);
-                  }}
-                  style={{
-                    border: "solid 1px black",
-                    padding: "0 3px",
-                    fontSize: "19px",
-                    width: "40px",
-                    height: "25px",
-                    marginLeft: "5px",
                   }}
                 >
                   시작
                 </span>
                 <span
-                  className="sheep-stop"
+                  className="sheep-all-button"
                   onClick={() => {
                     setTimeToggle(false);
-                  }}
-                  style={{
-                    border: "solid 1px black",
-                    padding: "0 3px",
-                    fontSize: "19px",
-                    width: "40px",
-                    height: "25px",
-                    marginLeft: "5px",
                   }}
                 >
                   중단
                 </span>
-                <span
-                  className="sheep-setting"
-                  style={{
-                    border: "solid 1px black",
-                    padding: "0 3px",
-                    fontSize: "19px",
-                    width: "40px",
-                    height: "25px",
-                    marginLeft: "5px",
-                  }}
-                >
-                  설정
-                </span>
+                <span className="sheep-all-button">설정</span>
               </div>
             </div>
           );
@@ -377,50 +349,22 @@ function Timer({
               <div className="born">이제부터 집중하세요!</div>
               <div className="born-button">
                 <span
-                  className="sheep-start"
+                  className="sheep-all-button"
                   onClick={() => {
                     setTimeToggle(true);
-                  }}
-                  style={{
-                    border: "solid 1px black",
-                    padding: "0 3px",
-                    fontSize: "19px",
-                    width: "40px",
-                    height: "25px",
-                    marginLeft: "5px",
                   }}
                 >
                   시작
                 </span>
                 <span
-                  className="sheep-stop"
+                  className="sheep-all-button"
                   onClick={() => {
                     setTimeToggle(false);
-                  }}
-                  style={{
-                    border: "solid 1px black",
-                    padding: "0 3px",
-                    fontSize: "19px",
-                    width: "40px",
-                    height: "25px",
-                    marginLeft: "5px",
                   }}
                 >
                   중단
                 </span>
-                <span
-                  className="sheep-setting"
-                  style={{
-                    border: "solid 1px black",
-                    padding: "0 3px",
-                    fontSize: "19px",
-                    width: "40px",
-                    height: "25px",
-                    marginLeft: "5px",
-                  }}
-                >
-                  설정
-                </span>
+                <span className="sheep-all-button">설정</span>
               </div>
             </div>
           );
