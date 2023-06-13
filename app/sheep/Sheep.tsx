@@ -26,12 +26,9 @@ export default function Sheep() {
     "양의 탈을 쓴 늑대를 본 적 있니? 그게 바로 나야.",
     "나는 평론가를 싫어해.",
     "나랑 프롬 파티에 갈래?",
-    "I hate Koreans.",
-    "Nietzsche is more of a superstar than a philosopher. To me, the best philosopher is Heidegger.",
-    "I want to go to the Cannes Film Festival someday.",
-    "Death is the best gift God has ever given to man.",
-    "Don't be a bitch. Just be a queen.",
-    "Do you like RuPaul's Drag Race? My favorite drag queen is Sasha Velour.",
+    "난 언젠가 칸 영화제에 가보고 싶어.",
+    "죽음은 신이 인간에게 준 최고의 선물이지.",
+    "루폴의 드래그 레이스를 아니? 난 참가자 중에 사샤 벨루어를 가장 좋아해.",
     "Same-sex marriage is still prohibited in Korea. Does this make sense in the 21st century? It's like a joke.",
     "Most gay people in Korea hide their identity. It's a very tragic thing. Homosexuality is not a sin.",
     "My boyfriend is very smart. He is devoted and has a very cute face. He has a strong sense of economy. Are you jealous?",
@@ -206,11 +203,11 @@ interface TimerProps {
   restTime: number;
   timeEnd: boolean;
   complete: boolean;
-  setComplete: any;
+  setComplete: React.Dispatch<React.SetStateAction<boolean>>;
   seconds: number;
-  setSeconds: any;
+  setSeconds: React.Dispatch<React.SetStateAction<number>>;
   restSeconds: number;
-  setRestSeconds: any;
+  setRestSeconds: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function Timer({
