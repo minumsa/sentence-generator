@@ -9,6 +9,7 @@ export default function Sheep() {
   const [timerStopped, setTimerStopped] = useState<boolean>(false);
   const [plan, setPlan] = useState<number>(8);
   const [restTime, setRestTime] = useState<number>(5);
+  const [complete, setComplete] = useState<boolean>(false);
   const say = [
     "나는 인간의 노예가 아니야.",
     "나는 자유를 꿈꿔.",
@@ -81,7 +82,13 @@ export default function Sheep() {
             style={{ cursor: "pointer" }}
           >{`🐑`}</div>
           <div className="sheep-timer">
-            <Timer time={time} timeEnd={timeEnd} restTime={restTime} />{" "}
+            <Timer
+              time={time}
+              timeEnd={timeEnd}
+              restTime={restTime}
+              complete={complete}
+              setComplete={setComplete}
+            />{" "}
             {/* Timer 컴포넌트에 키 값을 전달한다 */}
           </div>
           <div className="sheep-button-container">
@@ -193,7 +200,7 @@ export default function Sheep() {
           </div>
           <div className="pomodoro-box-container">
             <div className="pomodoro-box">
-              <SheepImage plan={plan} />
+              <SheepImage plan={plan} timeEnd={timeEnd} complete={complete} />
             </div>
           </div>
         </div>
@@ -206,13 +213,14 @@ interface TimerProps {
   time: number;
   restTime: number;
   timeEnd: boolean;
+  complete: boolean;
+  setComplete: any;
 }
 
-function Timer({ timeEnd, time, restTime }: TimerProps) {
+function Timer({ timeEnd, time, restTime, complete, setComplete }: TimerProps) {
   // TODO: 집중 interval 끝나면 휴식 interval 자동 시작되게 하기
   // TODO: 리셋 버튼 누르면 리셋되게
 
-  const [complete, setComplete] = useState<boolean>(false);
   const [restSeconds, setRestSeconds] = useState<number>(restTime * 60);
   const [restStart, setRestStart] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(time * 60);
@@ -312,9 +320,11 @@ function Timer({ timeEnd, time, restTime }: TimerProps) {
 
 interface SheepImageProps {
   plan: number;
+  timeEnd: boolean;
+  complete: boolean;
 }
 
-function SheepImage({ plan }: SheepImageProps) {
+function SheepImage({ plan, timeEnd, complete }: SheepImageProps) {
   const images = [];
 
   for (let i = 0; i < plan; i++) {
@@ -322,6 +332,21 @@ function SheepImage({ plan }: SheepImageProps) {
       <span className="sheep-image">
         <Image
           src="/sheep_3.png"
+          alt="Pictures of the sheep"
+          width="65"
+          height="65"
+          style={{ marginBottom: "8px" }}
+        />
+      </span>
+    );
+  }
+
+  if (complete === true) {
+    images.pop();
+    images.unshift(
+      <span className="sheep-image">
+        <Image
+          src="/sheep_4.png"
           alt="Pictures of the sheep"
           width="65"
           height="65"
