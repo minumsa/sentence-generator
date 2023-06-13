@@ -1,5 +1,6 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
 /* @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@900&display=swap"); */
+@import "@kfonts/neodgm-code";
 
 html {
   margin: 0;
@@ -178,6 +179,10 @@ body::-webkit-scrollbar {
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+.sheep-time-div {
+  font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
+}
+
 .sheep-container {
   display: flex;
   flex-direction: column;
@@ -202,6 +207,7 @@ body::-webkit-scrollbar {
 }
 
 .born {
+  font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
   margin-bottom: 0;
   margin-top: 5px;
   font-size: 20px;
@@ -220,6 +226,7 @@ body::-webkit-scrollbar {
 }
 
 .sheep-all-button {
+  font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
   border: solid 1px black;
   padding: 1px 5px;
   font-size: 19px;

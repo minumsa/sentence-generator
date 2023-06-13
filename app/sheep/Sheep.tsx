@@ -304,7 +304,10 @@ function Timer({
           return (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <div style={{ width: "90px", marginLeft: "5px" }}>
+                <div
+                  className="sheep-time-div"
+                  style={{ width: "90px", marginLeft: "5px" }}
+                >
                   {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
                     remainingSeconds
                   )}`}{" "}
@@ -340,7 +343,7 @@ function Timer({
           return (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <div style={{ width: "90px" }}>
+                <div className="sheep-time-div" style={{ width: "90px" }}>
                   {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
                     remainingSeconds
                   )}`}{" "}
