@@ -2,20 +2,20 @@ import React from "react";
 import Sheep from "./Sheep";
 
 export const metadata = {
-  title: "I am a sheep",
+  title: "복제양 뽀모도로",
   openGraph: {
-    images: [{ url: "/lambs-thumbnail.png", width: 1800, height: 945 }],
+    title: "복제양 뽀모도로",
+    images: [{ url: "/sheep-thumbnail.png", width: 1800, height: 945 }],
     locale: "ko_KR",
-    siteName: "",
-    title: "Sheep",
+    siteName: "divdivdiv",
     type: "website",
   },
   twitter: {
+    title: "복제양 뽀모도로",
     card: "summary_large_image",
     creator: "@dev_carver",
-    description: "I am a sheep",
-    images: ["https://divdivdiv.com/lambs-thumbnail.png"],
-    title: "I am a sheep",
+    description: "집중에 성공해 양을 최대한 많이 만드세요.",
+    images: ["https://divdivdiv.com/sheep-thumbnail.png"],
   },
 };
 
