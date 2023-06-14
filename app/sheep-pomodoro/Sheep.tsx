@@ -13,6 +13,50 @@ export default function Sheep() {
   const [plan, setPlan] = useState<number>(12);
   const [complete, setComplete] = useState<number>(0);
 
+  // 현재 날짜와 시간을 나타내는 새로운 Date 객체를 생성한다
+  const midnight = new Date();
+
+  // Date 객체의 시, 분, 초 및 밀리초를 설정하여 자정을 나타낸다
+  midnight.setHours(24, 0, 0, 0);
+
+  // 이 useEffect 훅은 컴포넌트가 마운트될 때 한 번 실행된
+  // localStorage에서 저장된 값을 가져와 컴포넌트 상태를 업데이트한다
+  useEffect(() => {
+    // localStorage에서 "time" 값을 가져온다
+    const storedTime = localStorage.getItem("time");
+    if (storedTime) {
+      // 값이 존재한다면 정수로 파싱하고 컴포넌트 상태를 업데이트한다
+      setTime(parseInt(storedTime));
+    }
+
+    // localStorage에서 "restTime" 값을 가져온다
+    const storedRestTime = localStorage.getItem("restTime");
+    if (storedRestTime) {
+      // 값이 존재한다면 정수로 파싱하고 컴포넌트 상태를 업데이트한다
+      setRestTime(parseInt(storedRestTime));
+    }
+
+    const storedComplete = localStorage.getItem("complete");
+    if (storedComplete) {
+      setComplete(parseInt(storedComplete));
+    }
+  }, []);
+
+  // 이 useEffect 훅은 time, restTime, complete 값이 변경될 때마다 실행된다
+  // 변경된 값을 localStorage에 저장한다
+  useEffect(() => {
+    localStorage.setItem("time", time.toString());
+    localStorage.setItem("restTime", restTime.toString());
+    localStorage.setItem("complete", complete.toString());
+
+    const now = new Date();
+    if (now > midnight) {
+      localStorage.removeItem("time");
+      localStorage.removeItem("restTime");
+      localStorage.removeItem("complete");
+    }
+  }, [time, restTime, complete]);
+
   // 타이머 전체를 관리하기 위해 useRef 생성
   const intervalRef = useRef<any>(null);
 
