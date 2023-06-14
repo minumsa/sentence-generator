@@ -267,11 +267,11 @@ function Timer({
             return x - 1;
           } else {
             clearInterval(interval);
+            setSeconds(time * 60);
             setTimeToggle(false);
             setComplete(x => x + 1);
-            setRestTimeToggle(true);
-            setSeconds(time * 60);
             alert("집중에 성공해서 양 한 마리가 생성되었습니다!");
+            setRestTimeToggle(true);
             return 0;
           }
         });
