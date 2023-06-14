@@ -416,8 +416,6 @@ interface SheepImageProps {
 }
 
 function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
-  console.log(complete);
-
   useEffect(() => {
     // plan이 변경되면 렌더링 ===> 전체 양 이미지 개수 변경
   }, [plan]);
@@ -432,7 +430,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
     // 완성되지 않은 양 이미지 생성
     images.push(
       Array(plan - complete > 0 ? plan - complete : 0)
-        .fill()
+        .fill(undefined)
         .map((_, i) => (
           <span className="sheep-image" key={i}>
             <Image
@@ -449,7 +447,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
     // 완성된 양 이미지 생성
     images.push(
       Array(complete > 0 ? complete : 0)
-        .fill()
+        .fill(undefined)
         .map((_, i) => (
           <span className="sheep-image" key={i}>
             <Image
