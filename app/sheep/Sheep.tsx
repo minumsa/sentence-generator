@@ -59,14 +59,13 @@ export default function Sheep() {
     <>
       <div className="sheep-div-1" style={{ width: "100vw", height: "100vh" }}>
         <div className="sheep-top">
-          <div className="clone">C:₩WINDOWS₩S₩system32₩복제양_뽀모도로.exe</div>
+          <div className="clone">C:₩WINDOWS₩system32₩복제양_뽀모도로.exe</div>
           <div className="clone-box">?</div>
           <div className="clone-box2">x</div>
+          <div className="sheep-top-border"></div>
         </div>
         <div className="sheep-container">
-          <div className="sheep-count" style={{ cursor: "pointer" }}>
-            {`🐑`}
-          </div>
+          <div className="sheep-count">{`🐑`}</div>
           <div className="sheep-timer">
             <Timer
               time={time}
@@ -81,6 +80,7 @@ export default function Sheep() {
               setRestSeconds={setRestSeconds}
               complete={complete}
               setComplete={setComplete}
+              handleReset={handleReset}
             />{" "}
             {/* Timer 컴포넌트에 키 값을 전달한다 */}
           </div>
@@ -219,6 +219,7 @@ interface TimerProps {
   setRestSeconds: React.Dispatch<React.SetStateAction<number>>;
   complete: number;
   setComplete: React.Dispatch<React.SetStateAction<number>>;
+  handleReset: any;
 }
 
 function Timer({
@@ -233,6 +234,7 @@ function Timer({
   restSeconds,
   setRestSeconds,
   setComplete,
+  handleReset,
 }: TimerProps) {
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -328,6 +330,7 @@ function Timer({
                   onClick={() => {
                     setTimeToggle(true);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   시작
                 </span>
@@ -336,10 +339,17 @@ function Timer({
                   onClick={() => {
                     setTimeToggle(false);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   중단
                 </span>
-                <span className="sheep-all-button">설정</span>
+                <span
+                  className="sheep-all-button"
+                  onClick={handleReset}
+                  style={{ cursor: "pointer" }}
+                >
+                  리셋
+                </span>
               </div>
             </div>
           );
