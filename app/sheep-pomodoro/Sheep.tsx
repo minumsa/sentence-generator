@@ -75,9 +75,9 @@ export default function Sheep() {
   const handleReset = () => {
     if (window.confirm("리셋하시겠습니까? 모든 양이 사라집니다.")) {
       setTimeToggle(false);
-      setPlan(8);
-      setTime(1);
-      setRestTime(1);
+      setPlan(12);
+      setTime(25);
+      setRestTime(5);
       setSeconds(time * 60);
       setRestSeconds(restTime * 60);
       window.alert("리셋되었습니다.");
