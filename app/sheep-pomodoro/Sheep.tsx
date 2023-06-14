@@ -130,7 +130,6 @@ export default function Sheep() {
                     marginLeft: "12px",
                   }}
                 >
-                  <option value="1">1분</option>
                   <option value="5">5분</option>
                   <option value="10">10분</option>
                   <option value="15">15분</option>
@@ -160,7 +159,6 @@ export default function Sheep() {
                     marginLeft: "12px",
                   }}
                 >
-                  <option value="1">1분</option>
                   <option value="5">5분</option>
                   <option value="10">10분</option>
                   <option value="15">15분</option>
@@ -431,33 +429,39 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
   const generateImages = () => {
     const images = [];
 
-    for (let i = 0; i < complete; i++) {
-      images.push(
-        <span className="sheep-image">
-          <Image
-            src="/sheep_4.png"
-            alt="Pictures of the sheep"
-            width="65"
-            height="65"
-            style={{ marginBottom: "8px" }}
-          />
-        </span>
-      );
-    }
+    // 완성되지 않은 양 이미지 생성
+    images.push(
+      Array(plan - complete > 0 ? plan - complete : 0)
+        .fill()
+        .map((_, i) => (
+          <span className="sheep-image" key={i}>
+            <Image
+              src="/sheep_3.png"
+              alt="Pictures of the sheep"
+              width="65"
+              height="65"
+              style={{ marginBottom: "8px" }}
+            />
+          </span>
+        ))
+    );
 
-    for (let i = 0; i < plan - complete; i++) {
-      images.push(
-        <span className="sheep-image">
-          <Image
-            src="/sheep_3.png"
-            alt="Pictures of the sheep"
-            width="65"
-            height="65"
-            style={{ marginBottom: "8px" }}
-          />
-        </span>
-      );
-    }
+    // 완성된 양 이미지 생성
+    images.push(
+      Array(complete > 0 ? complete : 0)
+        .fill()
+        .map((_, i) => (
+          <span className="sheep-image" key={i}>
+            <Image
+              src="/sheep_3.png"
+              alt="Pictures of the sheep"
+              width="65"
+              height="65"
+              style={{ marginBottom: "8px" }}
+            />
+          </span>
+        ))
+    );
 
     // if (restTimeToggle === true) {
     //   images.pop();
