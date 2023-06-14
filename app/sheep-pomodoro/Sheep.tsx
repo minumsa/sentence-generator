@@ -4,10 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Sheep() {
-  const [time, setTime] = useState<number>(1);
+  const [time, setTime] = useState<number>(25);
   const [timeToggle, setTimeToggle] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(time * 60);
-  const [restTime, setRestTime] = useState<number>(1);
+  const [restTime, setRestTime] = useState<number>(5);
   const [restTimeToggle, setRestTimeToggle] = useState<boolean>(false);
   const [restSeconds, setRestSeconds] = useState<number>(restTime * 60);
   const [plan, setPlan] = useState<number>(12);
@@ -243,7 +243,7 @@ function Timer({
       interval = setInterval(() => {
         setSeconds(x => {
           if (x > 0) {
-            return x - 15;
+            return x - 1;
           } else {
             clearInterval(interval);
             setTimeToggle(false);
@@ -270,12 +270,12 @@ function Timer({
       restInterval = setInterval(() => {
         setRestSeconds(x => {
           if (x > 0) {
-            return x - 15;
+            return x - 1;
           } else {
             clearInterval(restInterval);
             setRestTimeToggle(false);
             setRestSeconds(restTime * 60);
-            alert("다시 집중을 시작하세요!");
+            alert("시작 버튼을 눌러 다시 집중을 시작하세요!");
             return restTime * 60;
           }
         });
@@ -381,7 +381,13 @@ function Timer({
                 >
                   중단
                 </span>
-                <span className="sheep-all-button">설정</span>
+                <span
+                  className="sheep-all-button"
+                  onClick={handleReset}
+                  style={{ cursor: "pointer" }}
+                >
+                  리셋
+                </span>
               </div>
             </div>
           );
