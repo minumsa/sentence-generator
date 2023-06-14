@@ -240,6 +240,10 @@ body::-webkit-scrollbar {
   user-select: none;
 }
 
+.sheep-select {
+  font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
+}
+
 .sheep-time-div {
   font-size: 22px;
   color: #ffff00;

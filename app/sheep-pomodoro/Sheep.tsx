@@ -123,6 +123,7 @@ export default function Sheep() {
               <div className="sheep-plan">
                 반복(plan) :{" "}
                 <select
+                  className="sheep-select"
                   name="plan"
                   id="plan-select"
                   value={plan}
@@ -153,6 +154,7 @@ export default function Sheep() {
               <div className="sheep-pomodoro">
                 집중(pomodoro) :
                 <select
+                  className="sheep-select"
                   name="time"
                   id="time-select"
                   value={time}
@@ -183,6 +185,7 @@ export default function Sheep() {
               <div className="sheep-rest">
                 휴식(rest) :{" "}
                 <select
+                  className="sheep-select"
                   name="rest"
                   id="rest-select"
                   value={restTime}
