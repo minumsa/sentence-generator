@@ -27,16 +27,6 @@ export default function Sheep() {
     setRestSeconds(restTime * 60);
   }, [time, restTime]);
 
-  // 시작 버튼 누르면 동작하는 함수
-  const handleStart = () => {
-    setTimeToggle(true);
-  };
-
-  // 중지 버튼 누르면 동작하는 함수
-  const handleStop = () => {
-    setTimeToggle(false);
-  };
-
   // 리셋 버튼 누르면 동작하는 함수
   const handleReset = () => {
     if (window.confirm("리셋하시겠습니까? 모든 양이 사라집니다.")) {
@@ -176,20 +166,6 @@ export default function Sheep() {
                   <option value="60">60분</option>
                 </select>
               </div>
-              {/* <div>
-                <button onClick={handleStart} style={{ fontSize: "14px" }}>
-                  시작
-                </button>
-                <button
-                  onClick={handleStop}
-                  style={{ margin: "0 3px", fontSize: "14px" }}
-                >
-                  중단
-                </button>
-                <button onClick={handleReset} style={{ fontSize: "14px" }}>
-                  리셋
-                </button>
-              </div> */}
             </div>
           </div>
           <div className="pomodoro-box-container">
