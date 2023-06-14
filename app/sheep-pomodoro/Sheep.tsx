@@ -100,6 +100,7 @@ export default function Sheep() {
                     width: "60px",
                     marginLeft: "12px",
                   }}
+                  disabled={timeToggle || restTimeToggle}
                 >
                   <option value="1">1회</option>
                   <option value="2">2회</option>
@@ -129,6 +130,7 @@ export default function Sheep() {
                     width: "60px",
                     marginLeft: "12px",
                   }}
+                  disabled={timeToggle || restTimeToggle}
                 >
                   <option value="5">5분</option>
                   <option value="10">10분</option>
@@ -158,6 +160,7 @@ export default function Sheep() {
                     width: "60px",
                     marginLeft: "12px",
                   }}
+                  disabled={timeToggle || restTimeToggle}
                 >
                   <option value="5">5분</option>
                   <option value="10">10분</option>
