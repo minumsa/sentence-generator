@@ -257,7 +257,7 @@ body::-webkit-scrollbar {
   opacity: 0.85;
   position: absolute;
   text-align: center;
-  top: 12vh;
+  top: 13vh;
   width: 100%;
 
   -webkit-user-select: none;
