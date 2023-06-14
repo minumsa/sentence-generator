@@ -427,14 +427,14 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
   const generateImages = () => {
     const images = [];
 
-    // 완성되지 않은 양 이미지 생성
+    // 완성된 양 이미지 생성
     images.push(
-      Array(plan - complete > 0 ? plan - complete : 0)
+      Array(complete > 0 ? complete : 0)
         .fill(undefined)
         .map((_, i) => (
           <span className="sheep-image" key={i}>
             <Image
-              src="/sheep_3.png"
+              src="/sheep_4.png"
               alt="Pictures of the sheep"
               width="65"
               height="65"
@@ -444,9 +444,9 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
         ))
     );
 
-    // 완성된 양 이미지 생성
+    // 완성되지 않은 양 이미지 생성
     images.push(
-      Array(complete > 0 ? complete : 0)
+      Array(plan - complete > 0 ? plan - complete : 0)
         .fill(undefined)
         .map((_, i) => (
           <span className="sheep-image" key={i}>
