@@ -2,7 +2,29 @@
 
 import React, { useState, useEffect } from "react";
 
-export default function Test4() {
+interface TestProps {
+  score: number;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function Test4({ score, setScore }: TestProps) {
+  const [copiedScore, setCopiedScore] = useState<number>(0);
+  const [mark, setMark] = useState<string>("");
+
+  useEffect(() => {
+    setCopiedScore(score);
+  }, []);
+
+  useEffect(() => {
+    setScore(copiedScore);
+  }, [copiedScore]);
+
+  useEffect(() => {
+    if (mark === "여성") {
+      setScore((score: number) => copiedScore + 4);
+    }
+  }, [mark]);
+
   return (
     <>
       <div className="cine-test-format">
@@ -13,7 +35,11 @@ export default function Test4() {
         </div>
         <div style={{ marginTop: "20px" }}>
           {`"`}
-          <input className="cine-test-input" />
+          {/* <div style={mark1} onClick={clickAnswer1}></div> */}
+          <input
+            className="cine-test-input"
+            onChange={e => setMark(e.target.value)}
+          />
           {` 여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요."`}
         </div>
       </div>

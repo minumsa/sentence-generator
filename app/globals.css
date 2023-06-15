@@ -568,7 +568,7 @@ body::-webkit-scrollbar {
 
 @media (max-width: 450px) {
   .cine-flex-container {
-    width: 90%;
+    width: 95%;
   }
 
   .cine-test-format {

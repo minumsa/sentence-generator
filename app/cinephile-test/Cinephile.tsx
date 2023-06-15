@@ -20,11 +20,11 @@ export default function Cinephile() {
       case 1:
         return <Test1 score={score} setScore={setScore} />;
       case 2:
-        return <Test2 />;
+        return <Test2 score={score} setScore={setScore} />;
       case 3:
-        return <Test3 />;
+        return <Test3 score={score} setScore={setScore} />;
       case 4:
-        return <Test4 />;
+        return <Test4 score={score} setScore={setScore} />;
       case 5:
         return <Test5 />;
       default:

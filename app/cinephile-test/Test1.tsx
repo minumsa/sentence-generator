@@ -12,7 +12,6 @@ export default function Test1({ score, setScore }: TestProps) {
   const [mark2, setMark2] = useState<React.CSSProperties>({});
   const [mark3, setMark3] = useState<React.CSSProperties>({});
   const [mark4, setMark4] = useState<React.CSSProperties>({});
-  const [answer, setAnswer] = useState<number>(0);
   const [copiedScore, setCopiedScore] = useState<number>(0);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function Test1({ score, setScore }: TestProps) {
     setMark2({});
     setMark3({ border: "2.5px dashed black" });
     setMark4({});
-    setScore((score: number) => score + 1);
+    setScore((score: number) => copiedScore + 4);
   }
 
   function clickAnswer4() {
