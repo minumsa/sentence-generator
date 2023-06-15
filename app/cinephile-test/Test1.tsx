@@ -54,16 +54,16 @@ export default function Test1({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div>1. 다음 중 앨프리드 히치콕이 연출한 영화는?</div>
-        <div style={mark1} onClick={clickAnswer1}>
+        <div className="test111" style={mark1} onClick={clickAnswer1}>
           (1) 와일드 번치
         </div>
-        <div style={mark2} onClick={clickAnswer2}>
+        <div className="test111" style={mark2} onClick={clickAnswer2}>
           (2) 황야의 무법자
         </div>
-        <div style={mark3} onClick={clickAnswer3}>
+        <div className="test111" style={mark3} onClick={clickAnswer3}>
           (3) 북북서로 진로를 돌려라
         </div>
-        <div style={mark4} onClick={clickAnswer4}>
+        <div className="test111" style={mark4} onClick={clickAnswer4}>
           (4) 네 멋대로 해라
         </div>
       </div>
