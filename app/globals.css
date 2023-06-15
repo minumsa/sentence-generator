@@ -478,6 +478,7 @@ body::-webkit-scrollbar {
   font-family: "GangwonEdu_OTFBoldA";
   font-weight: 300; /* 300 or 700 */
   font-size: 20px;
+  word-break: keep-all;
 }
 
 .cine-flex-container {
@@ -490,11 +491,16 @@ body::-webkit-scrollbar {
 }
 
 .cine-nav-container {
+  display: flex;
+  justify-content: center;
   height: 150px;
+  font-size: 25px;
   /* background-color: green; */
 }
 
 .cine-content-container {
+  display: flex;
+  justify-content: center;
   flex-grow: 1;
 }
 
@@ -509,7 +515,7 @@ body::-webkit-scrollbar {
   display: flex;
   width: 90px;
   height: 40px;
-  border: 1px solid black;
+  border: 1.5px solid black;
   border-radius: 30px;
   /* background-color: #00ff00; */
   justify-content: center;
@@ -521,10 +527,23 @@ body::-webkit-scrollbar {
   display: flex;
   width: 90px;
   height: 40px;
-  border: 1px solid black;
+  border: 1.5px solid black;
   border-radius: 30px;
   /* background-color: #00ff00; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.cine-test-format {
+  font-size: 25px;
+  line-height: 200%;
+}
+
+.cine-test-input {
+  font-family: "GangwonEdu_OTFBoldA";
+  font-size: 25px;
+
+  width: 42px;
+  height: 21px;
 }

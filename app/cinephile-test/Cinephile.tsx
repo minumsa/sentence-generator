@@ -32,7 +32,9 @@ export default function Cinephile() {
   return (
     <div className="cine-container">
       <div className="cine-flex-container">
-        <div className="cine-nav-container">nav</div>
+        <div className="cine-nav-container">
+          <span>씨네필 테스트</span>
+        </div>
         <div className="cine-content-container">{handleTest()}</div>
         <div className="cine-footer-container">
           <div
