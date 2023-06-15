@@ -25,8 +25,8 @@ export default function Test5() {
             <Image
               src="cannes.svg"
               alt="Cannes"
-              width="150"
-              height="75"
+              width={window.innerWidth > 450 ? "150" : "100"}
+              height={window.innerWidth > 450 ? "75" : "50"}
               style={{ marginBottom: "8px", marginTop: "10px" }}
             />
           </div>
@@ -36,8 +36,8 @@ export default function Test5() {
             <Image
               src="venice.svg"
               alt="Venice"
-              width="150"
-              height="80"
+              width={window.innerWidth > 450 ? "150" : "100"}
+              height={window.innerWidth > 450 ? "80" : "53"}
               style={{
                 marginLeft: "22px",
                 marginBottom: "8px",
@@ -54,17 +54,19 @@ export default function Test5() {
           }}
         >
           <div>(3) </div>
-          <div style={{ width: "150px" }}>
+          <div style={{ width: window.innerWidth > 450 ? "150" : "100" }}>
             {" "}
             <Image
+              className="rotterdam"
               src="/rotterdam.jpeg"
               alt="Rotterdam"
-              width="125"
-              height="110"
+              width={window.innerWidth > 450 ? "125" : "90"}
+              height={window.innerWidth > 450 ? "110" : "78"}
               style={{
                 marginLeft: "10px",
                 marginBottom: "8px",
                 marginTop: "10px",
+                marginRight: window.innerWidth > 450 ? "15px" : "0px",
               }}
             />
           </div>
@@ -74,8 +76,8 @@ export default function Test5() {
             <Image
               src="berlin.svg"
               alt="Berlin"
-              width="150"
-              height="88"
+              width={window.innerWidth > 450 ? "150" : "100"}
+              height={window.innerWidth > 450 ? "88" : "60"}
               style={{
                 marginLeft: "22px",
                 marginBottom: "8px",
