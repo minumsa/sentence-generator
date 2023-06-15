@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 interface TestProps {
   score: number;
-  setScore: (score: number) => void;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function Test1({ score, setScore }: TestProps) {
@@ -40,7 +40,7 @@ export default function Test1({ score, setScore }: TestProps) {
     setMark2({});
     setMark3({ border: "2.5px dashed black" });
     setMark4({});
-    setScore(score => score + 1);
+    setScore((score: number) => score + 1);
   }
 
   function clickAnswer4() {

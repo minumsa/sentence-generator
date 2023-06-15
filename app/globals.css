@@ -487,7 +487,7 @@ body::-webkit-scrollbar {
 }
 
 .cine-flex-container {
-  width: 600px;
+  width: 500px;
   height: 70%;
   /* background-color: yellow; */
   /* opacity: 10%; */
@@ -563,4 +563,11 @@ body::-webkit-scrollbar {
   height: 30px;
   margin-top: 20px;
   border: 1.5px solid black;
+}
+
+@media (max-width: 450px) {
+  .cine-flex-container {
+    width: 90%;
+  }
+  /*  */
 }
