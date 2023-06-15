@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 
-export default function Test1() {
+export default function Test3() {
   return (
     <>
-      <div>Test1</div>
+      <div>Test3</div>
     </>
   );
 }

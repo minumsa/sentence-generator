@@ -514,6 +514,7 @@ body::-webkit-scrollbar {
   /* background-color: #00ff00; */
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .cine-next-button-flex {
@@ -525,4 +526,5 @@ body::-webkit-scrollbar {
   /* background-color: #00ff00; */
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
