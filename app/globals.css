@@ -10,6 +10,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "omyu_pretty";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   margin: 0;
   height: 100%;
@@ -475,7 +483,8 @@ body::-webkit-scrollbar {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  font-family: "GangwonEdu_OTFBoldA";
+  font-family: "omyu_pretty";
+  /* "GangwonEdu_OTFBoldA"; */
   font-weight: 300; /* 300 or 700 */
   font-size: 20px;
   word-break: keep-all;
@@ -551,7 +560,8 @@ body::-webkit-scrollbar {
 }
 
 .cine-test-input {
-  font-family: "GangwonEdu_OTFBoldA";
+  font-family: "omyu_pretty";
+  /* "GangwonEdu_OTFBoldA"; */
   font-size: 25px;
   width: 42px;
   height: 21px;
