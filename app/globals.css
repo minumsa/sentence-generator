@@ -541,6 +541,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .cine-prev-button-flex:hover,
@@ -559,6 +560,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 .cine-test-format {
