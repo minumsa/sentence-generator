@@ -33,7 +33,13 @@ export default function Test4({ score, setScore }: TestProps) {
           원스｣로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상 소감을
           완성하시오.
         </div>
-        <div style={{ marginTop: "20px" }}>
+        <div
+          style={{
+            marginTop: "20px",
+            border: "1.5px solid black",
+            padding: "15px",
+          }}
+        >
           {`"`}
           {/* <div style={mark1} onClick={clickAnswer1}></div> */}
           <input
