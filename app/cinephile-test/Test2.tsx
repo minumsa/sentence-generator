@@ -55,8 +55,8 @@ export default function Test2({ score, setScore }: TestProps) {
       <div className="cine-test-format">
         <div></div>
         <span>2. 다음 중 소설 원작이 </span>
-        <span style={{ textDecoration: "underline" }}>아닌 </span>
-        <span>영화는?</span>
+        <span style={{ textDecoration: "underline" }}>아닌</span>
+        <span> 영화는?</span>
         <div style={mark1} onClick={clickAnswer1}>
           (1) 케빈에 대하여(2011, 린 램지){" "}
         </div>
