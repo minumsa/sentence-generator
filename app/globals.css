@@ -555,6 +555,7 @@ body::-webkit-scrollbar {
   font-size: 25px;
   width: 42px;
   height: 21px;
+  text-align: center;
 }
 
 .cine-progress-bar {
@@ -577,5 +578,13 @@ body::-webkit-scrollbar {
 
   .cine-progress-bar {
     width: 95%;
+  }
+
+  .cine-test-input {
+    font-size: 20px;
+  }
+
+  .cine-flex-container {
+    height: 75%;
   }
 }

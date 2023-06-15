@@ -11,9 +11,9 @@ export default function Test4() {
           원스｣로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상 소감을
           완성하시오.
         </div>
-        <div>
+        <div style={{ marginTop: "20px" }}>
           <input className="cine-test-input" />
-          {`여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요.`}
+          {` 여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요.`}
         </div>
       </div>
     </>
