@@ -600,6 +600,12 @@ body::-webkit-scrollbar {
   }
 }
 
-.test111 {
-  height: 37px;
+.cine-answer {
+  padding-left: 10px;
+}
+
+.cine-answer:hover {
+  color: white;
+  background-color: #0e1111;
+  /* height: 37px; */
 }

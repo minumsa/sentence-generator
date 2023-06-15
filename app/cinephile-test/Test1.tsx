@@ -19,7 +19,7 @@ export default function Test1({ score, setScore }: TestProps) {
   }, []);
 
   function clickAnswer1() {
-    setMark1({ borderBottom: "2.5px dashed black", width: "max-content" });
+    setMark1({ color: "white", backgroundColor: "#0e1111" });
     setMark2({});
     setMark3({});
     setMark4({});
@@ -28,7 +28,7 @@ export default function Test1({ score, setScore }: TestProps) {
 
   function clickAnswer2() {
     setMark1({});
-    setMark2({ borderBottom: "2.5px dashed black", width: "max-content" });
+    setMark2({ color: "white", backgroundColor: "#0e1111" });
     setMark3({});
     setMark4({});
     setScore(copiedScore);
@@ -37,7 +37,7 @@ export default function Test1({ score, setScore }: TestProps) {
   function clickAnswer3() {
     setMark1({});
     setMark2({});
-    setMark3({ borderBottom: "2.5px dashed black", width: "max-content" });
+    setMark3({ color: "white", backgroundColor: "#0e1111" });
     setMark4({});
     setScore((score: number) => copiedScore + 4);
   }
@@ -46,7 +46,7 @@ export default function Test1({ score, setScore }: TestProps) {
     setMark1({});
     setMark2({});
     setMark3({});
-    setMark4({ borderBottom: "2.5px dashed black", width: "max-content" });
+    setMark4({ color: "white", backgroundColor: "#0e1111" });
     setScore(copiedScore);
   }
 
@@ -54,16 +54,16 @@ export default function Test1({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div>1. 다음 중 앨프리드 히치콕이 연출한 영화는?</div>
-        <div className="test111" style={mark1} onClick={clickAnswer1}>
+        <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
           (1) 와일드 번치
         </div>
-        <div className="test111" style={mark2} onClick={clickAnswer2}>
+        <div className="cine-answer" style={mark2} onClick={clickAnswer2}>
           (2) 황야의 무법자
         </div>
-        <div className="test111" style={mark3} onClick={clickAnswer3}>
+        <div className="cine-answer" style={mark3} onClick={clickAnswer3}>
           (3) 북북서로 진로를 돌려라
         </div>
-        <div className="test111" style={mark4} onClick={clickAnswer4}>
+        <div className="cine-answer" style={mark4} onClick={clickAnswer4}>
           (4) 네 멋대로 해라
         </div>
       </div>
