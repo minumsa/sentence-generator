@@ -503,7 +503,7 @@ body::-webkit-scrollbar {
 .cine-nav-container {
   display: flex;
   flex-direction: column;
-  height: 150px;
+  height: 120px;
   font-size: 25px;
   /* background-color: green; */
 }
