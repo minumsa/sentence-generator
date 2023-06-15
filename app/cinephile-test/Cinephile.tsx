@@ -9,13 +9,16 @@ import Test5 from "./Test5";
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(1);
+  const [score, setScore] = useState<number>(0);
   const minTestNumber = 1;
   const maxTestNumber = 5;
+
+  console.log("score", score);
 
   function handleTest() {
     switch (testNumber) {
       case 1:
-        return <Test1 />;
+        return <Test1 score={score} setScore={setScore} />;
       case 2:
         return <Test2 />;
       case 3:

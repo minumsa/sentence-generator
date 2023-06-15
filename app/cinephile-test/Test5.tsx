@@ -30,7 +30,7 @@ export default function Test5() {
               style={{ marginBottom: "8px", marginTop: "10px" }}
             />
           </div>
-          <div style={{ marginLeft: "50px" }}>(2) </div>
+          <div style={{ marginLeft: "60px" }}>(2) </div>
           <div>
             {" "}
             <Image
@@ -68,7 +68,7 @@ export default function Test5() {
               }}
             />
           </div>
-          <div style={{ marginLeft: "50px" }}>(4) </div>
+          <div style={{ marginLeft: "60px" }}>(4) </div>
           <div>
             {" "}
             <Image
