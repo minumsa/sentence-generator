@@ -36,7 +36,7 @@ export default function Test4({ score, setScore }: TestProps) {
         <div
           style={{
             marginTop: "20px",
-            border: "1.5px solid black",
+            border: "1.5px solid #0e1111",
             padding: "15px",
           }}
         >

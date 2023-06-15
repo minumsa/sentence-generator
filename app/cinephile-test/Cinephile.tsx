@@ -45,7 +45,7 @@ export default function Cinephile() {
                 style={{
                   height: "30px",
                   width: `${(testNumber / maxTestNumber) * 100}%`,
-                  backgroundColor: "black",
+                  backgroundColor: "#0e1111",
                 }}
               >
                 <div style={{ color: "white", textAlign: "center" }}>{`${
