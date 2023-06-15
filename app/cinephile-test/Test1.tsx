@@ -19,7 +19,7 @@ export default function Test1({ score, setScore }: TestProps) {
   }, []);
 
   function clickAnswer1() {
-    setMark1({ textDecoration: "underline" });
+    setMark1({ borderBottom: "2.5px dashed black", width: "max-content" });
     setMark2({});
     setMark3({});
     setMark4({});
@@ -28,7 +28,7 @@ export default function Test1({ score, setScore }: TestProps) {
 
   function clickAnswer2() {
     setMark1({});
-    setMark2({ textDecoration: "underline" });
+    setMark2({ borderBottom: "2.5px dashed black", width: "max-content" });
     setMark3({});
     setMark4({});
     setScore(copiedScore);
@@ -37,7 +37,7 @@ export default function Test1({ score, setScore }: TestProps) {
   function clickAnswer3() {
     setMark1({});
     setMark2({});
-    setMark3({ textDecoration: "underline " });
+    setMark3({ borderBottom: "2.5px dashed black", width: "max-content" });
     setMark4({});
     setScore((score: number) => copiedScore + 4);
   }
@@ -46,7 +46,7 @@ export default function Test1({ score, setScore }: TestProps) {
     setMark1({});
     setMark2({});
     setMark3({});
-    setMark4({ textDecoration: "underline " });
+    setMark4({ borderBottom: "2.5px dashed black", width: "max-content" });
     setScore(copiedScore);
   }
 

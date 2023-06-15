@@ -496,6 +496,7 @@ body::-webkit-scrollbar {
 }
 
 .cine-flex-container {
+  margin-top: 5%;
   width: 500px;
   height: 70%;
   /* background-color: yellow; */
