@@ -2,6 +2,14 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@900&display=swap"); */
 @import "@kfonts/neodgm-code";
 
+@font-face {
+  font-family: "GangwonEdu_OTFBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   margin: 0;
   height: 100%;
@@ -459,4 +467,37 @@ body::-webkit-scrollbar {
   .falling-fruits div {
     font-size: 100px;
   }
+}
+
+.cine-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  font-family: "GangwonEdu_OTFBoldA"; /* 300 or 700 */
+}
+
+.cine-flex-container {
+  width: 600px;
+  height: 90%;
+  margin-top: 5vh;
+  background-color: yellow;
+  /* opacity: 10%; */
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+}
+
+.cine-nav-container {
+  height: 100px;
+  background-color: green;
+}
+
+.cine-content-container {
+  flex-grow: 1;
+}
+
+.cine-footer-container {
+  height: 100px;
+  background-color: orange;
 }
