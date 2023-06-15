@@ -267,7 +267,7 @@ function Timer({
       interval = setInterval(() => {
         setSeconds(x => {
           if (x > 0) {
-            return x - 1;
+            return x - 60;
           } else {
             clearInterval(interval);
             setSeconds(time * 60);
@@ -294,7 +294,7 @@ function Timer({
       restInterval = setInterval(() => {
         setRestSeconds(x => {
           if (x > 0) {
-            return x - 1;
+            return x - 60;
           } else {
             clearInterval(restInterval);
             setRestTimeToggle(false);
@@ -387,7 +387,11 @@ function Timer({
                   )}`}{" "}
                 </div>
               </div>
-              <div className="born">이제부터 집중하세요!...</div>
+              <div className="born">
+                <span>이제부터 </span>
+                <span className="sheep-point">집중</span>
+                <span>하세요!...</span>
+              </div>
               <div className="born-button">
                 <span
                   className="sheep-all-button"
@@ -426,7 +430,11 @@ function Timer({
                   )}:${formatTime(restRemainingSeconds)}`}
                 </div>
               </div>
-              <div className="born">이제부터 휴식을 취하세요!...</div>
+              <div className="born">
+                <span>이제부터 </span>
+                <span className="sheep-point">휴식</span>
+                <span>을 취하세요!...</span>
+              </div>
             </>
           );
         }
