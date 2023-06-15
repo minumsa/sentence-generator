@@ -12,8 +12,8 @@ export default function Test4() {
           완성하시오.
         </div>
         <div>
-          "<input className="cine-test-input"></input> 여러분, 그 누구도
-          여러분께 전성기가 지났다는 말을 하지 못하게 하세요."
+          <input className="cine-test-input" />
+          {`여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요.`}
         </div>
       </div>
     </>

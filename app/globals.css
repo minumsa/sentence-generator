@@ -569,5 +569,13 @@ body::-webkit-scrollbar {
   .cine-flex-container {
     width: 90%;
   }
-  /*  */
+
+  .cine-test-format {
+    font-size: 20px;
+    line-height: 210%;
+  }
+
+  .cine-progress-bar {
+    width: 95%;
+  }
 }

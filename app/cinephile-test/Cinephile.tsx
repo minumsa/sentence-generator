@@ -37,19 +37,21 @@ export default function Cinephile() {
       <div className="cine-flex-container">
         <div className="cine-nav-container">
           <div className="cine-test-title">
-            <div>{`씨네필 테스트`}</div>
+            <div>{"씨네필 테스트"}</div>
           </div>
-          <div className="cine-progress-bar">
-            <div
-              style={{
-                height: "30px",
-                width: `${(testNumber / maxTestNumber) * 100}%`,
-                backgroundColor: "black",
-              }}
-            >
-              <div style={{ color: "white", textAlign: "center" }}>{`${
-                (testNumber / maxTestNumber) * 100
-              }%`}</div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div className="cine-progress-bar">
+              <div
+                style={{
+                  height: "30px",
+                  width: `${(testNumber / maxTestNumber) * 100}%`,
+                  backgroundColor: "black",
+                }}
+              >
+                <div style={{ color: "white", textAlign: "center" }}>{`${
+                  (testNumber / maxTestNumber) * 100
+                }%`}</div>
+              </div>
             </div>
           </div>
         </div>
