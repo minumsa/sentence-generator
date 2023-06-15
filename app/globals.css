@@ -543,6 +543,12 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
+.cine-prev-button-flex:hover,
+.cine-next-button-flex:hover {
+  background-color: #0e1111;
+  color: white;
+}
+
 .cine-next-button-flex {
   display: flex;
   width: 90px;

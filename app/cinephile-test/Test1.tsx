@@ -7,19 +7,28 @@ interface TestProps {
   setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
+interface AnswerStyle {
+  color: string;
+  backgroundColor: string;
+}
+
 export default function Test1({ score, setScore }: TestProps) {
   const [mark1, setMark1] = useState<React.CSSProperties>({});
   const [mark2, setMark2] = useState<React.CSSProperties>({});
   const [mark3, setMark3] = useState<React.CSSProperties>({});
   const [mark4, setMark4] = useState<React.CSSProperties>({});
   const [copiedScore, setCopiedScore] = useState<number>(0);
+  const [answerStyle, setAnswerStyle] = useState<AnswerStyle>({
+    color: "white",
+    backgroundColor: "#0e1111",
+  });
 
   useEffect(() => {
     setCopiedScore(score);
   }, []);
 
   function clickAnswer1() {
-    setMark1({ color: "white", backgroundColor: "#0e1111" });
+    setMark1(answerStyle);
     setMark2({});
     setMark3({});
     setMark4({});
@@ -28,7 +37,7 @@ export default function Test1({ score, setScore }: TestProps) {
 
   function clickAnswer2() {
     setMark1({});
-    setMark2({ color: "white", backgroundColor: "#0e1111" });
+    setMark2(answerStyle);
     setMark3({});
     setMark4({});
     setScore(copiedScore);
@@ -37,7 +46,7 @@ export default function Test1({ score, setScore }: TestProps) {
   function clickAnswer3() {
     setMark1({});
     setMark2({});
-    setMark3({ color: "white", backgroundColor: "#0e1111" });
+    setMark3(answerStyle);
     setMark4({});
     setScore((score: number) => copiedScore + 4);
   }
@@ -46,7 +55,7 @@ export default function Test1({ score, setScore }: TestProps) {
     setMark1({});
     setMark2({});
     setMark3({});
-    setMark4({ color: "white", backgroundColor: "#0e1111" });
+    setMark4(answerStyle);
     setScore(copiedScore);
   }
 
