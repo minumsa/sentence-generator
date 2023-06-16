@@ -9,7 +9,7 @@ interface TestProps {
 }
 
 interface AnswerStyle {
-  border: string;
+  filter: string;
 }
 
 export default function Test5({ score, setScore }: TestProps) {
@@ -19,10 +19,11 @@ export default function Test5({ score, setScore }: TestProps) {
   const [mark4, setMark4] = useState<React.CSSProperties>({});
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const [answerStyle, setAnswerStyle] = useState<AnswerStyle>({
-    border: "dashed #0e1111 3px",
-    borderRadius: "50%",
-    overflow: "auto",
-    boxSizing: "border-box",
+    // border: "dashed #0e1111 3px",
+    // borderRadius: "50%",
+    // overflow: "auto",
+    // boxSizing: "border-box",
+    filter: "opacity(0.5) drop-shadow(0 0 0 blue)",
   });
 
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function Test5({ score, setScore }: TestProps) {
         >
           <div>(1) </div>
           <div style={mark1} onClick={clickAnswer1}>
-            <div style={{ boxSizing: "border-box" }}>
+            <div>
               {" "}
               <Image
                 src="/cine-cannes.png"
@@ -88,7 +89,6 @@ export default function Test5({ score, setScore }: TestProps) {
                 style={{
                   marginBottom: "8px",
                   marginTop: "10px",
-                  boxSizing: "border-box",
                   // position: "fixed",
                 }}
               />
