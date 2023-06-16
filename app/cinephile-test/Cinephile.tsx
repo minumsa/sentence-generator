@@ -43,12 +43,15 @@ export default function Cinephile() {
             <div className="cine-progress-bar">
               <div
                 style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                   height: "30px",
                   width: `${(testNumber / maxTestNumber) * 100}%`,
                   backgroundColor: "#0e1111",
                 }}
               >
-                <div style={{ color: "white", textAlign: "center" }}>{`${
+                <div style={{ color: "white", fontSize: "22px" }}>{`${
                   (testNumber / maxTestNumber) * 100
                 }%`}</div>
               </div>
