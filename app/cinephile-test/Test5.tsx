@@ -23,7 +23,7 @@ export default function Test5() {
           <div>
             {" "}
             <Image
-              src="cannes.svg"
+              src="/cine-cannes.png"
               alt="Cannes"
               width={window.innerWidth > 450 ? "150" : "100"}
               height={window.innerWidth > 450 ? "75" : "50"}
@@ -34,7 +34,7 @@ export default function Test5() {
           <div>
             {" "}
             <Image
-              src="venice.svg"
+              src="/cine-venice.png"
               alt="Venice"
               width={window.innerWidth > 450 ? "150" : "100"}
               height={window.innerWidth > 450 ? "80" : "53"}
@@ -58,7 +58,7 @@ export default function Test5() {
             {" "}
             <Image
               className="rotterdam"
-              src="/rotterdam.jpeg"
+              src="/cine-rotterdam.png"
               alt="Rotterdam"
               width={window.innerWidth > 450 ? "125" : "90"}
               height={window.innerWidth > 450 ? "110" : "78"}
@@ -74,7 +74,7 @@ export default function Test5() {
           <div>
             {" "}
             <Image
-              src="berlin.svg"
+              src="/cine-berlin.png"
               alt="Berlin"
               width={window.innerWidth > 450 ? "150" : "100"}
               height={window.innerWidth > 450 ? "88" : "60"}
