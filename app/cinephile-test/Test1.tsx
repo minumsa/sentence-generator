@@ -10,57 +10,44 @@ interface TestProps {
 
 interface AnswerStyle {
   color: string;
-  // border: string;
   backgroundColor: string;
 }
 
 export default function Test1({ score, setScore }: TestProps) {
-  const [mark1, setMark1] = useState<React.CSSProperties>({});
-  const [mark2, setMark2] = useState<React.CSSProperties>({});
-  const [mark3, setMark3] = useState<React.CSSProperties>({});
-  const [mark4, setMark4] = useState<React.CSSProperties>({});
+  console.log(score);
+
+  const [answers, setAnswers] = useState<React.CSSProperties[]>([
+    {},
+    {},
+    {},
+    {},
+  ]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
-  const [answerStyle, setAnswerStyle] = useState<AnswerStyle>({
+  const answerStyle: AnswerStyle = {
     color: "white",
     backgroundColor: "#0e1111",
-    // color: "blue",
-    // border: "1.5px solid blue",
-  });
+  };
 
   useEffect(() => {
     setCopiedScore(score);
   }, []);
 
-  function clickAnswer1() {
-    setMark1(answerStyle);
-    setMark2({});
-    setMark3({});
-    setMark4({});
-    setScore(copiedScore);
-  }
-
-  function clickAnswer2() {
-    setMark1({});
-    setMark2(answerStyle);
-    setMark3({});
-    setMark4({});
-    setScore(copiedScore);
-  }
-
-  function clickAnswer3() {
-    setMark1({});
-    setMark2({});
-    setMark3(answerStyle);
-    setMark4({});
-    setScore((score: number) => copiedScore + 4);
-  }
-
-  function clickAnswer4() {
-    setMark1({});
-    setMark2({});
-    setMark3({});
-    setMark4(answerStyle);
-    setScore(copiedScore);
+  function clickAnswer(answerIndex: number) {
+    if (answers[answerIndex].backgroundColor === answerStyle.backgroundColor) {
+      // 클릭한 답변을 다시 클릭하면 초기화
+      setAnswers(prevAnswers => {
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers[answerIndex] = {};
+        return updatedAnswers;
+      });
+      setScore(copiedScore);
+    } else {
+      const updatedAnswers = Array.from({ length: 4 }, (_, index) =>
+        index === answerIndex ? answerStyle : {}
+      );
+      setAnswers(updatedAnswers);
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+    }
   }
 
   return (
@@ -69,18 +56,25 @@ export default function Test1({ score, setScore }: TestProps) {
         <div className="cine-quiz">
           1. 다음 중 앨프리드 히치콕이 연출한 영화는?
         </div>
-        <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
-          (1) 와일드 번치
-        </div>
-        <div className="cine-answer" style={mark2} onClick={clickAnswer2}>
-          (2) 황야의 무법자
-        </div>
-        <div className="cine-answer" style={mark3} onClick={clickAnswer3}>
-          (3) 북북서로 진로를 돌려라
-        </div>
-        <div className="cine-answer" style={mark4} onClick={clickAnswer4}>
-          (4) 네 멋대로 해라
-        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className="cine-answer"
+            style={answers[answerIndex - 1]}
+            onClick={() => clickAnswer(answerIndex - 1)}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? "와일드 번치"
+              : answerIndex === 2
+              ? "황야의 무법자"
+              : answerIndex === 3
+              ? "북북서로 진로를 돌려라"
+              : answerIndex === 4
+              ? "네 멋대로 해라"
+              : ""}
+          </div>
+        ))}
       </div>
     </>
   );
