@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
@@ -8,67 +6,52 @@ interface TestProps {
   setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
-interface AnswerStyle {
-  filter: string;
-}
-
 export default function Test5({ score, setScore }: TestProps) {
-  const [mark1, setMark1] = useState<React.CSSProperties>({});
-  const [mark2, setMark2] = useState<React.CSSProperties>({});
-  const [mark3, setMark3] = useState<React.CSSProperties>({});
-  const [mark4, setMark4] = useState<React.CSSProperties>({});
+  const [mark1, setMark1] = useState<string>("");
+  const [mark2, setMark2] = useState<string>("");
+  const [mark3, setMark3] = useState<string>("");
+  const [mark4, setMark4] = useState<string>("");
   const [copiedScore, setCopiedScore] = useState<number>(0);
-  const [answerStyle, setAnswerStyle] = useState<AnswerStyle>({
-    // border: "dashed #0e1111 3px",
-    // borderRadius: "50%",
-    // overflow: "auto",
-    // boxSizing: "border-box",
-    filter: "opacity(0.5) drop-shadow(0 0 0 blue)",
-  });
 
   useEffect(() => {
     setCopiedScore(score);
   }, []);
 
-  function clickAnswer1() {
-    setMark1(answerStyle);
-    setMark2({});
-    setMark3({});
-    setMark4({});
-    setScore(copiedScore);
+  function toggleMarkStates(answer: number) {
+    // 정답이 클릭되면 mark의 스타일을 바꿈
+    // 클릭되지 않은 정답은 스타일을 초기화
+    setMark1(answer === 1 ? "2px dashed black" : "");
+    setMark2(answer === 2 ? "2px dashed black" : "");
+    setMark3(answer === 3 ? "2px dashed black" : "");
+    setMark4(answer === 4 ? "2px dashed black" : "");
   }
 
-  function clickAnswer2() {
-    setMark1({});
-    setMark2(answerStyle);
-    setMark3({});
-    setMark4({});
-    setScore(copiedScore);
-  }
-
-  function clickAnswer3() {
-    setMark1({});
-    setMark2({});
-    setMark3(answerStyle);
-    setMark4({});
-    setScore((score: number) => copiedScore + 4);
-  }
-
-  function clickAnswer4() {
-    setMark1({});
-    setMark2({});
-    setMark3({});
-    setMark4(answerStyle);
-    setScore(copiedScore);
+  function clickAnswer(answer: number) {
+    // 정답이 클릭되었는지 확인
+    if (
+      (answer === 1 && mark1 === "2px dashed black") ||
+      (answer === 2 && mark2 === "2px dashed black") ||
+      (answer === 3 && mark3 === "2px dashed black") ||
+      (answer === 4 && mark4 === "2px dashed black")
+    ) {
+      // 클릭된 정답이 또 클릭되면 초기화
+      toggleMarkStates(0);
+      setScore(copiedScore);
+    } else {
+      // 정답이 클릭되지 않았으면 toggleMarkStates 함수에 파라미터로 answer를 호출
+      // 정답이 3이면 score를 copiedScore에 4를 더한 값으로 업데이트
+      toggleMarkStates(answer);
+      setScore(answer === 3 ? copiedScore + 4 : copiedScore);
+    }
   }
 
   return (
     <>
       <div className="cine-test-format">
         <div>
-          <span> 5. 다음 중 세계 3대 국제 영화제의 로고가 </span>
-          <span style={{ textDecoration: "underline" }}>아닌</span>
-          <span> 것을 선택하시오.</span>
+          <span> 5. 다음 중 세계 3대 국제 영화제에 포함되지 </span>
+          <span style={{ textDecoration: "underline" }}>않는</span>
+          <span> 것은?</span>
         </div>
         <div
           style={{
@@ -78,7 +61,7 @@ export default function Test5({ score, setScore }: TestProps) {
           }}
         >
           <div>(1) </div>
-          <div style={mark1} onClick={clickAnswer1}>
+          <div onClick={() => clickAnswer(1)}>
             <div>
               {" "}
               <Image
@@ -89,13 +72,13 @@ export default function Test5({ score, setScore }: TestProps) {
                 style={{
                   marginBottom: "8px",
                   marginTop: "10px",
-                  // position: "fixed",
+                  border: mark1,
                 }}
               />
             </div>
           </div>
           <div style={{ marginLeft: "60px" }}>(2) </div>
-          <div style={mark2} onClick={clickAnswer2}>
+          <div onClick={() => clickAnswer(2)}>
             <div>
               {" "}
               <Image
@@ -107,6 +90,7 @@ export default function Test5({ score, setScore }: TestProps) {
                   marginLeft: "22px",
                   marginBottom: "8px",
                   marginTop: "10px",
+                  border: mark2,
                 }}
               />
             </div>
@@ -120,7 +104,7 @@ export default function Test5({ score, setScore }: TestProps) {
           }}
         >
           <div>(3) </div>
-          <div style={mark3} onClick={clickAnswer3}>
+          <div onClick={() => clickAnswer(3)}>
             <div
               style={{
                 width: window.innerWidth > 450 ? "150" : "100",
@@ -138,12 +122,13 @@ export default function Test5({ score, setScore }: TestProps) {
                 style={{
                   marginLeft: "10px",
                   marginRight: window.innerWidth > 450 ? "15px" : "15px",
+                  border: mark3,
                 }}
               />
             </div>
           </div>
           <div style={{ marginLeft: "50px" }}>(4) </div>
-          <div style={mark4} onClick={clickAnswer4}>
+          <div onClick={() => clickAnswer(4)}>
             <div>
               {" "}
               <Image
@@ -155,6 +140,7 @@ export default function Test5({ score, setScore }: TestProps) {
                   marginLeft: "22px",
                   marginBottom: "8px",
                   marginTop: "10px",
+                  border: mark4,
                 }}
               />
             </div>

@@ -60,14 +60,14 @@ export default function Cinephile() {
         </div>
         <div className="cine-content-container">{handleTest()}</div>
         <div className="cine-footer-container">
-          <div
+          {/* <div
             className="cine-prev-button-flex"
             onClick={() => {
               if (testNumber > minTestNumber) setTestNumber(x => x - 1);
             }}
           >
             <div className="cine-prev-button">이전 문제</div>
-          </div>
+          </div> */}
           <div
             className="cine-next-button-flex"
             onClick={() => {

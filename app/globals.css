@@ -233,7 +233,7 @@ body::-webkit-scrollbar {
   display: inline-block;
   background-color: #cbcbcb;
   box-shadow: -1px -1px 0px 1px white, 1px 1px 0px 1px #97958f;
-  color: black;
+  color: #0e1111;
   margin-left: 20px;
   padding-top: 3px;
   width: 20px;
@@ -252,7 +252,7 @@ body::-webkit-scrollbar {
   display: inline-block;
   background-color: #cbcbcb;
   box-shadow: -1px -1px 0px 1px white, 1px 1px 0px 1px #97958f;
-  color: black;
+  color: #0e1111;
   margin-left: 20px;
   padding-top: 2px;
   padding-bottom: 1px;
@@ -505,7 +505,7 @@ body::-webkit-scrollbar {
 
 .cine-flex-container {
   /* margin-top: 5%; */
-  width: 530px;
+  width: 550px;
   height: 65%;
   /* background-color: yellow; */
   /* opacity: 10%; */
@@ -529,6 +529,7 @@ body::-webkit-scrollbar {
 }
 
 .cine-content-container {
+  margin-top: 5px;
   display: flex;
   justify-content: center;
   flex-grow: 1;
@@ -562,14 +563,15 @@ body::-webkit-scrollbar {
 
 .cine-next-button-flex {
   display: flex;
-  width: 90px;
-  height: 40px;
+  flex-grow: 1;
+  height: 35px;
   border: 1.5px solid #0e1111;
-  border-radius: 30px;
+  /* border-radius: 30px; */
   /* background-color: #00ff00; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 25px;
   /* margin-right: 10px; */
 }
 
@@ -597,6 +599,10 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 450px) {
+  .cine-content-container {
+    margin-top: 0;
+  }
+
   .cine-flex-container {
     margin-top: 15%;
     width: 85%;
@@ -622,6 +628,10 @@ body::-webkit-scrollbar {
 
   .cine-flex-container {
     height: 85%;
+  }
+
+  .cine-next-button-flex {
+    font-size: 20px;
   }
 }
 
@@ -667,7 +677,7 @@ body::-webkit-scrollbar {
   width: 150px;
   height: 150px;
 
-  border: 1.5px solid black;
+  border: 1.5px solid #0e1111;
 }
 
 .cine-answer-top-right {
@@ -675,7 +685,7 @@ body::-webkit-scrollbar {
   width: 150px;
   height: 150px;
 
-  border: 1.5px solid black;
+  border: 1.5px solid #0e1111;
 }
 
 .cine-top-img {
@@ -690,5 +700,5 @@ body::-webkit-scrollbar {
   font-size: 20px;
   width: 150px;
   height: 30px;
-  border-top: 1.5px solid black;
+  border-top: 1.5px solid #0e1111;
 }
