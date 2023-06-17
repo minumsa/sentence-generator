@@ -492,10 +492,10 @@ body::-webkit-scrollbar {
   width: 100vw;
   height: 100vh;
   font-family: "omyu_pretty";
+  word-break: keep-all;
   /* "GangwonEdu_OTFBoldA"; */
   font-weight: 300; /* 300 or 700 */
   font-size: 20px;
-  word-break: keep-all;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -505,7 +505,7 @@ body::-webkit-scrollbar {
 
 .cine-flex-container {
   /* margin-top: 5%; */
-  width: 500px;
+  width: 530px;
   height: 65%;
   /* background-color: yellow; */
   /* opacity: 10%; */
@@ -514,15 +514,16 @@ body::-webkit-scrollbar {
 }
 
 .cine-test-title {
+  font-size: 28px;
   display: flex;
   justify-content: center;
-  font-family: PyeongChangPeace-Bold;
+  /* font-family: PyeongChangPeace-Bold; */
 }
 
 .cine-nav-container {
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: 100px;
   font-size: 25px;
   /* background-color: green; */
 }
@@ -550,7 +551,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .cine-prev-button-flex:hover,
@@ -569,12 +570,13 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 .cine-test-format {
   font-size: 25px;
   line-height: 200%;
+  padding: 0 5px;
 }
 
 .cine-test-input {
@@ -597,7 +599,7 @@ body::-webkit-scrollbar {
 @media (max-width: 450px) {
   .cine-flex-container {
     margin-top: 15%;
-    width: 90%;
+    width: 85%;
   }
 
   .cine-test-format {
@@ -605,12 +607,13 @@ body::-webkit-scrollbar {
     line-height: 210%;
   }
 
+  /* 
   .cine-progress-bar {
     width: 90%;
-  }
+  } */
 
   .cine-nav-container {
-    height: 105px;
+    height: 100px;
   }
 
   .cine-test-input {
@@ -622,12 +625,70 @@ body::-webkit-scrollbar {
   }
 }
 
+.cine-quiz {
+  padding: 0 5px;
+}
+
 .cine-answer {
-  padding-left: 10px;
+  padding: 0 5px;
 }
 
 .cine-answer:hover {
   color: white;
   background-color: #0e1111;
   /* height: 37px; */
+}
+
+.cine-answer-container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 400px;
+  margin-top: 10px;
+}
+
+.cine-answer-top {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  height: 150px;
+}
+
+.cine-answer-bottom {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  height: 150px;
+}
+
+.cine-answer-top-left {
+  margin-left: 35px;
+  width: 150px;
+  height: 150px;
+
+  border: 1.5px solid black;
+}
+
+.cine-answer-top-right {
+  margin-right: 35px;
+  width: 150px;
+  height: 150px;
+
+  border: 1.5px solid black;
+}
+
+.cine-top-img {
+  width: 150px;
+  height: 120px;
+}
+
+.cine-top-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 150px;
+  height: 30px;
+  border-top: 1.5px solid black;
 }

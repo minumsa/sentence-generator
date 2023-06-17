@@ -62,15 +62,16 @@ export default function Test2({ score, setScore }: TestProps) {
   return (
     <>
       <div className="cine-test-format">
-        <div></div>
-        <span>2. 다음 중 소설 원작이 </span>
-        <span style={{ textDecoration: "underline" }}>아닌</span>
-        <span> 영화는?</span>
+        <div className="cine-quiz">
+          <span>2. 다음 중 소설 원작이 </span>
+          <span style={{ textDecoration: "underline" }}>아닌</span>
+          <span> 영화는?</span>
+        </div>
         <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
-          (1) 케빈에 대하여(2011, 린 램지){" "}
+          <span>(1) 케빈에 대하여(2011, 린 램지)</span>
         </div>
         <div className="cine-answer" style={mark2} onClick={clickAnswer2}>
-          (2) 콜 미 바이 유어 네임(2017, 루카 구아다니노)
+          <span>(2) 콜 미 바이 유어 네임(2017, 루카 구아다니노)</span>
         </div>
         <div className="cine-answer" style={mark3} onClick={clickAnswer3}>
           (3) 지구 최후의 밤(2018, 비간)

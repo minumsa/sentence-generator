@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 interface TestProps {
@@ -9,7 +10,8 @@ interface TestProps {
 
 interface AnswerStyle {
   color: string;
-  backgroundColor: string;
+  border: string;
+  // backgroundColor: string;
 }
 
 export default function Test1({ score, setScore }: TestProps) {
@@ -19,8 +21,10 @@ export default function Test1({ score, setScore }: TestProps) {
   const [mark4, setMark4] = useState<React.CSSProperties>({});
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const [answerStyle, setAnswerStyle] = useState<AnswerStyle>({
-    color: "white",
-    backgroundColor: "#0e1111",
+    // color: "white",
+    // backgroundColor: "#0e1111",
+    color: "blue",
+    border: "1.5px solid blue",
   });
 
   useEffect(() => {
@@ -62,8 +66,92 @@ export default function Test1({ score, setScore }: TestProps) {
   return (
     <>
       <div className="cine-test-format">
-        <div>1. 다음 중 앨프리드 히치콕이 연출한 영화는?</div>
-        <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
+        <div className="cine-quiz">
+          1. 다음 중 앨프리드 히치콕이 연출한 영화는?
+        </div>
+        <div className="cine-answer-container">
+          <div className="cine-answer-top">
+            <div
+              className="cine-answer-top-left"
+              style={mark1}
+              onClick={clickAnswer1}
+            >
+              <div className="cine-top-img">
+                <Image
+                  src="/cine-img-1.png"
+                  alt="cine-img-1"
+                  width={150}
+                  height={120}
+                  // width={window.innerWidth > 450 ? "150" : "100"}
+                  // height={window.innerWidth > 450 ? "80" : "53"}
+                />
+              </div>
+              <div className="cine-top-title">
+                <div>와일드 번치</div>
+              </div>
+            </div>
+            <div
+              className="cine-answer-top-right"
+              style={mark2}
+              onClick={clickAnswer2}
+            >
+              <div className="cine-top-img">
+                <Image
+                  src="/cine-img-2.png"
+                  alt="cine-img-2"
+                  width={150}
+                  height={120}
+                  // width={window.innerWidth > 450 ? "150" : "100"}
+                  // height={window.innerWidth > 450 ? "80" : "53"}
+                />
+              </div>
+              <div className="cine-top-title">
+                <div>황야의 무법자</div>
+              </div>
+            </div>
+          </div>
+          <div className="cine-answer-bottom">
+            <div
+              className="cine-answer-top-left"
+              style={mark3}
+              onClick={clickAnswer3}
+            >
+              <div className="cine-top-img">
+                <Image
+                  src="/cine-img-3.png"
+                  alt="cine-img-3"
+                  width={150}
+                  height={120}
+                  // width={window.innerWidth > 450 ? "150" : "100"}
+                  // height={window.innerWidth > 450 ? "80" : "53"}
+                />
+              </div>
+              <div className="cine-top-title">
+                <div style={{ fontSize: "18px" }}>북북서로 진로를 달려라</div>
+              </div>
+            </div>
+            <div
+              className="cine-answer-top-right"
+              style={mark4}
+              onClick={clickAnswer4}
+            >
+              <div className="cine-top-img">
+                <Image
+                  src="/cine-img-4.png"
+                  alt="cine-img-4"
+                  width={150}
+                  height={120}
+                  // width={window.innerWidth > 450 ? "150" : "100"}
+                  // height={window.innerWidth > 450 ? "80" : "53"}
+                />
+              </div>
+              <div className="cine-top-title">
+                <div>황야의 무법자</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
           (1) 와일드 번치
         </div>
         <div className="cine-answer" style={mark2} onClick={clickAnswer2}>
@@ -74,7 +162,7 @@ export default function Test1({ score, setScore }: TestProps) {
         </div>
         <div className="cine-answer" style={mark4} onClick={clickAnswer4}>
           (4) 네 멋대로 해라
-        </div>
+        </div> */}
       </div>
     </>
   );

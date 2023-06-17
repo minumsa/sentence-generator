@@ -62,7 +62,7 @@ export default function Test3({ score, setScore }: TestProps) {
   return (
     <>
       <div className="cine-test-format">
-        <div>3. 다음 중 러닝타임이 가장 긴 영화는?</div>
+        <div className="cine-quiz">3. 다음 중 러닝타임이 가장 긴 영화는?</div>
         <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
           (1) 잠(1964, 앤디 워홀)
         </div>
