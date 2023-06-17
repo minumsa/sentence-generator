@@ -504,9 +504,9 @@ body::-webkit-scrollbar {
 }
 
 .cine-flex-container {
-  /* margin-top: 5%; */
+  margin-top: 3%;
   width: 550px;
-  height: 65%;
+  height: 75%;
   /* background-color: yellow; */
   /* opacity: 10%; */
   display: flex;
@@ -598,19 +598,19 @@ body::-webkit-scrollbar {
   border: 1.5px solid #0e1111;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 600px) {
   .cine-content-container {
     margin-top: 0;
   }
 
   .cine-flex-container {
-    margin-top: 15%;
-    width: 85%;
+    margin-top: 0%;
+    width: 90%;
   }
 
   .cine-test-format {
     font-size: 20px;
-    line-height: 210%;
+    line-height: 200%;
   }
 
   /* 
@@ -632,6 +632,10 @@ body::-webkit-scrollbar {
 
   .cine-next-button-flex {
     font-size: 20px;
+  }
+
+  .cine-footer-container {
+    height: 90px;
   }
 }
 

@@ -12,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test1({ score, setScore }: TestProps) {
+export default function Test9({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -43,7 +43,7 @@ export default function Test1({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -51,7 +51,7 @@ export default function Test1({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          1. 다음 중 앨프리드 히치콕이 연출한 영화는?
+          <span>{`9. 다음 중 성소수자 주인공이 등장하지 않는 영화는?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +62,13 @@ export default function Test1({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? "와일드 번치"
+              ? `타오르는 여인의 초상(2019, 셀린 시아마)`
               : answerIndex === 2
-              ? "황야의 무법자"
+              ? `호수의 이방인(2013, 알랭 기로디)`
               : answerIndex === 3
-              ? "북북서로 진로를 돌려라"
+              ? `클로즈(2022, 루카스 돈트)`
               : answerIndex === 4
-              ? "네 멋대로 해라"
+              ? `토리와 로키타(2022, 다르덴 형제)`
               : ""}
           </div>
         ))}

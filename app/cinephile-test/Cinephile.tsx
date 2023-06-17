@@ -6,14 +6,16 @@ import Test2 from "./Test2";
 import Test3 from "./Test3";
 import Test4 from "./Test4";
 import Test5 from "./Test5";
+import Test6 from "./Test6";
+import Test7 from "./Test7";
+import Test8 from "./Test8";
+import Test9 from "./Test9";
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(1);
   const [score, setScore] = useState<number>(0);
   const minTestNumber = 1;
-  const maxTestNumber = 5;
-
-  console.log("score", score);
+  const maxTestNumber = 9;
 
   function handleTest() {
     switch (testNumber) {
@@ -27,6 +29,14 @@ export default function Cinephile() {
         return <Test4 score={score} setScore={setScore} />;
       case 5:
         return <Test5 score={score} setScore={setScore} />;
+      case 6:
+        return <Test6 score={score} setScore={setScore} />;
+      case 7:
+        return <Test7 score={score} setScore={setScore} />;
+      case 8:
+        return <Test8 score={score} setScore={setScore} />;
+      case 9:
+        return <Test9 score={score} setScore={setScore} />;
       default:
         return null;
     }
@@ -37,7 +47,7 @@ export default function Cinephile() {
       <div className="cine-flex-container">
         <div className="cine-nav-container">
           <div className="cine-test-title">
-            <div>{"씨네필 테스트"}</div>
+            <div>{"영잘알 테스트"}</div>
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div className="cine-progress-bar">
@@ -51,9 +61,9 @@ export default function Cinephile() {
                   backgroundColor: "#0e1111",
                 }}
               >
-                <div style={{ color: "white", fontSize: "22px" }}>{`${
-                  (testNumber / maxTestNumber) * 100
-                }%`}</div>
+                <div
+                  style={{ color: "white", fontSize: "22px" }}
+                >{`${Math.floor((testNumber / maxTestNumber) * 100)}%`}</div>
               </div>
             </div>
           </div>

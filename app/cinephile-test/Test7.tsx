@@ -12,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test1({ score, setScore }: TestProps) {
+export default function Test7({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -43,7 +43,7 @@ export default function Test1({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -51,7 +51,7 @@ export default function Test1({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          1. 다음 중 앨프리드 히치콕이 연출한 영화는?
+          {`7. 웨스 크레이븐이 연출을 맡고 케빈 윌리엄슨이 각본을 썼으며, "공포영화의 법칙"이라는 클리셰를 메타픽션적으로 활용해 흥행과 더불어 작품성까지 크게 호평받은 이 공포영화 시리즈는?`}
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +62,13 @@ export default function Test1({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? "와일드 번치"
+              ? `<스크림> 시리즈`
               : answerIndex === 2
-              ? "황야의 무법자"
+              ? `<13일의 금요일> 시리즈`
               : answerIndex === 3
-              ? "북북서로 진로를 돌려라"
+              ? `<이블 데드> 시리즈`
               : answerIndex === 4
-              ? "네 멋대로 해라"
+              ? `<컨저링> 시리즈`
               : ""}
           </div>
         ))}

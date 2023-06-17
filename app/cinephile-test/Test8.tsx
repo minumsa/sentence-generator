@@ -12,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test1({ score, setScore }: TestProps) {
+export default function Test8({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -43,7 +43,7 @@ export default function Test1({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -51,7 +51,9 @@ export default function Test1({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          1. 다음 중 앨프리드 히치콕이 연출한 영화는?
+          <span>{`8. 영화 <킬 빌>에는 4명의 암살자 캐릭터가 등장하는데, 해당 인물들은 모두 각각의 독특한 코드 네임을 가지고 있다. 다음 중 `}</span>
+          <span style={{ textDecoration: "underline" }}>버니타 그린</span>
+          <span>의 코드 네임으로 가장 적절한 것은?</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +64,13 @@ export default function Test1({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? "와일드 번치"
+              ? `코튼마우스`
               : answerIndex === 2
-              ? "황야의 무법자"
+              ? `캘리포니아 마운틴 스네이크`
               : answerIndex === 3
-              ? "북북서로 진로를 돌려라"
+              ? `블랙 맘바`
               : answerIndex === 4
-              ? "네 멋대로 해라"
+              ? `코퍼헤드`
               : ""}
           </div>
         ))}
