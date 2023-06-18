@@ -10,12 +10,19 @@ import Test6 from "./Test6";
 import Test7 from "./Test7";
 import Test8 from "./Test8";
 import Test9 from "./Test9";
+import Test10 from "./Test10";
+import Test11 from "./Test11";
+import Test12 from "./Test12";
+import Test13 from "./Test13";
+import Test14 from "./Test14";
+import Test15 from "./Test15";
+import Test16 from "./Test16";
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(1);
   const [score, setScore] = useState<number>(0);
   const minTestNumber = 1;
-  const maxTestNumber = 9;
+  const maxTestNumber = 16;
 
   function handleTest() {
     switch (testNumber) {
@@ -37,6 +44,20 @@ export default function Cinephile() {
         return <Test8 score={score} setScore={setScore} />;
       case 9:
         return <Test9 score={score} setScore={setScore} />;
+      case 10:
+        return <Test10 score={score} setScore={setScore} />;
+      case 11:
+        return <Test11 score={score} setScore={setScore} />;
+      case 12:
+        return <Test12 score={score} setScore={setScore} />;
+      case 13:
+        return <Test13 score={score} setScore={setScore} />;
+      case 14:
+        return <Test14 score={score} setScore={setScore} />;
+      case 15:
+        return <Test15 score={score} setScore={setScore} />;
+      case 16:
+        return <Test16 score={score} setScore={setScore} />;
       default:
         return null;
     }

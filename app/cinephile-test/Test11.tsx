@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 interface TestProps {
@@ -13,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test6({ score, setScore }: TestProps) {
+export default function Test11({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -44,7 +43,7 @@ export default function Test6({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 4 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -52,20 +51,7 @@ export default function Test6({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Image
-            src="/test6-img.jpeg"
-            alt="test6-img"
-            width={window.innerWidth > 450 ? "280" : "180"}
-            height={window.innerWidth > 450 ? "180" : "120"}
-            style={{
-              marginBottom: "15px",
-              marginTop: "15px",
-              border: "1.5px solid black",
-            }}
-          />
+          <span>{`11. 다음 중 실화를 바탕으로 만든 영화가 아닌 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -76,13 +62,13 @@ export default function Test6({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `"Here's Billy!"`
+              ? `타르(2022, 토드 필드)`
               : answerIndex === 2
-              ? `"Here's Henry!"`
+              ? `한공주(2013, 이수진)`
               : answerIndex === 3
-              ? `"Here's Terry!"`
+              ? `두 교황(2019, 페르난도 메이렐레스)`
               : answerIndex === 4
-              ? `"Here's Johnny!"`
+              ? `스포트라이트(2015, 토마스 맥카시)`
               : ``}
           </div>
         ))}

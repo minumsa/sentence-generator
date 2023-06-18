@@ -71,7 +71,7 @@ export default function Test8({ score, setScore }: TestProps) {
               ? `블랙 맘바`
               : answerIndex === 4
               ? `코퍼헤드`
-              : ""}
+              : ``}
           </div>
         ))}
       </div>

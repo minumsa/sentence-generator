@@ -69,7 +69,7 @@ export default function Test9({ score, setScore }: TestProps) {
               ? `클로즈(2022, 루카스 돈트)`
               : answerIndex === 4
               ? `토리와 로키타(2022, 다르덴 형제)`
-              : ""}
+              : ``}
           </div>
         ))}
       </div>

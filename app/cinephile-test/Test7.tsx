@@ -69,7 +69,7 @@ export default function Test7({ score, setScore }: TestProps) {
               ? `<이블 데드> 시리즈`
               : answerIndex === 4
               ? `<컨저링> 시리즈`
-              : ""}
+              : ``}
           </div>
         ))}
       </div>

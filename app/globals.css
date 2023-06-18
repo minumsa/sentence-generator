@@ -31,6 +31,7 @@ html {
   height: 100%;
   width: 100%;
 }
+
 .fruits-container {
   height: 100vh;
   width: 100vw;
@@ -49,9 +50,9 @@ body {
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
   display: none;
-}
+} */
 
 /* @media (prefers-color-scheme: dark) {
   body {
@@ -174,8 +175,8 @@ body::-webkit-scrollbar {
 
 @media (max-width: 500px) {
   body {
-    position: fixed;
-    overflow: hidden;
+    /* position: fixed; */
+    /* overflow: hidden; */
   }
 
   .test30-div-1 {
@@ -203,6 +204,7 @@ body::-webkit-scrollbar {
   overflow: hidden;
   height: 100%;
 }
+
 .clone {
   color: #ffffff;
   font-family: "Neo둥근모 Code", "Neo둥근모Code", "neodgm-code";
@@ -494,13 +496,13 @@ body::-webkit-scrollbar {
   font-family: "omyu_pretty";
   word-break: keep-all;
   /* "GangwonEdu_OTFBoldA"; */
-  font-weight: 300; /* 300 or 700 */
+  /* font-weight: 300; 300 or 700 */
   font-size: 20px;
 
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
 }
 
 .cine-flex-container {
@@ -635,7 +637,7 @@ body::-webkit-scrollbar {
   }
 
   .cine-footer-container {
-    height: 90px;
+    height: 85px;
   }
 }
 
