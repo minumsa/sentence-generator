@@ -49,7 +49,7 @@ export default function Test18({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
+      <div className="cine-test-format">
         <div className="cine-quiz" style={{ marginTop: "10px" }}>
           <span>{`18. 다음 중 영화와 `}</span>
           <span style={{ textDecoration: "underline" }}>{`상관없는`}</span>

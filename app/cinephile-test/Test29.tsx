@@ -49,8 +49,11 @@ export default function Test29({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
-        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+      <div className="cine-test-format">
+        <div
+          className="cine-quiz"
+          // style={{ marginTop: "10px" }}
+        >
           <span>{`29. 다음 중 픽사 애니메이션 스튜디오에서 만든 영화가 `}</span>
           <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
           <span>{` 것은?`}</span>

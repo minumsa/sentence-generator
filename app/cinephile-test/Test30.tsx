@@ -52,15 +52,15 @@ export default function Test30({ score, setScore }: TestProps) {
     <>
       <div
         className="cine-test-format"
-        style={{
-          marginTop: window.innerWidth > 450 ? "15px" : "0",
-          marginBottom: window.innerWidth > 450 ? "20px" : "0",
-        }}
+        style={
+          {
+            // marginTop: window.innerWidth > 450 ? "15px" : "0",
+            // marginBottom: window.innerWidth > 450 ? "20px" : "0",
+          }
+        }
       >
         <div className="cine-quiz">
-          <span>{`30. 다음 중 뱀파이어가 등장하지 `}</span>
-          <span style={{ textDecoration: "underline" }}>{`않는`}</span>
-          <span>{` 영화는?`}</span>
+          <span>{`30. 한국영상자료원에서 운영하고 있는 시네마테크(KOFA)는 일종의 영화 도서관으로, 영화 관련 자료를 보존하고 이를 모든 일반인에게 무료로 공개해 해당 자료의 가치를 공유한다. 다음 중 국내 시네마테크가 위치해 있는 지역은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -71,13 +71,13 @@ export default function Test30({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `렛 미 인(2008, 토마스 알프레드슨)`
+              ? `서울특별시 광진구`
               : answerIndex === 2
-              ? `박쥐(2009, 박찬욱)`
+              ? `서울특별시 마포구`
               : answerIndex === 3
-              ? `오직 사랑하는 이들만이 살아남는다(2013, 짐 자무쉬)`
+              ? `전주시 완산구`
               : answerIndex === 4
-              ? `언더 더 스킨(2013, 조나단 글레이저)`
+              ? `부산광역시 해운대구`
               : ``}
           </div>
         ))}

@@ -48,8 +48,9 @@ export default function Test4({ score, setScore }: TestProps) {
         </div>
         <div
           style={{
+            // width: "513px",
             marginTop: "20px",
-            marginBottom: window.innerWidth > 450 ? "20px" : "0",
+            // marginBottom: window.innerWidth > 450 ? "20px" : "0",
             border: "1.5px solid #0e1111",
             padding: "15px",
           }}

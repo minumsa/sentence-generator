@@ -52,10 +52,12 @@ export default function Test6({ score, setScore }: TestProps) {
     <>
       <div
         className="cine-test-format"
-        style={{
-          marginTop: window.innerWidth > 450 ? "15px" : "0",
-          marginBottom: window.innerWidth > 450 ? "20px" : "0",
-        }}
+        style={
+          {
+            // marginTop: window.innerWidth > 450 ? "15px" : "0",
+            // marginBottom: window.innerWidth > 450 ? "20px" : "0",
+          }
+        }
       >
         <div className="cine-quiz">
           {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}

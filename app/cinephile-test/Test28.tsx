@@ -49,8 +49,11 @@ export default function Test28({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
-        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+      <div className="cine-test-format">
+        <div
+          className="cine-quiz"
+          // style={{ marginTop: "10px" }}
+        >
           <span>{`28. 다음 중 영화 평론가가 `}</span>
           <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
           <span>{` 사람은?`}</span>

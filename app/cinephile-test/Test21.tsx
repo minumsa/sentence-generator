@@ -28,13 +28,16 @@ export default function Test21({ score, setScore }: TestProps) {
   return (
     <>
       <div className="cine-test-format">
-        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+        <div
+          className="cine-quiz"
+          // style={{ marginTop: "10px" }}
+        >
           {`21. 다음은 <로제타>(1999, 다르덴 형제)의 줄거리 일부이다. 빈칸에 가장 적절한 단어를 입력하시오.`}
         </div>
         <div
           style={{
             marginTop: "10px",
-            marginBottom: window.innerWidth > 450 ? "25px" : "20px",
+            // marginBottom: window.innerWidth > 450 ? "25px" : "20px",
             border: "1.5px solid #0e1111",
             padding: "15px",
           }}

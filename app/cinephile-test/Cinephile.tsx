@@ -114,7 +114,7 @@ export default function Cinephile() {
       <div className="cine-flex-container">
         <div
           className="cine-nav-container"
-          style={testNumber > 0 ? { height: "100px" } : { height: "50px" }}
+          style={testNumber > 0 ? { height: "90px" } : { height: "50px" }}
         >
           <div className="cine-test-title">
             <div>{"시네필 테스트"}</div>
@@ -142,7 +142,12 @@ export default function Cinephile() {
             </div>
           )}
         </div>
-        <div className="cine-content-container">{handleTest()}</div>
+        <div
+          className="cine-content-container"
+          style={testNumber > 0 ? {} : { height: "515px" }}
+        >
+          {handleTest()}
+        </div>
         <div className="cine-footer-container">
           {/* <div
             className="cine-prev-button-flex"

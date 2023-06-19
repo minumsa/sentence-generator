@@ -506,7 +506,7 @@ body {
 }
 
 .cine-flex-container {
-  margin-top: 3%;
+  margin-top: 10vh;
   width: 550px;
   height: 75%;
   /* background-color: yellow; */
@@ -530,10 +530,11 @@ body {
 }
 
 .cine-content-container {
-  margin-top: 5px;
+  /* height: 600px; */
+  margin-top: 25px;
+  margin-bottom: 40px;
   display: flex;
   justify-content: center;
-  flex-grow: 1;
 }
 
 .cine-footer-container {
@@ -599,13 +600,36 @@ body {
   border: 1.5px solid #0e1111;
 }
 
+.test0-ol {
+  font-size: "";
+  margin-left: 40px;
+}
+
+.test0-span {
+  font-size: 20px;
+}
+
 @media (max-width: 600px) {
+  .test0-ol {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+  .test0-span-2 {
+    font-size: 22px;
+  }
+
+  .test0-span {
+    font-size: 18px;
+  }
+
   .cine-test-title {
     font-size: 26px;
   }
 
   .cine-content-container {
     margin-top: 0;
+    margin-bottom: 20px;
   }
 
   .cine-flex-container {

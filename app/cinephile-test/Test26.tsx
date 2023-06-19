@@ -49,8 +49,11 @@ export default function Test26({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
-        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+      <div className="cine-test-format">
+        <div
+          className="cine-quiz"
+          // style={{ marginTop: "10px" }}
+        >
           <span>{`26. 다음 설명에 잘 부합하는 영화의 제목은?`}</span>
         </div>
         <div

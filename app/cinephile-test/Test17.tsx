@@ -119,7 +119,7 @@ export default function Test17({ score, setScore }: TestProps) {
           </span>
           <span style={{ color: "gray" }}>
             (* 사용자의 인터넷 환경에 따라 보기의 데이터를 불러오는 속도가
-            소요될 수 있는 문제입니다. 30초 이상 기다려도 보기가 뜨지 않는다면
+            소요될 수 있는 문제입니다. 10초 이상 기다려도 보기가 뜨지 않는다면
             다음 문제로 넘어가주세요.)
           </span>
         </div>
