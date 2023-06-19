@@ -13,7 +13,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test6({ score, setScore }: TestProps) {
+export default function Test24({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -51,15 +51,13 @@ export default function Test6({ score, setScore }: TestProps) {
   return (
     <>
       <div className="cine-test-format">
-        <div className="cine-quiz">
-          {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}
-        </div>
+        <div className="cine-quiz">{`24. <아사코>(2018), <드라이브 마이 카>(2021), <우연과 상상>(2022)을 연출한 다음 사진 속 일본 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/test6-img.jpeg"
-            alt="test6-img"
+            src="/cine-img-24.jpeg"
+            alt="test24-img"
             width={window.innerWidth > 450 ? "280" : "180"}
-            height={window.innerWidth > 450 ? "180" : "120"}
+            height={window.innerWidth > 450 ? "200" : "130"}
             style={{
               marginBottom: "15px",
               marginTop: "5px",
@@ -76,13 +74,13 @@ export default function Test6({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `"Johnny is coming!"`
+              ? `이와이 슌지`
               : answerIndex === 2
-              ? `"Johnny, I found you!"`
+              ? `고레에다 히로카즈`
               : answerIndex === 3
-              ? `"It's me, Johnny!"`
+              ? `소노 시온`
               : answerIndex === 4
-              ? `"Here's Johnny!"`
+              ? `하마구치 류스케`
               : ``}
           </div>
         ))}

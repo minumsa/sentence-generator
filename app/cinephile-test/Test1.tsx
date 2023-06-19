@@ -62,13 +62,13 @@ export default function Test1({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? "와일드 번치"
+              ? "400번의 구타(1959)"
               : answerIndex === 2
-              ? "황야의 무법자"
+              ? "12인의 성난 사람들(1957)"
               : answerIndex === 3
-              ? "북북서로 진로를 돌려라"
+              ? "열차 안의 낯선 자들(1951)"
               : answerIndex === 4
-              ? "네 멋대로 해라"
+              ? "수색자(1956)"
               : ""}
           </div>
         ))}

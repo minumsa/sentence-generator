@@ -51,7 +51,9 @@ export default function Test11({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`11. 다음 중 실화를 바탕으로 만든 영화가 아닌 것은?`}</span>
+          <span>{`11. 다음 중 실화를 바탕으로 만든 영화가 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
+          <span>{` 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -68,7 +70,7 @@ export default function Test11({ score, setScore }: TestProps) {
               : answerIndex === 3
               ? `두 교황(2019, 페르난도 메이렐레스)`
               : answerIndex === 4
-              ? `스포트라이트(2015, 토마스 맥카시)`
+              ? `머니볼(2011, 베넷 밀러)`
               : ``}
           </div>
         ))}

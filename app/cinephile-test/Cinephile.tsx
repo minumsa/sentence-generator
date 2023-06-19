@@ -17,12 +17,23 @@ import Test13 from "./Test13";
 import Test14 from "./Test14";
 import Test15 from "./Test15";
 import Test16 from "./Test16";
+import Test17 from "./Test17";
+import Test18 from "./Test18";
+import Test19 from "./Test19";
+import Test20 from "./Test20";
+import Test21 from "./Test21";
+import Test22 from "./Test22";
+import Test23 from "./Test23";
+import Test24 from "./Test24";
+import Test25 from "./Test25";
+import Test26 from "./Test26";
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(1);
   const [score, setScore] = useState<number>(0);
   const minTestNumber = 1;
-  const maxTestNumber = 16;
+  const maxTestNumber = 30;
+  const progressPercent = Math.floor((testNumber / maxTestNumber) * 100);
 
   function handleTest() {
     switch (testNumber) {
@@ -58,6 +69,26 @@ export default function Cinephile() {
         return <Test15 score={score} setScore={setScore} />;
       case 16:
         return <Test16 score={score} setScore={setScore} />;
+      case 17:
+        return <Test17 score={score} setScore={setScore} />;
+      case 18:
+        return <Test18 score={score} setScore={setScore} />;
+      case 19:
+        return <Test19 score={score} setScore={setScore} />;
+      case 20:
+        return <Test20 score={score} setScore={setScore} />;
+      case 21:
+        return <Test21 score={score} setScore={setScore} />;
+      case 22:
+        return <Test22 score={score} setScore={setScore} />;
+      case 23:
+        return <Test23 score={score} setScore={setScore} />;
+      case 24:
+        return <Test24 score={score} setScore={setScore} />;
+      case 25:
+        return <Test25 score={score} setScore={setScore} />;
+      case 26:
+        return <Test26 score={score} setScore={setScore} />;
       default:
         return null;
     }
@@ -68,7 +99,7 @@ export default function Cinephile() {
       <div className="cine-flex-container">
         <div className="cine-nav-container">
           <div className="cine-test-title">
-            <div>{"영잘알 테스트"}</div>
+            <div>{"시네필 테스트"}</div>
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div className="cine-progress-bar">
@@ -82,9 +113,9 @@ export default function Cinephile() {
                   backgroundColor: "#0e1111",
                 }}
               >
-                <div
-                  style={{ color: "white", fontSize: "22px" }}
-                >{`${Math.floor((testNumber / maxTestNumber) * 100)}%`}</div>
+                <div style={{ color: "white", fontSize: "22px" }}>
+                  {progressPercent > 9 ? `${progressPercent}%` : ``}
+                </div>
               </div>
             </div>
           </div>

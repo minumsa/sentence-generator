@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 interface TestProps {
@@ -13,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test6({ score, setScore }: TestProps) {
+export default function Test26({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -44,28 +43,31 @@ export default function Test6({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 4 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
-          {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}
+      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
+        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+          <span>{`26. 다음 설명에 잘 부합하는 영화의 제목은?`}</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Image
-            src="/test6-img.jpeg"
-            alt="test6-img"
-            width={window.innerWidth > 450 ? "280" : "180"}
-            height={window.innerWidth > 450 ? "180" : "120"}
-            style={{
-              marginBottom: "15px",
-              marginTop: "5px",
-              border: "1.5px solid black",
-            }}
-          />
+        <div
+          style={{
+            border: "1.5px solid black",
+            // padding: "10px",
+            margin: "10px 0",
+          }}
+        >
+          <ul>
+            <li>거스 밴 샌트가 연출했다.</li>
+            <li>숀 펜이 출연해 제81회 아카데미에서 남우주연상을 수상했다.</li>
+            <li>
+              미국의 성소수자 인권운동가이자 정치가인 실존 인물의 삶을 바탕으로
+              만든 전기 영화이다.
+            </li>
+          </ul>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -76,13 +78,13 @@ export default function Test6({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `"Johnny is coming!"`
+              ? `밀크`
               : answerIndex === 2
-              ? `"Johnny, I found you!"`
+              ? `엉클 분미`
               : answerIndex === 3
-              ? `"It's me, Johnny!"`
+              ? `인 디 아일`
               : answerIndex === 4
-              ? `"Here's Johnny!"`
+              ? `브로크백 마운틴`
               : ``}
           </div>
         ))}

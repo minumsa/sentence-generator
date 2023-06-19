@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 interface TestProps {
   score: number;
@@ -62,13 +63,13 @@ export default function Test16({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `재즈 싱어`
+              ? `재즈 싱어(1927, 앨런 크로슬랜드)`
               : answerIndex === 2
-              ? `시민 케인`
+              ? `시민 케인(1941, 오슨 웰스)`
               : answerIndex === 3
-              ? `카사블랑카`
+              ? `모던 타임즈(1936, 찰리 채플린)`
               : answerIndex === 4
-              ? `바람과 함께 사라지다`
+              ? `바람과 함께 사라지다(1939, 빅터 플레밍)`
               : ``}
           </div>
         ))}

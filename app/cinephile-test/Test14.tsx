@@ -51,7 +51,7 @@ export default function Test14({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`14. 미국의 가장 권위 있는 영화 시상식으로 알려져 있는 아카데미에서 연기상을 수상하지 못한 배우는?`}</span>
+          <span>{`14. 미국의 가장 권위 있는 영화 시상식인 아카데미에서 연기상을 수상하지 못한 배우는?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
