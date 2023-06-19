@@ -34,7 +34,7 @@ export default function Test21({ score, setScore }: TestProps) {
         <div
           style={{
             marginTop: "10px",
-            marginBottom: "20px",
+            marginBottom: window.innerWidth > 450 ? "25px" : "20px",
             border: "1.5px solid #0e1111",
             padding: "15px",
           }}

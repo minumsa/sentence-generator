@@ -50,8 +50,19 @@ export default function Test19({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">{`19. <피아니스트>(2001), <엘르>(2016), <다가오는 것들>(2016)에 출연한 다음 사진 속 프랑스 배우의 이름은?`}</div>
+      <div
+        className="cine-test-format"
+        style={{
+          marginTop: window.innerWidth > 450 ? "10px" : "0",
+          marginBottom: window.innerWidth > 450 ? "15px" : "0",
+        }}
+      >
+        <div
+          className="cine-quiz"
+          style={{
+            marginBottom: window.innerWidth > 450 ? "10px" : "0",
+          }}
+        >{`19. <피아니스트>(2001), <엘르>(2016), <다가오는 것들>(2016)에 출연한 다음 사진 속 프랑스 배우의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
             src="/test19-img.jpeg"

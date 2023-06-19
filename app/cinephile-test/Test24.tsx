@@ -50,7 +50,13 @@ export default function Test24({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
+      <div
+        className="cine-test-format"
+        style={{
+          marginTop: window.innerWidth > 450 ? "15px" : "0",
+          marginBottom: window.innerWidth > 450 ? "15px" : "0",
+        }}
+      >
         <div className="cine-quiz">{`24. <아사코>(2018), <드라이브 마이 카>(2021), <우연과 상상>(2022)을 연출한 다음 사진 속 일본 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
@@ -59,8 +65,8 @@ export default function Test24({ score, setScore }: TestProps) {
             width={window.innerWidth > 450 ? "280" : "180"}
             height={window.innerWidth > 450 ? "200" : "130"}
             style={{
-              marginBottom: "15px",
-              marginTop: "5px",
+              marginBottom: window.innerWidth > 450 ? "25px" : "15px",
+              marginTop: window.innerWidth > 450 ? "15px" : "5px",
               border: "1.5px solid black",
             }}
           />

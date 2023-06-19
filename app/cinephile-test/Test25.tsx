@@ -27,7 +27,13 @@ export default function Test25({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
+      <div
+        className="cine-test-format"
+        style={{
+          marginTop: window.innerWidth > 450 ? "5px" : "0",
+          marginBottom: window.innerWidth > 450 ? "20px" : "0",
+        }}
+      >
         <div className="cine-quiz" style={{ marginTop: "10px" }}>
           {`25. 다음은 마블 시네마틱 유니버스 페이즈 4 시리즈를 무작위로 나열한 것이다. 해당 영화들을 개봉 순으로 입력하시오. (예: 1324)`}
         </div>

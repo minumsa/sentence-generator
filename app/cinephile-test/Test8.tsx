@@ -49,7 +49,12 @@ export default function Test8({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
+      <div
+        className="cine-test-format"
+        style={{
+          marginBottom: window.innerWidth > 450 ? "15px" : "0",
+        }}
+      >
         <div className="cine-quiz">
           <span>{`8. <킬 빌> 시리즈에는 데들리 바이퍼스 출신의 4명의 암살자 캐릭터가 등장하는데, 해당 인물들은 모두 독사의 이름을 딴 독특한 코드 네임을 가지고 있다. 다음 중 주인공 베아트릭스 키도의 첫 번째 표적이었던 `}</span>
           <span
