@@ -27,16 +27,23 @@ import Test23 from "./Test23";
 import Test24 from "./Test24";
 import Test25 from "./Test25";
 import Test26 from "./Test26";
+import Test27 from "./Test27";
+import Test28 from "./Test28";
+import Test29 from "./Test29";
+import Test30 from "./Test30";
+import Test0 from "./Test0";
 
 export default function Cinephile() {
-  const [testNumber, setTestNumber] = useState<number>(1);
+  const [testNumber, setTestNumber] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
-  const minTestNumber = 1;
+  const minTestNumber = 0;
   const maxTestNumber = 30;
   const progressPercent = Math.floor((testNumber / maxTestNumber) * 100);
 
   function handleTest() {
     switch (testNumber) {
+      case 0:
+        return <Test0 />;
       case 1:
         return <Test1 score={score} setScore={setScore} />;
       case 2:
@@ -89,6 +96,14 @@ export default function Cinephile() {
         return <Test25 score={score} setScore={setScore} />;
       case 26:
         return <Test26 score={score} setScore={setScore} />;
+      case 27:
+        return <Test27 score={score} setScore={setScore} />;
+      case 28:
+        return <Test28 score={score} setScore={setScore} />;
+      case 29:
+        return <Test29 score={score} setScore={setScore} />;
+      case 30:
+        return <Test30 score={score} setScore={setScore} />;
       default:
         return null;
     }
@@ -97,28 +112,35 @@ export default function Cinephile() {
   return (
     <div className="cine-container">
       <div className="cine-flex-container">
-        <div className="cine-nav-container">
+        <div
+          className="cine-nav-container"
+          style={testNumber > 0 ? { height: "100px" } : { height: "50px" }}
+        >
           <div className="cine-test-title">
             <div>{"시네필 테스트"}</div>
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div className="cine-progress-bar">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "30px",
-                  width: `${(testNumber / maxTestNumber) * 100}%`,
-                  backgroundColor: "#0e1111",
-                }}
-              >
-                <div style={{ color: "white", fontSize: "22px" }}>
-                  {progressPercent > 9 ? `${progressPercent}%` : ``}
+          {testNumber === 0 ? (
+            ""
+          ) : (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div className="cine-progress-bar">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "30px",
+                    width: `${(testNumber / maxTestNumber) * 100}%`,
+                    backgroundColor: "#0e1111",
+                  }}
+                >
+                  <div style={{ color: "white", fontSize: "22px" }}>
+                    {progressPercent > 9 ? `${progressPercent}%` : ``}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="cine-content-container">{handleTest()}</div>
         <div className="cine-footer-container">
@@ -130,14 +152,25 @@ export default function Cinephile() {
           >
             <div className="cine-prev-button">이전 문제</div>
           </div> */}
-          <div
-            className="cine-next-button-flex"
-            onClick={() => {
-              if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
-            }}
-          >
-            <div className="cine-next-button">다음 문제</div>
-          </div>
+          {testNumber === 0 ? (
+            <div
+              className="cine-next-button-flex"
+              onClick={() => {
+                if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
+              }}
+            >
+              <div className="cine-next-button">테스트 시작하기</div>
+            </div>
+          ) : (
+            <div
+              className="cine-next-button-flex"
+              onClick={() => {
+                if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
+              }}
+            >
+              <div className="cine-next-button">다음 문제</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

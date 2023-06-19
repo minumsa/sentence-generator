@@ -499,10 +499,10 @@ body {
   /* font-weight: 300; 300 or 700 */
   font-size: 20px;
 
-  /* -webkit-user-select: none;
+  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; */
+  user-select: none;
 }
 
 .cine-flex-container {
@@ -525,7 +525,6 @@ body {
 .cine-nav-container {
   display: flex;
   flex-direction: column;
-  height: 100px;
   font-size: 25px;
   /* background-color: green; */
 }
@@ -601,6 +600,10 @@ body {
 }
 
 @media (max-width: 600px) {
+  .cine-test-title {
+    font-size: 26px;
+  }
+
   .cine-content-container {
     margin-top: 0;
   }
@@ -619,10 +622,6 @@ body {
   .cine-progress-bar {
     width: 90%;
   } */
-
-  .cine-nav-container {
-    height: 100px;
-  }
 
   .cine-test-input {
     font-size: 20px;
@@ -647,6 +646,7 @@ body {
 
 .cine-answer {
   padding: 0 5px;
+  cursor: pointer;
 }
 
 .cine-answer:hover {

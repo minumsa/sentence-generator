@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 interface TestProps {
   score: number;
@@ -13,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test16({ score, setScore }: TestProps) {
+export default function Test18({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -44,15 +43,17 @@ export default function Test16({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 4 ? score + 4 : copiedScore));
     }
   }
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
-          <span>{`18. 다음 중 국내 최초로 천만 관객을 돌파한 영화는?`}</span>
+      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
+        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+          <span>{`18. 다음 중 영화와 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`상관없는`}</span>
+          <span>{` 줄임말은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -63,13 +64,13 @@ export default function Test16({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `실미도(2003, 강우석)`
+              ? `용아맥`
               : answerIndex === 2
-              ? `태극기 휘날리며(2004, 강제규)`
+              ? `코돌비`
               : answerIndex === 3
-              ? `왕의 남자(2005, 이준익)`
+              ? `분조카`
               : answerIndex === 4
-              ? `괴물(2006, 봉준호)`
+              ? `영스엑`
               : ``}
           </div>
         ))}

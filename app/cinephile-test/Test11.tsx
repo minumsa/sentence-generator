@@ -68,7 +68,7 @@ export default function Test11({ score, setScore }: TestProps) {
               : answerIndex === 2
               ? `한공주(2013, 이수진)`
               : answerIndex === 3
-              ? `두 교황(2019, 페르난도 메이렐레스)`
+              ? `스포트라이트(2015, 톰 맥카시)`
               : answerIndex === 4
               ? `머니볼(2011, 베넷 밀러)`
               : ``}

@@ -12,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test14({ score, setScore }: TestProps) {
+export default function Test28({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -49,9 +49,11 @@ export default function Test14({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
-          <span>{`14. 다음 중 아카데미에서 연기상을 수상하지 못한 배우는?`}</span>
+      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
+        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+          <span>{`28. 다음 중 영화 평론가가 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
+          <span>{` 사람은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +64,13 @@ export default function Test14({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `윤여정`
+              ? `이동진`
               : answerIndex === 2
-              ? `글렌 클로즈`
+              ? `김기영`
               : answerIndex === 3
-              ? `에디 레드메인`
+              ? `송경원`
               : answerIndex === 4
-              ? `레오나르도 디카프리오`
+              ? `정성일`
               : ``}
           </div>
         ))}

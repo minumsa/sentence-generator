@@ -53,8 +53,8 @@ export default function Test6({ score, setScore }: TestProps) {
       <div
         className="cine-test-format"
         style={{
-          marginTop: window.innerWidth > 450 ? "10px" : "0",
-          marginBottom: window.innerWidth > 450 ? "15px" : "0",
+          marginTop: window.innerWidth > 450 ? "15px" : "0",
+          marginBottom: window.innerWidth > 450 ? "20px" : "0",
         }}
       >
         <div className="cine-quiz">
@@ -67,8 +67,8 @@ export default function Test6({ score, setScore }: TestProps) {
             width={window.innerWidth > 450 ? "280" : "180"}
             height={window.innerWidth > 450 ? "180" : "120"}
             style={{
-              marginBottom: "15px",
-              marginTop: window.innerWidth > 450 ? "10px" : "5px",
+              marginBottom: window.innerWidth > 450 ? "20px" : "15px",
+              marginTop: window.innerWidth > 450 ? "15px" : "5px",
               border: "1.5px solid black",
             }}
           />

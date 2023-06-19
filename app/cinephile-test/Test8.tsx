@@ -52,7 +52,8 @@ export default function Test8({ score, setScore }: TestProps) {
       <div
         className="cine-test-format"
         style={{
-          marginBottom: window.innerWidth > 450 ? "15px" : "0",
+          marginTop: window.innerWidth > 450 ? "15px" : "0",
+          marginBottom: window.innerWidth > 450 ? "20px" : "0",
         }}
       >
         <div className="cine-quiz">

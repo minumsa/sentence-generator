@@ -51,7 +51,7 @@ export default function Test10({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`10. 다음 중 영화에서 작품의 스토리, 설정, 감독의 의도 등을 관객에게 효과적으로 전달하기 위한 목적으로 등장인물, 소품, 조명, 카메라 기법 등을 계획하고 구성하는 총체적 행위, 또 시각 연출 전반에 따른 미학을 가리키는 용어는?`}</span>
+          <span>{`10. 다음 중 영화에서 작품의 스토리, 설정, 감독의 의도 등을 관객에게 효과적으로 전달하기 위한 목적으로 등장인물, 소품, 조명, 촬영 기법 등을 계획하고 구성하는 총체적 행위, 또 시각 연출 전반에 따른 미학을 가리키는 용어는?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div

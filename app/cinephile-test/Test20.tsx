@@ -43,7 +43,7 @@ export default function Test20({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
     }
   }
 
@@ -51,7 +51,7 @@ export default function Test20({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`20. 다음 중 <안녕, 용문객잔>(2003, 차이밍량)의 주요 공간적 배경으로 가장 적절한 것은?`}</span>
+          <span>{`20. 다음 중 <전장의 크리스마스>(1983), <마지막 황제>(1987), <토니 타키타니>(2004), <레버넌트>(2015)의 음악을 담당한 작곡가의 이름은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +62,13 @@ export default function Test20({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `소림사`
+              ? `한스 짐머`
               : answerIndex === 2
-              ? `호텔`
+              ? `존 윌리엄스`
               : answerIndex === 3
-              ? `극장`
+              ? `히사이시 조`
               : answerIndex === 4
-              ? `재즈 클럽`
+              ? `사카모토 류이치`
               : ``}
           </div>
         ))}

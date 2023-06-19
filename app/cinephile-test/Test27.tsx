@@ -12,7 +12,7 @@ interface AnswerStyle {
   backgroundColor: string;
 }
 
-export default function Test14({ score, setScore }: TestProps) {
+export default function Test27({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([
     {},
     {},
@@ -43,15 +43,15 @@ export default function Test14({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 4 ? score + 4 : copiedScore));
     }
   }
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
-          <span>{`14. 다음 중 아카데미에서 연기상을 수상하지 못한 배우는?`}</span>
+      <div className="cine-test-format" style={{ marginBottom: "20px" }}>
+        <div className="cine-quiz" style={{ marginTop: "10px" }}>
+          <span>{`27. 오즈의 마법사(1939, 빅터 플레밍)에서 주인공 도로시는 어떤 행위를 통해 결국 무사히 고향으로 돌아갈 수 있게 된다. 다음 중 그 행위로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +62,13 @@ export default function Test14({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `윤여정`
+              ? `문고리를 반대 방향으로 돌린다.`
               : answerIndex === 2
-              ? `글렌 클로즈`
+              ? `무지개 지팡이를 휘두른다.`
               : answerIndex === 3
-              ? `에디 레드메인`
+              ? `파란 요정에게 기도를 한다.`
               : answerIndex === 4
-              ? `레오나르도 디카프리오`
+              ? `구두 뒤꿈치를 맞부딪친다.`
               : ``}
           </div>
         ))}
