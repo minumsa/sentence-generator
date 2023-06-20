@@ -44,7 +44,7 @@ export default function Test16({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 0 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -63,13 +63,13 @@ export default function Test16({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `재즈 싱어(1927, 앨런 크로슬랜드)`
+              ? `전함 포템킨(1925, 세르게이 에이젠슈타인)`
               : answerIndex === 2
-              ? `시민 케인(1941, 오슨 웰스)`
+              ? `재즈 싱어(1927, 앨런 크로슬랜드)`
               : answerIndex === 3
               ? `모던 타임즈(1936, 찰리 채플린)`
               : answerIndex === 4
-              ? `바람과 함께 사라지다(1939, 빅터 플레밍)`
+              ? `시민 케인(1941, 오슨 웰스)`
               : ``}
           </div>
         ))}

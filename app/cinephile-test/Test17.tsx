@@ -62,6 +62,22 @@ export default function Test17({ score, setScore }: TestProps) {
   }, [lastDay, lastDaysBoxOfficeList]);
 
   useEffect(() => {
+    if (lastDay && !lastDaysBoxOfficeList) {
+      const url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${lastDay}`;
+
+      axios
+        .get(url)
+        .then(res => {
+          const data = res.data;
+          setLastDaysBoxOfficeList(data.boxOfficeResult.dailyBoxOfficeList);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, [lastDay, lastDaysBoxOfficeList]);
+
+  useEffect(() => {
     if (lastDaysBoxOfficeList && lastDaysBoxOfficeList.length > 0) {
       setMovie1(lastDaysBoxOfficeList[0].movieNm);
       setMovie2(lastDaysBoxOfficeList[1].movieNm);

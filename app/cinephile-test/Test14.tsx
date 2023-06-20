@@ -66,9 +66,9 @@ export default function Test14({ score, setScore }: TestProps) {
               : answerIndex === 2
               ? `글렌 클로즈`
               : answerIndex === 3
-              ? `에디 레드메인`
+              ? `앨리슨 재니`
               : answerIndex === 4
-              ? `레오나르도 디카프리오`
+              ? `제이미 리 커티스`
               : ``}
           </div>
         ))}
