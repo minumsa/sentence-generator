@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 interface TestProps {
@@ -14,17 +13,14 @@ export default function Test4({ score, setScore }: TestProps) {
 
   useEffect(() => {
     setCopiedScore(score);
-  }, []);
-
-  useEffect(() => {
-    setScore(copiedScore);
-  }, [copiedScore]);
+    setScore(score);
+  }, [score]);
 
   useEffect(() => {
     if (mark === "여성") {
-      setScore((score: number) => copiedScore + 4);
+      setScore((prevScore: number) => prevScore + 4);
     }
-  }, [mark]);
+  }, [mark, setScore]);
 
   return (
     <>
@@ -34,29 +30,14 @@ export default function Test4({ score, setScore }: TestProps) {
           원스｣(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
           소감을 완성하시오.
         </div>
-        {/* <div style={{ display: "flex", justifyContent: "center" }}>
-          <Image
-            src="/cine-img-5.jpg"
-            alt="cine-img-5"
-            width={window.innerWidth > 450 ? "350" : "210"}
-            height={window.innerWidth > 450 ? "200" : "120"}
-            style={{
-              marginTop: "10px",
-              border: "1.5px solid black",
-            }}
-          />
-        </div> */}
         <div
           style={{
-            // width: "513px",
             marginTop: "20px",
-            // marginBottom: window.innerWidth > 450 ? "20px" : "0",
-            border: "1.5px solid #0e1111",
+            border: "1px solid #0e1111",
             padding: "15px",
           }}
         >
           {`"`}
-          {/* <div style={mark1} onClick={clickAnswer1}></div> */}
           <input
             className="cine-test-input"
             onChange={e => setMark(e.target.value)}

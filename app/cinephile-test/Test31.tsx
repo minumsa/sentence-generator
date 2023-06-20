@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 
-export default function Test31() {
+interface NameProps {
+  value: string;
+}
+
+export default function Test31({ value }: NameProps) {
   return (
     <>
-      <div>something</div>
+      <div className="cine-end-div">{value} 님의 시네필 별점은...</div>
     </>
   );
 }

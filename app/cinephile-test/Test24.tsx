@@ -44,7 +44,7 @@ export default function Test24({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 4 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
     }
   }
 
@@ -69,7 +69,7 @@ export default function Test24({ score, setScore }: TestProps) {
             style={{
               marginBottom: window.innerWidth > 450 ? "25px" : "15px",
               marginTop: window.innerWidth > 450 ? "15px" : "5px",
-              border: "1.5px solid black",
+              border: "1px solid black",
             }}
           />
         </div>

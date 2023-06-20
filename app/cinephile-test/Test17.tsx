@@ -100,7 +100,7 @@ export default function Test17({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
     }
   }
 

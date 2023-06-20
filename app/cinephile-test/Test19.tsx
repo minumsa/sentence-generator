@@ -44,7 +44,7 @@ export default function Test19({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
     }
   }
 
@@ -74,7 +74,7 @@ export default function Test19({ score, setScore }: TestProps) {
             style={{
               marginBottom: "15px",
               marginTop: "5px",
-              border: "1.5px solid black",
+              border: "1px solid black",
             }}
           />
         </div>

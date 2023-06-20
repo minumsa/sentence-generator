@@ -43,7 +43,7 @@ export default function Test27({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 4 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
     }
   }
 
@@ -69,9 +69,9 @@ export default function Test27({ score, setScore }: TestProps) {
               : answerIndex === 2
               ? `무지개 지팡이를 휘두른다.`
               : answerIndex === 3
-              ? `파란 요정에게 기도를 한다.`
-              : answerIndex === 4
               ? `구두 뒤꿈치를 맞부딪친다.`
+              : answerIndex === 4
+              ? `파란 요정에게 기도를 한다.`
               : ``}
           </div>
         ))}

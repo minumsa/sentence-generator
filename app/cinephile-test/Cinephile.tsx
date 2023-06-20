@@ -44,6 +44,7 @@ export default function Cinephile() {
   const [buttonContent, setButtonContent] = useState<any>();
   const [contentStyle, setContentStyle] = useState<any>();
   const [navStyle, setNavStyle] = useState<any>();
+  const [value, setValue] = useState<string>("당신");
 
   function handleTest() {
     switch (testNumber) {
@@ -110,7 +111,7 @@ export default function Cinephile() {
       case 30:
         return <Test30 score={score} setScore={setScore} />;
       case 31:
-        return <Test31 />;
+        return <Test31 value={value} />;
       default:
         return null;
     }
@@ -141,18 +142,29 @@ export default function Cinephile() {
         </div>
       );
     }
-  }, [testNumber]);
+  }, [testNumber, value]);
 
   useEffect(() => {
     if (testNumber === 0) {
       setButtonContent(
         <div
-          className="cine-next-button-flex"
-          onClick={() => {
-            if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
-          }}
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
-          <div className="cine-next-button">테스트 시작하기</div>
+          <input
+            autoFocus
+            type="string"
+            placeholder="닉네임 입력"
+            className="cine-name-input"
+            onChange={e => setValue(e.target.value)}
+          />
+          <div
+            className="cine-next-button-flex"
+            onClick={() => {
+              if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
+            }}
+          >
+            <div className="cine-next-button">테스트 시작</div>
+          </div>
         </div>
       );
     } else if (testNumber < 30) {
@@ -177,12 +189,18 @@ export default function Cinephile() {
           <div className="cine-next-button">결과 보기</div>
         </div>
       );
+    } else if (testNumber === 31) {
+      setButtonContent(
+        <div className="cine-next-button-flex">
+          <div className="cine-next-button">카카오톡 공유하기</div>
+        </div>
+      );
     }
-  }, [testNumber]);
+  }, [testNumber, value]);
 
   useEffect(() => {
     if (testNumber === 0) {
-      setContentStyle({});
+      setContentStyle({ marginBottom: "20px" });
     } else if (testNumber > 0) {
       setContentStyle({ marginBottom: "20px" });
     } else if (testNumber === 31) {
@@ -198,7 +216,7 @@ export default function Cinephile() {
     }
   }, [testNumber]);
 
-  console.log(testNumber);
+  console.log(score);
 
   return (
     <div className="cine-container">

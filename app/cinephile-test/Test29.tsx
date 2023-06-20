@@ -43,7 +43,7 @@ export default function Test29({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -67,13 +67,13 @@ export default function Test29({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `벅스 라이프(1998, 존 라세터)`
-              : answerIndex === 2
-              ? `라따뚜이(2007, 브래드 버드)`
-              : answerIndex === 3
-              ? `보스 베이비(2017, 톰 맥그라스)`
-              : answerIndex === 4
               ? `엘리멘탈(2023, 피터 손)`
+              : answerIndex === 2
+              ? `보스 베이비(2017, 톰 맥그라스)`
+              : answerIndex === 3
+              ? `라따뚜이(2007, 브래드 버드)`
+              : answerIndex === 4
+              ? `벅스 라이프(1998, 존 라세터)`
               : ``}
           </div>
         ))}

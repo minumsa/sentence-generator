@@ -44,7 +44,7 @@ export default function Test30({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 4 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -75,7 +75,7 @@ export default function Test30({ score, setScore }: TestProps) {
               : answerIndex === 2
               ? `서울특별시 마포구`
               : answerIndex === 3
-              ? `전주시 완산구`
+              ? `서울특별시 종로구`
               : answerIndex === 4
               ? `부산광역시 해운대구`
               : ``}

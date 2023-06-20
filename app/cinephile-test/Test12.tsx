@@ -20,7 +20,7 @@ export default function Test12({ score, setScore }: TestProps) {
   }, [copiedScore]);
 
   useEffect(() => {
-    if (mark === "열차") {
+    if (mark === "열차" || mark === "기차") {
       setScore((score: number) => copiedScore + 4);
     }
   }, [mark]);
@@ -32,7 +32,7 @@ export default function Test12({ score, setScore }: TestProps) {
           <div>{`12. 다음 빈칸을 적절하게 채워 정답을 완성하시오.`}</div>
           <div
             style={{
-              border: "1.5px solid black",
+              border: "1px solid black",
               padding: "15px 25px",
               marginTop: "10px",
             }}

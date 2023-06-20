@@ -43,7 +43,7 @@ export default function Test14({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
