@@ -3,6 +3,22 @@
 @import "@kfonts/neodgm-code";
 
 @font-face {
+  font-family: "ChosunGu";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cafe24Oneprettynight";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "DOSPilgiMedium";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSPilgiMedium.woff2")
     format("woff2");
@@ -611,13 +627,13 @@ body {
 .cine-progress-bar {
   display: flex;
   width: 100%;
-  height: 40px;
+  height: 35px;
   margin-top: 20px;
   border: 1.5px solid #0e1111;
 }
 
 .cine-progress-content {
-  height: 40px;
+  height: 35px;
 }
 
 .test0-ol {

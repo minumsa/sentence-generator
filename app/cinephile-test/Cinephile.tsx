@@ -32,13 +32,18 @@ import Test28 from "./Test28";
 import Test29 from "./Test29";
 import Test30 from "./Test30";
 import Test0 from "./Test0";
+import Test31 from "./Test31";
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
   const minTestNumber = 0;
-  const maxTestNumber = 30;
-  const progressPercent = Math.floor((testNumber / maxTestNumber) * 100);
+  const maxTestNumber = 31;
+  const progressPercent = Math.floor((testNumber / (maxTestNumber - 1)) * 100);
+  const [progressContent, setProgressContent] = useState<any>();
+  const [buttonContent, setButtonContent] = useState<any>();
+  const [contentStyle, setContentStyle] = useState<any>();
+  const [navStyle, setNavStyle] = useState<any>();
 
   function handleTest() {
     switch (testNumber) {
@@ -104,84 +109,113 @@ export default function Cinephile() {
         return <Test29 score={score} setScore={setScore} />;
       case 30:
         return <Test30 score={score} setScore={setScore} />;
+      case 31:
+        return <Test31 />;
       default:
         return null;
     }
   }
+
+  useEffect(() => {
+    if (testNumber === 0 || testNumber === 31) {
+      setProgressContent("");
+    } else if (testNumber !== 31) {
+      setProgressContent(
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div className="cine-progress-bar">
+            <div
+              className="cine-progress-content"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: `${(testNumber / (maxTestNumber - 1)) * 100}%`,
+                backgroundColor: "#0e1111",
+              }}
+            >
+              <div className="cine-progress-font" style={{ color: "white" }}>
+                {progressPercent > 5 ? `${progressPercent}%` : ``}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }, [testNumber]);
+
+  useEffect(() => {
+    if (testNumber === 0) {
+      setButtonContent(
+        <div
+          className="cine-next-button-flex"
+          onClick={() => {
+            if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
+          }}
+        >
+          <div className="cine-next-button">테스트 시작하기</div>
+        </div>
+      );
+    } else if (testNumber < 30) {
+      setButtonContent(
+        <div
+          className="cine-next-button-flex"
+          onClick={() => {
+            if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
+          }}
+        >
+          <div className="cine-next-button">다음 문제</div>
+        </div>
+      );
+    } else if (testNumber === 30) {
+      setButtonContent(
+        <div
+          className="cine-next-button-flex"
+          onClick={() => {
+            if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
+          }}
+        >
+          <div className="cine-next-button">결과 보기</div>
+        </div>
+      );
+    }
+  }, [testNumber]);
+
+  useEffect(() => {
+    if (testNumber === 0) {
+      setContentStyle({});
+    } else if (testNumber > 0) {
+      setContentStyle({ marginBottom: "20px" });
+    } else if (testNumber === 31) {
+      setContentStyle({});
+    }
+  }, [testNumber]);
+
+  useEffect(() => {
+    if (testNumber === 0) {
+      setNavStyle({ height: "30px" });
+    } else if (testNumber > 0) {
+      setNavStyle({ height: "90px" });
+    }
+  }, [testNumber]);
+
+  console.log(testNumber);
 
   return (
     <div className="cine-container">
       <div className="cine-flex-container">
         <div
           className="cine-nav-container"
-          style={testNumber > 0 ? { height: "90px" } : { height: "20px" }}
+          style={testNumber < 31 ? navStyle : { height: "30px" }}
         >
           <div className="cine-test-title">
             <div>{"시네필 테스트"}</div>
           </div>
-          {testNumber === 0 ? (
-            ""
-          ) : (
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <div className="cine-progress-bar">
-                <div
-                  className="cine-progress-content"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: `${(testNumber / maxTestNumber) * 100}%`,
-                    backgroundColor: "#0e1111",
-                  }}
-                >
-                  <div
-                    className="cine-progress-font"
-                    style={{ color: "white" }}
-                  >
-                    {progressPercent > 5 ? `${progressPercent}%` : ``}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          {progressContent}
         </div>
-        <div
-          className="cine-content-container"
-          style={
-            testNumber > 0 ? {} : { height: "460px", marginBottom: "20px" }
-          }
-        >
+        <div className="cine-content-container" style={contentStyle}>
           {handleTest()}
         </div>
-        <div className="cine-footer-container">
-          {/* <div
-            className="cine-prev-button-flex"
-            onClick={() => {
-              if (testNumber > minTestNumber) setTestNumber(x => x - 1);
-            }}
-          >
-            <div className="cine-prev-button">이전 문제</div>
-          </div> */}
-          {testNumber === 0 ? (
-            <div
-              className="cine-next-button-flex"
-              onClick={() => {
-                if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
-              }}
-            >
-              <div className="cine-next-button">테스트 시작하기</div>
-            </div>
-          ) : (
-            <div
-              className="cine-next-button-flex"
-              onClick={() => {
-                if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
-              }}
-            >
-              <div className="cine-next-button">다음 문제</div>
-            </div>
-          )}
-        </div>
+        <div className="cine-footer-container">{buttonContent}</div>
       </div>
     </div>
   );
