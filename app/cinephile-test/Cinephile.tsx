@@ -191,9 +191,21 @@ export default function Cinephile() {
       );
     } else if (testNumber === 31) {
       setButtonContent(
-        <div className="cine-next-button-flex">
-          <div className="cine-next-button">카카오톡 공유하기</div>
-        </div>
+        <>
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "100%" }}
+          >
+            <div className="cine-twitter-button-flex">
+              <div className="cine-next-button">트위터 공유하기</div>
+            </div>
+            <div
+              className="cine-kakao-button-flex"
+              style={{ marginTop: "10px" }}
+            >
+              <div className="cine-next-button">카카오톡 공유하기</div>
+            </div>
+          </div>
+        </>
       );
     }
   }, [testNumber, value]);

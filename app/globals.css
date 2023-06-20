@@ -575,23 +575,48 @@ body {
   /* background-color: orange; */
 }
 
-.cine-prev-button-flex {
+.cine-next-button-flex:hover {
+  background-color: #0e1111;
+  color: white;
+}
+
+.cine-twitter-button-flex {
   display: flex;
-  width: 90px;
-  height: 40px;
-  border: 1.5px solid #0e1111;
-  border-radius: 30px;
+  flex-grow: 1;
+  height: 50px;
+  width: 100%;
+  border: 1px solid #0e1111;
+  /* border-radius: 30px; */
   /* background-color: #00ff00; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  /* margin-left: 10px; */
+  font-size: 25px;
+  /* margin-right: 10px; */
 }
 
-.cine-prev-button-flex:hover,
-.cine-next-button-flex:hover {
-  background-color: #0e1111;
+.cine-twitter-button-flex:hover {
+  background-color: #00acee;
   color: white;
+}
+
+.cine-kakao-button-flex {
+  display: flex;
+  flex-grow: 1;
+  height: 50px;
+  width: 100%;
+  border: 1px solid #0e1111;
+  /* border-radius: 30px; */
+  /* background-color: #00ff00; */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 25px;
+  /* margin-right: 10px; */
+}
+
+.cine-kakao-button-flex:hover {
+  background-color: #fef01b;
 }
 
 .cine-next-button-flex {
