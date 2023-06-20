@@ -12,7 +12,7 @@ export default function Test31({ value, score }: NameProps) {
   const maxScore = 120; // 최대 점수 설정
 
   const calculatePercentage = (score: number) => {
-    return (score / maxScore) * 100; // 백분율 계산
+    return Math.floor((score / maxScore) * 100); // 백분율 계산
   };
 
   const percentage = calculatePercentage(score); // 현재 점수의 백분율 계산
@@ -27,7 +27,8 @@ export default function Test31({ value, score }: NameProps) {
         position: "relative",
       }}
     >
-      <div className="cine-end-div">{value} 님의 시네필 별점은...</div>
+      <div className="cine-end-div">{value} 님의 시네필 별점은</div>
+      <div className="cine-score">{percentage}점</div>
       <div
         className="star-box"
         style={{

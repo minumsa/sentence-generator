@@ -33,6 +33,7 @@ import Test29 from "./Test29";
 import Test30 from "./Test30";
 import Test0 from "./Test0";
 import Test31 from "./Test31";
+import Image from "next/image";
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(0);
@@ -200,7 +201,16 @@ export default function Cinephile() {
               marginTop: "30px",
             }}
           >
-            <div className="cine-twitter-button-flex">
+            <div
+              className="cine-answer-button-flex"
+              style={{ marginTop: "10px" }}
+            >
+              <div className="cine-next-button">해설 보기</div>
+            </div>
+            <div
+              className="cine-twitter-button-flex"
+              style={{ marginTop: "10px" }}
+            >
               <div className="cine-next-button">트위터 공유하기</div>
             </div>
             <div
@@ -208,6 +218,28 @@ export default function Cinephile() {
               style={{ marginTop: "10px" }}
             >
               <div className="cine-next-button">카카오톡 공유하기</div>
+            </div>
+            <div
+              className="cine-challenge-button-flex"
+              style={{
+                marginTop: "10px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                src="https://quiz.watcha.io/retry.svg"
+                alt="retry"
+                width={25}
+                height={25}
+              />
+              <div
+                className="cine-next-button"
+                style={{ marginLeft: "5px" }}
+                onClick={() => setTestNumber(0)}
+              >
+                다시 도전
+              </div>
             </div>
           </div>
         </>
@@ -232,8 +264,6 @@ export default function Cinephile() {
       setNavStyle({ height: "90px" });
     }
   }, [testNumber]);
-
-  console.log(score);
 
   return (
     <div className="cine-container">

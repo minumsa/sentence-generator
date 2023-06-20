@@ -600,6 +600,26 @@ body {
   color: white;
 }
 
+.cine-answer-button-flex {
+  display: flex;
+  flex-grow: 1;
+  height: 50px;
+  width: 100%;
+  border: 1px solid #0e1111;
+  /* border-radius: 30px; */
+  /* background-color: #00ff00; */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 25px;
+  /* margin-right: 10px; */
+}
+
+.cine-answer-button-flex:hover {
+  background-color: #0e1111;
+  color: white;
+}
+
 .cine-kakao-button-flex {
   display: flex;
   flex-grow: 1;
@@ -617,6 +637,20 @@ body {
 
 .cine-kakao-button-flex:hover {
   background-color: #fef01b;
+}
+
+.cine-challenge-button-flex {
+  display: flex;
+  flex-grow: 1;
+  height: 50px;
+  width: 100%;
+  /* border-radius: 30px; */
+  /* background-color: #00ff00; */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 25px;
+  /* margin-right: 10px; */
 }
 
 .cine-next-button-flex {
@@ -751,9 +785,17 @@ body {
     font-size: 20px;
   }
 
-  .cine-footer-container {
-    height: 120px;
+  .cine-answer-button-flex {
+    font-size: 20px;
   }
+
+  .cine-challenge-button-flex {
+    font-size: 20px;
+  }
+
+  /* .cine-footer-container {
+    height: 120px;
+  } */
 
   .cine-progress-font {
     font-size: 20px;
@@ -839,6 +881,12 @@ body {
 
 .cine-end-div {
   font-size: 25px;
+  font-weight: 900;
   margin-top: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+}
+
+.cine-score {
+  font-size: 50px;
+  margin-bottom: 30px;
 }
