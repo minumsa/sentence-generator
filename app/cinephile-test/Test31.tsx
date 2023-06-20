@@ -27,7 +27,7 @@ export default function Test31({ value, score }: NameProps) {
         position: "relative",
       }}
     >
-      <div className="cine-end-div">{value} 님의 시네필 별점은</div>
+      <div className="cine-end-div">{value} 님의 결과는</div>
       <div className="cine-score">{percentage}점</div>
       <div
         className="star-box"

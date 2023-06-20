@@ -63,21 +63,23 @@ export default function Test2({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>2. 다음 중 소설 원작이 </span>
+          <span>{`2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
-          <span> 영화는?</span>
+          <span> 것은?</span>
         </div>
         <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
-          <span>(1) 케빈에 대하여(2011, 린 램지)</span>
+          <span>(1) “제 삶도 언젠가 빛이 날까요?”</span>
         </div>
         <div className="cine-answer" style={mark2} onClick={clickAnswer2}>
-          <span>(2) 콜 미 바이 유어 네임(2017, 루카 구아다니노)</span>
+          <span>(2) “언니, 그건 지난 학기잖아요.”</span>
         </div>
         <div className="cine-answer" style={mark3} onClick={clickAnswer3}>
-          (3) 지구 최후의 밤(2018, 비간)
+          (3) “더 나아지기 위해 우리는 기꺼이 더 나빠졌다. 그게 우리의
+          최선이었다.”
         </div>
         <div className="cine-answer" style={mark4} onClick={clickAnswer4}>
-          (4) 서부 전선 이상 없다(2022, 에드워드 버거)
+          (4) “우리는 늘 누군가를 만나 무언가를 나눈다는 것, 세상은 참 신기하고
+          아름답다.”
         </div>
       </div>
     </>

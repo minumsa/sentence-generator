@@ -40,7 +40,7 @@ export default function Test3({ score, setScore }: TestProps) {
     setMark2(answerStyle);
     setMark3({});
     setMark4({});
-    setScore((score: number) => copiedScore + 4);
+    setScore(copiedScore);
   }
 
   function clickAnswer3() {
@@ -56,24 +56,30 @@ export default function Test3({ score, setScore }: TestProps) {
     setMark2({});
     setMark3({});
     setMark4(answerStyle);
-    setScore(copiedScore);
+    setScore((score: number) => copiedScore + 4);
   }
 
   return (
     <>
       <div className="cine-test-format">
-        <div className="cine-quiz">3. 다음 중 러닝타임이 가장 긴 영화는?</div>
+        <div className="cine-quiz">
+          <span>
+            3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가{" "}
+          </span>
+          <span style={{ textDecoration: "underline" }}>아닌</span>
+          <span> 것은?</span>
+        </div>
         <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
-          (1) 잠(1964, 앤디 워홀)
+          (1) 드라이브 마이 카(2021, 하마구치 류스케)
         </div>
         <div className="cine-answer" style={mark2} onClick={clickAnswer2}>
-          (2) 사탄 탱고(1994, 터르 벨러)
+          (2) 버닝(2018, 이창동)
         </div>
         <div className="cine-answer" style={mark3} onClick={clickAnswer3}>
-          (3) 반지의 제왕: 왕의 귀환(2003, 피터 잭슨)
+          (3) 토니 타키타니(2004, 이치카와 준)
         </div>
         <div className="cine-answer" style={mark4} onClick={clickAnswer4}>
-          (4) 해피 아워(2015, 하마구치 류스케)
+          (4) 환상의 빛(1995, 고레에다 히로카즈)
         </div>
       </div>
     </>

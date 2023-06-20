@@ -43,7 +43,7 @@ export default function Test15({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
     }
   }
 
@@ -51,7 +51,7 @@ export default function Test15({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`15. 다음 중 매년 부산국제영화제(BIFF)가 개최되는 계절은?`}</span>
+          <span>{`15. 다음 중 <타미 페이의 눈>(2021, 마이클 쇼월터)에 등장하는 타미 페이 바커의 직업으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +62,13 @@ export default function Test15({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `봄`
+              ? `기자`
               : answerIndex === 2
-              ? `여름`
+              ? `미용사`
               : answerIndex === 3
-              ? `가을`
+              ? `안경사`
               : answerIndex === 4
-              ? `겨울`
+              ? `전도사`
               : ``}
           </div>
         ))}

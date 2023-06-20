@@ -51,8 +51,12 @@ export default function Test10({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`10. 다음 중 영화에서 작품의 스토리, 설정, 감독의 의도 등을 관객에게 효과적으로 전달하기 위한 목적으로 등장인물, 소품, 조명, 촬영 기법 등을 계획하고 구성하는 총체적 행위, 또 시각 연출 전반에 따른 미학을 가리키는 용어는?`}</span>
+          <span>{`10. 다음 중 아래 제시된 이모지들과 가장 어울리는 왕가위의 영화는?`}</span>
         </div>
+        <div className="cine-test10-emoji" style={{ margin: "40px 0" }}>
+          📞 🍍 🕒 😎
+        </div>
+        <div className="cine-test10-emoji">👮‍♂️ 💌 🔑 🛫</div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
@@ -62,13 +66,13 @@ export default function Test10({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `오마주`
+              ? `아비정전(1990)`
               : answerIndex === 2
-              ? `미장센`
+              ? `중경삼림(1994)`
               : answerIndex === 3
-              ? `클리셰`
+              ? `해피 투게더(1997)`
               : answerIndex === 4
-              ? `메타포`
+              ? `화양연화(2000)`
               : ``}
           </div>
         ))}

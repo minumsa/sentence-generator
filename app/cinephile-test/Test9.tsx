@@ -43,7 +43,7 @@ export default function Test9({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
     }
   }
 
@@ -64,13 +64,13 @@ export default function Test9({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `타오르는 여인의 초상(2019, 셀린 시아마)`
-              : answerIndex === 2
               ? `호수의 이방인(2013, 알랭 기로디)`
-              : answerIndex === 3
-              ? `클로즈(2022, 루카스 돈트)`
-              : answerIndex === 4
+              : answerIndex === 2
               ? `보이후드(2014, 리처드 링클레이터)`
+              : answerIndex === 3
+              ? `타오르는 여인의 초상(2019, 셀린 시아마)`
+              : answerIndex === 4
+              ? `클로즈(2022, 루카스 돈트)`
               : ``}
           </div>
         ))}

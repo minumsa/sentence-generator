@@ -43,7 +43,7 @@ export default function Test5({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
     }
   }
 
@@ -51,9 +51,9 @@ export default function Test5({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`5. 다음 중 세계 3대 국제 영화제에 포함되지 `}</span>
-          <span style={{ textDecoration: "underline" }}>{`않는`}</span>
-          <span>{` 것은?`}</span>
+          <span>{`5. 다음 중 칸 영화제에서 황금종려상을 수상하지 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`않은`}</span>
+          <span>{` 영화는?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -64,13 +64,13 @@ export default function Test5({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `칸 영화제`
+              ? `가장 따뜻한 색, 블루(2013, 압델라티프 케시시)`
               : answerIndex === 2
-              ? `베를린 영화제`
+              ? `어느 가족(2018, 고레에다 히로카즈)`
               : answerIndex === 3
-              ? `베니스 영화제`
+              ? `노매드랜드(2020, 클로이 자오)`
               : answerIndex === 4
-              ? `토론토 영화제`
+              ? `슬픔의 삼각형(2022, 루벤 외스틀룬드)`
               : ``}
           </div>
         ))}
