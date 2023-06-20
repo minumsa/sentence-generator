@@ -70,7 +70,7 @@ export default function Test6({ score, setScore }: TestProps) {
             height={window.innerWidth > 450 ? "180" : "120"}
             style={{
               marginBottom: window.innerWidth > 450 ? "20px" : "15px",
-              marginTop: window.innerWidth > 450 ? "15px" : "5px",
+              marginTop: window.innerWidth > 450 ? "15px" : "15px",
               border: "1.5px solid black",
             }}
           />

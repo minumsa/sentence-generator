@@ -3,6 +3,14 @@
 @import "@kfonts/neodgm-code";
 
 @font-face {
+  font-family: "DOSPilgiMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSPilgiMedium.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "GangwonEdu_OTFBoldA";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff")
     format("woff");
@@ -23,6 +31,14 @@
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2")
     format("woff2");
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DOSMyungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSMyungjo.woff")
+    format("woff");
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -506,7 +522,7 @@ body {
 }
 
 .cine-flex-container {
-  margin-top: 10vh;
+  margin-top: 3vh;
   width: 550px;
   height: 75%;
   /* background-color: yellow; */
@@ -519,18 +535,18 @@ body {
   font-size: 28px;
   display: flex;
   justify-content: center;
-  /* font-family: PyeongChangPeace-Bold; */
+  font-family: "DOSMyungjo";
 }
 
 .cine-nav-container {
   display: flex;
   flex-direction: column;
   font-size: 25px;
-  /* background-color: green; */
+  /* background-color: gray; */
 }
 
 .cine-content-container {
-  /* height: 600px; */
+  flex-grow: 1;
   margin-top: 25px;
   margin-bottom: 40px;
   display: flex;
@@ -566,7 +582,7 @@ body {
 .cine-next-button-flex {
   display: flex;
   flex-grow: 1;
-  height: 35px;
+  height: 40px;
   border: 1.5px solid #0e1111;
   /* border-radius: 30px; */
   /* background-color: #00ff00; */
@@ -580,7 +596,7 @@ body {
 .cine-test-format {
   font-size: 25px;
   line-height: 200%;
-  padding: 0 5px;
+  /* padding: 0 5px; */
 }
 
 .cine-test-input {
@@ -595,24 +611,45 @@ body {
 .cine-progress-bar {
   display: flex;
   width: 100%;
-  height: 30px;
+  height: 40px;
   margin-top: 20px;
   border: 1.5px solid #0e1111;
 }
 
+.cine-progress-content {
+  height: 40px;
+}
+
 .test0-ol {
+  /* list-style: none; */
   font-size: "";
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
 .test0-span {
   font-size: 20px;
 }
 
+.cine-progress-font {
+  font-size: 24px;
+}
+
+.test0-div {
+  height: "450px";
+  margin-top: 10px;
+  /* font-family: "DOSMyungjo"; */
+}
+
 @media (max-width: 600px) {
+  .test0-div {
+    height: "450px";
+    margin-top: 10px;
+  }
+
   .test0-ol {
     font-size: 20px;
-    margin-left: 10px;
+    margin-left: 0px;
+    margin-top: 13px;
   }
 
   .test0-span-2 {
@@ -628,13 +665,19 @@ body {
   }
 
   .cine-content-container {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    flex-grow: 0;
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
 
   .cine-flex-container {
-    margin-top: 0%;
+    margin-top: 0;
     width: 90%;
+    height: 90%;
+    /* background-color: yellow; */
+    /* opacity: 10%; */
+    display: flex;
+    flex-direction: column;
   }
 
   .cine-test-format {
@@ -642,17 +685,16 @@ body {
     line-height: 200%;
   }
 
-  /* 
   .cine-progress-bar {
-    width: 90%;
-  } */
+    height: 30px;
+  }
+
+  .cine-progress-content {
+    height: 30px;
+  }
 
   .cine-test-input {
     font-size: 20px;
-  }
-
-  .cine-flex-container {
-    height: 85%;
   }
 
   .cine-next-button-flex {
@@ -661,6 +703,10 @@ body {
 
   .cine-footer-container {
     height: 85px;
+  }
+
+  .cine-progress-font {
+    font-size: 20px;
   }
 }
 

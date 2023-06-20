@@ -6,19 +6,21 @@ export default function Test0() {
   return (
     <>
       <div
+        className="test0-div"
         style={{
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          height: "90%",
+          // height: "500px",
           border: "1.5px solid black",
           fontSize: "25px",
           padding: "15px",
+          boxShadow: "5px 5px 5px #b3b3b3",
         }}
       >
         <div style={{ marginTop: "10px", textAlign: "center" }}>
           <span className="test0-span">※</span>
-          <span className="test0-span-2"> 테스트 전 유의사항 </span>
+          <span className="test0-span-2"> 테스트 유의사항 </span>
           <span className="test0-span">※</span>
         </div>
         <ol
@@ -31,7 +33,7 @@ export default function Test0() {
           <li>어떤 문제는 주관식입니다.</li>
           <li>이미지가 포함된 문제도 있습니다.</li>
           <li>
-            스포일러의 가능성은 최대한 배재했으나, 특정 문제에는 개봉된 지
+            스포일러의 가능성은 최대한 배제했으나, 특정 문제에는 개봉된 지
             20년이 넘은 영화에 대한 키워드가 등장합니다.
           </li>
           <li>이 테스트는 재미로만 즐겨주세요.</li>

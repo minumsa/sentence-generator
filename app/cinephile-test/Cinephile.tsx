@@ -114,7 +114,7 @@ export default function Cinephile() {
       <div className="cine-flex-container">
         <div
           className="cine-nav-container"
-          style={testNumber > 0 ? { height: "90px" } : { height: "50px" }}
+          style={testNumber > 0 ? { height: "90px" } : { height: "20px" }}
         >
           <div className="cine-test-title">
             <div>{"시네필 테스트"}</div>
@@ -125,17 +125,20 @@ export default function Cinephile() {
             <div style={{ display: "flex", justifyContent: "center" }}>
               <div className="cine-progress-bar">
                 <div
+                  className="cine-progress-content"
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    height: "30px",
                     width: `${(testNumber / maxTestNumber) * 100}%`,
                     backgroundColor: "#0e1111",
                   }}
                 >
-                  <div style={{ color: "white", fontSize: "22px" }}>
-                    {progressPercent > 9 ? `${progressPercent}%` : ``}
+                  <div
+                    className="cine-progress-font"
+                    style={{ color: "white" }}
+                  >
+                    {progressPercent > 5 ? `${progressPercent}%` : ``}
                   </div>
                 </div>
               </div>
@@ -144,7 +147,9 @@ export default function Cinephile() {
         </div>
         <div
           className="cine-content-container"
-          style={testNumber > 0 ? {} : { height: "515px" }}
+          style={
+            testNumber > 0 ? {} : { height: "460px", marginBottom: "20px" }
+          }
         >
           {handleTest()}
         </div>

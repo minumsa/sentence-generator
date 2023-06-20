@@ -59,8 +59,8 @@ export default function Test26({ score, setScore }: TestProps) {
         <div
           style={{
             border: "1.5px solid black",
-            // padding: "10px",
-            margin: "10px 0",
+            padding: "0 15px",
+            margin: "15px 0 20px 0",
           }}
         >
           <ul>

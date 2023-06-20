@@ -47,7 +47,7 @@ export default function Test25({ score, setScore }: TestProps) {
             marginTop: "10px",
             marginBottom: "20px",
             border: "1.5px solid #0e1111",
-            padding: "15px",
+            padding: "15px 25px",
           }}
         >
           {/* <div style={mark1} onClick={clickAnswer1}></div> */}

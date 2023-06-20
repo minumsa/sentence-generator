@@ -34,7 +34,7 @@ export default function Test4({ score, setScore }: TestProps) {
           원스｣(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
           소감을 완성하시오.
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        {/* <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
             src="/cine-img-5.jpg"
             alt="cine-img-5"
@@ -45,7 +45,7 @@ export default function Test4({ score, setScore }: TestProps) {
               border: "1.5px solid black",
             }}
           />
-        </div>
+        </div> */}
         <div
           style={{
             // width: "513px",
