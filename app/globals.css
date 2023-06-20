@@ -743,6 +743,14 @@ body {
     height: 40px;
   }
 
+  .cine-kakao-button-flex {
+    font-size: 20px;
+  }
+
+  .cine-twitter-button-flex {
+    font-size: 20px;
+  }
+
   .cine-footer-container {
     height: 120px;
   }
@@ -753,7 +761,7 @@ body {
 }
 
 .cine-quiz {
-  padding: 0 5px;
+  padding: 0 0px;
 }
 
 .cine-answer {
@@ -832,5 +840,5 @@ body {
 .cine-end-div {
   font-size: 25px;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }

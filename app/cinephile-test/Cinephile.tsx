@@ -111,7 +111,7 @@ export default function Cinephile() {
       case 30:
         return <Test30 score={score} setScore={setScore} />;
       case 31:
-        return <Test31 value={value} />;
+        return <Test31 value={value} score={score} />;
       default:
         return null;
     }
@@ -193,7 +193,12 @@ export default function Cinephile() {
       setButtonContent(
         <>
           <div
-            style={{ display: "flex", flexDirection: "column", width: "100%" }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              marginTop: "30px",
+            }}
           >
             <div className="cine-twitter-button-flex">
               <div className="cine-next-button">트위터 공유하기</div>
