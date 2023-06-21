@@ -899,6 +899,6 @@ body {
 
 .cine-answer-line {
   width: 100%;
-  border-top: 2px dashed black;
+  border-top: dashed black;
   margin: 35px 0;
 }
