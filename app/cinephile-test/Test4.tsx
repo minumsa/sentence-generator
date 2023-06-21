@@ -8,27 +8,28 @@ interface TestProps {
 }
 
 export default function Test4({ score, setScore }: TestProps) {
-  const [copiedScore, setCopiedScore] = useState<number>(0);
+  const [copiedScore, setCopiedScore] = useState<number>(score);
   const [mark, setMark] = useState<string>("");
 
   useEffect(() => {
     setCopiedScore(score);
-    setScore(score);
-  }, [score]);
+  }, []);
 
   useEffect(() => {
     if (mark === "여성") {
-      setScore((prevScore: number) => prevScore + 4);
+      setScore((score: number) => score + 4);
+    } else {
+      setScore(copiedScore);
     }
-  }, [mark, setScore]);
+  }, [mark]);
 
   return (
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          4. 배우 양자경은 제95회 아카데미 시상식에서 ｢에브리씽 에브리웨어 올 앳
-          원스｣(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
-          소감을 완성하시오.
+          {`4. 배우 양자경은 제95회 아카데미 시상식에서 <에브리씽 에브리웨어 올 앳
+          원스>(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
+          소감을 완성하시오.`}
         </div>
         <div
           style={{

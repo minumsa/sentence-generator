@@ -44,7 +44,7 @@ export default function Test19({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 3 ? score + 4 : copiedScore));
     }
   }
 
@@ -64,13 +64,13 @@ export default function Test19({ score, setScore }: TestProps) {
           style={{
             marginBottom: window.innerWidth > 450 ? "10px" : "0",
           }}
-        >{`19. <피아니스트>(2001), <엘르>(2016), <다가오는 것들>(2016)에 출연한 다음 사진 속 프랑스 배우의 이름은?`}</div>
+        >{`19. 다음 중 <라쇼몽>(1950, 구로사와 아키라)에서 미후네 토시로가 연기한 산적 캐릭터의 이름으로 가장 적절한 것은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/test19-img.jpeg"
+            src="/cine-img-19.jpeg"
             alt="test19-img"
             width={window.innerWidth > 450 ? "280" : "180"}
-            height={window.innerWidth > 450 ? "180" : "120"}
+            height={window.innerWidth > 450 ? "210" : "140"}
             style={{
               marginBottom: "15px",
               marginTop: "5px",
@@ -87,13 +87,13 @@ export default function Test19({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `줄리 델피`
+              ? `테츠야`
               : answerIndex === 2
-              ? `카트린 드뇌브`
+              ? `탄지로`
               : answerIndex === 3
-              ? `이자벨 위페르`
+              ? `타케노리`
               : answerIndex === 4
-              ? `마리옹 꼬띠아르`
+              ? `타조마루`
               : ``}
           </div>
         ))}

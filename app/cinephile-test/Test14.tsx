@@ -51,7 +51,9 @@ export default function Test14({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`14. 다음 중 아카데미에서 연기상을 수상하지 못한 배우는?`}</span>
+          <span>{`14. 다음 중 영화에 관련된 줄임말이 `}</span>
+          <span style={{ textDecoration: "underline" }}>아닌</span>
+          <span> 것은?</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +64,13 @@ export default function Test14({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `윤여정`
+              ? `코돌비`
               : answerIndex === 2
-              ? `글렌 클로즈`
+              ? `분조카`
               : answerIndex === 3
-              ? `앨리슨 재니`
+              ? `용아맥`
               : answerIndex === 4
-              ? `제이미 리 커티스`
+              ? `영스엑`
               : ``}
           </div>
         ))}

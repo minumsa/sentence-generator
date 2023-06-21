@@ -64,6 +64,12 @@ export default function Test31({ value, score }: NameProps) {
           }}
         />
       </div>
+      <div className="cine-footer-comment">
+        <div className="cine-footer-comment-child">
+          {value} 님은 시네필이 분명합니다!
+        </div>
+        <div>이제 영화를 만들 일만 남으셨네요.</div>
+      </div>
     </div>
   );
 }

@@ -51,9 +51,7 @@ export default function Test11({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`11. 다음 중 실화를 바탕으로 만든 영화가 `}</span>
-          <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
-          <span>{` 것은?`}</span>
+          <span>{`11. 다음 중 <언더 더 스킨>(2013, 조나단 글레이저)에서 에일리언 로라가 지구로 오게 된 이유로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -64,13 +62,13 @@ export default function Test11({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `타르(2022, 토드 필드)`
+              ? `식량으로 사용할 생물을 찾으려고`
               : answerIndex === 2
-              ? `한공주(2013, 이수진)`
+              ? `인간을 납치해 실험체로 쓰려고`
               : answerIndex === 3
-              ? `스포트라이트(2015, 톰 맥카시)`
+              ? `우연히 블랙홀 속으로 빨려들어서`
               : answerIndex === 4
-              ? `머니볼(2011, 베넷 밀러)`
+              ? `우주 탐사 도중 비행체의 결함으로 불시착해서`
               : ``}
           </div>
         ))}

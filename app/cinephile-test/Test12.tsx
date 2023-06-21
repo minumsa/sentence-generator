@@ -8,7 +8,7 @@ interface TestProps {
 }
 
 export default function Test12({ score, setScore }: TestProps) {
-  const [copiedScore, setCopiedScore] = useState<number>(0);
+  const [copiedScore, setCopiedScore] = useState<number>(score);
   const [mark, setMark] = useState<string>("");
 
   useEffect(() => {
@@ -16,14 +16,16 @@ export default function Test12({ score, setScore }: TestProps) {
   }, []);
 
   useEffect(() => {
-    setScore(copiedScore);
-  }, [copiedScore]);
-
-  useEffect(() => {
     if (mark === "열차" || mark === "기차") {
       setScore((score: number) => copiedScore + 4);
+    } else {
+      setScore(copiedScore);
     }
-  }, [mark]);
+  }, [mark, setScore]);
+
+  useEffect(() => {
+    setCopiedScore(score);
+  }, []);
 
   return (
     <>

@@ -3,6 +3,14 @@
 @import "@kfonts/neodgm-code";
 
 @font-face {
+  font-family: "HS-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "ChosunGu";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff")
     format("woff");
@@ -540,7 +548,7 @@ body {
 .cine-flex-container {
   margin-top: 3vh;
   width: 550px;
-  height: 75%;
+  height: 80%;
   /* background-color: yellow; */
   /* opacity: 10%; */
   display: flex;
@@ -548,10 +556,11 @@ body {
 }
 
 .cine-test-title {
-  font-size: 28px;
+  font-size: 30px;
   display: flex;
   justify-content: center;
-  font-family: "DOSMyungjo";
+  /* font-family: "DOSMyungjo"; */
+  font-family: "HS-Regular";
 }
 
 .cine-nav-container {
@@ -717,7 +726,7 @@ body {
 
 @media (max-width: 600px) {
   .test0-div {
-    height: "450px";
+    height: 450px;
     margin-top: 10px;
   }
 
@@ -793,12 +802,16 @@ body {
     font-size: 20px;
   }
 
-  /* .cine-footer-container {
-    height: 120px;
-  } */
-
   .cine-progress-font {
     font-size: 20px;
+  }
+
+  .cine-footer-comment {
+    font-size: 20px;
+  }
+
+  .cine-footer-comment-child {
+    margin-bottom: 10px;
   }
 }
 
@@ -895,4 +908,17 @@ body {
   font-size: 60px;
   text-align: center;
   margin-bottom: 40px;
+}
+
+.cine-footer-comment {
+  font-size: 25px;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 10px;
+}
+
+.cine-footer-comment-child {
+  margin-bottom: 20px;
+  font-size: 25px;
 }

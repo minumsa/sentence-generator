@@ -53,7 +53,7 @@ export default function Test5({ score, setScore }: TestProps) {
         <div className="cine-quiz">
           <span>{`5. 다음 중 칸 영화제에서 황금종려상을 수상하지 `}</span>
           <span style={{ textDecoration: "underline" }}>{`않은`}</span>
-          <span>{` 영화는?`}</span>
+          <span>{` 작품은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div

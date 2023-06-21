@@ -45,7 +45,7 @@ export default function Cinephile() {
   const [buttonContent, setButtonContent] = useState<any>();
   const [contentStyle, setContentStyle] = useState<any>();
   const [navStyle, setNavStyle] = useState<any>();
-  const [value, setValue] = useState<string>("당신");
+  const [value, setValue] = useState<string>("참가자");
 
   function handleTest() {
     switch (testNumber) {
@@ -198,7 +198,7 @@ export default function Cinephile() {
               display: "flex",
               flexDirection: "column",
               width: "100%",
-              marginTop: "30px",
+              // marginTop: "30px",
             }}
           >
             <div
@@ -226,6 +226,10 @@ export default function Cinephile() {
                 display: "flex",
                 alignItems: "center",
               }}
+              onClick={() => {
+                setTestNumber(0);
+                setScore(0);
+              }}
             >
               <Image
                 src="https://quiz.watcha.io/retry.svg"
@@ -233,11 +237,7 @@ export default function Cinephile() {
                 width={25}
                 height={25}
               />
-              <div
-                className="cine-next-button"
-                style={{ marginLeft: "5px" }}
-                onClick={() => setTestNumber(0)}
-              >
+              <div className="cine-next-button" style={{ marginLeft: "5px" }}>
                 다시 도전
               </div>
             </div>
@@ -265,6 +265,8 @@ export default function Cinephile() {
     }
   }, [testNumber]);
 
+  console.log(score);
+
   return (
     <div className="cine-container">
       <div className="cine-flex-container">
@@ -272,7 +274,12 @@ export default function Cinephile() {
           className="cine-nav-container"
           style={testNumber < 31 ? navStyle : { height: "30px" }}
         >
-          <div className="cine-test-title">
+          <div
+            className="cine-test-title"
+            onClick={() => {
+              setTestNumber(31);
+            }} // TODO: 테스트용 온 클릭, 나중에 빼기!!
+          >
             <div>{"시네필 테스트"}</div>
           </div>
           {progressContent}

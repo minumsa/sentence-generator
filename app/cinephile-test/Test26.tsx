@@ -43,7 +43,7 @@ export default function Test26({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 0 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
     }
   }
 
@@ -54,23 +54,9 @@ export default function Test26({ score, setScore }: TestProps) {
           className="cine-quiz"
           // style={{ marginTop: "10px" }}
         >
-          <span>{`26. 다음 설명에 잘 부합하는 영화의 제목은?`}</span>
-        </div>
-        <div
-          style={{
-            border: "1px solid black",
-            padding: "0 10px",
-            margin: "15px 0 20px 0",
-          }}
-        >
-          <ul>
-            <li>거스 밴 샌트가 연출했다.</li>
-            <li>숀 펜이 출연해 제81회 아카데미에서 남우주연상을 수상했다.</li>
-            <li>
-              미국의 성소수자 인권운동가이자 정치가인 실존 인물의 삶을 바탕으로
-              만든 전기 영화이다.
-            </li>
-          </ul>
+          <span>{`26. 다음 중 <엑스맨> 실사영화 시리즈의 캐릭터가 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
+          <span>{` 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -81,13 +67,13 @@ export default function Test26({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `밀크`
+              ? `로그`
               : answerIndex === 2
-              ? `엉클 분미`
+              ? `엔젤`
               : answerIndex === 3
-              ? `인 디 아일`
+              ? `와스프`
               : answerIndex === 4
-              ? `브로크백 마운틴`
+              ? `비스트`
               : ``}
           </div>
         ))}

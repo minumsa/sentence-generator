@@ -51,7 +51,7 @@ export default function Test20({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`20. 다음 중 <전장의 크리스마스>(1983), <마지막 황제>(1987), <토니 타키타니>(2004), <레버넌트>(2015)의 음악을 담당한 작곡가의 이름은?`}</span>
+          <span>{`20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -62,13 +62,13 @@ export default function Test20({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `한스 짐머`
+              ? `한 명 이상의 인간을 살해한다.`
               : answerIndex === 2
-              ? `존 윌리엄스`
+              ? `자신이 정한 한 가지 종류의 음식만 먹는다.`
               : answerIndex === 3
-              ? `히사이시 조`
+              ? `말을 하지 않는다.`
               : answerIndex === 4
-              ? `사카모토 류이치`
+              ? `연인을 찾는다.`
               : ``}
           </div>
         ))}
