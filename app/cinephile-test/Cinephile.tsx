@@ -315,8 +315,6 @@ export default function Cinephile() {
     }
   }, [testNumber]);
 
-  console.log(score);
-
   return (
     <div className="cine-container">
       <div className="cine-flex-container">
