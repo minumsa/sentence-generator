@@ -931,6 +931,6 @@ body {
 
 .cine-answer-line {
   width: 100%;
-  border-top: 2px dotted black;
-  margin: 30px 0;
+  border-top: 2px dashed black;
+  margin: 35px 0;
 }

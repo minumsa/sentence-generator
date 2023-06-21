@@ -70,7 +70,7 @@ export default function Test9({ score, setScore }: TestProps) {
               : answerIndex === 3
               ? `타오르는 여인의 초상(2019, 셀린 시아마)`
               : answerIndex === 4
-              ? `클로즈(2022, 루카스 돈트)`
+              ? `걸(2018, 루카스 돈트)`
               : ``}
           </div>
         ))}
