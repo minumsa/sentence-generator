@@ -46,6 +46,7 @@ export default function Cinephile() {
   const [contentStyle, setContentStyle] = useState<any>();
   const [navStyle, setNavStyle] = useState<any>();
   const [value, setValue] = useState<string>("참가자");
+  const [scoreComment, setScoreComment] = useState<string>("");
 
   function handleTest() {
     switch (testNumber) {
@@ -117,6 +118,45 @@ export default function Cinephile() {
         return null;
     }
   }
+
+  useEffect(() => {
+    let scoreComment = "";
+    switch (true) {
+      case score >= 0 && score <= 11:
+        scoreComment = `${value} 님, 혹시 푼 거 맞나요? 🙄`;
+        break;
+      case score >= 12 && score <= 23:
+        scoreComment = `그래도 노력은 인정합니다! 👏`;
+        break;
+      case score >= 24 && score <= 35:
+        scoreComment = `어느 정도 맞췄지만 아직은 분발이 필요합니다. 🫣`;
+        break;
+      case score >= 36 && score <= 47:
+        scoreComment = `시네필은 아니지만 영화를 상당히 좋아하시는군요? 😮`;
+        break;
+      case score >= 48 && score <= 59:
+        scoreComment = `시네필은 아니지만 상당히 훌륭합니다! ☺️`;
+        break;
+      case score >= 60 && score <= 71:
+        scoreComment = `${value} 님은 시네필 꿈나무입니다! ⭐️`;
+        break;
+      case score >= 72 && score <= 83:
+        scoreComment = `${value} 님은 애매한 시네필입니다. 🤔`;
+        break;
+      case score >= 84 && score <= 95:
+        scoreComment = `${value} 님은 시네필이 분명합니다! 🥳`;
+        break;
+      case score >= 96 && score <= 107:
+        scoreComment = `${value} 님은 거의 모르는 영화가 없으시군요? 🥸`;
+        break;
+      case score >= 108:
+        scoreComment = `${value} 님은 상위 1% 시네필입니다. 🤩`;
+        break;
+      default:
+        scoreComment = "";
+    }
+    setScoreComment(scoreComment);
+  }, [score]);
 
   useEffect(() => {
     if (testNumber === 0 || testNumber === 31) {
@@ -198,9 +238,10 @@ export default function Cinephile() {
               display: "flex",
               flexDirection: "column",
               width: "100%",
-              // marginTop: "30px",
+              marginTop: "30px",
             }}
           >
+            <div className="cine-score-comment">{scoreComment}</div>
             <div
               className="cine-answer-button-flex"
               style={{ marginTop: "10px" }}

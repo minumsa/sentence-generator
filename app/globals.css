@@ -556,7 +556,7 @@ body {
 }
 
 .cine-test-title {
-  font-size: 30px;
+  font-size: 32px;
   display: flex;
   justify-content: center;
   /* font-family: "DOSMyungjo"; */
@@ -745,7 +745,7 @@ body {
   }
 
   .cine-test-title {
-    font-size: 26px;
+    font-size: 27px;
   }
 
   .cine-content-container {
@@ -806,12 +806,14 @@ body {
     font-size: 20px;
   }
 
-  .cine-footer-comment {
-    font-size: 20px;
+  .cine-score-comment {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 22px;
   }
 
-  .cine-footer-comment-child {
-    margin-bottom: 10px;
+  .cine-end-div {
+    font-size: 22px;
   }
 }
 
@@ -910,15 +912,10 @@ body {
   margin-bottom: 40px;
 }
 
-.cine-footer-comment {
-  font-size: 25px;
-  font-weight: 300;
+.cine-score-comment {
   text-align: center;
-  margin-top: 60px;
-  margin-bottom: 10px;
-}
-
-.cine-footer-comment-child {
-  margin-bottom: 20px;
   font-size: 25px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  line-height: 150%;
 }

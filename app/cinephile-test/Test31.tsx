@@ -27,7 +27,7 @@ export default function Test31({ value, score }: NameProps) {
         position: "relative",
       }}
     >
-      <div className="cine-end-div">{value} 님의 결과는</div>
+      <div className="cine-end-div">{value} 님의 결과는?</div>
       <div className="cine-score">{percentage}점</div>
       <div
         className="star-box"
@@ -63,12 +63,6 @@ export default function Test31({ value, score }: NameProps) {
             zIndex: 1, // point-star 위에 배치
           }}
         />
-      </div>
-      <div className="cine-footer-comment">
-        <div className="cine-footer-comment-child">
-          {value} 님은 시네필이 분명합니다!
-        </div>
-        <div>이제 영화를 만들 일만 남으셨네요.</div>
       </div>
     </div>
   );
