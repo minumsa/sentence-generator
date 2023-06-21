@@ -34,6 +34,7 @@ import Test30 from "./Test30";
 import Test0 from "./Test0";
 import Test31 from "./Test31";
 import Image from "next/image";
+import Answer from "./Answer";
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(0);
@@ -114,6 +115,8 @@ export default function Cinephile() {
         return <Test30 score={score} setScore={setScore} />;
       case 31:
         return <Test31 value={value} score={score} />;
+      case 32:
+        return <Answer />;
       default:
         return null;
     }
@@ -129,7 +132,7 @@ export default function Cinephile() {
         scoreComment = `그래도 노력은 인정합니다! 👏`;
         break;
       case score >= 24 && score <= 35:
-        scoreComment = `어느 정도 맞췄지만 아직은 분발이 필요합니다. 🫣`;
+        scoreComment = `어느 정도 맞췄지만 시네필이 되려면 아직 멀었습니다. 🫣`;
         break;
       case score >= 36 && score <= 47:
         scoreComment = `시네필은 아니지만 영화를 상당히 좋아하시는군요? 😮`;
@@ -156,10 +159,10 @@ export default function Cinephile() {
         scoreComment = "";
     }
     setScoreComment(scoreComment);
-  }, [score]);
+  }, [score, value]);
 
   useEffect(() => {
-    if (testNumber === 0 || testNumber === 31) {
+    if (testNumber === 0 || testNumber > 30) {
       setProgressContent("");
     } else if (testNumber !== 31) {
       setProgressContent(
@@ -245,8 +248,11 @@ export default function Cinephile() {
             <div
               className="cine-answer-button-flex"
               style={{ marginTop: "10px" }}
+              onClick={() => {
+                setTestNumber(32);
+              }}
             >
-              <div className="cine-next-button">해설 보기</div>
+              <div className="cine-next-button">정답 보기</div>
             </div>
             <div
               className="cine-twitter-button-flex"
@@ -270,6 +276,7 @@ export default function Cinephile() {
               onClick={() => {
                 setTestNumber(0);
                 setScore(0);
+                setValue("");
               }}
             >
               <Image
@@ -285,6 +292,8 @@ export default function Cinephile() {
           </div>
         </>
       );
+    } else if (testNumber === 32) {
+      setButtonContent(<></>);
     }
   }, [testNumber, value]);
 
@@ -293,7 +302,7 @@ export default function Cinephile() {
       setContentStyle({ marginBottom: "20px" });
     } else if (testNumber > 0) {
       setContentStyle({ marginBottom: "20px" });
-    } else if (testNumber === 31) {
+    } else if (testNumber > 30) {
       setContentStyle({});
     }
   }, [testNumber]);

@@ -919,3 +919,18 @@ body {
   margin-bottom: 20px;
   line-height: 150%;
 }
+
+.cine-answer-selected {
+  background-color: black;
+  color: white;
+}
+
+.cine-answer-answer {
+  padding: 0 5px;
+}
+
+.cine-answer-line {
+  width: 100%;
+  border-top: 2px dotted black;
+  margin: 30px 0;
+}
