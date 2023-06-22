@@ -966,11 +966,11 @@ export default function Answer() {
                 <span>{`달리 샷`}</span>
                 <span className="cine-reference-white">
                   <a
-                    href="https://www.youtube.com/watch?v=ramDgHoBSvc"
+                    href="https://youtu.be/ramDgHoBSvc?t=952"
                     target="_blank"
                     style={{ color: "white", textDecoration: "none" }}
                   >
-                    관련 자료
+                    관련 영상
                   </a>
                 </span>
               </>
