@@ -50,15 +50,7 @@ export default function Test30({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div
-        className="cine-test-format"
-        style={
-          {
-            // marginTop: window.innerWidth > 450 ? "15px" : "0",
-            // marginBottom: window.innerWidth > 450 ? "20px" : "0",
-          }
-        }
-      >
+      <div className="cine-test-format">
         <div className="cine-quiz">
           <span>{`30. 한국영상자료원에서 운영하고 있는 시네마테크(KOFA)는 일종의 영화 도서관으로, 영화 관련 자료를 보존하고 이를 모든 일반인에게 무료로 공개해 해당 자료의 가치를 공유한다. 다음 중 국내 시네마테크가 위치해 있는 지역은?`}</span>
         </div>

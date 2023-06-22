@@ -50,15 +50,7 @@ export default function Test19({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div
-        className="cine-test-format"
-        style={
-          {
-            // marginTop: window.innerWidth > 450 ? "10px" : "0",
-            // marginBottom: window.innerWidth > 450 ? "15px" : "0",
-          }
-        }
-      >
+      <div className="cine-test-format">
         <div
           className="cine-quiz"
           style={{

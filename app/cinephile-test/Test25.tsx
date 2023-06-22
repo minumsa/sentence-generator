@@ -47,15 +47,7 @@ export default function Test25({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div
-        className="cine-test-format"
-        style={
-          {
-            // marginTop: window.innerWidth > 450 ? "15px" : "0",
-            // marginBottom: window.innerWidth > 450 ? "15px" : "0",
-          }
-        }
-      >
+      <div className="cine-test-format">
         <div className="cine-quiz">
           <span>{`25. 다음은 <마블 시네마틱 유니버스 페이즈 4> 시리즈를 무작위로 나열한 것이다. 해당 영화들을 `}</span>
           <span style={{ textDecoration: "underline" }}>개봉 순</span>
@@ -69,7 +61,6 @@ export default function Test25({ score, setScore }: TestProps) {
             padding: "15px 25px",
           }}
         >
-          {/* <div style={mark1} onClick={clickAnswer1}></div> */}
           <div>{`ㄱ. 블랙 위도우`}</div>
           <div>{`ㄴ. 블랙 팬서: 와칸다 포에버`}</div>
           <div>{`ㄷ. 이터널스`}</div>

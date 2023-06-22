@@ -48,6 +48,9 @@ export default function Cinephile() {
   const [navStyle, setNavStyle] = useState<any>();
   const [value, setValue] = useState<string>("참가자");
   const [scoreComment, setScoreComment] = useState<string>("");
+  const [testMove, setTestMove] = useState<any>();
+
+  console.log(score);
 
   function handleTest() {
     switch (testNumber) {
@@ -334,6 +337,20 @@ export default function Cinephile() {
         </div>
         <div className="cine-content-container" style={contentStyle}>
           {handleTest()}
+          {/* TODO: 테스트용 페이지 이동 기능, 나중에 빼기!! */}
+          {/* <input
+            onChange={e => {
+              setTestMove(Number(e.target.value));
+            }}
+          ></input>
+          <button
+            onClick={() => {
+              setTestNumber(testMove);
+            }}
+            style={{ fontSize: "25px" }}
+          >
+            이동
+          </button> */}
         </div>
         <div className="cine-footer-container">{buttonContent}</div>
       </div>

@@ -1,12 +1,85 @@
 "use client";
 
 import Image from "next/image";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 export default function Answer() {
+  const [lastDay, setLastDay] = useState<string | undefined>();
+  const [lastDaysBoxOfficeList, setLastDaysBoxOfficeList] = useState<any[]>();
+  const [movie1, setMovie1] = useState<string>("");
+  const [movie2, setMovie2] = useState<string>("");
+  const [movie3, setMovie3] = useState<string>("");
+  const [movie4, setMovie4] = useState<string>("");
+
+  useEffect(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1; // 월은 0부터 시작
+    const day = today.getDate() - 1;
+
+    if (day < 0) {
+      const prevMonth = month - 1 === 0 ? 12 : month - 1;
+      const prevYear = month - 1 === 0 ? year - 1 : year;
+      const prevMonthLastDate = new Date(prevYear, prevMonth, 0).getDate();
+      setLastDay(
+        prevYear +
+          (prevMonth < 10 ? "0" + String(prevMonth) : String(prevMonth)) +
+          (prevMonthLastDate < 10 ? "0" + prevMonthLastDate : prevMonthLastDate)
+      );
+    } else {
+      setLastDay(
+        year +
+          (month < 10 ? "0" + String(month) : String(month)) +
+          (day < 10 ? "0" + day : day)
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (lastDay && !lastDaysBoxOfficeList) {
+      const url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${lastDay}`;
+
+      axios
+        .get(url)
+        .then(res => {
+          const data = res.data;
+          setLastDaysBoxOfficeList(data.boxOfficeResult.dailyBoxOfficeList);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, [lastDay, lastDaysBoxOfficeList]);
+
+  useEffect(() => {
+    if (lastDay && !lastDaysBoxOfficeList) {
+      const url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${lastDay}`;
+
+      axios
+        .get(url)
+        .then(res => {
+          const data = res.data;
+          setLastDaysBoxOfficeList(data.boxOfficeResult.dailyBoxOfficeList);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, [lastDay, lastDaysBoxOfficeList]);
+
+  useEffect(() => {
+    if (lastDaysBoxOfficeList && lastDaysBoxOfficeList.length > 0) {
+      setMovie1(lastDaysBoxOfficeList[0].movieNm);
+      setMovie2(lastDaysBoxOfficeList[1].movieNm);
+      setMovie3(lastDaysBoxOfficeList[2].movieNm);
+      setMovie4(lastDaysBoxOfficeList[3].movieNm);
+    }
+  }, [lastDaysBoxOfficeList]);
+
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", marginBottom: "50px" }}
+      style={{ display: "flex", flexDirection: "column", marginBottom: "60px" }}
     >
       <div style={{ marginTop: "10px" }}>
         <div className="cine-test-format">
@@ -24,13 +97,13 @@ export default function Answer() {
             >
               ({answerIndex}){" "}
               {answerIndex === 1
-                ? "초밥"
+                ? "초밥 // 해준이 서래를 심문할 때 시마스시에서 특초밥 세트를 주문해 함께 먹는다."
                 : answerIndex === 2
-                ? "볶음밥"
+                ? "볶음밥 // 해준이 서래에게 중국식 볶음밥을 직접 만들어준다."
                 : answerIndex === 3
                 ? "파스타"
                 : answerIndex === 4
-                ? "석류"
+                ? "석류 // 해준과 정안이 이포로 이사한 뒤 거실에서 함께 석류를 손질한다."
                 : ""}
             </div>
           ))}
@@ -52,17 +125,30 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `“제 삶도 언젠가 빛이 날까요?”`
-              : answerIndex === 2
-              ? `“언니, 그건 지난 학기잖아요.”`
-              : answerIndex === 3
-              ? `“더 나아지기 위해 우리는 기꺼이 더 나빠졌다. 그게 우리의
-                최선이었다.” // <최선의 삶>(2019, 이우정)에 등장하는 대사`
-              : answerIndex === 4
-              ? `“우리는 늘 누군가를 만나 무언가를 나눈다는 것, 세상은 참 신기하고
+            {answerIndex === 1 ? (
+              `“제 삶도 언젠가 빛이 날까요?”`
+            ) : answerIndex === 2 ? (
+              `“언니, 그건 지난 학기잖아요.”`
+            ) : answerIndex === 3 ? (
+              <>
+                <span>{`“더 나아지기 위해 우리는 기꺼이 더 나빠졌다. 그게 우리의
+                최선이었다.” // <최선의 삶>(2019, 이우정)에 등장하는 대사`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://youtu.be/WjJ6pdVeOAg?t=88"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 영상
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 4 ? (
+              `“우리는 늘 누군가를 만나 무언가를 나눈다는 것, 세상은 참 신기하고
                 아름답다.”`
-              : ""}
+            ) : (
+              ""
+            )}
           </div>
         ))}
       </div>
@@ -83,15 +169,31 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `드라이브 마이 카(2021, 하마구치 류스케)`
-              : answerIndex === 2
-              ? `버닝(2018, 이창동)`
-              : answerIndex === 3
-              ? `토니 타키타니(2004, 이치카와 준)`
-              : answerIndex === 4
-              ? `환상의 빛(1995, 고레에다 히로카즈) // 소설가 미야모토 테루의 동명소설이 원작이다.`
-              : ""}
+            {answerIndex === 1 ? (
+              `드라이브 마이 카(2021, 하마구치 류스케)`
+            ) : answerIndex === 2 ? (
+              `버닝(2018, 이창동) // 참고로 원작 소설의 제목은 <헛간을 태우다>이다.`
+            ) : answerIndex === 3 ? (
+              `토니 타키타니(2004, 이치카와 준)`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>
+                  환상의 빛(1995, 고레에다 히로카즈) // 미야모토 테루의 동명
+                  소설이 원작이다.
+                </span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=49852122&start=slayer"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         ))}
       </div>
@@ -111,7 +213,16 @@ export default function Answer() {
         >
           {`"`}
           <input disabled placeholder="여성" className="cine-test-input" />
-          {` 여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요."`}
+          <span>{` 여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요." // SBS가 해당 수상 소감에서 "여성"이라는 단어를 일부러 삭제했다는 의혹이 있었다. 논란이 일자 재편집한 영상이 업로드되었다.`}</span>
+          <span className="cine-reference-black">
+            <a
+              href="https://youtu.be/DZldmL7zeSY?t=109"
+              target="_blank"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              관련 영상
+            </a>
+          </span>
         </div>
       </div>
       <div className="cine-answer-line"></div>
@@ -167,15 +278,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `"Johnny is coming!"`
-              : answerIndex === 2
-              ? `"Johnny, I found you!"`
-              : answerIndex === 3
-              ? `"It's me, Johnny!"`
-              : answerIndex === 4
-              ? `"Here's Johnny!"`
-              : ``}
+            {answerIndex === 1 ? (
+              `"Johnny is coming!"`
+            ) : answerIndex === 2 ? (
+              `"Johnny, I found you!"`
+            ) : answerIndex === 3 ? (
+              `"It's me, Johnny!"`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`"Here's Johnny!"`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://youtu.be/WDpipB4yehk?t=105"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 영상
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -192,28 +316,33 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `<스크림> 시리즈`
-              : answerIndex === 2
-              ? `<13일의 금요일> 시리즈`
-              : answerIndex === 3
-              ? `<이블 데드> 시리즈`
-              : answerIndex === 4
-              ? `<컨저링> 시리즈`
-              : ``}
+            {answerIndex === 1 ? (
+              <>
+                <span>{`<스크림> 시리즈`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://youtu.be/UCf7s7jvP9c?t=602"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 영상
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 2 ? (
+              `<13일의 금요일> 시리즈`
+            ) : answerIndex === 3 ? (
+              `<이블 데드> 시리즈`
+            ) : answerIndex === 4 ? (
+              `<컨저링> 시리즈`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
       <div className="cine-answer-line"></div>
-      <div
-        className="cine-test-format"
-        style={
-          {
-            // marginTop: window.innerWidth > 450 ? "15px" : "0",
-            // marginBottom: window.innerWidth > 450 ? "20px" : "0",
-          }
-        }
-      >
+      <div className="cine-test-format">
         <div className="cine-quiz">
           <span>{`8. <킬 빌> 시리즈에는 데들리 바이퍼스 출신의 4명의 암살자 캐릭터가 등장하는데, 해당 인물들은 모두 독사의 이름을 딴 독특한 코드 네임을 가지고 있다. 다음 중 주인공 베아트릭스 키도의 첫 번째 표적이었던 `}</span>
           <span
@@ -260,15 +389,61 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `호수의 이방인(2013, 알랭 기로디)`
-              : answerIndex === 2
-              ? `보이후드(2014, 리처드 링클레이터)`
-              : answerIndex === 3
-              ? `타오르는 여인의 초상(2019, 셀린 시아마)`
-              : answerIndex === 4
-              ? `걸(2018, 루카스 돈트)`
-              : ``}
+            {answerIndex === 1 ? (
+              <>
+                <span>{`호수의 이방인(2013, 알랭 기로디) // 게이 주인공이 등장한다.`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://www.youtube.com/watch?v=5Ezl0ma9XWc"
+                    target="_blank"
+                    style={{ color: "black", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 2 ? (
+              <>
+                <span>{`보이후드(2014, 리처드 링클레이터)`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=BlCivrRQXtY"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 3 ? (
+              <>
+                <span>{`타오르는 여인의 초상(2019, 셀린 시아마) // 레즈비언 주인공이 등장한다.`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://www.youtube.com/watch?v=rv-m744KKXE"
+                    target="_blank"
+                    style={{ color: "black", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`걸(2018, 루카스 돈트) // 트랜스젠더 주인공이 등장한다.`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://www.youtube.com/watch?v=3j5EwmS_ISA"
+                    target="_blank"
+                    style={{ color: "black", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -297,6 +472,593 @@ export default function Answer() {
               ? `해피 투게더(1997)`
               : answerIndex === 4
               ? `화양연화(2000)`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`11. 다음 중 <언더 더 스킨>(2013, 조나단 글레이저)에서 에일리언 로라가 지구로 오게 된 이유로 가장 적절한 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 1 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `식량으로 사용할 생물을 찾으려고`
+              : answerIndex === 2
+              ? `인간을 납치해 실험체로 쓰려고`
+              : answerIndex === 3
+              ? `우연히 블랙홀 속으로 빨려들어서`
+              : answerIndex === 4
+              ? `우주 탐사 도중 비행체의 결함으로 불시착해서`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <div>{`12. 다음 빈칸을 적절하게 채워 정답을 완성하시오.`}</div>
+          <div
+            style={{
+              border: "1px solid black",
+              padding: "15px 25px",
+              marginTop: "10px",
+            }}
+          >
+            {`1895년 겨울, 뤼미에르 형제는 프랑스의 한 카페에서 자신들이 만든 영상을 공개했다. 이때 상영된 50초 분량의 <`}
+            <input
+              disabled
+              placeholder="열차"
+              className="cine-test-input"
+            ></input>
+            {`의 도착>이라는 작품은 세계 최초의 영화로 널리 알려져 있다.`}
+          </div>
+        </div>
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`13. 다음 중 국내에서 가장 큰 아이맥스 스크린을 보유하고 있는 영화관은? (2023년 6월 기준)`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 2 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `CGV 왕십리`
+              : answerIndex === 2
+              ? `CGV 용산아이파크몰`
+              : answerIndex === 3
+              ? `CGV 천호`
+              : answerIndex === 4
+              ? `CGV 서면`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`14. 다음 중 영화에 관련된 줄임말이 `}</span>
+          <span style={{ textDecoration: "underline" }}>아닌</span>
+          <span> 것은?</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 2 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `코돌비 // 메가박스 코엑스 돌비 시네마`
+              : answerIndex === 2
+              ? `분조카 // 분위기 좋은 카페`
+              : answerIndex === 3
+              ? `용아맥 // CGV 용산아이파크몰 아이맥스`
+              : answerIndex === 4
+              ? `영스엑 // CGV 영등포 스크린 X`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`15. 다음 중 <타미 페이의 눈>(2021, 마이클 쇼월터)에 등장하는 타미 페이 바커의 직업으로 가장 적절한 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 4 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `기자`
+              : answerIndex === 2
+              ? `미용사`
+              : answerIndex === 3
+              ? `안경사`
+              : answerIndex === 4
+              ? `전도사`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`16. 다음 중 세계 최초의 장편 유성영화는?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 2 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `전함 포템킨(1925, 세르게이 에이젠슈타인)`
+              : answerIndex === 2
+              ? `재즈 싱어(1927, 앨런 크로슬랜드)`
+              : answerIndex === 3
+              ? `모던 타임즈(1936, 찰리 채플린)`
+              : answerIndex === 4
+              ? `시민 케인(1941, 오슨 웰스)`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>
+            {`17. 다음 중 어제(${lastDay
+              ?.split("")
+              .slice(0, 4)
+              .join("")}.${lastDay?.split("").slice(4, 6).join("")}.${lastDay
+              ?.split("")
+              .slice(6, 8)
+              .join("")}.) 박스오피스 1위를 기록한 영화는?`}{" "}
+          </span>
+          <span style={{ color: "gray" }}>
+            (* 사용자의 인터넷 환경에 따라 보기의 데이터를 불러오는 속도가
+            소요될 수 있는 문제입니다. 10초 이상 기다려도 보기가 뜨지 않는다면
+            다음 문제로 넘어가주세요.)
+          </span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 3 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? movie2
+              : answerIndex === 2
+              ? movie3
+              : answerIndex === 3
+              ? movie1
+              : answerIndex === 4
+              ? movie4
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`18. <다가오는 것들>(2016, 미아 한센 러브)에서 주인공 나탈리는 파리의 한 고등학교에서 교사로 일한다. 다음 중 나탈리가 가르치는 과목으로 가장 적절한 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 3 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `문학`
+              : answerIndex === 2
+              ? `수학`
+              : answerIndex === 3
+              ? `철학`
+              : answerIndex === 4
+              ? `미술`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div
+          className="cine-quiz"
+          style={{
+            marginBottom: window.innerWidth > 450 ? "10px" : "0",
+          }}
+        >{`19. 다음 중 <라쇼몽>(1950, 구로사와 아키라)에서 미후네 토시로가 연기한 산적 캐릭터의 이름으로 가장 적절한 것은?`}</div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Image
+            src="/cine-img-19.jpeg"
+            alt="test19-img"
+            width={window.innerWidth > 450 ? "280" : "180"}
+            height={window.innerWidth > 450 ? "210" : "140"}
+            style={{
+              marginBottom: "15px",
+              marginTop: "5px",
+              border: "1px solid black",
+            }}
+          />
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 4 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `테츠야`
+              : answerIndex === 2
+              ? `탄지로`
+              : answerIndex === 3
+              ? `타케노리`
+              : answerIndex === 4
+              ? `타조마루`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 4 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `한 명 이상의 인간을 살해한다.`
+              : answerIndex === 2
+              ? `자신이 정한 한 가지 종류의 음식만 먹는다.`
+              : answerIndex === 3
+              ? `말을 하지 않는다.`
+              : answerIndex === 4
+              ? `연인을 찾는다.`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`21. 다음은 <로제타>(1999, 다르덴 형제)의 줄거리 일부이다. 다음 중 빈칸에 가장 적절한 단어는?`}</span>
+        </div>
+        <div
+          style={{
+            marginTop: "10px",
+            marginBottom: "15px",
+            border: "1px solid #0e1111",
+            padding: "15px 25px",
+          }}
+        >
+          <span>
+            {` 알코올 중독에 빠진 어머니와 함께 이동식 트레일러에서 생활하고 있는 18살의 로제타에게 가난은 일상이다. 헌옷을 주워 어머니가 수선하면 내다 팔고, 먹을 음식이 없어 강에서 숭어를 잡기도 한다. 공장에서 일한 기간이 짧아 실업급여는 나오지 않고, 다른 일거리를 찾는 일도 어렵기만 하다. 그러다 로제타는 근처 `}
+          </span>
+          <input disabled placeholder="와플" className="cine-test-input" />
+          <span>{` 가게에서 일하는 리케와 친구가 된다.`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 4 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `신발`
+              : answerIndex === 2
+              ? `중고책`
+              : answerIndex === 3
+              ? `과일`
+              : answerIndex === 4
+              ? `와플`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`22. 다음 중 레일을 깔아 수레에 카메라를 설치한 뒤, 정해진 노선에 따라 지면을 이동하며 안정적으로 촬영하는 방식을 뜻하는 용어로 가장 적절한 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 1 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `달리`
+              : answerIndex === 2
+              ? `스테디캠`
+              : answerIndex === 3
+              ? `크레인`
+              : answerIndex === 4
+              ? `핸드헬드`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`23. 다음 중 미국 영화 산업의 중심지인 할리우드가 위치한 지역은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 4 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `뉴욕`
+              : answerIndex === 2
+              ? `필라델피아`
+              : answerIndex === 3
+              ? `샌디에이고`
+              : answerIndex === 4
+              ? `로스앤젤레스`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Image
+            src="/cine-img-24.png"
+            alt="test24-img"
+            width={window.innerWidth > 450 ? "280" : "180"}
+            height={window.innerWidth > 450 ? "190" : "120"}
+            style={{
+              marginBottom: window.innerWidth > 450 ? "25px" : "15px",
+              marginTop: window.innerWidth > 450 ? "15px" : "5px",
+              border: "1px solid black",
+            }}
+          />
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 4 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `패티 젠킨스`
+              : answerIndex === 2
+              ? `캐서린 비글로우`
+              : answerIndex === 3
+              ? `소피아 코폴라`
+              : answerIndex === 4
+              ? `그레타 거윅`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`25. 다음은 <마블 시네마틱 유니버스 페이즈 4> 시리즈를 무작위로 나열한 것이다. 해당 영화들을 `}</span>
+          <span style={{ textDecoration: "underline" }}>개봉 순</span>
+          <span>으로 올바르게 정렬한 것은?</span>
+        </div>
+        <div
+          style={{
+            marginTop: "10px",
+            marginBottom: "20px",
+            border: "1px solid #0e1111",
+            padding: "15px 25px",
+          }}
+        >
+          <div>{`ㄱ. 블랙 위도우`}</div>
+          <div>{`ㄴ. 블랙 팬서: 와칸다 포에버`}</div>
+          <div>{`ㄷ. 이터널스`}</div>
+          <div>{`ㄹ. 닥터 스트레인지: 대혼돈의 멀티버스`}</div>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 4 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `ㄱ → ㄹ → ㄴ → ㄷ`
+              : answerIndex === 2
+              ? `ㄱ → ㄹ → ㄷ → ㄴ`
+              : answerIndex === 3
+              ? `ㄱ → ㄷ → ㄴ → ㄹ`
+              : answerIndex === 4
+              ? `ㄱ → ㄷ → ㄹ → ㄴ`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`26. 다음 중 <엑스맨> 실사영화 시리즈의 캐릭터가 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
+          <span>{` 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 3 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `로그`
+              : answerIndex === 2
+              ? `엔젤`
+              : answerIndex === 3
+              ? `와스프`
+              : answerIndex === 4
+              ? `비스트`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`27. 오즈의 마법사(1939, 빅터 플레밍)에서 주인공 도로시는 어떤 행위를 통해 무사히 고향으로 돌아갈 수 있게 된다. 다음 중 그 행위로 가장 적절한 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 3 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `문고리를 반대 방향으로 돌린다.`
+              : answerIndex === 2
+              ? `무지개 지팡이를 휘두른다.`
+              : answerIndex === 3
+              ? `구두 뒤꿈치를 맞부딪친다.`
+              : answerIndex === 4
+              ? `파란 요정에게 기도를 한다.`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`28. 다음 설명에 가장 잘 부합하는 영화의 제목은?`}</span>
+        </div>
+        <div
+          style={{
+            border: "1px solid black",
+            padding: "0 15px 0 5px",
+            margin: "15px 0 20px 0",
+          }}
+        >
+          <ul>
+            <li>거스 밴 샌트가 연출했다.</li>
+            <li>숀 펜이 출연해 제81회 아카데미에서 남우주연상을 수상했다.</li>
+            <li>
+              미국의 성소수자 인권운동가이자 정치가인 실존 인물의 삶을 바탕으로
+              만든 전기 영화이다.
+            </li>
+          </ul>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 1 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `밀크`
+              : answerIndex === 2
+              ? `미스테리어스 스킨`
+              : answerIndex === 3
+              ? `콜 미 바이 유어 네임`
+              : answerIndex === 4
+              ? `필라델피아`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`29. 다음 중 픽사 애니메이션 스튜디오에서 만든 영화가 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
+          <span>{` 것은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 2 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `엘리멘탈(2023, 피터 손)`
+              : answerIndex === 2
+              ? `보스 베이비(2017, 톰 맥그라스) // 드림웍스 애니메이션 스튜디오`
+              : answerIndex === 3
+              ? `라따뚜이(2007, 브래드 버드)`
+              : answerIndex === 4
+              ? `벅스 라이프(1998, 존 라세터)`
+              : ``}
+          </div>
+        ))}
+      </div>
+      <div className="cine-answer-line"></div>
+      <div className="cine-test-format">
+        <div className="cine-quiz">
+          <span>{`30. 한국영상자료원에서 운영하고 있는 시네마테크(KOFA)는 일종의 영화 도서관으로, 영화 관련 영상를 보존하고 이를 모든 일반인에게 무료로 공개해 해당 자료의 가치를 공유한다. 다음 중 국내 시네마테크가 위치해 있는 지역은?`}</span>
+        </div>
+        {[1, 2, 3, 4].map(answerIndex => (
+          <div
+            key={answerIndex}
+            className={`cine-answer-answer ${
+              answerIndex === 3 ? "cine-answer-selected" : ""
+            }`}
+          >
+            ({answerIndex}){" "}
+            {answerIndex === 1
+              ? `서울특별시 광진구`
+              : answerIndex === 2
+              ? `서울특별시 종로구`
+              : answerIndex === 3
+              ? `서울특별시 마포구`
+              : answerIndex === 4
+              ? `부산광역시 해운대구`
               : ``}
           </div>
         ))}

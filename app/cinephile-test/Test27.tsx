@@ -50,10 +50,7 @@ export default function Test27({ score, setScore }: TestProps) {
   return (
     <>
       <div className="cine-test-format">
-        <div
-          className="cine-quiz"
-          // style={{ marginTop: "10px" }}
-        >
+        <div className="cine-quiz">
           <span>{`27. 오즈의 마법사(1939, 빅터 플레밍)에서 주인공 도로시는 어떤 행위를 통해 무사히 고향으로 돌아갈 수 있게 된다. 다음 중 그 행위로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (

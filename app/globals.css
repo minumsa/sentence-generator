@@ -1,5 +1,4 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
-/* @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@900&display=swap"); */
 @import "@kfonts/neodgm-code";
 
 @font-face {
@@ -889,7 +888,7 @@ body {
 }
 
 .cine-answer-selected {
-  background-color: black;
+  background-color: #0e1111;
   color: white;
 }
 
@@ -899,6 +898,20 @@ body {
 
 .cine-answer-line {
   width: 100%;
-  border-top: dashed black;
-  margin: 35px 0;
+  border-top: dashed #0e1111;
+  margin: 40px 0;
+}
+
+.cine-reference-black {
+  color: #0e1111;
+  border: 1.5px solid #0e1111;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.cine-reference-white {
+  color: white;
+  border: 1.5px solid white;
+  padding: 5px;
+  margin-left: 10px;
 }
