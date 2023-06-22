@@ -799,14 +799,6 @@ body {
   /* height: 37px; */
 }
 
-.cine-answer-container {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  height: 400px;
-  margin-top: 10px;
-}
-
 .cine-answer-top {
   display: flex;
   justify-content: space-between;
@@ -914,4 +906,11 @@ body {
   border: 1.5px solid white;
   padding: 5px;
   margin-left: 10px;
+}
+
+.cine-answer-container {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

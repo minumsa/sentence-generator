@@ -79,7 +79,8 @@ export default function Answer() {
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", marginBottom: "60px" }}
+      className="cine-answer-container"
+      style={{ display: "flex", flexDirection: "column" }}
     >
       <div style={{ marginTop: "10px" }}>
         <div className="cine-test-format">
@@ -358,19 +359,32 @@ export default function Answer() {
           <div
             key={answerIndex}
             className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+              answerIndex === 4 ? "cine-answer-selected" : ""
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `코퍼헤드 // 버니타 그린`
-              : answerIndex === 2
-              ? `캘리포니아 마운틴 스네이크 // 엘 드라이버`
-              : answerIndex === 3
-              ? `블랙 맘바 // 베아트릭스 키도`
-              : answerIndex === 4
-              ? `코튼마우스 // 오렌 이시이`
-              : ``}
+            {answerIndex === 1 ? (
+              `코퍼헤드 // 버니타 그린`
+            ) : answerIndex === 2 ? (
+              `캘리포니아 마운틴 스네이크 // 엘 드라이버`
+            ) : answerIndex === 3 ? (
+              `블랙 맘바 // 베아트릭스 키도`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`코튼마우스 // 오렌 이시이`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://namu.wiki/w/데들리%20바이퍼스"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -464,15 +478,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `아비정전(1990)`
-              : answerIndex === 2
-              ? `중경삼림(1994)`
-              : answerIndex === 3
-              ? `해피 투게더(1997)`
-              : answerIndex === 4
-              ? `화양연화(2000)`
-              : ``}
+            {answerIndex === 1 ? (
+              `아비정전(1990)`
+            ) : answerIndex === 2 ? (
+              <>
+                <span>{`중경삼림(1994) // 1부에서 하지무는 헤어진 연인을 기다리며 유통기한이 5월 1일까지인 파인애플 통조림을 30일 동안 사 모은다. 그리고 선글라스를 쓴 여인에게서 전화가 오길 기다린다. 2부에서 페이는 경찰 663에게 호감을 느끼고, 그와 연인 관계였던 스튜어디스가 보낸 편지 봉투에서 663의 집 열쇠를 찾는다.`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=OPCug9jyG9k"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 3 ? (
+              `해피 투게더(1997)`
+            ) : answerIndex === 4 ? (
+              `화양연화(2000)`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -489,15 +516,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `식량으로 사용할 생물을 찾으려고`
-              : answerIndex === 2
-              ? `인간을 납치해 실험체로 쓰려고`
-              : answerIndex === 3
-              ? `우연히 블랙홀 속으로 빨려들어서`
-              : answerIndex === 4
-              ? `우주 탐사 도중 비행체의 결함으로 불시착해서`
-              : ``}
+            {answerIndex === 1 ? (
+              <>
+                <span>{`식량으로 사용할 생물을 찾으려고`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=J7bAZCOk0Sc"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 2 ? (
+              `인간을 납치해 실험체로 쓰려고`
+            ) : answerIndex === 3 ? (
+              `우연히 블랙홀 속으로 빨려들어서`
+            ) : answerIndex === 4 ? (
+              `우주 탐사 도중 비행체의 결함으로 불시착해서`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -518,7 +558,32 @@ export default function Answer() {
               placeholder="열차"
               className="cine-test-input"
             ></input>
-            {`의 도착>이라는 작품은 세계 최초의 영화로 널리 알려져 있다.`}
+            <span>{`의 도착>이라는 작품은 세계 최초의 영화로 널리 알려져 있다.`}</span>
+            <span
+              style={{
+                marginLeft: "10px",
+                backgroundColor: "#0e1111",
+                color: "white",
+                padding: "13px 5px",
+              }}
+            >
+              {`"세계 최초의 영화"로 가장 많이 알려진 작품은 <열차의 도착>이지만, 사실 이 작품은 당시 뤼미에르 형제가 상영했던 단편영화 컬렉션 중 하나였다. 해당 컬렉션에서 가장 먼저 상영되었던 작품은 <공장 문을 나서는 노동자들>이었다.`}{" "}
+              <span
+                style={{
+                  marginLeft: "10px",
+                  backgroundColor: "#0e1111",
+                  color: "white",
+                  padding: "5px",
+                  border: "2px solid white",
+                }}
+              >
+                <a
+                  href="https://www.youtube.com/watch?v=-e1u7Fgoocc"
+                  target="_blank"
+                  style={{ color: "white", textDecoration: "none" }}
+                >{`<열차의 도착> 보러 가기`}</a>
+              </span>
+            </span>
           </div>
         </div>
       </div>
@@ -535,15 +600,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `CGV 왕십리`
-              : answerIndex === 2
-              ? `CGV 용산아이파크몰`
-              : answerIndex === 3
-              ? `CGV 천호`
-              : answerIndex === 4
-              ? `CGV 서면`
-              : ``}
+            {answerIndex === 1 ? (
+              `CGV 왕십리`
+            ) : answerIndex === 2 ? (
+              <>
+                <span>CGV 용산아이파크몰</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.mk.co.kr/news/culture/8781694"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 3 ? (
+              `CGV 천호`
+            ) : answerIndex === 4 ? (
+              `CGV 서면`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -587,15 +665,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `기자`
-              : answerIndex === 2
-              ? `미용사`
-              : answerIndex === 3
-              ? `안경사`
-              : answerIndex === 4
-              ? `전도사`
-              : ``}
+            {answerIndex === 1 ? (
+              `기자`
+            ) : answerIndex === 2 ? (
+              `미용사`
+            ) : answerIndex === 3 ? (
+              `안경사`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>전도사</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=eMMLRnXPPJk"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -612,15 +703,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `전함 포템킨(1925, 세르게이 에이젠슈타인)`
-              : answerIndex === 2
-              ? `재즈 싱어(1927, 앨런 크로슬랜드)`
-              : answerIndex === 3
-              ? `모던 타임즈(1936, 찰리 채플린)`
-              : answerIndex === 4
-              ? `시민 케인(1941, 오슨 웰스)`
-              : ``}
+            {answerIndex === 1 ? (
+              `전함 포템킨(1925, 세르게이 에이젠슈타인)`
+            ) : answerIndex === 2 ? (
+              <>
+                <span>{`재즈 싱어(1927, 앨런 크로슬랜드)`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://ko.wikipedia.org/wiki/재즈_싱어"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 3 ? (
+              `모던 타임즈(1936, 찰리 채플린)`
+            ) : answerIndex === 4 ? (
+              `시민 케인(1941, 오슨 웰스)`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -651,13 +755,13 @@ export default function Answer() {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? movie2
+              ? `${movie2} // 2위`
               : answerIndex === 2
-              ? movie3
+              ? `${movie3} // 3위`
               : answerIndex === 3
-              ? movie1
+              ? `${movie1} // 1위`
               : answerIndex === 4
-              ? movie4
+              ? `${movie4} // 4위`
               : ``}
           </div>
         ))}
@@ -675,15 +779,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `문학`
-              : answerIndex === 2
-              ? `수학`
-              : answerIndex === 3
-              ? `철학`
-              : answerIndex === 4
-              ? `미술`
-              : ``}
+            {answerIndex === 1 ? (
+              `문학`
+            ) : answerIndex === 2 ? (
+              `수학`
+            ) : answerIndex === 3 ? (
+              <>
+                <span>{`철학`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=VtmE1AAvncE"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 4 ? (
+              `미술`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -716,15 +833,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `테츠야`
-              : answerIndex === 2
-              ? `탄지로`
-              : answerIndex === 3
-              ? `타케노리`
-              : answerIndex === 4
-              ? `타조마루`
-              : ``}
+            {answerIndex === 1 ? (
+              `토모야 // 세리자와 토모야는 <스즈메의 문단속>에 등장하는 주인공 소타의 친구 이름이다.`
+            ) : answerIndex === 2 ? (
+              `탄지로 // 카마도 탄지로는 <귀멸의 칼날> 시리즈에 등장하는 주인공 이름이다.`
+            ) : answerIndex === 3 ? (
+              `타케노리 // 아카기 타케노리는 <슬램덩크> 시리즈에 등장하는 채치수의 원작 이름이다.`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`타조마루`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=Zqoyl2p8_lw&t=112s"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -741,15 +871,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `한 명 이상의 인간을 살해한다.`
-              : answerIndex === 2
-              ? `자신이 정한 한 가지 종류의 음식만 먹는다.`
-              : answerIndex === 3
-              ? `말을 하지 않는다.`
-              : answerIndex === 4
-              ? `연인을 찾는다.`
-              : ``}
+            {answerIndex === 1 ? (
+              `한 명 이상의 인간을 살해한다.`
+            ) : answerIndex === 2 ? (
+              `자신이 정한 한 가지 종류의 음식만 먹는다.`
+            ) : answerIndex === 3 ? (
+              `말을 하지 않는다.`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`연인을 찾는다.`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=vU29VfayDMw&t=16s"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -780,15 +923,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `신발`
-              : answerIndex === 2
-              ? `중고책`
-              : answerIndex === 3
-              ? `과일`
-              : answerIndex === 4
-              ? `와플`
-              : ``}
+            {answerIndex === 1 ? (
+              `신발`
+            ) : answerIndex === 2 ? (
+              `중고책`
+            ) : answerIndex === 3 ? (
+              `과일`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`와플`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=woN2P4r65oA"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -805,15 +961,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `달리`
-              : answerIndex === 2
-              ? `스테디캠`
-              : answerIndex === 3
-              ? `크레인`
-              : answerIndex === 4
-              ? `핸드헬드`
-              : ``}
+            {answerIndex === 1 ? (
+              <>
+                <span>{`달리 샷`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=ramDgHoBSvc"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 2 ? (
+              `크레인 샷 // 크레인과 같은 높은 지지대 역할을 하는 장비에 장착해 수평, 수직 축으로 촬영하는 기법`
+            ) : answerIndex === 3 ? (
+              `핸드헬드 샷 // 카메라를 손으로 잡거나 어깨에 들쳐 메고 찍는 촬영하는 기법`
+            ) : answerIndex === 4 ? (
+              `롱 샷 // 카메라와 피사체 간의 거리를 멀리 두고 촬영하는 기법`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -830,15 +999,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `뉴욕`
-              : answerIndex === 2
-              ? `필라델피아`
-              : answerIndex === 3
-              ? `샌디에이고`
-              : answerIndex === 4
-              ? `로스앤젤레스`
-              : ``}
+            {answerIndex === 1 ? (
+              `뉴욕`
+            ) : answerIndex === 2 ? (
+              `필라델피아`
+            ) : answerIndex === 3 ? (
+              `샌디에이고`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`로스앤젤레스`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://ko.wikipedia.org/wiki/할리우드"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -866,15 +1048,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `패티 젠킨스`
-              : answerIndex === 2
-              ? `캐서린 비글로우`
-              : answerIndex === 3
-              ? `소피아 코폴라`
-              : answerIndex === 4
-              ? `그레타 거윅`
-              : ``}
+            {answerIndex === 1 ? (
+              `패티 젠킨스`
+            ) : answerIndex === 2 ? (
+              `캐서린 비글로우`
+            ) : answerIndex === 3 ? (
+              `소피아 코폴라`
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`그레타 거윅`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://ko.wikipedia.org/wiki/그레타_거윅"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -893,10 +1088,10 @@ export default function Answer() {
             padding: "15px 25px",
           }}
         >
-          <div>{`ㄱ. 블랙 위도우`}</div>
-          <div>{`ㄴ. 블랙 팬서: 와칸다 포에버`}</div>
-          <div>{`ㄷ. 이터널스`}</div>
-          <div>{`ㄹ. 닥터 스트레인지: 대혼돈의 멀티버스`}</div>
+          <div>{`ㄱ. 블랙 위도우 // 2021년 7월`}</div>
+          <div>{`ㄴ. 블랙 팬서: 와칸다 포에버 // 2022년 11월`}</div>
+          <div>{`ㄷ. 이터널스 // 2021년 11월`}</div>
+          <div>{`ㄹ. 닥터 스트레인지: 대혼돈의 멀티버스 // 2022년 5월`}</div>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
@@ -921,27 +1116,73 @@ export default function Answer() {
       <div className="cine-answer-line"></div>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`26. 다음 중 <엑스맨> 실사영화 시리즈의 캐릭터가 `}</span>
-          <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
-          <span>{` 것은?`}</span>
+          <span>{`26. 다음 중 <엑스맨 2>(2003), <엑스맨: 아포칼립스>(2016), <엑스맨: 다크 피닉스>(2019)에 등장하는 `}</span>
+          <span style={{ textDecoration: "underline" }}>{`나이트크롤러`}</span>
+          <span>{`의 능력으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
             className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+              answerIndex === 4 ? "cine-answer-selected" : ""
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `로그`
-              : answerIndex === 2
-              ? `엔젤`
-              : answerIndex === 3
-              ? `와스프`
-              : answerIndex === 4
-              ? `비스트`
-              : ``}
+            {answerIndex === 1 ? (
+              <>
+                <span>{`핌 입자를 사용해 몸 크기를 축소하거나 확대하고, 생체 전기로 에너지 광선을 발사한다. // <마블 유니버스> 시리즈에 등장하는 캐릭터인 와스프에 대한 설명이다.`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://namu.wiki/w/와스프(마블%20코믹스)"
+                    target="_blank"
+                    style={{ color: "#0e1111", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 2 ? (
+              <>
+                <span>{`세포와 조직을 자유자재로 조작해 다른 사람의 외형으로 변신할 수 있고 목소리까지 복제한다. // <엑스맨 유니버스> 시리즈에 등장하는 캐릭터인 미스틱에 대한 설명이다.`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://namu.wiki/w/미스틱(엑스맨%20유니버스)"
+                    target="_blank"
+                    style={{ color: "#0e1111", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 3 ? (
+              <>
+                <span>{`상대의 에너지를 흡수한다. 뮤턴트의 에너지를 흡수해 그 능력을 사용할 수도 있다. // <마블 유니버스> 시리즈에 등장하는 캐릭터인 로그에 대한 설명이다.`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://namu.wiki/w/로그(엑스맨%20유니버스)"
+                    target="_blank"
+                    style={{ color: "#0e1111", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`차원을 통과해 텔레포트할 수 있다. 뼈 구조가 유연해 뛰어난 민첩성과 균형 감각을 가지고 있다.`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://namu.wiki/w/나이트크롤러(엑스맨%20유니버스)"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -958,15 +1199,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `문고리를 반대 방향으로 돌린다.`
-              : answerIndex === 2
-              ? `무지개 지팡이를 휘두른다.`
-              : answerIndex === 3
-              ? `구두 뒤꿈치를 맞부딪친다.`
-              : answerIndex === 4
-              ? `파란 요정에게 기도를 한다.`
-              : ``}
+            {answerIndex === 1 ? (
+              `문고리를 반대 방향으로 돌린다.`
+            ) : answerIndex === 2 ? (
+              `무지개 지팡이를 휘두른다.`
+            ) : answerIndex === 3 ? (
+              <>
+                <span>{`구두 뒤꿈치를 맞부딪친다.`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://youtu.be/ooM-RGUTe2E?t=26"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 영상
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 4 ? (
+              `파란 요정에게 기도를 한다.`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -999,15 +1253,61 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `밀크`
-              : answerIndex === 2
-              ? `미스테리어스 스킨`
-              : answerIndex === 3
-              ? `콜 미 바이 유어 네임`
-              : answerIndex === 4
-              ? `필라델피아`
-              : ``}
+            {answerIndex === 1 ? (
+              <>
+                <span>{`밀크`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.youtube.com/watch?v=UB6Rd0tw9QI"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 2 ? (
+              <>
+                <span>{`미스테리어스 스킨`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://www.youtube.com/watch?v=MYv5V6W4vvI"
+                    target="_blank"
+                    style={{ color: "#0e1111", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 3 ? (
+              <>
+                <span>{`콜 미 바이 유어 네임`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://www.youtube.com/watch?v=am_aqh4qW5c"
+                    target="_blank"
+                    style={{ color: "#0e1111", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 4 ? (
+              <>
+                <span>{`필라델피아`}</span>
+                <span className="cine-reference-black">
+                  <a
+                    href="https://www.youtube.com/watch?v=CKDz2LVHz0Y"
+                    target="_blank"
+                    style={{ color: "#0e1111", textDecoration: "none" }}
+                  >
+                    예고편
+                  </a>
+                </span>
+              </>
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>
@@ -1029,7 +1329,7 @@ export default function Answer() {
             {answerIndex === 1
               ? `엘리멘탈(2023, 피터 손)`
               : answerIndex === 2
-              ? `보스 베이비(2017, 톰 맥그라스) // 드림웍스 애니메이션 스튜디오`
+              ? `보스 베이비(2017, 톰 맥그라스) // 드림웍스 애니메이션 스튜디오에서 만들었다.`
               : answerIndex === 3
               ? `라따뚜이(2007, 브래드 버드)`
               : answerIndex === 4
@@ -1051,15 +1351,28 @@ export default function Answer() {
             }`}
           >
             ({answerIndex}){" "}
-            {answerIndex === 1
-              ? `서울특별시 광진구`
-              : answerIndex === 2
-              ? `서울특별시 종로구`
-              : answerIndex === 3
-              ? `서울특별시 마포구`
-              : answerIndex === 4
-              ? `부산광역시 해운대구`
-              : ``}
+            {answerIndex === 1 ? (
+              `서울특별시 광진구`
+            ) : answerIndex === 2 ? (
+              `서울특별시 종로구`
+            ) : answerIndex === 3 ? (
+              <>
+                <span>{`서울특별시 마포구`}</span>
+                <span className="cine-reference-white">
+                  <a
+                    href="https://www.koreafilm.or.kr/main"
+                    target="_blank"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    관련 자료
+                  </a>
+                </span>
+              </>
+            ) : answerIndex === 4 ? (
+              `부산광역시 해운대구`
+            ) : (
+              ``
+            )}
           </div>
         ))}
       </div>

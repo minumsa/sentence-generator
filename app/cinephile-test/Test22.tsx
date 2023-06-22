@@ -62,13 +62,13 @@ export default function Test22({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `달리`
+              ? `달리 샷`
               : answerIndex === 2
-              ? `스테디캠`
+              ? `크레인 샷`
               : answerIndex === 3
-              ? `크레인`
+              ? `핸드헬드 샷`
               : answerIndex === 4
-              ? `핸드헬드`
+              ? `롱 샷`
               : ``}
           </div>
         ))}

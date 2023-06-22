@@ -167,7 +167,7 @@ export default function Cinephile() {
   useEffect(() => {
     if (testNumber === 0 || testNumber > 30) {
       setProgressContent("");
-    } else if (testNumber !== 31) {
+    } else if (testNumber < 32) {
       setProgressContent(
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div className="cine-progress-bar">
@@ -255,7 +255,7 @@ export default function Cinephile() {
                 setTestNumber(32);
               }}
             >
-              <div className="cine-next-button">정답 보기</div>
+              <div className="cine-next-button">정답 및 해설 보기</div>
             </div>
             <div
               className="cine-twitter-button-flex"
@@ -279,7 +279,7 @@ export default function Cinephile() {
               onClick={() => {
                 setTestNumber(0);
                 setScore(0);
-                setValue("");
+                setValue("참가자");
               }}
             >
               <Image
@@ -296,7 +296,38 @@ export default function Cinephile() {
         </>
       );
     } else if (testNumber === 32) {
-      setButtonContent(<></>);
+      setButtonContent(
+        <>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <div
+              className="cine-answer-button-flex"
+              style={{ marginTop: "10px" }}
+              onClick={() => {
+                setTestNumber(0);
+                setScore(0);
+                setValue("참가자");
+              }}
+            >
+              <div className="cine-next-button">처음으로 돌아가기</div>
+            </div>{" "}
+            <div
+              className="cine-answer-button-flex"
+              style={{ marginTop: "10px", marginBottom: "60px" }}
+              onClick={() => {
+                setTestNumber(31);
+              }}
+            >
+              <div className="cine-next-button">이전 페이지로 돌아가기</div>
+            </div>
+          </div>
+        </>
+      );
     }
   }, [testNumber, value]);
 
