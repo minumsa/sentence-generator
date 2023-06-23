@@ -349,7 +349,42 @@ export default function Cinephile() {
     }
   }, [testNumber]);
 
-  function handleSelectChange(event) {
+  function truncateText(text: string, maxLength: number) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  }
+
+  const options = [
+    {
+      value: 1,
+      text: "1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 않는 음식은?",
+    },
+    {
+      value: 2,
+      text: "2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 아닌 것은?",
+    },
+    {
+      value: 3,
+      text: "3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가 아닌 것은?",
+    },
+    {
+      value: 4,
+      text: "4. 배우 양자경은 제95회 아카데미 시상식에서 <에브리씽 에브리웨어 올 앳 원스>(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상 소감을 완성하시오.",
+    },
+    {
+      value: 20,
+      text: "20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?",
+    },
+  ];
+
+  const truncatedOptions = options.map(option => ({
+    value: option.value,
+    text: truncateText(option.text, 30),
+  }));
+
+  function handleSelectChange(event: { target: { value: any } }) {
     const selectedValue = event.target.value;
     if (selectedValue) {
       window.location.href = `#${selectedValue}`;
@@ -383,23 +418,11 @@ export default function Cinephile() {
                 style={{ width: "100%" }}
                 onChange={handleSelectChange}
               >
-                <option value={1}>
-                  {`1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 않는 음식은?`}
-                </option>
-                <option
-                  value={2}
-                >{`2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 아닌 것은?`}</option>
-                <option
-                  value={3}
-                >{`3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가 아닌 것은?`}</option>
-                <option value={4}>
-                  {`4. 배우 양자경은 제95회 아카데미 시상식에서 <에브리씽 에브리웨어 올 앳
-              원스>(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
-              소감을 완성하시오.`}
-                </option>
-                <option value={20}>
-                  {`20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?`}
-                </option>
+                {truncatedOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.text}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
