@@ -513,9 +513,9 @@ body {
 }
 
 .cine-flex-container {
-  margin-top: 3vh;
+  /* margin-top: 3vh; */
   width: 550px;
-  height: 80vh;
+  height: 85vh;
   /* background-color: yellow; */
   /* opacity: 10%; */
   display: flex;
@@ -528,6 +528,7 @@ body {
   justify-content: center;
   /* font-family: "DOSMyungjo"; */
   font-family: "HS-Regular";
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .cine-nav-container {
@@ -973,4 +974,8 @@ body {
   border: 1.5px solid white;
   padding: 5px;
   margin-left: 10px;
+}
+
+#cine7 {
+  scroll-margin-top: 180px;
 }
