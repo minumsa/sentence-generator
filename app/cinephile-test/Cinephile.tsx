@@ -500,8 +500,18 @@ export default function Cinephile() {
     <div className="cine-container">
       <div className="cine-flex-container">
         <div
-          className="cine-nav-container"
-          style={testNumber < 31 ? navStyle : { height: "30px" }}
+          className={
+            testNumber === 32 ? "cine-nav-32-container" : "cine-nav-container"
+          }
+          style={
+            testNumber < 31
+              ? navStyle
+              : testNumber === 31
+              ? { height: "30px" }
+              : testNumber === 32
+              ? { position: "fixed" }
+              : navStyle
+          }
         >
           <div
             className="cine-test-title"
