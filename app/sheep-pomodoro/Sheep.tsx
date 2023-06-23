@@ -468,7 +468,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
         .map((_, i) => (
           <span className="sheep-image" key={i}>
             <Image
-              src="/sheep_4.png"
+              src="/sheep-img-2.webp"
               alt="Pictures of the sheep"
               width="65"
               height="65"
@@ -485,7 +485,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
         .map((_, i) => (
           <span className="sheep-image" key={i}>
             <Image
-              src="/sheep_3.png"
+              src="/sheep-img-1.webp"
               alt="Pictures of the sheep"
               width="65"
               height="65"
@@ -494,21 +494,6 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
           </span>
         ))
     );
-
-    // if (restTimeToggle === true) {
-    //   images.pop();
-    //   images.unshift(
-    //     <span className="sheep-image" key={`sheep-${Date.now()}`}>
-    //       <Image
-    //         src="/sheep_4.png"
-    //         alt="Pictures of the sheep"
-    //         width="65"
-    //         height="65"
-    //         style={{ marginBottom: "8px" }}
-    //       />
-    //     </span>
-    //   );
-    // }
 
     return images;
   };

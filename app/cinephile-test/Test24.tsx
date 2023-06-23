@@ -54,8 +54,8 @@ export default function Test24({ score, setScore }: TestProps) {
         <div className="cine-quiz">{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/cine-img-24.png"
-            alt="test24-img"
+            src="/cine-img-24.webp"
+            alt="cine-img-24"
             width={window.innerWidth > 450 ? "280" : "180"}
             height={window.innerWidth > 450 ? "190" : "120"}
             style={{
