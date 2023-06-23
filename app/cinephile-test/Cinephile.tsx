@@ -129,7 +129,7 @@ export default function Cinephile() {
     let scoreComment = "";
     switch (true) {
       case score >= 0 && score <= 11:
-        scoreComment = `${value} 님, 혹시 푼 거 맞나요? 🙄`;
+        scoreComment = `${value} 님, 문제 푼 거 맞나요? 🙄`;
         break;
       case score >= 12 && score <= 23:
         scoreComment = `그래도 노력은 인정합니다! 👏`;
@@ -138,7 +138,7 @@ export default function Cinephile() {
         scoreComment = `어느 정도 맞췄지만 시네필이 되려면 아직 멀었습니다. 🫣`;
         break;
       case score >= 36 && score <= 47:
-        scoreComment = `시네필은 아니지만 영화를 상당히 좋아하시는군요? 😮`;
+        scoreComment = `시네필은 아니지만 영화를 상당히 많이 보셨군요? 😮`;
         break;
       case score >= 48 && score <= 59:
         scoreComment = `시네필은 아니지만 상당히 훌륭합니다! ☺️`;
@@ -147,16 +147,16 @@ export default function Cinephile() {
         scoreComment = `${value} 님은 시네필 꿈나무입니다! ⭐️`;
         break;
       case score >= 72 && score <= 83:
-        scoreComment = `${value} 님은 애매한 시네필입니다. 🤔`;
+        scoreComment = `에? ${value} 님은 애매한 시네필입니다! 🤨`;
         break;
       case score >= 84 && score <= 95:
-        scoreComment = `${value} 님은 시네필이 분명합니다! 🥳`;
+        scoreComment = `오오! ${value} 님은 시네필이 분명합니다. 🥳`;
         break;
       case score >= 96 && score <= 107:
-        scoreComment = `${value} 님은 거의 모르는 영화가 없으시군요? 🥸`;
+        scoreComment = `시네필 출두요! ${value} 님은 거의 모르는 영화가 없으시군요? 🥸`;
         break;
       case score >= 108:
-        scoreComment = `${value} 님은 상위 1% 시네필입니다. 🤩`;
+        scoreComment = `놀랍습니다! ${value} 님은 상위 1% 시네필입니다. 🤩`;
         break;
       default:
         scoreComment = "";
@@ -349,6 +349,13 @@ export default function Cinephile() {
     }
   }, [testNumber]);
 
+  function handleSelectChange(event) {
+    const selectedValue = event.target.value;
+    if (selectedValue) {
+      window.location.href = `#${selectedValue}`;
+    }
+  }
+
   return (
     <div className="cine-container">
       <div className="cine-flex-container">
@@ -363,6 +370,38 @@ export default function Cinephile() {
             }} // TODO: 테스트용 온 클릭, 나중에 빼기!!
           >
             <div>{"시네필 테스트"}</div>
+          </div>
+          <div
+            className={testNumber === 32 ? "cine-hide" : ""}
+            style={testNumber === 32 ? {} : { display: "none" }}
+          >
+            <div className="cine-select-div">
+              <select
+                className="cine-hide-select"
+                name="tests"
+                id="test-select"
+                style={{ width: "100%" }}
+                onChange={handleSelectChange}
+              >
+                <option value={1}>
+                  {`1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 않는 음식은?`}
+                </option>
+                <option
+                  value={2}
+                >{`2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 아닌 것은?`}</option>
+                <option
+                  value={3}
+                >{`3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가 아닌 것은?`}</option>
+                <option value={4}>
+                  {`4. 배우 양자경은 제95회 아카데미 시상식에서 <에브리씽 에브리웨어 올 앳
+              원스>(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
+              소감을 완성하시오.`}
+                </option>
+                <option value={20}>
+                  {`20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?`}
+                </option>
+              </select>
+            </div>
           </div>
           {progressContent}
         </div>

@@ -82,7 +82,7 @@ export default function Answer() {
       className="cine-answer-container"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      <div style={{ marginTop: "10px" }}>
+      <div style={{ marginTop: "10px" }} id="1">
         <div className="cine-test-format">
           <div className="cine-quiz">
             <span>{`1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 `}</span>
@@ -153,7 +153,7 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line"></div>
+      <div className="cine-answer-line" id="3"></div>
       <div className="cine-test-format">
         <div className="cine-quiz">
           <span>
@@ -198,7 +198,7 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line"></div>
+      <div className="cine-answer-line" id="4"></div>
       <div className="cine-test-format">
         <div className="cine-quiz">
           {`4. 배우 양자경은 제95회 아카데미 시상식에서 <에브리씽 에브리웨어 올 앳
@@ -226,7 +226,7 @@ export default function Answer() {
           </span>
         </div>
       </div>
-      <div className="cine-answer-line"></div>
+      <div className="cine-answer-line" id="5"></div>
       <div className="cine-test-format">
         <div className="cine-quiz">
           <span>{`5. 다음 중 칸 영화제에서 황금종려상을 수상하지 `}</span>
@@ -741,9 +741,8 @@ export default function Answer() {
               .join("")}.) 박스오피스 1위를 기록한 영화는?`}{" "}
           </span>
           <span style={{ color: "gray" }}>
-            (* 사용자의 인터넷 환경에 따라 보기의 데이터를 불러오는 속도가
-            소요될 수 있는 문제입니다. 10초 이상 기다려도 보기가 뜨지 않는다면
-            다음 문제로 넘어가주세요.)
+            (* 10초 이상 기다려도 보기가 뜨지 않는다면 다음 문제로
+            넘어가주세요.)
           </span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -858,7 +857,7 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line"></div>
+      <div className="cine-answer-line" id="20"></div>
       <div className="cine-test-format">
         <div className="cine-quiz">
           <span>{`20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?`}</span>

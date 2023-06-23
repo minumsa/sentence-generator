@@ -506,10 +506,10 @@ body {
   /* font-weight: 300; 300 or 700 */
   font-size: 20px;
 
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
 }
 
 .cine-flex-container {
@@ -531,9 +531,11 @@ body {
 }
 
 .cine-nav-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   font-size: 25px;
+  /* margin-bottom: 50px; */
   /* background-color: gray; */
 }
 
@@ -691,7 +693,55 @@ body {
   /* font-family: "DOSMyungjo"; */
 }
 
+.cine-hide {
+  display: flex;
+  /* width: 550px; */
+  /* height: 200px; */
+  margin-top: 30px;
+  margin-bottom: 50px;
+  justify-content: center;
+  /* font-family: "DOSMyungjo"; */
+  font-family: "HS-Regular";
+}
+
+.cine-select-div {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.cine-hide-select {
+  font-size: 22px;
+  height: 50px;
+  padding: 10px;
+  font-family: "omyu_pretty";
+}
+
+.cine-answer-container {
+  margin-top: 70px;
+  /* -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; */
+}
+
 @media (max-width: 600px) {
+  /* .cine-nav-container {
+    width: 90%;
+    height: 100px;
+  } */
+
+  .cine-answer-container {
+    margin-top: 50px;
+  }
+
+  .cine-hide-select {
+    font-size: 20px;
+    height: 40px;
+    padding: 5px;
+  }
+
   .test0-div {
     height: 450px;
     margin-top: 10px;
@@ -906,11 +956,4 @@ body {
   border: 1.5px solid white;
   padding: 5px;
   margin-left: 10px;
-}
-
-.cine-answer-container {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
