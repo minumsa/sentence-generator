@@ -35,11 +35,11 @@ export default function Test12({ score, setScore }: TestProps) {
           <div
             style={{
               border: "1px solid black",
-              padding: "15px 25px",
+              padding: "15px 35px",
               marginTop: "10px",
             }}
           >
-            {`1895년 겨울, 뤼미에르 형제는 프랑스의 한 카페에서 자신들이 만든 영상을 공개했다. 이때 상영된 50초 분량의 <`}
+            <span>{`1895년 겨울, 뤼미에르 형제는 프랑스의 한 카페에서 자신들의 작품을 공개했다. 이때 상영되었던 50초 분량의 <`}</span>
             <input
               className="cine-test-input"
               onChange={e => setMark(e.target.value)}

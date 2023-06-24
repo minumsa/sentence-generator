@@ -47,23 +47,7 @@ export default function Test17({ score, setScore }: TestProps) {
 
   useEffect(() => {
     if (lastDay && !lastDaysBoxOfficeList) {
-      const url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${lastDay}`;
-
-      axios
-        .get(url)
-        .then(res => {
-          const data = res.data;
-          setLastDaysBoxOfficeList(data.boxOfficeResult.dailyBoxOfficeList);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }
-  }, [lastDay, lastDaysBoxOfficeList]);
-
-  useEffect(() => {
-    if (lastDay && !lastDaysBoxOfficeList) {
-      const url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${lastDay}`;
+      const url = `https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${lastDay}`;
 
       axios
         .get(url)
@@ -100,7 +84,7 @@ export default function Test17({ score, setScore }: TestProps) {
 
   useEffect(() => {
     setCopiedScore(score);
-  }, []);
+  }, [score]);
 
   function clickAnswer(answerIndex: number) {
     if (answers[answerIndex].backgroundColor === answerStyle.backgroundColor) {
@@ -121,43 +105,40 @@ export default function Test17({ score, setScore }: TestProps) {
   }
 
   return (
-    <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
-          <span>
-            {`17. 다음 중 어제(${lastDay
-              ?.split("")
-              .slice(0, 4)
-              .join("")}.${lastDay?.split("").slice(4, 6).join("")}.${lastDay
-              ?.split("")
-              .slice(6, 8)
-              .join("")}.) 박스오피스 1위를 기록한 영화는?`}{" "}
-          </span>
-          <span style={{ color: "gray" }}>
-            (* 10초 이상 기다려도 보기가 뜨지 않는다면 다음 문제로
-            넘어가주세요.)
-          </span>
-        </div>
-        {[1, 2, 3, 4].map(answerIndex => (
-          <div
-            key={answerIndex}
-            className="cine-answer"
-            style={answers[answerIndex - 1]}
-            onClick={() => clickAnswer(answerIndex - 1)}
-          >
-            ({answerIndex}){" "}
-            {answerIndex === 1
-              ? movie2
-              : answerIndex === 2
-              ? movie3
-              : answerIndex === 3
-              ? movie1
-              : answerIndex === 4
-              ? movie4
-              : ``}
-          </div>
-        ))}
+    <div className="cine-test-format">
+      <div className="cine-quiz">
+        <span>
+          {`17. 다음 중 어제(${lastDay
+            ?.split("")
+            .slice(0, 4)
+            .join("")}.${lastDay?.split("").slice(4, 6).join("")}.${lastDay
+            ?.split("")
+            .slice(6, 8)
+            .join("")}.) 박스오피스 1위를 기록한 영화는?`}{" "}
+        </span>
+        <span style={{ color: "gray" }}>
+          (* 10초 이상 기다려도 보기가 뜨지 않는다면 다음 문제로 넘어가주세요.)
+        </span>
       </div>
-    </>
+      {[1, 2, 3, 4].map(answerIndex => (
+        <div
+          key={answerIndex}
+          className="cine-answer"
+          style={answers[answerIndex - 1]}
+          onClick={() => clickAnswer(answerIndex - 1)}
+        >
+          ({answerIndex}){" "}
+          {answerIndex === 1
+            ? movie2
+            : answerIndex === 2
+            ? movie3
+            : answerIndex === 3
+            ? movie1
+            : answerIndex === 4
+            ? movie4
+            : ``}
+        </div>
+      ))}
+    </div>
   );
 }
