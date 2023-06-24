@@ -77,11 +77,11 @@ export default function Test21({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `신발`
+              ? `초콜릿`
               : answerIndex === 2
-              ? `중고책`
+              ? `젤라또`
               : answerIndex === 3
-              ? `과일`
+              ? `크레페`
               : answerIndex === 4
               ? `와플`
               : ``}

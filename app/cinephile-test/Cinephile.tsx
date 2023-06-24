@@ -36,6 +36,21 @@ import Test0 from "./Test0";
 import Test31 from "./Test31";
 import Image from "next/image";
 import Answer from "./Answer";
+import Script from "next/script";
+
+declare global {
+  // Kakao 전역에서 접근 가능하도록
+  interface Window {
+    Kakao: any;
+  }
+}
+
+const kakaoInit = () => {
+  // 페이지가 로드시 실행
+  if (!window.Kakao.isInitialized())
+    // 선언되지 않았을 때만 실행하도록 if문 추가
+    window.Kakao.init("8b2e769ecd8f1b59e13d651bd3177712");
+};
 
 export default function Cinephile() {
   const [testNumber, setTestNumber] = useState<number>(0);
@@ -50,6 +65,18 @@ export default function Cinephile() {
   const [value, setValue] = useState<string>("참가자");
   const [scoreComment, setScoreComment] = useState<string>("");
   const [testMove, setTestMove] = useState<any>();
+
+  const onShare = async () => {
+    console.log("TEST");
+    await window.Kakao.Share.sendDefault({
+      objectType: "text",
+      text: `나의 시네필 평점은?`,
+      link: {
+        mobileWebUrl: "https://divdivdiv.com/cinephile-test",
+        webUrl: "https://divdivdiv.com/cinephile-test",
+      },
+    });
+  };
 
   function handleTest() {
     switch (testNumber) {
@@ -266,7 +293,9 @@ export default function Cinephile() {
               className="cine-kakao-button-flex"
               style={{ marginTop: "10px" }}
             >
-              <div className="cine-next-button">카카오톡 공유하기</div>
+              <div className="cine-next-button" onClick={onShare}>
+                카카오톡 공유하기
+              </div>
             </div>
             <div
               className="cine-challenge-button-flex"
@@ -563,6 +592,10 @@ export default function Cinephile() {
         </div>
         <div className="cine-footer-container">{buttonContent}</div>
       </div>
+      <Script
+        src="https://developers.kakao.com/sdk/js/kakao.js"
+        onLoad={kakaoInit}
+      />
     </div>
   );
 }
