@@ -23,14 +23,13 @@ export default function Test31({ value, score }: NameProps) {
 
   useEffect(() => {
     axios
-      .post("/api/createResult", {
+      .post("/api2/createResult", {
         name: value,
         score: score,
       })
       .then(function (response) {
         setMyRank(response.data.order);
         setTotalcount(response.data.totalCount);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

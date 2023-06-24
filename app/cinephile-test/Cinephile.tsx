@@ -565,9 +565,9 @@ export default function Cinephile() {
           <div
             className="cine-test-title"
             onClick={() => {
-              // if (testNumber > 0) {
-              setTestNumber(31);
-              // }
+              if (testNumber === 32) {
+                setTestNumber(31);
+              }
             }} // TODO: 테스트용 온 클릭, 나중에 빼기!!
           >
             <div>{"시네필 테스트"}</div>

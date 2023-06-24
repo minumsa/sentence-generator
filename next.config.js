@@ -7,8 +7,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: "/:path*",
-        destination: "https://cinephile-test-server.vercel.app/:path*",
+        source: "/api2/:path*",
+        destination: "https://cinephile-test-server.vercel.app/api/:path*",
       },
     ];
   },
