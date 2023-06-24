@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 interface NameProps {
   value: string;
@@ -10,6 +11,8 @@ interface NameProps {
 
 export default function Test31({ value, score }: NameProps) {
   const maxScore = 120; // 최대 점수 설정
+  const [myRank, setMyRank] = useState<number>(0);
+  const [totalCount, setTotalcount] = useState<number>(0);
 
   const calculatePercentage = (score: number) => {
     return Math.floor((score / maxScore) * 100); // 백분율 계산
@@ -17,6 +20,19 @@ export default function Test31({ value, score }: NameProps) {
 
   const percentage = calculatePercentage(score); // 현재 점수의 백분율 계산
   const clipPathPercentage = Math.floor(percentage / 10) * 10; // 10% 단위로 변화
+
+  axios
+    .post("https://cinephile-test-server.vercel.app/api/createResult", {
+      name: value,
+      score: score,
+    })
+    .then(function (response) {
+      setMyRank(response.data.order);
+      setTotalcount(response.data.totalCount);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   return (
     <div
@@ -27,7 +43,12 @@ export default function Test31({ value, score }: NameProps) {
         position: "relative",
       }}
     >
-      <div className="cine-end-div">{value} 님의 결과는?</div>
+      <div className="cine-end-div" style={{ marginBottom: "12px" }}>
+        {value} 님의 결과는?
+      </div>
+      <div className="cine-end-div" style={{ marginBottom: "30px" }}>
+        {totalCount}명 중에 {myRank}등!
+      </div>
       <div className="cine-score">{percentage}점</div>
       <div
         className="star-box"
