@@ -505,11 +505,6 @@ body {
   /* "GangwonEdu_OTFBoldA"; */
   /* font-weight: 300; 300 or 700 */
   font-size: 20px;
-
-  /* -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; */
 }
 
 .cine-flex-container {
@@ -521,6 +516,25 @@ body {
   display: flex;
   flex-direction: column;
 }
+/* 
+@-webkit-keyframes blink{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-moz-keyframes blink{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes blink{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+} */
+
+/* -webkit-animation: blink 0.5s ease-in-out infinite alternate;
+-moz-animation: blink 0.5s ease-in-out infinite alternate;
+animation: blink 0.5s ease-in-out infinite alternate; */
 
 .cine-test-title {
   font-size: 32px;
@@ -528,7 +542,6 @@ body {
   justify-content: center;
   /* font-family: "DOSMyungjo"; */
   font-family: "HS-Regular";
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .cine-nav-container {
@@ -848,7 +861,7 @@ body {
   }
 
   .cine-nav-32-container {
-    width: 90%;
+    width: 100%;
   }
 }
 
@@ -958,7 +971,7 @@ body {
 
 .cine-answer-line {
   width: 100%;
-  border-top: dashed #0e1111;
+  border-top: 1px dashed #0e1111;
   margin: 40px 0;
 }
 
@@ -974,8 +987,4 @@ body {
   border: 1.5px solid white;
   padding: 5px;
   margin-left: 10px;
-}
-
-#cine7 {
-  scroll-margin-top: 180px;
 }

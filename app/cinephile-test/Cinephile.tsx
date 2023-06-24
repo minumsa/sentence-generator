@@ -50,8 +50,6 @@ export default function Cinephile() {
   const [scoreComment, setScoreComment] = useState<string>("");
   const [testMove, setTestMove] = useState<any>();
 
-  console.log(score);
-
   function handleTest() {
     switch (testNumber) {
       case 0:
@@ -386,7 +384,7 @@ export default function Cinephile() {
       text: "6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?",
     },
     {
-      value: "cine7",
+      value: "7",
       text: `7. 웨스 크레이븐이 연출을 맡고 케빈 윌리엄슨이 각본을 썼으며, "공포영화의 법칙"이라는 클리셰를 메타픽션적으로 활용해 개봉 당시 흥행과 더불어 작품성까지 크게 호평받은 이 공포영화 시리즈는?`,
     },
     {
@@ -509,7 +507,7 @@ export default function Cinephile() {
               : testNumber === 31
               ? { height: "30px" }
               : testNumber === 32
-              ? { position: "fixed" }
+              ? { ...navStyle, height: "0" }
               : navStyle
           }
         >
