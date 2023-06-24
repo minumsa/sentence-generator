@@ -68,17 +68,19 @@ export default function Cinephile() {
   const [scoreToStar, setScoreToStar] = useState<string>("⭐️");
   const convertedScore = Math.floor((score / 120) * 5 * 2) / 2; // 점수를 5점 만점으로 환산하고 0.5 단위로 변경
 
-  if (convertedScore >= 0 && convertedScore < 1) {
-    setScoreToStar("⭐️");
-  } else if (convertedScore >= 1 && convertedScore < 2) {
-    setScoreToStar("⭐️⭐️");
-  } else if (convertedScore >= 2 && convertedScore < 3) {
-    setScoreToStar("⭐️⭐️⭐️");
-  } else if (convertedScore >= 3 && convertedScore < 4) {
-    setScoreToStar("⭐️⭐️⭐️⭐️");
-  } else if (convertedScore >= 4) {
-    setScoreToStar("⭐️⭐️⭐️⭐️⭐️");
-  }
+  useEffect(() => {
+    if (convertedScore >= 0 && convertedScore < 1) {
+      setScoreToStar("⭐️");
+    } else if (convertedScore >= 1 && convertedScore < 2) {
+      setScoreToStar("⭐️⭐️");
+    } else if (convertedScore >= 2 && convertedScore < 3) {
+      setScoreToStar("⭐️⭐️⭐️");
+    } else if (convertedScore >= 3 && convertedScore < 4) {
+      setScoreToStar("⭐️⭐️⭐️⭐️");
+    } else if (convertedScore >= 4) {
+      setScoreToStar("⭐️⭐️⭐️⭐️⭐️");
+    }
+  }, [convertedScore]);
 
   const onShare = async () => {
     await window.Kakao.Share.sendDefault({
