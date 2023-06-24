@@ -21,18 +21,21 @@ export default function Test31({ value, score }: NameProps) {
   const percentage = calculatePercentage(score); // 현재 점수의 백분율 계산
   const clipPathPercentage = Math.floor(percentage / 10) * 10; // 10% 단위로 변화
 
-  axios
-    .post("https://cinephile-test-server.vercel.app/api/createResult", {
-      name: value,
-      score: score,
-    })
-    .then(function (response) {
-      setMyRank(response.data.order);
-      setTotalcount(response.data.totalCount);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  useEffect(() => {
+    axios
+      .post("/api/createResult", {
+        name: value,
+        score: score,
+      })
+      .then(function (response) {
+        setMyRank(response.data.order);
+        setTotalcount(response.data.totalCount);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div
