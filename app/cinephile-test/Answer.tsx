@@ -629,7 +629,7 @@ export default function Answer() {
       <div className="cine-answer-line" id="14"></div>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`14. 다음 중 영화에 관련된 줄임말이 `}</span>
+          <span>{`14. 다음 중 누벨바그의 핵심 인물이었던 장뤽 고다르의 작품이 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
         </div>
@@ -637,18 +637,18 @@ export default function Answer() {
           <div
             key={answerIndex}
             className={`cine-answer-answer ${
-              answerIndex === 2 ? "cine-answer-selected" : ""
+              answerIndex === 3 ? "cine-answer-selected" : ""
             }`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `코돌비 // 메가박스 코엑스 돌비 시네마`
+              ? `비브르 사 비(1962)`
               : answerIndex === 2
-              ? `분조카 // 분위기 좋은 카페`
+              ? `리어 왕(1987)`
               : answerIndex === 3
-              ? `용아맥 // CGV 용산아이파크몰 아이맥스`
+              ? `내 어머니의 모든 것(1999) // 페드로 알모도바르의 작품이다.`
               : answerIndex === 4
-              ? `영스엑 // CGV 영등포 스크린 X`
+              ? `언어와의 작별(2014)`
               : ``}
           </div>
         ))}

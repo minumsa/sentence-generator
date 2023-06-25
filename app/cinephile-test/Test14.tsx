@@ -43,7 +43,7 @@ export default function Test14({ score, setScore }: TestProps) {
         index === answerIndex ? answerStyle : {}
       );
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 1 ? score + 4 : copiedScore));
+      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
     }
   }
 
@@ -51,7 +51,7 @@ export default function Test14({ score, setScore }: TestProps) {
     <>
       <div className="cine-test-format">
         <div className="cine-quiz">
-          <span>{`14. 다음 중 영화에 관련된 줄임말이 `}</span>
+          <span>{`14. 다음 중 누벨바그의 핵심 인물이었던 장뤽 고다르의 작품이 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
         </div>
@@ -64,13 +64,13 @@ export default function Test14({ score, setScore }: TestProps) {
           >
             ({answerIndex}){" "}
             {answerIndex === 1
-              ? `코돌비`
+              ? `비브르 사 비(1962)`
               : answerIndex === 2
-              ? `분조카`
+              ? `리어 왕(1987)`
               : answerIndex === 3
-              ? `용아맥`
+              ? `내 어머니의 모든 것(1999)`
               : answerIndex === 4
-              ? `영스엑`
+              ? `언어와의 작별(2014)`
               : ``}
           </div>
         ))}

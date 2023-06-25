@@ -30,6 +30,7 @@ export default function Test31({ value, score }: NameProps) {
       .then(function (response) {
         setMyRank(response.data.order);
         setTotalcount(response.data.totalCount);
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
