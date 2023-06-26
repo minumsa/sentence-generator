@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Draggable from "react-draggable";
@@ -13,7 +11,12 @@ const Index: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
 
   const clickIconHandler = (path: string) => {
-    router.push(path);
+    if (path.startsWith("http")) {
+      window.open(path, "_blank"); // 외부 링크를 새 탭에서 열기
+    } else {
+      const newTab = window.open(path, "_blank"); // 새 탭 열기
+      newTab?.focus(); // 새 탭으로 포커스 이동
+    }
   };
 
   const IconContainer: React.FC<{
@@ -21,23 +24,9 @@ const Index: React.FC = () => {
     projectName: string;
     projectDescription: string;
     className: string;
-    onTouchStart?: () => void;
-    onTouchEnd?: () => void;
-  }> = ({
-    path,
-    projectName,
-    projectDescription,
-    className,
-    onTouchStart,
-    onTouchEnd,
-  }) => (
+  }> = ({ path, projectName, projectDescription, className }) => (
     <Draggable>
-      <div
-        className={className}
-        onDoubleClick={() => clickIconHandler(path)}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
+      <div className={className} onDoubleClick={() => clickIconHandler(path)}>
         <div
           className="index-icon-image"
           style={{
@@ -66,32 +55,30 @@ const Index: React.FC = () => {
         projectName="Project 1"
         projectDescription="Sheep Pomodoro"
         className="index-icon-container"
-        onTouchStart={() => setIsDragging(true)}
-        onTouchEnd={() => setIsDragging(false)}
       />
       <IconContainer
         path="/cinephile-test"
         projectName="Project 2"
         projectDescription="Cinephile Test"
         className="index-icon-container-2"
-        onTouchStart={() => setIsDragging(true)}
-        onTouchEnd={() => setIsDragging(false)}
       />
       <IconContainer
         path="/possible-universe"
         projectName="Project 3"
         projectDescription="Possible Universe"
         className="index-icon-container-3"
-        onTouchStart={() => setIsDragging(true)}
-        onTouchEnd={() => setIsDragging(false)}
+      />
+      <IconContainer
+        path="https://blog.divdivdiv.com"
+        projectName="Project 4"
+        projectDescription="Blog"
+        className="index-icon-container-4"
       />
       <IconContainer
         path="/fruits"
-        projectName="Project 4"
+        projectName="Project 5"
         projectDescription="Fruits"
-        className="index-icon-container-4"
-        onTouchStart={() => setIsDragging(true)}
-        onTouchEnd={() => setIsDragging(false)}
+        className="index-icon-container-5"
       />
     </div>
   );
