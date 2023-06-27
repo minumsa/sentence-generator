@@ -185,7 +185,7 @@ export default function RandomSentenceGenerator({
   };
 
   return (
-    <>
+    <div className="possible-div">
       <meta
         name="theme-color"
         media="(prefers-color-scheme: light)"
@@ -202,7 +202,8 @@ export default function RandomSentenceGenerator({
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              transform: `rotate(${Math.random() * 180 - 180}deg)`,
+              marginRight: "30px",
+              // transform: `rotate(${Math.random() * 180 - 180}deg)`,
               // scale(${Math.random() * 1.2 + 0.3})
             }}
           >
@@ -212,7 +213,8 @@ export default function RandomSentenceGenerator({
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              transform: `rotate(${Math.random() * 180 - 180}deg)`,
+              marginRight: "30px",
+              // transform: `rotate(${Math.random() * 180 - 180}deg)`,
             }}
           >
             {randomObject}{" "}
@@ -221,7 +223,7 @@ export default function RandomSentenceGenerator({
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              transform: `rotate(${Math.random() * 180 - 180}deg)`,
+              // transform: `rotate(${Math.random() * 180 - 180}deg)`,
             }}
           >
             {randomVerb}
@@ -260,6 +262,6 @@ export default function RandomSentenceGenerator({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
