@@ -13,8 +13,6 @@ export default function Sheep() {
   const [plan, setPlan] = useState<number>(12);
   const [complete, setComplete] = useState<number>(0);
 
-  console.log(plan);
-
   // 현재 날짜와 시간을 나타내는 새로운 Date 객체를 생성한다
   const midnight = new Date();
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Draggable from "react-draggable";
+import Clock from "./Clock";
 
 const Index: React.FC = () => {
   const [folderWidth, setFolderWidth] = useState<number>(800);
@@ -42,13 +43,13 @@ const Index: React.FC = () => {
     },
   ]);
 
-  const [currentTime, setCurrentTime] = useState<string>(() => {
-    const date = new Date();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    const seconds = String(date.getSeconds()).padStart(2, "0");
-    return `${hours}:${minutes}:${seconds}`;
-  });
+  // const [currentTime, setCurrentTime] = useState<string>(() => {
+  //   const date = new Date();
+  //   const hours = String(date.getHours()).padStart(2, "0");
+  //   const minutes = String(date.getMinutes()).padStart(2, "0");
+  //   const seconds = String(date.getSeconds()).padStart(2, "0");
+  //   return `${hours}:${minutes}:${seconds}`;
+  // });
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -200,7 +201,7 @@ const Index: React.FC = () => {
     </Draggable>
   );
 
-  const currentTimeMemoized = useMemo(() => currentTime, [currentTime]);
+  // const currentTimeMemoized = useMemo(() => currentTime, [currentTime]);
 
   function getDayOfWeek(date: Date): string {
     const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
@@ -273,7 +274,9 @@ const Index: React.FC = () => {
             // opacity: "50%",
           }}
         >
-          <div className="menu-text">{home}</div>
+          <div className="menu-text">
+            {language === "English" ? "Home" : "홈"}
+          </div>
           <div className="menu-text">{about}</div>
           <div className="menu-text">{contact}</div>
           <div className="menu-text" onClick={languageHandler}>
@@ -281,6 +284,9 @@ const Index: React.FC = () => {
           </div>
           <div className="menu-text">
             {month}월 {day}일 ({dayOfWeek}){/* {year} / 0{month} / {day} */}
+          </div>
+          <div className="menu-text">
+            <Clock />
           </div>
         </div>
       </div>
@@ -298,78 +304,82 @@ const Index: React.FC = () => {
             className={`index-icon-container-${index + 1}`}
           />
         ))}
-        <div className="index-icon-container-6">
-          {showImage && (
+        <Draggable>
+          <div className="index-icon-container-6">
+            {showImage && (
+              <div
+                className="image-modal"
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  zIndex: 9999,
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onClick={handleImageClick}
+              >
+                <Image src={imgSrc} alt={imgAlt} width={720} height={961} />
+              </div>
+            )}
             <div
-              className="image-modal"
+              className="index-icon-image"
               style={{
-                position: "fixed",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 9999,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                color: "white",
+                cursor: "move",
+                backgroundImage: `url(cat.webp)`,
+                backgroundSize: "100%",
+                width: folderWidth / 11,
+                height: folderHeight / 6.8,
+                border: "4px solid white",
+                boxShadow: "1.5px 1.5px 3px gray",
               }}
-              onClick={handleImageClick}
-            >
-              <Image src={imgSrc} alt={imgAlt} width={720} height={961} />
-            </div>
-          )}
-          <div
-            className="index-icon-image"
-            style={{
-              color: "white",
-              cursor: "move",
-              backgroundImage: `url(cat.webp)`,
-              backgroundSize: "100%",
-              width: folderWidth / 11,
-              height: folderHeight / 6.8,
-              border: "4px solid white",
-              boxShadow: "1.5px 1.5px 3px gray",
-            }}
-            onDoubleClick={() => handleDoubleClick(6)}
-          ></div>
-          <div className="index-icon-text">cat.webp</div>
-        </div>
-        <div className="index-icon-container-7">
-          {showImage && (
+              onDoubleClick={() => handleDoubleClick(6)}
+            ></div>
+            <div className="index-icon-text">cat.webp</div>
+          </div>
+        </Draggable>
+        <Draggable>
+          <div className="index-icon-container-7">
+            {showImage && (
+              <div
+                className="image-modal"
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  zIndex: 9999,
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onClick={handleImageClick}
+              >
+                <Image src={imgSrc} alt={imgAlt} width={720} height={961} />
+              </div>
+            )}
             <div
-              className="image-modal"
+              className="index-icon-image"
               style={{
-                position: "fixed",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 9999,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                color: "white",
+                cursor: "move",
+                backgroundImage: `url(me.webp)`,
+                backgroundSize: "100%",
+                width: folderWidth / 11,
+                height: folderHeight / 6.8,
+                border: "4px solid white",
+                boxShadow: "1.5px 1.5px 3px gray",
               }}
-              onClick={handleImageClick}
-            >
-              <Image src={imgSrc} alt={imgAlt} width={720} height={961} />
-            </div>
-          )}
-          <div
-            className="index-icon-image"
-            style={{
-              color: "white",
-              cursor: "move",
-              backgroundImage: `url(me.webp)`,
-              backgroundSize: "100%",
-              width: folderWidth / 11,
-              height: folderHeight / 6.8,
-              border: "4px solid white",
-              boxShadow: "1.5px 1.5px 3px gray",
-            }}
-            onDoubleClick={() => handleDoubleClick(7)}
-          ></div>
-          <div className="index-icon-text">me.webp</div>
-        </div>
+              onDoubleClick={() => handleDoubleClick(7)}
+            ></div>
+            <div className="index-icon-text">me.webp</div>
+          </div>
+        </Draggable>
       </div>
       <div
         style={{
@@ -383,7 +393,7 @@ const Index: React.FC = () => {
           // opacity: "50%",
         }}
       >
-        <div style={{ fontSize: "12px", fontWeight: "300" }}>5개의 항목</div>
+        <div style={{ fontSize: "12px", fontWeight: "300" }}>7개의 항목</div>
         <div>
           <input type="range"></input>
         </div>
