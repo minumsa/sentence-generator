@@ -1012,13 +1012,18 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   width: 100vw;
   height: 100vh;
+
+  background-image: linear-gradient(45deg, #d0d0d0 25%, transparent 25%),
+    linear-gradient(-45deg, #d0d0d0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d0d0d0 75%),
+    linear-gradient(-45deg, transparent 75%, #d0d0d0 75%);
 }
 
 .index-container {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 98.7%;
+  height: 98.2%;
   font-family: "Pretendard Variable", "Pretendard", "-apple-system",
     "BlinkMacSystemFont", system-ui, "Roboto", "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
@@ -1033,8 +1038,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 25%;
-  left: 25%;
+  top: 200px;
+  left: 120px;
 }
 
 .index-icon-container-2 {
@@ -1044,8 +1049,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 25%;
-  left: 35%;
+  top: 200px;
+  left: 250px;
 }
 
 .index-icon-container-3 {
@@ -1055,8 +1060,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 25%;
-  left: 45%;
+  top: 200px;
+  left: 380px;
 }
 
 .index-icon-container-4 {
@@ -1066,8 +1071,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 25%;
-  left: 55%;
+  top: 200px;
+  left: 510px;
 }
 
 .index-icon-container-5 {
@@ -1077,8 +1082,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 25%;
-  left: 65%;
+  top: 200px;
+  left: 640px;
 }
 
 .index-icon-container-6 {
@@ -1088,8 +1093,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 45%;
-  left: 25%;
+  top: 500px;
+  left: 280px;
 }
 
 .index-icon-container-7 {
@@ -1099,8 +1104,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 45%;
-  left: 35%;
+  top: 503px;
+  left: 390px;
 }
 
 .index-icon-container-8 {

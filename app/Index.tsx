@@ -158,11 +158,23 @@ const Index: React.FC = () => {
     );
   };
 
+  const [checkerWidth, setCheckerWidth] = useState<number>(4);
+
+  // useEffect(() => {
+  //   setCheckerWidth(5);
+  // }, []);
+
   return (
     <div
       className="index-container-container"
       style={{
         backgroundColor: isDarkMode ? "#ffffff" : "#000000",
+        backgroundSize: isDarkMode
+          ? `${checkerWidth * 2}px ${checkerWidth * 2}px`
+          : "0",
+        backgroundPosition: isDarkMode
+          ? `0 0, 0 ${checkerWidth}px, ${checkerWidth}px -${checkerWidth}px, -${checkerWidth}px 0px`
+          : "0",
       }}
     >
       <div
