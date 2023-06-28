@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import NoSSR from "./NoSSR";
 
-export default function Clock() {
+export default function Clock({ language }: any) {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   useEffect(() => {
@@ -14,10 +14,27 @@ export default function Clock() {
     };
   }, []);
 
-  const hours = String(currentTime.getHours()).padStart(2, "0");
+  const hours = currentTime.getHours();
   const minutes = String(currentTime.getMinutes()).padStart(2, "0");
   const seconds = String(currentTime.getSeconds()).padStart(2, "0");
-  const dateStr = `${hours}:${minutes}:${seconds}`;
+  const twelveHourFormat = hours % 12 || 12;
+  let period = "";
 
-  return <NoSSR>{dateStr}</NoSSR>;
+  if (language === "A") {
+    period = hours >= 12 ? "PM" : "AM";
+
+    const engClock = `${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
+    return (
+      <NoSSR>
+        {period} {engClock}
+      </NoSSR>
+    );
+  } else {
+    period = hours >= 12 ? "오후" : "오전";
+    const korClock = `${period} ${String(twelveHourFormat).padStart(
+      2,
+      "0"
+    )}:${minutes}`;
+    return <NoSSR>{korClock}</NoSSR>;
+  }
 }
