@@ -1,6 +1,15 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
 @import "@kfonts/neodgm-code";
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@900&family=Open+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap");
+
+@font-face {
+  font-family: "ChosunGs";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGs.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
   font-family: "HS-Regular";
@@ -996,6 +1005,27 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   margin-left: 10px;
 }
 
+.index-container-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.index-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Pretendard Variable", "Pretendard", "-apple-system",
+    "BlinkMacSystemFont", system-ui, "Roboto", "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 400;
+}
+
 .index-icon-container-1 {
   width: 120px;
   display: flex;
@@ -1041,7 +1071,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 }
 
 .index-icon-container-5 {
-  width: 120px;
+  width: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1060,7 +1090,6 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   position: absolute;
   top: 45%;
   left: 25%;
-  font-weight: 300;
 }
 
 .index-icon-container-7 {
@@ -1072,7 +1101,21 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   position: absolute;
   top: 45%;
   left: 35%;
-  font-weight: 300;
+}
+
+.index-icon-container-8 {
+  font-family: "ChosunGs";
+  width: 320px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  cursor: move;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 .index-icon-text {
@@ -1081,12 +1124,11 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   margin-top: 8px;
   font-size: 14px;
-  font-weight: 300;
   /* color: #ffffff; */
   /* color: #dddede; */
   /* color: rgba(255, 255, 255, 1) */
   /* color: #0e1111; */
-  color: #000000;
+  /* color: #000000; */
   line-height: 1.3;
   /* text-shadow: 1px 1px 3px #000; */
 }
@@ -1097,8 +1139,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   margin-top: 10px;
   font-size: 14px;
-  font-weight: 300;
-  color: #000000;
+  /* color: #000000; */
   line-height: 1.3;
 }
 
@@ -1115,14 +1156,13 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 
   /* color: #a1a1a1; */
   /* color: #dddede; */
-  color: #000000;
+  /* color: #000000; */
   /* color: rgb(244, 244, 244); */
   /* background-color: #000000; */
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   /* margin: 0 1vw; */
   margin: 0 15px;
   cursor: pointer;
-  font-weight: 300;
 
   /* text-decoration: underline; */
 }
@@ -1133,22 +1173,37 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 
   /* color: #a1a1a1; */
   /* color: #dddede; */
-  color: #000000;
+  /* color: #000000; */
   /* color: rgb(244, 244, 244); */
   /* background-color: #000000; */
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   margin: 0 10px;
   cursor: pointer;
-  font-weight: 300;
 }
 
 .menu-text:hover,
-.right-menu-text:hover {
+.right-menu-text:hover,
+.dark-mode-icon:hover {
   /* color: blue; */
 
   -webkit-animation: blink 0.5s ease-in-out infinite alternate;
   -moz-animation: blink 0.5s ease-in-out infinite alternate;
   animation: blink 0.5s ease-in-out infinite alternate;
+}
+
+.dark-mode-icon {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+
+  font-size: 14px;
+
+  /* color: #a1a1a1; */
+  /* color: #dddede; */
+  /* color: rgb(244, 244, 244); */
+  /* background-color: white; */
+  margin: 0 8px;
+  cursor: pointer;
 }
 
 @-webkit-keyframes blink {

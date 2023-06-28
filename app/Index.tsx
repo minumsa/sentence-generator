@@ -10,7 +10,8 @@ const Index: React.FC = () => {
   const [folderHeight, setFolderHeight] = useState<number>(65);
   const [imgFileWidth, setImgFileWidth] = useState<number>(72);
   const [imgFileHeight, setImgFileHeight] = useState<number>(96);
-  const [language, setLanguage] = useState("A");
+  const [language, setLanguage] = useState<string>("A");
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const projects = useMemo(
     () => [
       {
@@ -159,180 +160,229 @@ const Index: React.FC = () => {
 
   return (
     <div
+      className="index-container-container"
       style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100vw",
-        height: "100vh",
-
-        // backgroundColor: "black",
-        // backgroundColor: "rgb(30, 30, 30)",
-        // backgroundColor: "rgb(255, 255, 255)",
-        // backgroundColor: "rgb(244, 244, 244)",
-        // backgroundColor: "#333",
-        backgroundColor: "#ffffff",
-        fontFamily: `Pretendard Variable, Pretendard, -apple-system,
-        BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI,
-        Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji,
-        Segoe UI Emoji, Segoe UI Symbol, sans-serif`,
+        backgroundColor: isDarkMode ? "#ffffff" : "#000000",
       }}
     >
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
+        className="index-container"
+        style={
+          // isDarkMode
+          //   ? { backgroundColor: "#000000", color: "#ffffff" }
+          //   : { backgroundColor: "#ffffff", color: "#000000" }
+          isDarkMode
+            ? { backgroundColor: "rgb(30, 30, 30)", color: "#ffffff" }
+            : { backgroundColor: "#ffffff", color: "rgb(30, 30, 30)" }
+        }
       >
         <div
           style={{
             display: "flex",
             justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "98%",
+              height: "35px",
+              borderBottom: isDarkMode
+                ? "0.5px solid #ffffff"
+                : "0.5px solid #000000",
+              // "1px solid #dddede",
+              // backgroundColor: "blue",
+              // opacity: "50%",
+            }}
+          >
+            {/* style={{ marginLeft: "200px" }} */}
+            {/* style={{ fontWeight: "500" }} */}
+            <div className="menu-text">
+              {/* {language === "A" ? "Home" : "홈"} */}
+              divdivdiv
+            </div>
+            <div className="menu-text">
+              {language === "A" ? "About" : "소개"}
+            </div>
+            <div className="menu-text">
+              {language === "A" ? "Contact" : "연결"}
+            </div>
+            <div style={{ flexGrow: "1" }}></div>
+            <div
+              className="dark-mode-icon"
+              style={
+                isDarkMode
+                  ? {
+                      backgroundColor: "rgba(30, 30, 30)",
+                      border: "1px solid #ffffff",
+                    }
+                  : {
+                      backgroundColor: "#ffffff",
+                      border: "1px solid #000000",
+                    }
+                // isDarkMode
+                //   ? { backgroundColor: "#000000", border: "1px solid #ffffff" }
+                //   : { backgroundColor: "#ffffff", border: "1px solid #000000" }
+              }
+              onClick={() => {
+                isDarkMode ? setIsDarkMode(false) : setIsDarkMode(true);
+              }}
+            ></div>
+            <div
+              className="right-menu-text"
+              onClick={() => {
+                language === "A" ? setLanguage("한") : setLanguage("A");
+              }}
+              style={{
+                // fontWeight: "450",
+                // border: "1px solid #444444",
+                // backgroundColor: "#000000",
+                border: isDarkMode ? "1px solid #ffffff" : "1px solid #000000",
+                // color: "#ffffff",
+                borderRadius: "5px",
+                padding: "1px 7px",
+              }}
+            >
+              {language}
+            </div>
+            <div
+              className="right-menu-text"
+              style={{
+                // backgroundColor: "#000000",
+                // border: "1px solid #444444",
+                border: isDarkMode ? "1px solid #ffffff" : "1px solid #000000",
+                // color: "#ffffff",
+                borderRadius: "5px",
+                marginRight: "0px",
+              }}
+            >
+              {language === "A"
+                ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
+                : `${month}월 ${day}일 (${dayOfWeek})`}
+              {/* {year}/{month}/{day} */}
+            </div>
+            <div className="right-menu-text">
+              <Clock language={language} />
+            </div>
+          </div>
+          {/* <div>something</div> */}
+        </div>
+        <div
+          style={{
+            flexGrow: "1",
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "end",
+            }}
+          >
+            {/* <div style={{ fontSize: "400px", textAlign: "end" }}>divdivdiv</div> */}
+          </div>
+          {showImage && (
+            <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />
+          )}
+          {projects.map((project, index) => (
+            <IconContainer
+              key={index}
+              path={project.path}
+              projectName={project.projectName}
+              projectDescription={project.projectDescription}
+              className={`index-icon-container-${index + 1}`}
+            />
+          ))}
+          <Draggable>
+            <div className="index-icon-container-6">
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(cat.webp)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: imgFileWidth,
+                  height: imgFileHeight,
+                  border: "4px solid white",
+                  boxShadow: "1.5px 1.5px 3px gray",
+                }}
+                onDoubleClick={() => handleDoubleClick(6)}
+              ></div>
+              <div className="index-img-text">
+                {language === "A" ? "cat.webp" : "고양이.webp"}
+              </div>
+            </div>
+          </Draggable>
+          <Draggable>
+            <div className="index-icon-container-7">
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(me.webp)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: imgFileWidth,
+                  height: imgFileHeight,
+                  border: "4px solid white",
+                  boxShadow: "1.5px 1.5px 3px gray",
+                }}
+                onDoubleClick={() => handleDoubleClick(7)}
+              ></div>
+              <div className="index-img-text">
+                {language === "A" ? "me.webp" : "나.webp"}
+              </div>
+            </div>
+          </Draggable>
+          {/* <Draggable>
+            <div
+              className="index-icon-container-8"
+              style={
+                isDarkMode
+                  ? {
+                      border: "1px solid #ffffff",
+                      backgroundColor: "rgba(30, 30, 30)",
+                    }
+                  : { border: "1px solid #000000", backgroundColor: "#ffffff" }
+              }
+            >
+              <div
+                style={{
+                  fontSize: "60px",
+                  padding: "10px",
+                }}
+              >
+                살려야 한다
+              </div>
+            </div>
+          </Draggable> */}
+        </div>
+        <div
+          style={{
+            display: "none",
+            // display: "flex",
+            justifyContent: "space-between",
             alignItems: "center",
-            width: "98%",
-            height: "35px",
-            borderBottom: "1px solid #000000",
+            // width: "98%",
+            height: "30px",
+            borderTop: isDarkMode ? "0.5px solid #ffffff" : "1px solid #dddede",
             // backgroundColor: "blue",
             // opacity: "50%",
           }}
         >
-          {/* style={{ marginLeft: "200px" }} */}
-          {/* style={{ fontWeight: "500" }} */}
-          <div className="menu-text">
-            {/* {language === "A" ? "Home" : "홈"} */}
-            divdivdiv
+          <div style={{ width: "100px" }}></div>
+          <div style={{ fontSize: "12px", fontWeight: "300" }}>
+            {language === "A" ? "7 items" : "7개의 항목"}
           </div>
-          <div className="menu-text">{language === "A" ? "About" : "소개"}</div>
-          <div className="menu-text">
-            {language === "A" ? "Contact" : "연결"}
+          <div style={{ marginRight: "10px" }}>
+            <input type="range"></input>
           </div>
-          <div style={{ flexGrow: "1" }}></div>
-          <div
-            className="right-menu-text"
-            onClick={() => {
-              language === "A" ? setLanguage("한") : setLanguage("A");
-            }}
-            style={{
-              // fontWeight: "450",
-              // border: "1px solid #444444",
-              // backgroundColor: "#000000",
-              border: "1px solid #000000",
-              // color: "#ffffff",
-              borderRadius: "5px",
-              padding: "1px 7px",
-            }}
-          >
-            {language}
-          </div>
-          <div
-            className="right-menu-text"
-            style={{
-              // backgroundColor: "#000000",
-              // border: "1px solid #444444",
-              border: "1px solid #000000",
-              // color: "#ffffff",
-              borderRadius: "5px",
-              marginRight: "0px",
-            }}
-          >
-            {language === "A"
-              ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
-              : `${month}월 ${day}일 (${dayOfWeek})`}
-            {/* {year}/{month}/{day} */}
-          </div>
-          <div className="right-menu-text">
-            <Clock language={language} />
-          </div>
-        </div>
-        {/* <div>something</div> */}
-      </div>
-      <div
-        style={{
-          flexGrow: "1",
-        }}
-      >
-        <div
-          style={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "end",
-          }}
-        >
-          {/* <div style={{ fontSize: "400px", textAlign: "end" }}>divdivdiv</div> */}
-        </div>
-        {showImage && (
-          <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />
-        )}
-        {projects.map((project, index) => (
-          <IconContainer
-            key={index}
-            path={project.path}
-            projectName={project.projectName}
-            projectDescription={project.projectDescription}
-            className={`index-icon-container-${index + 1}`}
-          />
-        ))}
-        <Draggable>
-          <div className="index-icon-container-6">
-            <div
-              className="index-icon-image"
-              style={{
-                color: "white",
-                cursor: "move",
-                backgroundImage: `url(cat.webp)`,
-                backgroundSize: "100%",
-                backgroundRepeat: "no-repeat",
-                width: imgFileWidth,
-                height: imgFileHeight,
-                border: "4px solid white",
-                boxShadow: "1.5px 1.5px 3px gray",
-              }}
-              onDoubleClick={() => handleDoubleClick(6)}
-            ></div>
-            <div className="index-img-text">
-              {language === "A" ? "cat.webp" : "고양이.webp"}
-            </div>
-          </div>
-        </Draggable>
-        <Draggable>
-          <div className="index-icon-container-7">
-            <div
-              className="index-icon-image"
-              style={{
-                color: "white",
-                cursor: "move",
-                backgroundImage: `url(me.webp)`,
-                backgroundSize: "100%",
-                backgroundRepeat: "no-repeat",
-                width: imgFileWidth,
-                height: imgFileHeight,
-                border: "4px solid white",
-                boxShadow: "1.5px 1.5px 3px gray",
-              }}
-              onDoubleClick={() => handleDoubleClick(7)}
-            ></div>
-            <div className="index-img-text">
-              {language === "A" ? "me.webp" : "나.webp"}
-            </div>
-          </div>
-        </Draggable>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          // width: "98%",
-          height: "30px",
-          borderTop: "1px solid #dddede",
-          // backgroundColor: "blue",
-          // opacity: "50%",
-        }}
-      >
-        <div style={{ width: "100px" }}></div>
-        <div style={{ fontSize: "12px", fontWeight: "300" }}>7개의 항목</div>
-        <div style={{ marginRight: "10px" }}>
-          <input type="range"></input>
         </div>
       </div>
     </div>
