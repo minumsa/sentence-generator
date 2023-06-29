@@ -47,9 +47,9 @@ const Index: React.FC = () => {
 
   const clickIconHandler = (path: string) => {
     if (path.startsWith("http")) {
-      window.open(path, "_blank"); // 외부 링크를 새 탭에서 열기
+      window.open(path, "_blank");
     } else {
-      const newTab = window.open(path, "_blank"); // 새 탭 열기
+      const newTab = window.open(path, "_blank"); // 새 탭에서 열기
       newTab?.focus(); // 새 탭으로 포커스 이동
     }
   };
@@ -112,6 +112,7 @@ const Index: React.FC = () => {
   const [showImage, setShowImage] = useState(false);
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const handleDoubleClick = (index: number) => {
     if (index === 6) {
@@ -137,6 +138,14 @@ const Index: React.FC = () => {
   }
 
   const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
+    let width = 720;
+    let height = 961;
+
+    if (isMobile) {
+      width /= 2;
+      height /= 2;
+    }
+
     return (
       <div
         className="image-modal"
@@ -153,16 +162,12 @@ const Index: React.FC = () => {
         }}
         onClick={onClick}
       >
-        <Image src={src} alt={alt} width={720} height={961} />
+        <Image src={src} alt={alt} width={width} height={height} />
       </div>
     );
   };
 
   const [checkerWidth, setCheckerWidth] = useState<number>(4);
-
-  // useEffect(() => {
-  //   setCheckerWidth(5);
-  // }, []);
 
   return (
     <div
@@ -180,9 +185,6 @@ const Index: React.FC = () => {
       <div
         className="index-container"
         style={
-          // isDarkMode
-          //   ? { backgroundColor: "#000000", color: "#ffffff" }
-          //   : { backgroundColor: "#ffffff", color: "#000000" }
           isDarkMode
             ? { backgroundColor: "rgb(30, 30, 30)", color: "#ffffff" }
             : { backgroundColor: "#ffffff", color: "rgb(30, 30, 30)" }
@@ -204,15 +206,9 @@ const Index: React.FC = () => {
               borderBottom: isDarkMode
                 ? "0.5px solid #ffffff"
                 : "0.5px solid #000000",
-              // "1px solid #dddede",
-              // backgroundColor: "blue",
-              // opacity: "50%",
             }}
           >
-            {/* style={{ marginLeft: "200px" }} */}
-            {/* style={{ fontWeight: "500" }} */}
-            <div className="menu-text">
-              {/* {language === "A" ? "Home" : "홈"} */}
+            <div className="menu-text" style={{ marginLeft: "10px" }}>
               divdivdiv
             </div>
             <div className="menu-text">
@@ -221,7 +217,7 @@ const Index: React.FC = () => {
             <div className="menu-text">
               {language === "A" ? "Contact" : "연결"}
             </div>
-            <div style={{ flexGrow: "1" }}></div>
+            <div className="index-menu-grow" style={{ flexGrow: "1" }}></div>
             <div
               className="dark-mode-icon"
               style={
@@ -234,25 +230,18 @@ const Index: React.FC = () => {
                       backgroundColor: "#ffffff",
                       border: "1px solid #000000",
                     }
-                // isDarkMode
-                //   ? { backgroundColor: "#000000", border: "1px solid #ffffff" }
-                //   : { backgroundColor: "#ffffff", border: "1px solid #000000" }
               }
               onClick={() => {
                 isDarkMode ? setIsDarkMode(false) : setIsDarkMode(true);
               }}
             ></div>
             <div
-              className="right-menu-text"
+              className="right-menu-language"
               onClick={() => {
                 language === "A" ? setLanguage("한") : setLanguage("A");
               }}
               style={{
-                // fontWeight: "450",
-                // border: "1px solid #444444",
-                // backgroundColor: "#000000",
                 border: isDarkMode ? "1px solid #ffffff" : "1px solid #000000",
-                // color: "#ffffff",
                 borderRadius: "5px",
                 padding: "1px 7px",
               }}
@@ -260,42 +249,35 @@ const Index: React.FC = () => {
               {language}
             </div>
             <div
-              className="right-menu-text"
+              className="right-menu-calender"
               style={{
-                // backgroundColor: "#000000",
-                // border: "1px solid #444444",
                 border: isDarkMode ? "1px solid #ffffff" : "1px solid #000000",
-                // color: "#ffffff",
                 borderRadius: "5px",
-                marginRight: "0px",
               }}
             >
               {language === "A"
                 ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
                 : `${month}월 ${day}일 (${dayOfWeek})`}
-              {/* {year}/{month}/{day} */}
             </div>
-            <div className="right-menu-text">
+            <div className="right-menu-clock">
               <Clock language={language} />
             </div>
           </div>
-          {/* <div>something</div> */}
         </div>
         <div
+          className="index-content-container"
           style={{
             flexGrow: "1",
           }}
         >
-          <div
+          {/* <div
             style={{
               height: "100%",
               display: "flex",
               flexDirection: "column",
               justifyContent: "end",
             }}
-          >
-            {/* <div style={{ fontSize: "400px", textAlign: "end" }}>divdivdiv</div> */}
-          </div>
+          ></div> */}
           {showImage && (
             <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />
           )}
@@ -374,18 +356,175 @@ const Index: React.FC = () => {
               </div>
             </div>
           </Draggable> */}
+          <div className="index-mobile-content-container">
+            <div
+              className="index-mobile-icon-container"
+              onClick={() => clickIconHandler("https://blog.divdivdiv.com")}
+            >
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(folder.png)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: folderWidth,
+                  height: folderHeight,
+                }}
+              ></div>
+              <div className="index-icon-text">
+                <div>{language === "A" ? "Project 1" : "프로젝트 1"}</div>
+                <div>{language === "A" ? "(Blog)" : "(블로그)"}</div>
+              </div>
+            </div>
+            <div
+              className="index-mobile-icon-container"
+              onClick={() => clickIconHandler("/cinephile-test")}
+            >
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(folder.png)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: folderWidth,
+                  height: folderHeight,
+                }}
+              ></div>
+              <div className="index-icon-text">
+                <div>{language === "A" ? "Project 2" : "프로젝트 2"}</div>
+                <div>
+                  {language === "A" ? "(Cinephile Test)" : "(시네필 테스트)"}
+                </div>
+              </div>
+            </div>
+            <div
+              className="index-mobile-icon-container"
+              onClick={() => clickIconHandler("/sheep-pomodoro")}
+            >
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(folder.png)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: folderWidth,
+                  height: folderHeight,
+                }}
+              ></div>
+              <div className="index-icon-text">
+                <div>{language === "A" ? "Project 3" : "프로젝트 3"}</div>
+                <div>{language === "A" ? "(Pomodoro)" : "(뽀모도로)"}</div>
+              </div>
+            </div>
+            <div
+              className="index-mobile-icon-container"
+              onClick={() => clickIconHandler("/fruits")}
+            >
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(folder.png)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: folderWidth,
+                  height: folderHeight,
+                }}
+              ></div>
+              <div className="index-icon-text">
+                <div>{language === "A" ? "Project 4" : "프로젝트 4"}</div>
+                <div>{language === "A" ? "(Fruits)" : "(과일 생성기)"}</div>
+              </div>
+            </div>
+            <div
+              className="index-mobile-icon-container-5"
+              onClick={() => clickIconHandler("/possible-universe")}
+            >
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(folder.png)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: folderWidth,
+                  height: folderHeight,
+                }}
+              ></div>
+              <div className="index-icon-text">
+                <div>{language === "A" ? "Project 5" : "프로젝트 5"}</div>
+                <div>
+                  {language === "A" ? "(Possible Universe)" : "(문장 생성기)"}
+                </div>
+              </div>
+            </div>
+            {/* <div
+              className="index-mobile-icon-container"
+              style={{ width: "60px" }}
+            ></div> */}
+            <div className="index-mobile-icon-container">
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(cat.webp)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: imgFileWidth,
+                  height: imgFileHeight,
+                  border: "4px solid white",
+                  boxShadow: "1.5px 1.5px 3px gray",
+                }}
+                onClick={() => {
+                  setIsMobile(true);
+                  handleDoubleClick(6);
+                }}
+              ></div>
+              <div className="index-img-text">
+                {language === "A" ? "cat.webp" : "고양이.webp"}
+              </div>
+            </div>
+            <div className="index-mobile-icon-container">
+              <div
+                className="index-icon-image"
+                style={{
+                  color: "white",
+                  cursor: "move",
+                  backgroundImage: `url(me.webp)`,
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+                  width: imgFileWidth,
+                  height: imgFileHeight,
+                  border: "4px solid white",
+                  boxShadow: "1.5px 1.5px 3px gray",
+                }}
+                onClick={() => {
+                  setIsMobile(true);
+                  handleDoubleClick(7);
+                }}
+              ></div>
+              <div className="index-img-text">
+                {language === "A" ? "me.webp" : "나.webp"}
+              </div>
+            </div>
+          </div>
         </div>
         <div
           style={{
             display: "none",
-            // display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            // width: "98%",
             height: "30px",
             borderTop: isDarkMode ? "0.5px solid #ffffff" : "1px solid #dddede",
-            // backgroundColor: "blue",
-            // opacity: "50%",
           }}
         >
           <div style={{ width: "100px" }}></div>
