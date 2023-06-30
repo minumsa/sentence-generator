@@ -5,9 +5,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Draggable from "react-draggable";
 import Clock from "./Clock";
 import Main from "./Main";
+import About from "./About";
+import Contact from "./Contact";
 
 const Index: React.FC = () => {
   const [language, setLanguage] = useState<string>("A");
+  const [currentComponent, setCurrentComponent] = useState<React.ReactElement>(
+    <Main language={language} />
+  );
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const currentDate = new Date();
@@ -79,13 +84,29 @@ const Index: React.FC = () => {
               marginBottom: "30px",
             }}
           >
-            <div className="menu-text" style={{ marginLeft: "10px" }}>
+            <div
+              className="menu-text"
+              style={{ marginLeft: "10px" }}
+              onClick={() => {
+                setCurrentComponent(<Main language={language} />);
+              }}
+            >
               divdivdiv
             </div>
-            <div className="menu-text">
+            <div
+              className="menu-text"
+              onClick={() => {
+                setCurrentComponent(<About />);
+              }}
+            >
               {language === "A" ? "About" : "소개"}
             </div>
-            <div className="menu-text">
+            <div
+              className="menu-text"
+              onClick={() => {
+                setCurrentComponent(<Contact />);
+              }}
+            >
               {language === "A" ? "Contact" : "연결"}
             </div>
             <div className="index-menu-grow" style={{ flexGrow: "1" }}></div>
@@ -141,7 +162,7 @@ const Index: React.FC = () => {
             flexGrow: "1",
           }}
         >
-          <Main language={language} />
+          {currentComponent}
         </div>
         {/* <div
           style={{

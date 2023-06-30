@@ -184,6 +184,8 @@ export default function RandomSentenceGenerator({
     return "#" + Math.round(Math.random() * 0xffffff).toString(16);
   };
 
+  const windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
+
   return (
     <div className="possible-div">
       <meta
@@ -202,7 +204,7 @@ export default function RandomSentenceGenerator({
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              marginRight: "30px",
+              marginRight: windowWidth < 500 ? 0 : "30px",
               // transform: `rotate(${Math.random() * 180 - 180}deg)`,
               // scale(${Math.random() * 1.2 + 0.3})
             }}
