@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Draggable from "react-draggable";
 import Clock from "./Clock";
 import Main from "./Main";
 import About from "./About";
@@ -43,6 +41,10 @@ const Index: React.FC = () => {
   }
 
   const [checkerWidth, setCheckerWidth] = useState<number>(4);
+
+  const [showMain, setShowMain] = useState<boolean>(true);
+  const [showAbout, setShowAbout] = useState<boolean>(false);
+  const [showContact, setShowContact] = useState<boolean>(false);
 
   return (
     <div
@@ -88,7 +90,9 @@ const Index: React.FC = () => {
               className="menu-text"
               style={{ marginLeft: "10px" }}
               onClick={() => {
-                setCurrentComponent(<Main language={language} />);
+                setShowMain(true);
+                setShowAbout(false);
+                setShowContact(false);
               }}
             >
               divdivdiv
@@ -96,7 +100,9 @@ const Index: React.FC = () => {
             <div
               className="menu-text"
               onClick={() => {
-                setCurrentComponent(<About />);
+                setShowAbout(true);
+                setShowMain(false);
+                setShowContact(false);
               }}
             >
               {language === "A" ? "About" : "소개"}
@@ -104,7 +110,9 @@ const Index: React.FC = () => {
             <div
               className="menu-text"
               onClick={() => {
-                setCurrentComponent(<Contact />);
+                setShowContact(true);
+                setShowAbout(false);
+                setShowMain(false);
               }}
             >
               {language === "A" ? "Contact" : "연결"}
@@ -162,7 +170,11 @@ const Index: React.FC = () => {
             flexGrow: "1",
           }}
         >
-          {currentComponent}
+          {showMain && <Main language={language} />}
+          {showAbout && <About language={language} />}
+          {showContact && (
+            <Contact language={language} isDarkMode={isDarkMode} />
+          )}
         </div>
         {/* <div
           style={{
