@@ -124,6 +124,11 @@ body {
   background-color: #000000;
 }
 
+.test30-subject-span,
+.test30-object-span {
+  margin-right: 0.2em;
+}
+
 @media (max-width: 450px) {
   .test30-div-1 {
     height: 100vh;
@@ -139,6 +144,10 @@ body {
 }
 
 @media (max-width: 1000px) {
+  .test30-object-span {
+    margin-right: 0;
+  }
+
   .test30-test {
     display: flex;
     flex-direction: column;
@@ -1038,8 +1047,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 200px;
-  left: 120px;
+  top: 100px;
+  left: 100px;
 }
 
 .index-icon-container-2 {
@@ -1049,8 +1058,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 200px;
-  left: 250px;
+  top: 100px;
+  left: 230px;
 }
 
 .index-icon-container-3 {
@@ -1060,8 +1069,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 200px;
-  left: 380px;
+  top: 100px;
+  left: 360px;
 }
 
 .index-icon-container-4 {
@@ -1071,8 +1080,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 200px;
-  left: 510px;
+  top: 100px;
+  left: 490px;
 }
 
 .index-icon-container-5 {
@@ -1082,8 +1091,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 200px;
-  left: 640px;
+  top: 100px;
+  left: 620px;
 }
 
 .index-icon-container-6 {
@@ -1093,7 +1102,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 350px;
+  top: 250px;
   left: 180px;
 }
 
@@ -1104,23 +1113,30 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 350px;
+  top: 250px;
   left: 320px;
 }
 
 .index-icon-container-8 {
-  font-family: "ChosunGs";
-  width: 320px;
-  height: 170px;
+  width: 120px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  align-content: center;
   cursor: move;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 265px;
+  left: 460px;
+}
+
+.index-icon-container-9 {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: move;
+  position: absolute;
+  top: 255px;
+  left: 600px;
 }
 
 .index-icon-text {
@@ -1174,6 +1190,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 
   /* border-radius: 1000px; */
   /* margin-bottom: 2px; */
+
+  /* margin-left: 5px; */
 
   padding: 8px 10px;
   font-size: 14px;
@@ -1351,8 +1369,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   }
 
   .index-icon-container-8 {
-    top: 50%;
-    left: 50%;
+    top: 265px;
+    left: 440px;
   }
 }
 
@@ -1456,7 +1474,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   }
 
   .index-contact-text-1,
-  .index-contact-text-2 {
+  .index-contact-text-2,
+  .index-about-container {
     font-size: 13.5px;
   }
 
@@ -1469,7 +1488,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
   .menu-text {
     margin: 0 7px;
     cursor: pointer;

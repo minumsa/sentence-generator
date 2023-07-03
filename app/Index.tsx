@@ -88,7 +88,19 @@ const Index: React.FC = () => {
           >
             <div
               className="menu-text"
-              style={{ marginLeft: "10px" }}
+              style={{
+                marginLeft: "10px",
+                fontWeight: showMain ? "600" : "400",
+                // WebkitAnimation: showMain
+                //   ? "blink 0.5s ease-in-out infinite alternate"
+                //   : undefined,
+                // MozAnimation: showMain
+                //   ? "blink 0.5s ease-in-out infinite alternate"
+                //   : undefined,
+                // animation: showMain
+                //   ? "blink 0.5s ease-in-out infinite alternate"
+                //   : undefined,
+              }}
               onClick={() => {
                 setShowMain(true);
                 setShowAbout(false);
@@ -104,6 +116,7 @@ const Index: React.FC = () => {
                 setShowMain(false);
                 setShowContact(false);
               }}
+              style={{ fontWeight: showAbout ? "600" : "400" }}
             >
               {language === "A" ? "About" : "소개"}
             </div>
@@ -114,6 +127,7 @@ const Index: React.FC = () => {
                 setShowAbout(false);
                 setShowMain(false);
               }}
+              style={{ fontWeight: showContact ? "600" : "400" }}
             >
               {language === "A" ? "Contact" : "연결"}
             </div>

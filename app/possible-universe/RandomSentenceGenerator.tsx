@@ -201,10 +201,10 @@ export default function RandomSentenceGenerator({
       <div className="test30-div-1">
         <div className="test30-div-2" onClick={handleClick}>
           <span
+            className="test30-subject-span"
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              marginRight: windowWidth < 500 ? 0 : "30px",
               // transform: `rotate(${Math.random() * 180 - 180}deg)`,
               // scale(${Math.random() * 1.2 + 0.3})
             }}
@@ -212,10 +212,10 @@ export default function RandomSentenceGenerator({
             {randomSubject}{" "}
           </span>
           <span
+            className="test30-object-span"
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              marginRight: "30px",
               // transform: `rotate(${Math.random() * 180 - 180}deg)`,
             }}
           >
