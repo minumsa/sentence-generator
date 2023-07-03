@@ -94,7 +94,7 @@ export default function Main({ language }: indexProps) {
           boxShadow:
             imgSrc === "/exp_ko.webp" || imgSrc === "/exp_en.webp"
               ? "1px 2px 5px gray"
-              : 0,
+              : undefined,
           // border: imgSrc === "/exp_ko.webp" ? "1px solid black" : 0,
         }}
         onClick={onClick}
