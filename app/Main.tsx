@@ -134,7 +134,7 @@ export default function Main({ language }: indexProps) {
                 className="main-exp-paragraph-title"
                 onClick={() => clickIconHandler("/sheep-pomodoro")}
               >
-                {language === "A" ? "3. Pomodoro 🐑🍅" : "3. 뽀모도로 🍅"}
+                {language === "A" ? "3. Pomodoro 🐑" : "3. 뽀모도로 🐑"}
               </div>
               {language === "A"
                 ? "I have implemented a web version of the popular Pomodoro timer, which has been popular as a productivity tool for several years. Users can set their daily goals, as well as focus and rest times according to their preferences."
@@ -173,7 +173,7 @@ export default function Main({ language }: indexProps) {
                 className="main-exp-paragraph-title"
                 style={{ cursor: "help" }}
               >
-                {language === "A" ? "*Tech Stack" : "*테크 스택"}
+                {language === "A" ? "*Tech Stack ⚙️" : "*테크 스택 ⚙️"}
               </div>
               TypeScript, CSS, Next.js, React
             </div>
