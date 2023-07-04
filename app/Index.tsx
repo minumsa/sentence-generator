@@ -7,10 +7,7 @@ import About from "./About";
 import Contact from "./Contact";
 
 const Index: React.FC = () => {
-  const [language, setLanguage] = useState<string>("A");
-  const [currentComponent, setCurrentComponent] = useState<React.ReactElement>(
-    <Main language={language} />
-  );
+  const [language, setLanguage] = useState<string>("한");
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const currentDate = new Date();
@@ -74,6 +71,7 @@ const Index: React.FC = () => {
           }}
         >
           <div
+            className="index-nav-container"
             style={{
               display: "flex",
               justifyContent: "center",

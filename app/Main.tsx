@@ -29,37 +29,8 @@ export default function Main({ language }: indexProps) {
   const [MobileImgFileHeight, setMobileImgFileHeight] = useState<number>(
     imgFileHeight * 0.9
   );
-  const projects = useMemo(
-    () => [
-      {
-        path: "https://blog.divdivdiv.com",
-        projectName: language === "A" ? "Project 1" : "프로젝트 1",
-        projectDescription: language === "A" ? "Blog" : "블로그",
-      },
-      {
-        path: "/cinephile-test",
-        projectName: language === "A" ? "Project 2" : "프로젝트 2",
-        projectDescription:
-          language === "A" ? "Cinephile Test" : "시네필 테스트",
-      },
-      {
-        path: "/sheep-pomodoro",
-        projectName: language === "A" ? "Project 3" : "프로젝트 3",
-        projectDescription: language === "A" ? "Pomodoro" : "뽀모도로",
-      },
-      {
-        path: "/fruits",
-        projectName: language === "A" ? "Project 4" : "프로젝트 4",
-        projectDescription: language === "A" ? "Fruits" : "과일 생성기",
-      },
-      {
-        path: "/possible-universe",
-        projectName: language === "A" ? "Project 5" : "프로젝트 5",
-        projectDescription: language === "A" ? "Sentences" : "문장 생성기",
-      },
-    ],
-    [language]
-  );
+
+  const [isMemo, setIsMemo] = useState<boolean>(false);
 
   interface ImageModalProps {
     src: string;
@@ -76,7 +47,140 @@ export default function Main({ language }: indexProps) {
       height /= 2;
     }
 
-    return (
+    return isMemo ? (
+      <div
+        className="image-modal"
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 9999,
+          // backgroundColor: "rgba(0, 0, 0, 0.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          // border: imgSrc === "/exp_ko.webp" ? "0.5px solid white" : 0,
+          // borderRadius: imgSrc === "/exp_ko.webp" ? "10px" : 0,
+          boxShadow:
+            imgSrc === "/memo-nav-ko.webp" || imgSrc === "/memo-nav-en.webp"
+              ? "1px 2px 5px gray"
+              : undefined,
+          // border: imgSrc === "/exp_ko.webp" ? "1px solid black" : 0,
+        }}
+        onClick={onClick}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "#ffffff",
+            color: "#222222",
+          }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            width={isMobile ? 0 : 620}
+            height={isMobile ? 0 : 50}
+          />
+          <div
+            style={{
+              height: isMobile
+                ? language === "A"
+                  ? "645px"
+                  : "560px"
+                : "800px",
+              width: isMobile ? "370px" : "620px",
+            }}
+          >
+            <div
+              className="main-exp-updated"
+              style={{
+                marginTop: isMobile ? "10px" : 0,
+                fontWeight: isMobile ? 600 : 400,
+              }}
+            >
+              {language === "A"
+                ? "Last Updated: 2023-07-04"
+                : "최근 업데이트: 2023년 7월 4일"}
+            </div>
+            <div className="main-exp-paragraph">
+              <div
+                className="main-exp-paragraph-title"
+                onClick={() => clickIconHandler("https://blog.divdivdiv.com")}
+              >
+                {language === "A" ? "1. Blog ✍️" : "1. 블로그 ✍️"}
+              </div>
+              {language === "A"
+                ? "This page was created to provide a space for writing and posting freely. It features a layout similar to a book, focusing more on text than images, despite being a web page."
+                : "자유롭게 글을 써서 올린 공간이 필요해 만든 페이지입니다. 이미지보다는 텍스트를 중심으로 업로드하기 위해, 웹이지만 책과 유사한 형태의 레이아웃을 구성했습니다."}
+            </div>
+            <div className="main-exp-paragraph">
+              <div
+                className="main-exp-paragraph-title"
+                onClick={() => clickIconHandler("/cinephile-test")}
+              >
+                {language === "A"
+                  ? "2. Cinephile Test 🍿"
+                  : "2. 시네필 테스트 🍿"}
+              </div>
+              {language === "A"
+                ? "Test This page allows you to take quizzes about movies. After answering the questions, you can see your cinephile rating and your rank among all participants. You can also share the page."
+                : "영화에 관한 퀴즈를 풀 수 있는 페이지입니다. 문제를 풀고 나면 나의 시네필 평점과 내가 전체 참가자 중 몇 등인지 알 수 있고, 페이지를 공유할 수 있습니다."}
+            </div>
+            <div className="main-exp-paragraph">
+              <div
+                className="main-exp-paragraph-title"
+                onClick={() => clickIconHandler("/sheep-pomodoro")}
+              >
+                {language === "A" ? "3. Pomodoro 🍅" : "3. 뽀모도로 🍅"}
+              </div>
+              {language === "A"
+                ? "I have implemented a web version of the popular Pomodoro timer, which has been popular as a productivity tool for several years. Users can set their daily goals, as well as focus and rest times according to their preferences."
+                : "몇 년 전부터 생산성 향상을 위한 아이템으로 인기를 끈 뽀모도로 타이머를 웹으로 구현했습니다. 사용자가 원하는 목표량, 집중 및 휴식 시간을 선택할 수 있습니다."}
+            </div>
+            <div className="main-exp-paragraph">
+              <div
+                className="main-exp-paragraph-title"
+                onClick={() => clickIconHandler("/fruits")}
+              >
+                <span>
+                  {language === "A"
+                    ? "4. Fruit Generator 🍇"
+                    : "4. 과일 생성기 🍇"}
+                </span>
+              </div>
+              {language === "A"
+                ? "Fruits are continuously generated from the top of the page and descend. When you click on your favorite fruit, interesting or useful information about that fruit appears on the screen."
+                : "페이지 상단에서 과일이 무한하게 생성되며 하강합니다. 특정 과일을 클릭하면 해당 과일에 대한 재밌고 유용한 정보가 화면에 나타납니다."}
+            </div>
+            <div className="main-exp-paragraph">
+              <div
+                className="main-exp-paragraph-title"
+                onClick={() => clickIconHandler("/possible-universe")}
+              >
+                {language === "A"
+                  ? "5. Sentence Generator ⚙️"
+                  : "5. 문장 생성기 ⚙️"}
+              </div>
+              {language === "A"
+                ? "This page was created to commemorate the 2023 Pride Month. Predefined subjects, objects, and verbs are randomly combined to generate various sentences, depending on the circumstances."
+                : "2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해준 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다."}
+            </div>
+            <div className="main-exp-paragraph">
+              <div
+                className="main-exp-paragraph-title"
+                style={{ cursor: "help" }}
+              >
+                {language === "A" ? "*Tech Stack" : "*테크 스택"}
+              </div>
+              TypeScript, CSS, Next.js, React
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : (
       <div
         className="image-modal"
         style={{
@@ -89,30 +193,10 @@ export default function Main({ language }: indexProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          // border: imgSrc === "/exp_ko.webp" ? "0.5px solid white" : 0,
-          // borderRadius: imgSrc === "/exp_ko.webp" ? "10px" : 0,
-          boxShadow:
-            imgSrc === "/exp_ko.webp" || imgSrc === "/exp_en.webp"
-              ? "1px 2px 5px gray"
-              : undefined,
-          // border: imgSrc === "/exp_ko.webp" ? "1px solid black" : 0,
         }}
         onClick={onClick}
       >
-        <Image
-          src={src}
-          alt={alt}
-          width={
-            imgSrc === "/exp_ko.webp" || imgSrc === "/exp_en.webp"
-              ? width * 0.9
-              : width
-          }
-          height={
-            imgSrc === "/exp_ko.webp" || imgSrc === "/exp_en.webp"
-              ? height * 0.9
-              : height
-          }
-        />
+        <Image src={src} alt={alt} width={width} height={height} />
       </div>
     );
   };
@@ -171,7 +255,9 @@ export default function Main({ language }: indexProps) {
       setImgSrc("/me.webp");
       setImgAlt("Me");
     } else if (index === 8) {
-      language === "A" ? setImgSrc("/exp_en.webp") : setImgSrc("/exp_ko.webp");
+      language === "A"
+        ? setImgSrc("/memo-nav-en.webp")
+        : setImgSrc("/memo-nav-ko.webp");
       setImgAlt("README.txt");
     }
     setShowImage(true);
@@ -367,7 +453,10 @@ export default function Main({ language }: indexProps) {
               border: "4px solid white",
               boxShadow: "1px 2px 5px gray",
             }}
-            onDoubleClick={() => handleDoubleClick(6)}
+            onDoubleClick={() => {
+              setIsMemo(false);
+              handleDoubleClick(6);
+            }}
           ></div>
           <div className="index-img-text">
             {language === "A" ? "cat.webp" : "고양이.webp"}
@@ -389,7 +478,10 @@ export default function Main({ language }: indexProps) {
               border: "4px solid white",
               boxShadow: "1px 2px 5px gray",
             }}
-            onDoubleClick={() => handleDoubleClick(7)}
+            onDoubleClick={() => {
+              setIsMemo(false);
+              handleDoubleClick(7);
+            }}
           ></div>
           <div className="index-img-text">
             {language === "A" ? "me.webp" : "나.webp"}
@@ -423,43 +515,23 @@ export default function Main({ language }: indexProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage:
-                language === "A" ? "url(exp_en.webp)" : "url(exp_ko.webp)",
+              backgroundImage: "url(exp_en.webp)",
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: imgFileWidth,
               height: imgFileHeight,
               boxShadow: "1px 2px 5px gray",
             }}
-            onDoubleClick={() => handleDoubleClick(8)}
+            onDoubleClick={() => {
+              setIsMemo(true);
+              handleDoubleClick(8);
+            }}
           ></div>
-          <div className="index-icon-text" style={{ marginTop: "12px" }}>
+          <div className="index-icon-text" style={{ marginTop: "13px" }}>
             <div> {language === "A" ? "README.txt" : "프로젝트 설명.txt"}</div>
           </div>
         </div>
       </Draggable>
-      {/* <Draggable>
-        <div
-          className="index-icon-container-8"
-          style={
-            isDarkMode
-              ? {
-                  border: "1px solid #ffffff",
-                  backgroundColor: "rgba(30, 30, 30)",
-                }
-              : { border: "1px solid #000000", backgroundColor: "#ffffff" }
-          }
-        >
-          <div
-            style={{
-              fontSize: "60px",
-              padding: "10px",
-            }}
-          >
-            살려야 한다
-          </div>
-        </div>
-      </Draggable> */}
       <div className="index-mobile-content-container">
         <div
           className="index-mobile-icon-container"
@@ -529,6 +601,7 @@ export default function Main({ language }: indexProps) {
         <div
           className="index-mobile-icon-container-5"
           onClick={() => clickIconHandler("/fruits")}
+          style={{ marginLeft: "20px" }}
         >
           <div
             className="index-icon-image"
@@ -573,6 +646,56 @@ export default function Main({ language }: indexProps) {
           style={{ width: "60px" }}
         ></div> */}
         {/* <div className="index-mobile-img-content-container"> */}
+
+        <div className="index-mobile-icon-container">
+          <div
+            className="index-icon-image"
+            style={{
+              color: "white",
+              cursor: "move",
+              backgroundImage: "url(exp_en.webp)",
+              backgroundSize: "100%",
+              backgroundRepeat: "no-repeat",
+              width: MobileImgFileWidth,
+              height: MobileImgFileHeight,
+              boxShadow: "1px 2px 5px gray",
+            }}
+            onClick={() => {
+              setIsMobile(true);
+              setIsMemo(true);
+              handleDoubleClick(8);
+            }}
+          ></div>
+          <div className="index-mobile-img-text">
+            <div> {language === "A" ? "README.txt" : "프로젝트 설명.txt"}</div>
+          </div>
+        </div>
+
+        <div className="index-mobile-icon-container">
+          <div
+            className="index-icon-image"
+            style={{
+              color: "white",
+              cursor: "move",
+              backgroundImage: `url(me.webp)`,
+              backgroundSize: "100%",
+              backgroundRepeat: "no-repeat",
+              width: MobileImgFileWidth,
+              height: MobileImgFileHeight,
+              border: "4px solid white",
+              boxShadow: "1px 2px 5px gray",
+            }}
+            onClick={() => {
+              setIsMemo(false);
+              setIsMobile(true);
+              handleDoubleClick(7);
+            }}
+          ></div>
+          <div className="index-mobile-img-text">
+            {language === "A" ? "me.webp" : "나.webp"}
+          </div>
+        </div>
+
         <div className="index-mobile-icon-container">
           <div
             className="index-icon-image"
@@ -589,34 +712,12 @@ export default function Main({ language }: indexProps) {
             }}
             onClick={() => {
               setIsMobile(true);
+              setIsMemo(false);
               handleDoubleClick(6);
             }}
           ></div>
           <div className="index-mobile-img-text">
             {language === "A" ? "cat.webp" : "고양이.webp"}
-          </div>
-        </div>
-        <div className="index-mobile-icon-container">
-          <div
-            className="index-icon-image"
-            style={{
-              color: "white",
-              cursor: "move",
-              backgroundImage: `url(me.webp)`,
-              backgroundSize: "100%",
-              backgroundRepeat: "no-repeat",
-              width: MobileImgFileWidth,
-              height: MobileImgFileHeight,
-              border: "4px solid white",
-              boxShadow: "1px 2px 5px gray",
-            }}
-            onClick={() => {
-              setIsMobile(true);
-              handleDoubleClick(7);
-            }}
-          ></div>
-          <div className="index-mobile-img-text">
-            {language === "A" ? "me.webp" : "나.webp"}
           </div>
         </div>
         <div
@@ -642,31 +743,6 @@ export default function Main({ language }: indexProps) {
           ></div>
           <div className="index-mobile-img-text">
             {language === "A" ? "fortune.exe" : "포춘쿠키.exe"}
-          </div>
-        </div>
-
-        <div className="index-mobile-icon-container">
-          <div
-            className="index-icon-image"
-            style={{
-              color: "white",
-              cursor: "move",
-              backgroundImage:
-                language === "A" ? "url(exp_en.webp)" : "url(exp_ko.webp)",
-              backgroundSize: "100%",
-              backgroundRepeat: "no-repeat",
-              width: MobileImgFileWidth,
-              height: MobileImgFileHeight,
-              boxShadow: "1px 2px 5px gray",
-              marginTop: "8px",
-            }}
-            onClick={() => {
-              setIsMobile(true);
-              handleDoubleClick(8);
-            }}
-          ></div>
-          <div className="index-mobile-img-text">
-            <div> {language === "A" ? "README.txt" : "프로젝트 설명.txt"}</div>
           </div>
         </div>
       </div>
