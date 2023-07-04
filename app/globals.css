@@ -1103,7 +1103,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   cursor: move;
   position: absolute;
   top: 250px;
-  left: 460px;
+  left: 360px;
 }
 
 .index-icon-container-7 {
@@ -1114,9 +1114,10 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   cursor: move;
   position: absolute;
   top: 250px;
-  left: 320px;
+  left: 230px;
 }
 
+/* 포춘쿠키 */
 .index-icon-container-8 {
   width: 120px;
   display: flex;
@@ -1124,10 +1125,11 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 255px;
-  left: 600px;
+  top: 420px;
+  left: 100px;
 }
 
+/* 프로젝트 설명 */
 .index-icon-container-9 {
   width: 120px;
   display: flex;
@@ -1136,7 +1138,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   cursor: move;
   position: absolute;
   top: 255px;
-  left: 180px;
+  left: 100px;
 }
 
 .index-icon-text {
@@ -1395,7 +1397,12 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   }
 
   .index-icon-container-8 {
-    top: 265px;
+    top: 440px;
+    left: 50px;
+  }
+
+  .index-icon-container-9 {
+    top: 255px;
     left: 440px;
   }
 }

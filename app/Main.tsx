@@ -134,7 +134,7 @@ export default function Main({ language }: indexProps) {
                 className="main-exp-paragraph-title"
                 onClick={() => clickIconHandler("/sheep-pomodoro")}
               >
-                {language === "A" ? "3. Pomodoro 🍅" : "3. 뽀모도로 🍅"}
+                {language === "A" ? "3. Pomodoro 🐑🍅" : "3. 뽀모도로 🍅"}
               </div>
               {language === "A"
                 ? "I have implemented a web version of the popular Pomodoro timer, which has been popular as a productivity tool for several years. Users can set their daily goals, as well as focus and rest times according to their preferences."
@@ -161,12 +161,12 @@ export default function Main({ language }: indexProps) {
                 onClick={() => clickIconHandler("/possible-universe")}
               >
                 {language === "A"
-                  ? "5. Sentence Generator ⚙️"
-                  : "5. 문장 생성기 ⚙️"}
+                  ? "5. Sentence Generator 🌈"
+                  : "5. 문장 생성기 🌈"}
               </div>
               {language === "A"
                 ? "This page was created to commemorate the 2023 Pride Month. Predefined subjects, objects, and verbs are randomly combined to generate various sentences, depending on the circumstances."
-                : "2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해준 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다."}
+                : "2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해둔 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다."}
             </div>
             <div className="main-exp-paragraph">
               <div
@@ -302,7 +302,7 @@ export default function Main({ language }: indexProps) {
   ];
 
   const handleFortuneClick = () => {
-    language === "A"
+    return language === "A"
       ? alert(fortuneEngArr[Math.floor(Math.random() * fortuneArr.length)])
       : alert(fortuneArr[Math.floor(Math.random() * fortuneArr.length)]);
   };
