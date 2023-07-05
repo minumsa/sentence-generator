@@ -127,7 +127,7 @@ export default function Main({ language }: indexProps) {
               </div>
               {language === "A"
                 ? "Test This page allows you to take quizzes about movies. After answering the questions, you can see your cinephile rating and your rank among all participants. You can also share the page."
-                : "영화에 관한 퀴즈를 풀 수 있는 페이지입니다. 문제를 풀고 나면 나의 시네필 평점과 내가 전체 참가자 중 몇 등인지 알 수 있고, 페이지를 공유할 수 있습니다."}
+                : "영화 퀴즈를 풀 수 있는 페이지입니다. 문제를 다 풀고 나면 나의 시네필 별점과 내가 전체 참가자 중 몇 등인지 알 수 있고, 페이지를 공유할 수 있습니다."}
             </div>
             <div className="main-exp-paragraph">
               <div
@@ -138,7 +138,7 @@ export default function Main({ language }: indexProps) {
               </div>
               {language === "A"
                 ? "I have implemented a web version of the popular Pomodoro timer, which has been popular as a productivity tool for several years. Users can set their daily goals, as well as focus and rest times according to their preferences."
-                : "몇 년 전부터 생산성 향상을 위한 아이템으로 인기를 끈 뽀모도로 타이머를 웹으로 구현했습니다. 사용자가 원하는 목표량, 집중 및 휴식 시간을 선택할 수 있습니다."}
+                : "몇 년 전부터 생산성 향상을 위한 아이템으로 인기를 끈 뽀모도로 타이머를 웹으로 구현했습니다. 사용자가 원하는 대로 하루 목표량, 집중 및 휴식 시간을 설정할 수 있습니다."}
             </div>
             <div className="main-exp-paragraph">
               <div
