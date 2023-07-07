@@ -201,37 +201,6 @@ export default function Main({ language }: indexProps) {
     );
   };
 
-  // const IconContainer: React.FC<{
-  //   path: string;
-  //   projectName: string;
-  //   projectDescription: string;
-  //   className: string;
-  // }> = ({ path, projectName, projectDescription, className }) => (
-  //   <Draggable>
-  //     <div
-  //       className={className}
-  //       onDoubleClick={() => clickIconHandler("https://blog.divdivdiv.com")}
-  //     >
-  //       <div
-  //         className="index-icon-image"
-  //         style={{
-  //           color: "white",
-  //           cursor: "move",
-  //           backgroundImage: `url(folder.png)`,
-  //           backgroundSize: "100%",
-  //           backgroundRepeat: "no-repeat",
-  //           width: folderWidth,
-  //           height: folderHeight,
-  //         }}
-  //       ></div>
-  //       <div className="index-icon-text">
-  //         <div></div>
-  //         <div>({projectDescription})</div>
-  //       </div>
-  //     </div>
-  //   </Draggable>
-  // );
-
   const clickIconHandler = (path: string) => {
     if (path.startsWith("http")) {
       window.open(path, "_blank");

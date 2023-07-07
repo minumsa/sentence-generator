@@ -2,6 +2,7 @@
 @import "@kfonts/neodgm-code";
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@900&family=Open+Sans:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap");
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
 @font-face {
   font-family: "KBO-Dia-Gothic_bold";
@@ -1570,6 +1571,33 @@ animation: blink 0.5s ease-in-out infinite alternate; */
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; */
 }
 
+.lunchmain-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  font-family: "KBO-Dia-Gothic_bold";
+}
+
+.lunchmenu-text-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #000000;
+  font-size: 70px;
+}
+
+.lunchmenu-text-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  border-bottom: 1px solid #000000;
+  /* padding-left: 30px; */
+  padding-right: 10px;
+}
+
 .lunch-main-text {
   display: flex;
   flex-direction: column;
@@ -1583,10 +1611,12 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   animation: blink 0.5s ease-in-out infinite alternate; */
 }
 
+.lunchmenu-text {
+  font-size: 70px;
+}
+
 .lunch-start-button {
   font-size: 20px;
-  margin-top: 30px;
-  padding: 10px;
   width: 250px;
   border: 1px solid #000000;
   cursor: pointer;
@@ -1622,5 +1652,10 @@ animation: blink 0.5s ease-in-out infinite alternate; */
     text-align: center;
     color: #000000;
     background-color: #ffffff;
+  }
+
+  .lunchmenu-text {
+    font-size: 50px;
+    margin: 10px;
   }
 }

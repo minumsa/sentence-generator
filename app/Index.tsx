@@ -188,23 +188,6 @@ const Index: React.FC = () => {
             <Contact language={language} isDarkMode={isDarkMode} />
           )}
         </div>
-        {/* <div
-          style={{
-            display: "none",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: "30px",
-            borderTop: isDarkMode ? "0.5px solid #ffffff" : "1px solid #dddede",
-          }}
-        >
-          <div style={{ width: "100px" }}></div>
-          <div style={{ fontSize: "12px", fontWeight: "300" }}>
-            {language === "A" ? "7 items" : "7개의 항목"}
-          </div>
-          <div style={{ marginRight: "10px" }}>
-            <input type="range"></input>
-          </div>
-        </div> */}
       </div>
     </div>
   );
