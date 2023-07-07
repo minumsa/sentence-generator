@@ -62,7 +62,10 @@ export default function LunchMain() {
   return (
     <>
       <div className="lunchmain-container">
-        <div style={{ width: "20%", height: "100%", overflow: "scroll" }}>
+        <div
+          className="lunch-left-container"
+          style={{ width: "20%", height: "100%", overflow: "scroll" }}
+        >
           <div className="lunchmenu-text-container">
             {districts.map((x, index) => (
               <div key={index} className="lunchmenu-text-title">
@@ -79,7 +82,7 @@ export default function LunchMain() {
             height: "100%",
           }}
         >
-          <div style={{ overflow: "scroll" }}>
+          <div className="lunch-right-container" style={{ overflow: "scroll" }}>
             <div className="food-bottom-title">서울의 맛집 v1.1.1</div>
             <div className="lunchmenu-text">
               {/* <Image

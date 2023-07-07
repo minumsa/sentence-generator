@@ -1589,6 +1589,16 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   /* color: #09912f; */
 }
 
+/* IE and Edge
+-ms-overflow-style: none;  
+Firefox
+    scrollbar-width: none;  */
+
+.lunch-left-container::-webkit-scrollbar,
+.lunch-right-container::-webkit-scrollbar {
+  display: none;
+}
+
 .lunchmenu-text-container {
   /* height: 100%; */
   display: flex;
@@ -1625,12 +1635,13 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 
 .lunchmenu-text {
   font-family: "GabiaHeuldot";
-  font-size: 40px;
+  font-size: calc(20px + 1.5vw);
   padding: 35px 50px;
 }
 
 .lunchmenu-text-block {
   /* margin-bottom: 20px; */
+  /* font-size: 90%; */
   line-height: 180%;
   word-break: keep-all;
 }
