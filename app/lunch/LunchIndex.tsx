@@ -59,7 +59,7 @@ export default function LunchIndex({ setShowIndex, setShowMain }: LunchProps) {
   return (
     <div className="lunch-container">
       <div className="lunch-main-text">
-        <div>{`오늘의 점심은? ${foodEmoji[currentEmojiIndex]}`}</div>
+        <div>{`서울의 맛집 ${foodEmoji[currentEmojiIndex]}`}</div>
         <div
           className="lunch-start-button"
           onClick={() => {
@@ -67,7 +67,7 @@ export default function LunchIndex({ setShowIndex, setShowMain }: LunchProps) {
             setShowMain(true);
           }}
         >
-          메뉴 고르러 가기
+          리스트 보러 가기
         </div>
       </div>
     </div>
