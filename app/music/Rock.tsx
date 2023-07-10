@@ -32,7 +32,7 @@ export default function Rock() {
         </div>
       </div>
       <div className="music-post-container-block">
-        공중으로 날아가는 멜로디에 강조를 두어 리듬적인 울림을 잔혹한 본질로
+        {`공중으로 날아가는 멜로디에 강조를 두어 리듬적인 울림을 잔혹한 본질로
         걸러내는 것을 주장한 이 명성있는 비스티 보이즈 프로듀서는 칠리 페퍼스의
         다이내믹을 바꾸었습니다. 쾌격을 선사하는 "Give It Away"와 불타오르는
         "Suck My Kiss"는 힙합의 비트 중심적인 끈질김함을 강조한 록의 템플릿을
@@ -42,7 +42,7 @@ export default function Rock() {
         새로운 차원을 드러냈습니다. 리듬 섹션은 스튜디오의 질감과 뉘앙스에 대한
         성장하는 호기심을 보여주었으며, 이는 이후의 다방면으로 판매량을 기록한
         'Californication' (1999)과 'By the Way' (2002)의 화려한 발라드에서
-        탐구하게 될 것입니다.
+        탐구하게 될 것입니다.`}
       </div>
       <div
         style={{
