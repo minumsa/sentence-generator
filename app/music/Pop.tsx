@@ -10,7 +10,7 @@ export default function Pop() {
           <Image src="/aja.jpeg" alt="steelydan_aja" width="250" height="250" />
         </div>
         <div className="music-post-container-block">
-          <div>Steely Dan, ‘Aja’</div>
+          <div>Steely Dan, ｟Aja｠</div>
           <div>ABC, 1977</div>
           <a
             href="https://music.apple.com/kr/album/aja/1440938356"

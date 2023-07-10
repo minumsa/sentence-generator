@@ -17,8 +17,8 @@ export default function Soundtrack() {
         </div>
         <div className="music-post-container-block">
           <div>
-            {`Sparks, ‘Annette (Cannes Edition - Selections from the Motion
-            Picture Soundtrack)’`}
+            {`Sparks, ｟Annette (Cannes Edition - Selections from the Motion
+            Picture Soundtrack)｠`}
           </div>
           <div>CG Cinema International, 2021</div>
           <a

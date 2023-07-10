@@ -16,7 +16,7 @@ export default function Folk() {
           />
         </div>
         <div className="music-post-container-block">
-          <div>Taylor Swift, ‘Speak Now’</div>
+          <div>Taylor Swift, ｟Speak Now｠</div>
           <div>BIG MACHINE, 2010</div>
           <a
             href="https://music.apple.com/kr/album/speak-now-bonus-track-version/1440724790"

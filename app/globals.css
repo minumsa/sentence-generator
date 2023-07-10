@@ -1588,6 +1588,10 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   background-color: #000000;
   color: #ffccff;
   /* color: #09912f; */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* IE and Edge
@@ -1760,6 +1764,14 @@ Firefox
   border-radius: 1000px;
   background-color: #000000;
   z-index: 1000;
+  cursor: pointer;
+}
+
+.music-post-submit:hover {
+  color: #000000;
+  font-weight: bold;
+  border-radius: 0;
+  background-color: #ffccff;
 }
 
 @media (max-width: 700px) {

@@ -16,7 +16,7 @@ export default function Kpop() {
           />
         </div>
         <div className="music-post-container-block">
-          <div>NewJeans, ‘Super Shy’</div>
+          <div>NewJeans, ｟Super Shy｠</div>
           <div>HYBE, 2023</div>
           <a
             href="https://music.apple.com/kr/album/newjeans-super-shy-single/1692686264"

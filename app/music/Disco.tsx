@@ -16,7 +16,7 @@ export default function Disco() {
           />
         </div>
         <div className="music-post-container-block">
-          <div>Kylie Minogue, ‘DISCO’</div>
+          <div>Kylie Minogue, ｟DISCO｠</div>
           <div>Darenote, 2020</div>
           <a
             href="https://music.apple.com/kr/album/disco/1523095299"

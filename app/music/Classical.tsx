@@ -17,7 +17,8 @@ export default function Classical() {
         </div>
         <div className="music-post-container-block">
           <div>
-            조성진, ‘The Handel Project: Handel - Suites * Brahms - Variations’
+            조성진, ｟The Handel Project: Handel - Suites * Brahms -
+            Variations｠
           </div>
           <div>Deutsche Grammophon, 2023</div>
           <a

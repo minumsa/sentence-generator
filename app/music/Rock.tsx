@@ -16,7 +16,7 @@ export default function Rock() {
           />
         </div>
         <div className="music-post-container-block">
-          <div>Red Hot Chili Peppers, ‘Blood Sugar Sex Magik’</div>
+          <div>Red Hot Chili Peppers, ｟Blood Sugar Sex Magik｠</div>
           <div>Warner Bros. Records, 1991</div>
           <a
             href="https://music.apple.com/kr/album/blood-sugar-sex-magik/945581828"
