@@ -1579,13 +1579,14 @@ animation: blink 0.5s ease-in-out infinite alternate; */
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; */
 }
 
-.lunchmain-container {
+.music-main-container {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: row;
-  font-family: "KBO-Dia-Gothic_bold";
-  background-color: #eeeeee;
+  font-family: "GabiaHeuldot";
+  background-color: #000000;
+  color: #ffccff;
   /* color: #09912f; */
 }
 
@@ -1594,30 +1595,46 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 Firefox
     scrollbar-width: none;  */
 
-.lunch-left-container::-webkit-scrollbar,
-.lunch-right-container::-webkit-scrollbar {
+.music-left-container::-webkit-scrollbar,
+.music-right-container::-webkit-scrollbar {
   display: none;
 }
 
-.lunchmenu-text-container {
+.music-genre-container {
   /* height: 100%; */
+  /* width: 450px; */
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #000000;
+  /* border: 1px solid #ffccff; */
   font-size: 70px;
 }
 
-.lunchmenu-text-title {
-  font-size: 50px;
+.music-genre {
+  cursor: pointer;
+  width: 210px;
+  height: 45px;
+  font-size: 30px;
   font-family: "GabiaHeuldot";
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  border-bottom: 1px solid #000000;
+  border: 1px solid #ffccff;
   /* padding-left: 30px; */
   padding: 10px;
+  margin: 10px;
+  border-radius: 9000px;
+}
+
+.music-genre:hover {
+  font-weight: bold;
+  color: #000000;
+  border: 1px solid #ffccff;
+  background-color: #ffccff;
+  /* padding-left: 30px; */
+  padding: 10px;
+  margin: 10px;
+  border-radius: 0px;
 }
 
 .lunch-main-text {
@@ -1633,13 +1650,14 @@ Firefox
   animation: blink 0.5s ease-in-out infinite alternate; */
 }
 
-.lunchmenu-text {
+.music-post-container {
   font-family: "GabiaHeuldot";
-  font-size: calc(20px + 1.5vw);
-  padding: 35px 50px;
+  /* font-size: calc(20px + 1.5vw); */
+  font-size: 30px;
+  padding: 20px 50px;
 }
 
-.lunchmenu-text-block {
+.music-post-container-block {
   /* margin-bottom: 20px; */
   /* font-size: 90%; */
   line-height: 180%;
@@ -1669,7 +1687,30 @@ Firefox
   transition-duration: 0.5s;
 }
 
-.food-bottom-title {
+.music-top-menu {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 45px;
+  font-size: 25px;
+  border: 1px solid #ffccff;
+  border-radius: 10000px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.music-top-menu:hover {
+  color: #000000;
+  font-weight: bold;
+  border-radius: 0;
+  background-color: #ffccff;
+}
+
+.music-bottom-title {
   position: absolute;
   right: 20px;
   bottom: 20px;
@@ -1683,6 +1724,21 @@ Firefox
   padding: 20px;
   /* border: 1px solid #000000;
   border-radius: 2000px; */
+}
+
+.album-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.play-applemusic {
+  /* padding: 0 10px; */
+  /* width: 350px; */
+  margin-top: 10px;
+  border-top: 1px solid #ffccff;
+  border-bottom: 1px solid #ffccff;
+  cursor: pointer;
 }
 
 @media (max-width: 700px) {
@@ -1707,7 +1763,7 @@ Firefox
     background-color: #ffffff;
   }
 
-  .lunchmenu-text {
+  .music-post-container {
     font-size: 50px;
     margin: 10px;
   }
