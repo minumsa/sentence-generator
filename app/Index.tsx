@@ -130,7 +130,7 @@ const Index: React.FC = () => {
               {language === "A" ? "Contact" : "연결"}
             </div>
             <div className="index-menu-grow" style={{ flexGrow: "1" }}></div>
-            <div
+            {/* <div
               className="dark-mode-icon"
               style={
                 isDarkMode
@@ -146,7 +146,7 @@ const Index: React.FC = () => {
               onClick={() => {
                 isDarkMode ? setIsDarkMode(false) : setIsDarkMode(true);
               }}
-            ></div>
+            ></div> */}
             <div
               className="right-menu-language"
               onClick={() => {
