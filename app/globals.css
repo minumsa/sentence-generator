@@ -1655,6 +1655,7 @@ Firefox
   /* font-size: calc(20px + 1.5vw); */
   font-size: 30px;
   padding: 20px 50px;
+  margin-top: 5px;
 }
 
 .music-post-container-block {
@@ -1741,13 +1742,33 @@ Firefox
   cursor: pointer;
 }
 
+.music-post-input {
+  height: 50px;
+  width: 100%;
+  font-size: 30px;
+  font-family: "GabiaHeuldot";
+  margin-top: 15px;
+  background-color: #ffccff;
+  font-weight: bold;
+}
+
+.music-post-submit {
+  margin: 50px 0 10px 0;
+  border: 1px solid #ffccff;
+  width: fit-content;
+  padding: 10px 30px;
+  border-radius: 1000px;
+  background-color: #000000;
+  z-index: 1000;
+}
+
 @media (max-width: 700px) {
   .lunch-main-text {
     margin-bottom: 10vh;
     font-weight: 700;
     font-size: 43px;
     /* -webkit-animation: blink 0.5s ease-in-out infinite alternate;
-    -moz-animation: blink 0.5s ease-in-out infinite alternate;
+    -moz-animation: blink 0.5s ease-in-out infinite alteㅅㅈ댜rnate;
     animation: blink 0.5s ease-in-out infinite alternate; */
   }
 

@@ -2,24 +2,24 @@
 
 import Image from "next/image";
 
-export default function Rock() {
+export default function Folk() {
   return (
     <div className="music-post-container">
       <div className="album-container">
         <div style={{ marginRight: "20px" }}>
           <Image
-            src="/bloodsugar.jpeg"
-            alt="newjeans_supershy"
+            src="/speaknow.webp"
+            alt="speaknow"
             width="250"
             height="250"
             // style={{ border: "1px solid white" }}
           />
         </div>
         <div className="music-post-container-block">
-          <div>Red Hot Chili Peppers, ‘Blood Sugar Sex Magik’</div>
-          <div>Warner Bros. Records, 1991</div>
+          <div>Taylor Swift, ‘Speak Now’</div>
+          <div>BIG MACHINE, 2010</div>
           <a
-            href="https://music.apple.com/kr/album/blood-sugar-sex-magik/945581828"
+            href="https://music.apple.com/kr/album/speak-now-bonus-track-version/1440724790"
             target="_blank"
             style={{
               textDecoration: "none",
@@ -32,7 +32,7 @@ export default function Rock() {
         </div>
       </div>
       <div className="music-post-container-block">
-        {`칠리스 최고의 명반 중 하나이자, 펑크(funk) 록 불후의 명반으로 평가받는다. 이 앨범을 발표하고 나서 레드 핫 칠리 페퍼스는 본격적으로 세계적인 스타 반열에 오른다. 다만 이런 갑작스러운 인기와 영예가 몹시 부담스러웠던 밴드의 기타리스트 존 프루시안테는 투어 도중 돌연 모습을 감추고 만다. 이후 제인스 어딕션 출신의 기타리스트 데이브 나바로가 그의 자리를 대신하게 된다. 앨범 제작 과정을 다룬 한 시간 정도 분량의 다큐멘터리 'Funky Monks'가 있다.`}
+        {`전작 Fearless보다 팝, 록 사운드가 더 가미되었다. 이번 앨범의 제일 큰 특징은 전곡을 직접 단독 작사/작곡했다는 것이다. 한 노래에 많게는 수십명이 따라붙는 할리우드에서 매우 이례적인 일인데, 이전 앨범의 노래보다 발전한 가사로 대중과 평단에게 큰 호평을 받았다. 2012년 롤링 스톤 선정 50대 여성 아티스트 명반에서 45위로 선정되기도 했다. 팬들 사이에서도 명반으로 자주 꼽힌다. 상업적으로도 전작에 이어 흥행을 이어나갔다. 첫 주 약 104만장을 팔아 밀리언 초동 신화의 시작을 알린 앨범이다. 2010년 연간 차트 9위, 2011년 연간 차트 2위에 해당하는 롱런끝에 미국에서만 460만 장이 팔려 나갔다.`}
       </div>
       <div
         style={{
