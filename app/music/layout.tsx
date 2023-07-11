@@ -25,12 +25,9 @@ type Props = {
   children: React.ReactNode;
 };
 
-function Layout() {
-  return (
-    <div>
-      <Music />
-    </div>
-  );
-}
+const Layout = ({ children }: Props) => {
+  return <div>{children}</div>;
+  // return <Music />;
+};
 
 export default Layout;
