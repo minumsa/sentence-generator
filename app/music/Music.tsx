@@ -9,7 +9,7 @@ export default function Music({ children }: any) {
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
 
-  console.log(genreByPath);
+  console.log(genreByPath.length);
 
   const genres = [
     "POP",
@@ -63,7 +63,8 @@ export default function Music({ children }: any) {
                 //     marginTop: "20px",
                 //   }
                 // :
-                genreByPath === genre && !loginPage
+                (genreByPath === genre && !loginPage) ||
+                (genreByPath.length < 1 && activeGenre === genre)
                   ? {
                       backgroundColor: "#ffccff",
                       borderRadius: 0,

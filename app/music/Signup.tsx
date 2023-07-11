@@ -15,27 +15,80 @@ export default function Signup() {
       <div style={{ textAlign: "center", fontWeight: "normal" }}>
         ｟ 회원가입 페이지 ｠
       </div>
-      <div style={{ marginTop: "50px" }}>이메일</div>
-      <input
-        className="music-post-input"
-        onChange={e => {
-          setEmail(e.target.value);
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
-      ></input>
-      <div style={{ marginTop: "50px" }}>닉네임</div>
-      <input
-        className="music-post-input"
-        onChange={e => {
-          setName(e.target.value);
+      >
+        <div style={{ width: "500px", display: "flex", marginTop: "50px" }}>
+          <div>이메일</div>
+        </div>
+        <input
+          className="music-post-input"
+          onChange={e => {
+            setEmail(e.target.value);
+          }}
+          style={{ width: "500px" }}
+        ></input>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
-      ></input>
-      <div style={{ marginTop: "50px" }}>비밀번호</div>
-      <input
-        className="music-post-input"
-        onChange={e => {
-          setPassword(e.target.value);
+      >
+        <div style={{ width: "500px", display: "flex", marginTop: "50px" }}>
+          <div>닉네임</div>
+        </div>
+        <input
+          className="music-post-input"
+          onChange={e => {
+            setName(e.target.value);
+          }}
+          style={{ width: "500px" }}
+        ></input>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
-      ></input>
+      >
+        <div style={{ width: "500px", display: "flex", marginTop: "50px" }}>
+          <div>비밀번호</div>
+        </div>
+        <input
+          className="music-post-input"
+          onChange={e => {
+            setPassword(e.target.value);
+          }}
+          style={{ width: "500px" }}
+          type="password"
+        ></input>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ width: "500px", display: "flex", marginTop: "50px" }}>
+          <div>비밀번호 재입력</div>
+        </div>
+        <input
+          className="music-post-input"
+          onChange={e => {
+            setPassword(e.target.value);
+          }}
+          style={{ width: "500px" }}
+          type="password"
+        ></input>
+      </div>
       <div
         style={{
           display: "flex",
