@@ -1,11 +1,11 @@
 "use client";
 
-import Login from "../Login";
+import Folk from "../Folk";
 
 export default function Page() {
   return (
     <>
-      <Login />
+      <Folk />
     </>
   );
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import Login from "../Login";
+import Rock from "../Rock";
 
 export default function Page() {
   return (
     <>
-      <Login />
+      <Rock />
     </>
   );
 }

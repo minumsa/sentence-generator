@@ -1,11 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Signup() {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const router = useRouter();
 
   return (
     <div className="music-post-container">
@@ -41,8 +44,13 @@ export default function Signup() {
           textAlign: "center",
         }}
       >
-        <div>이미 아이디가 있다면?</div>
-        <div style={{ marginLeft: "10px", fontWeight: "bold" }}>로그인</div>
+        <div>아이디가 있다면?</div>
+        <div
+          style={{ marginLeft: "10px", fontWeight: "bold", cursor: "pointer" }}
+          onClick={() => router.push("/music/login")}
+        >
+          로그인
+        </div>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="music-post-submit">회원가입</div>

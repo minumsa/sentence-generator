@@ -1,4 +1,6 @@
+/* eslint-disable react/no-children-prop */
 import React from "react";
+import Music from "./Music";
 
 export const metadata = {
   title: "카버 차트",
@@ -25,8 +27,12 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-  return <div>{children}</div>;
-  // return <Music />;
+  return (
+    <div className="music-main-container">
+      <Music children={children} />
+      {/* <MusicRight /> */}
+    </div>
+  );
 };
 
 export default Layout;

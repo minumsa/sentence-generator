@@ -1,11 +1,11 @@
 "use client";
 
-import Login from "../Login";
+import Kpop from "../Kpop";
 
 export default function Page() {
   return (
     <>
-      <Login />
+      <Kpop />
     </>
   );
 }

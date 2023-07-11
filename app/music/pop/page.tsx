@@ -1,11 +1,9 @@
-"use client";
-
-import Login from "../Login";
+import Pop from "../Pop";
 
 export default function Page() {
   return (
     <>
-      <Login />
+      <Pop />
     </>
   );
 }

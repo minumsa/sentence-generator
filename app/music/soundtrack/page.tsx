@@ -1,11 +1,11 @@
 "use client";
 
-import Login from "../Login";
+import Soundtrack from "../Soundtrack";
 
 export default function Page() {
   return (
     <>
-      <Login />
+      <Soundtrack />
     </>
   );
 }

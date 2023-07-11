@@ -1,11 +1,11 @@
 "use client";
 
-import Login from "../Login";
+import Classical from "../Classical";
 
 export default function Page() {
   return (
     <>
-      <Login />
+      <Classical />
     </>
   );
 }

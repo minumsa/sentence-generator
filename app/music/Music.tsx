@@ -1,19 +1,16 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import Pop from "./Pop";
-import Kpop from "./Kpop";
-import Rock from "./Rock";
-import Disco from "./Disco";
-import Folk from "./Folk";
-import Jazz from "./Jazz";
-import Classical from "./Classical";
-import Soundtrack from "./Soundtrack";
-import Upload from "./Upload";
-import Signup from "./Signup";
-import Login from "./Login";
 
-export default function Music() {
+export default function Music({ children }: any) {
+  const router = useRouter();
+  const pathName = usePathname();
+  const genreByPath =
+    pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
+
+  console.log(genreByPath);
+
   const genres = [
     "POP",
     "K-POP",
@@ -27,44 +24,56 @@ export default function Music() {
   ];
 
   const [activeGenre, setActiveGenre] = useState("ALL");
-  const [uploadPage, setUploadPage] = useState(false);
+  const [loginPage, setLoginPage] = useState(false);
 
   const handleGenreClick = (genre: any) => {
-    setActiveGenre(genre);
-    setUploadPage(false);
+    setLoginPage(false);
+    const genrePath = genre.toLowerCase();
+    genrePath === "all"
+      ? router.push(`/music`)
+      : router.push(`/music/${genrePath}`);
   };
 
   return (
-    <div className="music-main-container">
+    <>
       <div
         className="music-left-container"
         style={{ width: "250px", height: "100%" }}
       >
-        <div className="music-genre-container">
+        <div className="music-genre-container" style={{ paddingTop: "10px" }}>
           {genres.map((genre, index) => (
             <div
               key={genre}
               className={`music-genre ${activeGenre === genre ? "active" : ""}`}
-              onClick={() => handleGenreClick(genre)}
+              onClick={() => {
+                setActiveGenre(genre);
+                handleGenreClick(genre);
+              }}
               style={
-                genre === "POP" && activeGenre === genre && !uploadPage
+                // genreByPath === "POP"
+                //   ?
+                // &&
+                // activeGenre === genreByPath &&
+                // !loginPage
+                //   {
+                //     backgroundColor: "#ffccff",
+                //     borderRadius: 0,
+                //     color: "#000000",
+                //     fontWeight: "bold",
+                //     marginTop: "20px",
+                //   }
+                // :
+                genreByPath === genre && !loginPage
                   ? {
                       backgroundColor: "#ffccff",
                       borderRadius: 0,
                       color: "#000000",
                       fontWeight: "bold",
-                      marginTop: "20px",
                     }
-                  : activeGenre === genre && !uploadPage
-                  ? {
-                      backgroundColor: "#ffccff",
-                      borderRadius: 0,
-                      color: "#000000",
-                      fontWeight: "bold",
-                    }
-                  : genre === "POP"
-                  ? { marginTop: "20px" }
-                  : {} // 다른 장르에 대한 스타일이 없을 경우 null로 설정
+                  : {}
+                // genre === "POP"
+                // ? { marginTop: "20px" }
+                // : {}
               }
             >
               {genre}
@@ -86,49 +95,29 @@ export default function Music() {
         >
           <div
             className="music-top-menu"
-            onClick={() => setUploadPage(true)}
-            style={
-              uploadPage
-                ? {
-                    backgroundColor: "#ffccff",
-                    borderRadius: 0,
-                    color: "#000000",
-                    fontWeight: "bold",
-                  }
-                : {}
-            }
+            // onClick={() => setUploadPage(true)}
+            onClick={() => {
+              router.push("/music/login");
+              // setLoginPage(true);
+              setActiveGenre("");
+            }}
+            // style={
+            //   loginPage
+            //     ? {
+            //         backgroundColor: "#ffccff",
+            //         borderRadius: 0,
+            //         color: "#000000",
+            //         fontWeight: "bold",
+            //       }
+            //     : {}
+            // }
           >
             로그인
           </div>
           <div className="music-bottom-title">카버 차트 v1.1.1</div>
-          {uploadPage ? (
-            <Login />
-          ) : (
-            <>
-              {activeGenre === "POP" && <Pop />}
-              {activeGenre === "K-POP" && <Kpop />}
-              {activeGenre === "ROCK" && <Rock />}
-              {activeGenre === "DISCO" && <Disco />}
-              {activeGenre === "FOLK" && <Folk />}
-              {activeGenre === "JAZZ" && <Jazz />}
-              {activeGenre === "CLASSICAL" && <Classical />}
-              {activeGenre === "SOUNDTRACK" && <Soundtrack />}
-              {activeGenre === "ALL" && (
-                <>
-                  <Pop />
-                  <Kpop />
-                  <Rock />
-                  <Disco />
-                  <Folk />
-                  <Jazz />
-                  <Classical />
-                  <Soundtrack />
-                </>
-              )}
-            </>
-          )}
+          {children}
         </div>
       </div>
-    </div>
+    </>
   );
 }
