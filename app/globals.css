@@ -1576,10 +1576,10 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   background-color: #000000;
   color: #ffccff;
   /* color: #09912f; */
-  /* -webkit-user-select: none;
+  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; */
+  user-select: none;
 }
 
 /* IE and Edge
@@ -1587,10 +1587,10 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 Firefox
     scrollbar-width: none;  */
 
-/* .music-left-container::-webkit-scrollbar,
+.music-left-container::-webkit-scrollbar,
 .music-right-container::-webkit-scrollbar {
   display: none;
-} */
+}
 
 .music-genre-container {
   /* height: 100%; */

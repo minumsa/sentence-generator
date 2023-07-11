@@ -10,6 +10,8 @@ import Jazz from "./Jazz";
 import Classical from "./Classical";
 import Soundtrack from "./Soundtrack";
 import Upload from "./Upload";
+import Signup from "./Signup";
+import Login from "./Login";
 
 export default function Music() {
   const genres = [
@@ -45,7 +47,15 @@ export default function Music() {
               className={`music-genre ${activeGenre === genre ? "active" : ""}`}
               onClick={() => handleGenreClick(genre)}
               style={
-                activeGenre === genre && !uploadPage
+                genre === "POP" && activeGenre === genre && !uploadPage
+                  ? {
+                      backgroundColor: "#ffccff",
+                      borderRadius: 0,
+                      color: "#000000",
+                      fontWeight: "bold",
+                      marginTop: "20px",
+                    }
+                  : activeGenre === genre && !uploadPage
                   ? {
                       backgroundColor: "#ffccff",
                       borderRadius: 0,
@@ -88,11 +98,11 @@ export default function Music() {
                 : {}
             }
           >
-            업로드
+            로그인
           </div>
           <div className="music-bottom-title">카버 차트 v1.1.1</div>
           {uploadPage ? (
-            <Upload />
+            <Login />
           ) : (
             <>
               {activeGenre === "POP" && <Pop />}

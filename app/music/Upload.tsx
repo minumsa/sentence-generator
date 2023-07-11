@@ -11,8 +11,6 @@ export default function Upload() {
   const [genre, setGenre] = useState<string>("POP");
   const [link, setLink] = useState<string>("");
 
-  console.log(genre);
-
   return (
     <div className="music-post-container">
       <div style={{ textAlign: "center", fontWeight: "normal" }}>
