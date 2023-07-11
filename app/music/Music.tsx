@@ -36,10 +36,10 @@ export default function Music() {
     <div className="music-main-container">
       <div
         className="music-left-container"
-        style={{ width: "250px", height: "100%", marginTop: "10px" }}
+        style={{ width: "250px", height: "100%" }}
       >
         <div className="music-genre-container">
-          {genres.map(genre => (
+          {genres.map((genre, index) => (
             <div
               key={genre}
               className={`music-genre ${activeGenre === genre ? "active" : ""}`}
@@ -52,7 +52,9 @@ export default function Music() {
                       color: "#000000",
                       fontWeight: "bold",
                     }
-                  : {}
+                  : genre === "POP"
+                  ? { marginTop: "20px" }
+                  : {} // 다른 장르에 대한 스타일이 없을 경우 null로 설정
               }
             >
               {genre}

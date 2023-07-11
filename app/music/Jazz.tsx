@@ -19,7 +19,7 @@ export default function Jazz() {
           <div>Bill Evans & Jim Hall, ｟Undercurrent｠</div>
           <div>United Artist, 1962</div>
           <a
-            href="https://music.apple.com/kr/album/newjeans-super-shy-single/1692686264"
+            href="https://music.apple.com/kr/album/undercurrent/724267459?l=en-GB"
             target="_blank"
             style={{
               textDecoration: "none",

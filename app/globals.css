@@ -62,8 +62,21 @@
 
 html {
   margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  /* background-color: #f4f6f7; */
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  /* background-color: #000000; */
 }
 
 .fruits-container {
@@ -73,15 +86,6 @@ html {
     linear-gradient(-45deg, #d0d0d0 25%, transparent 25%),
     linear-gradient(45deg, transparent 75%, #d0d0d0 75%),
     linear-gradient(-45deg, transparent 75%, #d0d0d0 75%);
-}
-
-body {
-  margin: 0;
-  /* background-color: #f4f6f7; */
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 /* body::-webkit-scrollbar {
@@ -1563,22 +1567,6 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   }
 }
 
-.lunch-container {
-  width: 100vw;
-  height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  font-family: "KBO-Dia-Gothic_bold";
-  /* font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; */
-}
-
 .music-main-container {
   width: 100vw;
   height: 100vh;
@@ -1588,10 +1576,10 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   background-color: #000000;
   color: #ffccff;
   /* color: #09912f; */
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
 }
 
 /* IE and Edge
@@ -1599,10 +1587,10 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 Firefox
     scrollbar-width: none;  */
 
-.music-left-container::-webkit-scrollbar,
+/* .music-left-container::-webkit-scrollbar,
 .music-right-container::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .music-genre-container {
   /* height: 100%; */
@@ -1618,7 +1606,6 @@ Firefox
   width: 210px;
   height: 45px;
   font-size: 30px;
-  font-family: "GabiaHeuldot";
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1641,19 +1628,6 @@ Firefox
   border-radius: 0px;
 }
 
-.lunch-main-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10vh;
-  font-weight: 700;
-  font-size: 80px;
-  /* -webkit-animation: blink 0.5s ease-in-out infinite alternate;
-  -moz-animation: blink 0.5s ease-in-out infinite alternate;
-  animation: blink 0.5s ease-in-out infinite alternate; */
-}
-
 .music-post-container {
   font-family: "GabiaHeuldot";
   /* font-size: calc(20px + 1.5vw); */
@@ -1667,29 +1641,6 @@ Firefox
   /* font-size: 90%; */
   line-height: 180%;
   word-break: keep-all;
-}
-
-.lunch-start-button {
-  /* font-family: "GabiaHeuldot"; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 10px;
-  font-size: 20px;
-  width: 250px;
-  height: 50px;
-  border: 1px solid #000000;
-  cursor: pointer;
-  text-align: center;
-  color: #000000;
-  background-color: #ffffff;
-}
-
-.lunch-start-button:hover {
-  color: #ffffff;
-  background-color: #000000;
-  transform: scale(1.2);
-  transition-duration: 0.5s;
 }
 
 .music-top-menu {
@@ -1725,8 +1676,8 @@ Firefox
   align-items: end;
   flex-grow: 1; */
   font-size: 60px;
-  font-family: "GabiaHeuldot";
-  padding: 20px;
+  /* font-family: "GabiaHeuldot"; */
+  /* padding: 20px; */
   /* border: 1px solid #000000;
   border-radius: 2000px; */
 }
@@ -1775,27 +1726,6 @@ Firefox
 }
 
 @media (max-width: 700px) {
-  .lunch-main-text {
-    margin-bottom: 10vh;
-    font-weight: 700;
-    font-size: 43px;
-    /* -webkit-animation: blink 0.5s ease-in-out infinite alternate;
-    -moz-animation: blink 0.5s ease-in-out infinite alteㅅㅈ댜rnate;
-    animation: blink 0.5s ease-in-out infinite alternate; */
-  }
-
-  .lunch-start-button {
-    font-size: 16px;
-    margin-top: 20px;
-    padding: 10px;
-    width: 150px;
-    border: 1px solid #000000;
-    cursor: pointer;
-    text-align: center;
-    color: #000000;
-    background-color: #ffffff;
-  }
-
   .music-post-container {
     font-size: 50px;
     margin: 10px;
