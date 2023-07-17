@@ -48,19 +48,6 @@ export default function Music({ children }: any) {
                 handleGenreClick(genre);
               }}
               style={
-                // genreByPath === "POP"
-                //   ?
-                // &&
-                // activeGenre === genreByPath &&
-                // !loginPage
-                //   {
-                //     backgroundColor: "#ffccff",
-                //     borderRadius: 0,
-                //     color: "#000000",
-                //     fontWeight: "bold",
-                //     marginTop: "20px",
-                //   }
-                // :
                 (genreByPath === genre && !loginPage) ||
                 (genreByPath.length < 1 && activeGenre === genre)
                   ? {
@@ -70,9 +57,6 @@ export default function Music({ children }: any) {
                       fontWeight: "bold",
                     }
                   : {}
-                // genre === "POP"
-                // ? { marginTop: "20px" }
-                // : {}
               }
             >
               {genre}
@@ -94,27 +78,15 @@ export default function Music({ children }: any) {
         >
           <div
             className="music-top-menu"
-            // onClick={() => setUploadPage(true)}
             onClick={() => {
               router.push("/music/login");
-              // setLoginPage(true);
               setActiveGenre("");
             }}
-            // style={
-            //   loginPage
-            //     ? {
-            //         backgroundColor: "#ffccff",
-            //         borderRadius: 0,
-            //         color: "#000000",
-            //         fontWeight: "bold",
-            //       }
-            //     : {}
-            // }
           >
             로그인
           </div>
           <div className="music-bottom-title">카버 차트 v1.1.1</div>
-          {children}
+          <Pop />
         </div>
       </div>
     </>

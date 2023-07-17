@@ -31,7 +31,6 @@ export default function Upload() {
       </div>
       <div
         style={{
-          // borderBottom: "thick double #ffccff",
           borderBottom: "1px solid #ffccff",
           padding: "20px",
           marginBottom: "100px",

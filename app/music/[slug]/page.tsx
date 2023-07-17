@@ -1,23 +1,26 @@
 "use client";
 
+import { NextPage } from "next";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import Pop from "./Pop";
-import Kpop from "./Kpop";
-import Rock from "./Rock";
-import Disco from "./Disco";
-import Folk from "./Folk";
-import Jazz from "./Jazz";
-import Classical from "./Classical";
-import Soundtrack from "./Soundtrack";
+import Pop from "../Pop";
+import Kpop from "../Kpop";
+import Rock from "../Rock";
+import Disco from "../Disco";
+import Folk from "../Folk";
+import Jazz from "../Jazz";
+import Classical from "../Classical";
+import Soundtrack from "../Soundtrack";
+import Upload from "../Upload";
 
-export default function Page() {
+const GenrePage: NextPage<{ params: { slug: string } }> = ({ params }) => {
+  const decodedSlug = decodeURIComponent(params.slug);
   const router = useRouter();
   const pathName = usePathname();
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
 
-  const genres = [
+  const contents = [
     "POP",
     "K-POP",
     "ROCK",
@@ -40,6 +43,40 @@ export default function Page() {
       : router.push(`/music/${genrePath}`);
   };
 
+  let content = null;
+
+  switch (decodedSlug) {
+    case "pop":
+      content = <Pop />;
+      break;
+    case "k-pop":
+      content = <Kpop />;
+      break;
+    case "rock":
+      content = <Rock />;
+      break;
+    case "disco":
+      content = <Disco />;
+      break;
+    case "folk":
+      content = <Folk />;
+      break;
+    case "jazz":
+      content = <Jazz />;
+      break;
+    case "classical":
+      content = <Classical />;
+      break;
+    case "soundtrack":
+      content = <Soundtrack />;
+      break;
+    case "upload":
+      content = <Upload />;
+      break;
+    default:
+      content = null;
+  }
+
   return (
     <>
       <div
@@ -47,7 +84,7 @@ export default function Page() {
         style={{ width: "250px", height: "100%" }}
       >
         <div className="music-genre-container" style={{ paddingTop: "10px" }}>
-          {genres.map((genre, index) => (
+          {contents.map((genre, index) => (
             <div
               key={genre}
               className={`music-genre ${activeGenre === genre ? "active" : ""}`}
@@ -94,16 +131,11 @@ export default function Page() {
             업로드
           </div>
           <div className="music-bottom-title">카버 차트 v1.1.1</div>
-          <Pop />
-          <Kpop />
-          <Rock />
-          <Disco />
-          <Folk />
-          <Jazz />
-          <Classical />
-          <Soundtrack />
+          {content}
         </div>
       </div>
     </>
   );
-}
+};
+
+export default GenrePage;
