@@ -1697,6 +1697,10 @@ Firefox
   font-weight: bold;
 }
 
+.music-post-input-text {
+  height: 500px;
+}
+
 .music-post-submit {
   margin: 50px 0 10px 0;
   border: 1px solid #ffccff;
