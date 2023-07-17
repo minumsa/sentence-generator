@@ -1,8 +1,8 @@
 import connectMongoDB from "@/libs/mongodb";
-import User from "@/models/user";
+import Music from "@/models/music";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function createUser(
+export default async function createMusic(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
@@ -10,17 +10,17 @@ export default async function createUser(
     try {
       await connectMongoDB();
 
-      const { email, name, password } = request.body;
+      const { albumId, text } = request.body;
 
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return response.status(409).json({ message: "Email already exists" });
+      const existingMusic = await Music.findOne({ albumId });
+      if (existingMusic) {
+        return response.status(409).json({ message: "album already exists" });
       }
 
-      const newUser = new User({ email, name, password });
-      await newUser.save();
+      const newMusic = new Music({ albumId, text });
+      await newMusic.save();
 
-      return response.status(201).json({ message: "User created" });
+      return response.status(201).json({ message: "Music created" });
     } catch (error) {
       console.error(error);
       return response.status(500).json({ message: "Server Error" });

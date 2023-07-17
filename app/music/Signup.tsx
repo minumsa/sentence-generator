@@ -1,7 +1,7 @@
 "use client";
 
 import connectMongoDB from "@/libs/mongodb";
-import User from "@/models/user";
+import User from "@/models/music";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
