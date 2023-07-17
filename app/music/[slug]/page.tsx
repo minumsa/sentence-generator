@@ -2,7 +2,7 @@
 
 import { NextPage } from "next";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pop from "../Pop";
 import Kpop from "../Kpop";
 import Rock from "../Rock";
@@ -13,12 +13,23 @@ import Classical from "../Classical";
 import Soundtrack from "../Soundtrack";
 import Upload from "../Upload";
 
-const GenrePage: NextPage<{ params: { slug: string } }> = ({ params }) => {
+const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const decodedSlug = decodeURIComponent(params.slug);
   const router = useRouter();
   const pathName = usePathname();
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
+
+  const initialAlbumId: any[] = JSON.parse(
+    localStorage.getItem("albumId") || "[]"
+  );
+  const [albumId, setAlbumId] = useState<any[]>(initialAlbumId);
+
+  useEffect(() => {
+    localStorage.setItem("albumId", JSON.stringify(albumId));
+  }, [albumId]);
+
+  console.log("albumId", albumId);
 
   const contents = [
     "POP",
@@ -71,7 +82,7 @@ const GenrePage: NextPage<{ params: { slug: string } }> = ({ params }) => {
       content = <Soundtrack />;
       break;
     case "upload":
-      content = <Upload />;
+      content = <Upload albumId={albumId} setAlbumId={setAlbumId} />;
       break;
     default:
       content = null;
@@ -138,4 +149,4 @@ const GenrePage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   );
 };
 
-export default GenrePage;
+export default ContentPage;

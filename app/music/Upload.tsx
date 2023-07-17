@@ -2,9 +2,20 @@
 
 import { useState } from "react";
 
-export default function Upload() {
-  const [albumId, setAlbumId] = useState<string>("");
+interface UploadProps {
+  albumId: any[];
+  setAlbumId: any;
+}
+
+export default function Upload({ albumId, setAlbumId }: UploadProps) {
   const [text, setText] = useState<string>("");
+
+  const handleSubmit = () => {
+    setAlbumId(prevAlbumId => [...prevAlbumId, text]);
+    setText(""); // Reset the input field after submission
+  };
+
+  console.log(albumId);
 
   return (
     <div className="music-post-container">
@@ -15,19 +26,19 @@ export default function Upload() {
       <input
         className="music-post-input "
         onChange={e => {
-          setAlbumId(e.target.value);
+          setText(e.target.value);
         }}
       ></input>
       <div style={{ marginTop: "50px" }}>글</div>
       <input
         className="music-post-input music-post-input-text"
         type="text"
-        onChange={e => {
-          setText(e.target.value);
-        }}
+        onChange={() => {}}
       ></input>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div className="music-post-submit">제출하기</div>
+        <div className="music-post-submit" onClick={handleSubmit}>
+          제출하기
+        </div>
       </div>
       <div
         style={{
