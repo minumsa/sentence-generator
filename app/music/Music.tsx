@@ -9,8 +9,6 @@ export default function Music({ children }: any) {
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
 
-  console.log(genreByPath.length);
-
   const genres = [
     "POP",
     "K-POP",

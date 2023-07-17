@@ -10,7 +10,7 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ["openweathermap.org"],
+    domains: ["openweathermap.org", "i.scdn.co"],
   },
   async rewrites() {
     return [

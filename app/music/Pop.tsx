@@ -1,27 +1,116 @@
 "use client";
 
+import Error from "next/error";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Pop() {
+  const [musicData, setMusicData] = useState<any | null>(null);
+
+  const fetchAccessToken = async () => {
+    try {
+      const url = "https://accounts.spotify.com/api/token";
+      const clientId = "9ba8de463724427689b855dfcabca1b1";
+      const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
+      const basicToken = btoa(`${clientId}:${clientSecret}`);
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${basicToken}`,
+      };
+      const data = "grant_type=client_credentials";
+
+      const accessTokenResponse = await fetch(url, {
+        method: "POST",
+        headers,
+        body: data,
+      });
+
+      if (!accessTokenResponse.ok) {
+        throw new Error("Access token fetch failed");
+      }
+
+      const accessTokenData = await accessTokenResponse.json();
+      return accessTokenData.access_token;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const accessToken = await fetchAccessToken();
+      if (!accessToken) {
+        throw new Error("Access token is not available");
+      }
+
+      const url = "https://api.spotify.com/v1/albums/5sztejERqpktXEdemlUvU5";
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+      const musicDataResponse = await fetch(url, { headers });
+
+      if (!musicDataResponse.ok) {
+        throw new Error("music fetch failed");
+      }
+
+      const result = await musicDataResponse.json();
+
+      setMusicData(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  console.log(musicData);
+
   return (
     <div className="music-post-container">
       <div className="album-container">
         <div style={{ marginRight: "20px" }}>
-          <Image src="/aja.jpeg" alt="steelydan_aja" width="250" height="250" />
+          {musicData ? (
+            <Image
+              src={musicData.images[0].url}
+              alt="album art"
+              width="250"
+              height="250"
+            />
+          ) : (
+            ""
+          )}
         </div>
         <div className="music-post-container-block">
-          <div>Steely Dan, ｟Aja｠</div>
-          <div>ABC, 1977</div>
+          <div style={{ display: "flex" }}>
+            <div>{musicData ? musicData.artists[0].name + "," : ""}</div>
+            <div style={{ marginLeft: "10px" }}>
+              {musicData ? `｟${musicData.name}｠` : ""}
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <div>{musicData ? musicData.label + "," : ""}</div>
+            <div style={{ marginLeft: "10px" }}>
+              {musicData ? musicData.release_date : ""}
+            </div>
+          </div>
           <a
-            href="https://music.apple.com/kr/album/aja/1440938356"
+            href={
+              musicData ? (
+                musicData.external_urls.spotify
+              ) : (
+                <Error statusCode={404} />
+              )
+            }
             target="_blank"
             style={{
               textDecoration: "none",
               color: "#ffccff",
-              // cursor: "pointer",
             }}
           >
-            <div className="play-applemusic">Play on Apple Music ↵</div>
+            <div className="play-applemusic">Play on Spotify ↵</div>
           </a>
         </div>
       </div>
