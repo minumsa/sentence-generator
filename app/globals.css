@@ -1243,39 +1243,28 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   margin-right: 20px;
 }
 
-.right-menu-text {
-  padding: 1px 5px;
-  font-size: 14px;
-
-  /* color: #a1a1a1; */
-  /* color: #dddede; */
-  /* color: #000000; */
-  /* color: rgb(244, 244, 244); */
-  /* background-color: #000000; */
-  /* background-color: #ffffff; */
-  margin: 0 10px;
-  cursor: pointer;
-}
-
-.right-menu-clock {
+.right-menu-item {
   padding: 1px 5px;
   font-size: 14px;
   margin: 0 10px;
-  cursor: pointer;
-}
-
-.right-menu-calender {
-  padding: 1px 5px;
-  font-size: 14px;
-  margin: 0 10px;
-  cursor: pointer;
 }
 
 .right-menu-language {
-  padding: 1px 5px;
-  font-size: 14px;
-  margin: 0 10px;
   cursor: pointer;
+}
+
+.right-menu-weather-icon,
+.right-menu-clock {
+  margin: 0;
+}
+
+.right-menu-weather-temp,
+.right-menu-weather-icon {
+  padding: 1px 0;
+}
+
+.right-menu-weather-temp {
+  margin: 0 8px 0 1px;
 }
 
 .menu-text:hover,
@@ -1503,7 +1492,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
     cursor: pointer;
   }
 
-  .right-menu-clock {
+  .right-menu-clock,
+  .right-menu-calender {
     display: none;
   }
 

@@ -5,6 +5,7 @@ import Clock from "./Clock";
 import Main from "./Main";
 import About from "./About";
 import Contact from "./Contact";
+import Image from "next/image";
 
 const Index: React.FC = () => {
   const [language, setLanguage] = useState<string>("한");
@@ -42,6 +43,27 @@ const Index: React.FC = () => {
   const [showMain, setShowMain] = useState<boolean>(true);
   const [showAbout, setShowAbout] = useState<boolean>(false);
   const [showContact, setShowContact] = useState<boolean>(false);
+  const [weatherData, setWeatherData] = useState<any | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiKey = "a363f14d94f369a4d926a27d5d44fc60";
+        const seoulWeatherResponse = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${apiKey}&lang=kr`
+        );
+        if (!seoulWeatherResponse.ok) {
+          throw "weather fetch failed";
+        }
+        const data = await seoulWeatherResponse.json();
+        setWeatherData(data);
+      } catch (error) {
+        console.error("Error fetching city data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div
@@ -130,25 +152,25 @@ const Index: React.FC = () => {
               {language === "A" ? "Contact" : "연결"}
             </div>
             <div className="index-menu-grow" style={{ flexGrow: "1" }}></div>
-            {/* <div
-              className="dark-mode-icon"
-              style={
-                isDarkMode
-                  ? {
-                      backgroundColor: "rgba(30, 30, 30)",
-                      border: "1px solid #ffffff",
-                    }
-                  : {
-                      backgroundColor: "#ffffff",
-                      border: "1px solid #000000",
-                    }
-              }
-              onClick={() => {
-                isDarkMode ? setIsDarkMode(false) : setIsDarkMode(true);
-              }}
-            ></div> */}
+            <div className="right-menu-item right-menu-weather-icon">
+              {weatherData ? (
+                <Image
+                  src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                  width={35}
+                  height={35}
+                  alt="Weather Icon"
+                />
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="right-menu-item right-menu-weather-temp">
+              {weatherData
+                ? `${(weatherData.main.temp - 273.15).toFixed(1)}°`
+                : ""}
+            </div>
             <div
-              className="right-menu-language"
+              className="right-menu-item right-menu-language"
               onClick={() => {
                 language === "A" ? setLanguage("한") : setLanguage("A");
               }}
@@ -161,7 +183,7 @@ const Index: React.FC = () => {
               {language}
             </div>
             <div
-              className="right-menu-calender"
+              className="right-menu-item right-menu-calender"
               style={{
                 border: isDarkMode ? "1px solid #ffffff" : "1px solid #000000",
                 borderRadius: "5px",
@@ -171,7 +193,7 @@ const Index: React.FC = () => {
                 ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
                 : `${month}월 ${day}일 (${dayOfWeek})`}
             </div>
-            <div className="right-menu-clock">
+            <div className="right-menu-item right-menu-clock">
               <Clock language={language} />
             </div>
           </div>

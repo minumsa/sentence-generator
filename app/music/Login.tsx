@@ -27,6 +27,7 @@ export default function Login() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            marginTop: "50px",
           }}
         >
           <div style={{ width: "500px", display: "flex", marginTop: "50px" }}>
