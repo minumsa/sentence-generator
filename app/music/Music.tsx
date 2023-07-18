@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import Pop from "./Pop";
 
 export default function Music({ children }: any) {
   const router = useRouter();
@@ -86,7 +87,7 @@ export default function Music({ children }: any) {
             로그인
           </div>
           <div className="music-bottom-title">카버 차트 v1.1.1</div>
-          <Pop />
+          {/* <Pop /> */}
         </div>
       </div>
     </>
