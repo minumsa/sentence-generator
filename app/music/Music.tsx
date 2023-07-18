@@ -2,7 +2,6 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import Pop from "./Pop";
 
 export default function Music({ children }: any) {
   const router = useRouter();
