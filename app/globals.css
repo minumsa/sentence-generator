@@ -1619,6 +1619,8 @@ Firefox
 }
 
 .music-post-container {
+  display: flex;
+  flex-direction: column;
   font-family: "GabiaHeuldot";
   /* font-size: calc(20px + 1.5vw); */
   font-size: 30px;

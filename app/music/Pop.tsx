@@ -105,37 +105,35 @@ export default function Pop({ uploadItems }: UploadProps) {
                     />
                   </div>
                   <div className="music-post-container-block">
-                    <div style={{ display: "flex" }}>
-                      <div>{data.fetchMusicData.artists[0].name}</div>
-                      <div style={{ marginLeft: "10px" }}>
-                        {`｟${data.fetchMusicData.name}｠`}
-                      </div>
+                    <div>
+                      <span>{data.fetchMusicData.artists[0].name},</span>{" "}
+                      <span>{`｟${data.fetchMusicData.name}｠`}</span>
                     </div>
-                    <div style={{ display: "flex" }}>
-                      <div>{data.fetchMusicData.label}</div>
-                      <div style={{ marginLeft: "10px" }}>
-                        {data.fetchMusicData.release_date}
-                      </div>
+                    <div>
+                      <span>{data.fetchMusicData.label},</span>{" "}
+                      <span>{data.fetchMusicData.release_date}</span>
                     </div>
-                    <a
-                      href={data.fetchMusicData.external_urls.spotify}
-                      target="_blank"
-                      style={{
-                        textDecoration: "none",
-                        color: "#ffccff",
-                      }}
-                    >
-                      <div className="play-applemusic">Play on Spotify ↵</div>
-                    </a>
+                    <div>
+                      <a
+                        href={data.fetchMusicData.external_urls.spotify}
+                        target="_blank"
+                        style={{
+                          textDecoration: "none",
+                          color: "#ffccff",
+                        }}
+                      >
+                        <div className="play-applemusic">Play on Spotify ↵</div>
+                      </a>
+                    </div>
                   </div>
-                  <div className="music-post-container-block">{data.text}</div>
-                  <div
-                    style={{
-                      borderBottom: "1px solid #ffccff",
-                      padding: "20px",
-                    }}
-                  ></div>
                 </div>
+                <div className="music-post-container-block">{data.text}</div>
+                <div
+                  style={{
+                    borderBottom: "1px solid #ffccff",
+                    padding: "20px",
+                  }}
+                ></div>
               </div>
             ) : null;
           })
