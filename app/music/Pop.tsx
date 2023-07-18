@@ -87,60 +87,59 @@ export default function Pop({ uploadItems }: UploadProps) {
   }, [uploadItems]);
 
   console.log("musicDatas", musicDatas);
+  // key={data.fetchMusicData.id}
 
   return (
-    <div className="music-post-container">
-      <div className="album-container">
-        <div style={{ marginRight: "20px" }}>
-          {musicData ? (
-            <Image
-              src={musicData.images[0].url}
-              alt="album art"
-              width="250"
-              height="250"
-            />
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="music-post-container-block">
-          <div style={{ display: "flex" }}>
-            <div>{musicData ? musicData.artists[0].name + "," : ""}</div>
-            <div style={{ marginLeft: "10px" }}>
-              {musicData ? `｟${musicData.name}｠` : ""}
-            </div>
-          </div>
-          <div style={{ display: "flex" }}>
-            <div>{musicData ? musicData.label + "," : ""}</div>
-            <div style={{ marginLeft: "10px" }}>
-              {musicData ? musicData.release_date : ""}
-            </div>
-          </div>
-          <a
-            href={
-              musicData ? (
-                musicData.external_urls.spotify
-              ) : (
-                <Error statusCode={404} />
-              )
-            }
-            target="_blank"
-            style={{
-              textDecoration: "none",
-              color: "#ffccff",
-            }}
-          >
-            <div className="play-applemusic">Play on Spotify ↵</div>
-          </a>
-        </div>
-      </div>
-      <div className="music-post-container-block">{`text`}</div>
-      <div
-        style={{
-          borderBottom: "1px solid #ffccff",
-          padding: "20px",
-        }}
-      ></div>
+    <div>
+      {musicDatas
+        ? musicDatas.map((data, index) => {
+            return data.genre === "pop" ? (
+              <div className="music-post-container">
+                <div className="album-container" key={index}>
+                  <div style={{ marginRight: "20px" }}>
+                    <Image
+                      src={data.fetchMusicData.images[0].url}
+                      alt="album art"
+                      width="250"
+                      height="250"
+                    />
+                  </div>
+                  <div className="music-post-container-block">
+                    <div style={{ display: "flex" }}>
+                      <div>{data.fetchMusicData.artists[0].name}</div>
+                      <div style={{ marginLeft: "10px" }}>
+                        {`｟${data.fetchMusicData.name}｠`}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                      <div>{data.fetchMusicData.label}</div>
+                      <div style={{ marginLeft: "10px" }}>
+                        {data.fetchMusicData.release_date}
+                      </div>
+                    </div>
+                    <a
+                      href={data.fetchMusicData.external_urls.spotify}
+                      target="_blank"
+                      style={{
+                        textDecoration: "none",
+                        color: "#ffccff",
+                      }}
+                    >
+                      <div className="play-applemusic">Play on Spotify ↵</div>
+                    </a>
+                  </div>
+                  <div className="music-post-container-block">{data.text}</div>
+                  <div
+                    style={{
+                      borderBottom: "1px solid #ffccff",
+                      padding: "20px",
+                    }}
+                  ></div>
+                </div>
+              </div>
+            ) : null;
+          })
+        : ""}
     </div>
   );
 }
