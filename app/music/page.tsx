@@ -11,6 +11,12 @@ interface FetchItem {
   genre: string;
 }
 
+interface UploadItem {
+  albumId: string;
+  text: string;
+  genre: string;
+}
+
 export default function Page() {
   const router = useRouter();
   const pathName = usePathname();
@@ -30,10 +36,17 @@ export default function Page() {
   ];
 
   const initialUploadItem: any[] = JSON.parse(
-    localStorage.getItem("uploadItems") || "[]"
+    typeof window !== "undefined"
+      ? localStorage.getItem("uploadItems") || "[]"
+      : "[]"
   );
 
   const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
+  const [uploadItem, setUploadItem] = useState<UploadItem>({
+    albumId: "",
+    text: "",
+    genre: "",
+  });
 
   useEffect(() => {
     localStorage.setItem("uploadItems", JSON.stringify(uploadItems));

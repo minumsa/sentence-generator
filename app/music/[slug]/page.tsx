@@ -26,18 +26,21 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
 
+  const [albumId, setAlbumId] = useState<string>("");
+  const [text, setText] = useState<string>("");
+  const [genre, setGenre] = useState<string>("");
+
   const initialUploadItem: any[] = JSON.parse(
-    localStorage.getItem("uploadItems") || "[]"
+    typeof window !== "undefined"
+      ? localStorage.getItem("uploadItems") || "[]"
+      : "[]"
   );
+  const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
   const [uploadItem, setUploadItem] = useState<UploadItem>({
     albumId: "",
     text: "",
     genre: "",
   });
-  const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
-  const [albumId, setAlbumId] = useState<string>("");
-  const [text, setText] = useState<string>("");
-  const [genre, setGenre] = useState<string>("");
 
   useEffect(() => {
     localStorage.setItem("uploadItems", JSON.stringify(uploadItems));
