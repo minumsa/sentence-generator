@@ -1,6 +1,5 @@
 /* eslint-disable react/no-children-prop */
 import React from "react";
-import Music from "./Music";
 
 export const metadata = {
   title: "카버 차트",
