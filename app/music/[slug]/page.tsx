@@ -43,9 +43,9 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     localStorage.setItem("uploadItems", JSON.stringify(uploadItems));
   }, [uploadItems]);
 
-  console.log("uploaditem", uploadItem);
-  console.log("uploaditems", uploadItems);
-  console.log("uploaditems[0]", uploadItems[0]);
+  // console.log("uploaditem", uploadItem);
+  // console.log("uploaditems", uploadItems);
+  // console.log("uploaditems[0]", uploadItems[0]);
 
   const contents = [
     "POP",
