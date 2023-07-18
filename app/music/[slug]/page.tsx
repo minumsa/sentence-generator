@@ -3,18 +3,18 @@
 import { NextPage } from "next";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Pop from "../Pop";
-import Kpop from "../Kpop";
-import Rock from "../Rock";
-import Disco from "../Disco";
-import Folk from "../Folk";
-import Jazz from "../Jazz";
-import Classical from "../Classical";
-import Soundtrack from "../Soundtrack";
 import Upload from "../Upload";
+import Image from "next/image";
 
 interface UploadItem {
   albumId: string;
+  text: string;
+  genre: string;
+}
+
+interface FetchItem {
+  [x: string]: any;
+  fetchMusicData: any;
   text: string;
   genre: string;
 }
@@ -43,10 +43,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     localStorage.setItem("uploadItems", JSON.stringify(uploadItems));
   }, [uploadItems]);
 
-  // console.log("uploaditem", uploadItem);
-  // console.log("uploaditems", uploadItems);
-  // console.log("uploaditems[0]", uploadItems[0]);
-
   const contents = [
     "POP",
     "K-POP",
@@ -70,52 +66,77 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
       : router.push(`/music/${genrePath}`);
   };
 
-  let content = null;
+  const [musicDatas, setMusicDatas] = useState<any[]>([]);
 
-  switch (decodedSlug) {
-    case "pop":
-      content = <Pop uploadItems={uploadItems} />;
-      break;
-    case "k-pop":
-      content = <Kpop />;
-      break;
-    case "rock":
-      content = <Rock />;
-      break;
-    case "disco":
-      content = <Disco />;
-      break;
-    case "folk":
-      content = <Folk />;
-      break;
-    case "jazz":
-      content = <Jazz />;
-      break;
-    case "classical":
-      content = <Classical />;
-      break;
-    case "soundtrack":
-      content = <Soundtrack />;
-      break;
-    case "upload":
-      content = (
-        <Upload
-          genre={genre}
-          setGenre={setGenre}
-          text={text}
-          setText={setText}
-          albumId={albumId}
-          setAlbumId={setAlbumId}
-          uploadItem={uploadItem}
-          setUploadItem={setUploadItem}
-          uploadItems={uploadItems}
-          setUploadItems={setUploadItems}
-        />
+  const fetchAccessToken = async () => {
+    try {
+      const url = "https://accounts.spotify.com/api/token";
+      const clientId = "9ba8de463724427689b855dfcabca1b1";
+      const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
+      const basicToken = btoa(`${clientId}:${clientSecret}`);
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${basicToken}`,
+      };
+      const data = "grant_type=client_credentials";
+
+      const accessTokenResponse = await fetch(url, {
+        method: "POST",
+        headers,
+        body: data,
+      });
+
+      if (!accessTokenResponse.ok) {
+        console.error("Error: Access token fetch failed");
+      }
+
+      const accessTokenData = await accessTokenResponse.json();
+      return accessTokenData.access_token;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const accessToken = await fetchAccessToken();
+      if (!accessToken) {
+        // throw new Error("Access token is not available");
+        console.error("Error: Access token is not available");
+      }
+
+      const musicDataArray: FetchItem[] = await Promise.all(
+        uploadItems.map(async uploadItem => {
+          const url = `https://api.spotify.com/v1/albums/${uploadItem.albumId}`;
+          const headers = {
+            Authorization: `Bearer ${accessToken}`,
+          };
+          const musicDataResponse = await fetch(url, { headers });
+
+          if (!musicDataResponse.ok) {
+            // throw new Error("music fetch failed");
+            console.error("Error: music fetch failed");
+          }
+
+          const fetchedMusicData = await musicDataResponse.json();
+          return {
+            fetchMusicData: fetchedMusicData,
+            text: uploadItem.text,
+            genre: uploadItem.genre,
+          };
+        })
       );
-      break;
-    default:
-      content = null;
-  }
+
+      setMusicDatas(prevMusicDatas => [...musicDataArray, ...prevMusicDatas]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [uploadItems]);
 
   return (
     <>
@@ -171,7 +192,70 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
             업로드
           </div>
           <div className="music-bottom-title">카버 차트 v1.1.1</div>
-          {content}
+          {decodedSlug === "upload" ? (
+            <Upload
+              genre={genre}
+              setGenre={setGenre}
+              text={text}
+              setText={setText}
+              albumId={albumId}
+              setAlbumId={setAlbumId}
+              uploadItem={uploadItem}
+              setUploadItem={setUploadItem}
+              uploadItems={uploadItems}
+              setUploadItems={setUploadItems}
+            />
+          ) : musicDatas ? (
+            musicDatas.map((data, index) => {
+              return data.genre === decodedSlug ? (
+                <div className="music-post-container">
+                  <div className="album-container" key={index}>
+                    <div style={{ marginRight: "20px" }}>
+                      <Image
+                        src={data.fetchMusicData.images[0].url}
+                        alt="album art"
+                        width="250"
+                        height="250"
+                      />
+                    </div>
+                    <div className="music-post-container-block">
+                      <div>
+                        <span>{data.fetchMusicData.artists[0].name},</span>{" "}
+                        <span>{`｟${data.fetchMusicData.name}｠`}</span>
+                      </div>
+                      <div>
+                        <span>{data.fetchMusicData.label},</span>{" "}
+                        <span>{data.fetchMusicData.release_date}</span>
+                      </div>
+                      <div>
+                        <a
+                          href={data.fetchMusicData.external_urls.spotify}
+                          target="_blank"
+                          style={{
+                            textDecoration: "none",
+                            color: "#ffccff",
+                          }}
+                        >
+                          <div className="play-applemusic">
+                            Play on Spotify ↵
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="music-post-container-block">{data.text}</div>
+                  <div
+                    style={{
+                      borderBottom: "1px solid #ffccff",
+                      padding: "20px",
+                    }}
+                  ></div>
+                </div>
+              ) : null;
+            })
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
