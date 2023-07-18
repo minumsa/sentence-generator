@@ -12,6 +12,7 @@ const musicSchema = new mongoose.Schema({
   text: String,
 });
 
-const Music: Model<MusicData> = mongoose.model<MusicData>("Music", musicSchema);
+const Music: Model<MusicData> =
+  mongoose.models.Music || mongoose.model<MusicData>("Music", musicSchema);
 
 export default Music;

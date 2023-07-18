@@ -98,6 +98,7 @@ export default function Page() {
     }
   };
 
+  const [dataTest, setDataTest] = useState<any>();
   const fetchData = async () => {
     try {
       const accessToken = await fetchAccessToken();
@@ -138,6 +139,32 @@ export default function Page() {
   useEffect(() => {
     fetchData();
   }, [uploadItems]);
+
+  async function fetchMusic() {
+    try {
+      const response = await fetch("/api/music", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload music data");
+      }
+
+      const data = await response.json();
+      setDataTest(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMusic();
+  }, []);
+
+  console.log("dataTest", dataTest);
 
   return (
     <>
