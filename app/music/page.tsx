@@ -9,12 +9,14 @@ interface FetchItem {
   fetchMusicData: any;
   text: string;
   genre: string;
+  link: string;
 }
 
 interface UploadItem {
   albumId: string;
-  text: string;
   genre: string;
+  link: string;
+  text: string;
 }
 
 export default function Page() {
@@ -46,6 +48,7 @@ export default function Page() {
     albumId: "",
     text: "",
     genre: "",
+    link: "",
   });
 
   useEffect(() => {
@@ -121,6 +124,7 @@ export default function Page() {
             fetchMusicData: fetchedMusicData,
             text: uploadItem.text,
             genre: uploadItem.genre,
+            link: uploadItem.link,
           };
         })
       );
@@ -214,7 +218,7 @@ export default function Page() {
                         </div>
                         <div>
                           <a
-                            href={data.fetchMusicData.external_urls.spotify}
+                            href={data.link}
                             target="_blank"
                             style={{
                               textDecoration: "none",
@@ -222,7 +226,7 @@ export default function Page() {
                             }}
                           >
                             <div className="play-applemusic">
-                              Play on Spotify ↵
+                              Play on Apple Music ↵
                             </div>
                           </a>
                         </div>

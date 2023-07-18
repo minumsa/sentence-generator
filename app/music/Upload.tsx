@@ -4,13 +4,16 @@ import { useState } from "react";
 
 interface UploadItem {
   albumId: string;
-  text: string;
   genre: string;
+  link: string;
+  text: string;
 }
 
 interface UploadProps {
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
+  link: string;
+  setLink: React.Dispatch<React.SetStateAction<string>>;
   genre: string;
   setGenre: React.Dispatch<React.SetStateAction<string>>;
   albumId: string;
@@ -24,6 +27,8 @@ interface UploadProps {
 export default function Upload({
   text,
   setText,
+  link,
+  setLink,
   genre,
   setGenre,
   albumId,
@@ -36,13 +41,15 @@ export default function Upload({
   const handleSubmit = () => {
     const newItem: UploadItem = {
       albumId: albumId,
-      text: text,
       genre: genre,
+      link: link,
+      text: text,
     };
     setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
     setAlbumId("");
     setGenre("");
     setText("");
+    setLink("");
   };
 
   // console.log(albumId);
@@ -52,7 +59,7 @@ export default function Upload({
       <div style={{ textAlign: "center", fontWeight: "normal" }}>
         ｟ 업로드 페이지 ｠
       </div>
-      <div style={{ marginTop: "100px" }}>앨범 ID</div>
+      <div style={{ marginTop: "100px" }}>앨범 ID(Spotify)</div>
       <input
         className="music-post-input"
         value={albumId}
@@ -66,6 +73,14 @@ export default function Upload({
         value={genre}
         onChange={e => {
           setGenre(e.target.value);
+        }}
+      ></input>
+      <div style={{ marginTop: "50px" }}>링크(Apple Music)</div>
+      <input
+        className="music-post-input"
+        value={link}
+        onChange={e => {
+          setLink(e.target.value);
         }}
       ></input>
       <div style={{ marginTop: "50px" }}>글</div>

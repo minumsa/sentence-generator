@@ -8,8 +8,9 @@ import Image from "next/image";
 
 interface UploadItem {
   albumId: string;
-  text: string;
   genre: string;
+  link: string;
+  text: string;
 }
 
 interface FetchItem {
@@ -29,6 +30,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const [albumId, setAlbumId] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
+  const [link, setLink] = useState<string>("");
 
   const initialUploadItem: any[] = JSON.parse(
     typeof window !== "undefined"
@@ -38,8 +40,9 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
   const [uploadItem, setUploadItem] = useState<UploadItem>({
     albumId: "",
-    text: "",
     genre: "",
+    link: "",
+    text: "",
   });
 
   useEffect(() => {
@@ -199,6 +202,8 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
             <Upload
               genre={genre}
               setGenre={setGenre}
+              link={link}
+              setLink={setLink}
               text={text}
               setText={setText}
               albumId={albumId}
@@ -232,7 +237,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                       </div>
                       <div>
                         <a
-                          href={data.fetchMusicData.external_urls.spotify}
+                          href={data.link}
                           target="_blank"
                           style={{
                             textDecoration: "none",
@@ -240,7 +245,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                           }}
                         >
                           <div className="play-applemusic">
-                            Play on Spotify ↵
+                            Play on Apple Music ↵
                           </div>
                         </a>
                       </div>
