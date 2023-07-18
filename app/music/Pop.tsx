@@ -37,7 +37,8 @@ export default function Pop({ uploadItems }: UploadProps) {
       });
 
       if (!accessTokenResponse.ok) {
-        throw new Error("Access token fetch failed");
+        // throw new Error("Access token fetch failed");
+        console.error("Error: Access token fetch failed");
       }
 
       const accessTokenData = await accessTokenResponse.json();
@@ -52,7 +53,8 @@ export default function Pop({ uploadItems }: UploadProps) {
     try {
       const accessToken = await fetchAccessToken();
       if (!accessToken) {
-        throw new Error("Access token is not available");
+        // throw new Error("Access token is not available");
+        console.error("Error: Access token is not available");
       }
 
       const musicDataArray: UploadItem[] = await Promise.all(
@@ -64,7 +66,8 @@ export default function Pop({ uploadItems }: UploadProps) {
           const musicDataResponse = await fetch(url, { headers });
 
           if (!musicDataResponse.ok) {
-            throw new Error("music fetch failed");
+            // throw new Error("music fetch failed");
+            console.error("Error: music fetch failed");
           }
 
           const fetchedMusicData = await musicDataResponse.json();
