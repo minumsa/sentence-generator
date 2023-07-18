@@ -84,14 +84,14 @@ export default function Upload({
         }}
       ></input>
       <div style={{ marginTop: "50px" }}>글</div>
-      <input
+      <textarea
         className="music-post-input music-post-input-text"
         // type="text"
         value={text}
         onChange={e => {
           setText(e.target.value);
         }}
-      ></input>
+      ></textarea>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="music-post-submit" onClick={handleSubmit}>
           제출하기
