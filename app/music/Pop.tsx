@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface UploadItem {
+  [x: string]: any;
   fetchMusicData: any;
   text: string;
   genre: string;
