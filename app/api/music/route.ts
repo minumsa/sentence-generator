@@ -6,18 +6,21 @@ export default async function createMusic(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.setHeader("Access-Control-Allow-Methods", "POST");
+
   if (request.method === "POST") {
     try {
       await connectMongoDB();
 
-      const { albumId, text } = request.body;
+      const { albumId, genre, link, text } = request.body;
 
       const existingMusic = await Music.findOne({ albumId });
       if (existingMusic) {
         return response.status(409).json({ message: "album already exists" });
       }
 
-      const newMusic = new Music({ albumId, text });
+      const newMusic = new Music({ albumId, genre, link, text });
       await newMusic.save();
 
       return response.status(201).json({ message: "Music created" });

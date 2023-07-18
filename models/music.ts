@@ -5,19 +5,12 @@ interface MusicData extends Document {
   text: string;
 }
 
-const musicSchema: Schema<MusicData> = new Schema(
-  {
-    albumId: {
-      type: String,
-      required: true,
-    },
-    text: {
-      type: String,
-      required: true,
-    },
-  },
-  { timestamps: true } // date created, updated
-);
+const musicSchema = new mongoose.Schema({
+  albumId: String,
+  genre: String,
+  link: String,
+  text: String,
+});
 
 const Music: Model<MusicData> = mongoose.model<MusicData>("Music", musicSchema);
 

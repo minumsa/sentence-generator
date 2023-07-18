@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 interface UploadItem {
   albumId: string;
   genre: string;
@@ -38,21 +36,55 @@ export default function Upload({
   uploadItems,
   setUploadItems,
 }: UploadProps) {
-  const handleSubmit = () => {
+  // const handleSubmit = () => {
+  //   const newItem: UploadItem = {
+  //     albumId: albumId,
+  //     genre: genre,
+  //     link: link,
+  //     text: text,
+  //   };
+  //   setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
+  //   setAlbumId("");
+  //   setGenre("");
+  //   setText("");
+  //   setLink("");
+  // };
+
+  // console.log(albumId);
+
+  const handleSubmit = async () => {
     const newItem: UploadItem = {
       albumId: albumId,
       genre: genre,
       link: link,
       text: text,
     };
-    setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
-    setAlbumId("");
-    setGenre("");
-    setText("");
-    setLink("");
-  };
 
-  // console.log(albumId);
+    try {
+      const response = await fetch("/api/music", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newItem),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload music data");
+      }
+
+      const data = await response.json();
+      console.log(data.message);
+
+      setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
+      setAlbumId("");
+      setGenre("");
+      setText("");
+      setLink("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="music-post-container">
