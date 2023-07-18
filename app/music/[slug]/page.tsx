@@ -23,13 +23,13 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const initialAlbumId: any[] = JSON.parse(
     localStorage.getItem("albumId") || "[]"
   );
-  const [albumId, setAlbumId] = useState<any[]>(initialAlbumId);
+  const [albumIds, setAlbumIds] = useState<any[]>(initialAlbumId);
 
   useEffect(() => {
-    localStorage.setItem("albumId", JSON.stringify(albumId));
-  }, [albumId]);
+    localStorage.setItem("albumId", JSON.stringify(albumIds));
+  }, [albumIds]);
 
-  console.log("albumId", albumId);
+  console.log("albumId", albumIds);
 
   const contents = [
     "POP",
@@ -82,7 +82,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
       content = <Soundtrack />;
       break;
     case "upload":
-      content = <Upload albumId={albumId} setAlbumId={setAlbumId} />;
+      content = <Upload albumId={albumIds} setAlbumIds={setAlbumIds} />;
       break;
     default:
       content = null;

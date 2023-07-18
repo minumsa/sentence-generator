@@ -3,15 +3,17 @@
 import { useState } from "react";
 
 interface UploadProps {
-  albumId: any[];
-  setAlbumId: any;
+  albumIds: any[];
+  setAlbumIds: any;
 }
 
-export default function Upload({ albumId, setAlbumId }: UploadProps) {
+export default function Upload({ albumIds, setAlbumIds }: UploadProps) {
   const [text, setText] = useState<string>("");
+  const [genre, setGenre] = useState<string>("");
+  const [albumId, setAlbumId] = useState<string>("");
 
   const handleSubmit = () => {
-    setAlbumId(prevAlbumId => [...prevAlbumId, text]);
+    setAlbumIds(prevAlbumIds => [...prevAlbumIds, albumId]);
     setText(""); // Reset the input field after submission
   };
 
@@ -26,15 +28,23 @@ export default function Upload({ albumId, setAlbumId }: UploadProps) {
       <input
         className="music-post-input "
         onChange={e => {
-          setText(e.target.value);
+          setAlbumId(e.target.value);
+        }}
+      ></input>
+      <div style={{ marginTop: "50px" }}>장르</div>
+      <input
+        className="music-post-input "
+        onChange={e => {
+          setGenre(e.target.value);
         }}
       ></input>
       <div style={{ marginTop: "50px" }}>글</div>
-      <input
+      <div
+        contenteditable="true"
         className="music-post-input music-post-input-text"
-        type="text"
+        // type="text"
         onChange={() => {}}
-      ></input>
+      ></div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="music-post-submit" onClick={handleSubmit}>
           제출하기
