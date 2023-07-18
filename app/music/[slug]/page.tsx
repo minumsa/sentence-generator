@@ -13,6 +13,12 @@ import Classical from "../Classical";
 import Soundtrack from "../Soundtrack";
 import Upload from "../Upload";
 
+interface UploadItem {
+  albumId: string;
+  text: string;
+  genre: string;
+}
+
 const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const decodedSlug = decodeURIComponent(params.slug);
   const router = useRouter();
@@ -20,16 +26,26 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
 
-  const initialAlbumId: any[] = JSON.parse(
-    localStorage.getItem("albumId") || "[]"
+  const initialUploadItem: any[] = JSON.parse(
+    localStorage.getItem("uploadItems") || "[]"
   );
-  const [albumIds, setAlbumIds] = useState<any[]>(initialAlbumId);
+  const [uploadItem, setUploadItem] = useState<UploadItem>({
+    albumId: "",
+    text: "",
+    genre: "",
+  });
+  const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
+  const [albumId, setAlbumId] = useState<string>("");
+  const [text, setText] = useState<string>("");
+  const [genre, setGenre] = useState<string>("");
 
   useEffect(() => {
-    localStorage.setItem("albumId", JSON.stringify(albumIds));
-  }, [albumIds]);
+    localStorage.setItem("uploadItems", JSON.stringify(uploadItems));
+  }, [uploadItems]);
 
-  console.log("albumId", albumIds);
+  console.log("uploaditem", uploadItem);
+  console.log("uploaditems", uploadItems);
+  console.log("uploaditems[0]", uploadItems[0]);
 
   const contents = [
     "POP",
@@ -58,7 +74,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
 
   switch (decodedSlug) {
     case "pop":
-      content = <Pop />;
+      content = <Pop uploadItems={uploadItems} />;
       break;
     case "k-pop":
       content = <Kpop />;
@@ -82,7 +98,20 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
       content = <Soundtrack />;
       break;
     case "upload":
-      content = <Upload albumId={albumIds} setAlbumIds={setAlbumIds} />;
+      content = (
+        <Upload
+          genre={genre}
+          setGenre={setGenre}
+          text={text}
+          setText={setText}
+          albumId={albumId}
+          setAlbumId={setAlbumId}
+          uploadItem={uploadItem}
+          setUploadItem={setUploadItem}
+          uploadItems={uploadItems}
+          setUploadItems={setUploadItems}
+        />
+      );
       break;
     default:
       content = null;

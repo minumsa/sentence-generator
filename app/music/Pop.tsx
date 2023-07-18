@@ -4,7 +4,17 @@ import Error from "next/error";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function Pop() {
+interface UploadItem {
+  albumId: string;
+  text: string;
+  genre: string;
+}
+
+interface UploadProps {
+  uploadItems: UploadItem[];
+}
+
+export default function Pop({ uploadItems }: UploadProps) {
   const [musicData, setMusicData] = useState<any | null>(null);
 
   const fetchAccessToken = async () => {
@@ -44,7 +54,9 @@ export default function Pop() {
         throw new Error("Access token is not available");
       }
 
-      const url = "https://api.spotify.com/v1/albums/5sztejERqpktXEdemlUvU5";
+      // 5sztejERqpktXEdemlUvU5
+      const url = `https://api.spotify.com/v1/albums/${albumId}`;
+      // const url = `https://api.spotify.com/v1/albums/5sztejERqpktXEdemlUvU5`;
       const headers = {
         Authorization: `Bearer ${accessToken}`,
       };
@@ -66,7 +78,11 @@ export default function Pop() {
     fetchData();
   }, []);
 
-  console.log(musicData);
+  useEffect(() => {
+    // 새로운 div 만들기
+  }, [uploadItems]);
+
+  // console.log(musicData);
 
   return (
     <div className="music-post-container">
