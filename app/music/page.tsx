@@ -155,8 +155,6 @@ export default function Page() {
     fetchMongoData();
   }, []);
 
-  console.log("dataTest", dataTest);
-
   return (
     <>
       <div
