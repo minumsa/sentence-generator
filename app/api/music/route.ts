@@ -27,6 +27,7 @@ export async function POST(request: Request) {
   // NextResponse.json({ data })
 
   try {
+    require("dotenv").config({ path: "/.env" });
     await connectMongoDB();
 
     // body: JSON.stringify(newItem) <=== 얘를 변수로 설정한 것!
@@ -67,6 +68,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
+    require("dotenv").config({ path: "/.env" });
     await connectMongoDB();
     const musicList = await Music.find();
     return NextResponse.json(musicList.map(data => data.toJSON()));
