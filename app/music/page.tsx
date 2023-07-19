@@ -12,7 +12,7 @@ interface FetchItem {
   link: string;
 }
 
-interface UploadItem {
+interface MongoItem {
   albumId: string;
   genre: string;
   link: string;
@@ -24,6 +24,7 @@ export default function Page() {
   const pathName = usePathname();
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
+  const [mongoDataArr, setMongoDataArr] = useState<MongoItem[]>([]);
 
   const contents = [
     "POP",
@@ -37,23 +38,13 @@ export default function Page() {
     "ALL",
   ];
 
-  const initialUploadItem: any[] = JSON.parse(
-    typeof window !== "undefined"
-      ? localStorage.getItem("uploadItems") || "[]"
-      : "[]"
-  );
-
-  const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
-  const [uploadItem, setUploadItem] = useState<UploadItem>({
-    albumId: "",
-    text: "",
-    genre: "",
-    link: "",
-  });
-
-  useEffect(() => {
-    localStorage.setItem("uploadItems", JSON.stringify(uploadItems));
-  }, [uploadItems]);
+  // const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
+  // const [uploadItem, setUploadItem] = useState<UploadItem>({
+  //   albumId: "",
+  //   text: "",
+  //   genre: "",
+  //   link: "",
+  // });
 
   const [activeGenre, setActiveGenre] = useState("ALL");
   const [loginPage, setLoginPage] = useState(false);
@@ -108,8 +99,8 @@ export default function Page() {
       }
 
       const musicDataArray: FetchItem[] = await Promise.all(
-        uploadItems.map(async uploadItem => {
-          const url = `https://api.spotify.com/v1/albums/${uploadItem.albumId}`;
+        mongoDataArr.map(async item => {
+          const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
           const headers = {
             Authorization: `Bearer ${accessToken}`,
           };
@@ -123,9 +114,9 @@ export default function Page() {
           const fetchedMusicData = await musicDataResponse.json();
           return {
             fetchMusicData: fetchedMusicData,
-            text: uploadItem.text,
-            genre: uploadItem.genre,
-            link: uploadItem.link,
+            text: item.text,
+            genre: item.genre,
+            link: item.link,
           };
         })
       );
@@ -138,9 +129,9 @@ export default function Page() {
 
   useEffect(() => {
     fetchData();
-  }, [uploadItems]);
+  }, [mongoDataArr]);
 
-  async function fetchMusic() {
+  async function fetchMongoData() {
     try {
       const response = await fetch("/api/music", {
         method: "GET",
@@ -154,14 +145,14 @@ export default function Page() {
       }
 
       const data = await response.json();
-      setDataTest(data);
+      setMongoDataArr(data);
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-    fetchMusic();
+    fetchMongoData();
   }, []);
 
   console.log("dataTest", dataTest);

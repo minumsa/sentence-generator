@@ -16,10 +16,10 @@ interface UploadProps {
   setGenre: React.Dispatch<React.SetStateAction<string>>;
   albumId: string;
   setAlbumId: React.Dispatch<React.SetStateAction<string>>;
-  uploadItem: UploadItem;
-  setUploadItem: React.Dispatch<React.SetStateAction<UploadItem>>;
-  uploadItems: UploadItem[];
-  setUploadItems: React.Dispatch<React.SetStateAction<UploadItem[]>>;
+  // uploadItem: UploadItem;
+  // setUploadItem: React.Dispatch<React.SetStateAction<UploadItem>>;
+  // uploadItems: UploadItem[];
+  // setUploadItems: React.Dispatch<React.SetStateAction<UploadItem[]>>;
 }
 
 export default function Upload({
@@ -31,27 +31,11 @@ export default function Upload({
   setGenre,
   albumId,
   setAlbumId,
-  uploadItem,
-  setUploadItem,
-  uploadItems,
-  setUploadItems,
-}: UploadProps) {
-  // const handleSubmit = () => {
-  //   const newItem: UploadItem = {
-  //     albumId: albumId,
-  //     genre: genre,
-  //     link: link,
-  //     text: text,
-  //   };
-  //   setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
-  //   setAlbumId("");
-  //   setGenre("");
-  //   setText("");
-  //   setLink("");
-  // };
-
-  // console.log(albumId);
-
+}: // uploadItem,
+// setUploadItem,
+// uploadItems,
+// setUploadItems,
+UploadProps) {
   const handleSubmit = async () => {
     const newItem: UploadItem = {
       albumId: albumId,
@@ -76,7 +60,7 @@ export default function Upload({
       const data = await response.json();
       console.log(data.message);
 
-      setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
+      // setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
       setAlbumId("");
       setGenre("");
       setText("");

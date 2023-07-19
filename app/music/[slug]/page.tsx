@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Upload from "../Upload";
 import Image from "next/image";
 
-interface UploadItem {
+interface MongoItem {
   albumId: string;
   genre: string;
   link: string;
@@ -31,23 +31,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const [text, setText] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
-
-  const initialUploadItem: any[] = JSON.parse(
-    typeof window !== "undefined"
-      ? localStorage.getItem("uploadItems") || "[]"
-      : "[]"
-  );
-  const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
-  const [uploadItem, setUploadItem] = useState<UploadItem>({
-    albumId: "",
-    genre: "",
-    link: "",
-    text: "",
-  });
-
-  useEffect(() => {
-    localStorage.setItem("uploadItems", JSON.stringify(uploadItems));
-  }, [uploadItems]);
+  const [mongoDataArr, setMongoDataArr] = useState<MongoItem[]>([]);
 
   const contents = [
     "POP",
@@ -113,8 +97,8 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
       }
 
       const musicDataArray: FetchItem[] = await Promise.all(
-        uploadItems.map(async uploadItem => {
-          const url = `https://api.spotify.com/v1/albums/${uploadItem.albumId}`;
+        mongoDataArr.map(async item => {
+          const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
           const headers = {
             Authorization: `Bearer ${accessToken}`,
           };
@@ -128,8 +112,9 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           const fetchedMusicData = await musicDataResponse.json();
           return {
             fetchMusicData: fetchedMusicData,
-            text: uploadItem.text,
-            genre: uploadItem.genre,
+            text: item.text,
+            genre: item.genre,
+            link: item.link,
           };
         })
       );
@@ -142,7 +127,33 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
 
   useEffect(() => {
     fetchData();
-  }, [uploadItems]);
+  }, [mongoDataArr]);
+
+  async function fetchMongoData() {
+    try {
+      const response = await fetch("/api/music", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload music data");
+      }
+
+      const data = await response.json();
+      setMongoDataArr(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMongoData();
+  }, []);
+
+  console.log("mongoDataArr", mongoDataArr);
 
   return (
     <>
@@ -208,16 +219,16 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
               setText={setText}
               albumId={albumId}
               setAlbumId={setAlbumId}
-              uploadItem={uploadItem}
-              setUploadItem={setUploadItem}
-              uploadItems={uploadItems}
-              setUploadItems={setUploadItems}
+              // uploadItem={uploadItem}
+              // setUploadItem={setUploadItem}
+              // uploadItems={uploadItems}
+              // setUploadItems={setUploadItems}
             />
           ) : musicDatas ? (
             musicDatas.map((data, index) => {
               return data.genre === decodedSlug ? (
-                <div className="music-post-container">
-                  <div className="album-container" key={index}>
+                <div className="music-post-container" key={index}>
+                  <div className="album-container">
                     <div style={{ marginRight: "20px" }}>
                       <Image
                         src={data.fetchMusicData.images[0].url}
