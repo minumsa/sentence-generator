@@ -1,10 +1,35 @@
 "use client";
 
+import { useEffect } from "react";
+
 interface UploadItem {
   albumId: string;
   genre: string;
   link: string;
   text: string;
+}
+
+interface FetchItem {
+  [x: string]: any;
+  imgUrl: string;
+  artist: string;
+  album: string;
+  label: string;
+  releaseDate: string;
+  genre: String;
+  link: String;
+  text: String;
+}
+
+interface MusicData {
+  imgUrl: string;
+  artist: string;
+  album: string;
+  label: string;
+  releaseDate: string;
+  genre: String;
+  link: String;
+  text: String;
 }
 
 interface UploadProps {
@@ -16,6 +41,8 @@ interface UploadProps {
   setGenre: React.Dispatch<React.SetStateAction<string>>;
   albumId: string;
   setAlbumId: React.Dispatch<React.SetStateAction<string>>;
+  musicData: MusicData;
+  setMusicData: React.Dispatch<React.SetStateAction<MusicData | null>>;
   // uploadItem: UploadItem;
   // setUploadItem: React.Dispatch<React.SetStateAction<UploadItem>>;
   // uploadItems: UploadItem[];
@@ -31,6 +58,8 @@ export default function Upload({
   setGenre,
   albumId,
   setAlbumId,
+  musicData,
+  setMusicData,
 }: // uploadItem,
 // setUploadItem,
 // uploadItems,
@@ -44,13 +73,81 @@ UploadProps) {
       text: text,
     };
 
+    const fetchAccessToken = async () => {
+      try {
+        const url = "https://accounts.spotify.com/api/token";
+        const clientId = "9ba8de463724427689b855dfcabca1b1";
+        const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
+        const basicToken = btoa(`${clientId}:${clientSecret}`);
+        const headers = {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Basic ${basicToken}`,
+        };
+        const data = "grant_type=client_credentials";
+
+        const accessTokenResponse = await fetch(url, {
+          method: "POST",
+          headers,
+          body: data,
+        });
+
+        if (!accessTokenResponse.ok) {
+          console.error("Error: Access token fetch failed");
+        }
+
+        const accessTokenData = await accessTokenResponse.json();
+        return accessTokenData.access_token;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    };
+
+    const fetchSpotifyData = async () => {
+      try {
+        const accessToken = await fetchAccessToken();
+        if (!accessToken) {
+          // throw new Error("Access token is not available");
+          console.error("Error: Access token is not available");
+        }
+
+        const url = `https://api.spotify.com/v1/albums/${newItem.albumId}`;
+        const headers = {
+          Authorization: `Bearer ${accessToken}`,
+        };
+        const musicDataResponse = await fetch(url, { headers });
+
+        if (!musicDataResponse.ok) {
+          // throw new Error("music fetch failed");
+          console.error("Error: music fetch failed");
+        }
+
+        const fetchedMusicData = await musicDataResponse.json();
+        const musicDataArray: MusicData = {
+          imgUrl: fetchedMusicData.images[0].url,
+          artist: fetchedMusicData.artists[0].name,
+          album: fetchedMusicData.name,
+          label: fetchedMusicData.label,
+          releaseDate: fetchedMusicData.release_date,
+          text: newItem.text,
+          genre: newItem.genre,
+          link: newItem.link,
+        };
+
+        setMusicData(musicDataArray);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     try {
+      // await fetchSpotifyData();
       const response = await fetch("/api/music", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newItem),
+        body: JSON.stringify(musicData),
       });
 
       if (!response.ok) {
@@ -61,6 +158,7 @@ UploadProps) {
       console.log(data.message);
 
       // setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
+      setMusicData(null);
       setAlbumId("");
       setGenre("");
       setText("");

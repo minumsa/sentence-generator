@@ -1,7 +1,6 @@
 import connectMongoDB from "@/libs/mongodb";
 import Music from "@/models/music";
 import mongoose from "mongoose";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
 // 문서가 어디??
@@ -31,8 +30,9 @@ export async function POST(request: Request) {
     await connectMongoDB();
 
     // body: JSON.stringify(newItem) <=== 얘를 변수로 설정한 것!
-    const { albumId, genre, link, text } = await request.json();
-    const existingMusic = await Music.findOne({ albumId });
+    const { imgUrl, artist, album, label, releaseDate, genre, link, text } =
+      await request.json();
+    const existingMusic = await Music.findOne({ imgUrl });
 
     // NextResponse.json({ message: "Music created" }, { status: 201 });
     // NextResponse.json({ message: "Server Error" }, { status: 500 });
@@ -47,7 +47,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const newMusic = new Music({ albumId, genre, link, text });
+    const newMusic = new Music({
+      imgUrl,
+      artist,
+      album,
+      label,
+      releaseDate,
+      genre,
+      link,
+      text,
+    });
     await newMusic.save();
     return NextResponse.json(newMusic.toJSON());
   } catch (error) {

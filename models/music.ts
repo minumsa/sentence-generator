@@ -1,12 +1,22 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface MusicData extends Document {
-  albumId: string;
+  imgUrl: string;
+  artist: string;
+  album: string;
+  label: string;
+  releaseDate: string;
+  genre: string;
+  link: string;
   text: string;
 }
 
 const musicSchema = new mongoose.Schema({
-  albumId: String,
+  imgUrl: String,
+  artist: String,
+  album: String,
+  label: String,
+  releaseDate: String,
   genre: String,
   link: String,
   text: String,

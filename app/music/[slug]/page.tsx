@@ -20,6 +20,17 @@ interface FetchItem {
   genre: string;
 }
 
+interface MusicData {
+  imgUrl: string;
+  artist: string;
+  album: string;
+  label: string;
+  releaseDate: string;
+  genre: String;
+  link: String;
+  text: String;
+}
+
 const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const decodedSlug = decodeURIComponent(params.slug);
   const router = useRouter();
@@ -56,78 +67,81 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
       : router.push(`/music/${genrePath}`);
   };
 
+  const [musicData, setMusicData] = useState<MusicData | null>(null);
   const [musicDatas, setMusicDatas] = useState<any[]>([]);
 
-  const fetchAccessToken = async () => {
-    try {
-      const url = "https://accounts.spotify.com/api/token";
-      const clientId = "9ba8de463724427689b855dfcabca1b1";
-      const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
-      const basicToken = btoa(`${clientId}:${clientSecret}`);
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${basicToken}`,
-      };
-      const data = "grant_type=client_credentials";
+  console.log("musicData", musicData);
 
-      const accessTokenResponse = await fetch(url, {
-        method: "POST",
-        headers,
-        body: data,
-      });
+  // const fetchAccessToken = async () => {
+  //   try {
+  //     const url = "https://accounts.spotify.com/api/token";
+  //     const clientId = "9ba8de463724427689b855dfcabca1b1";
+  //     const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
+  //     const basicToken = btoa(`${clientId}:${clientSecret}`);
+  //     const headers = {
+  //       "Content-Type": "application/x-www-form-urlencoded",
+  //       Authorization: `Basic ${basicToken}`,
+  //     };
+  //     const data = "grant_type=client_credentials";
 
-      if (!accessTokenResponse.ok) {
-        console.error("Error: Access token fetch failed");
-      }
+  //     const accessTokenResponse = await fetch(url, {
+  //       method: "POST",
+  //       headers,
+  //       body: data,
+  //     });
 
-      const accessTokenData = await accessTokenResponse.json();
-      return accessTokenData.access_token;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  };
+  //     if (!accessTokenResponse.ok) {
+  //       console.error("Error: Access token fetch failed");
+  //     }
 
-  const fetchData = async () => {
-    try {
-      const accessToken = await fetchAccessToken();
-      if (!accessToken) {
-        // throw new Error("Access token is not available");
-        console.error("Error: Access token is not available");
-      }
+  //     const accessTokenData = await accessTokenResponse.json();
+  //     return accessTokenData.access_token;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return null;
+  //   }
+  // };
 
-      const musicDataArray: FetchItem[] = await Promise.all(
-        mongoDataArr.map(async item => {
-          const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
-          const headers = {
-            Authorization: `Bearer ${accessToken}`,
-          };
-          const musicDataResponse = await fetch(url, { headers });
+  // const fetchData = async () => {
+  //   try {
+  //     const accessToken = await fetchAccessToken();
+  //     if (!accessToken) {
+  //       // throw new Error("Access token is not available");
+  //       console.error("Error: Access token is not available");
+  //     }
 
-          if (!musicDataResponse.ok) {
-            // throw new Error("music fetch failed");
-            console.error("Error: music fetch failed");
-          }
+  //     const musicDataArray: FetchItem[] = await Promise.all(
+  //       mongoDataArr.map(async item => {
+  //         const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
+  //         const headers = {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         };
+  //         const musicDataResponse = await fetch(url, { headers });
 
-          const fetchedMusicData = await musicDataResponse.json();
-          return {
-            fetchMusicData: fetchedMusicData,
-            text: item.text,
-            genre: item.genre,
-            link: item.link,
-          };
-        })
-      );
+  //         if (!musicDataResponse.ok) {
+  //           // throw new Error("music fetch failed");
+  //           console.error("Error: music fetch failed");
+  //         }
 
-      setMusicDatas(prevMusicDatas => [...musicDataArray, ...prevMusicDatas]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //         const fetchedMusicData = await musicDataResponse.json();
+  //         return {
+  //           fetchMusicData: fetchedMusicData,
+  //           text: item.text,
+  //           genre: item.genre,
+  //           link: item.link,
+  //         };
+  //       })
+  //     );
 
-  useEffect(() => {
-    fetchData();
-  }, [mongoDataArr]);
+  //     setMusicDatas(prevMusicDatas => [...musicDataArray, ...prevMusicDatas]);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, [mongoDataArr]);
 
   async function fetchMongoData() {
     try {
@@ -219,6 +233,8 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
               setText={setText}
               albumId={albumId}
               setAlbumId={setAlbumId}
+              musicData={musicData}
+              setMusicData={setMusicData}
               // uploadItem={uploadItem}
               // setUploadItem={setUploadItem}
               // uploadItems={uploadItems}
