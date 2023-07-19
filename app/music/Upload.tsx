@@ -167,6 +167,8 @@ UploadProps) {
     setLink("");
   }, [musicData]);
 
+  // console.log(musicData);
+
   return (
     <div className="music-post-container">
       <div style={{ textAlign: "center", fontWeight: "normal" }}>
