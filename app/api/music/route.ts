@@ -6,26 +6,6 @@ import { NextResponse } from "next/server";
 // 문서가 어디??
 
 export async function POST(request: Request) {
-  // NextResponse.json.("Access-Control-Allow-Origin", "*");
-  // response.setHeader("Access-Control-Allow-Methods", "POST");
-  // return NextResponse.json(
-  //   { message: "yooil" },
-  //   {
-  //     headers: {
-  //       // "Access-Control-Allow-Origin": "*",
-  //       // cors 때문에 넣음, 보안 정책
-  //       // 신경 쓸 필요 x ===> 없어도 됨!
-  //       "Access-Control-Allow-Methods": "POST",
-  //     },
-  //   }
-  // );
-
-  // http 요청에 대한 응답 ===> 내용물 + 추가 정보
-  // 추가 정보를 넣는 방법 ===> http는 http header를 사용
-  // 요청 응답 시 http header 사용
-
-  // NextResponse.json({ data })
-
   try {
     require("dotenv").config();
     await connectMongoDB();
@@ -36,7 +16,7 @@ export async function POST(request: Request) {
       data;
 
     if (password !== process.env.UPROAD_PASSWORD)
-      NextResponse.json(
+      return NextResponse.json(
         { message: "password is not correct" },
         { status: 400 }
       );
