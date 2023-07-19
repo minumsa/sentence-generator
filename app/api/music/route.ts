@@ -31,9 +31,17 @@ export async function POST(request: Request) {
     await connectMongoDB();
 
     // body: JSON.stringify(newItem) <=== 얘를 변수로 설정한 것!
+    const { data, password } = await request.json();
     const { imgUrl, artist, album, label, releaseDate, genre, link, text } =
-      await request.json();
-    const existingMusic = await Music.findOne({ imgUrl });
+      data;
+
+    if (password !== process.env.UPROAD_PASSWORD)
+      NextResponse.json(
+        { message: "password is not correct" },
+        { status: 400 }
+      );
+
+    const existingData = await Music.findOne({ imgUrl });
 
     // NextResponse.json({ message: "Music created" }, { status: 201 });
     // NextResponse.json({ message: "Server Error" }, { status: 500 });
@@ -41,14 +49,14 @@ export async function POST(request: Request) {
     // return하는 값에 따라 next.js가 밑으로 내려준다?!..
     // return 값에 써있는 내용물을 응답으로 내려준다!
 
-    if (existingMusic) {
+    if (existingData) {
       return NextResponse.json(
         { message: "album already exists" },
         { status: 409 }
       );
     }
 
-    const newMusic = new Music({
+    const newData = new Music({
       imgUrl,
       artist,
       album,
@@ -58,8 +66,8 @@ export async function POST(request: Request) {
       link,
       text,
     });
-    await newMusic.save();
-    return NextResponse.json(newMusic.toJSON());
+    await newData.save();
+    return NextResponse.json(newData.toJSON());
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
@@ -70,8 +78,8 @@ export async function GET(request: Request) {
   try {
     require("dotenv").config();
     await connectMongoDB();
-    const musicList = await Music.find();
-    return NextResponse.json(musicList.map(data => data.toJSON()));
+    const dataArr = await Music.find();
+    return NextResponse.json(dataArr.map(data => data.toJSON()));
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

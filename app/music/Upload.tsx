@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface UploadItem {
   albumId: string;
@@ -53,7 +53,12 @@ export default function Upload({
 // uploadItems,
 // setUploadItems,
 UploadProps) {
+  const [password, setPassword] = useState<string | null>("");
+
   const handleSubmit = async () => {
+    const userPassword = prompt("비밀번호를 입력해주세요.");
+    setPassword(userPassword);
+
     if (!albumId || !genre || !link || !text) {
       alert("항목을 모두 채워주세요.");
       return;
@@ -141,7 +146,10 @@ UploadProps) {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(musicData),
+            body: JSON.stringify({
+              data: musicData,
+              password: password,
+            }),
           });
 
           if (!response.ok) {
