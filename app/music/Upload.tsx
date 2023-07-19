@@ -41,7 +41,7 @@ interface UploadProps {
   setGenre: React.Dispatch<React.SetStateAction<string>>;
   albumId: string;
   setAlbumId: React.Dispatch<React.SetStateAction<string>>;
-  musicData: MusicData;
+  musicData: MusicData | null;
   setMusicData: React.Dispatch<React.SetStateAction<MusicData | null>>;
   // uploadItem: UploadItem;
   // setUploadItem: React.Dispatch<React.SetStateAction<UploadItem>>;
@@ -140,32 +140,35 @@ UploadProps) {
       }
     };
 
-    try {
-      // await fetchSpotifyData();
-      const response = await fetch("/api/music", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(musicData),
-      });
+    await fetchSpotifyData();
+    if (musicData !== null) {
+      try {
+        const response = await fetch("/api/music", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(musicData),
+        });
 
-      if (!response.ok) {
-        throw new Error("Failed to upload music data");
+        if (!response.ok) {
+          throw new Error("Failed to upload music data");
+        }
+
+        const data = await response.json();
+        console.log(data.message);
+
+        // setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
+      } catch (error) {
+        console.error(error);
       }
-
-      const data = await response.json();
-      console.log(data.message);
-
-      // setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
-      setMusicData(null);
-      setAlbumId("");
-      setGenre("");
-      setText("");
-      setLink("");
-    } catch (error) {
-      console.error(error);
     }
+
+    setMusicData(null);
+    setAlbumId("");
+    setGenre("");
+    setText("");
+    setLink("");
   };
 
   return (
