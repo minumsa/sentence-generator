@@ -4,19 +4,15 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface FetchItem {
-  [x: string]: any;
-  fetchMusicData: any;
-  text: string;
-  genre: string;
-  link: string;
-}
-
 interface MongoItem {
-  albumId: string;
-  genre: string;
-  link: string;
-  text: string;
+  imgUrl: string;
+  artist: string;
+  album: string;
+  label: string;
+  releaseDate: string;
+  genre: String;
+  link: String;
+  text: String;
 }
 
 export default function Page() {
@@ -38,14 +34,6 @@ export default function Page() {
     "ALL",
   ];
 
-  // const [uploadItems, setUploadItems] = useState<any[]>(initialUploadItem);
-  // const [uploadItem, setUploadItem] = useState<UploadItem>({
-  //   albumId: "",
-  //   text: "",
-  //   genre: "",
-  //   link: "",
-  // });
-
   const [activeGenre, setActiveGenre] = useState("ALL");
   const [loginPage, setLoginPage] = useState(false);
 
@@ -56,80 +44,6 @@ export default function Page() {
       ? router.push(`/music`)
       : router.push(`/music/${genrePath}`);
   };
-
-  const [musicDatas, setMusicDatas] = useState<any[]>([]);
-
-  // const fetchAccessToken = async () => {
-  //   try {
-  //     const url = "https://accounts.spotify.com/api/token";
-  //     const clientId = "9ba8de463724427689b855dfcabca1b1";
-  //     const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
-  //     const basicToken = btoa(`${clientId}:${clientSecret}`);
-  //     const headers = {
-  //       "Content-Type": "application/x-www-form-urlencoded",
-  //       Authorization: `Basic ${basicToken}`,
-  //     };
-  //     const data = "grant_type=client_credentials";
-
-  //     const accessTokenResponse = await fetch(url, {
-  //       method: "POST",
-  //       headers,
-  //       body: data,
-  //     });
-
-  //     if (!accessTokenResponse.ok) {
-  //       console.error("Error: Access token fetch failed");
-  //     }
-
-  //     const accessTokenData = await accessTokenResponse.json();
-  //     return accessTokenData.access_token;
-  //   } catch (error) {
-  //     console.error(error);
-  //     return null;
-  //   }
-  // };
-
-  // const [dataTest, setDataTest] = useState<any>();
-  // const fetchData = async () => {
-  //   try {
-  //     const accessToken = await fetchAccessToken();
-  //     if (!accessToken) {
-  //       // throw new Error("Access token is not available");
-  //       console.error("Error: Access token is not available");
-  //     }
-
-  //     const musicDataArray: FetchItem[] = await Promise.all(
-  //       mongoDataArr.map(async item => {
-  //         const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
-  //         const headers = {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         };
-  //         const musicDataResponse = await fetch(url, { headers });
-
-  //         if (!musicDataResponse.ok) {
-  //           // throw new Error("music fetch failed");
-  //           console.error("Error: music fetch failed");
-  //         }
-
-  //         const fetchedMusicData = await musicDataResponse.json();
-  //         return {
-  //           fetchMusicData: fetchedMusicData,
-  //           text: item.text,
-  //           genre: item.genre,
-  //           link: item.link,
-  //         };
-  //       })
-  //     );
-
-  //     setMusicDatas(prevMusicDatas => [...musicDataArray, ...prevMusicDatas]);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, [mongoDataArr]);
 
   async function fetchMongoData() {
     try {
@@ -210,14 +124,14 @@ export default function Page() {
           </div>
           <div className="music-bottom-title">카버 차트 v1.1.1</div>
 
-          {musicDatas
-            ? musicDatas.map((data, index) => {
+          {mongoDataArr
+            ? mongoDataArr.map((data, index) => {
                 return (
                   <div className="music-post-container" key={index}>
                     <div className="album-container">
                       <div style={{ marginRight: "20px" }}>
                         <Image
-                          src={data.fetchMusicData.images[0].url}
+                          src={data.imgUrl}
                           alt="album art"
                           width={250}
                           height={250}
@@ -225,12 +139,12 @@ export default function Page() {
                       </div>
                       <div className="music-post-container-block">
                         <div>
-                          <span>{data.fetchMusicData.artists[0].name},</span>{" "}
-                          <span>{`｟${data.fetchMusicData.name}｠`}</span>
+                          <span>{data.artist},</span>{" "}
+                          <span>{`｟${data.album}｠`}</span>
                         </div>
                         <div>
-                          <span>{data.fetchMusicData.label},</span>{" "}
-                          <span>{data.fetchMusicData.release_date}</span>
+                          <span>{data.label},</span>{" "}
+                          <span>{data.releaseDate}</span>
                         </div>
                         <div>
                           <a
