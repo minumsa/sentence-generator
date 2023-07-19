@@ -66,6 +66,11 @@ export default function Upload({
 // setUploadItems,
 UploadProps) {
   const handleSubmit = async () => {
+    if (!albumId || !genre || !link || !text) {
+      alert("항목을 모두 채워주세요.");
+      return;
+    }
+
     const newItem: UploadItem = {
       albumId: albumId,
       genre: genre,
@@ -103,73 +108,76 @@ UploadProps) {
       }
     };
 
-    const fetchSpotifyData = async () => {
-      try {
-        const accessToken = await fetchAccessToken();
-        if (!accessToken) {
-          // throw new Error("Access token is not available");
-          console.error("Error: Access token is not available");
-        }
-
-        const url = `https://api.spotify.com/v1/albums/${newItem.albumId}`;
-        const headers = {
-          Authorization: `Bearer ${accessToken}`,
-        };
-        const musicDataResponse = await fetch(url, { headers });
-
-        if (!musicDataResponse.ok) {
-          // throw new Error("music fetch failed");
-          console.error("Error: music fetch failed");
-        }
-
-        const fetchedMusicData = await musicDataResponse.json();
-        const musicDataArray: MusicData = {
-          imgUrl: fetchedMusicData.images[0].url,
-          artist: fetchedMusicData.artists[0].name,
-          album: fetchedMusicData.name,
-          label: fetchedMusicData.label,
-          releaseDate: fetchedMusicData.release_date,
-          text: newItem.text,
-          genre: newItem.genre,
-          link: newItem.link,
-        };
-
-        setMusicData(musicDataArray);
-      } catch (error) {
-        console.error(error);
+    try {
+      const accessToken = await fetchAccessToken();
+      if (!accessToken) {
+        // throw new Error("Access token is not available");
+        console.error("Error: Access token is not available");
       }
-    };
 
-    await fetchSpotifyData();
-    if (musicData !== null) {
-      try {
-        const response = await fetch("/api/music", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(musicData),
-        });
+      const url = `https://api.spotify.com/v1/albums/${newItem.albumId}`;
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+      const musicDataResponse = await fetch(url, { headers });
 
-        if (!response.ok) {
-          throw new Error("Failed to upload music data");
+      if (!musicDataResponse.ok) {
+        // throw new Error("music fetch failed");
+        console.error("Error: music fetch failed");
+      }
+
+      const fetchedMusicData = await musicDataResponse.json();
+      const musicDataArray: MusicData = {
+        imgUrl: fetchedMusicData.images[0].url,
+        artist: fetchedMusicData.artists[0].name,
+        album: fetchedMusicData.name,
+        label: fetchedMusicData.label,
+        releaseDate: fetchedMusicData.release_date,
+        text: newItem.text,
+        genre: newItem.genre,
+        link: newItem.link,
+      };
+
+      setMusicData(musicDataArray);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    async function fetchMongoDB() {
+      if (musicData !== null) {
+        try {
+          const response = await fetch("/api/music", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(musicData),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to upload music data");
+          }
+
+          const data = await response.json();
+          console.log(data.message);
+
+          // setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
+        } catch (error) {
+          console.error(error);
         }
-
-        const data = await response.json();
-        console.log(data.message);
-
-        // setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
-      } catch (error) {
-        console.error(error);
       }
     }
 
-    setMusicData(null);
+    fetchMongoDB();
+
+    // setMusicData(null);
     setAlbumId("");
     setGenre("");
     setText("");
     setLink("");
-  };
+  }, [musicData]);
 
   return (
     <div className="music-post-container">
