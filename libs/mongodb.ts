@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const connectMongoDB = async () => {
+  require("dotenv").config({ path: "/.env" });
   try {
-    require("dotenv").config();
     await mongoose.connect(process.env.MONGODB_URI!);
 
     console.log("Connected to MongoDB");
