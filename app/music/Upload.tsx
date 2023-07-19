@@ -9,27 +9,15 @@ interface UploadItem {
   text: string;
 }
 
-interface FetchItem {
-  [x: string]: any;
-  imgUrl: string;
-  artist: string;
-  album: string;
-  label: string;
-  releaseDate: string;
-  genre: String;
-  link: String;
-  text: String;
-}
-
 interface MusicData {
   imgUrl: string;
   artist: string;
   album: string;
   label: string;
   releaseDate: string;
-  genre: String;
-  link: String;
-  text: String;
+  genre: string;
+  link: string;
+  text: string;
 }
 
 interface UploadProps {

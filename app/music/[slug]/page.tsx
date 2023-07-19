@@ -12,9 +12,9 @@ interface MongoItem {
   album: string;
   label: string;
   releaseDate: string;
-  genre: String;
-  link: String;
-  text: String;
+  genre: string;
+  link: string;
+  text: string;
 }
 
 const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
