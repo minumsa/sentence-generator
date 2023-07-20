@@ -71,10 +71,11 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
       }
 
       const data = await response.json();
-      await data.sort(
+      data.sort(
         (a: { uploadDate: string }, b: { uploadDate: string }) =>
-          Number(b.uploadDate) - Number(a.uploadDate)
+          Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
       );
+
       setMongoDataArr(data);
     } catch (error) {
       console.error(error);

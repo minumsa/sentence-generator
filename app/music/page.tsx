@@ -61,13 +61,11 @@ export default function Page() {
       }
 
       const data = await response.json();
-      console.log("sort before", data);
-
-      await data.sort(
+      data.sort(
         (a: { uploadDate: string }, b: { uploadDate: string }) =>
-          Number(b.uploadDate) - Number(a.uploadDate)
+          Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
       );
-      console.log("sort after", data);
+
       setMongoDataArr(data);
     } catch (error) {
       console.error(error);
