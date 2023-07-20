@@ -177,7 +177,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                       </div>
                       <div>
                         <span>{data.label},</span>{" "}
-                        <span>{data.releaseDate.slice(0, 3)}</span>
+                        <span>{data.releaseDate.slice(0, 4)}</span>
                       </div>
                       <div>
                         <a
