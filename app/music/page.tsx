@@ -142,13 +142,12 @@ export default function Page() {
                           alt="album art"
                           width={300}
                           height={300}
+                          style={{ borderRadius: "5px" }}
                         />
                       </div>
                       <div className="music-post-container-block">
-                        <div style={{ marginTop: "20px" }}>
-                          <span>{data.album}</span>
-                          <span>{data.artist}</span>
-                        </div>
+                        <div style={{ marginTop: "20px" }}>{data.album}</div>
+                        <div>{data.artist}</div>
                         <div>
                           <span>{`${data.label} · `}</span>
                           <span>{data.releaseDate.slice(0, 4)}</span>
