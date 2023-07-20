@@ -140,8 +140,8 @@ export default function Page() {
                         <Image
                           src={data.imgUrl}
                           alt="album art"
-                          width={250}
-                          height={250}
+                          width={300}
+                          height={300}
                         />
                       </div>
                       <div className="music-post-container-block">
