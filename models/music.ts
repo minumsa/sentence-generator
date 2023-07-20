@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface MusicData extends Document {
+  id: string;
   imgUrl: string;
   artist: string;
   album: string;
@@ -12,6 +13,7 @@ interface MusicData extends Document {
 }
 
 const musicSchema = new mongoose.Schema({
+  id: String,
   imgUrl: String,
   artist: String,
   album: String,

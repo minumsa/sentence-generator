@@ -12,16 +12,16 @@ export async function POST(request: Request) {
 
     // body: JSON.stringify(newItem) <=== 얘를 변수로 설정한 것!
     const { data, password } = await request.json();
-    const { imgUrl, artist, album, label, releaseDate, genre, link, text } =
+    const { id, imgUrl, artist, album, label, releaseDate, genre, link, text } =
       data;
 
     if (password !== process.env.UPROAD_PASSWORD)
       return NextResponse.json(
         { message: "password is not correct" },
-        { status: 400 }
+        { status: 401 }
       );
 
-    const existingData = await Music.findOne({ imgUrl });
+    const existingData = await Music.findOne({ id });
 
     // NextResponse.json({ message: "Music created" }, { status: 201 });
     // NextResponse.json({ message: "Server Error" }, { status: 500 });
@@ -37,6 +37,7 @@ export async function POST(request: Request) {
     }
 
     const newData = new Music({
+      id,
       imgUrl,
       artist,
       album,

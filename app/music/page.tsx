@@ -122,7 +122,7 @@ export default function Page() {
           >
             업로드
           </div>
-          <div className="music-bottom-title">카버 차트 v1.1.1</div>
+          <div className="music-bottom-title">{/* 카버 차트 v1.1.1 */}</div>
 
           {mongoDataArr
             ? mongoDataArr.map((data, index) => {

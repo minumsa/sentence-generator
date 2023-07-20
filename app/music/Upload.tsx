@@ -10,6 +10,7 @@ interface UploadItem {
 }
 
 interface MusicData {
+  id: string;
   imgUrl: string;
   artist: string;
   album: string;
@@ -124,6 +125,7 @@ UploadProps) {
       console.log("fetchedMusicData", fetchedMusicData);
 
       const musicDataArray: MusicData = {
+        id: fetchedMusicData.id,
         imgUrl: fetchedMusicData.images[0].url,
         artist: fetchedMusicData.artists[0].name,
         album: fetchedMusicData.name,
@@ -155,7 +157,7 @@ UploadProps) {
             }),
           });
 
-          if (response.status === 400) {
+          if (response.status === 401) {
             alert("관리자 비밀번호가 틀렸습니다.");
           } else if (response.status === 409) {
             alert("이미 존재하는 앨범입니다.");
