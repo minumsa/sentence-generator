@@ -7,6 +7,7 @@ interface UploadItem {
   genre: string;
   link: string;
   text: string;
+  uploadDate: string;
 }
 
 interface MusicData {
@@ -71,6 +72,7 @@ UploadProps) {
       genre: genre,
       link: link,
       text: text,
+      uploadDate: Date(),
     };
 
     const fetchAccessToken = async () => {
@@ -135,7 +137,7 @@ UploadProps) {
         text: newItem.text,
         genre: newItem.genre,
         link: newItem.link,
-        uploadDate: Date(),
+        uploadDate: newItem.uploadDate,
       };
 
       setMusicData(musicDataArray);
