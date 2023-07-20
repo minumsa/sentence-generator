@@ -151,7 +151,7 @@ export default function Page() {
                         </div>
                         <div>
                           <span>{data.label},</span>{" "}
-                          <span>{data.releaseDate}</span>
+                          <span>{data.releaseDate.slice(0, 3)}</span>
                         </div>
                         <div>
                           <a
