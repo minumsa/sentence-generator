@@ -145,7 +145,10 @@ export default function Page() {
                           style={{ borderRadius: "10px" }}
                         />
                       </div>
-                      <div className="music-post-container-block">
+                      <div
+                        className="music-post-container-block"
+                        style={{ marginLeft: "25px" }}
+                      >
                         <div style={{ marginTop: "20px", fontWeight: "bold" }}>
                           {data.album}
                         </div>
