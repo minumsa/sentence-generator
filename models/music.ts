@@ -8,6 +8,7 @@ interface MusicData extends Document {
   label: string;
   releaseDate: string;
   genre: string;
+  genreDetail: string[];
   link: string;
   text: string;
 }
@@ -20,6 +21,7 @@ const musicSchema = new mongoose.Schema({
   label: String,
   releaseDate: String,
   genre: String,
+  genreDetail: [String],
   link: String,
   text: String,
 });

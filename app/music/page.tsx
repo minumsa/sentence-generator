@@ -12,6 +12,7 @@ interface MongoItem {
   label: string;
   releaseDate: string;
   genre: string;
+  genreDetail: string[];
   link: string;
   text: string;
 }

@@ -14,6 +14,7 @@ interface MongoItem {
   label: string;
   releaseDate: string;
   genre: string;
+  genreDetail: string[];
   link: string;
   text: string;
 }
@@ -175,6 +176,12 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                       <div>
                         <span>{data.label},</span>{" "}
                         <span>{data.releaseDate}</span>
+                      </div>
+                      <div>
+                        {data.genreDetail.map((genre, index) => {
+                          const genreLength = data.genreDetail.length;
+                          return index + 1 < genreLength ? `${genre}, ` : genre;
+                        })}
                       </div>
                       <div>
                         <a
