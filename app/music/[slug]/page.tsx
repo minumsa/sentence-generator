@@ -74,7 +74,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
 
       setMongoDataArr(data);
       mongoDataArr.sort((a, b) => {
-        return Number(a.uploadDate) - Number(b.uploadDate);
+        return Number(b.uploadDate) - Number(a.uploadDate);
       });
     } catch (error) {
       console.error(error);
