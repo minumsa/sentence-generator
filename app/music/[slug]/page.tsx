@@ -7,6 +7,7 @@ import Upload from "../Upload";
 import Image from "next/image";
 
 interface MongoItem {
+  id: string;
   imgUrl: string;
   artist: string;
   album: string;

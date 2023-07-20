@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface MongoItem {
+  id: string;
   imgUrl: string;
   artist: string;
   album: string;
