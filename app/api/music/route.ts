@@ -12,18 +12,8 @@ export async function POST(request: Request) {
 
     // body: JSON.stringify(newItem) <=== 얘를 변수로 설정한 것!
     const { data, password } = await request.json();
-    const {
-      id,
-      imgUrl,
-      artist,
-      album,
-      label,
-      releaseDate,
-      genre,
-      genreDetail,
-      link,
-      text,
-    } = data;
+    const { id, imgUrl, artist, album, label, releaseDate, genre, link, text } =
+      data;
 
     if (password !== process.env.UPROAD_PASSWORD)
       return NextResponse.json(
@@ -54,7 +44,6 @@ export async function POST(request: Request) {
       label,
       releaseDate,
       genre,
-      genreDetail,
       link,
       text,
     });

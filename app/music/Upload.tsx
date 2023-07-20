@@ -17,7 +17,6 @@ interface MusicData {
   label: string;
   releaseDate: string;
   genre: string;
-  genreDetail: string[];
   link: string;
   text: string;
 }
@@ -134,7 +133,6 @@ UploadProps) {
         releaseDate: fetchedMusicData.release_date,
         text: newItem.text,
         genre: newItem.genre,
-        genreDetail: fetchedMusicData.genres,
         link: newItem.link,
       };
 
