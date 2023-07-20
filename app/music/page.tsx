@@ -61,12 +61,14 @@ export default function Page() {
       }
 
       const data = await response.json();
-      data.sort(
+      console.log("sort before", data);
+
+      await data.sort(
         (a: { uploadDate: string }, b: { uploadDate: string }) =>
           Number(b.uploadDate) - Number(a.uploadDate)
       );
+      console.log("sort after", data);
       setMongoDataArr(data);
-      mongoDataArr.sort((a, b) => Number(b.uploadDate) - Number(a.uploadDate));
     } catch (error) {
       console.error(error);
     }
