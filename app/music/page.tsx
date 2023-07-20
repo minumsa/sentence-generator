@@ -150,14 +150,14 @@ export default function Page() {
                         style={{ marginLeft: "25px" }}
                       >
                         <div style={{ marginTop: "20px", fontWeight: "bold" }}>
-                          {data.album}
+                          {`｟${data.album}｠`}
                         </div>
-                        <div>{data.artist}</div>
-                        <div>
+                        <div style={{ marginLeft: "5px" }}>{data.artist}</div>
+                        <div style={{ marginLeft: "5px" }}>
                           <span>{`${data.label} · `}</span>
                           <span>{data.releaseDate.slice(0, 4)}</span>
                         </div>
-                        <div>
+                        <div style={{ marginLeft: "5px" }}>
                           <a
                             href={data.link}
                             target="_blank"

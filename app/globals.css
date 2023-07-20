@@ -1687,6 +1687,8 @@ Firefox
   border-top: 1px solid #ffccff;
   border-bottom: 1px solid #ffccff;
   cursor: pointer;
+  width: fit-content;
+  padding: 0 10px 0 0;
 }
 
 .music-post-input {
