@@ -56,11 +56,11 @@ UploadProps) {
   const [password, setPassword] = useState<string | null>("");
 
   const handleSubmit = async () => {
-    const userPassword = prompt("비밀번호를 입력해주세요.");
+    const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
     setPassword(userPassword);
 
     if (!albumId || !genre || !link || !text) {
-      alert("항목을 모두 채워주세요.");
+      alert("모든 항목을 채워주세요.");
       return;
     }
 
@@ -152,8 +152,12 @@ UploadProps) {
             }),
           });
 
-          if (!response.ok) {
+          if (response.status === 400) {
+            alert("관리자 비밀번호가 틀렸습니다.");
+          } else if (!response.ok) {
             throw new Error("Failed to upload music data");
+          } else {
+            alert("데이터가 성공적으로 저장되었습니다.");
           }
 
           const data = await response.json();
@@ -161,7 +165,7 @@ UploadProps) {
 
           // setUploadItems(prevUploadItems => [newItem, ...prevUploadItems]);
         } catch (error) {
-          console.error(error);
+          console.error("Error: ", error);
         }
       }
     }
