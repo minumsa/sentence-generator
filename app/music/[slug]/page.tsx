@@ -17,6 +17,7 @@ interface MongoItem {
   link: string;
   text: string;
   uploadDate: string;
+  duration: number;
 }
 
 const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
