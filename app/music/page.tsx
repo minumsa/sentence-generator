@@ -145,12 +145,12 @@ export default function Page() {
                         />
                       </div>
                       <div className="music-post-container-block">
-                        <div>
-                          <span>{data.artist},</span>{" "}
-                          <span>{`｟${data.album}｠`}</span>
+                        <div style={{ marginTop: "20px" }}>
+                          <span>{data.album}</span>
+                          <span>{data.artist}</span>
                         </div>
                         <div>
-                          <span>{data.label},</span>{" "}
+                          <span>{`${data.label} · `}</span>
                           <span>{data.releaseDate.slice(0, 4)}</span>
                         </div>
                         <div>
