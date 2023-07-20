@@ -19,6 +19,7 @@ interface MusicData {
   genre: string;
   link: string;
   text: string;
+  uploadDate: string;
 }
 
 interface UploadProps {
@@ -134,6 +135,7 @@ UploadProps) {
         text: newItem.text,
         genre: newItem.genre,
         link: newItem.link,
+        uploadDate: Date(),
       };
 
       setMusicData(musicDataArray);

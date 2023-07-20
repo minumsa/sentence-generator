@@ -14,6 +14,7 @@ interface MongoItem {
   genre: string;
   link: string;
   text: string;
+  uploadDate: string;
 }
 
 export default function Page() {
