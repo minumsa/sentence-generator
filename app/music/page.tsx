@@ -142,11 +142,13 @@ export default function Page() {
                           alt="album art"
                           width={300}
                           height={300}
-                          style={{ borderRadius: "5px" }}
+                          style={{ borderRadius: "10px" }}
                         />
                       </div>
                       <div className="music-post-container-block">
-                        <div style={{ marginTop: "20px" }}>{data.album}</div>
+                        <div style={{ marginTop: "20px", fontWeight: "bold" }}>
+                          {data.album}
+                        </div>
                         <div>{data.artist}</div>
                         <div>
                           <span>{`${data.label} · `}</span>
