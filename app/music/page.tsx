@@ -114,7 +114,7 @@ export default function Page() {
           className="music-right-container"
           style={{ overflow: "scroll", width: "90%" }}
         >
-          <div
+          {/* <div
             className="music-top-menu"
             onClick={() => {
               router.push("/music/upload");
@@ -122,7 +122,7 @@ export default function Page() {
             }}
           >
             업로드
-          </div>
+          </div> */}
           <div className="music-bottom-title">{/* 카버 차트 v1.1.1 */}</div>
 
           {mongoDataArr
