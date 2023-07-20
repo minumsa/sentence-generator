@@ -18,6 +18,7 @@ interface MongoItem {
   text: string;
   uploadDate: string;
   duration: number;
+  tracks: number;
 }
 
 const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
@@ -171,14 +172,32 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                         height="300"
                       />
                     </div>
-                    <div className="music-post-container-block">
-                      <div>
-                        <span>{data.artist},</span>{" "}
-                        <span>{`｟${data.album}｠`}</span>
+                    <div
+                      className="music-post-container-block"
+                      style={{ marginLeft: "30px" }}
+                    >
+                      {/* <div>{`｟${data.album}｠`}</div> */}
+                      <div>{data.artist}</div>
+                      <div className="name-name" style={{ fontWeight: "800" }}>
+                        {data.album}
                       </div>
                       <div>
                         <span>{data.label},</span>{" "}
                         <span>{data.releaseDate.slice(0, 4)}</span>
+                      </div>
+                      <div>
+                        {`${data.tracks}곡, `}
+                        {Math.floor(data.duration / 60) < 60
+                          ? `${Math.floor(data.duration / 60)}분 ${
+                              data.duration % 60
+                            }초`
+                          : `${Math.floor(
+                              Math.floor(data.duration / 60) / 60
+                            )}시간 ${
+                              Math.floor(data.duration / 60) % 60 > 0
+                                ? (Math.floor(data.duration / 60) % 60) + "분"
+                                : ""
+                            }`}
                       </div>
                       <div>
                         <a

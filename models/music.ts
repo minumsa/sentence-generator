@@ -13,6 +13,7 @@ interface MusicData extends Document {
   text: string;
   uploadDate: string;
   duration: number;
+  tracks: number;
 }
 
 const musicSchema = new mongoose.Schema({
@@ -28,6 +29,7 @@ const musicSchema = new mongoose.Schema({
   text: String,
   uploadDate: String,
   duration: Number,
+  tracks: Number,
 });
 
 const Music: Model<MusicData> =

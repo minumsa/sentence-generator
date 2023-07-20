@@ -1562,7 +1562,13 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   height: 100vh;
   display: flex;
   flex-direction: row;
-  font-family: "GabiaHeuldot";
+  /* font-family: "GabiaHeuldot"; */
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 300;
+  /* font-family: pre; */
   background-color: #000000;
   color: #ffccff;
   /* color: #09912f; */
@@ -1621,7 +1627,7 @@ Firefox
 .music-post-container {
   display: flex;
   flex-direction: column;
-  font-family: "GabiaHeuldot";
+  /* font-family: "GabiaHeuldot"; */
   /* font-size: calc(20px + 1.5vw); */
   font-size: 30px;
   padding: 20px 50px;

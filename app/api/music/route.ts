@@ -24,6 +24,7 @@ export async function POST(request: Request) {
       text,
       uploadDate,
       duration,
+      tracks,
     } = data;
 
     if (password !== process.env.UPROAD_PASSWORD)
@@ -59,6 +60,7 @@ export async function POST(request: Request) {
       text,
       uploadDate,
       duration,
+      tracks,
     });
     await newData.save();
     return NextResponse.json(newData.toJSON());

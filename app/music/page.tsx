@@ -16,6 +16,7 @@ interface MongoItem {
   text: string;
   uploadDate: string;
   duration: number;
+  tracks: number;
 }
 
 export default function Page() {
@@ -143,22 +144,39 @@ export default function Page() {
                           alt="album art"
                           width={300}
                           height={300}
-                          style={{ borderRadius: "10px" }}
+                          // style={{ borderRadius: "10px" }}
                         />
                       </div>
                       <div
                         className="music-post-container-block"
-                        style={{ marginLeft: "25px" }}
+                        style={{ marginLeft: "30px" }}
                       >
-                        <div style={{ marginTop: "20px", fontWeight: "bold" }}>
-                          {`｟${data.album}｠`}
+                        <div>{data.artist}</div>
+                        <div
+                          className="name-name"
+                          style={{ fontWeight: "800" }}
+                        >
+                          {data.album}
                         </div>
-                        <div style={{ marginLeft: "5px" }}>{data.artist}</div>
-                        <div style={{ marginLeft: "5px" }}>
-                          <span>{`${data.label} · `}</span>
+                        <div>
+                          <span>{data.label},</span>{" "}
                           <span>{data.releaseDate.slice(0, 4)}</span>
                         </div>
-                        <div style={{ marginLeft: "5px" }}>
+                        <div>
+                          {`${data.tracks}곡, `}
+                          {Math.floor(data.duration / 60) < 60
+                            ? `${Math.floor(data.duration / 60)}분 ${
+                                data.duration % 60
+                              }초`
+                            : `${Math.floor(
+                                Math.floor(data.duration / 60) / 60
+                              )}시간 ${
+                                Math.floor(data.duration / 60) % 60 > 0
+                                  ? (Math.floor(data.duration / 60) % 60) + "분"
+                                  : ""
+                              }`}
+                        </div>
+                        <div>
                           <a
                             href={data.link}
                             target="_blank"

@@ -22,6 +22,7 @@ interface MusicData {
   text: string;
   uploadDate: string;
   duration: number;
+  tracks: number;
 }
 
 interface UploadProps {
@@ -126,8 +127,6 @@ UploadProps) {
 
       const fetchedMusicData = await musicDataResponse.json();
 
-      console.log("fetchedMusicData", fetchedMusicData);
-
       const musicDataArray: MusicData = {
         id: fetchedMusicData.id,
         imgUrl: fetchedMusicData.images[0].url,
@@ -139,7 +138,12 @@ UploadProps) {
         genre: newItem.genre,
         link: newItem.link,
         uploadDate: newItem.uploadDate,
-        duration: fetchedMusicData.tracks.items[0].duration_ms,
+        tracks: fetchedMusicData.tracks.items.length,
+        duration: Math.floor(
+          fetchedMusicData.tracks.items
+            .map((data: any) => data.duration_ms)
+            .reduce((a: number, b: number) => a + b) / 1000
+        ),
       };
 
       setMusicData(musicDataArray);
