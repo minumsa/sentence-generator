@@ -139,7 +139,7 @@ UploadProps) {
         genre: newItem.genre,
         link: newItem.link,
         uploadDate: newItem.uploadDate,
-        duration: fetchedMusicData.items[0].duration_ms,
+        duration: fetchedMusicData.tracks.items[0].duration_ms,
       };
 
       setMusicData(musicDataArray);
