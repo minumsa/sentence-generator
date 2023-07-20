@@ -120,6 +120,9 @@ UploadProps) {
       }
 
       const fetchedMusicData = await musicDataResponse.json();
+
+      console.log("fetchedMusicData", fetchedMusicData);
+
       const musicDataArray: MusicData = {
         imgUrl: fetchedMusicData.images[0].url,
         artist: fetchedMusicData.artists[0].name,
@@ -154,6 +157,8 @@ UploadProps) {
 
           if (response.status === 400) {
             alert("관리자 비밀번호가 틀렸습니다.");
+          } else if (response.status === 409) {
+            alert("이미 존재하는 앨범입니다.");
           } else if (!response.ok) {
             throw new Error("Failed to upload music data");
           } else {
