@@ -95,6 +95,8 @@ UploadProps) {
           body: data,
         });
 
+        setPassword(userPassword);
+
         if (!accessTokenResponse.ok) {
           console.error("Error: Access token fetch failed");
         }

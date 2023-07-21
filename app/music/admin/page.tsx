@@ -99,6 +99,34 @@ export default function Page() {
   const [releaseSort, setReleaseSort] = useState<boolean>(true);
   const [currentSort, setCurrentSort] = useState<string>("uploadSort");
 
+  const handleDelete = async (id: string) => {
+    const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
+    console.log(userPassword);
+
+    try {
+      const response = await fetch(`/api/music`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: id, password: userPassword }),
+      });
+
+      if (response.status === 401) {
+        alert("관리자 비밀번호가 틀렸습니다.");
+      } else if (response.status === 404) {
+        alert("존재하지 않는 앨범입니다.");
+      } else if (!response.ok) {
+        throw new Error("Failed to upload music data");
+      } else {
+        alert("데이터가 성공적으로 삭제되었습니다.");
+        fetchMongoData();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div style={{ display: "flex", width: "100%", height: "100%" }}>
       <div className="music-left-container">
@@ -278,7 +306,14 @@ export default function Page() {
                             }`}
                       </div>
                       <div style={{ display: "flex" }}>
-                        <div className="music-delete-menu">삭제</div>
+                        <div
+                          className="music-delete-menu"
+                          onClick={() => {
+                            handleDelete(data.id);
+                          }}
+                        >
+                          삭제
+                        </div>
                         <div className="music-delete-menu">수정</div>
                       </div>
                       {/* <div>

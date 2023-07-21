@@ -80,14 +80,30 @@ export async function GET(request: Request) {
   }
 }
 
-// export async function DELETE(request: Request) {
-//   try {
-//     require("dotenv").config();
-//     await connectMongoDB();
-//     const dataArr = await Music.find();
-//     return NextResponse.json(dataArr.map(data => data.toJSON()));
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json({ message: "Server Error" }, { status: 500 });
-//   }
-// }
+export async function DELETE(request: Request) {
+  try {
+    require("dotenv").config();
+    await connectMongoDB();
+
+    const { id, password } = await request.json();
+
+    if (password !== process.env.UPROAD_PASSWORD)
+      return NextResponse.json(
+        { message: "password is not correct" },
+        { status: 401 }
+      );
+
+    const existingData = await Music.findOne({ id });
+
+    if (!existingData) {
+      return NextResponse.json({ message: "Data not found" }, { status: 404 });
+    }
+
+    await existingData.deleteOne();
+
+    return NextResponse.json({ message: "Data deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: "Server Error" }, { status: 500 });
+  }
+}

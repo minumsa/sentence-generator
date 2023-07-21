@@ -89,43 +89,69 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     }
   }
 
-  useEffect(() => {
-    fetchMongoData();
-  }, []);
-
   const [uploadSort, setUploadSort] = useState<boolean>(true);
   const [releaseSort, setReleaseSort] = useState<boolean>(true);
   const [currentSort, setCurrentSort] = useState<string>("uploadSort");
 
-  const fetchAccessToken = async () => {
-    try {
-      const url = "https://accounts.spotify.com/api/token";
-      const clientId = "9ba8de463724427689b855dfcabca1b1";
-      const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
-      const basicToken = btoa(`${clientId}:${clientSecret}`);
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${basicToken}`,
-      };
-      const data = "grant_type=client_credentials";
+  const handleDelete = async (id: string) => {
+    const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
+    console.log(userPassword);
 
-      const accessTokenResponse = await fetch(url, {
-        method: "POST",
-        headers,
-        body: data,
+    try {
+      const response = await fetch(`/api/music`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: id, password: userPassword }),
       });
 
-      if (!accessTokenResponse.ok) {
-        console.error("Error: Access token fetch failed");
+      if (response.status === 401) {
+        alert("관리자 비밀번호가 틀렸습니다.");
+      } else if (response.status === 404) {
+        alert("존재하지 않는 앨범입니다.");
+      } else if (!response.ok) {
+        throw new Error("Failed to upload music data");
+      } else {
+        alert("데이터가 성공적으로 삭제되었습니다.");
+        fetchMongoData();
       }
-
-      const accessTokenData = await accessTokenResponse.json();
-      return accessTokenData.access_token;
     } catch (error) {
       console.error(error);
-      return null;
     }
   };
+
+  // async function deleteMongoDB() {
+  //   try {
+  //     const response = await fetch(`/api/music`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ id: deleteId, password: password }),
+  //     });
+
+  //     if (response.status === 401) {
+  //       alert("관리자 비밀번호가 틀렸습니다.");
+  //     } else if (response.status === 404) {
+  //       alert("존재하지 않는 앨범입니다.");
+  //     } else if (!response.ok) {
+  //       throw new Error("Failed to upload music data");
+  //     } else {
+  //       alert("데이터가 성공적으로 삭제되었습니다.");
+  //       deleteMongoDB();
+  //       setPassword("");
+  //       setDeleteId("");
+  //       fetchMongoData();
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  useEffect(() => {
+    fetchMongoData();
+  }, []);
 
   return (
     <div style={{ display: "flex", width: "100%", height: "100%" }}>
@@ -322,7 +348,14 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                           }`}
                     </div>
                     <div style={{ display: "flex" }}>
-                      <div className="music-delete-menu">삭제</div>
+                      <div
+                        className="music-delete-menu"
+                        onClick={() => {
+                          handleDelete(data.id);
+                        }}
+                      >
+                        삭제
+                      </div>
                       <div className="music-delete-menu">수정</div>
                     </div>
                     {/* <div>
