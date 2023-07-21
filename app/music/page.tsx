@@ -50,7 +50,7 @@ export default function Page() {
       ? router.push(`/music`)
       : router.push(`/music/${genrePath}`);
     genrePath === "r&b/soul"
-      ? router.push(`/music/r&b-soul`)
+      ? router.push(`/music/r&b_soul`)
       : router.push(`/music/${genrePath}`);
   };
 
@@ -96,7 +96,8 @@ export default function Page() {
                 handleGenreClick(genre);
               }}
               style={
-                (genreByPath === genre && !loginPage) ||
+                genreByPath === genre ||
+                (genre === "R&B/SOUL" && genreByPath === "R&B_SOUL") ||
                 (genreByPath.length < 1 && activeGenre === genre)
                   ? {
                       backgroundColor: "#ffccff",
@@ -142,17 +143,26 @@ export default function Page() {
                 <div className="music-post-container" key={index}>
                   <div className="album-container">
                     <div style={{ marginRight: "20px" }}>
-                      <Image
-                        src={data.imgUrl}
-                        alt="album art"
-                        width={300}
-                        height={300}
-                        // style={{ borderRadius: "10px" }}
-                      />
+                      <a
+                        href={data.link}
+                        target="_blank"
+                        style={{
+                          textDecoration: "none",
+                          color: "#ffccff",
+                        }}
+                      >
+                        <Image
+                          src={data.imgUrl}
+                          alt="album art"
+                          width={300}
+                          height={300}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </a>
                     </div>
                     <div
                       className="music-post-container-block"
-                      style={{ marginLeft: "30px" }}
+                      style={{ marginLeft: "30px", marginTop: "30px" }}
                     >
                       <div>{data.artist}</div>
                       <div className="name-name" style={{ fontWeight: "800" }}>
@@ -176,7 +186,7 @@ export default function Page() {
                                 : ""
                             }`}
                       </div>
-                      <div>
+                      {/* <div>
                         <a
                           href={data.link}
                           target="_blank"
@@ -189,12 +199,15 @@ export default function Page() {
                             Play on Apple Music ↵
                           </div>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div
                     className="music-post-container-block"
-                    style={{ display: "flex", flexDirection: "column" }}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
                   >
                     {data.text.split("<br/>").map((text, index) => {
                       return index + 1 < data.text.split("<br/>").length ? (

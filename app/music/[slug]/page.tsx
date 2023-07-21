@@ -54,12 +54,13 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const handleGenreClick = (genre: any) => {
     setLoginPage(false);
     const genrePath = genre.toLowerCase();
-    genrePath === "all"
-      ? router.push(`/music`)
-      : router.push(`/music/${genrePath}`);
-    genrePath === "r&b/soul"
-      ? router.push(`/music/r&b_soul`)
-      : router.push(`/music/${genrePath}`);
+    const pathSuffix =
+      genrePath === "all"
+        ? ""
+        : genrePath === "r&b/soul"
+        ? "r&b_soul"
+        : genrePath;
+    router.push(`/music/${pathSuffix}`);
   };
 
   const [musicData, setMusicData] = useState<MongoItem | null>(null);
@@ -109,7 +110,8 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                 handleGenreClick(genre);
               }}
               style={
-                (genreByPath === genre && !loginPage) ||
+                genreByPath === genre ||
+                (genre === "R&B/SOUL" && genreByPath === "R&B_SOUL") ||
                 (genreByPath.length < 1 && activeGenre === genre)
                   ? {
                       backgroundColor: "#ffccff",
@@ -172,16 +174,25 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
               <div className="music-post-container" key={index}>
                 <div className="album-container">
                   <div style={{ marginRight: "20px" }}>
-                    <Image
-                      src={data.imgUrl}
-                      alt="album art"
-                      width="300"
-                      height="300"
-                    />
+                    <a
+                      href={data.link}
+                      target="_blank"
+                      style={{
+                        textDecoration: "none",
+                        color: "#ffccff",
+                      }}
+                    >
+                      <Image
+                        src={data.imgUrl}
+                        alt="album art"
+                        width="300"
+                        height="300"
+                      />
+                    </a>
                   </div>
                   <div
                     className="music-post-container-block"
-                    style={{ marginLeft: "30px" }}
+                    style={{ marginLeft: "30px", marginTop: "30px" }}
                   >
                     {/* <div>{`｟${data.album}｠`}</div> */}
                     <div>{data.artist}</div>
@@ -206,7 +217,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                               : ""
                           }`}
                     </div>
-                    <div>
+                    {/* <div>
                       <a
                         href={data.link}
                         target="_blank"
@@ -219,10 +230,20 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                           Play on Apple Music ↵
                         </div>
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
-                <div className="music-post-container-block">{data.text}</div>
+                <div className="music-post-container-block">
+                  {data.text.split("<br/>").map((text, index) => {
+                    return index + 1 < data.text.split("<br/>").length ? (
+                      <div style={{ marginBottom: "50px" }} key={index}>
+                        {text}
+                      </div>
+                    ) : (
+                      <div key={index}>{text}</div>
+                    );
+                  })}
+                </div>
                 <div
                   style={{
                     borderBottom: "1px solid #ffccff",
