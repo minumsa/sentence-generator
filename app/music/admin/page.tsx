@@ -31,6 +31,7 @@ export default function Page() {
     "K-POP",
     "J-POP",
     "ROCK",
+    "ALTERNATIVE",
     "DISCO",
     "ELECTRONIC",
     "JAZZ",

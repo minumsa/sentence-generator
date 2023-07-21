@@ -31,6 +31,7 @@ export default function Page() {
     "K-POP",
     "J-POP",
     "ROCK",
+    "ALTERNATIVE",
     "DISCO",
     "ELECTRONIC",
     "JAZZ",
@@ -166,6 +167,7 @@ export default function Page() {
           }
           onClick={() => {
             setReleaseSort(!releaseSort);
+            setCurrentSort("releaseSort");
 
             releaseSort
               ? mongoDataArr.sort(
@@ -178,13 +180,10 @@ export default function Page() {
                     Number(b.releaseDate.slice(0, 4)) -
                     Number(a.releaseDate.slice(0, 4))
                 );
-
-            setCurrentSort("releaseSort");
           }}
         >
           {releaseSort ? "발매일 ↓" : "발매일 ↑"}
         </div>
-        {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
         {mongoDataArr
           ? mongoDataArr.map((data, index) => {
               return (

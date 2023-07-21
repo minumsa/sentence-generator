@@ -39,6 +39,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     "K-POP",
     "J-POP",
     "ROCK",
+    "ALTERNATIVE",
     "DISCO",
     "ELECTRONIC",
     "JAZZ",

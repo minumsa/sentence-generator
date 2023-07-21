@@ -39,6 +39,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     "K-POP",
     "J-POP",
     "ROCK",
+    "ALTERNATIVE",
     "DISCO",
     "ELECTRONIC",
     "JAZZ",
@@ -131,72 +132,84 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
         </div>
       </div>
       <div className="music-right-container">
-        <div
-          className="music-top-menu"
-          style={
-            currentSort === "uploadSort"
-              ? {
-                  color: "#000000",
-                  fontWeight: "bold",
-                  borderRadius: "0",
-                  backgroundColor: "#ffccff",
-                }
-              : {}
-          }
-          onClick={() => {
-            setUploadSort(!uploadSort);
+        {decodedSlug !== "upload" ? (
+          <div>
+            <div
+              className="music-top-menu"
+              style={
+                currentSort === "uploadSort"
+                  ? {
+                      color: "#000000",
+                      fontWeight: "bold",
+                      borderRadius: "0",
+                      backgroundColor: "#ffccff",
+                    }
+                  : {}
+              }
+              onClick={() => {
+                setUploadSort(!uploadSort);
 
-            uploadSort
-              ? mongoDataArr.sort(
-                  (a: { uploadDate: string }, b: { uploadDate: string }) =>
-                    Number(new Date(a.uploadDate)) -
-                    Number(new Date(b.uploadDate))
-                )
-              : mongoDataArr.sort(
-                  (a: { uploadDate: string }, b: { uploadDate: string }) =>
-                    Number(new Date(b.uploadDate)) -
-                    Number(new Date(a.uploadDate))
-                );
+                uploadSort
+                  ? mongoDataArr.sort(
+                      (a: { uploadDate: string }, b: { uploadDate: string }) =>
+                        Number(new Date(a.uploadDate)) -
+                        Number(new Date(b.uploadDate))
+                    )
+                  : mongoDataArr.sort(
+                      (a: { uploadDate: string }, b: { uploadDate: string }) =>
+                        Number(new Date(b.uploadDate)) -
+                        Number(new Date(a.uploadDate))
+                    );
 
-            setCurrentSort("uploadSort");
-          }}
-        >
-          {uploadSort ? "업로드 ↓" : "업로드 ↑"}
-        </div>
-        <div
-          className="music-top-menu"
-          style={
-            currentSort === "releaseSort"
-              ? {
-                  right: "20px",
-                  top: "80px",
-                  color: "#000000",
-                  fontWeight: "bold",
-                  borderRadius: "0",
-                  backgroundColor: "#ffccff",
-                }
-              : { right: "20px", top: "80px" }
-          }
-          onClick={() => {
-            setReleaseSort(!releaseSort);
+                setCurrentSort("uploadSort");
+              }}
+            >
+              {uploadSort ? "업로드 ↓" : "업로드 ↑"}
+            </div>
+            <div
+              className="music-top-menu"
+              style={
+                currentSort === "releaseSort"
+                  ? {
+                      right: "20px",
+                      top: "80px",
+                      color: "#000000",
+                      fontWeight: "bold",
+                      borderRadius: "0",
+                      backgroundColor: "#ffccff",
+                    }
+                  : { right: "20px", top: "80px" }
+              }
+              onClick={() => {
+                setReleaseSort(!releaseSort);
 
-            releaseSort
-              ? mongoDataArr.sort(
-                  (a: { releaseDate: string }, b: { releaseDate: string }) =>
-                    Number(a.releaseDate.slice(0, 4)) -
-                    Number(b.releaseDate.slice(0, 4))
-                )
-              : mongoDataArr.sort(
-                  (a: { releaseDate: string }, b: { releaseDate: string }) =>
-                    Number(b.releaseDate.slice(0, 4)) -
-                    Number(a.releaseDate.slice(0, 4))
-                );
+                releaseSort
+                  ? mongoDataArr.sort(
+                      (
+                        a: { releaseDate: string },
+                        b: { releaseDate: string }
+                      ) =>
+                        Number(a.releaseDate.slice(0, 4)) -
+                        Number(b.releaseDate.slice(0, 4))
+                    )
+                  : mongoDataArr.sort(
+                      (
+                        a: { releaseDate: string },
+                        b: { releaseDate: string }
+                      ) =>
+                        Number(b.releaseDate.slice(0, 4)) -
+                        Number(a.releaseDate.slice(0, 4))
+                    );
 
-            setCurrentSort("releaseSort");
-          }}
-        >
-          {releaseSort ? "발매일 ↓" : "발매일 ↑"}
-        </div>
+                setCurrentSort("releaseSort");
+              }}
+            >
+              {decodedSlug !== "upload" && releaseSort
+                ? "발매일 ↓"
+                : "발매일 ↑"}
+            </div>
+          </div>
+        ) : null}
         {decodedSlug === "upload" ? (
           <Upload
             genre={genre}
