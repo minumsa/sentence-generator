@@ -3,7 +3,7 @@
 import { NextPage } from "next";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Upload from "../Upload";
+import Upload from "../../Upload";
 import Image from "next/image";
 
 interface MongoItem {
@@ -50,18 +50,16 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   ];
 
   const [activeGenre, setActiveGenre] = useState("ALL");
-  const [loginPage, setLoginPage] = useState(false);
 
   const handleGenreClick = (genre: any) => {
-    setLoginPage(false);
     const genrePath = genre.toLowerCase();
     const pathSuffix =
       genrePath === "all"
-        ? ""
+        ? "/"
         : genrePath === "r&b/soul"
         ? "r&b_soul"
         : genrePath;
-    router.push(`/music/${pathSuffix}`);
+    router.push(`/music/admin/${pathSuffix}`);
   };
 
   const [musicData, setMusicData] = useState<MongoItem | null>(null);
@@ -290,7 +288,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                   </div>
                   <div
                     className="music-post-container-block"
-                    style={{ marginLeft: "30px", marginTop: "30px" }}
+                    style={{ marginLeft: "30px" }}
                   >
                     <div>{data.artist}</div>
                     <a
@@ -322,6 +320,10 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                               ? (Math.floor(data.duration / 60) % 60) + "분"
                               : ""
                           }`}
+                    </div>
+                    <div style={{ display: "flex" }}>
+                      <div className="music-delete-menu">삭제</div>
+                      <div className="music-delete-menu">수정</div>
                     </div>
                     {/* <div>
                       <a

@@ -1,10 +1,8 @@
 "use client";
 
-import { NextPage } from "next";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Upload from "../Upload";
-import Image from "next/image";
 
 interface MongoItem {
   id: string;
@@ -21,17 +19,11 @@ interface MongoItem {
   tracks: number;
 }
 
-const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
-  const decodedSlug = decodeURIComponent(params.slug);
+export default function Page() {
   const router = useRouter();
   const pathName = usePathname();
   const genreByPath =
     pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
-
-  const [albumId, setAlbumId] = useState<string>("");
-  const [text, setText] = useState<string>("");
-  const [genre, setGenre] = useState<string>("");
-  const [link, setLink] = useState<string>("");
   const [mongoDataArr, setMongoDataArr] = useState<MongoItem[]>([]);
 
   const contents = [
@@ -52,19 +44,27 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const [activeGenre, setActiveGenre] = useState("ALL");
   const [loginPage, setLoginPage] = useState(false);
 
+  //   const handleGenreClick = (genre: any) => {
+  //     setLoginPage(false);
+  //     const genrePath = genre.toLowerCase();
+  //     genrePath === "all"
+  //       ? router.push(`/music`)
+  //       : router.push(`/music/${genrePath}`);
+  //     genrePath === "r&b/soul"
+  //       ? router.push(`/music/r&b_soul`)
+  //       : router.push(`/music/${genrePath}`);
+  //   };
+
   const handleGenreClick = (genre: any) => {
-    setLoginPage(false);
     const genrePath = genre.toLowerCase();
     const pathSuffix =
       genrePath === "all"
-        ? ""
+        ? "/"
         : genrePath === "r&b/soul"
         ? "r&b_soul"
         : genrePath;
-    router.push(`/music/${pathSuffix}`);
+    router.push(`/music/admin/${pathSuffix}`);
   };
-
-  const [musicData, setMusicData] = useState<MongoItem | null>(null);
 
   async function fetchMongoData() {
     try {
@@ -99,42 +99,9 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const [releaseSort, setReleaseSort] = useState<boolean>(true);
   const [currentSort, setCurrentSort] = useState<string>("uploadSort");
 
-  const fetchAccessToken = async () => {
-    try {
-      const url = "https://accounts.spotify.com/api/token";
-      const clientId = "9ba8de463724427689b855dfcabca1b1";
-      const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
-      const basicToken = btoa(`${clientId}:${clientSecret}`);
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${basicToken}`,
-      };
-      const data = "grant_type=client_credentials";
-
-      const accessTokenResponse = await fetch(url, {
-        method: "POST",
-        headers,
-        body: data,
-      });
-
-      if (!accessTokenResponse.ok) {
-        console.error("Error: Access token fetch failed");
-      }
-
-      const accessTokenData = await accessTokenResponse.json();
-      return accessTokenData.access_token;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  };
-
   return (
     <div style={{ display: "flex", width: "100%", height: "100%" }}>
-      <div
-        className="music-left-container"
-        style={{ width: "250px", height: "100%" }}
-      >
+      <div className="music-left-container">
         <div className="music-genre-container" style={{ paddingTop: "10px" }}>
           {contents.map((genre, index) => (
             <div
@@ -249,81 +216,12 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           {releaseSort ? "발매일 ↓" : "발매일 ↑"}
         </div>
         {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
-        {decodedSlug === "upload" ? (
-          <Upload
-            genre={genre}
-            setGenre={setGenre}
-            link={link}
-            setLink={setLink}
-            text={text}
-            setText={setText}
-            albumId={albumId}
-            setAlbumId={setAlbumId}
-            musicData={musicData}
-            setMusicData={setMusicData}
-            // uploadItem={uploadItem}
-            // setUploadItem={setUploadItem}
-            // uploadItems={uploadItems}
-            // setUploadItems={setUploadItems}
-          />
-        ) : mongoDataArr ? (
-          mongoDataArr.map((data, index) => {
-            return data.genre.replace("/", "_") === decodedSlug ? (
-              <div className="music-post-container" key={index}>
-                <div className="album-container">
-                  <div style={{ marginRight: "20px" }}>
-                    <a
-                      href={data.link}
-                      target="_blank"
-                      style={{
-                        textDecoration: "none",
-                        color: "#ffccff",
-                      }}
-                    >
-                      <Image
-                        src={data.imgUrl}
-                        alt="album art"
-                        width="300"
-                        height="300"
-                      />
-                    </a>
-                  </div>
-                  <div
-                    className="music-post-container-block"
-                    style={{ marginLeft: "30px", marginTop: "30px" }}
-                  >
-                    <div>{data.artist}</div>
-                    <a
-                      href={data.link}
-                      target="_blank"
-                      style={{
-                        textDecoration: "none",
-                        color: "#ffccff",
-                      }}
-                    >
-                      <div className="name-name" style={{ fontWeight: "800" }}>
-                        {data.album}
-                      </div>
-                    </a>
-                    <div>
-                      <span>{data.label},</span>{" "}
-                      <span>{data.releaseDate.slice(0, 4)}</span>
-                    </div>
-                    <div>
-                      {`${data.tracks}곡, `}
-                      {Math.floor(data.duration / 60) < 60
-                        ? `${Math.floor(data.duration / 60)}분 ${
-                            data.duration % 60
-                          }초`
-                        : `${Math.floor(
-                            Math.floor(data.duration / 60) / 60
-                          )}시간 ${
-                            Math.floor(data.duration / 60) % 60 > 0
-                              ? (Math.floor(data.duration / 60) % 60) + "분"
-                              : ""
-                          }`}
-                    </div>
-                    {/* <div>
+        {mongoDataArr
+          ? mongoDataArr.map((data, index) => {
+              return (
+                <div className="music-post-container" key={index}>
+                  <div className="album-container">
+                    <div style={{ marginRight: "20px" }}>
                       <a
                         href={data.link}
                         target="_blank"
@@ -332,40 +230,102 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                           color: "#ffccff",
                         }}
                       >
-                        <div className="play-applemusic">
-                          Play on Apple Music ↵
+                        <Image
+                          src={data.imgUrl}
+                          alt="album art"
+                          width={300}
+                          height={300}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </a>
+                    </div>
+                    <div
+                      className="music-post-container-block"
+                      style={{ marginLeft: "30px" }}
+                    >
+                      <div>{data.artist}</div>
+                      <a
+                        href={data.link}
+                        target="_blank"
+                        style={{
+                          textDecoration: "none",
+                          color: "#ffccff",
+                        }}
+                      >
+                        <div
+                          className="name-name"
+                          style={{ fontWeight: "800" }}
+                        >
+                          {data.album}
                         </div>
                       </a>
-                    </div> */}
-                  </div>
-                </div>
-                <div className="music-post-container-block">
-                  {data.text.split("<br/>").map((text, index) => {
-                    return index + 1 < data.text.split("<br/>").length ? (
-                      <div style={{ marginBottom: "50px" }} key={index}>
-                        {text}
+                      <div>
+                        <span>{data.label},</span>{" "}
+                        <span>{data.releaseDate.slice(0, 4)}</span>
                       </div>
-                    ) : (
-                      <div key={index}>{text}</div>
-                    );
-                  })}
+                      <div>
+                        {`${data.tracks}곡, `}
+                        {Math.floor(data.duration / 60) < 60
+                          ? `${Math.floor(data.duration / 60)}분 ${
+                              data.duration % 60
+                            }초`
+                          : `${Math.floor(
+                              Math.floor(data.duration / 60) / 60
+                            )}시간 ${
+                              Math.floor(data.duration / 60) % 60 > 0
+                                ? (Math.floor(data.duration / 60) % 60) + "분"
+                                : ""
+                            }`}
+                      </div>
+                      <div style={{ display: "flex" }}>
+                        <div className="music-delete-menu">삭제</div>
+                        <div className="music-delete-menu">수정</div>
+                      </div>
+                      {/* <div>
+                        <a
+                          href={data.link}
+                          target="_blank"
+                          style={{
+                            textDecoration: "none",
+                            color: "#ffccff",
+                          }}
+                        >
+                          <div className="play-applemusic">
+                            Play on Apple Music ↵
+                          </div>
+                        </a>
+                      </div> */}
+                    </div>
+                  </div>
+                  <div
+                    className="music-post-container-block"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {data.text.split("<br/>").map((text, index) => {
+                      return index + 1 < data.text.split("<br/>").length ? (
+                        <div style={{ marginBottom: "50px" }} key={index}>
+                          {text}
+                        </div>
+                      ) : (
+                        <div key={index}>{text}</div>
+                      );
+                    })}
+                  </div>
+                  <div
+                    style={{
+                      borderBottom: "1px solid #ffccff",
+                      padding: "20px",
+                    }}
+                  ></div>
                 </div>
-                <div
-                  style={{
-                    borderBottom: "1px solid #ffccff",
-                    padding: "20px",
-                  }}
-                ></div>
-              </div>
-            ) : null;
-          })
-        ) : (
-          ""
-        )}
+              );
+            })
+          : null}
       </div>
     </div>
     // </div>
   );
-};
-
-export default ContentPage;
+}

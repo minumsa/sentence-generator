@@ -42,17 +42,16 @@ export default function Page() {
   ];
 
   const [activeGenre, setActiveGenre] = useState("ALL");
-  const [loginPage, setLoginPage] = useState(false);
 
   const handleGenreClick = (genre: any) => {
-    setLoginPage(false);
     const genrePath = genre.toLowerCase();
-    genrePath === "all"
-      ? router.push(`/music`)
-      : router.push(`/music/${genrePath}`);
-    genrePath === "r&b/soul"
-      ? router.push(`/music/r&b_soul`)
-      : router.push(`/music/${genrePath}`);
+    const pathSuffix =
+      genrePath === "all"
+        ? "music/admin"
+        : genrePath === "r&b/soul"
+        ? "r&b_soul"
+        : genrePath;
+    router.push(`/music/admin/${pathSuffix}`);
   };
 
   async function fetchMongoData() {
