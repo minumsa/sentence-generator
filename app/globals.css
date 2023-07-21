@@ -1560,6 +1560,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 .music-main-container {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   /* font-family: "GabiaHeuldot"; */
@@ -1583,6 +1584,12 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 Firefox
     scrollbar-width: none;  */
 
+.music-left-container {
+  width: 250px;
+  height: 100%;
+  overflow: scroll;
+}
+
 .music-left-container::-webkit-scrollbar,
 .music-right-container::-webkit-scrollbar {
   display: none;
@@ -1591,6 +1598,7 @@ Firefox
 .music-genre-container {
   /* height: 100%; */
   /* width: 450px; */
+
   display: flex;
   flex-direction: column;
   /* border: 1px solid #ffccff; */
@@ -1728,11 +1736,4 @@ Firefox
   font-weight: bold;
   border-radius: 0;
   background-color: #ffccff;
-}
-
-@media (max-width: 700px) {
-  .music-post-container {
-    font-size: 50px;
-    margin: 10px;
-  }
 }

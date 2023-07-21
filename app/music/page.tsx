@@ -31,8 +31,10 @@ export default function Page() {
     "K-POP",
     "ROCK",
     "DISCO",
-    "FOLK",
+    "ELECTRONIC",
     "JAZZ",
+    "R&B/SOUL",
+    "FOLK",
     "CLASSICAL",
     "SOUNDTRACK",
     "ALL",
@@ -46,6 +48,9 @@ export default function Page() {
     const genrePath = genre.toLowerCase();
     genrePath === "all"
       ? router.push(`/music`)
+      : router.push(`/music/${genrePath}`);
+    genrePath === "r&b/soul"
+      ? router.push(`/music/r&b-soul`)
       : router.push(`/music/${genrePath}`);
   };
 
@@ -79,11 +84,8 @@ export default function Page() {
   }, []);
 
   return (
-    <>
-      <div
-        className="music-left-container"
-        style={{ width: "250px", height: "100%" }}
-      >
+    <div style={{ display: "flex", width: "100%", height: "100%" }}>
+      <div className="music-left-container">
         <div className="music-genre-container" style={{ paddingTop: "10px" }}>
           {contents.map((genre, index) => (
             <div
@@ -115,14 +117,16 @@ export default function Page() {
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
+          width: "calc(100% - 250px)",
           height: "100%",
+          overflow: "scroll",
         }}
       >
-        <div
+        {/* <div
           className="music-right-container"
           style={{ overflow: "scroll", width: "90%" }}
-        >
-          {/* <div
+        > */}
+        {/* <div
             className="music-top-menu"
             onClick={() => {
               router.push("/music/upload");
@@ -131,82 +135,89 @@ export default function Page() {
           >
             업로드
           </div> */}
-          {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
-
-          {mongoDataArr
-            ? mongoDataArr.map((data, index) => {
-                return (
-                  <div className="music-post-container" key={index}>
-                    <div className="album-container">
-                      <div style={{ marginRight: "20px" }}>
-                        <Image
-                          src={data.imgUrl}
-                          alt="album art"
-                          width={300}
-                          height={300}
-                          // style={{ borderRadius: "10px" }}
-                        />
-                      </div>
-                      <div
-                        className="music-post-container-block"
-                        style={{ marginLeft: "30px" }}
-                      >
-                        <div>{data.artist}</div>
-                        <div
-                          className="name-name"
-                          style={{ fontWeight: "800" }}
-                        >
-                          {data.album}
-                        </div>
-                        <div>
-                          <span>{data.label},</span>{" "}
-                          <span>{data.releaseDate.slice(0, 4)}</span>
-                        </div>
-                        <div>
-                          {`${data.tracks}곡, `}
-                          {Math.floor(data.duration / 60) < 60
-                            ? `${Math.floor(data.duration / 60)}분 ${
-                                data.duration % 60
-                              }초`
-                            : `${Math.floor(
-                                Math.floor(data.duration / 60) / 60
-                              )}시간 ${
-                                Math.floor(data.duration / 60) % 60 > 0
-                                  ? (Math.floor(data.duration / 60) % 60) + "분"
-                                  : ""
-                              }`}
-                        </div>
-                        <div>
-                          <a
-                            href={data.link}
-                            target="_blank"
-                            style={{
-                              textDecoration: "none",
-                              color: "#ffccff",
-                            }}
-                          >
-                            <div className="play-applemusic">
-                              Play on Apple Music ↵
-                            </div>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="music-post-container-block">
-                      {data.text}
+        {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
+        {mongoDataArr
+          ? mongoDataArr.map((data, index) => {
+              return (
+                <div className="music-post-container" key={index}>
+                  <div className="album-container">
+                    <div style={{ marginRight: "20px" }}>
+                      <Image
+                        src={data.imgUrl}
+                        alt="album art"
+                        width={300}
+                        height={300}
+                        // style={{ borderRadius: "10px" }}
+                      />
                     </div>
                     <div
-                      style={{
-                        borderBottom: "1px solid #ffccff",
-                        padding: "20px",
-                      }}
-                    ></div>
+                      className="music-post-container-block"
+                      style={{ marginLeft: "30px" }}
+                    >
+                      <div>{data.artist}</div>
+                      <div className="name-name" style={{ fontWeight: "800" }}>
+                        {data.album}
+                      </div>
+                      <div>
+                        <span>{data.label},</span>{" "}
+                        <span>{data.releaseDate.slice(0, 4)}</span>
+                      </div>
+                      <div>
+                        {`${data.tracks}곡, `}
+                        {Math.floor(data.duration / 60) < 60
+                          ? `${Math.floor(data.duration / 60)}분 ${
+                              data.duration % 60
+                            }초`
+                          : `${Math.floor(
+                              Math.floor(data.duration / 60) / 60
+                            )}시간 ${
+                              Math.floor(data.duration / 60) % 60 > 0
+                                ? (Math.floor(data.duration / 60) % 60) + "분"
+                                : ""
+                            }`}
+                      </div>
+                      <div>
+                        <a
+                          href={data.link}
+                          target="_blank"
+                          style={{
+                            textDecoration: "none",
+                            color: "#ffccff",
+                          }}
+                        >
+                          <div className="play-applemusic">
+                            Play on Apple Music ↵
+                          </div>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                );
-              })
-            : null}
-        </div>
+                  <div
+                    className="music-post-container-block"
+                    style={{ display: "flex", flexDirection: "column" }}
+                  >
+                    {data.text.split("<br/>").map((text, index) => {
+                      return index + 1 < data.text.split("<br/>").length ? (
+                        <div style={{ marginBottom: "50px" }} key={index}>
+                          {text}
+                        </div>
+                      ) : (
+                        <div key={index}>{text}</div>
+                      );
+                    })}
+                  </div>
+                  <div
+                    style={{
+                      borderBottom: "1px solid #ffccff",
+                      padding: "20px",
+                    }}
+                  ></div>
+                </div>
+              );
+            })
+          : null}
       </div>
-    </>
+    </div>
+    // </div>
   );
 }
