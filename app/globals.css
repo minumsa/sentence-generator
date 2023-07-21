@@ -1663,6 +1663,7 @@ Firefox
   position: absolute;
   right: 20px;
   top: 20px;
+  padding: 0 5px;
 }
 
 .music-top-menu:hover {

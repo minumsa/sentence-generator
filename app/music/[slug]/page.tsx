@@ -37,6 +37,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const contents = [
     "POP",
     "K-POP",
+    "J-POP",
     "ROCK",
     "DISCO",
     "ELECTRONIC",
@@ -94,6 +95,10 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     fetchMongoData();
   }, []);
 
+  const [uploadSort, setUploadSort] = useState<boolean>(true);
+  const [releaseSort, setReleaseSort] = useState<boolean>(true);
+  const [currentSort, setCurrentSort] = useState<string>("uploadSort");
+
   return (
     <div style={{ display: "flex", width: "100%", height: "100%" }}>
       <div
@@ -141,15 +146,78 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           className="music-right-container"
           style={{ overflow: "scroll", width: "90%" }}
         > */}
-        {/* <div
-            className="music-top-menu"
-            onClick={() => {
-              router.push("/music/upload");
-              setActiveGenre("");
-            }}
-          >
-            업로드
-          </div> */}
+        <div
+          className="music-top-menu"
+          style={
+            currentSort === "uploadSort"
+              ? {
+                  color: "#000000",
+                  fontWeight: "bold",
+                  borderRadius: "0",
+                  backgroundColor: "#ffccff",
+                }
+              : {}
+          }
+          onClick={() => {
+            setUploadSort(!uploadSort);
+
+            uploadSort
+              ? mongoDataArr.sort(
+                  (a: { uploadDate: string }, b: { uploadDate: string }) =>
+                    Number(new Date(a.uploadDate)) -
+                    Number(new Date(b.uploadDate))
+                )
+              : mongoDataArr.sort(
+                  (a: { uploadDate: string }, b: { uploadDate: string }) =>
+                    Number(new Date(b.uploadDate)) -
+                    Number(new Date(a.uploadDate))
+                );
+
+            setCurrentSort("uploadSort");
+
+            // router.push("/music/upload");
+            // setActiveGenre("");
+          }}
+        >
+          {uploadSort ? "업로드 ↓" : "업로드 ↑"}
+        </div>
+        <div
+          className="music-top-menu"
+          style={
+            currentSort === "releaseSort"
+              ? {
+                  right: "20px",
+                  top: "80px",
+                  color: "#000000",
+                  fontWeight: "bold",
+                  borderRadius: "0",
+                  backgroundColor: "#ffccff",
+                }
+              : { right: "20px", top: "80px" }
+          }
+          onClick={() => {
+            setReleaseSort(!releaseSort);
+
+            releaseSort
+              ? mongoDataArr.sort(
+                  (a: { releaseDate: string }, b: { releaseDate: string }) =>
+                    Number(a.releaseDate.slice(0, 4)) -
+                    Number(b.releaseDate.slice(0, 4))
+                )
+              : mongoDataArr.sort(
+                  (a: { releaseDate: string }, b: { releaseDate: string }) =>
+                    Number(b.releaseDate.slice(0, 4)) -
+                    Number(a.releaseDate.slice(0, 4))
+                );
+
+            setCurrentSort("releaseSort");
+
+            // router.push("/music/upload");
+            // setActiveGenre("");
+          }}
+        >
+          {releaseSort ? "발매일 ↓" : "발매일 ↑"}
+        </div>
         {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
         {decodedSlug === "upload" ? (
           <Upload
@@ -194,11 +262,19 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                     className="music-post-container-block"
                     style={{ marginLeft: "30px", marginTop: "30px" }}
                   >
-                    {/* <div>{`｟${data.album}｠`}</div> */}
                     <div>{data.artist}</div>
-                    <div className="name-name" style={{ fontWeight: "800" }}>
-                      {data.album}
-                    </div>
+                    <a
+                      href={data.link}
+                      target="_blank"
+                      style={{
+                        textDecoration: "none",
+                        color: "#ffccff",
+                      }}
+                    >
+                      <div className="name-name" style={{ fontWeight: "800" }}>
+                        {data.album}
+                      </div>
+                    </a>
                     <div>
                       <span>{data.label},</span>{" "}
                       <span>{data.releaseDate.slice(0, 4)}</span>
