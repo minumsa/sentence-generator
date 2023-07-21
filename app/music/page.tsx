@@ -27,6 +27,7 @@ export default function Page() {
   const [mongoDataArr, setMongoDataArr] = useState<MongoItem[]>([]);
 
   const contents = [
+    "ALL",
     "POP",
     "K-POP",
     "J-POP",
@@ -37,9 +38,9 @@ export default function Page() {
     "JAZZ",
     "R&B/SOUL",
     "FOLK",
+    "COUNTRY",
     "CLASSICAL",
     "SOUNDTRACK",
-    "ALL",
   ];
 
   const [activeGenre, setActiveGenre] = useState("ALL");

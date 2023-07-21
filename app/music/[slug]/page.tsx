@@ -35,6 +35,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const [mongoDataArr, setMongoDataArr] = useState<MongoItem[]>([]);
 
   const contents = [
+    "ALL",
     "POP",
     "K-POP",
     "J-POP",
@@ -45,9 +46,9 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     "JAZZ",
     "R&B/SOUL",
     "FOLK",
+    "COUNTRY",
     "CLASSICAL",
     "SOUNDTRACK",
-    "ALL",
   ];
 
   const [activeGenre, setActiveGenre] = useState("ALL");
