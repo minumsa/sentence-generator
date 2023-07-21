@@ -42,18 +42,6 @@ export default function Page() {
   ];
 
   const [activeGenre, setActiveGenre] = useState("ALL");
-  const [loginPage, setLoginPage] = useState(false);
-
-  //   const handleGenreClick = (genre: any) => {
-  //     setLoginPage(false);
-  //     const genrePath = genre.toLowerCase();
-  //     genrePath === "all"
-  //       ? router.push(`/music`)
-  //       : router.push(`/music/${genrePath}`);
-  //     genrePath === "r&b/soul"
-  //       ? router.push(`/music/r&b_soul`)
-  //       : router.push(`/music/${genrePath}`);
-  //   };
 
   const handleGenreClick = (genre: any) => {
     const genrePath = genre.toLowerCase();
@@ -157,20 +145,7 @@ export default function Page() {
           ))}
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          width: "calc(100% - 250px)",
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        {/* <div
-          className="music-right-container"
-          style={{ overflow: "scroll", width: "90%" }}
-        > */}
+      <div className="music-right-container">
         <div
           className="music-top-menu"
           style={
@@ -185,6 +160,7 @@ export default function Page() {
           }
           onClick={() => {
             setUploadSort(!uploadSort);
+            setCurrentSort("uploadSort");
 
             uploadSort
               ? mongoDataArr.sort(
@@ -197,11 +173,6 @@ export default function Page() {
                     Number(new Date(b.uploadDate)) -
                     Number(new Date(a.uploadDate))
                 );
-
-            setCurrentSort("uploadSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {uploadSort ? "업로드 ↓" : "업로드 ↑"}
@@ -236,14 +207,10 @@ export default function Page() {
                 );
 
             setCurrentSort("releaseSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {releaseSort ? "발매일 ↓" : "발매일 ↑"}
         </div>
-        {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
         {mongoDataArr
           ? mongoDataArr.map((data, index) => {
               return (
@@ -361,6 +328,5 @@ export default function Page() {
           : null}
       </div>
     </div>
-    // </div>
   );
 }

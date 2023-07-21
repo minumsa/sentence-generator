@@ -50,10 +50,8 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   ];
 
   const [activeGenre, setActiveGenre] = useState("ALL");
-  const [loginPage, setLoginPage] = useState(false);
 
   const handleGenreClick = (genre: any) => {
-    setLoginPage(false);
     const genrePath = genre.toLowerCase();
     const pathSuffix =
       genrePath === "all"
@@ -99,36 +97,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   const [releaseSort, setReleaseSort] = useState<boolean>(true);
   const [currentSort, setCurrentSort] = useState<string>("uploadSort");
 
-  const fetchAccessToken = async () => {
-    try {
-      const url = "https://accounts.spotify.com/api/token";
-      const clientId = "9ba8de463724427689b855dfcabca1b1";
-      const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
-      const basicToken = btoa(`${clientId}:${clientSecret}`);
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${basicToken}`,
-      };
-      const data = "grant_type=client_credentials";
-
-      const accessTokenResponse = await fetch(url, {
-        method: "POST",
-        headers,
-        body: data,
-      });
-
-      if (!accessTokenResponse.ok) {
-        console.error("Error: Access token fetch failed");
-      }
-
-      const accessTokenData = await accessTokenResponse.json();
-      return accessTokenData.access_token;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  };
-
   return (
     <div style={{ display: "flex", width: "100%", height: "100%" }}>
       <div
@@ -162,20 +130,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           ))}
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          width: "calc(100% - 250px)",
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        {/* <div
-          className="music-right-container"
-          style={{ overflow: "scroll", width: "90%" }}
-        > */}
+      <div className="music-right-container">
         <div
           className="music-top-menu"
           style={
@@ -204,9 +159,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                 );
 
             setCurrentSort("uploadSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {uploadSort ? "업로드 ↓" : "업로드 ↑"}
@@ -241,14 +193,10 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                 );
 
             setCurrentSort("releaseSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {releaseSort ? "발매일 ↓" : "발매일 ↑"}
         </div>
-        {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
         {decodedSlug === "upload" ? (
           <Upload
             genre={genre}
@@ -261,10 +209,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
             setAlbumId={setAlbumId}
             musicData={musicData}
             setMusicData={setMusicData}
-            // uploadItem={uploadItem}
-            // setUploadItem={setUploadItem}
-            // uploadItems={uploadItems}
-            // setUploadItems={setUploadItems}
           />
         ) : mongoDataArr ? (
           mongoDataArr.map((data, index) => {
@@ -323,20 +267,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                               : ""
                           }`}
                     </div>
-                    {/* <div>
-                      <a
-                        href={data.link}
-                        target="_blank"
-                        style={{
-                          textDecoration: "none",
-                          color: "#ffccff",
-                        }}
-                      >
-                        <div className="play-applemusic">
-                          Play on Apple Music ↵
-                        </div>
-                      </a>
-                    </div> */}
                   </div>
                 </div>
                 <div className="music-post-container-block">
@@ -364,7 +294,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
         )}
       </div>
     </div>
-    // </div>
   );
 };
 

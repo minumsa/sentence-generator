@@ -1590,6 +1590,19 @@ Firefox
   overflow: scroll;
 }
 
+.music-right-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: calc(100% - 250px);
+  height: 100%;
+  overflow: scroll;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .music-left-container::-webkit-scrollbar,
 .music-right-container::-webkit-scrollbar {
   display: none;

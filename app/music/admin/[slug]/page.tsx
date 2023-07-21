@@ -121,34 +121,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
     }
   };
 
-  // async function deleteMongoDB() {
-  //   try {
-  //     const response = await fetch(`/api/music`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ id: deleteId, password: password }),
-  //     });
-
-  //     if (response.status === 401) {
-  //       alert("관리자 비밀번호가 틀렸습니다.");
-  //     } else if (response.status === 404) {
-  //       alert("존재하지 않는 앨범입니다.");
-  //     } else if (!response.ok) {
-  //       throw new Error("Failed to upload music data");
-  //     } else {
-  //       alert("데이터가 성공적으로 삭제되었습니다.");
-  //       deleteMongoDB();
-  //       setPassword("");
-  //       setDeleteId("");
-  //       fetchMongoData();
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
   useEffect(() => {
     fetchMongoData();
   }, []);
@@ -186,20 +158,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           ))}
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          width: "calc(100% - 250px)",
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        {/* <div
-          className="music-right-container"
-          style={{ overflow: "scroll", width: "90%" }}
-        > */}
+      <div className="music-right-container">
         <div
           className="music-top-menu"
           style={
@@ -214,6 +173,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           }
           onClick={() => {
             setUploadSort(!uploadSort);
+            setCurrentSort("uploadSort");
 
             uploadSort
               ? mongoDataArr.sort(
@@ -226,11 +186,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                     Number(new Date(b.uploadDate)) -
                     Number(new Date(a.uploadDate))
                 );
-
-            setCurrentSort("uploadSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {uploadSort ? "업로드 ↓" : "업로드 ↑"}
@@ -251,6 +206,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           }
           onClick={() => {
             setReleaseSort(!releaseSort);
+            setCurrentSort("releaseSort");
 
             releaseSort
               ? mongoDataArr.sort(
@@ -263,16 +219,10 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                     Number(b.releaseDate.slice(0, 4)) -
                     Number(a.releaseDate.slice(0, 4))
                 );
-
-            setCurrentSort("releaseSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {releaseSort ? "발매일 ↓" : "발매일 ↑"}
         </div>
-        {/* <div className="music-bottom-title">카버 차트 v1.1.1</div> */}
         {decodedSlug === "upload" ? (
           <Upload
             genre={genre}
@@ -285,10 +235,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
             setAlbumId={setAlbumId}
             musicData={musicData}
             setMusicData={setMusicData}
-            // uploadItem={uploadItem}
-            // setUploadItem={setUploadItem}
-            // uploadItems={uploadItems}
-            // setUploadItems={setUploadItems}
           />
         ) : mongoDataArr ? (
           mongoDataArr.map((data, index) => {
@@ -358,20 +304,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                       </div>
                       <div className="music-delete-menu">수정</div>
                     </div>
-                    {/* <div>
-                      <a
-                        href={data.link}
-                        target="_blank"
-                        style={{
-                          textDecoration: "none",
-                          color: "#ffccff",
-                        }}
-                      >
-                        <div className="play-applemusic">
-                          Play on Apple Music ↵
-                        </div>
-                      </a>
-                    </div> */}
                   </div>
                 </div>
                 <div className="music-post-container-block">
@@ -399,7 +331,6 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
         )}
       </div>
     </div>
-    // </div>
   );
 };
 

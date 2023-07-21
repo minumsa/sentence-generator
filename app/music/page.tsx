@@ -47,11 +47,11 @@ export default function Page() {
     const genrePath = genre.toLowerCase();
     const pathSuffix =
       genrePath === "all"
-        ? "music/admin"
+        ? ""
         : genrePath === "r&b/soul"
         ? "r&b_soul"
         : genrePath;
-    router.push(`/music/admin/${pathSuffix}`);
+    router.push(`/music/${pathSuffix}`);
   };
 
   async function fetchMongoData() {
@@ -117,20 +117,7 @@ export default function Page() {
           ))}
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          width: "calc(100% - 250px)",
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        {/* <div
-          className="music-right-container"
-          style={{ overflow: "scroll", width: "90%" }}
-        > */}
+      <div className="music-right-container">
         <div
           className="music-top-menu"
           style={
@@ -159,9 +146,6 @@ export default function Page() {
                 );
 
             setCurrentSort("uploadSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {uploadSort ? "업로드 ↓" : "업로드 ↑"}
@@ -196,9 +180,6 @@ export default function Page() {
                 );
 
             setCurrentSort("releaseSort");
-
-            // router.push("/music/upload");
-            // setActiveGenre("");
           }}
         >
           {releaseSort ? "발매일 ↓" : "발매일 ↑"}
@@ -265,20 +246,6 @@ export default function Page() {
                                 : ""
                             }`}
                       </div>
-                      {/* <div>
-                        <a
-                          href={data.link}
-                          target="_blank"
-                          style={{
-                            textDecoration: "none",
-                            color: "#ffccff",
-                          }}
-                        >
-                          <div className="play-applemusic">
-                            Play on Apple Music ↵
-                          </div>
-                        </a>
-                      </div> */}
                     </div>
                   </div>
                   <div
@@ -310,6 +277,5 @@ export default function Page() {
           : null}
       </div>
     </div>
-    // </div>
   );
 }
