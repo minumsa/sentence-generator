@@ -1645,7 +1645,7 @@ Firefox
 .music-post-container-block {
   /* margin-bottom: 20px; */
   /* font-size: 90%; */
-  line-height: 180%;
+  line-height: 200%;
   word-break: keep-all;
 }
 
@@ -1710,15 +1710,20 @@ Firefox
   height: 50px;
   width: 100%;
   font-size: 30px;
-  font-family: "GabiaHeuldot";
+  /* font-family: "GabiaHeuldot"; */
   margin-top: 15px;
   background-color: #ffccff;
-  font-weight: bold;
+  /* font-weight: 600; */
 }
 
 .music-post-input-text {
   color: #000000;
+  line-height: 180%;
   height: 350px;
+  font-family: "Pretendard Variable", "Pretendard", "-apple-system",
+    "BlinkMacSystemFont", system-ui, "Roboto", "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .music-post-submit {

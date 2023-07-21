@@ -3,8 +3,6 @@ import Music from "@/models/music";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-// 문서가 어디??
-
 export async function POST(request: Request) {
   try {
     require("dotenv").config();
@@ -81,3 +79,15 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
   }
 }
+
+// export async function DELETE(request: Request) {
+//   try {
+//     require("dotenv").config();
+//     await connectMongoDB();
+//     const dataArr = await Music.find();
+//     return NextResponse.json(dataArr.map(data => data.toJSON()));
+//   } catch (error) {
+//     console.error(error);
+//     return NextResponse.json({ message: "Server Error" }, { status: 500 });
+//   }
+// }
