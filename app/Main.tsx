@@ -88,9 +88,11 @@ export default function Main({ language }: indexProps) {
             style={{
               height: isMobile
                 ? language === "A"
-                  ? "645px"
-                  : "560px"
-                : "800px",
+                  ? "760px"
+                  : "660px"
+                : language === "A"
+                ? "980px"
+                : "850px",
               width: isMobile ? "370px" : "620px",
             }}
           >
@@ -167,6 +169,17 @@ export default function Main({ language }: indexProps) {
               {language === "A"
                 ? "This page was created to commemorate the 2023 Pride Month. Predefined subjects, objects, and verbs are randomly combined to generate various sentences, depending on the circumstances."
                 : "2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해둔 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다."}
+            </div>
+            <div className="main-exp-paragraph">
+              <div
+                className="main-exp-paragraph-title"
+                onClick={() => clickIconHandler("/possible-universe")}
+              >
+                {language === "A" ? "0. Carver Chart 🎶" : "0. 카버 차트 🎶"}
+              </div>
+              {language === "A"
+                ? "The project I'm currently working on is a page that introduces favorite albums. It utilizes the Spotify API to upload album information along with short write-ups. When the administrator enters a password on the management page, they can write, modify, or delete the write-ups. All relevant data is stored in MongoDB."
+                : "현재 작업 중인 프로젝트로, 좋아하는 음반을 소개하는 페이지입니다. 스포티파이에서 제공하는 API를 활용해 음반 정보, 짧은 글을 함께 업로드합니다. 관리자 페이지에서 암호를 입력하면 글을 쓰거나 수정, 삭제할 수 있습니다. 관련 데이터는 모두 MongoDB에 저장해두었습니다."}
             </div>
             <div className="main-exp-paragraph">
               <div
@@ -501,6 +514,29 @@ export default function Main({ language }: indexProps) {
           </div>
         </div>
       </Draggable>
+      <Draggable>
+        <div
+          className="index-icon-container-10"
+          onDoubleClick={() => clickIconHandler("/music")}
+        >
+          <div
+            className="index-icon-image"
+            style={{
+              color: "white",
+              cursor: "move",
+              backgroundImage: `url(folder.png)`,
+              backgroundSize: "100%",
+              backgroundRepeat: "no-repeat",
+              width: folderWidth,
+              height: folderHeight,
+            }}
+          ></div>
+          <div className="index-icon-text">
+            <div>{language === "A" ? "Project 0" : "프로젝트 0"}</div>
+            <div>{language === "A" ? "(Carver Chart)" : "(카버 차트)"}</div>
+          </div>
+        </div>
+      </Draggable>
       <div className="index-mobile-content-container">
         <div
           className="index-mobile-icon-container"
@@ -610,12 +646,27 @@ export default function Main({ language }: indexProps) {
             <div>{language === "A" ? "(Sentences)" : "(문장 생성기)"}</div>
           </div>
         </div>
-        {/* <div
+        <div
           className="index-mobile-icon-container"
-          style={{ width: "60px" }}
-        ></div> */}
-        {/* <div className="index-mobile-img-content-container"> */}
-
+          onClick={() => clickIconHandler("/music")}
+        >
+          <div
+            className="index-icon-image"
+            style={{
+              color: "white",
+              cursor: "move",
+              backgroundImage: `url(folder.png)`,
+              backgroundSize: "100%",
+              backgroundRepeat: "no-repeat",
+              width: mobileFolderWidth,
+              height: mobileFolderHeight,
+            }}
+          ></div>
+          <div className="index-mobile-icon-text">
+            <div>{language === "A" ? "Project 0" : "프로젝트 0"}</div>
+            <div>{language === "A" ? "(Carver Chart)" : "(카버 차트)"}</div>
+          </div>
+        </div>
         <div className="index-mobile-icon-container">
           <div
             className="index-icon-image"
@@ -664,7 +715,6 @@ export default function Main({ language }: indexProps) {
             {language === "A" ? "me.webp" : "나.webp"}
           </div>
         </div>
-
         <div className="index-mobile-icon-container">
           <div
             className="index-icon-image"

@@ -111,15 +111,6 @@ const Index: React.FC = () => {
               style={{
                 marginLeft: "10px",
                 fontWeight: showMain ? "600" : "400",
-                // WebkitAnimation: showMain
-                //   ? "blink 0.5s ease-in-out infinite alternate"
-                //   : undefined,
-                // MozAnimation: showMain
-                //   ? "blink 0.5s ease-in-out infinite alternate"
-                //   : undefined,
-                // animation: showMain
-                //   ? "blink 0.5s ease-in-out infinite alternate"
-                //   : undefined,
               }}
               onClick={() => {
                 setShowMain(true);

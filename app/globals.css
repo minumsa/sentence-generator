@@ -1124,7 +1124,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   cursor: move;
   position: absolute;
   top: 250px;
-  left: 360px;
+  left: 230px;
 }
 
 .index-icon-container-7 {
@@ -1135,7 +1135,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   cursor: move;
   position: absolute;
   top: 250px;
-  left: 230px;
+  left: 360px;
 }
 
 /* 포춘쿠키 */
@@ -1146,8 +1146,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 420px;
-  left: 100px;
+  top: 260px;
+  left: 490px;
 }
 
 /* 프로젝트 설명 */
@@ -1158,7 +1158,18 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   align-items: center;
   cursor: move;
   position: absolute;
-  top: 255px;
+  top: 425px;
+  left: 100px;
+}
+
+.index-icon-container-10 {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: move;
+  position: absolute;
+  top: 260px;
   left: 100px;
 }
 
@@ -1398,7 +1409,7 @@ animation: blink 0.5s ease-in-out infinite alternate; */
 
   .index-icon-container-6 {
     top: 250px;
-    left: 180px;
+    left: 440px;
   }
 
   .index-icon-container-7 {
@@ -1412,8 +1423,19 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   }
 
   .index-icon-container-9 {
-    top: 255px;
-    left: 440px;
+    top: 430px;
+    left: 180px;
+  }
+
+  .index-icon-container-10 {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: move;
+    position: absolute;
+    top: 270px;
+    left: 180px;
   }
 }
 
@@ -1480,7 +1502,8 @@ animation: blink 0.5s ease-in-out infinite alternate; */
   .index-icon-container-6,
   .index-icon-container-7,
   .index-icon-container-8,
-  .index-icon-container-9 {
+  .index-icon-container-9,
+  .index-icon-container-10 {
     display: none;
   }
 
