@@ -2,7 +2,7 @@
 
 ## 전체 웹 구조
 
-이 웹(https://divdivdiv.com/)은 Next.js와 React, TypeScript를 사용해 개발했습니다. 코드는 5개의 컴포넌트로 구성되어 있습니다.
+이 웹은 Next.js와 React, TypeScript를 사용해 개발했습니다. 코드는 5개의 컴포넌트로 구성되어 있습니다.
 
 1. Index 컴포넌트: 메인 레이아웃과 네비게이션을 담당하는 부모 컴포넌트입니다. 페이지 내부에서 `Main`, `About`, `Contact` 컴포넌트들을 조건부로 렌더링해 해당 컴포넌트들이 보여지도록 하고, 날씨 정보와 한영 토글 버튼, 날짜 및 시간을 포함한 상단 네비게이션 바를 포함하고 있습니다.
 2. Main 컴포넌트: 메인 페이지에서 사용되는 컴포넌트입니다. 더블클릭하면 해당 페이지로 이동하는 프로젝트 폴더, 각각의 프로젝트를 설명하는 메모, 오늘의 운세를 알려주는 프로그램, 사진 몇 장이 있습니다.
@@ -74,4 +74,32 @@ useEffect(() => {
 
   fetchData();
 }, []);
+```
+
+### 상태 변경과 이벤트 처리 부분
+
+세 가지의 상태 변수(showMain, showAbout, showContact)를 사용해 현재 표시되는 컨텐츠를 제어합니다. `onClick` 이벤트 핸들러를 통해 사용자가 메뉴를 클릭하면 해당 콘텐츠를 보여주고 나머지 콘텐츠는 숨깁니다.
+
+```typescript
+const [showMain, setShowMain] = useState<boolean>(true);
+const [showAbout, setShowAbout] = useState<boolean>(false);
+const [showContact, setShowContact] = useState<boolean>(false);
+
+// ...
+
+<div
+  className="menu-text"
+  style={{
+    marginLeft: "10px",
+    fontWeight: showMain ? "600" : "400",
+  }}
+  onClick={() => {
+    setShowMain(true);
+    setShowAbout(false);
+    setShowContact(false);
+  }}
+>
+  divdivdiv
+</div>
+
 ```
