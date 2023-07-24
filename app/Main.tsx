@@ -49,24 +49,20 @@ export default function Main({ language }: indexProps) {
 
     return isMemo ? (
       <div
-        className="image-modal"
+        className="index-image-modal"
         style={{
           position: "fixed",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           zIndex: 9999,
-          // backgroundColor: "rgba(0, 0, 0, 0.5)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          // border: imgSrc === "/exp_ko.webp" ? "0.5px solid white" : 0,
-          // borderRadius: imgSrc === "/exp_ko.webp" ? "10px" : 0,
           boxShadow:
             imgSrc === "/memo-nav-ko.webp" || imgSrc === "/memo-nav-en.webp"
               ? "1px 2px 5px gray"
               : undefined,
-          // border: imgSrc === "/exp_ko.webp" ? "1px solid black" : 0,
         }}
         onClick={onClick}
       >
@@ -218,8 +214,8 @@ export default function Main({ language }: indexProps) {
     if (path.startsWith("http")) {
       window.open(path, "_blank");
     } else {
-      const newTab = window.open(path, "_blank"); // 새 탭에서 열기
-      newTab?.focus(); // 새 탭으로 포커스 이동
+      const newTab = window.open(path, "_blank");
+      newTab?.focus();
     }
   };
 
@@ -294,15 +290,6 @@ export default function Main({ language }: indexProps) {
       {showImage && (
         <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />
       )}
-      {/* {projects.map((project, index) => (
-        <IconContainer
-          key={index}
-          path={project.path}
-          projectName={project.projectName}
-          projectDescription={project.projectDescription}
-          className={`index-icon-container-${index + 1}`}
-        />
-      ))} */}
       <Draggable>
         <div
           className="index-icon-container-1"
