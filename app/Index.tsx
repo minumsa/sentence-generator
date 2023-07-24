@@ -67,16 +67,12 @@ const Index: React.FC = () => {
     <div
       className="index-container-container"
       style={{
-        backgroundColor: isDarkMode ? "#ffffff" : "#000000",
+        backgroundColor: "#000000",
       }}
     >
       <div
         className="index-container"
-        style={
-          isDarkMode
-            ? { backgroundColor: "rgb(30, 30, 30)", color: "#ffffff" }
-            : { backgroundColor: "#ffffff", color: "rgb(30, 30, 30)" }
-        }
+        style={{ backgroundColor: "#ffffff", color: "rgb(30, 30, 30)" }}
       >
         <div
           style={{
