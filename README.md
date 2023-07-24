@@ -55,6 +55,8 @@ npm run dev
 useEffect를 사용하여 상태를 관리합니다. 컴포넌트가 마운트되면 OpenWeatherMap에서 제공하는 날씨 API를 호출합니다. 서울의 날씨 정보를 가져와 weatherData라는 상태 변수에 담고, 만약 데이터를 가져오는 동안 에러가 발생하면 콘솔에 에러를 출력합니다.
 
 ```typescript
+// Index.tsx
+
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -81,6 +83,8 @@ useEffect(() => {
 세 가지의 상태 변수(showMain, showAbout, showContact)를 사용해 현재 표시되는 컨텐츠를 제어합니다. `onClick` 이벤트 핸들러를 통해 사용자가 메뉴를 클릭하면 해당 콘텐츠를 보여주고 나머지 콘텐츠는 숨깁니다.
 
 ```typescript
+// Index.tsx
+
 const [showMain, setShowMain] = useState<boolean>(true);
 const [showAbout, setShowAbout] = useState<boolean>(false);
 const [showContact, setShowContact] = useState<boolean>(false);
@@ -103,3 +107,124 @@ const [showContact, setShowContact] = useState<boolean>(false);
 </div>
 
 ```
+
+
+### 상태 변경과 이벤트 처리 부분
+
+세 가지의 상태 변수(showMain, showAbout, showContact)를 사용해 현재 표시되는 컨텐츠를 제어합니다. `onClick` 이벤트 핸들러를 통해 사용자가 메뉴를 클릭하면 해당 콘텐츠를 보여주고 나머지 콘텐츠는 숨깁니다.
+
+```typescript
+// Index.tsx
+
+const [showMain, setShowMain] = useState<boolean>(true);
+const [showAbout, setShowAbout] = useState<boolean>(false);
+const [showContact, setShowContact] = useState<boolean>(false);
+
+// ...
+
+<div
+  className="menu-text"
+  style={{
+    marginLeft: "10px",
+    fontWeight: showMain ? "600" : "400",
+  }}
+  onClick={() => {
+    setShowMain(true);
+    setShowAbout(false);
+    setShowContact(false);
+  }}
+>
+  divdivdiv
+</div>
+
+```
+
+### ImageModal 컴포넌트 부분
+
+ImageModal 컴포넌트는 이미지를 확대해서 보여주거나 프로젝트 설명을 적은 메모를 보여주는 역할을 합니다.
+
+```typescript
+// Main.tsx
+
+const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
+  // 이미지 모달 컴포넌트를 정의합니다.
+  // 클릭 시 확대하여 이미지를 보여주거나 프로젝트 설명을 보여줍니다.
+};
+```
+
+### handleFortuneClick 함수 부분
+
+포춘쿠키 아이콘 클릭 시 랜덤한 포춘쿠키 문구를 알림으로 보여주는 역할을 합니다.
+
+```typescript
+// Main.tsx
+
+const handleFortuneClick = () => {
+  // 포춘쿠키 아이콘 클릭 시 랜덤한 포춘쿠키 문구를 알림으로 보여줍니다.
+  return language === "A"
+    ? alert(fortuneEngArr[Math.floor(Math.random() * fortuneArr.length)])
+    : alert(fortuneArr[Math.floor(Math.random() * fortuneArr.length)]);
+};
+```
+
+### 시간을 실시간으로 업데이트하는 부분
+
+`useEffect`를 사용하여 컴포넌트가 렌더링될 때 타이머를 설정하고, 1초마다 현재 시간을 업데이트합니다. 컴포넌트가 언마운트될 때 해당 타이머를 정리하여 메모리 누수를 방지합니다.
+
+```typescript
+// Clock.tsx
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentTime(new Date());
+  }, 1000);
+
+  return () => {
+    clearInterval(interval);
+  };
+}, []);
+```
+
+### 현재 언어에 맞는 시계를 반환하고 서버사이드 렌더링을 방지하는 부분
+
+시간은 12시간 형식으로 변환하고, String() 함수와 padStart() 함수를 사용하여 시간과 분을 두 자리 숫자로 표시합니다. 그리고 NoSSR 컴포넌트로 감싸서 서버사이드 렌더링 시 시계가 중복으로 렌더링되는 현상을 방지합니다.
+
+한편, 한국어로 시계를 표시하는 코드는 위 코드의 반대로 동작하며 language가 "A"가 아닌 경우에 실행됩니다.
+
+```typescript
+// Clock.tsx
+
+ if (language === "A") {
+    period = hours >= 12 ? "PM" : "AM";
+
+    const engClock = `${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
+    return (
+      <NoSSR>
+        {period} {engClock}
+      </NoSSR>
+    );
+  } else {
+    period = hours >= 12 ? "오후" : "오전";
+    const korClock = `${period} ${String(twelveHourFormat).padStart(
+      2,
+      "0"
+    )}:${minutes}`;
+    return <NoSSR>{korClock}</NoSSR>;
+  }
+```
+```typescript
+// NoSSR.tsx
+
+const NoSSR = ({ children, fallback = null }: Props) => {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return fallback;
+  }
+
+  return children;
+};
+```
+
