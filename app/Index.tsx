@@ -9,7 +9,6 @@ import Image from "next/image";
 
 const Index: React.FC = () => {
   const [language, setLanguage] = useState<string>("한");
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -88,9 +87,7 @@ const Index: React.FC = () => {
               alignItems: "center",
               width: "98%",
               height: "35px",
-              borderBottom: isDarkMode
-                ? "0.5px solid #ffffff"
-                : "0.5px solid #000000",
+              borderBottom: "0.5px solid #000000",
               marginBottom: "30px",
             }}
           >
@@ -154,7 +151,7 @@ const Index: React.FC = () => {
                 language === "A" ? setLanguage("한") : setLanguage("A");
               }}
               style={{
-                border: isDarkMode ? "1px solid #ffffff" : "1px solid #000000",
+                border: "1px solid #000000",
                 borderRadius: "5px",
                 padding: "1px 7px",
               }}
@@ -164,7 +161,7 @@ const Index: React.FC = () => {
             <div
               className="right-menu-item right-menu-calender"
               style={{
-                border: isDarkMode ? "1px solid #ffffff" : "1px solid #000000",
+                border: "1px solid #000000",
                 borderRadius: "5px",
               }}
             >
@@ -185,9 +182,7 @@ const Index: React.FC = () => {
         >
           {showMain && <Main language={language} />}
           {showAbout && <About language={language} />}
-          {showContact && (
-            <Contact language={language} isDarkMode={isDarkMode} />
-          )}
+          {showContact && <Contact language={language} />}
         </div>
       </div>
     </div>
