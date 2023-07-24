@@ -190,7 +190,7 @@ useEffect(() => {
 시간은 12시간 형식으로 변환하고, String() 함수와 padStart() 함수를 사용하여 시간과 분을 두 자리 숫자로 표시합니다. 그리고 NoSSR 컴포넌트로 감싸서 서버사이드 렌더링 시 시계가 중복으로 렌더링되는 현상을 방지합니다. 
 
 ```typescript
-// Clock.tsx
+// Clock.tsx
 
  if (language === "A") {
     period = hours >= 12 ? "PM" : "AM";
@@ -211,7 +211,7 @@ useEffect(() => {
   }
 ```
 ```typescript
-// NoSSR.tsx
+// NoSSR.tsx
 
 const NoSSR = ({ children, fallback = null }: Props) => {
   const [mounted, setMounted] = React.useState(false);
