@@ -49,3 +49,29 @@ npm run dev
 - 부모 컴포넌트인 `Index` 컴포넌트에서 language 프로퍼티를 전달받고, 해당 값에 알맞는 형태로 문구를 표시합니다.
 
 ## 중심적인 코드 스니펫
+
+### 날씨 API를 호출하는 부분
+
+useEffect를 사용하여 상태를 관리합니다. 컴포넌트가 마운트되면 OpenWeatherMap에서 제공하는 날씨 API를 호출합니다. 서울의 날씨 정보를 가져와 weatherData라는 상태 변수에 담고, 만약 데이터를 가져오는 동안 에러가 발생하면 콘솔에 에러를 출력합니다.
+
+```typescript
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const apiKey = "a363f14d94f369a4d926a27d5d44fc60";
+      const seoulWeatherResponse = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${apiKey}&lang=kr`
+      );
+      if (!seoulWeatherResponse.ok) {
+        throw "weather fetch failed";
+      }
+      const data = await seoulWeatherResponse.json();
+      setWeatherData(data);
+    } catch (error) {
+      console.error("Error fetching city data:", error);
+    }
+  };
+
+  fetchData();
+}, []);
+```
