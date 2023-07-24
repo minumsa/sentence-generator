@@ -1,6 +1,6 @@
 # README.md
 
-## 전체 웹 구조
+## divdivdiv.com 전체 웹 구조
 
 이 웹은 Next.js와 React, TypeScript를 사용해 개발했습니다. 코드는 5개의 컴포넌트로 구성되어 있습니다.
 
