@@ -1,5 +1,4 @@
 import React from "react";
-import Fruits from "./Fruits";
 
 export const metadata = {
   title: "과일 생성기",
