@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import styles from "./pomodoro.module.css";
 
 export default function Page() {
   const [time, setTime] = useState<number>(25);
@@ -76,142 +77,145 @@ export default function Page() {
   };
 
   return (
-    <>
-      <div className="sheep-div-1" style={{ width: "100vw", height: "100vh" }}>
-        <div className="sheep-top">
-          <div className="clone">C:₩WINDOWS₩system32₩복제양_뽀모도로.exe</div>
-          <div className="clone-box">?</div>
-          <div className="clone-box2">x</div>
-          <div className="sheep-top-border"></div>
+    <div
+      className={styles["container"]}
+      style={{ width: "100vw", height: "100vh" }}
+    >
+      <div className={styles["nav-div"]}>
+        <div className={styles["nav-title"]}>
+          C:₩WINDOWS₩system32₩복제양_뽀모도로.exe
         </div>
-        <div className="sheep-container">
-          <div className="sheep-count">{`🐑`}</div>
-          <div className="sheep-timer">
-            <Timer
-              time={time}
-              timeToggle={timeToggle}
-              setTimeToggle={setTimeToggle}
-              restTime={restTime}
+        <div className={styles["nav-icon"]}>?</div>
+        <div className={`${styles["nav-icon"]} ${styles["close"]}`}>x</div>
+        <div className={styles["nav-border-bottom"]}></div>
+      </div>
+      <div className={styles["sheep-container"]}>
+        <div className={styles["sheep"]}>{`🐑`}</div>
+        <div className={styles["timer-container"]}>
+          <Timer
+            time={time}
+            timeToggle={timeToggle}
+            setTimeToggle={setTimeToggle}
+            restTime={restTime}
+            restTimeToggle={restTimeToggle}
+            setRestTimeToggle={setRestTimeToggle}
+            seconds={seconds}
+            setSeconds={setSeconds}
+            restSeconds={restSeconds}
+            setRestSeconds={setRestSeconds}
+            complete={complete}
+            setComplete={setComplete}
+            handleReset={handleReset}
+          />
+        </div>
+        <div className={styles["settings-container"]}>
+          <div className={styles["settings-div"]}>
+            <div className={styles["settings-plan-div"]}>
+              반복(plan) :{" "}
+              <select
+                className={styles["select"]}
+                name="plan"
+                id="plan-select"
+                value={plan}
+                onChange={e => {
+                  setPlan(Number(e.target.value));
+                }}
+                style={{
+                  fontSize: "14px",
+                  width: "60px",
+                  marginLeft: "12px",
+                }}
+                disabled={timeToggle || restTimeToggle}
+              >
+                <option value="1">1회</option>
+                <option value="2">2회</option>
+                <option value="3">3회</option>
+                <option value="4">4회</option>
+                <option value="5">5회</option>
+                <option value="6">6회</option>
+                <option value="7">7회</option>
+                <option value="8">8회</option>
+                <option value="9">9회</option>
+                <option value="10">10회</option>
+                <option value="11">11회</option>
+                <option value="12">12회</option>
+              </select>
+            </div>
+            <div className={styles["settings-pomodoro-div"]}>
+              집중(pomodoro) :
+              <select
+                className={styles["select"]}
+                name="time"
+                id="time-select"
+                value={time}
+                onChange={e => {
+                  setTime(Number(e.target.value));
+                }}
+                style={{
+                  fontSize: "14px",
+                  width: "60px",
+                  marginLeft: "12px",
+                }}
+                disabled={timeToggle || restTimeToggle}
+              >
+                <option value="5">5분</option>
+                <option value="10">10분</option>
+                <option value="15">15분</option>
+                <option value="20">20분</option>
+                <option value="25">25분</option>
+                <option value="30">30분</option>
+                <option value="35">35분</option>
+                <option value="40">40분</option>
+                <option value="45">45분</option>
+                <option value="50">50분</option>
+                <option value="55">55분</option>
+                <option value="60">60분</option>
+              </select>
+            </div>
+            <div className={styles["settings-rest-div"]}>
+              휴식(rest) :{" "}
+              <select
+                className={styles["select"]}
+                name="rest"
+                id="rest-select"
+                value={restTime}
+                onChange={e => {
+                  setRestTime(Number(e.target.value));
+                }}
+                style={{
+                  fontSize: "14px",
+                  width: "60px",
+                  marginLeft: "12px",
+                }}
+                disabled={timeToggle || restTimeToggle}
+              >
+                <option value="5">5분</option>
+                <option value="10">10분</option>
+                <option value="15">15분</option>
+                <option value="20">20분</option>
+                <option value="25">25분</option>
+                <option value="30">30분</option>
+                <option value="35">35분</option>
+                <option value="40">40분</option>
+                <option value="45">45분</option>
+                <option value="50">50분</option>
+                <option value="55">55분</option>
+                <option value="60">60분</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className={styles["pomodoro-container"]}>
+          <div className={styles["pomodoro"]}>
+            <SheepImage
+              plan={plan}
               restTimeToggle={restTimeToggle}
-              setRestTimeToggle={setRestTimeToggle}
-              seconds={seconds}
-              setSeconds={setSeconds}
-              restSeconds={restSeconds}
-              setRestSeconds={setRestSeconds}
               complete={complete}
-              setComplete={setComplete}
-              handleReset={handleReset}
             />
-          </div>
-          <div className="sheep-button-container">
-            <div className="sheep-box">
-              <div className="sheep-plan">
-                반복(plan) :{" "}
-                <select
-                  className="sheep-select"
-                  name="plan"
-                  id="plan-select"
-                  value={plan}
-                  onChange={e => {
-                    setPlan(Number(e.target.value));
-                  }}
-                  style={{
-                    fontSize: "14px",
-                    width: "60px",
-                    marginLeft: "12px",
-                  }}
-                  disabled={timeToggle || restTimeToggle}
-                >
-                  <option value="1">1회</option>
-                  <option value="2">2회</option>
-                  <option value="3">3회</option>
-                  <option value="4">4회</option>
-                  <option value="5">5회</option>
-                  <option value="6">6회</option>
-                  <option value="7">7회</option>
-                  <option value="8">8회</option>
-                  <option value="9">9회</option>
-                  <option value="10">10회</option>
-                  <option value="11">11회</option>
-                  <option value="12">12회</option>
-                </select>
-              </div>
-              <div className="sheep-pomodoro">
-                집중(pomodoro) :
-                <select
-                  className="sheep-select"
-                  name="time"
-                  id="time-select"
-                  value={time}
-                  onChange={e => {
-                    setTime(Number(e.target.value));
-                  }}
-                  style={{
-                    fontSize: "14px",
-                    width: "60px",
-                    marginLeft: "12px",
-                  }}
-                  disabled={timeToggle || restTimeToggle}
-                >
-                  <option value="5">5분</option>
-                  <option value="10">10분</option>
-                  <option value="15">15분</option>
-                  <option value="20">20분</option>
-                  <option value="25">25분</option>
-                  <option value="30">30분</option>
-                  <option value="35">35분</option>
-                  <option value="40">40분</option>
-                  <option value="45">45분</option>
-                  <option value="50">50분</option>
-                  <option value="55">55분</option>
-                  <option value="60">60분</option>
-                </select>
-              </div>
-              <div className="sheep-rest">
-                휴식(rest) :{" "}
-                <select
-                  className="sheep-select"
-                  name="rest"
-                  id="rest-select"
-                  value={restTime}
-                  onChange={e => {
-                    setRestTime(Number(e.target.value));
-                  }}
-                  style={{
-                    fontSize: "14px",
-                    width: "60px",
-                    marginLeft: "12px",
-                  }}
-                  disabled={timeToggle || restTimeToggle}
-                >
-                  <option value="5">5분</option>
-                  <option value="10">10분</option>
-                  <option value="15">15분</option>
-                  <option value="20">20분</option>
-                  <option value="25">25분</option>
-                  <option value="30">30분</option>
-                  <option value="35">35분</option>
-                  <option value="40">40분</option>
-                  <option value="45">45분</option>
-                  <option value="50">50분</option>
-                  <option value="55">55분</option>
-                  <option value="60">60분</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="pomodoro-box-container">
-            <div className="pomodoro-box">
-              <SheepImage
-                plan={plan}
-                restTimeToggle={restTimeToggle}
-                complete={complete}
-              />
-            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -316,22 +320,22 @@ function Timer({
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <div
-                  className="sheep-time-div"
-                  style={{ width: "90px", marginLeft: "5px" }}
+                  className={styles["time-container"]}
+                  style={{ marginLeft: "5px" }}
                 >
                   {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
                     remainingSeconds
                   )}`}{" "}
                 </div>
               </div>
-              <div className="born">
+              <div className={styles["text-container"]}>
                 <span>집중을 통해 </span>
-                <span className="sheep-point">양</span>
+                <span className={styles["sheep-point"]}>양</span>
                 <span>을 탄생시키세요!</span>
               </div>
-              <div className="born-button">
+              <div className={styles["button-container"]}>
                 <span
-                  className="sheep-all-button"
+                  className={styles["button"]}
                   onClick={() => {
                     setTimeToggle(true);
                   }}
@@ -340,7 +344,7 @@ function Timer({
                   시작
                 </span>
                 <span
-                  className="sheep-all-button"
+                  className={styles["button"]}
                   onClick={() => {
                     setTimeToggle(false);
                   }}
@@ -349,7 +353,7 @@ function Timer({
                   중단
                 </span>
                 <span
-                  className="sheep-all-button"
+                  className={styles["button"]}
                   onClick={handleReset}
                   style={{ cursor: "pointer" }}
                 >
@@ -362,20 +366,20 @@ function Timer({
           return (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <div className="sheep-time-div" style={{ width: "90px" }}>
+                <div className={styles["time-container"]}>
                   {`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(
                     remainingSeconds
                   )}`}{" "}
                 </div>
               </div>
-              <div className="born">
+              <div className="text-container">
                 <span>이제부터 </span>
-                <span className="sheep-point">집중</span>
+                <span className={styles["sheep-point"]}>집중</span>
                 <span>하세요!...</span>
               </div>
-              <div className="born-button">
+              <div className={styles["button-container"]}>
                 <span
-                  className="sheep-all-button"
+                  className={styles["button"]}
                   onClick={() => {
                     setTimeToggle(true);
                   }}
@@ -383,7 +387,7 @@ function Timer({
                   시작
                 </span>
                 <span
-                  className="sheep-all-button"
+                  className={styles["button"]}
                   onClick={() => {
                     setTimeToggle(false);
                   }}
@@ -391,7 +395,7 @@ function Timer({
                   중단
                 </span>
                 <span
-                  className="sheep-all-button"
+                  className={styles["button"]}
                   onClick={handleReset}
                   style={{ cursor: "pointer" }}
                 >
@@ -404,15 +408,15 @@ function Timer({
           return (
             <>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <div className="sheep-time-div" style={{ width: "90px" }}>
+                <div className={styles["time-container"]}>
                   {`${formatTime(restHours)}:${formatTime(
                     restMinutes
                   )}:${formatTime(restRemainingSeconds)}`}
                 </div>
               </div>
-              <div className="born">
+              <div className="text-container">
                 <span>이제부터 </span>
-                <span className="sheep-point">휴식</span>
+                <span className={styles["sheep-point"]}>휴식</span>
                 <span>을 취하세요!...</span>
               </div>
             </>
@@ -441,7 +445,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
       Array(complete > 0 ? complete : 0)
         .fill(undefined)
         .map((_, i) => (
-          <span className="sheep-image" key={i}>
+          <span className={styles["pomodoro-image"]} key={i}>
             <Image
               src="/pomodoro/icon-color.webp"
               alt="Pictures of the sheep"
@@ -457,7 +461,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
       Array(plan - complete > 0 ? plan - complete : 0)
         .fill(undefined)
         .map((_, i) => (
-          <span className="sheep-image" key={i}>
+          <span className={styles["pomodoro-image"]} key={i}>
             <Image
               src="/pomodoro/icon-mono.webp"
               alt="Pictures of the sheep"
