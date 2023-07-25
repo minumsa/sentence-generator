@@ -157,7 +157,7 @@ export default function Main({ language }: PageProps) {
             <div className="main-exp-paragraph">
               <div
                 className="main-exp-paragraph-title"
-                onClick={() => clickIconHandler("/possible-universe")}
+                onClick={() => clickIconHandler("/pride-2023")}
               >
                 {language === "A"
                   ? "5. Sentence Generator 🌈"
@@ -170,7 +170,7 @@ export default function Main({ language }: PageProps) {
             <div className="main-exp-paragraph">
               <div
                 className="main-exp-paragraph-title"
-                onClick={() => clickIconHandler("/possible-universe")}
+                onClick={() => clickIconHandler("/pride-2023")}
               >
                 {language === "A" ? "0. Carver Chart 🎶" : "0. 카버 차트 🎶"}
               </div>
@@ -388,7 +388,7 @@ export default function Main({ language }: PageProps) {
       <Draggable>
         <div
           className="index-icon-container-5"
-          onDoubleClick={() => clickIconHandler("/possible-universe")}
+          onDoubleClick={() => clickIconHandler("/pride-2023")}
         >
           <div
             className="index-icon-image"
@@ -615,7 +615,7 @@ export default function Main({ language }: PageProps) {
         </div>
         <div
           className="index-mobile-icon-container-5"
-          onClick={() => clickIconHandler("/possible-universe")}
+          onClick={() => clickIconHandler("/pride-2023")}
         >
           <div
             className="index-icon-image"

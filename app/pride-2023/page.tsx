@@ -1,4 +1,3 @@
-// 클라이언트 측에서 사용할 수 있는 기능을 활성화하기 위한 선언
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -129,20 +128,9 @@ const verbs: string[] = [
   "환영할 것이다.",
 ];
 
-// 서버 측에서 호출되어 초기 주어, 목적어, 동사를 랜덤하게 선택하고 이를 프론트엔드로 전달하는 비동기 함수
-export async function getServerSideProps() {
-  const initialSubject = subjects[Math.floor(Math.random() * subjects.length)];
-  const initialObject = objects[Math.floor(Math.random() * objects.length)];
-  const initialVerb = verbs[Math.floor(Math.random() * verbs.length)];
-
-  return {
-    props: {
-      initialSubject,
-      initialObject,
-      initialVerb,
-    },
-  };
-}
+const getRandomItemFromArray = (array: string[]): string => {
+  return array[Math.floor(Math.random() * array.length)];
+};
 
 interface InitialWords {
   initialSubject: string;
@@ -150,26 +138,25 @@ interface InitialWords {
   initialVerb: string;
 }
 
-export default function RandomSentenceGenerator({
-  initialSubject,
-  initialObject,
-  initialVerb,
-}: InitialWords): JSX.Element {
-  const [randomSubject, setRandomSubject] = useState<string>(initialSubject);
-  const [randomObject, setRandomObject] = useState<string>(initialObject);
-  const [randomVerb, setRandomVerb] = useState<string>(initialVerb);
+const generateRandomColor = (): string => {
+  return "#" + Math.round(Math.random() * 0xffffff).toString(16);
+};
+
+const RandomSentenceGenerator: React.FC<InitialWords> = () => {
+  const [randomSubject, setRandomSubject] = useState<string>("Pride");
+  const [randomObject, setRandomObject] = useState<string>("Month");
+  const [randomVerb, setRandomVerb] = useState<string>("2023");
   const [isRunning, setIsRunning] = useState<boolean>(true);
 
   const generateRandomSentence = () => {
-    setRandomSubject(subjects[Math.floor(Math.random() * subjects.length)]);
-    setRandomObject(objects[Math.floor(Math.random() * objects.length)]);
-    setRandomVerb(verbs[Math.floor(Math.random() * verbs.length)]);
+    setRandomSubject(getRandomItemFromArray(subjects));
+    setRandomObject(getRandomItemFromArray(objects));
+    setRandomVerb(getRandomItemFromArray(verbs));
   };
 
   useEffect(() => {
     const intervalId = setInterval(generateRandomSentence, 2000);
 
-    // 컴포넌트가 언마운트될 때 setInterval을 정리
     return () => {
       clearInterval(intervalId);
     };
@@ -178,10 +165,6 @@ export default function RandomSentenceGenerator({
   const handleClick = () => {
     setIsRunning(prevIsRunning => !prevIsRunning);
     generateRandomSentence();
-  };
-
-  const generateRandomColor = () => {
-    return "#" + Math.round(Math.random() * 0xffffff).toString(16);
   };
 
   const windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
@@ -205,8 +188,6 @@ export default function RandomSentenceGenerator({
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              // transform: `rotate(${Math.random() * 180 - 180}deg)`,
-              // scale(${Math.random() * 1.2 + 0.3})
             }}
           >
             {randomSubject}{" "}
@@ -216,7 +197,6 @@ export default function RandomSentenceGenerator({
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              // transform: `rotate(${Math.random() * 180 - 180}deg)`,
             }}
           >
             {randomObject}{" "}
@@ -225,7 +205,6 @@ export default function RandomSentenceGenerator({
             style={{
               display: "inline-block",
               color: generateRandomColor(),
-              // transform: `rotate(${Math.random() * 180 - 180}deg)`,
             }}
           >
             {randomVerb}
@@ -236,9 +215,7 @@ export default function RandomSentenceGenerator({
             <div
               className="test30-div-3-1"
               style={{
-                color: "#" + Math.round(Math.random() * 0xffffff).toString(16),
-                // transform: `rotate(${Math.random() * 180 - 180}deg)`,
-                // scale(${Math.random() * 1.2 + 0.3})
+                color: generateRandomColor(),
               }}
             >
               {randomSubject}{" "}
@@ -246,8 +223,7 @@ export default function RandomSentenceGenerator({
             <div
               className="test30-div-3-2"
               style={{
-                color: "#" + Math.round(Math.random() * 0xffffff).toString(16),
-                // transform: `rotate(${Math.random() * 180 - 180}deg)`,
+                color: generateRandomColor(),
               }}
             >
               {randomObject}{" "}
@@ -256,8 +232,7 @@ export default function RandomSentenceGenerator({
           <div
             className="test30-div-3-3"
             style={{
-              color: "#" + Math.round(Math.random() * 0xffffff).toString(16),
-              // transform: `rotate(${Math.random() * 180 - 50}deg)`,
+              color: generateRandomColor(),
             }}
           >
             {randomVerb}
@@ -266,4 +241,6 @@ export default function RandomSentenceGenerator({
       </div>
     </div>
   );
-}
+};
+
+export default RandomSentenceGenerator;
