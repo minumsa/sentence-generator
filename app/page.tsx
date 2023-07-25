@@ -11,7 +11,6 @@ export default function Home() {
   const [language, setLanguage] = useState<string>("한");
 
   const currentDate = new Date();
-  const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1;
   const months: string[] = [
     "January",

@@ -1,5 +1,4 @@
 import React from "react";
-import Sheep from "./Sheep";
 
 export const metadata = {
   title: "복제양 뽀모도로",
@@ -23,12 +22,8 @@ type Props = {
   children: React.ReactNode;
 };
 
-function Layout() {
-  return (
-    <div>
-      <Sheep />
-    </div>
-  );
-}
+const Layout = ({ children }: Props) => {
+  return <div>{children}</div>;
+};
 
 export default Layout;
