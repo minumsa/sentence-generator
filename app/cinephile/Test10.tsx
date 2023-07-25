@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -49,8 +50,8 @@ export default function Test10({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`10. 다음 중 아래 제시된 이모지들과 가장 어울리는 왕가위의 영화는?`}</span>
         </div>
         <div className="cine-test10-emoji" style={{ margin: "40px 0" }}>
@@ -60,7 +61,7 @@ export default function Test10({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

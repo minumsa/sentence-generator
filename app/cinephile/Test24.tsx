@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -50,8 +51,10 @@ export default function Test24({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
+      <div className={styles["cine-test-format"]}>
+        <div
+          className={styles["cine-quiz"]}
+        >{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
             src="/cinephile/24-greta.webp"
@@ -68,7 +71,7 @@ export default function Test24({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

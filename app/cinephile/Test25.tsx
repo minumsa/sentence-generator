@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -47,8 +48,8 @@ export default function Test25({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`25. 다음은 <마블 시네마틱 유니버스 페이즈 4> 시리즈를 무작위로 나열한 것이다. 해당 영화들을 `}</span>
           <span style={{ textDecoration: "underline" }}>개봉 순</span>
           <span>으로 올바르게 정렬한 것은?</span>
@@ -69,7 +70,7 @@ export default function Test25({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

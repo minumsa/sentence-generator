@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -49,14 +50,14 @@ export default function Test15({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`15. 다음 중 <타미 페이의 눈>(2021, 마이클 쇼월터)에 등장하는 타미 페이 바커의 직업으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

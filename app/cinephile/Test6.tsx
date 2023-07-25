@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -51,7 +52,7 @@ export default function Test6({ score, setScore }: TestProps) {
   return (
     <>
       <div
-        className="cine-test-format"
+        className={styles["cine-test-format"]}
         style={
           {
             // marginTop: window.innerWidth > 450 ? "15px" : "0",
@@ -59,7 +60,7 @@ export default function Test6({ score, setScore }: TestProps) {
           }
         }
       >
-        <div className="cine-quiz">
+        <div className={styles["cine-quiz"]}>
           {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -78,7 +79,7 @@ export default function Test6({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

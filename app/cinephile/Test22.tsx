@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -49,14 +50,14 @@ export default function Test22({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`22. 다음 중 레일을 깔아 수레에 카메라를 설치한 뒤, 정해진 노선에 따라 지면을 이동하며 안정적으로 촬영하는 방식을 뜻하는 용어로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

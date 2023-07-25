@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -49,9 +50,9 @@ export default function Test28({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
+      <div className={styles["cine-test-format"]}>
         <div
-          className="cine-quiz"
+          className={styles["cine-quiz"]}
           // style={{ marginTop: "10px" }}
         >
           <span>{`28. 다음 설명에 가장 잘 부합하는 영화의 제목은?`}</span>
@@ -75,7 +76,7 @@ export default function Test28({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -61,24 +62,40 @@ export default function Test3({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>
             3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가{" "}
           </span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
         </div>
-        <div className="cine-answer" style={mark1} onClick={clickAnswer1}>
+        <div
+          className={styles["cine-answer"]}
+          style={mark1}
+          onClick={clickAnswer1}
+        >
           (1) 드라이브 마이 카(2021, 하마구치 류스케)
         </div>
-        <div className="cine-answer" style={mark2} onClick={clickAnswer2}>
+        <div
+          className={styles["cine-answer"]}
+          style={mark2}
+          onClick={clickAnswer2}
+        >
           (2) 버닝(2018, 이창동)
         </div>
-        <div className="cine-answer" style={mark3} onClick={clickAnswer3}>
+        <div
+          className={styles["cine-answer"]}
+          style={mark3}
+          onClick={clickAnswer3}
+        >
           (3) 토니 타키타니(2004, 이치카와 준)
         </div>
-        <div className="cine-answer" style={mark4} onClick={clickAnswer4}>
+        <div
+          className={styles["cine-answer"]}
+          style={mark4}
+          onClick={clickAnswer4}
+        >
           (4) 환상의 빛(1995, 고레에다 히로카즈)
         </div>
       </div>

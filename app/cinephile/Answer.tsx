@@ -3,6 +3,7 @@
 import Image from "next/image";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 export default function Answer() {
   const [lastDay, setLastDay] = useState<string | undefined>();
@@ -68,6 +69,9 @@ export default function Answer() {
     }
   }, [lastDay, lastDaysBoxOfficeList]);
 
+  {
+    styles["cine-quiz"];
+  }
   useEffect(() => {
     if (lastDaysBoxOfficeList && lastDaysBoxOfficeList.length > 0) {
       setMovie1(lastDaysBoxOfficeList[0].movieNm);
@@ -79,12 +83,12 @@ export default function Answer() {
 
   return (
     <div
-      className="cine-answer-container"
+      className={styles["cine-answer-container"]}
       style={{ display: "flex", flexDirection: "column" }}
     >
       <div style={{ marginTop: "10px" }} id="1">
-        <div className="cine-test-format">
-          <div className="cine-quiz">
+        <div className={styles["cine-test-format"]}>
+          <div className={styles["cine-quiz"]}>
             <span>{`1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 `}</span>
             <span style={{ textDecoration: "underline" }}>않는</span>
             <span> 음식은?</span>
@@ -92,8 +96,8 @@ export default function Answer() {
           {[1, 2, 3, 4].map(answerIndex => (
             <div
               key={answerIndex}
-              className={`cine-answer-answer ${
-                answerIndex === 3 ? "cine-answer-selected" : ""
+              className={`${styles["cine-answer-answer"]}  ${
+                answerIndex === 3 ? styles["cine-answer-selected"] : ""
               }`}
             >
               ({answerIndex}){" "}
@@ -110,9 +114,9 @@ export default function Answer() {
           ))}
         </div>
       </div>
-      <div className="cine-answer-line" id="2"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="2"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
@@ -121,8 +125,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 3 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -134,7 +138,7 @@ export default function Answer() {
               <>
                 <span>{`“더 나아지기 위해 우리는 기꺼이 더 나빠졌다. 그게 우리의
                 최선이었다.” // <최선의 삶>(2019, 이우정)에 등장하는 대사`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://youtu.be/WjJ6pdVeOAg?t=88"
                     target="_blank"
@@ -153,9 +157,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="3"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="3"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>
             3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가{" "}
           </span>
@@ -165,8 +169,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -182,7 +186,7 @@ export default function Answer() {
                   환상의 빛(1995, 고레에다 히로카즈) // 미야모토 테루의 동명
                   소설이 원작이다.
                 </span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=49852122&start=slayer"
                     target="_blank"
@@ -198,9 +202,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="4"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="4"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           {`4. 배우 양자경은 제95회 아카데미 시상식에서 <에브리씽 에브리웨어 올 앳
           원스>(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
           소감을 완성하시오.`}
@@ -213,9 +217,13 @@ export default function Answer() {
           }}
         >
           {`"`}
-          <input disabled placeholder="여성" className="cine-test-input" />
+          <input
+            disabled
+            placeholder="여성"
+            className={styles["cine-test-input"]}
+          />
           <span>{` 여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요." // SBS가 해당 수상 소감에서 "여성"이라는 단어를 일부러 삭제했다는 의혹이 있었다. 논란이 일자 재편집한 영상이 업로드되었다.`}</span>
-          <span className="cine-reference-black">
+          <span className={styles["cine-reference-black"]}>
             <a
               href="https://youtu.be/DZldmL7zeSY?t=109"
               target="_blank"
@@ -226,9 +234,9 @@ export default function Answer() {
           </span>
         </div>
       </div>
-      <div className="cine-answer-line" id="5"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="5"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`5. 다음 중 칸 영화제에서 황금종려상을 수상하지 `}</span>
           <span style={{ textDecoration: "underline" }}>{`않은`}</span>
           <span>{` 작품은?`}</span>
@@ -236,8 +244,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 3 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -253,9 +261,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="6"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="6"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -274,10 +282,9 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
-            // id={`${answerIndex === 3 ? "3" : ""}`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1 ? (
@@ -289,7 +296,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`"Here's Johnny!"`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://youtu.be/WDpipB4yehk?t=105"
                     target="_blank"
@@ -305,23 +312,23 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="7"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="7"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           {`7. 웨스 크레이븐이 연출을 맡고 케빈 윌리엄슨이 각본을 썼으며, "공포영화의 법칙"이라는 클리셰를 메타픽션적으로 활용해 개봉 당시 흥행과 더불어 작품성까지 크게 호평받은 이 공포영화 시리즈는?`}
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 1 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 1 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1 ? (
               <>
                 <span>{`<스크림> 시리즈`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://youtu.be/UCf7s7jvP9c?t=602"
                     target="_blank"
@@ -343,9 +350,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="8"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="8"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`8. <킬 빌> 시리즈에는 데들리 바이퍼스 출신의 4명의 암살자 캐릭터가 등장하는데, 해당 인물들은 모두 독사의 이름을 딴 독특한 코드 네임을 가지고 있다. 다음 중 주인공 베아트릭스 키도의 첫 번째 표적이었던 `}</span>
           <span
             style={{
@@ -359,8 +366,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -373,7 +380,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`코튼마우스 // 오렌 이시이`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://namu.wiki/w/데들리%20바이퍼스"
                     target="_blank"
@@ -389,9 +396,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="9"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="9"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`9. 다음 중 성소수자 주인공이 등장하지 `}</span>
           <span style={{ textDecoration: "underline" }}>{`않는`}</span>
           <span>{` 영화는?`}</span>
@@ -399,15 +406,15 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 2 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 2 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1 ? (
               <>
                 <span>{`호수의 이방인(2013, 알랭 기로디) // 게이 주인공이 등장한다.`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://www.youtube.com/watch?v=5Ezl0ma9XWc"
                     target="_blank"
@@ -420,7 +427,7 @@ export default function Answer() {
             ) : answerIndex === 2 ? (
               <>
                 <span>{`보이후드(2014, 리처드 링클레이터)`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=BlCivrRQXtY"
                     target="_blank"
@@ -433,7 +440,7 @@ export default function Answer() {
             ) : answerIndex === 3 ? (
               <>
                 <span>{`타오르는 여인의 초상(2019, 셀린 시아마) // 레즈비언 주인공이 등장한다.`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://www.youtube.com/watch?v=rv-m744KKXE"
                     target="_blank"
@@ -446,7 +453,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`걸(2018, 루카스 돈트) // 트랜스젠더 주인공이 등장한다.`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://www.youtube.com/watch?v=3j5EwmS_ISA"
                     target="_blank"
@@ -462,20 +469,23 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="10"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="10"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`10. 다음 중 아래 제시된 이모지들과 가장 어울리는 왕가위의 영화는?`}</span>
         </div>
-        <div className="cine-test10-emoji" style={{ margin: "40px 0" }}>
+        <div
+          className={styles["cine-test10-emoji"]}
+          style={{ margin: "40px 0" }}
+        >
           📞 🍍 🕒 😎
         </div>
-        <div className="cine-test10-emoji">👮‍♂️ 💌 🔑 🛫</div>
+        <div className={styles["cine-test10-emoji"]}>👮‍♂️ 💌 🔑 🛫</div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 2 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 2 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -484,7 +494,7 @@ export default function Answer() {
             ) : answerIndex === 2 ? (
               <>
                 <span>{`중경삼림(1994) // 1부에서 하지무는 헤어진 연인을 기다리며 유통기한이 5월 1일까지인 파인애플 통조림을 30일 동안 사 모은다. 그리고 선글라스를 쓴 여인에게서 전화가 오길 기다린다. 2부에서 페이는 경찰 663에게 호감을 느끼고, 그와 연인 관계였던 스튜어디스가 보낸 편지 봉투에서 663의 집 열쇠를 찾는다.`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=OPCug9jyG9k"
                     target="_blank"
@@ -504,23 +514,23 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="11"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="11"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`11. 다음 중 <언더 더 스킨>(2013, 조나단 글레이저)에서 에일리언 로라가 지구로 오게 된 이유로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 1 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 1 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1 ? (
               <>
                 <span>{`식량으로 사용할 생물을 찾으려고`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=J7bAZCOk0Sc"
                     target="_blank"
@@ -542,9 +552,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="12"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="12"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <div>{`12. 다음 빈칸을 적절하게 채워 정답을 완성하시오.`}</div>
           <div
             style={{
@@ -557,7 +567,7 @@ export default function Answer() {
             <input
               disabled
               placeholder="열차"
-              className="cine-test-input"
+              className={styles["cine-test-input"]}
             ></input>
             <span>{`의 도착>이라는 작품은 세계 최초의 영화로 널리 알려져 있다.`}</span>
             <span
@@ -588,16 +598,16 @@ export default function Answer() {
           </div>
         </div>
       </div>
-      <div className="cine-answer-line" id="13"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="13"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`13. 다음 중 국내에서 가장 큰 아이맥스 스크린을 보유하고 있는 영화관은? (2023년 6월 기준)`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 2 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 2 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -606,7 +616,7 @@ export default function Answer() {
             ) : answerIndex === 2 ? (
               <>
                 <span>CGV 용산아이파크몰</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.mk.co.kr/news/culture/8781694"
                     target="_blank"
@@ -626,9 +636,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="14"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="14"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`14. 다음 중 누벨바그의 핵심 인물이었던 장뤽 고다르의 작품이 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
@@ -636,8 +646,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 3 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -653,16 +663,16 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="15"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="15"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`15. 다음 중 <타미 페이의 눈>(2021, 마이클 쇼월터)에 등장하는 타미 페이 바커의 직업으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -675,7 +685,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>전도사</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=eMMLRnXPPJk"
                     target="_blank"
@@ -691,16 +701,16 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="16"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="16"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`16. 다음 중 세계 최초의 장편 유성영화는?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 2 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 2 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -709,7 +719,7 @@ export default function Answer() {
             ) : answerIndex === 2 ? (
               <>
                 <span>{`재즈 싱어(1927, 앨런 크로슬랜드)`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://ko.wikipedia.org/wiki/재즈_싱어"
                     target="_blank"
@@ -729,9 +739,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="17"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="17"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>
             {`17. 다음 중 어제(${lastDay
               ?.split("")
@@ -749,8 +759,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 3 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -766,16 +776,16 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="18"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="18"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`18. <다가오는 것들>(2016, 미아 한센 러브)에서 주인공 나탈리는 파리의 한 고등학교에서 교사로 일한다. 다음 중 나탈리가 가르치는 과목으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]} ${
+              answerIndex === 3 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -786,7 +796,7 @@ export default function Answer() {
             ) : answerIndex === 3 ? (
               <>
                 <span>{`철학`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=VtmE1AAvncE"
                     target="_blank"
@@ -804,10 +814,10 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="19"></div>
-      <div className="cine-test-format">
+      <div className={styles["cine-answer-line"]} id="19"></div>
+      <div className={styles["cine-test-format"]}>
         <div
-          className="cine-quiz"
+          className={styles["cine-quiz"]}
           style={{
             marginBottom: window.innerWidth > 450 ? "10px" : "0",
           }}
@@ -828,8 +838,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -842,7 +852,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`타조마루`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=Zqoyl2p8_lw&t=112s"
                     target="_blank"
@@ -858,16 +868,16 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="20"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="20"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -880,7 +890,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`연인을 찾는다.`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=vU29VfayDMw&t=16s"
                     target="_blank"
@@ -896,9 +906,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="21"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="21"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`21. 다음은 <로제타>(1999, 다르덴 형제)의 줄거리 일부이다. 다음 중 빈칸에 가장 적절한 단어는?`}</span>
         </div>
         <div
@@ -912,14 +922,18 @@ export default function Answer() {
           <span>
             {` 알코올 중독에 빠진 어머니와 함께 이동식 트레일러에서 생활하고 있는 18살의 로제타에게 가난은 일상이다. 헌옷을 주워 어머니가 수선하면 내다 팔고, 먹을 음식이 없어 강에서 숭어를 잡기도 한다. 공장에서 일한 기간이 짧아 실업급여는 나오지 않고, 다른 일거리를 찾는 일도 어렵기만 하다. 그러다 로제타는 근처 `}
           </span>
-          <input disabled placeholder="와플" className="cine-test-input" />
+          <input
+            disabled
+            placeholder="와플"
+            className={styles["cine-test-input"]}
+          />
           <span>{` 가게에서 일하는 리케와 친구가 된다.`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -932,7 +946,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`와플`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=woN2P4r65oA"
                     target="_blank"
@@ -948,23 +962,23 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="22"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="22"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`22. 다음 중 레일을 깔아 수레에 카메라를 설치한 뒤, 정해진 노선에 따라 지면을 이동하며 안정적으로 촬영하는 방식을 뜻하는 용어로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 1 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 1 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1 ? (
               <>
                 <span>{`달리 샷`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://youtu.be/ramDgHoBSvc?t=952"
                     target="_blank"
@@ -986,16 +1000,16 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="23"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="23"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`23. 다음 중 미국 영화 산업의 중심지인 할리우드가 위치한 지역은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -1008,7 +1022,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`로스앤젤레스`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://ko.wikipedia.org/wiki/할리우드"
                     target="_blank"
@@ -1024,9 +1038,11 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="24"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
+      <div className={styles["cine-answer-line"]} id="24"></div>
+      <div className={styles["cine-test-format"]}>
+        <div
+          className={styles["cine-quiz"]}
+        >{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
             src="/cinephile/24-greta.webp"
@@ -1043,8 +1059,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -1057,7 +1073,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`그레타 거윅`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://ko.wikipedia.org/wiki/그레타_거윅"
                     target="_blank"
@@ -1073,9 +1089,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="25"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="25"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`25. 다음은 <마블 시네마틱 유니버스 페이즈 4> 시리즈를 무작위로 나열한 것이다. 해당 영화들을 `}</span>
           <span style={{ textDecoration: "underline" }}>개봉 순</span>
           <span>으로 올바르게 정렬한 것은?</span>
@@ -1096,8 +1112,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -1113,9 +1129,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="26"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="26"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`26. 다음 중 <엑스맨 2>(2003), <엑스맨: 아포칼립스>(2016), <엑스맨: 다크 피닉스>(2019)에 등장하는 `}</span>
           <span style={{ textDecoration: "underline" }}>{`나이트크롤러`}</span>
           <span>{`의 능력으로 가장 적절한 것은?`}</span>
@@ -1123,15 +1139,15 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 4 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 4 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1 ? (
               <>
                 <span>{`핌 입자를 사용해 몸 크기를 축소하거나 확대하고, 생체 전기로 에너지 광선을 발사한다. // <마블 유니버스> 시리즈에 등장하는 캐릭터인 와스프에 대한 설명이다.`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://namu.wiki/w/와스프(마블%20코믹스)"
                     target="_blank"
@@ -1144,7 +1160,7 @@ export default function Answer() {
             ) : answerIndex === 2 ? (
               <>
                 <span>{`세포와 조직을 자유자재로 조작해 다른 사람의 외형으로 변신할 수 있고 목소리까지 복제한다. // <엑스맨 유니버스> 시리즈에 등장하는 캐릭터인 미스틱에 대한 설명이다.`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://namu.wiki/w/미스틱(엑스맨%20유니버스)"
                     target="_blank"
@@ -1157,7 +1173,7 @@ export default function Answer() {
             ) : answerIndex === 3 ? (
               <>
                 <span>{`상대의 에너지를 흡수한다. 뮤턴트의 에너지를 흡수해 그 능력을 사용할 수도 있다. // <마블 유니버스> 시리즈에 등장하는 캐릭터인 로그에 대한 설명이다.`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://namu.wiki/w/로그(엑스맨%20유니버스)"
                     target="_blank"
@@ -1170,7 +1186,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`차원을 통과해 텔레포트할 수 있다. 뼈 구조가 유연해 뛰어난 민첩성과 균형 감각을 가지고 있다.`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://namu.wiki/w/나이트크롤러(엑스맨%20유니버스)"
                     target="_blank"
@@ -1186,16 +1202,16 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="27"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="27"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`27. 오즈의 마법사(1939, 빅터 플레밍)에서 주인공 도로시는 어떤 행위를 통해 무사히 고향으로 돌아갈 수 있게 된다. 다음 중 그 행위로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 3 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -1206,7 +1222,7 @@ export default function Answer() {
             ) : answerIndex === 3 ? (
               <>
                 <span>{`구두 뒤꿈치를 맞부딪친다.`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://youtu.be/ooM-RGUTe2E?t=26"
                     target="_blank"
@@ -1224,9 +1240,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="28"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="28"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`28. 다음 설명에 가장 잘 부합하는 영화의 제목은?`}</span>
         </div>
         <div
@@ -1248,15 +1264,15 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 1 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 1 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
             {answerIndex === 1 ? (
               <>
                 <span>{`밀크`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.youtube.com/watch?v=UB6Rd0tw9QI"
                     target="_blank"
@@ -1269,7 +1285,7 @@ export default function Answer() {
             ) : answerIndex === 2 ? (
               <>
                 <span>{`미스테리어스 스킨`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://www.youtube.com/watch?v=MYv5V6W4vvI"
                     target="_blank"
@@ -1282,7 +1298,7 @@ export default function Answer() {
             ) : answerIndex === 3 ? (
               <>
                 <span>{`콜 미 바이 유어 네임`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://www.youtube.com/watch?v=am_aqh4qW5c"
                     target="_blank"
@@ -1295,7 +1311,7 @@ export default function Answer() {
             ) : answerIndex === 4 ? (
               <>
                 <span>{`필라델피아`}</span>
-                <span className="cine-reference-black">
+                <span className={styles["cine-reference-black"]}>
                   <a
                     href="https://www.youtube.com/watch?v=CKDz2LVHz0Y"
                     target="_blank"
@@ -1311,9 +1327,9 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="29"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="29"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`29. 다음 중 픽사 애니메이션 스튜디오에서 만든 영화가 `}</span>
           <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
           <span>{` 것은?`}</span>
@@ -1321,8 +1337,8 @@ export default function Answer() {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 2 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 2 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -1338,16 +1354,16 @@ export default function Answer() {
           </div>
         ))}
       </div>
-      <div className="cine-answer-line" id="30"></div>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-answer-line"]} id="30"></div>
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`30. 한국영상자료원에서 운영하고 있는 시네마테크(KOFA)는 일종의 영화 도서관으로, 영화 관련 영상를 보존하고 이를 모든 일반인에게 무료로 공개해 해당 자료의 가치를 공유한다. 다음 중 국내 시네마테크가 위치해 있는 지역은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={`cine-answer-answer ${
-              answerIndex === 3 ? "cine-answer-selected" : ""
+            className={`${styles["cine-answer-answer"]}  ${
+              answerIndex === 3 ? styles["cine-answer-selected"] : ""
             }`}
           >
             ({answerIndex}){" "}
@@ -1358,7 +1374,7 @@ export default function Answer() {
             ) : answerIndex === 3 ? (
               <>
                 <span>{`서울특별시 마포구`}</span>
-                <span className="cine-reference-white">
+                <span className={styles["cine-reference-white"]}>
                   <a
                     href="https://www.koreafilm.or.kr/main"
                     target="_blank"

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styles from "./cine.module.css";
 
 interface NameProps {
   value: string;
@@ -46,15 +47,15 @@ export default function Test31({ value, score }: NameProps) {
         position: "relative",
       }}
     >
-      <div className="cine-end-div" style={{ marginBottom: "12px" }}>
+      <div className={styles["cine-end-div"]} style={{ marginBottom: "12px" }}>
         {value} 님의 결과는?
       </div>
-      <div className="cine-end-div" style={{ marginBottom: "30px" }}>
+      <div className={styles["cine-end-div"]} style={{ marginBottom: "30px" }}>
         {totalCount}명 중에 {myRank}등!
       </div>
-      <div className="cine-score">{percentage}점</div>
+      <div className={styles["cine-score"]}>{percentage}점</div>
       <div
-        className="star-box"
+        className={styles["star-box"]}
         style={{
           position: "relative",
           display: "flex",
@@ -63,7 +64,7 @@ export default function Test31({ value, score }: NameProps) {
         }}
       >
         <Image
-          className="point-star"
+          className={styles["point-star"]}
           src="/cinephile/star-color.webp"
           alt="gray-star"
           width={window.innerWidth > 450 ? "230" : "230"}
@@ -76,7 +77,7 @@ export default function Test31({ value, score }: NameProps) {
           }}
         />
         <Image
-          className="background-star"
+          className={styles["background-star"]}
           src="/cinephile/star-mono.webp"
           alt="gray-star"
           width={window.innerWidth > 450 ? "230" : "230"}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -50,7 +51,7 @@ export default function Test8({ score, setScore }: TestProps) {
   return (
     <>
       <div
-        className="cine-test-format"
+        className={styles["cine-test-format"]}
         style={
           {
             // marginTop: window.innerWidth > 450 ? "15px" : "0",
@@ -58,7 +59,7 @@ export default function Test8({ score, setScore }: TestProps) {
           }
         }
       >
-        <div className="cine-quiz">
+        <div className={styles["cine-quiz"]}>
           <span>{`8. <킬 빌> 시리즈에는 데들리 바이퍼스 출신의 4명의 암살자 캐릭터가 등장하는데, 해당 인물들은 모두 독사의 이름을 딴 독특한 코드 네임을 가지고 있다. 다음 중 주인공 베아트릭스 키도의 첫 번째 표적이었던 `}</span>
           <span
             style={{
@@ -72,7 +73,7 @@ export default function Test8({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

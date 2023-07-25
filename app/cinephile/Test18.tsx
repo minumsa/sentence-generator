@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -49,9 +50,9 @@ export default function Test18({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
+      <div className={styles["cine-test-format"]}>
         <div
-          className="cine-quiz"
+          className={styles["cine-quiz"]}
           //  style={{ marginTop: "10px" }}
         >
           <span>{`18. <다가오는 것들>(2016, 미아 한센 러브)에서 주인공 나탈리는 파리의 한 고등학교에서 교사로 일한다. 다음 중 나탈리가 가르치는 과목으로 가장 적절한 것은?`}</span>
@@ -59,7 +60,7 @@ export default function Test18({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

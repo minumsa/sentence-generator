@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 import Answer from "./Answer";
 import Script from "next/script";
@@ -207,9 +208,9 @@ export default function Page() {
     } else if (testNumber < 32) {
       setProgressContent(
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <div className="cine-progress-bar">
+          <div className={styles["cine-progress-bar"]}>
             <div
-              className="cine-progress-content"
+              className={styles["cine-progress-content"]}
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -218,7 +219,10 @@ export default function Page() {
                 backgroundColor: "#0e1111",
               }}
             >
-              <div className="cine-progress-font" style={{ color: "white" }}>
+              <div
+                className={styles["cine-progress-font"]}
+                style={{ color: "white" }}
+              >
                 {progressPercent > 5 ? `${progressPercent}%` : ``}
               </div>
             </div>
@@ -238,39 +242,39 @@ export default function Page() {
             autoFocus
             type="string"
             placeholder="닉네임 입력"
-            className="cine-name-input"
+            className={styles["cine-name-input"]}
             onChange={e => setValue(e.target.value)}
           />
           <div
-            className="cine-next-button-flex"
+            className={styles["cine-next-button-flex"]}
             onClick={() => {
               if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
             }}
           >
-            <div className="cine-next-button">테스트 시작</div>
+            <div className={styles["cine-next-button"]}>테스트 시작</div>
           </div>
         </div>
       );
     } else if (testNumber < 30) {
       setButtonContent(
         <div
-          className="cine-next-button-flex"
+          className={styles["cine-next-button-flex"]}
           onClick={() => {
             if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
           }}
         >
-          <div className="cine-next-button">다음 문제</div>
+          <div className={styles["cine-next-button"]}>다음 문제</div>
         </div>
       );
     } else if (testNumber === 30) {
       setButtonContent(
         <div
-          className="cine-next-button-flex"
+          className={styles["cine-next-button-flex"]}
           onClick={() => {
             if (testNumber < maxTestNumber) setTestNumber(x => x + 1);
           }}
         >
-          <div className="cine-next-button">결과 보기</div>
+          <div className={styles["cine-next-button"]}>결과 보기</div>
         </div>
       );
     } else if (testNumber === 31) {
@@ -284,18 +288,20 @@ export default function Page() {
               marginTop: "30px",
             }}
           >
-            <div className="cine-score-comment">{scoreComment}</div>
+            <div className={"cine-score-comment"}>{scoreComment}</div>
             <div
-              className="cine-answer-button-flex"
+              className={"cine-answer-button-flex"}
               style={{ marginTop: "10px" }}
               onClick={() => {
                 setTestNumber(32);
               }}
             >
-              <div className="cine-next-button">정답 및 해설 보기</div>
+              <div className={styles["cine-next-button"]}>
+                정답 및 해설 보기
+              </div>
             </div>
             <div
-              className="cine-twitter-button-flex"
+              className={styles["cine-twitter-button-flex"]}
               style={{ marginTop: "10px" }}
               onClick={() => {
                 window.open(
@@ -303,19 +309,21 @@ export default function Page() {
                 );
               }}
             >
-              <div className="cine-next-button">트위터 공유하기</div>
+              <div className={styles["cine-next-button"]}>트위터 공유하기</div>
             </div>
             <div
-              className="cine-kakao-button-flex"
+              className={styles["cine-kakao-button-flex"]}
               style={{ marginTop: "10px" }}
               onClick={() => {
                 onShare();
               }}
             >
-              <div className="cine-next-button">카카오톡 공유하기</div>
+              <div className={styles["cine-next-button"]}>
+                카카오톡 공유하기
+              </div>
             </div>
             <div
-              className="cine-challenge-button-flex"
+              className={styles["cine-challenge-button-flex"]}
               style={{
                 marginTop: "10px",
                 display: "flex",
@@ -327,7 +335,10 @@ export default function Page() {
                 setValue("참가자");
               }}
             >
-              <div className="cine-next-button" style={{ marginLeft: "5px" }}>
+              <div
+                className={styles["cine-next-button"]}
+                style={{ marginLeft: "5px" }}
+              >
                 다시 도전하기
               </div>
             </div>
@@ -345,7 +356,7 @@ export default function Page() {
             }}
           >
             <div
-              className="cine-answer-button-flex"
+              className={styles["cine-answer-button-flex"]}
               style={{ marginTop: "10px" }}
               onClick={() => {
                 setTestNumber(0);
@@ -353,16 +364,20 @@ export default function Page() {
                 setValue("참가자");
               }}
             >
-              <div className="cine-next-button">처음으로 돌아가기</div>
+              <div className={styles["cine-next-button"]}>
+                처음으로 돌아가기
+              </div>
             </div>{" "}
             <div
-              className="cine-answer-button-flex"
+              className={styles["cine-answer-button-flex"]}
               style={{ marginTop: "10px", marginBottom: "60px" }}
               onClick={() => {
                 setTestNumber(31);
               }}
             >
-              <div className="cine-next-button">이전 페이지로 돌아가기</div>
+              <div className={styles["cine-next-button"]}>
+                이전 페이지로 돌아가기
+              </div>
             </div>
           </div>
         </>
@@ -536,11 +551,13 @@ export default function Page() {
   }
 
   return (
-    <div className="cine-container">
-      <div className="cine-flex-container">
+    <div className={styles["cine-container"]}>
+      <div className={styles["cine-flex-container"]}>
         <div
           className={
-            testNumber === 32 ? "cine-nav-32-container" : "cine-nav-container"
+            testNumber === 32
+              ? styles["cine-nav-32-container"]
+              : styles["cine-nav-container"]
           }
           style={
             testNumber < 31
@@ -552,16 +569,16 @@ export default function Page() {
               : navStyle
           }
         >
-          <div className="cine-test-title">
+          <div className={styles["cine-test-title"]}>
             <div>{"시네필 테스트"}</div>
           </div>
           <div
             className={testNumber === 32 ? "cine-hide" : ""}
             style={testNumber === 32 ? {} : { display: "none" }}
           >
-            <div className="cine-select-div">
+            <div className={styles["cine-select-div"]}>
               <select
-                className="cine-hide-select"
+                className={styles["cine-hide-select"]}
                 name="tests"
                 id="test-select"
                 style={{ width: "100%" }}
@@ -577,10 +594,10 @@ export default function Page() {
           </div>
           {progressContent}
         </div>
-        <div className="cine-content-container" style={contentStyle}>
+        <div className={styles["cine-content-container"]} style={contentStyle}>
           {handleTest()}
         </div>
-        <div className="cine-footer-container">{buttonContent}</div>
+        <div className={styles["cine-footer-container"]}>{buttonContent}</div>
       </div>
       <Script
         src="https://developers.kakao.com/sdk/js/kakao.js"

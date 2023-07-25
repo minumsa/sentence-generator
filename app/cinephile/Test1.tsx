@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import styles from "./cine.module.css";
 
 interface TestProps {
   score: number;
@@ -31,7 +32,6 @@ export default function Test1({ score, setScore }: TestProps) {
 
   function clickAnswer(answerIndex: number) {
     if (answers[answerIndex].backgroundColor === answerStyle.backgroundColor) {
-      // 클릭한 답변을 다시 클릭하면 초기화
       setAnswers(prevAnswers => {
         const updatedAnswers = [...prevAnswers];
         updatedAnswers[answerIndex] = {};
@@ -49,8 +49,8 @@ export default function Test1({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className="cine-test-format">
-        <div className="cine-quiz">
+      <div className={styles["cine-test-format"]}>
+        <div className={styles["cine-quiz"]}>
           <span>{`1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 `}</span>
           <span style={{ textDecoration: "underline" }}>않는</span>
           <span> 음식은?</span>
@@ -58,7 +58,7 @@ export default function Test1({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className="cine-answer"
+            className={styles["cine-answer"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >
