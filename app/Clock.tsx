@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import NoSSR from "./NoSSR";
 
-export default function Clock({ language }: any) {
+interface PageProps {
+  language: string;
+}
+
+export default function Clock({ language }: PageProps) {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   useEffect(() => {

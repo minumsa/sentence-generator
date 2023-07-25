@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Draggable from "react-draggable";
 
-interface indexProps {
+interface PageProps {
   language: string;
 }
 
-export default function Main({ language }: indexProps) {
+export default function Main({ language }: PageProps) {
   const [folderWidth, setFolderWidth] = useState<number>(80);
   const [folderHeight, setFolderHeight] = useState<number>(65);
   const [mobileFolderWidth, setMobileFolderWidth] = useState<number>(

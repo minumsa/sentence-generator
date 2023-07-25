@@ -104,10 +104,8 @@ const [showContact, setShowContact] = useState<boolean>(false);
   }}
 >
   divdivdiv
-</div>
-
+</div>;
 ```
-
 
 ### 상태 변경과 이벤트 처리 부분
 
@@ -135,8 +133,7 @@ const [showContact, setShowContact] = useState<boolean>(false);
   }}
 >
   divdivdiv
-</div>
-
+</div>;
 ```
 
 ### ImageModal 컴포넌트 부분
@@ -172,7 +169,7 @@ const handleFortuneClick = () => {
 `useEffect`를 사용하여 컴포넌트가 렌더링될 때 타이머를 설정하고, 1초마다 현재 시간을 업데이트합니다. 컴포넌트가 언마운트될 때 해당 타이머를 정리하여 메모리 누수를 방지합니다.
 
 ```typescript
-// Clock.tsx
+// Clock.tsx
 
 useEffect(() => {
   const interval = setInterval(() => {
@@ -187,29 +184,30 @@ useEffect(() => {
 
 ### 현재 언어에 맞는 시계를 반환하고 서버사이드 렌더링을 방지하는 부분
 
-시간은 12시간 형식으로 변환하고, String() 함수와 padStart() 함수를 사용하여 시간과 분을 두 자리 숫자로 표시합니다. 그리고 NoSSR 컴포넌트로 감싸서 서버사이드 렌더링 시 시계가 중복으로 렌더링되는 현상을 방지합니다. 
+시간은 12시간 형식으로 변환하고, String() 함수와 padStart() 함수를 사용하여 시간과 분을 두 자리 숫자로 표시합니다. 그리고 NoSSR 컴포넌트로 감싸서 서버사이드 렌더링 시 시계가 중복으로 렌더링되는 현상을 방지합니다.
 
 ```typescript
 // Clock.tsx
 
- if (language === "A") {
-    period = hours >= 12 ? "PM" : "AM";
+if (language === "A") {
+  period = hours >= 12 ? "PM" : "AM";
 
-    const engClock = `${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
-    return (
-      <NoSSR>
-        {period} {engClock}
-      </NoSSR>
-    );
-  } else {
-    period = hours >= 12 ? "오후" : "오전";
-    const korClock = `${period} ${String(twelveHourFormat).padStart(
-      2,
-      "0"
-    )}:${minutes}`;
-    return <NoSSR>{korClock}</NoSSR>;
-  }
+  const engClock = `${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
+  return (
+    <NoSSR>
+      {period} {engClock}
+    </NoSSR>
+  );
+} else {
+  period = hours >= 12 ? "오후" : "오전";
+  const korClock = `${period} ${String(twelveHourFormat).padStart(
+    2,
+    "0"
+  )}:${minutes}`;
+  return <NoSSR>{korClock}</NoSSR>;
+}
 ```
+
 ```typescript
 // NoSSR.tsx
 
@@ -225,4 +223,3 @@ const NoSSR = ({ children, fallback = null }: Props) => {
   return children;
 };
 ```
-

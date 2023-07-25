@@ -1,10 +1,10 @@
 "use client";
 
-interface IndexProps {
+interface PageProps {
   language: string;
 }
 
-export default function About({ language }: IndexProps) {
+export default function About({ language }: PageProps) {
   return (
     <>
       <div className="index-about-container">

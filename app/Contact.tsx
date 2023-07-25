@@ -1,10 +1,10 @@
 "use client";
 
-interface IndexProps {
+interface PageProps {
   language: string;
 }
 
-export default function Contact({ language }: IndexProps) {
+export default function Contact({ language }: PageProps) {
   return (
     <div className="index-contact-container">
       <a
