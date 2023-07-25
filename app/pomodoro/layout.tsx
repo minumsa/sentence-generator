@@ -4,7 +4,9 @@ export const metadata = {
   title: "복제양 뽀모도로",
   openGraph: {
     title: "복제양 뽀모도로",
-    images: [{ url: "/sheep-thumbnail.png", width: 1800, height: 945 }],
+    images: [
+      { url: "/pomodoro/sheep-thumbnail.png", width: 1800, height: 945 },
+    ],
     locale: "ko_KR",
     siteName: "divdivdiv",
     type: "website",

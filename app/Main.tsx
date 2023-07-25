@@ -60,7 +60,8 @@ export default function Main({ language }: PageProps) {
           alignItems: "center",
           justifyContent: "center",
           boxShadow:
-            imgSrc === "/memo-nav-ko.webp" || imgSrc === "/memo-nav-en.webp"
+            imgSrc === "/divdivdiv-readme-nav-ko.webp" ||
+            imgSrc === "/divdivdiv-readme-nav-en.webp"
               ? "1px 2px 5px gray"
               : undefined,
         }}
@@ -227,15 +228,15 @@ export default function Main({ language }: PageProps) {
 
   const handleDoubleClick = (index: number) => {
     if (index === 6) {
-      setImgSrc("/cat.webp");
+      setImgSrc("/divdivdiv-cat.webp");
       setImgAlt("Cat");
     } else if (index === 7) {
-      setImgSrc("/me.webp");
+      setImgSrc("/divdivdiv-me.webp");
       setImgAlt("Me");
     } else if (index === 8) {
       language === "A"
-        ? setImgSrc("/memo-nav-en.webp")
-        : setImgSrc("/memo-nav-ko.webp");
+        ? setImgSrc("/divdivdiv-readme-nav-en.webp")
+        : setImgSrc("/divdivdiv-readme-nav-ko.webp");
       setImgAlt("README.txt");
     }
     setShowImage(true);
@@ -300,7 +301,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: folderWidth,
@@ -323,7 +324,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: folderWidth,
@@ -348,7 +349,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: folderWidth,
@@ -371,7 +372,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: folderWidth,
@@ -394,7 +395,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: folderWidth,
@@ -414,7 +415,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(cat.webp)`,
+              backgroundImage: `url(divdivdiv-cat.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: imgFileWidth,
@@ -439,7 +440,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(me.webp)`,
+              backgroundImage: `url(divdivdiv-me.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: imgFileWidth,
@@ -464,7 +465,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(fortune.webp)`,
+              backgroundImage: `url(divdivdiv-fortune.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: 80,
@@ -484,7 +485,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: "url(exp_en.webp)",
+              backgroundImage: "url(divdivdiv-readme-en.webp)",
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: imgFileWidth,
@@ -511,7 +512,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: folderWidth,
@@ -534,7 +535,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: mobileFolderWidth,
@@ -555,7 +556,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: mobileFolderWidth,
@@ -578,7 +579,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: mobileFolderWidth,
@@ -600,7 +601,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: mobileFolderWidth,
@@ -621,7 +622,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: mobileFolderWidth,
@@ -642,7 +643,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(folder.png)`,
+              backgroundImage: `url(divdivdiv-folder.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: mobileFolderWidth,
@@ -660,7 +661,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: "url(exp_en.webp)",
+              backgroundImage: "url(divdivdiv-readme-en.webp)",
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: MobileImgFileWidth,
@@ -684,7 +685,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(me.webp)`,
+              backgroundImage: `url(divdivdiv-me.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: MobileImgFileWidth,
@@ -708,7 +709,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(cat.webp)`,
+              backgroundImage: `url(divdivdiv-cat.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: MobileImgFileWidth,
@@ -735,7 +736,7 @@ export default function Main({ language }: PageProps) {
             style={{
               color: "white",
               cursor: "move",
-              backgroundImage: `url(fortune.webp)`,
+              backgroundImage: `url(divdivdiv-fortune.webp)`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               width: 80 * 0.9,
@@ -752,7 +753,6 @@ export default function Main({ language }: PageProps) {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }
