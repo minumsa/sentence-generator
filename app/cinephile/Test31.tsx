@@ -10,16 +10,16 @@ interface NameProps {
 }
 
 export default function Test31({ value, score }: NameProps) {
-  const maxScore = 120; // 최대 점수 설정
+  const maxScore = 120;
   const [myRank, setMyRank] = useState<number>(0);
   const [totalCount, setTotalcount] = useState<number>(0);
 
   const calculatePercentage = (score: number) => {
-    return Math.floor((score / maxScore) * 100); // 백분율 계산
+    return Math.floor((score / maxScore) * 100);
   };
 
-  const percentage = calculatePercentage(score); // 현재 점수의 백분율 계산
-  const clipPathPercentage = Math.floor(percentage / 10) * 10; // 10% 단위로 변화
+  const percentage = calculatePercentage(score);
+  const clipPathPercentage = Math.floor(percentage / 10) * 10;
 
   useEffect(() => {
     axios
@@ -71,8 +71,8 @@ export default function Test31({ value, score }: NameProps) {
           style={{
             position: "absolute",
             marginTop: "20px",
-            clipPath: `inset(0 ${100 - clipPathPercentage}% 0 0)`, // 백분율에 따라 클리핑 설정
-            zIndex: 2, // point-star 위에 배치
+            clipPath: `inset(0 ${100 - clipPathPercentage}% 0 0)`,
+            zIndex: 2,
           }}
         />
         <Image
@@ -84,7 +84,7 @@ export default function Test31({ value, score }: NameProps) {
           style={{
             position: "absolute",
             marginTop: "20px",
-            zIndex: 1, // point-star 위에 배치
+            zIndex: 1,
           }}
         />
       </div>

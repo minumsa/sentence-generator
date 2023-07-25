@@ -1,5 +1,4 @@
 import React from "react";
-import Cinephile from "./Cinephile";
 
 export const metadata = {
   title: "시네필 테스트",
@@ -24,12 +23,8 @@ type Props = {
   children: React.ReactNode;
 };
 
-function Layout() {
-  return (
-    <div>
-      <Cinephile />
-    </div>
-  );
-}
+const Layout = ({ children }: Props) => {
+  return <div>{children}</div>;
+};
 
 export default Layout;
