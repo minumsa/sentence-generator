@@ -87,8 +87,8 @@ export default function Cinephile() {
       objectType: "text",
       text: `나의 시네필 평점은? ${scoreToStar}`,
       link: {
-        mobileWebUrl: "https://divdivdiv.com/cinephile-test",
-        webUrl: "https://divdivdiv.com/cinephile-test",
+        mobileWebUrl: "https://divdivdiv.com/cinephile",
+        webUrl: "https://divdivdiv.com/cinephile",
       },
     });
   };
@@ -303,7 +303,7 @@ export default function Cinephile() {
               style={{ marginTop: "10px" }}
               onClick={() => {
                 window.open(
-                  `https://twitter.com/share?url=https://divdivdiv.com/cinephile-test&text=나의 시네필 평점은? ${scoreToStar}`
+                  `https://twitter.com/share?url=https://divdivdiv.com/cinephile&text=나의 시네필 평점은? ${scoreToStar}`
                 );
               }}
             >

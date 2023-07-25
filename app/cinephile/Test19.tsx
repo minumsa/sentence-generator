@@ -59,7 +59,7 @@ export default function Test19({ score, setScore }: TestProps) {
         >{`19. 다음 중 <라쇼몽>(1950, 구로사와 아키라)에서 미후네 토시로가 연기한 산적 캐릭터의 이름으로 가장 적절한 것은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/cine-img-19.webp"
+            src="/cinephile/19-rashomon.webp"
             alt="cine-img-19"
             width={window.innerWidth > 450 ? "280" : "190"}
             height={window.innerWidth > 450 ? "210" : "140"}

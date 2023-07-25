@@ -443,7 +443,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
         .map((_, i) => (
           <span className="sheep-image" key={i}>
             <Image
-              src="/pomodoro/pomodoro-color.webp"
+              src="/pomodoro/icon-color.webp"
               alt="Pictures of the sheep"
               width="65"
               height="65"
@@ -459,7 +459,7 @@ function SheepImage({ plan, restTimeToggle, complete }: SheepImageProps) {
         .map((_, i) => (
           <span className="sheep-image" key={i}>
             <Image
-              src="/pomodoro/pomodoro-blank.webp"
+              src="/pomodoro/icon-mono.webp"
               alt="Pictures of the sheep"
               width="65"
               height="65"

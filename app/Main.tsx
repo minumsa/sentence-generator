@@ -118,7 +118,7 @@ export default function Main({ language }: PageProps) {
             <div className="main-exp-paragraph">
               <div
                 className="main-exp-paragraph-title"
-                onClick={() => clickIconHandler("/cinephile-test")}
+                onClick={() => clickIconHandler("/cinephile")}
               >
                 {language === "A"
                   ? "2. Cinephile Test 🍿"
@@ -131,7 +131,7 @@ export default function Main({ language }: PageProps) {
             <div className="main-exp-paragraph">
               <div
                 className="main-exp-paragraph-title"
-                onClick={() => clickIconHandler("/sheep-pomodoro")}
+                onClick={() => clickIconHandler("/pomodoro")}
               >
                 {language === "A" ? "3. Pomodoro 🐑" : "3. 뽀모도로 🐑"}
               </div>
@@ -317,7 +317,7 @@ export default function Main({ language }: PageProps) {
       <Draggable>
         <div
           className="index-icon-container-2"
-          onDoubleClick={() => clickIconHandler("/cinephile-test")}
+          onDoubleClick={() => clickIconHandler("/cinephile")}
         >
           <div
             className="index-icon-image"
@@ -342,7 +342,7 @@ export default function Main({ language }: PageProps) {
       <Draggable>
         <div
           className="index-icon-container-3"
-          onDoubleClick={() => clickIconHandler("/sheep-pomodoro")}
+          onDoubleClick={() => clickIconHandler("/pomodoro")}
         >
           <div
             className="index-icon-image"
@@ -549,7 +549,7 @@ export default function Main({ language }: PageProps) {
         </div>
         <div
           className="index-mobile-icon-container"
-          onClick={() => clickIconHandler("/cinephile-test")}
+          onClick={() => clickIconHandler("/cinephile")}
         >
           <div
             className="index-icon-image"
@@ -572,7 +572,7 @@ export default function Main({ language }: PageProps) {
         </div>
         <div
           className="index-mobile-icon-container"
-          onClick={() => clickIconHandler("/sheep-pomodoro")}
+          onClick={() => clickIconHandler("/pomodoro")}
         >
           <div
             className="index-icon-image"

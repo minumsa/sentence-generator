@@ -64,7 +64,7 @@ export default function Test6({ score, setScore }: TestProps) {
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/cine-img-6.webp"
+            src="/cinephile/06-shining.webp"
             alt="cine-img-6"
             width={window.innerWidth > 450 ? "280" : "180"}
             height={window.innerWidth > 450 ? "180" : "120"}

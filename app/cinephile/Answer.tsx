@@ -260,7 +260,7 @@ export default function Answer() {
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/cine-img-6.webp"
+            src="/cinephile/06-shining.webp"
             alt="test6-img"
             width={window.innerWidth > 450 ? "280" : "180"}
             height={window.innerWidth > 450 ? "180" : "120"}
@@ -814,7 +814,7 @@ export default function Answer() {
         >{`19. 다음 중 <라쇼몽>(1950, 구로사와 아키라)에서 미후네 토시로가 연기한 산적 캐릭터의 이름으로 가장 적절한 것은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/cine-img-19.webp"
+            src="/cinephile/19-rashomon.webp"
             alt="test19-img"
             width={window.innerWidth > 450 ? "280" : "180"}
             height={window.innerWidth > 450 ? "210" : "140"}
@@ -1029,7 +1029,7 @@ export default function Answer() {
         <div className="cine-quiz">{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
-            src="/cine-img-24.webp"
+            src="/cinephile/24-greta.webp"
             alt="test24-img"
             width={window.innerWidth > 450 ? "280" : "180"}
             height={window.innerWidth > 450 ? "190" : "120"}

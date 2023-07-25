@@ -16,7 +16,7 @@ module.exports = {
     return [
       {
         source: "/api2/:path*",
-        destination: "https://cinephile-test-server.vercel.app/api/:path*",
+        destination: "https://cinephile-server.vercel.app/api/:path*",
       },
     ];
   },

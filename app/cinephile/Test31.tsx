@@ -64,7 +64,7 @@ export default function Test31({ value, score }: NameProps) {
       >
         <Image
           className="point-star"
-          src="/cine-star-2.webp"
+          src="/cinephile/star-color.webp"
           alt="gray-star"
           width={window.innerWidth > 450 ? "230" : "230"}
           height={window.innerWidth > 450 ? "47" : "47"}
@@ -77,7 +77,7 @@ export default function Test31({ value, score }: NameProps) {
         />
         <Image
           className="background-star"
-          src="/cine-star-1.webp"
+          src="/cinephile/star-mono.webp"
           alt="gray-star"
           width={window.innerWidth > 450 ? "230" : "230"}
           height={window.innerWidth > 450 ? "47" : "47"}
