@@ -10,7 +10,7 @@ interface NameProps {
   score: number;
 }
 
-export default function Test31({ value, score }: NameProps) {
+export default function Result({ value, score }: NameProps) {
   const maxScore = 120;
   const [myRank, setMyRank] = useState<number>(0);
   const [totalCount, setTotalcount] = useState<number>(0);

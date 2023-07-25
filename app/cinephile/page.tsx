@@ -5,7 +5,7 @@ import styles from "./cine.module.css";
 
 import Answer from "./Answer";
 import Script from "next/script";
-import Test0 from "./Test0";
+import Index from "./Index";
 import Test1 from "./Test1";
 import Test2 from "./Test2";
 import Test3 from "./Test3";
@@ -36,7 +36,7 @@ import Test27 from "./Test27";
 import Test28 from "./Test28";
 import Test29 from "./Test29";
 import Test30 from "./Test30";
-import Test31 from "./Test31";
+import Result from "./Result";
 
 declare global {
   interface Window {
@@ -49,10 +49,14 @@ const kakaoInit = () => {
     window.Kakao.init("8b2e769ecd8f1b59e13d651bd3177712");
 };
 
+interface Option {
+  value: number | string;
+  text: string;
+}
+
 export default function Page() {
   const [testNumber, setTestNumber] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
-  const minTestNumber = 0;
   const maxTestNumber = 31;
   const progressPercent = Math.floor((testNumber / (maxTestNumber - 1)) * 100);
   const [progressContent, setProgressContent] = useState<any>();
@@ -61,7 +65,6 @@ export default function Page() {
   const [navStyle, setNavStyle] = useState<any>();
   const [value, setValue] = useState<string>("참가자");
   const [scoreComment, setScoreComment] = useState<string>("");
-  const [testMove, setTestMove] = useState<any>();
   const [scoreToStar, setScoreToStar] = useState<string>("⭐️");
   const convertedScore = Math.floor((score / 120) * 5 * 2) / 2;
 
@@ -93,7 +96,7 @@ export default function Page() {
   function handleTest() {
     switch (testNumber) {
       case 0:
-        return <Test0 />;
+        return <Index />;
       case 1:
         return <Test1 score={score} setScore={setScore} />;
       case 2:
@@ -155,7 +158,7 @@ export default function Page() {
       case 30:
         return <Test30 score={score} setScore={setScore} />;
       case 31:
-        return <Test31 value={value} score={score} />;
+        return <Result value={value} score={score} />;
       case 32:
         return <Answer />;
       default:
@@ -414,7 +417,7 @@ export default function Page() {
     return text;
   }
 
-  const options = [
+  const options: Option[] = [
     {
       value: 1,
       text: "1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 않는 음식은?",

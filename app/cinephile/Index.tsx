@@ -1,6 +1,6 @@
 "use client";
 
-export default function Test0() {
+export default function Index() {
   return (
     <>
       <div
