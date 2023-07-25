@@ -42,7 +42,7 @@ export default function Test12({ score, setScore }: TestProps) {
           >
             <span>{`1895년 겨울, 뤼미에르 형제는 프랑스의 한 카페에서 자신들의 작품을 공개했다. 이때 상영되었던 50초 분량의 <`}</span>
             <input
-              className="cine-test-input"
+              className={styles["cine-test-input"]}
               onChange={e => setMark(e.target.value)}
             ></input>
             {`의 도착>이라는 작품은 세계 최초의 영화로 널리 알려져 있다.`}

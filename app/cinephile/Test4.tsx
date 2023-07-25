@@ -41,7 +41,7 @@ export default function Test4({ score, setScore }: TestProps) {
         >
           {`"`}
           <input
-            className="cine-test-input"
+            className={styles["cine-test-input"]}
             onChange={e => setMark(e.target.value)}
           />
           {` 여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요."`}

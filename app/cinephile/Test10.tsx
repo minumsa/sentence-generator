@@ -54,10 +54,13 @@ export default function Test10({ score, setScore }: TestProps) {
         <div className={styles["cine-quiz"]}>
           <span>{`10. 다음 중 아래 제시된 이모지들과 가장 어울리는 왕가위의 영화는?`}</span>
         </div>
-        <div className="cine-test10-emoji" style={{ margin: "40px 0" }}>
+        <div
+          className={styles["cine-test10-emoji"]}
+          style={{ margin: "40px 0" }}
+        >
           📞 🍍 🕒 😎
         </div>
-        <div className="cine-test10-emoji">👮‍♂️ 💌 🔑 🛫</div>
+        <div className={styles["cine-test10-emoji"]}>👮‍♂️ 💌 🔑 🛫</div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}

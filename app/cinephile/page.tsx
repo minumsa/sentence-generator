@@ -288,9 +288,9 @@ export default function Page() {
               marginTop: "30px",
             }}
           >
-            <div className={"cine-score-comment"}>{scoreComment}</div>
+            <div className={styles["cine-score-comment"]}>{scoreComment}</div>
             <div
-              className={"cine-answer-button-flex"}
+              className={styles["cine-answer-button-flex"]}
               style={{ marginTop: "10px" }}
               onClick={() => {
                 setTestNumber(32);
