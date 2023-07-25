@@ -8,17 +8,11 @@ const getRandomItemFromArray = (array: string[]): string => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-interface InitialWords {
-  initialSubject: string;
-  initialObject: string;
-  initialVerb: string;
-}
-
 const generateRandomColor = (): string => {
   return "#" + Math.round(Math.random() * 0xffffff).toString(16);
 };
 
-const RandomSentenceGenerator: React.FC<InitialWords> = () => {
+export default function RandomSentenceGenerator() {
   const [randomSubject, setRandomSubject] = useState<string>("Pride");
   const [randomObject, setRandomObject] = useState<string>("Month");
   const [randomVerb, setRandomVerb] = useState<string>("2023");
@@ -113,6 +107,4 @@ const RandomSentenceGenerator: React.FC<InitialWords> = () => {
       </div>
     </div>
   );
-};
-
-export default RandomSentenceGenerator;
+}
