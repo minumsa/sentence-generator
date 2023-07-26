@@ -10,14 +10,11 @@ https://divdivdiv.com/pride-2023
 
 2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해둔 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다.
 
-## 파일 구조
+## 기술 스텍
 
-이 웹은 `Next.js`와 `React`, `TypeScript`를 사용해 개발했습니다. 코드는 크게 4개의 파일로 구성되어 있습니다.
-
-1. layout.tsx: 메타데이터 정보를 정의하고 컴포넌트를 구성합니다.
-2. page.tsx: 랜덤하게 조합되며 생성되는 문장을 보여줍니다.
-3. words.ts: 주어, 문장, 동사에 해당하는 문자열의 배열을 저장합니다.
-4. pride-2023.module.css: 전체 웹의 CSS를 담당합니다.
+- ![Next][Next.js]
+- ![React][React.js]
+- ![TypeScript][TypeScript]
 
 ## 동작 방법
 
@@ -27,6 +24,13 @@ https://divdivdiv.com/pride-2023
 npm install
 npm run dev
 ```
+
+## 파일 구조
+
+1. `layout.tsx`: 메타데이터 정보를 정의하고 컴포넌트를 구성합니다.
+2. `page.tsx`: 랜덤하게 조합되며 생성되는 문장을 보여줍니다.
+3. `words.ts`: 주어, 문장, 동사에 해당하는 문자열의 배열을 저장합니다.
+4. `pride-2023.module.css`: 전체 웹의 CSS를 담당합니다.
 
 ## 코드 스니펫
 
@@ -135,3 +139,10 @@ return (
   </div>
 );
 ```
+
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[Redux]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+[MongoDB]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[Gatsby]: https://img.shields.io/badge/Gatsby-663399?style=for-the-badge&logo=gatsby&logoColor=white
