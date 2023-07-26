@@ -1,8 +1,14 @@
 # README.md
 
+![스크린샷 2023-07-26 오후 1 16 01](https://github.com/minumsa/divdivdiv/assets/83910706/fdf17f32-f82c-4023-bf2b-903ca4cdc362)
+
 ## 링크
 
-https://divdivdiv.com/fruits
+https://divdivdiv.com/pride-2023
+
+## 프로젝트 설명
+
+2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해둔 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다.
 
 ## 파일 구조
 
@@ -26,7 +32,7 @@ npm run dev
 
 ### 랜덤한 항목 선택 함수
 
-문자열 배열에서 랜덤한 항목을 선택하여 반환하는 유틸리티 함수입니다. 랜덤한 문장을 생성하는 데에 사용됩니다.
+문자열 배열에서 랜덤한 항목을 선택해 반환하는 유틸리티 함수입니다. 랜덤한 문장을 생성하는 데 사용됩니다.
 
 ```typescript
 // page.tsx
@@ -38,7 +44,7 @@ const getRandomItemFromArray = (array: string[]): string => {
 
 ### 랜덤한 색상 생성 함수
 
-랜덤한 색상 코드를 생성하여 반환하는 유틸리티 함수입니다. 랜덤한 색상으로 문장의 부분들을 스타일링하는 데에 사용됩니다.
+랜덤한 색상 코드를 생성해 반환하는 유틸리티 함수입니다. 랜덤한 색상으로 문장의 부분들을 스타일링하는 데 사용됩니다.
 
 ```typescript
 // page.tsx
@@ -76,9 +82,9 @@ export default function RandomSentenceGenerator() {
   }, [isRunning]);
 ```
 
-### 문장을 랜덤한 색상으로 스타일링하여 보여주는 JSX
+### 문장을 랜덤한 색상으로 스타일링해 보여주는 JSX
 
-랜덤한 문장을 생성하고 해당 문장의 부분들을 랜덤한 색상으로 스타일링하여 보여줍니다. 문장은 `styles["sentence"]` 클래스를 가진 div 요소로 표현되며, `generateRandomColor()` 함수를 사용하여 랜덤한 색상으로 스타일링됩니다. 모바일 환경에서는 `.mobile-subject`와 같은 클래스를 가진 요소들도 존재하며, 이들 역시 랜덤한 색상으로 스타일링됩니다.
+랜덤한 문장을 생성하고 해당 문장의 부분들을 랜덤한 색상으로 스타일링해 보여줍니다. 문장은 `styles["sentence"]` 클래스를 가진 div 요소로 표현되며, `generateRandomColor()` 함수를 사용해 랜덤한 색상으로 스타일링됩니다. 모바일 환경에서는 `.mobile-subject`와 같은 클래스를 가진 요소들도 존재하며, 이들 역시 랜덤한 색상으로 스타일링됩니다.
 
 ```typescript
 // page.tsx
