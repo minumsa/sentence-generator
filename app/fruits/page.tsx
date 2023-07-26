@@ -44,8 +44,10 @@ export default function Page() {
         fruit.addEventListener("click", clickHandler);
       }
 
-      setTimeout(() => {}, 10000);
-    }, 300);
+      setTimeout(() => {
+        fruit.remove();
+      }, 10000);
+    }, 1000);
 
     return () => {
       clearInterval(interval);
