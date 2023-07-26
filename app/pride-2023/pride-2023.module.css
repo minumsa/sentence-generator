@@ -31,8 +31,7 @@
   margin-right: 0.2em;
 }
 
-.mobile-container,
-.mobile-sentence {
+.mobile-container {
   display: none;
 }
 
