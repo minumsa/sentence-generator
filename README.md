@@ -145,14 +145,31 @@ const [showContact, setShowContact] = useState<boolean>(false);
 
 ### ImageModal 컴포넌트 부분
 
-`ImageModal` 컴포넌트는 이미지를 확대해서 보여주거나 프로젝트 설명을 적은 메모를 보여주는 역할을 합니다.
+이미지를 더블 클릭하면 해당 이미지 URL과 텍스트가 상태 변수에 입력됩니다. `ImageModal` 컴포넌트는 이미지를 확대해서 보여주거나 프로젝트에 대한 설명을 적은 메모를 보여주는 역할을 합니다.
+
+```typescript
+const handleDoubleClick = (index: number) => {
+  if (index === 6) {
+    setImgSrc("/divdivdiv/cat.webp");
+    setImgAlt("Cat");
+  } else if (index === 7) {
+    setImgSrc("/divdivdiv/me.webp");
+    setImgAlt("Me");
+  } else if (index === 8) {
+    language === "A"
+      ? setImgSrc("/divdivdiv/readme-nav-en.webp")
+      : setImgSrc("/divdivdiv/readme-nav-ko.webp");
+    setImgAlt("README.txt");
+  }
+  setShowImage(true);
+};
+```
 
 ```typescript
 // Main.tsx
 
 const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
-  // 이미지 모달 컴포넌트를 정의합니다.
-  // 클릭 시 확대해 이미지를 보여주거나 프로젝트 설명을 보여줍니다.
+  // ...
 };
 ```
 
