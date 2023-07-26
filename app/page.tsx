@@ -63,17 +63,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles["container"]}>
-      <div className={styles["index-container"]}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div className={styles["index-nav-container"]}>
+    <div className={styles["container-background"]}>
+      <div className={styles["container"]}>
+        <div>
+          <div className={styles["nav"]}>
             <div
-              className={styles["menu-text"]}
+              className={styles["button-left"]}
               style={{
                 marginLeft: "10px",
                 fontWeight: showMain ? "600" : "400",
@@ -87,7 +82,7 @@ export default function Home() {
               divdivdiv
             </div>
             <div
-              className={styles["menu-text"]}
+              className={styles["button-left"]}
               onClick={() => {
                 setShowAbout(true);
                 setShowMain(false);
@@ -98,7 +93,7 @@ export default function Home() {
               {language === "A" ? "About" : "소개"}
             </div>
             <div
-              className={styles["menu-text"]}
+              className={styles["button-left"]}
               onClick={() => {
                 setShowContact(true);
                 setShowAbout(false);
@@ -108,12 +103,9 @@ export default function Home() {
             >
               {language === "A" ? "Contact" : "연결"}
             </div>
+            <div className={styles["blank-space"]}></div>
             <div
-              className={styles["index-menu-grow"]}
-              style={{ flexGrow: "1" }}
-            ></div>
-            <div
-              className={`${styles["right-menu-item"]} ${styles["right-menu-weather-icon"]}`}
+              className={`${styles["button-right"]} ${styles["right-menu-weather-icon"]}`}
             >
               {weatherData ? (
                 <Image
@@ -127,14 +119,14 @@ export default function Home() {
               )}
             </div>
             <div
-              className={`${styles["right-menu-item"]} ${styles["right-menu-weather-temp"]}`}
+              className={`${styles["button-right"]} ${styles["right-menu-weather-temp"]}`}
             >
               {weatherData
                 ? `${(weatherData.main.temp - 273.15).toFixed(1)}°`
                 : ""}
             </div>
             <div
-              className={`${styles["right-menu-item"]} ${styles["right-menu-language"]}`}
+              className={`${styles["button-right"]} ${styles["right-menu-language"]}`}
               onClick={() => {
                 language === "A" ? setLanguage("한") : setLanguage("A");
               }}
@@ -147,7 +139,7 @@ export default function Home() {
               {language}
             </div>
             <div
-              className={`${styles["right-menu-item"]} ${styles["right-menu-calender"]}`}
+              className={`${styles["button-right"]} ${styles["right-menu-calender"]}`}
               style={{
                 border: "1px solid #000000",
                 borderRadius: "5px",
@@ -158,7 +150,7 @@ export default function Home() {
                 : `${month}월 ${day}일 (${dayOfWeek})`}
             </div>
             <div
-              className={`${styles["right-menu-item"]} ${styles["right-menu-clock"]}`}
+              className={`${styles["button-right"]} ${styles["right-menu-clock"]}`}
             >
               <Clock language={language} />
             </div>

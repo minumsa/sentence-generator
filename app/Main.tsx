@@ -549,6 +549,8 @@ export default function Main({ language }: PageProps) {
               backgroundImage: "url(/divdivdiv/readme-icon.webp)",
               width: MobileImgFileWidth,
               height: MobileImgFileHeight,
+              boxShadow: "1px 2px 5px gray",
+              border: 0,
             }}
             onClick={() => {
               setIsMobile(true);
@@ -568,6 +570,7 @@ export default function Main({ language }: PageProps) {
               backgroundImage: `url(/divdivdiv/me.webp)`,
               width: MobileImgFileWidth,
               height: MobileImgFileHeight,
+              boxShadow: "1px 2px 5px gray",
             }}
             onClick={() => {
               setIsMemo(false);
@@ -586,6 +589,7 @@ export default function Main({ language }: PageProps) {
               backgroundImage: `url(/divdivdiv/cat.webp)`,
               width: MobileImgFileWidth,
               height: MobileImgFileHeight,
+              boxShadow: "1px 2px 5px gray",
             }}
             onClick={() => {
               setIsMobile(true);
