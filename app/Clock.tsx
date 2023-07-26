@@ -27,12 +27,11 @@ export default function Clock({ language }: PageProps) {
   if (language === "A") {
     period = hours >= 12 ? "PM" : "AM";
 
-    const engClock = `${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
-    return (
-      <NoSSR>
-        {period} {engClock}
-      </NoSSR>
-    );
+    const engClock = `${period} ${String(twelveHourFormat).padStart(
+      2,
+      "0"
+    )}:${minutes}`;
+    return <NoSSR>{engClock}</NoSSR>;
   } else {
     period = hours >= 12 ? "오후" : "오전";
     const korClock = `${period} ${String(twelveHourFormat).padStart(

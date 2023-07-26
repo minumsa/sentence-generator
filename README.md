@@ -4,6 +4,10 @@
 
 https://divdivdiv.com
 
+## 프로젝트 설명
+
+개인 프로젝트를 업로드하는 포트폴리오 페이지입니다.
+
 ## 웹 구조
 
 이 웹은 `Next.js`와 `React`, `TypeScript`를 사용해 개발했습니다. 코드는 5개의 컴포넌트로 구성되어 있습니다.
@@ -23,7 +27,7 @@ npm install
 npm run dev
 ```
 
-## 프로젝트 세부 설명
+## 컴포넌트 역할
 
 ![스크린샷 2023-07-24 오후 6 35 50](https://github.com/minumsa/divdivdiv/assets/83910706/e0c3e960-6ffd-4596-adbf-1687455985f1)
 
@@ -195,12 +199,11 @@ useEffect(() => {
 if (language === "A") {
   period = hours >= 12 ? "PM" : "AM";
 
-  const engClock = `${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
-  return (
-    <NoSSR>
-      {period} {engClock}
-    </NoSSR>
-  );
+  const engClock = `${period} ${String(twelveHourFormat).padStart(
+    2,
+    "0"
+  )}:${minutes}`;
+  return <NoSSR>{engClock}</NoSSR>;
 } else {
   period = hours >= 12 ? "오후" : "오전";
   const korClock = `${period} ${String(twelveHourFormat).padStart(
