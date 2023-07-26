@@ -18,10 +18,10 @@ export default function Clock({ language }: PageProps) {
     };
   }, []);
 
-  const hours = currentTime.getHours();
-  const minutes = String(currentTime.getMinutes()).padStart(2, "0");
-  const twelveHourFormat = hours % 12 || 12;
-  let period = "";
+  const hours: number = currentTime.getHours();
+  const minutes: string = String(currentTime.getMinutes()).padStart(2, "0");
+  const twelveHourFormat: number = hours % 12 || 12;
+  let period: string = "";
 
   if (language === "A") {
     period = hours >= 12 ? "PM" : "AM";
