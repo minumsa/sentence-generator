@@ -10,6 +10,15 @@ https://divdivdiv.com
 
 개인 프로젝트를 업로드하는 포트폴리오 페이지입니다.
 
+## 동작 방법
+
+사용한 `npm` 버전은 9.2.0이며, `Node.js` 버전은 v19.4.0입니다. 프로젝트를 실행시키기 위한 명령어는 다음과 같습니다.
+
+```shell
+npm install
+npm run dev
+```
+
 ## 웹 구조
 
 이 웹은 `Next.js`와 `React`, `TypeScript`를 사용해 개발했습니다. 코드는 5개의 컴포넌트로 구성되어 있습니다.
@@ -20,22 +29,11 @@ https://divdivdiv.com
 4. `About`: 소개 페이지 컴포넌트입니다. 개발자에 관한 간단한 정보를 보여줍니다.
 5. `Contact`: 연결 페이지 컴포넌트입니다. 개발자의 깃허브 링크, 이메일 주소를 나타냅니다.
 
-## 동작 방법
-
-사용한 `npm` 버전은 9.2.0이며, `Node.js` 버전은 v19.4.0입니다. 프로젝트를 실행시키기 위한 명령어는 다음과 같습니다.
-
-```shell
-npm install
-npm run dev
-```
-
-## 컴포넌트 역할
-
 ### Index 컴포넌트
 
 - 현재 페이지에 해당하는 컴포넌트를 보여주도록 `showMain`, `showAbout`, `showContact` 상태 변수가 업데이트됩니다.
 - 페이지의 배경색 및 글자색은 `isDarkMode` 변수에 따라 변경됩니다.
-- 오늘 날짜를 가져와 `year`, `month`, `day`, `dayOfWeek`, `dayOfEngWeek`를 계산합니다. `getDayOfWeek` 함수를 정의해 날짜에 따른 요일을 한국어와 영어로 구분해서 상단 네비게이션 바에 반환합니다.
+- 오늘 날짜를 가져와 `year`, `month`, `day`, `dayOfWeek`, `dayOfEngWeek`를 계산합니다. `getDayOfWeek` 함수를 정의해 날짜에 따른 요일을 한국어와 영어로 구분한 뒤, 상단 네비게이션 바에 반환합니다.
 - `useEffect` 훅을 통해 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 하고, `fetchData` 함수를 호출합니다. 그리고 OpenWeatherMap API를 사용해 서울의 날씨 데이터를 가져와 `weatherData` 상태 변수에 저장합니다. 해당 날씨 데이터로 상단 네비게이션 바에 날씨 아이콘과 기온을 표시합니다.
 
 ### Main 컴포넌트
