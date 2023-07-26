@@ -49,10 +49,10 @@ export default function RandomSentenceGenerator() {
         media="(prefers-color-scheme: dark)"
         content="#0e1111"
       />
-      <div className={styles["div1"]}>
-        <div className={styles["div2"]} onClick={handleClick}>
+      <div className={styles["sentence-container"]}>
+        <div className={styles["sentence"]} onClick={handleClick}>
           <span
-            className={styles["span-subject"]}
+            className={styles["subject"]}
             style={{
               color: generateRandomColor(),
             }}
@@ -60,7 +60,7 @@ export default function RandomSentenceGenerator() {
             {randomSubject}{" "}
           </span>
           <span
-            className={styles["span-object"]}
+            className={styles["object"]}
             style={{
               color: generateRandomColor(),
             }}
@@ -68,7 +68,7 @@ export default function RandomSentenceGenerator() {
             {randomObject}{" "}
           </span>
           <span
-            className={styles["span-verb"]}
+            className={styles["verb"]}
             style={{
               color: generateRandomColor(),
             }}
@@ -77,9 +77,9 @@ export default function RandomSentenceGenerator() {
           </span>
         </div>
         <div className={styles["mobile-container"]} onClick={handleClick}>
-          <div className={styles["mobile-div1"]}>
+          <div className={styles["mobile-sentence"]}>
             <div
-              className={styles["div-mobile-subject"]}
+              className={styles["mobile-subject"]}
               style={{
                 color: generateRandomColor(),
               }}
@@ -87,7 +87,7 @@ export default function RandomSentenceGenerator() {
               {randomSubject}{" "}
             </div>
             <div
-              className={styles["div-mobile-object"]}
+              className={styles["mobile-object"]}
               style={{
                 color: generateRandomColor(),
               }}
@@ -96,7 +96,7 @@ export default function RandomSentenceGenerator() {
             </div>
           </div>
           <div
-            className={styles["div-mobile-verb"]}
+            className={styles["mobile-verb"]}
             style={{
               color: generateRandomColor(),
             }}

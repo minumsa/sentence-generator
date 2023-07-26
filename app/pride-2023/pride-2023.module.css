@@ -8,7 +8,7 @@
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-.div1 {
+.sentence-container {
   width: 100vw;
   height: 95vh;
   overflow: hidden;
@@ -20,19 +20,19 @@
   font-weight: 900;
 }
 
-.div2 {
+.sentence {
   cursor: pointer;
 }
 
-.span-subject,
-.span-object,
-.span-verb {
+.subject,
+.object,
+.verb {
   display: inline-block;
   margin-right: 0.2em;
 }
 
 .mobile-container,
-.mobile-div1 {
+.mobile-sentence {
   display: none;
 }
 
@@ -44,15 +44,15 @@
     height: 100vh;
   }
 
-  .div1 {
+  .sentence-container {
     text-align: center;
   }
 
-  .div2 {
+  .sentence {
     display: none;
   }
 
-  .mobile-div1 {
+  .mobile-sentence {
     display: flex;
     font-size: 10vw;
     word-break: keep-all;
@@ -63,30 +63,30 @@
     cursor: pointer;
   }
 
-  .div-mobile-subject,
-  .div-mobile-object,
-  .div-mobile-verb {
+  .mobile-subject,
+  .mobile-object,
+  .mobile-verb {
     display: inline-block;
     font-size: 8vw;
   }
 
-  .div-mobile-object {
+  .mobile-object {
     margin-left: 1.8vw;
   }
 
-  .div-mobile-verb {
+  .mobile-verb {
     height: 15vh;
     margin-top: 3vh;
   }
 }
 
 @media (max-width: 500px) {
-  .div1 {
+  .sentence-container {
     height: 92%;
     width: 100%;
   }
 
-  .div-mobile-verb {
+  .mobile-verb {
     height: 0;
   }
 }
