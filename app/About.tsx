@@ -8,7 +8,7 @@ interface PageProps {
 
 export default function About({ language }: PageProps) {
   return (
-    <div className={styles["index-about-container"]}>
+    <div className={styles["about-container"]}>
       <ul style={{ lineHeight: "200%" }}>
         <li>
           {language === "A"

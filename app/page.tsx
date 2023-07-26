@@ -65,7 +65,7 @@ export default function Home() {
   return (
     <div className={styles["container-background"]}>
       <div className={styles["container"]}>
-        <div>
+        <div className={styles["nav-container"]}>
           <div className={styles["nav"]}>
             <div
               className={styles["button-left"]}
@@ -104,9 +104,7 @@ export default function Home() {
               {language === "A" ? "Contact" : "연결"}
             </div>
             <div className={styles["blank-space"]}></div>
-            <div
-              className={`${styles["button-right"]} ${styles["right-menu-weather-icon"]}`}
-            >
+            <div className={`${styles["button-right"]} ${styles["weather"]}`}>
               {weatherData ? (
                 <Image
                   src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
@@ -119,14 +117,14 @@ export default function Home() {
               )}
             </div>
             <div
-              className={`${styles["button-right"]} ${styles["right-menu-weather-temp"]}`}
+              className={`${styles["button-right"]} ${styles["temperature"]}`}
             >
               {weatherData
                 ? `${(weatherData.main.temp - 273.15).toFixed(1)}°`
                 : ""}
             </div>
             <div
-              className={`${styles["button-right"]} ${styles["right-menu-language"]}`}
+              className={`${styles["button-right"]} ${styles["language"]}`}
               onClick={() => {
                 language === "A" ? setLanguage("한") : setLanguage("A");
               }}
@@ -139,7 +137,7 @@ export default function Home() {
               {language}
             </div>
             <div
-              className={`${styles["button-right"]} ${styles["right-menu-calender"]}`}
+              className={`${styles["button-right"]} ${styles["calender"]}`}
               style={{
                 border: "1px solid #000000",
                 borderRadius: "5px",
@@ -149,19 +147,12 @@ export default function Home() {
                 ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
                 : `${month}월 ${day}일 (${dayOfWeek})`}
             </div>
-            <div
-              className={`${styles["button-right"]} ${styles["right-menu-clock"]}`}
-            >
+            <div className={`${styles["button-right"]} ${styles["clock"]}`}>
               <Clock language={language} />
             </div>
           </div>
         </div>
-        <div
-          className={styles["index-content-container"]}
-          style={{
-            flexGrow: "1",
-          }}
-        >
+        <div className={styles["content"]}>
           {showMain && <Main language={language} />}
           {showAbout && <About language={language} />}
           {showContact && <Contact language={language} />}
