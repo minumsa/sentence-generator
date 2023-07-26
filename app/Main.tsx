@@ -87,7 +87,7 @@ export default function Main({ language }: PageProps) {
                 className={styles["paragraph-title"]}
                 onClick={() => clickIconHandler("https://blog.divdivdiv.com")}
               >
-                {readme.blog.title[lang]}
+                {`${readme.blog.title[lang]} ${readme.blog.emoji}`}
               </div>
               {readme.blog.text[lang]}
             </div>
@@ -96,7 +96,7 @@ export default function Main({ language }: PageProps) {
                 className={styles["paragraph-title"]}
                 onClick={() => clickIconHandler("/cinephile")}
               >
-                {readme.cinephile.title[lang]}
+                {`${readme.cinephile.title[lang]} ${readme.cinephile.emoji}`}
               </div>
               {readme.cinephile.text[lang]}
             </div>
@@ -105,7 +105,7 @@ export default function Main({ language }: PageProps) {
                 className={styles["paragraph-title"]}
                 onClick={() => clickIconHandler("/pomodoro")}
               >
-                {readme.pomodoro.title[lang]}
+                {`${readme.pomodoro.title[lang]} ${readme.pomodoro.emoji}`}
               </div>
               {readme.pomodoro.text[lang]}
             </div>
@@ -114,7 +114,7 @@ export default function Main({ language }: PageProps) {
                 className={styles["paragraph-title"]}
                 onClick={() => clickIconHandler("/fruits")}
               >
-                <span>{readme.fruits.title[lang]}</span>
+                {`${readme.fruits.title[lang]} ${readme.fruits.emoji}`}
               </div>
               {readme.fruits.text[lang]}
             </div>
@@ -123,16 +123,16 @@ export default function Main({ language }: PageProps) {
                 className={styles["paragraph-title"]}
                 onClick={() => clickIconHandler("/pride-2023")}
               >
-                {readme.sentenceGenerator.title[lang]}
+                {`${readme.pride.title[lang]} ${readme.pride.emoji}`}
               </div>
-              {readme.sentenceGenerator.text[lang]}
+              {readme.pride.text[lang]}
             </div>
             <div className={styles["paragraph"]}>
               <div
                 className={styles["paragraph-title"]}
                 onClick={() => clickIconHandler("/pride-2023")}
               >
-                {readme.music.title[lang]}
+                {`${readme.music.title[lang]} ${readme.music.emoji}`}
               </div>
               {readme.music.text[lang]}
             </div>
@@ -141,7 +141,7 @@ export default function Main({ language }: PageProps) {
                 className={styles["paragraph-title"]}
                 style={{ cursor: "help" }}
               >
-                {readme.techStack.text[lang]}
+                {`${readme.techStack.text[lang]} ${readme.techStack.emoji}`}
               </div>
               TypeScript, CSS, Next.js, React
             </div>
@@ -192,108 +192,84 @@ export default function Main({ language }: PageProps) {
       : alert(fortuneArr[Math.floor(Math.random() * fortuneArr.length)]);
   };
 
+  interface TitleProps {
+    EN: string;
+    KO: string;
+  }
+
+  function DraggableComponent(props: {
+    className: string;
+    link: string;
+    icon: string;
+    title: TitleProps;
+  }) {
+    const { className, link, icon, title } = props;
+
+    return (
+      <Draggable>
+        <div
+          className={styles[`${className}`]}
+          onDoubleClick={() => clickIconHandler(link)}
+        >
+          <div
+            className={styles["icon-image"]}
+            style={{
+              backgroundImage: `url(/divdivdiv/${icon}.webp)`,
+              width: folderWidth,
+              height: folderHeight,
+            }}
+          ></div>
+          <div className={styles["icon-title"]}>
+            {/* <div>{language === "A" ? "Project 1" : "프로젝트 1"}</div> */}
+            <div>{language === "A" ? `${title.EN}` : `${title.KO}`}</div>
+          </div>
+        </div>
+      </Draggable>
+    );
+  }
+
   return (
     <div>
       {showImage && (
         <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />
       )}
-      <Draggable>
-        <div
-          className={styles["icon-blog"]}
-          onDoubleClick={() => clickIconHandler("https://blog.divdivdiv.com")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: folderWidth,
-              height: folderHeight,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            <div>{language === "A" ? "Project 1" : "프로젝트 1"}</div>
-            <div>{language === "A" ? "(Blog)" : "(블로그)"}</div>
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-cinephile"]}
-          onDoubleClick={() => clickIconHandler("/cinephile")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: folderWidth,
-              height: folderHeight,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            <div>{language === "A" ? "Project 2" : "프로젝트 2"}</div>
-            <div>
-              {language === "A" ? "(Cinephile Test)" : "(시네필 테스트)"}
-            </div>
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-pomodoro"]}
-          onDoubleClick={() => clickIconHandler("/pomodoro")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: folderWidth,
-              height: folderHeight,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            <div>{language === "A" ? "Project 3" : "프로젝트 3"}</div>
-            <div>{language === "A" ? "(Pomodoro)" : "(뽀모도로)"}</div>
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-fruits"]}
-          onDoubleClick={() => clickIconHandler("/fruits")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: folderWidth,
-              height: folderHeight,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            <div>{language === "A" ? "Project 4" : "프로젝트 4"}</div>
-            <div>{language === "A" ? "(fruits)" : "(과일 생성기)"}</div>
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-pride"]}
-          onDoubleClick={() => clickIconHandler("/pride-2023")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: folderWidth,
-              height: folderHeight,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            <div>{language === "A" ? "Project 5" : "프로젝트 5"}</div>
-            <div>{language === "A" ? "(Sentences)" : "(문장 생성기)"}</div>
-          </div>
-        </div>
-      </Draggable>
+      <DraggableComponent
+        className="icon-blog"
+        link="https://blog.divdivdiv.com"
+        icon="folder"
+        title={readme.blog.title}
+      />
+      <DraggableComponent
+        className="icon-cinephile"
+        link="/cinephile"
+        icon="folder"
+        title={readme.cinephile.title}
+      />
+      <DraggableComponent
+        className="icon-pomodoro"
+        link="/pomodoro"
+        icon="folder"
+        title={readme.pomodoro.title}
+      />
+      <DraggableComponent
+        className="icon-fruits"
+        link="/fruits"
+        icon="folder"
+        title={readme.fruits.title}
+      />
+      <DraggableComponent
+        className="icon-pride"
+        link="/pride-2023"
+        icon="folder"
+        title={readme.pride.title}
+      />
+      <DraggableComponent
+        className="icon-pride"
+        link="/pride-2023"
+        icon="folder"
+        title={readme.pride.title}
+      />
+      {/* TODO: 이미지 모달 DraggableComponent 구현 */}
       <Draggable>
         <div
           className={styles["icon-cat"]}
