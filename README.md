@@ -1,5 +1,3 @@
-# README.md
-
 ![스크린샷 2023-07-24 오후 6 35 50](https://github.com/minumsa/divdivdiv/assets/83910706/e0c3e960-6ffd-4596-adbf-1687455985f1)
 
 ## 링크
