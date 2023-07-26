@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import styles from "./music.module.css";
 
 interface UploadItem {
   albumId: string;
@@ -201,13 +202,13 @@ UploadProps) {
   // console.log(musicData);
 
   return (
-    <div className="music-post-container">
+    <div className={styles["music-post-container"]}>
       <div style={{ textAlign: "center", fontWeight: "normal" }}>
         ｟ 업로드 페이지 ｠
       </div>
       <div style={{ marginTop: "100px" }}>앨범 ID(Spotify)</div>
       <input
-        className="music-post-input"
+        className={styles["music-post-input"]}
         value={albumId}
         onChange={e => {
           setAlbumId(e.target.value);
@@ -215,7 +216,7 @@ UploadProps) {
       ></input>
       <div style={{ marginTop: "50px" }}>장르</div>
       <input
-        className="music-post-input"
+        className={styles["music-post-input"]}
         value={genre}
         onChange={e => {
           setGenre(e.target.value);
@@ -223,7 +224,7 @@ UploadProps) {
       ></input>
       <div style={{ marginTop: "50px" }}>링크(Apple Music)</div>
       <input
-        className="music-post-input"
+        className={styles["music-post-input"]}
         value={link}
         onChange={e => {
           setLink(e.target.value);
@@ -231,7 +232,7 @@ UploadProps) {
       ></input>
       <div style={{ marginTop: "50px" }}>글</div>
       <textarea
-        className="music-post-input music-post-input-text"
+        className={`${styles["music-post-input"]} ${styles["music-post-input-text"]}`}
         // type="text"
         value={text}
         onChange={e => {
@@ -239,7 +240,7 @@ UploadProps) {
         }}
       ></textarea>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div className="music-post-submit" onClick={handleSubmit}>
+        <div className={styles["music-post-submit"]} onClick={handleSubmit}>
           제출하기
         </div>
       </div>

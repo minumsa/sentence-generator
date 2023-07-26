@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Upload from "../../Upload";
 import Image from "next/image";
+import styles from "../../music.module.css";
 
 interface MongoItem {
   id: string;
@@ -130,14 +131,19 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
   return (
     <div style={{ display: "flex", width: "100%", height: "100%" }}>
       <div
-        className="music-left-container"
+        className={styles["music-left-container"]}
         style={{ width: "250px", height: "100%" }}
       >
-        <div className="music-genre-container" style={{ paddingTop: "10px" }}>
+        <div
+          className={styles["music-genre-container"]}
+          style={{ paddingTop: "10px" }}
+        >
           {contents.map((genre, index) => (
             <div
               key={genre}
-              className={`music-genre ${activeGenre === genre ? "active" : ""}`}
+              className={`${styles["music-genre"]} ${
+                activeGenre === genre ? styles["active"] : ""
+              }`}
               onClick={() => {
                 setActiveGenre(genre);
                 handleGenreClick(genre);
@@ -160,9 +166,9 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           ))}
         </div>
       </div>
-      <div className="music-right-container">
+      <div className={styles["music-right-container"]}>
         <div
-          className="music-top-menu"
+          className={styles["music-top-menu"]}
           style={
             currentSort === "uploadSort"
               ? {
@@ -193,7 +199,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
           {uploadSort ? "업로드 ↓" : "업로드 ↑"}
         </div>
         <div
-          className="music-top-menu"
+          className={styles["music-top-menu"]}
           style={
             currentSort === "releaseSort"
               ? {
@@ -241,8 +247,8 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
         ) : mongoDataArr ? (
           mongoDataArr.map((data, index) => {
             return data.genre.replace("/", "_") === decodedSlug ? (
-              <div className="music-post-container" key={index}>
-                <div className="album-container">
+              <div className={styles["music-post-container"]} key={index}>
+                <div className={styles["album-container"]}>
                   <div style={{ marginRight: "20px" }}>
                     <a
                       href={data.link}
@@ -261,7 +267,7 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                     </a>
                   </div>
                   <div
-                    className="music-post-container-block"
+                    className={styles["music-post-container-block"]}
                     style={{ marginLeft: "30px" }}
                   >
                     <div>{data.artist}</div>
@@ -273,7 +279,10 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                         color: "#ffccff",
                       }}
                     >
-                      <div className="name-name" style={{ fontWeight: "800" }}>
+                      <div
+                        className={styles["name-name"]}
+                        style={{ fontWeight: "800" }}
+                      >
                         {data.album}
                       </div>
                     </a>
@@ -297,18 +306,18 @@ const ContentPage: NextPage<{ params: { slug: string } }> = ({ params }) => {
                     </div>
                     <div style={{ display: "flex" }}>
                       <div
-                        className="music-delete-menu"
+                        className={styles["music-delete-menu"]}
                         onClick={() => {
                           handleDelete(data.id);
                         }}
                       >
                         삭제
                       </div>
-                      <div className="music-delete-menu">수정</div>
+                      <div className={styles["music-delete-menu"]}>수정</div>
                     </div>
                   </div>
                 </div>
-                <div className="music-post-container-block">
+                <div className={styles["music-post-container-block"]}>
                   {data.text.split("<br/>").map((text, index) => {
                     return index + 1 < data.text.split("<br/>").length ? (
                       <div style={{ marginBottom: "50px" }} key={index}>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import styles from "./music.module.css";
 
 interface MongoItem {
   id: string;
@@ -91,12 +92,17 @@ export default function Page() {
 
   return (
     <div style={{ display: "flex", width: "100%", height: "100%" }}>
-      <div className="music-left-container">
-        <div className="music-genre-container" style={{ paddingTop: "10px" }}>
+      <div className={styles["music-left-container"]}>
+        <div
+          className={styles["music-genre-container"]}
+          style={{ paddingTop: "10px" }}
+        >
           {contents.map((genre, index) => (
             <div
               key={genre}
-              className={`music-genre ${activeGenre === genre ? "active" : ""}`}
+              className={`${styles["music-genre"]} ${
+                activeGenre === genre ? styles["active"] : ""
+              }`}
               onClick={() => {
                 setActiveGenre(genre);
                 handleGenreClick(genre);
@@ -119,9 +125,9 @@ export default function Page() {
           ))}
         </div>
       </div>
-      <div className="music-right-container">
+      <div className={styles["music-right-container"]}>
         <div
-          className="music-top-menu"
+          className={styles["music-top-menu"]}
           style={
             currentSort === "uploadSort"
               ? {
@@ -153,7 +159,7 @@ export default function Page() {
           {uploadSort ? "업로드 ↓" : "업로드 ↑"}
         </div>
         <div
-          className="music-top-menu"
+          className={styles["music-top-menu"]}
           style={
             currentSort === "releaseSort"
               ? {
@@ -188,8 +194,8 @@ export default function Page() {
         {mongoDataArr
           ? mongoDataArr.map((data, index) => {
               return (
-                <div className="music-post-container" key={index}>
-                  <div className="album-container">
+                <div className={styles["music-post-container"]} key={index}>
+                  <div className={styles["album-container"]}>
                     <div style={{ marginRight: "20px" }}>
                       <a
                         href={data.link}
@@ -209,7 +215,7 @@ export default function Page() {
                       </a>
                     </div>
                     <div
-                      className="music-post-container-block"
+                      className={styles["music-post-container-block"]}
                       style={{ marginLeft: "30px", marginTop: "30px" }}
                     >
                       <div>{data.artist}</div>
@@ -222,7 +228,7 @@ export default function Page() {
                         }}
                       >
                         <div
-                          className="name-name"
+                          className={styles["name-name"]}
                           style={{ fontWeight: "800" }}
                         >
                           {data.album}
@@ -249,7 +255,7 @@ export default function Page() {
                     </div>
                   </div>
                   <div
-                    className="music-post-container-block"
+                    className={styles["music-post-container-block"]}
                     style={{
                       display: "flex",
                       flexDirection: "column",
