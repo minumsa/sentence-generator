@@ -6,6 +6,7 @@ import Clock from "./Clock";
 import About from "./About";
 import Contact from "./Contact";
 import Main from "./Main";
+import styles from "./index.module.css";
 
 export default function Home() {
   const [language, setLanguage] = useState<string>("한");
@@ -62,36 +63,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div
-      className="index-container-container"
-      style={{
-        backgroundColor: "#000000",
-      }}
-    >
-      <div
-        className="index-container"
-        style={{ backgroundColor: "#ffffff", color: "rgb(30, 30, 30)" }}
-      >
+    <div className={styles["container"]}>
+      <div className={styles["index-container"]}>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
           }}
         >
-          <div
-            className="index-nav-container"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "98%",
-              height: "35px",
-              borderBottom: "0.5px solid #000000",
-              marginBottom: "30px",
-            }}
-          >
+          <div className={styles["index-nav-container"]}>
             <div
-              className="menu-text"
+              className={styles["menu-text"]}
               style={{
                 marginLeft: "10px",
                 fontWeight: showMain ? "600" : "400",
@@ -105,7 +87,7 @@ export default function Home() {
               divdivdiv
             </div>
             <div
-              className="menu-text"
+              className={styles["menu-text"]}
               onClick={() => {
                 setShowAbout(true);
                 setShowMain(false);
@@ -116,7 +98,7 @@ export default function Home() {
               {language === "A" ? "About" : "소개"}
             </div>
             <div
-              className="menu-text"
+              className={styles["menu-text"]}
               onClick={() => {
                 setShowContact(true);
                 setShowAbout(false);
@@ -126,8 +108,13 @@ export default function Home() {
             >
               {language === "A" ? "Contact" : "연결"}
             </div>
-            <div className="index-menu-grow" style={{ flexGrow: "1" }}></div>
-            <div className="right-menu-item right-menu-weather-icon">
+            <div
+              className={styles["index-menu-grow"]}
+              style={{ flexGrow: "1" }}
+            ></div>
+            <div
+              className={`${styles["right-menu-item"]} ${styles["right-menu-weather-icon"]}`}
+            >
               {weatherData ? (
                 <Image
                   src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
@@ -139,13 +126,15 @@ export default function Home() {
                 ""
               )}
             </div>
-            <div className="right-menu-item right-menu-weather-temp">
+            <div
+              className={`${styles["right-menu-item"]} ${styles["right-menu-weather-temp"]}`}
+            >
               {weatherData
                 ? `${(weatherData.main.temp - 273.15).toFixed(1)}°`
                 : ""}
             </div>
             <div
-              className="right-menu-item right-menu-language"
+              className={`${styles["right-menu-item"]} ${styles["right-menu-language"]}`}
               onClick={() => {
                 language === "A" ? setLanguage("한") : setLanguage("A");
               }}
@@ -158,7 +147,7 @@ export default function Home() {
               {language}
             </div>
             <div
-              className="right-menu-item right-menu-calender"
+              className={`${styles["right-menu-item"]} ${styles["right-menu-calender"]}`}
               style={{
                 border: "1px solid #000000",
                 borderRadius: "5px",
@@ -168,13 +157,15 @@ export default function Home() {
                 ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
                 : `${month}월 ${day}일 (${dayOfWeek})`}
             </div>
-            <div className="right-menu-item right-menu-clock">
+            <div
+              className={`${styles["right-menu-item"]} ${styles["right-menu-clock"]}`}
+            >
               <Clock language={language} />
             </div>
           </div>
         </div>
         <div
-          className="index-content-container"
+          className={styles["index-content-container"]}
           style={{
             flexGrow: "1",
           }}

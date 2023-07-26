@@ -97,7 +97,7 @@ const [showContact, setShowContact] = useState<boolean>(false);
 // ...
 
 <div
-  className="menu-text"
+  className={styles["menu-text"]}
   style={{
     marginLeft: "10px",
     fontWeight: showMain ? "600" : "400",
@@ -126,7 +126,7 @@ const [showContact, setShowContact] = useState<boolean>(false);
 // ...
 
 <div
-  className="menu-text"
+  className={styles["menu-text"]}
   style={{
     marginLeft: "10px",
     fontWeight: showMain ? "600" : "400",

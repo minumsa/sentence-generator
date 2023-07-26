@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "./index.module.css";
+
 interface PageProps {
   language: string;
 }
@@ -7,7 +9,7 @@ interface PageProps {
 export default function About({ language }: PageProps) {
   return (
     <>
-      <div className="index-about-container">
+      <div className={styles["index-about-container"]}>
         <ul style={{ lineHeight: "200%" }}>
           <li>
             {language === "A"
