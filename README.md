@@ -10,6 +10,12 @@ https://divdivdiv.com
 
 개인 프로젝트를 업로드하는 포트폴리오 페이지입니다.
 
+## 기술 스텍
+
+* ![Next][Next.js]
+* ![React][React.js]
+* ![TypeScript][TypeScript]
+
 ## 동작 방법
 
 사용한 `npm` 버전은 9.2.0이며, `Node.js` 버전은 v19.4.0입니다. 프로젝트를 실행시키기 위한 명령어는 다음과 같습니다.
@@ -20,8 +26,6 @@ npm run dev
 ```
 
 ## 웹 구조
-
-이 웹은 `Next.js`와 `React`, `TypeScript`를 사용해 개발했습니다. 코드는 5개의 컴포넌트로 구성되어 있습니다.
 
 1. `Index`: 메인 레이아웃과 네비게이션을 담당하는 부모 컴포넌트입니다. 페이지 내부에서 `Main`, `About`, `Contact` 컴포넌트들을 조건부로 렌더링해 해당 컴포넌트들이 보여지도록 하고, 날씨 정보와 한영 토글 버튼, 날짜 및 시간을 포함한 상단 네비게이션 바를 포함하고 있습니다.
 2. `Main`: 메인 페이지에서 사용되는 컴포넌트입니다. 더블클릭하면 해당 페이지로 이동하는 프로젝트 폴더, 각각의 프로젝트를 설명하는 메모, 오늘의 운세를 알려주는 프로그램, 사진 몇 장이 포함되어 있습니다.
@@ -224,3 +228,36 @@ const NoSSR = ({ children, fallback = null }: Props) => {
   return children;
 };
 ```
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
+[TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
