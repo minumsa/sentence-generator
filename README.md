@@ -1,5 +1,7 @@
 # README.md
 
+![스크린샷 2023-07-24 오후 6 35 50](https://github.com/minumsa/divdivdiv/assets/83910706/e0c3e960-6ffd-4596-adbf-1687455985f1)
+
 ## 링크
 
 https://divdivdiv.com
@@ -29,8 +31,6 @@ npm run dev
 
 ## 컴포넌트 역할
 
-![스크린샷 2023-07-24 오후 6 35 50](https://github.com/minumsa/divdivdiv/assets/83910706/e0c3e960-6ffd-4596-adbf-1687455985f1)
-
 ### Index 컴포넌트
 
 - 현재 페이지에 해당하는 컴포넌트를 보여주도록 `showMain`, `showAbout`, `showContact` 상태 변수가 업데이트됩니다.
@@ -48,9 +48,6 @@ npm run dev
 
 - `currentTime`이라는 상태 변수를 생성하고, 현재 시간 값을 저장하는 데 사용합니다. 이 값은 `Date` 객체로 초기화되며, `setInterval`을 사용해 1초마다 갱신됩니다.
 - 부모 컴포넌트인 `Index` 컴포넌트에서 전달받은 `language` 프로퍼티에 따라 "AM(오전)" 또는 "PM(오후)"을 사용해 12시간을 기준으로 현재 시간을 표시합니다.
-
-![스크린샷 2023-07-24 오후 6 36 05](https://github.com/minumsa/divdivdiv/assets/83910706/59c76186-a60d-4871-a7cb-2327a54c64a2)
-![스크린샷 2023-07-24 오후 6 36 15](https://github.com/minumsa/divdivdiv/assets/83910706/9931b175-d2fb-40a0-a64b-44001d6097a0)
 
 ### About 컴포넌트, Contact 컴포넌트
 
