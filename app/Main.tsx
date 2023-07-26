@@ -33,8 +33,8 @@ export default function Main({ language }: PageProps) {
   const [isMemo, setIsMemo] = useState<boolean>(false);
 
   const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
-    let width = 720;
-    let height = 961;
+    let width: number = 720;
+    let height: number = 961;
 
     if (isMobile) {
       width /= 2;

@@ -9,8 +9,6 @@ import Main from "./Main";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [language, setLanguage] = useState<string>("한");
-
   const currentDate = new Date();
   const month = currentDate.getMonth() + 1;
   const months: string[] = [
@@ -37,10 +35,11 @@ export default function Home() {
     return [daysOfWeek[dayIndex], daysOfEngWeek[dayIndex]];
   }
 
-  const [showMain, setShowMain] = useState<boolean>(true);
-  const [showAbout, setShowAbout] = useState<boolean>(false);
-  const [showContact, setShowContact] = useState<boolean>(false);
+  const [language, setLanguage] = useState<string>("한");
   const [weatherData, setWeatherData] = useState<any | null>(null);
+  const [activeTab, setActiveTab] = useState<"main" | "about" | "contact">(
+    "main"
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,46 +61,43 @@ export default function Home() {
     fetchData();
   }, []);
 
+  function renderButton(text: string, tab: "main" | "about" | "contact") {
+    return (
+      <div
+        className={styles["button-left"]}
+        style={{ fontWeight: activeTab === tab ? "600" : "400" }}
+        onClick={() => setActiveTab(tab)}
+      >
+        {text}
+      </div>
+    );
+  }
+
   return (
     <div className={styles["container-background"]}>
       <div className={styles["container"]}>
         <div className={styles["nav-container"]}>
           <div className={styles["nav"]}>
+            {renderButton("divdivdiv", "main")}
+            {renderButton(language === "A" ? "About" : "소개", "about")}
+            {renderButton(language === "A" ? "Contact" : "연결", "contact")}
             <div
               className={styles["button-left"]}
-              style={{
-                marginLeft: "10px",
-                fontWeight: showMain ? "600" : "400",
-              }}
+              style={{ fontWeight: activeTab === "about" ? "600" : "400" }}
               onClick={() => {
-                setShowMain(true);
-                setShowAbout(false);
-                setShowContact(false);
+                setActiveTab("about");
               }}
-            >
-              divdivdiv
-            </div>
-            <div
-              className={styles["button-left"]}
-              onClick={() => {
-                setShowAbout(true);
-                setShowMain(false);
-                setShowContact(false);
-              }}
-              style={{ fontWeight: showAbout ? "600" : "400" }}
             >
               {language === "A" ? "About" : "소개"}
             </div>
             <div
               className={styles["button-left"]}
+              style={{ fontWeight: activeTab === "contact" ? "600" : "400" }}
               onClick={() => {
-                setShowContact(true);
-                setShowAbout(false);
-                setShowMain(false);
+                setActiveTab("contact");
               }}
-              style={{ fontWeight: showContact ? "600" : "400" }}
             >
-              {language === "A" ? "Contact" : "연결"}
+              {}
             </div>
             <div className={styles["blank-space"]}></div>
             <div className={`${styles["button-right"]} ${styles["weather"]}`}>
@@ -153,9 +149,9 @@ export default function Home() {
           </div>
         </div>
         <div className={styles["content"]}>
-          {showMain && <Main language={language} />}
-          {showAbout && <About language={language} />}
-          {showContact && <Contact language={language} />}
+          {activeTab === "main" && <Main language={language} />}
+          {activeTab === "about" && <About language={language} />}
+          {activeTab === "contact" && <Contact language={language} />}
         </div>
       </div>
     </div>
