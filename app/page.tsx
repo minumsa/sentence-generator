@@ -61,7 +61,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  function renderButton(text: string, tab: "main" | "about" | "contact") {
+  function renderButtonLeft(text: string, tab: "main" | "about" | "contact") {
     return (
       <div
         className={styles["button-left"]}
@@ -78,27 +78,9 @@ export default function Home() {
       <div className={styles["container"]}>
         <div className={styles["nav-container"]}>
           <div className={styles["nav"]}>
-            {renderButton("divdivdiv", "main")}
-            {renderButton(language === "A" ? "About" : "소개", "about")}
-            {renderButton(language === "A" ? "Contact" : "연결", "contact")}
-            <div
-              className={styles["button-left"]}
-              style={{ fontWeight: activeTab === "about" ? "600" : "400" }}
-              onClick={() => {
-                setActiveTab("about");
-              }}
-            >
-              {language === "A" ? "About" : "소개"}
-            </div>
-            <div
-              className={styles["button-left"]}
-              style={{ fontWeight: activeTab === "contact" ? "600" : "400" }}
-              onClick={() => {
-                setActiveTab("contact");
-              }}
-            >
-              {}
-            </div>
+            {renderButtonLeft("divdivdiv", "main")}
+            {renderButtonLeft(language === "A" ? "About" : "소개", "about")}
+            {renderButtonLeft(language === "A" ? "Contact" : "연결", "contact")}
             <div className={styles["blank-space"]}></div>
             <div className={`${styles["button-right"]} ${styles["weather"]}`}>
               {weatherData ? (
@@ -124,21 +106,10 @@ export default function Home() {
               onClick={() => {
                 language === "A" ? setLanguage("한") : setLanguage("A");
               }}
-              style={{
-                border: "1px solid #000000",
-                borderRadius: "5px",
-                padding: "1px 7px",
-              }}
             >
               {language}
             </div>
-            <div
-              className={`${styles["button-right"]} ${styles["calender"]}`}
-              style={{
-                border: "1px solid #000000",
-                borderRadius: "5px",
-              }}
-            >
+            <div className={`${styles["button-right"]} ${styles["calender"]}`}>
               {language === "A"
                 ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
                 : `${month}월 ${day}일 (${dayOfWeek})`}

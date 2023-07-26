@@ -232,6 +232,14 @@
 
 .language {
   cursor: pointer;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 1px 7px;
+}
+
+.calender {
+  border: 1px solid #000000;
+  border-radius: 5px;
 }
 
 .weather,
