@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./index.module.css";
-import { fortuneArr, fortuneEngArr, icon, readme } from "./data";
+import { fortune, icon, readme } from "./data";
 
 interface PageProps {
   language: string;
@@ -33,19 +33,27 @@ export default function Main({ language }: PageProps) {
     let height: number = 960;
 
     if (isMobile) {
-      width /= 2;
-      height /= 2;
+      if (isReadme) {
+        width /= 2;
+        height /= 1.5;
+      } else {
+        width /= 2;
+        height /= 2;
+      }
     }
 
     function ReadmeComponent(props: { link: string; icon: any }) {
       const { link, icon } = props;
 
       return (
-        <div className={styles["paragraph"]}>
-          <div
-            className={styles["paragraph-title"]}
-            onClick={() => clickIconHandler(link)}
-          >
+        <div
+          className={styles["paragraph"]}
+          style={{
+            paddingBottom: icon === readme.techStack ? "20px" : 0,
+            margin: isMobile ? "10px 30px" : "10px 70px",
+          }}
+        >
+          <div className={styles["paragraph-title"]} onClick={() => clickIconHandler(link)}>
             {`${icon.title[lang]} ${icon.emoji}`}
           </div>
           {icon.text[lang]}
@@ -54,56 +62,25 @@ export default function Main({ language }: PageProps) {
     }
 
     return isReadme ? (
-      <div
-        className={styles["modal-container"]}
-        style={{
-          boxShadow:
-            imgSrc === "/divdivdiv/readme-nav-ko.webp" ||
-            imgSrc === "/divdivdiv/readme-nav-en.webp"
-              ? "1px 2px 5px gray"
-              : undefined,
-        }}
-        onClick={onClick}
-      >
-        <div className={styles["modal"]}>
-          <Image
-            src={src}
-            alt={alt}
-            width={isMobile ? 0 : 620}
-            height={isMobile ? 0 : 50}
-          />
+      <div className={styles["modal-container"]} onClick={onClick}>
+        <div className={styles["modal"]} style={{ width: width, height: height }}>
+          {/* <Image src={src} alt={alt} width={width} height={isMobile ? 0 : 50} /> */}
           <div
+            className={styles["last-updated"]}
             style={{
-              height: isMobile
-                ? language === "A"
-                  ? "760px"
-                  : "660px"
-                : language === "A"
-                ? "980px"
-                : "850px",
-              width: isMobile ? "370px" : "620px",
+              margin: isMobile ? "10px 0 0 0" : "0 0 30px 0",
+              paddingTop: isMobile ? undefined : "10px",
             }}
           >
-            <div
-              className={styles["last-updated"]}
-              style={{
-                marginTop: isMobile ? "10px" : 0,
-                fontWeight: isMobile ? 600 : 400,
-              }}
-            >
-              {readme.lastUpdated.text[lang]}
-            </div>
-            <ReadmeComponent
-              link="https://blog.divdivdiv.com"
-              icon={readme.blog}
-            />
-            <ReadmeComponent link="/cinephile" icon={readme.cinephile} />
-            <ReadmeComponent link="/pomodoro" icon={readme.pomodoro} />
-            <ReadmeComponent link="/fruits" icon={readme.fruits} />
-            <ReadmeComponent link="/pride" icon={readme.pride} />
-            <ReadmeComponent link="/music" icon={readme.music} />
-            <ReadmeComponent link="/" icon={readme.techStack} />
+            {readme.lastUpdated.text[lang]}
           </div>
+          <ReadmeComponent link="https://blog.divdivdiv.com" icon={readme.blog} />
+          <ReadmeComponent link="/cinephile" icon={readme.cinephile} />
+          <ReadmeComponent link="/pomodoro" icon={readme.pomodoro} />
+          <ReadmeComponent link="/fruits" icon={readme.fruits} />
+          <ReadmeComponent link="/pride" icon={readme.pride} />
+          <ReadmeComponent link="/music" icon={readme.music} />
+          <ReadmeComponent link="/" icon={readme.techStack} />
         </div>
       </div>
     ) : (
@@ -143,8 +120,8 @@ export default function Main({ language }: PageProps) {
 
   const handleFortuneClick = () => {
     return language === "A"
-      ? alert(fortuneEngArr[Math.floor(Math.random() * fortuneArr.length)])
-      : alert(fortuneArr[Math.floor(Math.random() * fortuneArr.length)]);
+      ? alert(fortune["EN"][Math.floor(Math.random() * fortune["EN"].length)])
+      : alert(fortune["KO"][Math.floor(Math.random() * fortune["KO"].length)]);
   };
 
   interface TitleProps {
@@ -186,7 +163,7 @@ export default function Main({ language }: PageProps) {
       linkFunction(link);
     };
 
-    const DraggableContent = (
+    const draggableContent = (
       <div
         className={styles[`${className}`]}
         onDoubleClick={() => {
@@ -202,31 +179,31 @@ export default function Main({ language }: PageProps) {
             width: size[0],
             height: size[1],
             backgroundImage: `url(/divdivdiv/${icon}.webp)`,
-            boxShadow:
-              size === img || size === mobileImg
-                ? "1px 2px 5px gray"
-                : undefined,
+            boxShadow: size === img || size === mobileImg ? "1px 2px 5px gray" : undefined,
             border: icon === "readme" ? 0 : " 4px solid white",
           }}
         ></div>
-        <div className={styles["icon-title"]}>
+        <div
+          className={styles["icon-title"]}
+          style={{
+            marginTop: icon === "folder" || icon === "fortune" ? "5px" : "10px",
+          }}
+        >
           <div>{language === "A" ? `${title.EN}` : `${title.KO}`}</div>
         </div>
       </div>
     );
 
     return className.includes("mobile") ? (
-      <div>{DraggableContent}</div>
+      <div>{draggableContent}</div>
     ) : (
-      <Draggable>{DraggableContent}</Draggable>
+      <Draggable>{draggableContent}</Draggable>
     );
   }
 
   return (
     <div>
-      {showImage && (
-        <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />
-      )}
+      {showImage && <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />}
       <DraggableComponent
         className="icon-blog"
         link="https://blog.divdivdiv.com"
@@ -269,20 +246,8 @@ export default function Main({ language }: PageProps) {
         title={readme.pride.title}
         size={folder}
       />
-      <DraggableComponent
-        className="icon-cat"
-        link="cat"
-        icon="cat"
-        title={icon.cat}
-        size={img}
-      />
-      <DraggableComponent
-        className="icon-me"
-        link="me"
-        icon="me"
-        title={icon.me}
-        size={img}
-      />
+      <DraggableComponent className="icon-cat" link="cat" icon="cat" title={icon.cat} size={img} />
+      <DraggableComponent className="icon-me" link="me" icon="me" title={icon.me} size={img} />
       <DraggableComponent
         className="icon-fortune"
         link="fortune"

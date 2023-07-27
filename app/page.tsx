@@ -37,9 +37,7 @@ export default function Home() {
 
   const [language, setLanguage] = useState<string>("한");
   const [weatherData, setWeatherData] = useState<any | null>(null);
-  const [activeTab, setActiveTab] = useState<"main" | "about" | "contact">(
-    "main"
-  );
+  const [activeTab, setActiveTab] = useState<"main" | "about" | "contact">("main");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,7 +59,12 @@ export default function Home() {
     fetchData();
   }, []);
 
-  function renderButtonLeft(text: string, tab: "main" | "about" | "contact") {
+  interface RenderButtonProps {
+    text: string;
+    tab: "main" | "about" | "contact";
+  }
+
+  function RenderButtonLeft({ text, tab }: RenderButtonProps) {
     return (
       <div
         className={styles["button-left"]}
@@ -78,29 +81,25 @@ export default function Home() {
       <div className={styles["container"]}>
         <div className={styles["nav-container"]}>
           <div className={styles["nav"]}>
-            {renderButtonLeft("divdivdiv", "main")}
-            {renderButtonLeft(language === "A" ? "About" : "소개", "about")}
-            {renderButtonLeft(language === "A" ? "Contact" : "연결", "contact")}
+            <RenderButtonLeft text="divdivdiv" tab="main" />
+            <RenderButtonLeft text={language === "A" ? "About" : "소개"} tab="about" />
+            <RenderButtonLeft text={language === "A" ? "Contact" : "연결"} tab="contact" />
             <div className={styles["blank-space"]}></div>
-            <div className={`${styles["button-right"]} ${styles["weather"]}`}>
-              {weatherData ? (
-                <Image
-                  src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-                  width={35}
-                  height={35}
-                  alt="Weather Icon"
-                />
-              ) : (
-                ""
-              )}
-            </div>
-            <div
-              className={`${styles["button-right"]} ${styles["temperature"]}`}
-            >
-              {weatherData
-                ? `${(weatherData.main.temp - 273.15).toFixed(1)}°`
-                : ""}
-            </div>
+            {weatherData ? (
+              <React.Fragment>
+                <div className={`${styles["button-right"]} ${styles["weather"]}`}>
+                  <Image
+                    src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                    width={35}
+                    height={35}
+                    alt="Weather Icon"
+                  />
+                </div>
+                <div className={`${styles["button-right"]} ${styles["temperature"]}`}>
+                  {(weatherData.main.temp - 273.15).toFixed(1)}°
+                </div>
+              </React.Fragment>
+            ) : null}
             <div
               className={`${styles["button-right"]} ${styles["language"]}`}
               onClick={() => {
