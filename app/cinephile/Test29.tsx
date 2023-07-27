@@ -45,8 +45,8 @@ export default function Test29({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`29. 다음 중 픽사 애니메이션 스튜디오에서 만든 영화가 `}</span>
           <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
           <span>{` 것은?`}</span>

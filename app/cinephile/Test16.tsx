@@ -46,8 +46,8 @@ export default function Test16({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`16. 다음 중 세계 최초의 장편 유성영화는?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (

@@ -45,8 +45,8 @@ export default function Test10({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`10. 다음 중 아래 제시된 이모지들과 가장 어울리는 왕가위의 영화는?`}</span>
         </div>
         <div className={styles["cine-test10-emoji"]} style={{ margin: "40px 0" }}>

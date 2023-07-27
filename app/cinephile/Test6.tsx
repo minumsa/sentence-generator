@@ -45,8 +45,8 @@ export default function Test6({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>

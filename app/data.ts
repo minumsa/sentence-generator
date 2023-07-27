@@ -73,7 +73,7 @@ export const readme = {
     },
     text: {
       KO: "영화 퀴즈를 풀 수 있는 페이지입니다. 문제를 다 풀고 나면 나의 시네필 별점과 내가 전체 참가자 중 몇 등인지 알 수 있고, 페이지를 공유할 수 있습니다.",
-      EN: "Test This page allows you to take quizzes about movies. After answering the questions, you can see your cinephile rating and your rank among all participants. You can also share the page.",
+      EN: "Test This page allows you to take questionzes about movies. After answering the questions, you can see your cinephile rating and your rank among all participants. You can also share the page.",
     },
     emoji: "🍿",
   },

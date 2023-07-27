@@ -53,7 +53,7 @@
   display: flex;
   height: 40px;
   width: 100%;
-  border: 1px solid #0e1111;
+  border: 1px solid #000000;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -62,7 +62,7 @@
 }
 
 .button:hover {
-  background-color: #0e1111;
+  background-color: #000000;
   color: white;
 }
 
@@ -71,7 +71,7 @@
   flex-grow: 1;
   height: 50px;
   width: 100%;
-  border: 1px solid #0e1111;
+  border: 1px solid #000000;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -88,7 +88,7 @@
   flex-grow: 1;
   height: 50px;
   width: 100%;
-  border: 1px solid #0e1111;
+  border: 1px solid #000000;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -96,7 +96,7 @@
 }
 
 .options-button-flex:hover {
-  background-color: #0e1111;
+  background-color: #000000;
   color: white;
 }
 
@@ -105,7 +105,7 @@
   flex-grow: 1;
   height: 50px;
   width: 100%;
-  border: 1px solid #0e1111;
+  border: 1px solid #000000;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -128,12 +128,18 @@
   margin-top: 10px;
 }
 
-.quiz-container {
+.question-container {
   font-size: 25px;
   line-height: 200%;
 }
 
-.cine-test-input {
+.short-answer-container {
+  margin-top: 20px;
+  border: 1px solid #000000;
+  padding: 15px;
+}
+
+.short-answer-input {
   font-family: "omyu_pretty";
   font-size: 25px;
   width: 42px;
@@ -146,7 +152,7 @@
   width: 100%;
   height: 35px;
   margin-top: 20px;
-  border: 1px solid #0e1111;
+  border: 1px solid #000000;
 }
 
 .cine-progress-content {
@@ -245,7 +251,7 @@
     flex-direction: column;
   }
 
-  .quiz-container {
+  .question-container {
     font-size: 20px;
     line-height: 200%;
   }
@@ -258,7 +264,7 @@
     height: 30px;
   }
 
-  .cine-test-input {
+  .short-answer-input {
     font-size: 20px;
   }
 
@@ -305,7 +311,7 @@
   }
 }
 
-.quiz {
+.question {
   padding: 0 0px;
 }
 
@@ -316,7 +322,7 @@
 
 .options:hover {
   color: white;
-  background-color: #0e1111;
+  background-color: #000000;
 }
 
 .options-top {
@@ -339,7 +345,7 @@
   width: 150px;
   height: 150px;
 
-  border: 1.5px solid #0e1111;
+  border: 1.5px solid #000000;
 }
 
 .options-top-right {
@@ -347,7 +353,7 @@
   width: 150px;
   height: 150px;
 
-  border: 1.5px solid #0e1111;
+  border: 1.5px solid #000000;
 }
 
 .cine-top-img {
@@ -362,7 +368,7 @@
   font-size: 20px;
   width: 150px;
   height: 30px;
-  border-top: 1.5px solid #0e1111;
+  border-top: 1.5px solid #000000;
 }
 
 .cine-name-input {
@@ -400,7 +406,7 @@
 }
 
 .options-selected {
-  background-color: #0e1111;
+  background-color: #000000;
   color: white;
 }
 
@@ -410,13 +416,13 @@
 
 .options-line {
   width: 100%;
-  border-top: 1px dashed #0e1111;
+  border-top: 1px dashed #000000;
   margin: 40px 0;
 }
 
 .cine-reference-black {
-  color: #0e1111;
-  border: 1.5px solid #0e1111;
+  color: #000000;
+  border: 1.5px solid #000000;
   padding: 5px;
   margin-left: 10px;
 }

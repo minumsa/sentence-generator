@@ -45,8 +45,8 @@ export default function Test9({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`9. 다음 중 성소수자 주인공이 등장하지 `}</span>
           <span style={{ textDecoration: "underline" }}>{`않는`}</span>
           <span>{` 영화는?`}</span>

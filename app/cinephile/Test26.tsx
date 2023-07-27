@@ -45,9 +45,9 @@ export default function Test26({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
+      <div className={styles["question-container"]}>
         <div
-          className={styles["quiz"]}
+          className={styles["question"]}
           // style={{ marginTop: "10px" }}
         >
           <span>{`26. 다음 중 <엑스맨 2>(2003), <엑스맨: 아포칼립스>(2016), <엑스맨: 다크 피닉스>(2019)에 등장하는 `}</span>

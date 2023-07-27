@@ -62,8 +62,8 @@ export default function Test2({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>

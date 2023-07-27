@@ -45,9 +45,9 @@ export default function Test18({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
+      <div className={styles["question-container"]}>
         <div
-          className={styles["quiz"]}
+          className={styles["question"]}
           //  style={{ marginTop: "10px" }}
         >
           <span>{`18. <다가오는 것들>(2016, 미아 한센 러브)에서 주인공 나탈리는 파리의 한 고등학교에서 교사로 일한다. 다음 중 나탈리가 가르치는 과목으로 가장 적절한 것은?`}</span>

@@ -46,9 +46,9 @@ export default function Test19({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
+      <div className={styles["question-container"]}>
         <div
-          className={styles["quiz"]}
+          className={styles["question"]}
           style={{
             marginBottom: window.innerWidth > 450 ? "10px" : "0",
           }}

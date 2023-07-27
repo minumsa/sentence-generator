@@ -45,8 +45,8 @@ export default function Test14({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`14. 다음 중 누벨바그의 핵심 인물이었던 장뤽 고다르의 작품이 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>

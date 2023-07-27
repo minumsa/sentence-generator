@@ -45,8 +45,8 @@ export default function Test5({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`5. 다음 중 칸 영화제에서 황금종려상을 수상하지 `}</span>
           <span style={{ textDecoration: "underline" }}>{`않은`}</span>
           <span>{` 작품은?`}</span>

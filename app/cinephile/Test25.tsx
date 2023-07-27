@@ -43,8 +43,8 @@ export default function Test25({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`25. 다음은 <마블 시네마틱 유니버스 페이즈 4> 시리즈를 무작위로 나열한 것이다. 해당 영화들을 `}</span>
           <span style={{ textDecoration: "underline" }}>개봉 순</span>
           <span>으로 올바르게 정렬한 것은?</span>

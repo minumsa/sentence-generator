@@ -45,9 +45,9 @@ export default function Test28({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
+      <div className={styles["question-container"]}>
         <div
-          className={styles["quiz"]}
+          className={styles["question"]}
           // style={{ marginTop: "10px" }}
         >
           <span>{`28. 다음 설명에 가장 잘 부합하는 영화의 제목은?`}</span>

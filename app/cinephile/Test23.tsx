@@ -45,8 +45,8 @@ export default function Test23({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`23. 다음 중 미국 영화 산업의 중심지인 할리우드가 위치한 지역은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (

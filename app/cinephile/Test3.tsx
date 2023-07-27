@@ -62,8 +62,8 @@ export default function Test3({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가 </span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>

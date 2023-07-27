@@ -68,7 +68,7 @@ export default function Answer() {
   }, [lastDay, lastDaysBoxOfficeList]);
 
   {
-    styles["quiz"];
+    styles["question"];
   }
   useEffect(() => {
     if (lastDaysBoxOfficeList && lastDaysBoxOfficeList.length > 0) {
@@ -85,8 +85,8 @@ export default function Answer() {
       style={{ display: "flex", flexDirection: "column" }}
     >
       <div style={{ marginTop: "10px" }} id="1">
-        <div className={styles["quiz-container"]}>
-          <div className={styles["quiz"]}>
+        <div className={styles["question-container"]}>
+          <div className={styles["question"]}>
             <span>{`1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 `}</span>
             <span style={{ textDecoration: "underline" }}>않는</span>
             <span> 음식은?</span>
@@ -113,8 +113,8 @@ export default function Answer() {
         </div>
       </div>
       <div className={styles["options-line"]} id="2"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
@@ -156,8 +156,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="3"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>3. 다음 중 소설가 무라카미 하루키의 소설을 바탕으로 만든 영화가 </span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
@@ -198,8 +198,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="4"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           {`4. 배우 양자경은 제95회 아카데미 시상식에서 <에브리씽 에브리웨어 올 앳
           원스>(2022, 댄 콴)로 여우주연상을 수상했다. 다음 빈칸을 채워 해당 수상
           소감을 완성하시오.`}
@@ -212,7 +212,7 @@ export default function Answer() {
           }}
         >
           {`"`}
-          <input disabled placeholder="여성" className={styles["cine-test-input"]} />
+          <input disabled placeholder="여성" className={styles["short-answer-input"]} />
           <span>{` 여러분, 그 누구도 여러분께 전성기가 지났다는 말을 하지 못하게 하세요." // SBS가 해당 수상 소감에서 "여성"이라는 단어를 일부러 삭제했다는 의혹이 있었다. 논란이 일자 재편집한 영상이 업로드되었다.`}</span>
           <span className={styles["cine-reference-black"]}>
             <a
@@ -226,8 +226,8 @@ export default function Answer() {
         </div>
       </div>
       <div className={styles["options-line"]} id="5"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`5. 다음 중 칸 영화제에서 황금종려상을 수상하지 `}</span>
           <span style={{ textDecoration: "underline" }}>{`않은`}</span>
           <span>{` 작품은?`}</span>
@@ -253,8 +253,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="6"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           {`6. 다음은 영화 <샤이닝>(1980, 스탠리 큐브릭)의 한 장면이다. 사진 속 인물의 대사로 가장 적절한 것은?`}
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -304,8 +304,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="7"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           {`7. 웨스 크레이븐이 연출을 맡고 케빈 윌리엄슨이 각본을 썼으며, "공포영화의 법칙"이라는 클리셰를 메타픽션적으로 활용해 개봉 당시 흥행과 더불어 작품성까지 크게 호평받은 이 공포영화 시리즈는?`}
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -342,8 +342,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="8"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`8. <킬 빌> 시리즈에는 데들리 바이퍼스 출신의 4명의 암살자 캐릭터가 등장하는데, 해당 인물들은 모두 독사의 이름을 딴 독특한 코드 네임을 가지고 있다. 다음 중 주인공 베아트릭스 키도의 첫 번째 표적이었던 `}</span>
           <span
             style={{
@@ -388,8 +388,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="9"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`9. 다음 중 성소수자 주인공이 등장하지 `}</span>
           <span style={{ textDecoration: "underline" }}>{`않는`}</span>
           <span>{` 영화는?`}</span>
@@ -461,8 +461,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="10"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`10. 다음 중 아래 제시된 이모지들과 가장 어울리는 왕가위의 영화는?`}</span>
         </div>
         <div className={styles["cine-test10-emoji"]} style={{ margin: "40px 0" }}>
@@ -503,8 +503,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="11"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`11. 다음 중 <언더 더 스킨>(2013, 조나단 글레이저)에서 에일리언 로라가 지구로 오게 된 이유로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -541,8 +541,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="12"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <div>{`12. 다음 빈칸을 적절하게 채워 정답을 완성하시오.`}</div>
           <div
             style={{
@@ -552,7 +552,7 @@ export default function Answer() {
             }}
           >
             {`1895년 겨울, 뤼미에르 형제는 프랑스의 한 카페에서 자신들이 만든 영상을 공개했다. 이때 상영된 50초 분량의 <`}
-            <input disabled placeholder="열차" className={styles["cine-test-input"]}></input>
+            <input disabled placeholder="열차" className={styles["short-answer-input"]}></input>
             <span>{`의 도착>이라는 작품은 세계 최초의 영화로 널리 알려져 있다.`}</span>
             <span
               style={{
@@ -583,8 +583,8 @@ export default function Answer() {
         </div>
       </div>
       <div className={styles["options-line"]} id="13"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`13. 다음 중 국내에서 가장 큰 아이맥스 스크린을 보유하고 있는 영화관은? (2023년 6월 기준)`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -621,8 +621,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="14"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`14. 다음 중 누벨바그의 핵심 인물이었던 장뤽 고다르의 작품이 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
@@ -648,8 +648,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="15"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`15. 다음 중 <타미 페이의 눈>(2021, 마이클 쇼월터)에 등장하는 타미 페이 바커의 직업으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -686,8 +686,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="16"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`16. 다음 중 세계 최초의 장편 유성영화는?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -724,8 +724,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="17"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>
             {`17. 다음 중 어제(${lastDay?.split("").slice(0, 4).join("")}.${lastDay
               ?.split("")
@@ -760,8 +760,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="18"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`18. <다가오는 것들>(2016, 미아 한센 러브)에서 주인공 나탈리는 파리의 한 고등학교에서 교사로 일한다. 다음 중 나탈리가 가르치는 과목으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -798,9 +798,9 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="19"></div>
-      <div className={styles["quiz-container"]}>
+      <div className={styles["question-container"]}>
         <div
-          className={styles["quiz"]}
+          className={styles["question"]}
           style={{
             marginBottom: window.innerWidth > 450 ? "10px" : "0",
           }}
@@ -852,8 +852,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="20"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`20. <더 랍스터>(2015, 요르고스 란티모스)에서 호텔에 입소하게 된 사람들은 45일 동안 특정 조건을 만족시키지 않으면 동물로 변하게 된다. 다음 중 해당 조건으로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -890,8 +890,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="21"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`21. 다음은 <로제타>(1999, 다르덴 형제)의 줄거리 일부이다. 다음 중 빈칸에 가장 적절한 단어는?`}</span>
         </div>
         <div
@@ -905,7 +905,7 @@ export default function Answer() {
           <span>
             {` 알코올 중독에 빠진 어머니와 함께 이동식 트레일러에서 생활하고 있는 18살의 로제타에게 가난은 일상이다. 헌옷을 주워 어머니가 수선하면 내다 팔고, 먹을 음식이 없어 강에서 숭어를 잡기도 한다. 공장에서 일한 기간이 짧아 실업급여는 나오지 않고, 다른 일거리를 찾는 일도 어렵기만 하다. 그러다 로제타는 근처 `}
           </span>
-          <input disabled placeholder="와플" className={styles["cine-test-input"]} />
+          <input disabled placeholder="와플" className={styles["short-answer-input"]} />
           <span>{` 가게에서 일하는 리케와 친구가 된다.`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -942,8 +942,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="22"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`22. 다음 중 레일을 깔아 수레에 카메라를 설치한 뒤, 정해진 노선에 따라 지면을 이동하며 안정적으로 촬영하는 방식을 뜻하는 용어로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -980,8 +980,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="23"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`23. 다음 중 미국 영화 산업의 중심지인 할리우드가 위치한 지역은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -1018,9 +1018,9 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="24"></div>
-      <div className={styles["quiz-container"]}>
+      <div className={styles["question-container"]}>
         <div
-          className={styles["quiz"]}
+          className={styles["question"]}
         >{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
@@ -1069,8 +1069,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="25"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`25. 다음은 <마블 시네마틱 유니버스 페이즈 4> 시리즈를 무작위로 나열한 것이다. 해당 영화들을 `}</span>
           <span style={{ textDecoration: "underline" }}>개봉 순</span>
           <span>으로 올바르게 정렬한 것은?</span>
@@ -1109,8 +1109,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="26"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`26. 다음 중 <엑스맨 2>(2003), <엑스맨: 아포칼립스>(2016), <엑스맨: 다크 피닉스>(2019)에 등장하는 `}</span>
           <span style={{ textDecoration: "underline" }}>{`나이트크롤러`}</span>
           <span>{`의 능력으로 가장 적절한 것은?`}</span>
@@ -1182,8 +1182,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="27"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`27. 오즈의 마법사(1939, 빅터 플레밍)에서 주인공 도로시는 어떤 행위를 통해 무사히 고향으로 돌아갈 수 있게 된다. 다음 중 그 행위로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
@@ -1220,8 +1220,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="28"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`28. 다음 설명에 가장 잘 부합하는 영화의 제목은?`}</span>
         </div>
         <div
@@ -1306,8 +1306,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="29"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`29. 다음 중 픽사 애니메이션 스튜디오에서 만든 영화가 `}</span>
           <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
           <span>{` 것은?`}</span>
@@ -1333,8 +1333,8 @@ export default function Answer() {
         ))}
       </div>
       <div className={styles["options-line"]} id="30"></div>
-      <div className={styles["quiz-container"]}>
-        <div className={styles["quiz"]}>
+      <div className={styles["question-container"]}>
+        <div className={styles["question"]}>
           <span>{`30. 한국영상자료원에서 운영하고 있는 시네마테크(KOFA)는 일종의 영화 도서관으로, 영화 관련 영상를 보존하고 이를 모든 일반인에게 무료로 공개해 해당 자료의 가치를 공유한다. 다음 중 국내 시네마테크가 위치해 있는 지역은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (

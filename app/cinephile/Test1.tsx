@@ -42,8 +42,8 @@ export default function Test1({ score, setScore }: TestProps) {
   }
 
   return (
-    <div className={styles["quiz-container"]}>
-      <div className={styles["quiz"]}>{data[0].quiz}</div>
+    <div className={styles["question-container"]}>
+      <div className={styles["question"]}>{data[0].question}</div>
       {data[0].options?.map((option, index) => {
         return (
           <div

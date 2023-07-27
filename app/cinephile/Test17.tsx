@@ -99,8 +99,8 @@ export default function Test17({ score, setScore }: TestProps) {
   }
 
   return (
-    <div className={styles["quiz-container"]}>
-      <div className={styles["quiz"]}>
+    <div className={styles["question-container"]}>
+      <div className={styles["question"]}>
         <span>
           {`17. 다음 중 어제(${lastDay?.split("").slice(0, 4).join("")}.${lastDay
             ?.split("")
