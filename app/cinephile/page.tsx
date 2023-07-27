@@ -45,8 +45,7 @@ declare global {
 }
 
 const kakaoInit = () => {
-  if (!window.Kakao.isInitialized())
-    window.Kakao.init("8b2e769ecd8f1b59e13d651bd3177712");
+  if (!window.Kakao.isInitialized()) window.Kakao.init("8b2e769ecd8f1b59e13d651bd3177712");
 };
 
 interface Option {
@@ -222,10 +221,7 @@ export default function Page() {
                 backgroundColor: "#0e1111",
               }}
             >
-              <div
-                className={styles["cine-progress-font"]}
-                style={{ color: "white" }}
-              >
+              <div className={styles["cine-progress-font"]} style={{ color: "white" }}>
                 {progressPercent > 5 ? `${progressPercent}%` : ``}
               </div>
             </div>
@@ -238,9 +234,7 @@ export default function Page() {
   useEffect(() => {
     if (testNumber === 0) {
       setButtonContent(
-        <div
-          style={{ display: "flex", flexDirection: "column", width: "100%" }}
-        >
+        <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
           <input
             autoFocus
             type="string"
@@ -299,9 +293,7 @@ export default function Page() {
                 setTestNumber(32);
               }}
             >
-              <div className={styles["cine-next-button"]}>
-                정답 및 해설 보기
-              </div>
+              <div className={styles["cine-next-button"]}>정답 및 해설 보기</div>
             </div>
             <div
               className={styles["cine-twitter-button-flex"]}
@@ -321,27 +313,17 @@ export default function Page() {
                 onShare();
               }}
             >
-              <div className={styles["cine-next-button"]}>
-                카카오톡 공유하기
-              </div>
+              <div className={styles["cine-next-button"]}>카카오톡 공유하기</div>
             </div>
             <div
               className={styles["cine-challenge-button-flex"]}
-              style={{
-                marginTop: "10px",
-                display: "flex",
-                alignItems: "center",
-              }}
               onClick={() => {
                 setTestNumber(0);
                 setScore(0);
                 setValue("참가자");
               }}
             >
-              <div
-                className={styles["cine-next-button"]}
-                style={{ marginLeft: "5px" }}
-              >
+              <div className={styles["cine-next-button"]} style={{ marginLeft: "5px" }}>
                 다시 도전하기
               </div>
             </div>
@@ -350,7 +332,7 @@ export default function Page() {
       );
     } else if (testNumber === 32) {
       setButtonContent(
-        <>
+        <React.Fragment>
           <div
             style={{
               display: "flex",
@@ -367,9 +349,7 @@ export default function Page() {
                 setValue("참가자");
               }}
             >
-              <div className={styles["cine-next-button"]}>
-                처음으로 돌아가기
-              </div>
+              <div className={styles["cine-next-button"]}>처음으로 돌아가기</div>
             </div>{" "}
             <div
               className={styles["cine-answer-button-flex"]}
@@ -378,12 +358,10 @@ export default function Page() {
                 setTestNumber(31);
               }}
             >
-              <div className={styles["cine-next-button"]}>
-                이전 페이지로 돌아가기
-              </div>
+              <div className={styles["cine-next-button"]}>이전 페이지로 돌아가기</div>
             </div>
           </div>
-        </>
+        </React.Fragment>
       );
     }
   }, [testNumber, value]);
@@ -558,9 +536,7 @@ export default function Page() {
       <div className={styles["cine-flex-container"]}>
         <div
           className={
-            testNumber === 32
-              ? styles["cine-nav-32-container"]
-              : styles["cine-nav-container"]
+            testNumber === 32 ? styles["cine-nav-32-container"] : styles["cine-nav-container"]
           }
           style={
             testNumber < 31
@@ -602,10 +578,7 @@ export default function Page() {
         </div>
         <div className={styles["cine-footer-container"]}>{buttonContent}</div>
       </div>
-      <Script
-        src="https://developers.kakao.com/sdk/js/kakao.js"
-        onLoad={kakaoInit}
-      />
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" onLoad={kakaoInit} />
     </div>
   );
 }

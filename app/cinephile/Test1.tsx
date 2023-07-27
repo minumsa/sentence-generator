@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./cine.module.css";
+import { data } from "./data";
 
 interface TestProps {
   score: number;
@@ -14,12 +15,7 @@ interface AnswerStyle {
 }
 
 export default function Test1({ score, setScore }: TestProps) {
-  const [answers, setAnswers] = useState<React.CSSProperties[]>([
-    {},
-    {},
-    {},
-    {},
-  ]);
+  const [answers, setAnswers] = useState<React.CSSProperties[]>([{}, {}, {}, {}]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const answerStyle: AnswerStyle = {
     color: "white",
@@ -48,33 +44,18 @@ export default function Test1({ score, setScore }: TestProps) {
   }
 
   return (
-    <>
-      <div className={styles["cine-test-format"]}>
-        <div className={styles["cine-quiz"]}>
-          <span>{`1. 다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 `}</span>
-          <span style={{ textDecoration: "underline" }}>않는</span>
-          <span> 음식은?</span>
-        </div>
-        {[1, 2, 3, 4].map(answerIndex => (
+    <div className={styles["cine-test-format"]}>
+      <div className={styles["cine-quiz"]}>{data[0].quiz}</div>
+      {data[0].options?.map((option, index) => {
+        return (
           <div
-            key={answerIndex}
             className={styles["cine-answer"]}
-            style={answers[answerIndex - 1]}
-            onClick={() => clickAnswer(answerIndex - 1)}
-          >
-            ({answerIndex}){" "}
-            {answerIndex === 1
-              ? "초밥"
-              : answerIndex === 2
-              ? "볶음밥"
-              : answerIndex === 3
-              ? "파스타"
-              : answerIndex === 4
-              ? "석류"
-              : ""}
-          </div>
-        ))}
-      </div>
-    </>
+            key={index}
+            style={answers[index]}
+            onClick={() => clickAnswer(index)}
+          >{`${index + 1}) ${option}`}</div>
+        );
+      })}
+    </div>
   );
 }
