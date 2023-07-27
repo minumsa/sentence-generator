@@ -337,7 +337,6 @@
   cursor: move;
   background-repeat: no-repeat;
   background-size: 100%;
-  border: 4px solid white;
 }
 
 @-webkit-keyframes blink {

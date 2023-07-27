@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./index.module.css";
-import { fortuneArr, fortuneEngArr, readme } from "./data";
+import { fortuneArr, fortuneEngArr, icon, readme } from "./data";
 
 interface PageProps {
   language: string;
@@ -17,32 +17,27 @@ interface ImageModalProps {
 }
 
 export default function Main({ language }: PageProps) {
-  const folderWidth: number = 80;
-  const folderHeight: number = 65;
-  const mobileFolderWidth: number = folderWidth * 0.9;
-  const mobileFolderHeight: number = folderHeight * 0.9;
+  const folder: number[] = [80, 65];
+  const mobileFolder: number[] = [folder[0] * 0.9, folder[1] * 0.9];
+  const img: number[] = [72, 96];
+  const mobileImg: number[] = [img[0] * 0.9, img[1] * 0.9];
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showImage, setShowImage] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");
-  const imgFileWidth: number = 72;
-  const imgFileHeight: number = 96;
-  const MobileImgFileWidth: number = imgFileWidth * 0.9;
-  const MobileImgFileHeight: number = imgFileHeight * 0.9;
-
-  const [isMemo, setIsMemo] = useState<boolean>(false);
+  const [isReadme, setIsReadme] = useState<boolean>(false);
   const lang = language == "A" ? "EN" : "KO";
 
   const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
     let width: number = 720;
-    let height: number = 961;
+    let height: number = 960;
 
     if (isMobile) {
       width /= 2;
       height /= 2;
     }
 
-    return isMemo ? (
+    return isReadme ? (
       <div
         className={styles["modal-container"]}
         style={{
@@ -170,14 +165,14 @@ export default function Main({ language }: PageProps) {
     setImgAlt("");
   };
 
-  const handleDoubleClick = (index: number) => {
-    if (index === 6) {
+  const handleClick = (name: string) => {
+    if (name === "cat") {
       setImgSrc("/divdivdiv/cat.webp");
       setImgAlt("Cat");
-    } else if (index === 7) {
+    } else if (name === "me") {
       setImgSrc("/divdivdiv/me.webp");
       setImgAlt("Me");
-    } else if (index === 8) {
+    } else if (name === "readme") {
       language === "A"
         ? setImgSrc("/divdivdiv/readme-nav-en.webp")
         : setImgSrc("/divdivdiv/readme-nav-ko.webp");
@@ -202,29 +197,62 @@ export default function Main({ language }: PageProps) {
     link: string;
     icon: string;
     title: TitleProps;
+    size: number[];
   }) {
-    const { className, link, icon, title } = props;
-
-    return (
-      <Draggable>
+    const { className, link, icon, title, size } = props;
+    const linkFunction = (link: string) => {
+      if (link === "readme") {
+        setIsReadme(true);
+      } else {
+        setIsReadme(false);
+      }
+      if (link === "fortune") {
+        handleFortuneClick();
+      } else if (link.includes("/")) {
+        clickIconHandler(link);
+      } else {
+        handleClick(link);
+      }
+    };
+    const DraggableContent = (
+      <div
+        className={styles[`${className}`]}
+        onDoubleClick={() => {
+          if (!className.includes("mobile")) {
+            setIsMobile(false);
+            linkFunction(link);
+          }
+        }}
+        onClick={() => {
+          if (className.includes("mobile")) {
+            setIsMobile(true);
+            linkFunction(link);
+          }
+        }}
+      >
         <div
-          className={styles[`${className}`]}
-          onDoubleClick={() => clickIconHandler(link)}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/${icon}.webp)`,
-              width: folderWidth,
-              height: folderHeight,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            {/* <div>{language === "A" ? "Project 1" : "프로젝트 1"}</div> */}
-            <div>{language === "A" ? `${title.EN}` : `${title.KO}`}</div>
-          </div>
+          className={styles["icon-image"]}
+          style={{
+            width: size[0],
+            height: size[1],
+            backgroundImage: `url(/divdivdiv/${icon}.webp)`,
+            boxShadow:
+              size === img || size === mobileImg
+                ? "1px 2px 5px gray"
+                : undefined,
+            border: icon === "readme" ? 0 : " 4px solid white",
+          }}
+        ></div>
+        <div className={styles["icon-title"]}>
+          <div>{language === "A" ? `${title.EN}` : `${title.KO}`}</div>
         </div>
-      </Draggable>
+      </div>
+    );
+
+    return className.includes("mobile") ? (
+      <div>{DraggableContent}</div>
+    ) : (
+      <Draggable>{DraggableContent}</Draggable>
     );
   }
 
@@ -238,336 +266,150 @@ export default function Main({ language }: PageProps) {
         link="https://blog.divdivdiv.com"
         icon="folder"
         title={readme.blog.title}
+        size={folder}
       />
       <DraggableComponent
         className="icon-cinephile"
         link="/cinephile"
         icon="folder"
         title={readme.cinephile.title}
+        size={folder}
       />
       <DraggableComponent
         className="icon-pomodoro"
         link="/pomodoro"
         icon="folder"
         title={readme.pomodoro.title}
+        size={folder}
       />
       <DraggableComponent
         className="icon-fruits"
         link="/fruits"
         icon="folder"
         title={readme.fruits.title}
+        size={folder}
       />
       <DraggableComponent
         className="icon-pride"
         link="/pride-2023"
         icon="folder"
         title={readme.pride.title}
+        size={folder}
       />
       <DraggableComponent
         className="icon-pride"
         link="/pride-2023"
         icon="folder"
         title={readme.pride.title}
+        size={folder}
       />
-      {/* TODO: 이미지 모달 DraggableComponent 구현 */}
-      <Draggable>
-        <div
-          className={styles["icon-cat"]}
-          onDoubleClick={() => {
-            setIsMemo(false);
-            handleDoubleClick(6);
-          }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/cat.webp)`,
-              width: imgFileWidth,
-              height: imgFileHeight,
-              boxShadow: "1px 2px 5px gray",
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            {language === "A" ? "cat.webp" : "고양이.webp"}
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-me"]}
-          onDoubleClick={() => {
-            setIsMemo(false);
-            handleDoubleClick(7);
-          }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/me.webp)`,
-              width: imgFileWidth,
-              height: imgFileHeight,
-              boxShadow: "1px 2px 5px gray",
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            {language === "A" ? "me.webp" : "나.webp"}
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-fortune"]}
-          onDoubleClick={() => handleFortuneClick()}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/fortune.webp)`,
-              width: 80,
-              height: 83,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            <div> {language === "A" ? "fortune.exe" : "포춘쿠키.exe"}</div>
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-readme"]}
-          onDoubleClick={() => {
-            setIsMemo(true);
-            handleDoubleClick(8);
-          }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: "url(/divdivdiv/readme-icon.webp)",
-              width: imgFileWidth,
-              height: imgFileHeight,
-              boxShadow: "1px 2px 5px gray",
-              border: 0,
-            }}
-          ></div>
-          <div className={styles["icon-title"]} style={{ marginTop: "13px" }}>
-            <div> {language === "A" ? "README.txt" : "프로젝트 설명.txt"}</div>
-          </div>
-        </div>
-      </Draggable>
-      <Draggable>
-        <div
-          className={styles["icon-music"]}
-          onDoubleClick={() => clickIconHandler("/music")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: folderWidth,
-              height: folderHeight,
-            }}
-          ></div>
-          <div className={styles["icon-title"]}>
-            <div>{language === "A" ? "Project 0" : "프로젝트 0"}</div>
-            <div>{language === "A" ? "(Carver Chart)" : "(카버 차트)"}</div>
-          </div>
-        </div>
-      </Draggable>
-      <div className={styles["mobile-icon-container"]}>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => clickIconHandler("https://blog.divdivdiv.com")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: mobileFolderWidth,
-              height: mobileFolderHeight,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            <div>{language === "A" ? "Project 1" : "프로젝트 1"}</div>
-            <div>{language === "A" ? "(Blog)" : "(블로그)"}</div>
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => clickIconHandler("/cinephile")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: mobileFolderWidth,
-              height: mobileFolderHeight,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            <div>{language === "A" ? "Project 2" : "프로젝트 2"}</div>
-            <div>
-              {language === "A" ? "(Cinephile Test)" : "(시네필 테스트)"}
-            </div>
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => clickIconHandler("/pomodoro")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: mobileFolderWidth,
-              height: mobileFolderHeight,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            <div>{language === "A" ? "Project 3" : "프로젝트 3"}</div>
-            <div>{language === "A" ? "(Pomodoro)" : "(뽀모도로)"}</div>
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => clickIconHandler("/fruits")}
-          style={{ marginLeft: "20px" }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: mobileFolderWidth,
-              height: mobileFolderHeight,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            <div>{language === "A" ? "Project 4" : "프로젝트 4"}</div>
-            <div>{language === "A" ? "(Fruits)" : "(과일 생성기)"}</div>
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => clickIconHandler("/pride-2023")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: mobileFolderWidth,
-              height: mobileFolderHeight,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            <div>{language === "A" ? "Project 5" : "프로젝트 5"}</div>
-            <div>{language === "A" ? "(Sentences)" : "(문장 생성기)"}</div>
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => clickIconHandler("/music")}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/folder.webp)`,
-              width: mobileFolderWidth,
-              height: mobileFolderHeight,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            <div>{language === "A" ? "Project 0" : "프로젝트 0"}</div>
-            <div>{language === "A" ? "(Carver Chart)" : "(카버 차트)"}</div>
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => {
-            setIsMobile(true);
-            setIsMemo(true);
-            handleDoubleClick(8);
-          }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: "url(/divdivdiv/readme-icon.webp)",
-              width: MobileImgFileWidth,
-              height: MobileImgFileHeight,
-              boxShadow: "1px 2px 5px gray",
-              border: 0,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            <div> {language === "A" ? "README.txt" : "프로젝트 설명.txt"}</div>
-          </div>
-        </div>
+      <DraggableComponent
+        className="icon-cat"
+        link="cat"
+        icon="cat"
+        title={icon.cat}
+        size={img}
+      />
+      <DraggableComponent
+        className="icon-me"
+        link="me"
+        icon="me"
+        title={icon.me}
+        size={img}
+      />
+      <DraggableComponent
+        className="icon-fortune"
+        link="fortune"
+        icon="fortune"
+        title={icon.fortune}
+        size={[80, 83]}
+      />
+      <DraggableComponent
+        className="icon-readme"
+        link="readme"
+        icon="readme"
+        title={icon.readme}
+        size={img}
+      />
+      <DraggableComponent
+        className="icon-music"
+        link="/music"
+        icon="folder"
+        title={readme.music.title}
+        size={folder}
+      />
 
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => {
-            setIsMemo(false);
-            setIsMobile(true);
-            handleDoubleClick(7);
-          }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/me.webp)`,
-              width: MobileImgFileWidth,
-              height: MobileImgFileHeight,
-              boxShadow: "1px 2px 5px gray",
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            {language === "A" ? "me.webp" : "나.webp"}
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          onClick={() => {
-            setIsMobile(true);
-            setIsMemo(false);
-            handleDoubleClick(6);
-          }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/cat.webp)`,
-              width: MobileImgFileWidth,
-              height: MobileImgFileHeight,
-              boxShadow: "1px 2px 5px gray",
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            {language === "A" ? "cat.webp" : "고양이.webp"}
-          </div>
-        </div>
-        <div
-          className={styles["mobile-icon"]}
-          style={{ marginLeft: "10px" }}
-          onClick={() => {
-            setIsMobile(true);
-            handleFortuneClick();
-          }}
-        >
-          <div
-            className={styles["icon-image"]}
-            style={{
-              backgroundImage: `url(/divdivdiv/fortune.webp)`,
-              width: 80 * 0.9,
-              height: 83 * 0.9,
-              marginTop: "10px",
-              border: undefined,
-              boxShadow: undefined,
-            }}
-          ></div>
-          <div className={styles["mobile-icon-title"]}>
-            {language === "A" ? "fortune.exe" : "포춘쿠키.exe"}
-          </div>
-        </div>
+      <div className={styles["mobile-icon-container"]}>
+        <DraggableComponent
+          className="mobile-icon"
+          link="https://blog.divdivdiv.com"
+          icon="folder"
+          title={readme.blog.title}
+          size={mobileFolder}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="/cinephile"
+          icon="folder"
+          title={readme.cinephile.title}
+          size={mobileFolder}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="/pomodoro"
+          icon="folder"
+          title={readme.pomodoro.title}
+          size={mobileFolder}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="/fruits"
+          icon="folder"
+          title={readme.fruits.title}
+          size={mobileFolder}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="/pride-2023"
+          icon="folder"
+          title={readme.pride.title}
+          size={mobileFolder}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="/music"
+          icon="folder"
+          title={readme.music.title}
+          size={mobileFolder}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="readme"
+          icon="readme"
+          title={icon.readme}
+          size={mobileImg}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="me"
+          icon="me"
+          title={icon.me}
+          size={mobileImg}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="cat"
+          icon="cat"
+          title={icon.cat}
+          size={mobileImg}
+        />
+        <DraggableComponent
+          className="mobile-icon"
+          link="fortune"
+          icon="fortune"
+          title={icon.fortune}
+          size={[80 * 0.9, 83 * 0.9]}
+        />
       </div>
     </div>
   );

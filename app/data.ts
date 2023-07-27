@@ -117,3 +117,22 @@ export const readme = {
     emoji: "🎶",
   },
 };
+
+export const icon = {
+  cat: {
+    EN: "cat.webp",
+    KO: "고양이.webp",
+  },
+  me: {
+    EN: "me.webp",
+    KO: "나.webp",
+  },
+  fortune: {
+    EN: "fortune.exe",
+    KO: "포춘쿠키.exe",
+  },
+  readme: {
+    EN: "README.txt",
+    KO: "프로젝트.txt",
+  },
+};
