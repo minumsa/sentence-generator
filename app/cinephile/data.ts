@@ -1,7 +1,7 @@
 export const data = [
   {
     quiz: "다음 중 <헤어질 결심>(2022, 박찬욱)에 등장하지 않는 음식은?",
-    answer: 2,
+    answer: 2, // index
     options: ["초밥", "볶음밥", "파스타", "석류"],
   },
   {

@@ -17,7 +17,7 @@ interface AnswerStyle {
 export default function Test1({ score, setScore }: TestProps) {
   const [answers, setAnswers] = useState<React.CSSProperties[]>([{}, {}, {}, {}]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
-  const answerStyle: AnswerStyle = {
+  const mark: AnswerStyle = {
     color: "white",
     backgroundColor: "#0e1111",
   };
@@ -26,20 +26,18 @@ export default function Test1({ score, setScore }: TestProps) {
     setCopiedScore(score);
   }, []);
 
-  function clickAnswer(answerIndex: number) {
-    if (answers[answerIndex].backgroundColor === answerStyle.backgroundColor) {
+  function clickAnswer(answer: number) {
+    if (answers[answer].backgroundColor === mark.backgroundColor) {
       setAnswers(prevAnswers => {
         const updatedAnswers = [...prevAnswers];
-        updatedAnswers[answerIndex] = {};
+        updatedAnswers[answer] = {};
         return updatedAnswers;
       });
       setScore(copiedScore);
     } else {
-      const updatedAnswers = Array.from({ length: 4 }, (_, index) =>
-        index === answerIndex ? answerStyle : {}
-      );
+      const updatedAnswers = Array.from({ length: 4 }, (_, index) => (index === index ? mark : {}));
       setAnswers(updatedAnswers);
-      setScore(score => (answerIndex === 2 ? score + 4 : copiedScore));
+      setScore(score => (answer === data[0].answer ? score + 4 : copiedScore));
     }
   }
 
