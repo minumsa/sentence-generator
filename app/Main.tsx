@@ -37,6 +37,22 @@ export default function Main({ language }: PageProps) {
       height /= 2;
     }
 
+    function ReadmeComponent(props: { link: string; icon: any }) {
+      const { link, icon } = props;
+
+      return (
+        <div className={styles["paragraph"]}>
+          <div
+            className={styles["paragraph-title"]}
+            onClick={() => clickIconHandler(link)}
+          >
+            {`${icon.title[lang]} ${icon.emoji}`}
+          </div>
+          {icon.text[lang]}
+        </div>
+      );
+    }
+
     return isReadme ? (
       <div
         className={styles["modal-container"]}
@@ -77,69 +93,16 @@ export default function Main({ language }: PageProps) {
             >
               {readme.lastUpdated.text[lang]}
             </div>
-            <div className={styles["paragraph"]}>
-              <div
-                className={styles["paragraph-title"]}
-                onClick={() => clickIconHandler("https://blog.divdivdiv.com")}
-              >
-                {`${readme.blog.title[lang]} ${readme.blog.emoji}`}
-              </div>
-              {readme.blog.text[lang]}
-            </div>
-            <div className={styles["paragraph"]}>
-              <div
-                className={styles["paragraph-title"]}
-                onClick={() => clickIconHandler("/cinephile")}
-              >
-                {`${readme.cinephile.title[lang]} ${readme.cinephile.emoji}`}
-              </div>
-              {readme.cinephile.text[lang]}
-            </div>
-            <div className={styles["paragraph"]}>
-              <div
-                className={styles["paragraph-title"]}
-                onClick={() => clickIconHandler("/pomodoro")}
-              >
-                {`${readme.pomodoro.title[lang]} ${readme.pomodoro.emoji}`}
-              </div>
-              {readme.pomodoro.text[lang]}
-            </div>
-            <div className={styles["paragraph"]}>
-              <div
-                className={styles["paragraph-title"]}
-                onClick={() => clickIconHandler("/fruits")}
-              >
-                {`${readme.fruits.title[lang]} ${readme.fruits.emoji}`}
-              </div>
-              {readme.fruits.text[lang]}
-            </div>
-            <div className={styles["paragraph"]}>
-              <div
-                className={styles["paragraph-title"]}
-                onClick={() => clickIconHandler("/pride-2023")}
-              >
-                {`${readme.pride.title[lang]} ${readme.pride.emoji}`}
-              </div>
-              {readme.pride.text[lang]}
-            </div>
-            <div className={styles["paragraph"]}>
-              <div
-                className={styles["paragraph-title"]}
-                onClick={() => clickIconHandler("/pride-2023")}
-              >
-                {`${readme.music.title[lang]} ${readme.music.emoji}`}
-              </div>
-              {readme.music.text[lang]}
-            </div>
-            <div className={styles["paragraph"]}>
-              <div
-                className={styles["paragraph-title"]}
-                style={{ cursor: "help" }}
-              >
-                {`${readme.techStack.text[lang]} ${readme.techStack.emoji}`}
-              </div>
-              TypeScript, CSS, Next.js, React
-            </div>
+            <ReadmeComponent
+              link="https://blog.divdivdiv.com"
+              icon={readme.blog}
+            />
+            <ReadmeComponent link="/cinephile" icon={readme.cinephile} />
+            <ReadmeComponent link="/pomodoro" icon={readme.pomodoro} />
+            <ReadmeComponent link="/fruits" icon={readme.fruits} />
+            <ReadmeComponent link="/pride" icon={readme.pride} />
+            <ReadmeComponent link="/music" icon={readme.music} />
+            <ReadmeComponent link="/" icon={readme.techStack} />
           </div>
         </div>
       </div>
@@ -166,18 +129,15 @@ export default function Main({ language }: PageProps) {
   };
 
   const handleClick = (name: string) => {
-    if (name === "cat") {
-      setImgSrc("/divdivdiv/cat.webp");
-      setImgAlt("Cat");
-    } else if (name === "me") {
-      setImgSrc("/divdivdiv/me.webp");
-      setImgAlt("Me");
-    } else if (name === "readme") {
+    if (name === "readme") {
       language === "A"
-        ? setImgSrc("/divdivdiv/readme-nav-en.webp")
-        : setImgSrc("/divdivdiv/readme-nav-ko.webp");
-      setImgAlt("README.txt");
+        ? setImgSrc("/divdivdiv/readme-en.webp")
+        : setImgSrc("/divdivdiv/readme-ko.webp");
+    } else {
+      setImgSrc(`/divdivdiv/${name}.webp`);
     }
+
+    setImgAlt(name);
     setShowImage(true);
   };
 
@@ -200,6 +160,7 @@ export default function Main({ language }: PageProps) {
     size: number[];
   }) {
     const { className, link, icon, title, size } = props;
+
     const linkFunction = (link: string) => {
       if (link === "readme") {
         setIsReadme(true);
@@ -214,20 +175,25 @@ export default function Main({ language }: PageProps) {
         handleClick(link);
       }
     };
+
+    const handleDesktopClick = () => {
+      setIsMobile(false);
+      linkFunction(link);
+    };
+
+    const handleMobileClick = () => {
+      setIsMobile(true);
+      linkFunction(link);
+    };
+
     const DraggableContent = (
       <div
         className={styles[`${className}`]}
         onDoubleClick={() => {
-          if (!className.includes("mobile")) {
-            setIsMobile(false);
-            linkFunction(link);
-          }
+          !className.includes("mobile") ? handleDesktopClick() : undefined;
         }}
         onClick={() => {
-          if (className.includes("mobile")) {
-            setIsMobile(true);
-            linkFunction(link);
-          }
+          className.includes("mobile") ? handleMobileClick() : undefined;
         }}
       >
         <div
@@ -291,14 +257,14 @@ export default function Main({ language }: PageProps) {
       />
       <DraggableComponent
         className="icon-pride"
-        link="/pride-2023"
+        link="/pride"
         icon="folder"
         title={readme.pride.title}
         size={folder}
       />
       <DraggableComponent
         className="icon-pride"
-        link="/pride-2023"
+        link="/pride"
         icon="folder"
         title={readme.pride.title}
         size={folder}
@@ -370,7 +336,7 @@ export default function Main({ language }: PageProps) {
         />
         <DraggableComponent
           className="mobile-icon"
-          link="/pride-2023"
+          link="/pride"
           icon="folder"
           title={readme.pride.title}
           size={mobileFolder}

@@ -5,7 +5,7 @@ export const metadata = {
   // description:
   //   "데이터에 입력된 주어, 동사, 목적어가 무작위하게 조합되며 다양한 퀴어 문장을 생성한다. 모든 문장은 미래형이며 아직은 완성되지 못한 가능세계를 암시한다.",
   openGraph: {
-    images: [{ url: "/pride-2023/thumbnail.png", width: 1800, height: 945 }],
+    images: [{ url: "/pride/thumbnail.png", width: 1800, height: 945 }],
     locale: "ko_KR",
     siteName: "divdivdiv",
     title: "퀴어 문장 생성기",
@@ -16,7 +16,7 @@ export const metadata = {
     creator: "@dev_carver",
     description:
       "데이터에 입력된 주어, 동사, 목적어가 무작위하게 조합되며 다양한 퀴어 문장을 생성한다. 모든 문장은 미래형이며 아직은 완성되지 못한 가능세계를 암시한다.",
-    images: ["https://divdivdiv.com/pride-2023/thumbnail.png"],
+    images: ["https://divdivdiv.com/pride/thumbnail.png"],
     title: "퀴어 문장 생성기",
   },
 };

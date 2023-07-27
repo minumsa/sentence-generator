@@ -4,7 +4,7 @@
 
 ## 링크
 
-https://divdivdiv.com/pride-2023
+https://divdivdiv.com/pride
 
 ## 프로젝트 설명
 
@@ -30,7 +30,7 @@ npm run dev
 1. `layout.tsx`: 메타데이터 정보를 정의하고 컴포넌트를 구성합니다.
 2. `page.tsx`: 랜덤하게 조합되며 생성되는 문장을 보여줍니다.
 3. `words.ts`: 주어, 문장, 동사에 해당하는 문자열의 배열을 저장합니다.
-4. `pride-2023.module.css`: 전체 웹의 CSS를 담당합니다.
+4. `pride.module.css`: 전체 웹의 CSS를 담당합니다.
 
 ## 코드 스니펫
 

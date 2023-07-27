@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import styles from "./pride-2023.module.css";
+import styles from "./pride.module.css";
 import { objects, subjects, verbs } from "./words";
 
 const getRandomItemFromArray = (array: string[]): string => {

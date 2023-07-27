@@ -44,9 +44,13 @@ export const readme = {
     },
   },
   techStack: {
-    text: {
+    title: {
       KO: "Tech Stack",
       EN: "테크 스텍",
+    },
+    text: {
+      KO: "TypeScript, CSS, Next.js, React",
+      EN: "TypeScript, CSS, Next.js, React",
     },
     emoji: "⚙️",
   },

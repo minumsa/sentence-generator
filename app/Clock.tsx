@@ -33,7 +33,7 @@ export default function Clock({ language }: PageProps) {
       2,
       "0"
     )}:${minutes}`;
-    return <NoSSR>{engClock}</NoSSR>;
+    return <NoSSR>{clock}</NoSSR>;
   } else {
     period = hours >= 12 ? "오후" : "오전";
     const korClock = `${period} ${String(twelveHourFormat).padStart(
