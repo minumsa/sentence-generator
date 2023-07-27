@@ -30,8 +30,8 @@ export default function Test12({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["cine-test-format"]}>
-        <div className={styles["cine-quiz"]}>
+      <div className={styles["quiz-container"]}>
+        <div className={styles["quiz"]}>
           <div>{`12. 다음 빈칸을 적절하게 채워 정답을 완성하시오.`}</div>
           <div
             style={{

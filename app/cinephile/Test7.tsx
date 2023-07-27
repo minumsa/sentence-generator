@@ -14,12 +14,7 @@ interface AnswerStyle {
 }
 
 export default function Test7({ score, setScore }: TestProps) {
-  const [answers, setAnswers] = useState<React.CSSProperties[]>([
-    {},
-    {},
-    {},
-    {},
-  ]);
+  const [answers, setAnswers] = useState<React.CSSProperties[]>([{}, {}, {}, {}]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const answerStyle: AnswerStyle = {
     color: "white",
@@ -50,14 +45,14 @@ export default function Test7({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["cine-test-format"]}>
-        <div className={styles["cine-quiz"]}>
+      <div className={styles["quiz-container"]}>
+        <div className={styles["quiz"]}>
           {`7. 웨스 크레이븐이 연출을 맡고 케빈 윌리엄슨이 각본을 썼으며, "공포영화의 법칙"이라는 클리셰를 메타픽션적으로 활용해 개봉 당시 흥행과 더불어 작품성까지 크게 호평받은 이 공포영화 시리즈는?`}
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={styles["cine-answer"]}
+            className={styles["options"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

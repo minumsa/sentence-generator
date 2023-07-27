@@ -14,12 +14,7 @@ interface AnswerStyle {
 }
 
 export default function Test29({ score, setScore }: TestProps) {
-  const [answers, setAnswers] = useState<React.CSSProperties[]>([
-    {},
-    {},
-    {},
-    {},
-  ]);
+  const [answers, setAnswers] = useState<React.CSSProperties[]>([{}, {}, {}, {}]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const answerStyle: AnswerStyle = {
     color: "white",
@@ -50,8 +45,8 @@ export default function Test29({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["cine-test-format"]}>
-        <div className={styles["cine-quiz"]}>
+      <div className={styles["quiz-container"]}>
+        <div className={styles["quiz"]}>
           <span>{`29. 다음 중 픽사 애니메이션 스튜디오에서 만든 영화가 `}</span>
           <span style={{ textDecoration: "underline" }}>{`아닌`}</span>
           <span>{` 것은?`}</span>
@@ -59,7 +54,7 @@ export default function Test29({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={styles["cine-answer"]}
+            className={styles["options"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

@@ -42,12 +42,12 @@ export default function Test1({ score, setScore }: TestProps) {
   }
 
   return (
-    <div className={styles["cine-test-format"]}>
-      <div className={styles["cine-quiz"]}>{data[0].quiz}</div>
+    <div className={styles["quiz-container"]}>
+      <div className={styles["quiz"]}>{data[0].quiz}</div>
       {data[0].options?.map((option, index) => {
         return (
           <div
-            className={styles["cine-answer"]}
+            className={styles["options"]}
             key={index}
             style={answers[index]}
             onClick={() => clickAnswer(index)}

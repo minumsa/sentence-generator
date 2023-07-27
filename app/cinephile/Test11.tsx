@@ -14,12 +14,7 @@ interface AnswerStyle {
 }
 
 export default function Test11({ score, setScore }: TestProps) {
-  const [answers, setAnswers] = useState<React.CSSProperties[]>([
-    {},
-    {},
-    {},
-    {},
-  ]);
+  const [answers, setAnswers] = useState<React.CSSProperties[]>([{}, {}, {}, {}]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const answerStyle: AnswerStyle = {
     color: "white",
@@ -50,14 +45,14 @@ export default function Test11({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["cine-test-format"]}>
-        <div className={styles["cine-quiz"]}>
+      <div className={styles["quiz-container"]}>
+        <div className={styles["quiz"]}>
           <span>{`11. 다음 중 <언더 더 스킨>(2013, 조나단 글레이저)에서 에일리언 로라가 지구로 오게 된 이유로 가장 적절한 것은?`}</span>
         </div>
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={styles["cine-answer"]}
+            className={styles["options"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

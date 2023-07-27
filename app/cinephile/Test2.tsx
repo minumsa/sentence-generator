@@ -62,41 +62,23 @@ export default function Test2({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["cine-test-format"]}>
-        <div className={styles["cine-quiz"]}>
+      <div className={styles["quiz-container"]}>
+        <div className={styles["quiz"]}>
           <span>{`2. 다음 중 <벌새>(2018, 김보라)에 등장하는 대사가 `}</span>
           <span style={{ textDecoration: "underline" }}>아닌</span>
           <span> 것은?</span>
         </div>
-        <div
-          className={styles["cine-answer"]}
-          style={mark1}
-          onClick={clickAnswer1}
-        >
+        <div className={styles["options"]} style={mark1} onClick={clickAnswer1}>
           <span>(1) “제 삶도 언젠가 빛이 날까요?”</span>
         </div>
-        <div
-          className={styles["cine-answer"]}
-          style={mark2}
-          onClick={clickAnswer2}
-        >
+        <div className={styles["options"]} style={mark2} onClick={clickAnswer2}>
           <span>(2) “언니, 그건 지난 학기잖아요.”</span>
         </div>
-        <div
-          className={styles["cine-answer"]}
-          style={mark3}
-          onClick={clickAnswer3}
-        >
-          (3) “더 나아지기 위해 우리는 기꺼이 더 나빠졌다. 그게 우리의
-          최선이었다.”
+        <div className={styles["options"]} style={mark3} onClick={clickAnswer3}>
+          (3) “더 나아지기 위해 우리는 기꺼이 더 나빠졌다. 그게 우리의 최선이었다.”
         </div>
-        <div
-          className={styles["cine-answer"]}
-          style={mark4}
-          onClick={clickAnswer4}
-        >
-          (4) “우리는 늘 누군가를 만나 무언가를 나눈다는 것, 세상은 참 신기하고
-          아름답다.”
+        <div className={styles["options"]} style={mark4} onClick={clickAnswer4}>
+          (4) “우리는 늘 누군가를 만나 무언가를 나눈다는 것, 세상은 참 신기하고 아름답다.”
         </div>
       </div>
     </>

@@ -39,9 +39,7 @@ export default function Test17({ score, setScore }: TestProps) {
       );
     } else {
       setLastDay(
-        year +
-          (month < 10 ? "0" + String(month) : String(month)) +
-          (day < 10 ? "0" + day : day)
+        year + (month < 10 ? "0" + String(month) : String(month)) + (day < 10 ? "0" + day : day)
       );
     }
   }, []);
@@ -71,12 +69,7 @@ export default function Test17({ score, setScore }: TestProps) {
     }
   }, [lastDaysBoxOfficeList]);
 
-  const [answers, setAnswers] = useState<React.CSSProperties[]>([
-    {},
-    {},
-    {},
-    {},
-  ]);
+  const [answers, setAnswers] = useState<React.CSSProperties[]>([{}, {}, {}, {}]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const answerStyle: AnswerStyle = {
     color: "white",
@@ -106,13 +99,13 @@ export default function Test17({ score, setScore }: TestProps) {
   }
 
   return (
-    <div className={styles["cine-test-format"]}>
-      <div className={styles["cine-quiz"]}>
+    <div className={styles["quiz-container"]}>
+      <div className={styles["quiz"]}>
         <span>
-          {`17. 다음 중 어제(${lastDay
+          {`17. 다음 중 어제(${lastDay?.split("").slice(0, 4).join("")}.${lastDay
             ?.split("")
-            .slice(0, 4)
-            .join("")}.${lastDay?.split("").slice(4, 6).join("")}.${lastDay
+            .slice(4, 6)
+            .join("")}.${lastDay
             ?.split("")
             .slice(6, 8)
             .join("")}.) 박스오피스 1위를 기록한 영화는?`}{" "}
@@ -124,7 +117,7 @@ export default function Test17({ score, setScore }: TestProps) {
       {[1, 2, 3, 4].map(answerIndex => (
         <div
           key={answerIndex}
-          className={styles["cine-answer"]}
+          className={styles["options"]}
           style={answers[answerIndex - 1]}
           onClick={() => clickAnswer(answerIndex - 1)}
         >

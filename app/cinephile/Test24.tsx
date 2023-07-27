@@ -15,12 +15,7 @@ interface AnswerStyle {
 }
 
 export default function Test24({ score, setScore }: TestProps) {
-  const [answers, setAnswers] = useState<React.CSSProperties[]>([
-    {},
-    {},
-    {},
-    {},
-  ]);
+  const [answers, setAnswers] = useState<React.CSSProperties[]>([{}, {}, {}, {}]);
   const [copiedScore, setCopiedScore] = useState<number>(0);
   const answerStyle: AnswerStyle = {
     color: "white",
@@ -51,9 +46,9 @@ export default function Test24({ score, setScore }: TestProps) {
 
   return (
     <>
-      <div className={styles["cine-test-format"]}>
+      <div className={styles["quiz-container"]}>
         <div
-          className={styles["cine-quiz"]}
+          className={styles["quiz"]}
         >{`24. <레이디 버드>(2017), <작은 아씨들>(2019), <바비>(2023)를 연출했으며, 배우로도 활동 중인 다음 사진 속 감독의 이름은?`}</div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Image
@@ -71,7 +66,7 @@ export default function Test24({ score, setScore }: TestProps) {
         {[1, 2, 3, 4].map(answerIndex => (
           <div
             key={answerIndex}
-            className={styles["cine-answer"]}
+            className={styles["options"]}
             style={answers[answerIndex - 1]}
             onClick={() => clickAnswer(answerIndex - 1)}
           >

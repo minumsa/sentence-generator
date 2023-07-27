@@ -83,7 +83,7 @@
   color: white;
 }
 
-.cine-answer-button-flex {
+.options-button-flex {
   display: flex;
   flex-grow: 1;
   height: 50px;
@@ -95,7 +95,7 @@
   font-size: 25px;
 }
 
-.cine-answer-button-flex:hover {
+.options-button-flex:hover {
   background-color: #0e1111;
   color: white;
 }
@@ -128,7 +128,7 @@
   margin-top: 10px;
 }
 
-.cine-test-format {
+.quiz-container {
   font-size: 25px;
   line-height: 200%;
 }
@@ -193,12 +193,12 @@
   font-family: "omyu_pretty";
 }
 
-.cine-answer-container {
+.options-container {
   margin-top: 100px;
 }
 
 @media (max-width: 600px) {
-  .cine-answer-container {
+  .options-container {
     margin-top: 80px;
   }
 
@@ -245,7 +245,7 @@
     flex-direction: column;
   }
 
-  .cine-test-format {
+  .quiz-container {
     font-size: 20px;
     line-height: 200%;
   }
@@ -274,7 +274,7 @@
     font-size: 20px;
   }
 
-  .cine-answer-button-flex {
+  .options-button-flex {
     font-size: 20px;
   }
 
@@ -305,28 +305,28 @@
   }
 }
 
-.cine-quiz {
+.quiz {
   padding: 0 0px;
 }
 
-.cine-answer {
+.options {
   padding: 0 5px;
   cursor: pointer;
 }
 
-.cine-answer:hover {
+.options:hover {
   color: white;
   background-color: #0e1111;
 }
 
-.cine-answer-top {
+.options-top {
   display: flex;
   justify-content: space-between;
   width: 400px;
   height: 150px;
 }
 
-.cine-answer-bottom {
+.options-bottom {
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
@@ -334,7 +334,7 @@
   height: 150px;
 }
 
-.cine-answer-top-left {
+.options-top-left {
   margin-left: 35px;
   width: 150px;
   height: 150px;
@@ -342,7 +342,7 @@
   border: 1.5px solid #0e1111;
 }
 
-.cine-answer-top-right {
+.options-top-right {
   margin-right: 35px;
   width: 150px;
   height: 150px;
@@ -399,16 +399,16 @@
   line-height: 150%;
 }
 
-.cine-answer-selected {
+.options-selected {
   background-color: #0e1111;
   color: white;
 }
 
-.cine-answer-answer {
+.options-answer {
   padding: 0 5px;
 }
 
-.cine-answer-line {
+.options-line {
   width: 100%;
   border-top: 1px dashed #0e1111;
   margin: 40px 0;
