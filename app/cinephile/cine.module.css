@@ -51,14 +51,14 @@
 
 .button {
   display: flex;
-  height: 40px;
+  height: 45px;
   width: 100%;
   border: 1px solid #000000;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   font-size: 25px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .button:hover {
@@ -139,6 +139,12 @@
   padding: 15px;
 }
 
+.answer-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .short-answer-input {
   font-family: "omyu_pretty";
   font-size: 25px;
@@ -194,6 +200,34 @@
   width: 100%;
   cursor: pointer;
   z-index: 50;
+}
+
+.index-container {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.index-title {
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.index-input {
+  font-family: "omyu_pretty";
+  font-size: 25px;
+  height: 45px;
+  width: calc(100% - 20px);
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
 }
 
 .cine-hide-select {
@@ -267,14 +301,6 @@
   border-top: 1.5px solid #000000;
 }
 
-.cine-name-input {
-  font-family: "omyu_pretty";
-  font-size: 25px;
-  height: 45px;
-  margin-bottom: 20px;
-  padding: 0 10px;
-}
-
 .cine-end-div {
   font-size: 25px;
   margin-top: 5px;
@@ -294,7 +320,7 @@
   margin: 40px 0;
 }
 
-.cine-score-comment {
+.comment {
   text-align: center;
   font-size: 25px;
   margin-top: 10px;
@@ -433,7 +459,7 @@
     font-size: 20px;
   }
 
-  .cine-score-comment {
+  .comment {
     margin-top: 5px;
     margin-bottom: 20px;
     font-size: 22px;
