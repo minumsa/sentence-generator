@@ -7,37 +7,26 @@ import Image from "next/image";
 interface QuestionProps {
   page: number;
   score: number;
-  setScore: React.Dispatch<React.SetStateAction<number>>;
   setTotalScore: React.Dispatch<React.SetStateAction<number>>;
+  userAnswer: string | number;
+  setUserAnswer: React.Dispatch<React.SetStateAction<string | number | null>>;
 }
 
-export function Question({ page, score, setScore, setTotalScore }: QuestionProps) {
+export function Question({ page, score, setTotalScore, userAnswer, setUserAnswer }: QuestionProps) {
   // TODO: useEffect 안 쓰고 useState(score)하면 될듯!
 
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const negativeWord: string[] = ["아닌", "않은", "않는"];
   const [isNagative, setIsNagative] = useState<boolean>(false);
 
   useEffect(() => {
     setTotalScore(prevScore => prevScore + score);
-
-    setSelectedAnswer(null);
+    setUserAnswer(null);
     setIsNagative(false);
 
     negativeWord.map(word => {
       if (data[page - 1].question.includes(word)) setIsNagative(true);
     });
   }, [page]);
-
-  function handleClick(answer: number) {
-    setSelectedAnswer(answer);
-
-    if (data[page - 1].answer === answer && answer !== selectedAnswer) {
-      setScore(4);
-    } else if (data[page - 1].answer !== answer) {
-      setScore(0);
-    }
-  }
 
   const Options = () => {
     return data[page - 1].options?.map((option, index) => {
@@ -46,10 +35,12 @@ export function Question({ page, score, setScore, setTotalScore }: QuestionProps
           <div
             className={styles["options"]}
             style={{
-              backgroundColor: index === selectedAnswer ? "#000000" : undefined,
-              color: index === selectedAnswer ? "#ffffff" : undefined,
+              backgroundColor: index === userAnswer ? "#000000" : undefined,
+              color: index === userAnswer ? "#ffffff" : undefined,
             }}
-            onClick={() => handleClick(index)}
+            onClick={() => {
+              setUserAnswer(index);
+            }}
           >
             {`${index + 1}) ${option}`}
           </div>
@@ -93,7 +84,7 @@ export function Question({ page, score, setScore, setTotalScore }: QuestionProps
             </div>
             <Options />
           </React.Fragment>
-        ) : data[page - 1].movie === "chungking-express" ? (
+        ) : data[page - 1].title === "chungking-express" ? (
           <React.Fragment>
             <div className={styles["chungking-express"]}>📞 🍍 🕒 😎</div>
             <div className={styles["chungking-express"]}>👮‍♂️ 💌 🔑 🛫</div>
@@ -104,26 +95,23 @@ export function Question({ page, score, setScore, setTotalScore }: QuestionProps
         )
       ) : data[page - 1].type === "short-answer" ? (
         <div className={styles["short-answer-container"]}>
-          {data[page - 1].paragraph
-            ?.split(String(data[page - 1].answer))
-            // .splice(0, 0, String(data[page - 1].answer))
-            .map((text, index) => {
-              return <React.Fragment key={index}>yes</React.Fragment>;
-              // return text === String(data[page - 1].answer) ? (
-              //   <input
-              //     className={styles["short-answer-input"]}
-              //     onChange={e => setMark(e.target.value)}
-              //   ></input>
-              // ) : (
-              //   <React.Fragment key={index}>
-              //     <span>{text}</span>
-              //   </React.Fragment>
-              // );
-            })}
+          {data[page - 1].paragraph?.split(String(data[page - 1].answer)).map((text, index) => {
+            return index === 0 ? (
+              <React.Fragment key={index}>
+                {text}
+                <input
+                  className={styles["short-answer-input"]}
+                  onChange={e => {
+                    setUserAnswer(e.target.value);
+                  }}
+                />
+              </React.Fragment>
+            ) : (
+              <React.Fragment key={index}>{text}</React.Fragment>
+            );
+          })}
         </div>
-      ) : (
-        ""
-      )}
+      ) : null}
     </div>
   );
 }
