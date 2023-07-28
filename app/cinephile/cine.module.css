@@ -147,7 +147,7 @@
   text-align: center;
 }
 
-.cine-progress-bar {
+.progress-container {
   display: flex;
   width: 100%;
   height: 35px;
@@ -155,8 +155,11 @@
   border: 1px solid #000000;
 }
 
-.cine-progress-content {
-  height: 35px;
+.progress-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
 }
 
 .test0-ol {
@@ -168,8 +171,9 @@
   font-size: 20px;
 }
 
-.cine-progress-font {
+.progress-font {
   font-size: 24px;
+  color: #ffffff;
 }
 
 .test0-div {
@@ -201,114 +205,6 @@
 
 .options-container {
   margin-top: 100px;
-}
-
-@media (max-width: 600px) {
-  .options-container {
-    margin-top: 80px;
-  }
-
-  .cine-hide-select {
-    font-size: 20px;
-    height: 40px;
-    padding: 5px;
-  }
-
-  .test0-div {
-    height: 450px;
-    margin-top: 10px;
-  }
-
-  .test0-ol {
-    font-size: 20px;
-    margin-left: 0px;
-    margin-top: 13px;
-  }
-
-  .test0-span-2 {
-    font-size: 22px;
-  }
-
-  .test0-span {
-    font-size: 18px;
-  }
-
-  .title {
-    font-size: 27px;
-  }
-
-  .content {
-    flex-grow: 0;
-    margin-top: 20px;
-    margin-bottom: 35px;
-  }
-
-  .content-container {
-    margin-top: 0;
-    width: 90%;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .question-container {
-    font-size: 20px;
-    line-height: 200%;
-  }
-
-  .cine-progress-bar {
-    height: 30px;
-  }
-
-  .cine-progress-content {
-    height: 30px;
-  }
-
-  .short-answer-input {
-    font-size: 20px;
-  }
-
-  .button {
-    font-size: 20px;
-  }
-
-  .cine-kakao-button-flex {
-    font-size: 20px;
-  }
-
-  .cine-twitter-button-flex {
-    font-size: 20px;
-  }
-
-  .options-button-flex {
-    font-size: 20px;
-  }
-
-  .cine-challenge-button-flex {
-    font-size: 20px;
-  }
-
-  .cine-progress-font {
-    font-size: 20px;
-  }
-
-  .cine-score-comment {
-    margin-top: 5px;
-    margin-bottom: 20px;
-    font-size: 22px;
-  }
-
-  .cine-end-div {
-    font-size: 22px;
-  }
-
-  .cine-nav-container {
-    width: 100%;
-  }
-
-  .cine-nav-32-container {
-    width: 100%;
-  }
 }
 
 .question {
@@ -391,10 +287,11 @@
   margin-bottom: 30px;
 }
 
-.cine-test10-emoji {
+.chungking-express {
   font-size: 60px;
   text-align: center;
   margin-bottom: 40px;
+  margin: 40px 0;
 }
 
 .cine-score-comment {
@@ -403,6 +300,15 @@
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 150%;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  margin: 15px 0 25px 0;
 }
 
 .options-selected {
@@ -432,4 +338,116 @@
   border: 1.5px solid white;
   padding: 5px;
   margin-left: 10px;
+}
+
+@media (max-width: 600px) {
+  .image {
+    margin: 5px 0 15px 0;
+  }
+
+  .options-container {
+    margin-top: 80px;
+  }
+
+  .cine-hide-select {
+    font-size: 20px;
+    height: 40px;
+    padding: 5px;
+  }
+
+  .test0-div {
+    height: 450px;
+    margin-top: 10px;
+  }
+
+  .test0-ol {
+    font-size: 20px;
+    margin-left: 0px;
+    margin-top: 13px;
+  }
+
+  .test0-span-2 {
+    font-size: 22px;
+  }
+
+  .test0-span {
+    font-size: 18px;
+  }
+
+  .title {
+    font-size: 27px;
+  }
+
+  .content {
+    flex-grow: 0;
+    margin-top: 20px;
+    margin-bottom: 35px;
+  }
+
+  .content-container {
+    margin-top: 0;
+    width: 90%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .question-container {
+    font-size: 20px;
+    line-height: 200%;
+  }
+
+  .progress-container {
+    height: 30px;
+  }
+
+  .progress {
+    height: 30px;
+  }
+
+  .short-answer-input {
+    font-size: 20px;
+  }
+
+  .button {
+    font-size: 20px;
+  }
+
+  .cine-kakao-button-flex {
+    font-size: 20px;
+  }
+
+  .cine-twitter-button-flex {
+    font-size: 20px;
+  }
+
+  .options-button-flex {
+    font-size: 20px;
+  }
+
+  .cine-challenge-button-flex {
+    font-size: 20px;
+  }
+
+  .progress-font {
+    font-size: 20px;
+  }
+
+  .cine-score-comment {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .cine-end-div {
+    font-size: 22px;
+  }
+
+  .cine-nav-container {
+    width: 100%;
+  }
+
+  .cine-nav-32-container {
+    width: 100%;
+  }
 }
