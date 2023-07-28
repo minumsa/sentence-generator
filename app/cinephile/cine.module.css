@@ -66,21 +66,14 @@
   color: white;
 }
 
-.cine-twitter-button-flex {
-  display: flex;
-  flex-grow: 1;
-  height: 50px;
-  width: 100%;
-  border: 1px solid #000000;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  font-size: 25px;
-}
-
-.cine-twitter-button-flex:hover {
+.twitter:hover {
   background-color: #00acee;
   color: white;
+}
+
+.kakao:hover {
+  background-color: #fef01b;
+  color: #000000;
 }
 
 .options-button-flex {
@@ -98,22 +91,6 @@
 .options-button-flex:hover {
   background-color: #000000;
   color: white;
-}
-
-.cine-kakao-button-flex {
-  display: flex;
-  flex-grow: 1;
-  height: 50px;
-  width: 100%;
-  border: 1px solid #000000;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  font-size: 25px;
-}
-
-.cine-kakao-button-flex:hover {
-  background-color: #fef01b;
 }
 
 .cine-challenge-button-flex {
@@ -238,7 +215,7 @@
 }
 
 .options-container {
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 
 .question {
@@ -255,7 +232,20 @@
   background-color: #000000;
 }
 
-.options-top {
+.options-commentary:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.reference {
+  display: inline-block;
+  color: white;
+  border: 1.5px solid white;
+  /* padding: 5px; */
+  margin-left: 10px;
+}
+
+/* .options-top {
   display: flex;
   justify-content: space-between;
   width: 400px;
@@ -284,7 +274,7 @@
   height: 150px;
 
   border: 1.5px solid #000000;
-}
+} */
 
 .cine-top-img {
   width: 150px;
@@ -301,16 +291,20 @@
   border-top: 1.5px solid #000000;
 }
 
-.cine-end-div {
+.result-text {
   font-size: 25px;
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.cine-score {
+.result-text:last-child {
+  margin-bottom: 200px;
+}
+
+.score {
   font-weight: 900;
   font-size: 50px;
-  margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .chungking-express {
@@ -359,11 +353,34 @@
   margin-left: 10px;
 }
 
+.star-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star-color {
+  display: absolute;
+  margin-top: 20px;
+  z-index: 2;
+}
+
+.star-mono {
+  position: absolute;
+  margin-top: 20px;
+  z-index: 1;
+}
+
 .cine-reference-white {
   color: white;
   border: 1.5px solid white;
   padding: 5px;
   margin-left: 10px;
+}
+
+.commentary-container {
+  margin-bottom: 50px;
 }
 
 @media (max-width: 600px) {
@@ -443,10 +460,6 @@
     font-size: 20px;
   }
 
-  .cine-twitter-button-flex {
-    font-size: 20px;
-  }
-
   .options-button-flex {
     font-size: 20px;
   }
@@ -465,7 +478,7 @@
     font-size: 22px;
   }
 
-  .cine-end-div {
+  .result-text {
     font-size: 22px;
   }
 

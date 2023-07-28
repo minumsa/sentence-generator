@@ -15,6 +15,7 @@ export const data = [
       "더 나아지기 위해 우리는 기꺼이 더 나빠졌다. 그게 우리의 최선이었다.",
       "우리는 늘 누군가를 만나 무언가를 나눈다는 것, 세상은 참 신기하고 아름답다.",
     ],
+    reference: "https://youtu.be/WjJ6pdVeOAg?t=88",
   },
   {
     type: "multiple-choice",

@@ -5,6 +5,16 @@ import styles from "./cine.module.css";
 import { Question } from "./Question";
 import { data } from "./data";
 import axios from "axios";
+import Image from "next/image";
+import Script from "next/script";
+import Answer from "./Answer";
+import David from "./David";
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 export default function Page() {
   const [pageType, setPageType] = useState<"index" | "test" | "result" | "answer">("index");
@@ -12,13 +22,14 @@ export default function Page() {
   const [totalScore, setTotalScore] = useState<number>(0);
   const [testPage, setTestPage] = useState<number>(1);
   // const testPageMax = data.length;
-  const testPageMax = 2;
+  const testPageMax = 5;
   const progressWidth = `${(testPage / testPageMax) * 100}%`;
   const progressPercent = `${Math.floor((testPage / testPageMax) * 100)}%`;
-  const [userAnswer, setUserAnswer] = useState<any>(null);
+  const [userAnswer, setUserAnswer] = useState<any>();
   const [userName, setUserName] = useState<string>("참가자");
   const [rank, setRank] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
+  const starCount: string = "⭐️".repeat(Math.round((totalScore / 100) * 5));
 
   const handleButton = () => {
     if (pageType === "index") {
@@ -79,6 +90,21 @@ export default function Page() {
       });
   }, []);
 
+  const onShare = async () => {
+    await window.Kakao.Share.sendDefault({
+      objectType: "text",
+      text: `나의 시네필 평점은? ${starCount}`,
+      link: {
+        mobileWebUrl: "https://divdivdiv.com/cinephile",
+        webUrl: "https://divdivdiv.com/cinephile",
+      },
+    });
+  };
+
+  const kakaoInit = () => {
+    if (!window.Kakao.isInitialized()) window.Kakao.init("8b2e769ecd8f1b59e13d651bd3177712");
+  };
+
   return (
     <div className={styles["container"]}>
       <div className={styles["content-container"]}>
@@ -114,50 +140,36 @@ export default function Page() {
             />
           ) : pageType === "result" ? (
             <div className={styles["result-container"]}>
-              <div className={styles["cine-end-div"]} style={{ marginBottom: "12px" }}>
-                {userName} 님의 결과는?
+              <div className={styles["result-text"]}>
+                {userName} 님은 {totalCount}명 중 {rank}등!
               </div>
-              <div className={styles["cine-end-div"]} style={{ marginBottom: "30px" }}>
-                {totalCount}명 중에 {rank}등!
+              <div className={styles["score"]}>{totalScore}점</div>
+              <div className={styles["star-container"]}>
+                <Image
+                  className={styles["star-color"]}
+                  src="/cinephile/star-color.webp"
+                  alt="star-color"
+                  width={window.innerWidth > 450 ? "230" : "230"}
+                  height={window.innerWidth > 450 ? "47" : "47"}
+                  style={{
+                    clipPath: `inset(0 ${100 - totalScore}% 0 0)`,
+                  }}
+                />
+                <Image
+                  className={styles["star-mono"]}
+                  src="/cinephile/star-mono.webp"
+                  alt="star-mono"
+                  width={window.innerWidth > 450 ? "230" : "230"}
+                  height={window.innerWidth > 450 ? "47" : "47"}
+                />
               </div>
-              <div className={styles["cine-score"]}>{totalScore}점</div>
               <div className={styles["comment"]}>{comment}</div>
-              {/* <div
-                className={styles["cine-twitter-button-flex"]}
-                style={{ marginTop: "10px" }}
-                onClick={() => {
-                  window.open(
-                    `https://twitter.com/share?url=https://divdivdiv.com/cinephile&text=나의 시네필 평점은? ${scoreToStar}`
-                  );
-                }}
-              >
-                <div className={styles["cine-next-button"]}>트위터 공유하기</div>
-              </div> */}
-              {/* <div
-                className={styles["cine-kakao-button-flex"]}
-                style={{ marginTop: "10px" }}
-                onClick={() => {
-                  onShare();
-                }}
-              >
-                <div className={styles["cine-next-button"]}>카카오톡 공유하기</div>
-              </div> */}
-              {/* <div
-                className={styles["cine-challenge-button-flex"]}
-                onClick={() => {
-                  setTestNumber(0);
-                  setScore(0);
-                  setValue("참가자");
-                }}
-              >
-                <div className={styles["cine-next-button"]} style={{ marginLeft: "5px" }}>
-                  다시 도전하기
-                </div>
-              </div> */}
             </div>
           ) : (
             <div className={styles["answer-container"]}>
               <div className={styles["index-title"]}>정답 및 해설</div>
+              <David />
+              {/* <Answer /> */}
             </div>
           )}
         </div>
@@ -172,14 +184,34 @@ export default function Page() {
             이전 페이지로 돌아가기
           </div>
         ) : pageType === "result" ? (
-          <div
-            className={styles["button"]}
-            onClick={() => {
-              setPageType("answer");
-            }}
-          >
-            정답 및 해설 보기
-          </div>
+          <React.Fragment>
+            <div
+              className={`${styles.button} ${styles.twitter}`}
+              onClick={() => {
+                window.open(
+                  `https://twitter.com/share?url=https://divdivdiv.com/cinephile&text=나의 시네필 평점은?${starCount}`
+                );
+              }}
+            >
+              트위터 공유하기
+            </div>
+            <div
+              className={`${styles.button} ${styles.kakao}`}
+              onClick={() => {
+                onShare();
+              }}
+            >
+              카카오톡 공유하기
+            </div>
+            <div
+              className={styles["button"]}
+              onClick={() => {
+                setPageType("answer");
+              }}
+            >
+              정답 및 해설 보기
+            </div>
+          </React.Fragment>
         ) : (
           ""
         )}
@@ -193,6 +225,7 @@ export default function Page() {
             : "다시 도전하기"}
         </div>
       </div>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" onLoad={kakaoInit} />
     </div>
   );
 }
