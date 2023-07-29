@@ -16,11 +16,13 @@ interface ImageModalProps {
   onClick: any;
 }
 
+// FIXME:  icon 객체로 통일하기
+const folder: number[] = [80, 65];
+const mobileFolder: number[] = [folder[0] * 0.9, folder[1] * 0.9];
+const img: number[] = [72, 96];
+const mobileImg: number[] = [img[0] * 0.9, img[1] * 0.9];
+
 export default function Main({ language }: PageProps) {
-  const folder: number[] = [80, 65];
-  const mobileFolder: number[] = [folder[0] * 0.9, folder[1] * 0.9];
-  const img: number[] = [72, 96];
-  const mobileImg: number[] = [img[0] * 0.9, img[1] * 0.9];
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showImage, setShowImage] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string>("");
@@ -129,9 +131,12 @@ export default function Main({ language }: PageProps) {
     KO: string;
   }
 
+  // TODO: 바깥으로 빼라. (파일 분리까지!)
   function DraggableComponent(props: {
     className: string;
     link: string;
+    // FIXME: 함수를 받아랏!
+    //onClick: () => string,
     icon: string;
     title: TitleProps;
     size: number[];
@@ -139,6 +144,7 @@ export default function Main({ language }: PageProps) {
     const { className, link, icon, title, size } = props;
 
     const linkFunction = (link: string) => {
+      // TODO: 이 함수 정리해보기
       if (link === "readme") {
         setIsReadme(true);
       } else {
@@ -230,13 +236,6 @@ export default function Main({ language }: PageProps) {
         link="/fruits"
         icon="folder"
         title={readme.fruits.title}
-        size={folder}
-      />
-      <DraggableComponent
-        className="icon-pride"
-        link="/pride"
-        icon="folder"
-        title={readme.pride.title}
         size={folder}
       />
       <DraggableComponent

@@ -4,45 +4,37 @@ import { useEffect, useState } from "react";
 import styles from "./fruits.module.css";
 import { fruitEmojiMap } from "./fruits";
 
+function getRandomItem(arr: string[]): string {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 export default function Page() {
+  // FIXME: 리액트 코드로 최대한 바꿔보기
   useEffect(() => {
     const container = document.getElementById("container");
 
     const interval = setInterval(() => {
       const fruit = document.createElement("div");
       const fruitsArr: string[] = Object.keys(fruitEmojiMap);
-      const randomFruit =
-        fruitsArr[Math.floor(Math.random() * fruitsArr.length)];
+      const randomFruit = getRandomItem(fruitsArr);
       fruit.innerHTML = randomFruit;
       fruit.style.left = `${Math.random() * 100}%`;
       container?.appendChild(fruit);
 
+      // TODO: pointerEvents 검색해보기
       fruit.style.pointerEvents = "auto";
+      fruit.style.cursor = "pointer";
 
-      fruit.addEventListener("mouseover", () => {
-        fruit.style.cursor = "pointer";
-      });
-
+      const eventName = window.outerWidth < 450 ? "touchstart" : "click";
       const clickHandler = () => {
-        const fruitEmoji = fruit.innerHTML;
-        const fruitArray = fruitEmojiMap[fruitEmoji];
-
+        const fruitArray = fruitEmojiMap[randomFruit];
         if (fruitArray) {
-          if (window.outerWidth < 450) {
-            fruit.removeEventListener("touchstart", clickHandler);
-          } else {
-            fruit.removeEventListener("click", clickHandler);
-          }
-          alert(fruitArray[Math.floor(Math.random() * fruitArray.length)]);
-          fruit.remove();
+          fruit.removeEventListener(eventName, clickHandler);
+          alert(getRandomItem(fruitArray));
         }
       };
 
-      if (window.outerWidth < 450) {
-        fruit.addEventListener("touchstart", clickHandler);
-      } else {
-        fruit.addEventListener("click", clickHandler);
-      }
+      fruit.addEventListener(eventName, clickHandler);
 
       setTimeout(() => {
         fruit.remove();

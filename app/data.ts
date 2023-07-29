@@ -141,3 +141,5 @@ export const icon = {
     KO: "프로젝트.txt",
   },
 };
+
+export type Language = "en" | "ko";

@@ -1,5 +1,3 @@
-"use client";
-
 export const subjects: string[] = [
   "국회의원 또한",
   "국회의원 역시",

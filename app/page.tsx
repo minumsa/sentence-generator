@@ -8,6 +8,8 @@ import Contact from "./Contact";
 import Main from "./Main";
 import styles from "./index.module.css";
 
+// TODO: page.tsx 제외 파일 divdivdiv 폴더 만들어서 넣어주기
+
 export default function Home() {
   const currentDate = new Date();
   const month = currentDate.getMonth() + 1;
@@ -35,7 +37,11 @@ export default function Home() {
     return [daysOfWeek[dayIndex], daysOfEngWeek[dayIndex]];
   }
 
-  const [language, setLanguage] = useState<string>("한");
+  // FIXME: locale 정보 : en, ko
+  // union 타입 good
+  // FIXME: language 를 React.Context 일것!
+  // => 모든 컴포넌트의 props 에 language 가 없어야 함!
+  const [language, setLanguage] = useState<"한" | "A">("한");
   const [weatherData, setWeatherData] = useState<any | null>(null);
   const [activeTab, setActiveTab] = useState<"main" | "about" | "contact">("main");
 
@@ -59,6 +65,7 @@ export default function Home() {
     fetchData();
   }, []);
 
+  // FIXME: tab 의 type 정보를 따로 빼서 중복 없애기
   interface RenderButtonProps {
     text: string;
     tab: "main" | "about" | "contact";
@@ -82,6 +89,7 @@ export default function Home() {
         <div className={styles["nav-container"]}>
           <div className={styles["nav"]}>
             <RenderButtonLeft text="divdivdiv" tab="main" />
+            {/* FIXME: multi locale string 처리를 모두 통일하기 */}
             <RenderButtonLeft text={language === "A" ? "About" : "소개"} tab="about" />
             <RenderButtonLeft text={language === "A" ? "Contact" : "연결"} tab="contact" />
             <div className={styles["blank-space"]}></div>
@@ -103,7 +111,8 @@ export default function Home() {
             <div
               className={`${styles["button-right"]} ${styles["language"]}`}
               onClick={() => {
-                language === "A" ? setLanguage("한") : setLanguage("A");
+                // 바꿨음! 나중에 확인해보기
+                setLanguage(language === "A" ? "한" : "A");
               }}
             >
               {language}

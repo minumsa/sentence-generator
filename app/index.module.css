@@ -30,6 +30,8 @@
   color: rgb(30, 30, 30);
 }
 
+/* TODO: icon- 어쩌구 공통 분모 따로 빼기 */
+
 .icon-blog {
   width: 120px;
   display: flex;
