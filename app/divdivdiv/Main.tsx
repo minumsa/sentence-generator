@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./index.module.css";
 import { fortune, icon, readme } from "./data";
@@ -17,10 +17,20 @@ interface ImageModalProps {
 }
 
 // FIXME:  icon 객체로 통일하기
-const folder: number[] = [80, 65];
-const mobileFolder: number[] = [folder[0] * 0.9, folder[1] * 0.9];
-const img: number[] = [72, 96];
-const mobileImg: number[] = [img[0] * 0.9, img[1] * 0.9];
+const iconType = {
+  folder: {
+    width: 80,
+    height: 65,
+  },
+  image: {
+    width: 72,
+    height: 96,
+  },
+  fortune: {
+    width: 80,
+    height: 83,
+  },
+};
 
 export default function Main({ language }: PageProps) {
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -28,7 +38,7 @@ export default function Main({ language }: PageProps) {
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");
   const [isReadme, setIsReadme] = useState<boolean>(false);
-  const lang = language == "A" ? "EN" : "KO";
+  const lang = language == "en" ? "ko" : "en";
 
   const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
     let width: number = 720;
@@ -109,7 +119,7 @@ export default function Main({ language }: PageProps) {
 
   const handleClick = (name: string) => {
     if (name === "readme") {
-      language === "A"
+      language === "en"
         ? setImgSrc("/divdivdiv/readme-en.webp")
         : setImgSrc("/divdivdiv/readme-ko.webp");
     } else {
@@ -121,15 +131,28 @@ export default function Main({ language }: PageProps) {
   };
 
   const handleFortuneClick = () => {
-    return language === "A"
-      ? alert(fortune["EN"][Math.floor(Math.random() * fortune["EN"].length)])
-      : alert(fortune["KO"][Math.floor(Math.random() * fortune["KO"].length)]);
+    return language === "en"
+      ? alert(fortune["en"][Math.floor(Math.random() * fortune["en"].length)])
+      : alert(fortune["ko"][Math.floor(Math.random() * fortune["ko"].length)]);
   };
 
   interface TitleProps {
-    EN: string;
-    KO: string;
+    en: string;
+    ko: string;
   }
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   // TODO: 바깥으로 빼라. (파일 분리까지!)
   function DraggableComponent(props: {
@@ -137,11 +160,12 @@ export default function Main({ language }: PageProps) {
     link: string;
     // FIXME: 함수를 받아랏!
     //onClick: () => string,
-    icon: string;
+    iconType: string;
     title: TitleProps;
-    size: number[];
+    width: number;
+    height: number;
   }) {
-    const { className, link, icon, title, size } = props;
+    const { className, link, iconType, title, width, height } = props;
 
     const linkFunction = (link: string) => {
       // TODO: 이 함수 정리해보기
@@ -171,176 +195,126 @@ export default function Main({ language }: PageProps) {
 
     const draggableContent = (
       <div
-        className={styles[`${className}`]}
+        className={`${styles["icon"]} ${styles[className]}`}
         onDoubleClick={() => {
-          !className.includes("mobile") ? handleDesktopClick() : undefined;
+          windowWidth > 500 ? handleDesktopClick() : undefined;
         }}
         onClick={() => {
-          className.includes("mobile") ? handleMobileClick() : undefined;
+          windowWidth > 500 ? undefined : handleMobileClick();
         }}
       >
         <div
           className={styles["icon-image"]}
           style={{
-            width: size[0],
-            height: size[1],
-            backgroundImage: `url(/divdivdiv/${icon}.webp)`,
-            boxShadow: size === img || size === mobileImg ? "1px 2px 5px gray" : undefined,
-            border: icon === "readme" ? 0 : " 4px solid white",
+            width: width,
+            height: height,
+            backgroundImage: `url(/divdivdiv/${iconType}.webp)`,
+            boxShadow:
+              iconType !== "folder" && iconType !== "fortune" ? "1px 2px 5px gray" : undefined,
+            border: iconType === "readme" ? 0 : " 4px solid white",
           }}
         ></div>
         <div
           className={styles["icon-title"]}
           style={{
-            marginTop: icon === "folder" || icon === "fortune" ? "5px" : "10px",
+            marginTop: iconType === "folder" || iconType === "fortune" ? "5px" : "10px",
           }}
         >
-          <div>{language === "A" ? `${title.EN}` : `${title.KO}`}</div>
+          <div>{language === "en" ? `${title.en}` : `${title.ko}`}</div>
         </div>
       </div>
     );
 
-    return className.includes("mobile") ? (
-      <div>{draggableContent}</div>
+    return windowWidth < 500 ? (
+      <React.Fragment>{draggableContent}</React.Fragment>
     ) : (
       <Draggable>{draggableContent}</Draggable>
     );
   }
 
   return (
-    <div>
+    <div className={windowWidth < 500 ? styles["mobile-icon-container"] : ""}>
       {showImage && <ImageModal src={imgSrc} alt={imgAlt} onClick={handleImageClick} />}
       <DraggableComponent
         className="icon-blog"
         link="https://blog.divdivdiv.com"
-        icon="folder"
+        iconType="folder"
         title={readme.blog.title}
-        size={folder}
+        width={iconType.folder.width}
+        height={iconType.folder.height}
       />
       <DraggableComponent
         className="icon-cinephile"
         link="/cinephile"
-        icon="folder"
+        iconType="folder"
         title={readme.cinephile.title}
-        size={folder}
+        width={iconType.folder.width}
+        height={iconType.folder.height}
       />
       <DraggableComponent
         className="icon-pomodoro"
         link="/pomodoro"
-        icon="folder"
+        iconType="folder"
         title={readme.pomodoro.title}
-        size={folder}
+        width={iconType.folder.width}
+        height={iconType.folder.height}
       />
       <DraggableComponent
         className="icon-fruits"
         link="/fruits"
-        icon="folder"
+        iconType="folder"
         title={readme.fruits.title}
-        size={folder}
+        width={iconType.folder.width}
+        height={iconType.folder.height}
       />
       <DraggableComponent
         className="icon-pride"
         link="/pride"
-        icon="folder"
+        iconType="folder"
         title={readme.pride.title}
-        size={folder}
+        width={iconType.folder.width}
+        height={iconType.folder.height}
       />
-      <DraggableComponent className="icon-cat" link="cat" icon="cat" title={icon.cat} size={img} />
-      <DraggableComponent className="icon-me" link="me" icon="me" title={icon.me} size={img} />
+      <DraggableComponent
+        className="icon-cat"
+        link="cat"
+        iconType="cat"
+        title={icon.cat}
+        width={iconType.image.width}
+        height={iconType.image.height}
+      />
+      <DraggableComponent
+        className="icon-me"
+        link="me"
+        iconType="me"
+        title={icon.me}
+        width={iconType.image.width}
+        height={iconType.image.height}
+      />
       <DraggableComponent
         className="icon-fortune"
         link="fortune"
-        icon="fortune"
+        iconType="fortune"
         title={icon.fortune}
-        size={[80, 83]}
+        width={iconType.fortune.width}
+        height={iconType.fortune.height}
       />
       <DraggableComponent
         className="icon-readme"
         link="readme"
-        icon="readme"
+        iconType="readme"
         title={icon.readme}
-        size={img}
+        width={iconType.image.width}
+        height={iconType.image.height}
       />
       <DraggableComponent
         className="icon-music"
         link="/music"
-        icon="folder"
+        iconType="folder"
         title={readme.music.title}
-        size={folder}
+        width={iconType.folder.width}
+        height={iconType.folder.height}
       />
-
-      <div className={styles["mobile-icon-container"]}>
-        <DraggableComponent
-          className="mobile-icon"
-          link="https://blog.divdivdiv.com"
-          icon="folder"
-          title={readme.blog.title}
-          size={mobileFolder}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="/cinephile"
-          icon="folder"
-          title={readme.cinephile.title}
-          size={mobileFolder}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="/pomodoro"
-          icon="folder"
-          title={readme.pomodoro.title}
-          size={mobileFolder}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="/fruits"
-          icon="folder"
-          title={readme.fruits.title}
-          size={mobileFolder}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="/pride"
-          icon="folder"
-          title={readme.pride.title}
-          size={mobileFolder}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="/music"
-          icon="folder"
-          title={readme.music.title}
-          size={mobileFolder}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="readme"
-          icon="readme"
-          title={icon.readme}
-          size={mobileImg}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="me"
-          icon="me"
-          title={icon.me}
-          size={mobileImg}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="cat"
-          icon="cat"
-          title={icon.cat}
-          size={mobileImg}
-        />
-        <DraggableComponent
-          className="mobile-icon"
-          link="fortune"
-          icon="fortune"
-          title={icon.fortune}
-          size={[80 * 0.9, 83 * 0.9]}
-        />
-      </div>
     </div>
   );
 }

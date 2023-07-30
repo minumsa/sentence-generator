@@ -23,7 +23,7 @@ export default function Clock({ language }: PageProps) {
   const twelveHourFormat: number = hours % 12 || 12;
   let period: string = "";
 
-  if (language === "A") {
+  if (language === "en") {
     period = hours >= 12 ? "PM" : "AM";
   } else {
     period = hours >= 12 ? "오후" : "오전";

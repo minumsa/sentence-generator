@@ -32,112 +32,61 @@
 
 /* TODO: icon- 어쩌구 공통 분모 따로 빼기 */
 
-.icon-blog {
+.icon {
   width: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: move;
   position: absolute;
+}
+
+.icon-blog {
   top: 100px;
   left: 100px;
 }
 
 .icon-cinephile {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 100px;
   left: 230px;
 }
 
 .icon-pomodoro {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 100px;
   left: 360px;
 }
 
 .icon-fruits {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 100px;
   left: 490px;
 }
 
 .icon-pride {
-  width: 130px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 100px;
   left: 620px;
 }
 
 .icon-cat {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 250px;
   left: 230px;
 }
 
 .icon-me {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 250px;
   left: 360px;
 }
 
 .icon-fortune {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 260px;
   left: 490px;
 }
 
 .icon-readme {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 425px;
   left: 100px;
 }
 
 .icon-music {
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: move;
-  position: absolute;
   top: 260px;
   left: 100px;
 }
@@ -425,7 +374,12 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
+  .icon {
+    position: relative;
+    padding-bottom: 20px;
+  }
+
   .paragraph,
   .paragraph-title,
   .last-updated {
@@ -463,7 +417,9 @@
   .icon-fortune,
   .icon-readme,
   .icon-music {
-    display: none;
+    top: unset;
+    left: unset;
+    right: unset;
   }
 
   .button-left {

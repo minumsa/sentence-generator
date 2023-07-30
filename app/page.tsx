@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Clock from "./Clock";
-import About from "./About";
-import Contact from "./Contact";
-import Main from "./Main";
-import styles from "./index.module.css";
+import styles from "./divdivdiv/index.module.css";
+import { Language } from "./divdivdiv/data";
+import Clock from "./divdivdiv/Clock";
+import About from "./divdivdiv/About";
+import Contact from "./divdivdiv/Contact";
+import Main from "./divdivdiv/Main";
 
-// TODO: page.tsx 제외 파일 divdivdiv 폴더 만들어서 넣어주기
+type Tab = "main" | "about" | "contact";
 
 export default function Home() {
   const currentDate = new Date();
@@ -38,12 +39,11 @@ export default function Home() {
   }
 
   // FIXME: locale 정보 : en, ko
-  // union 타입 good
   // FIXME: language 를 React.Context 일것!
   // => 모든 컴포넌트의 props 에 language 가 없어야 함!
-  const [language, setLanguage] = useState<"한" | "A">("한");
+  const [language, setLanguage] = useState<Language>("ko");
   const [weatherData, setWeatherData] = useState<any | null>(null);
-  const [activeTab, setActiveTab] = useState<"main" | "about" | "contact">("main");
+  const [activeTab, setActiveTab] = useState<Tab>("main");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,10 +65,9 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // FIXME: tab 의 type 정보를 따로 빼서 중복 없애기
   interface RenderButtonProps {
     text: string;
-    tab: "main" | "about" | "contact";
+    tab: Tab;
   }
 
   function RenderButtonLeft({ text, tab }: RenderButtonProps) {
@@ -90,8 +89,8 @@ export default function Home() {
           <div className={styles["nav"]}>
             <RenderButtonLeft text="divdivdiv" tab="main" />
             {/* FIXME: multi locale string 처리를 모두 통일하기 */}
-            <RenderButtonLeft text={language === "A" ? "About" : "소개"} tab="about" />
-            <RenderButtonLeft text={language === "A" ? "Contact" : "연결"} tab="contact" />
+            <RenderButtonLeft text={language === "en" ? "About" : "소개"} tab="about" />
+            <RenderButtonLeft text={language === "en" ? "Contact" : "연결"} tab="contact" />
             <div className={styles["blank-space"]}></div>
             {weatherData ? (
               <React.Fragment>
@@ -111,14 +110,13 @@ export default function Home() {
             <div
               className={`${styles["button-right"]} ${styles["language"]}`}
               onClick={() => {
-                // 바꿨음! 나중에 확인해보기
-                setLanguage(language === "A" ? "한" : "A");
+                setLanguage(language === "en" ? "ko" : "en");
               }}
             >
               {language}
             </div>
             <div className={`${styles["button-right"]} ${styles["calender"]}`}>
-              {language === "A"
+              {language === "en"
                 ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
                 : `${month}월 ${day}일 (${dayOfWeek})`}
             </div>

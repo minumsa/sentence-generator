@@ -154,7 +154,7 @@ const handleDoubleClick = (index: number) => {
     setImgSrc("/divdivdiv/me.webp");
     setImgAlt("Me");
   } else if (index === 8) {
-    language === "A"
+    language === "en"
       ? setImgSrc("/divdivdiv/readme-nav-en.webp")
       : setImgSrc("/divdivdiv/readme-nav-ko.webp");
     setImgAlt("README.txt");
@@ -179,7 +179,7 @@ const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
 // Main.tsx
 
 const handleFortuneClick = () => {
-  return language === "A"
+  return language === "en"
     ? alert(fortuneEngArr[Math.floor(Math.random() * fortuneArr.length)])
     : alert(fortuneArr[Math.floor(Math.random() * fortuneArr.length)]);
 };
@@ -206,20 +206,14 @@ useEffect(() => {
 ```typescript
 // Clock.tsx
 
-if (language === "A") {
+if (language === "en") {
   period = hours >= 12 ? "PM" : "AM";
 
-  const engClock = `${period} ${String(twelveHourFormat).padStart(
-    2,
-    "0"
-  )}:${minutes}`;
+  const engClock = `${period} ${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
   return <NoSSR>{engClock}</NoSSR>;
 } else {
   period = hours >= 12 ? "오후" : "오전";
-  const korClock = `${period} ${String(twelveHourFormat).padStart(
-    2,
-    "0"
-  )}:${minutes}`;
+  const korClock = `${period} ${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
   return <NoSSR>{korClock}</NoSSR>;
 }
 ```
