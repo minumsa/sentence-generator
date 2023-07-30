@@ -9,7 +9,7 @@ function getRandomItem(arr: string[]): string {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export default function Page() {
+function Fruits() {
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   const isMobile: boolean = windowWidth < 650;
   const [checkerWidth, setCheckerWidth] = useState<number>(0);
@@ -75,20 +75,26 @@ export default function Page() {
   }, [windowWidth]);
 
   return (
-    <NoSSR>
+    <div
+      className={styles["container"]}
+      style={{
+        backgroundSize: `${checkerWidth * 2}px ${checkerWidth * 2}px`,
+        backgroundPosition: `0 0, 0 ${checkerWidth}px, ${checkerWidth}px -${checkerWidth}px, -${checkerWidth}px 0px`,
+      }}
+    >
       <div
-        className={styles["container"]}
-        style={{
-          backgroundSize: `${checkerWidth * 2}px ${checkerWidth * 2}px`,
-          backgroundPosition: `0 0, 0 ${checkerWidth}px, ${checkerWidth}px -${checkerWidth}px, -${checkerWidth}px 0px`,
-        }}
-      >
-        <div
-          id="container"
-          style={{ fontSize: `${checkerWidth}px` }}
-          className={styles["falling-fruits"]}
-        ></div>
-      </div>
+        id="container"
+        style={{ fontSize: `${checkerWidth}px` }}
+        className={styles["falling-fruits"]}
+      ></div>
+    </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <NoSSR>
+      <Fruits />
     </NoSSR>
   );
 }
