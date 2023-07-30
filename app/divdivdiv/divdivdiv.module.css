@@ -30,8 +30,6 @@
   color: rgb(30, 30, 30);
 }
 
-/* TODO: icon- 어쩌구 공통 분모 따로 빼기 */
-
 .icon {
   width: 110px;
   display: flex;
@@ -46,17 +44,17 @@
   left: 100px;
 }
 
-.icon-cinephile {
+.icon-music {
   top: 100px;
   left: 230px;
 }
 
-.icon-pomodoro {
+.icon-cinephile {
   top: 100px;
   left: 360px;
 }
 
-.icon-fruits {
+.icon-pomodoro {
   top: 100px;
   left: 490px;
 }
@@ -66,14 +64,19 @@
   left: 620px;
 }
 
-.icon-cat {
-  top: 250px;
-  left: 230px;
+.icon-fruits {
+  top: 100px;
+  left: 750px;
 }
 
 .icon-me {
   top: 250px;
-  left: 360px;
+  left: 100px;
+}
+
+.icon-cat {
+  top: 250px;
+  left: 230px;
 }
 
 .icon-fortune {
@@ -82,13 +85,8 @@
 }
 
 .icon-readme {
-  top: 425px;
-  left: 100px;
-}
-
-.icon-music {
-  top: 260px;
-  left: 100px;
+  top: 252px;
+  left: 360px;
 }
 
 .icon-title {
@@ -308,68 +306,7 @@
   }
 }
 
-@media (max-width: 850px) {
-  .index-container {
-    width: 97%;
-    height: 98.2%;
-  }
-
-  .button-left {
-    margin: 0 5px;
-  }
-
-  .icon-blog {
-    top: 100px;
-    left: 50px;
-  }
-
-  .icon-cinephile {
-    top: 100px;
-    left: 180px;
-  }
-
-  .icon-pomodoro {
-    top: 100px;
-    left: 310px;
-  }
-
-  .icon-fruits {
-    top: 100px;
-    left: 440px;
-  }
-
-  .icon-pride {
-    top: 270px;
-    left: 45px;
-  }
-
-  .icon-cat {
-    top: 250px;
-    left: 440px;
-  }
-
-  .icon-me {
-    top: 250px;
-    left: 310px;
-  }
-
-  .icon-fortune {
-    top: 440px;
-    left: 50px;
-  }
-
-  .icon-readme {
-    top: 430px;
-    left: 180px;
-  }
-
-  .icon-music {
-    top: 270px;
-    left: 180px;
-  }
-}
-
-@media (max-width: 599px) {
+@media (max-width: 629px) {
   .icon {
     position: relative;
     padding-bottom: 20px;
@@ -378,7 +315,7 @@
   .paragraph,
   .paragraph-title,
   .last-updated {
-    font-size: 11.5px;
+    font-size: 14px;
   }
 
   .mobile-icon-container {

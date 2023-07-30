@@ -9,6 +9,21 @@ function getRandomItem(arr: string[]): string {
 }
 
 export default function Page() {
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const isMobile: boolean = windowWidth < 650;
+  const [checkerWidth, setCheckerWidth] = useState<number>(0);
+
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   // FIXME: 리액트 코드로 최대한 바꿔보기
   useEffect(() => {
     const container = document.getElementById("container");
@@ -25,7 +40,7 @@ export default function Page() {
       fruit.style.pointerEvents = "auto";
       fruit.style.cursor = "pointer";
 
-      const eventName = window.outerWidth < 450 ? "touchstart" : "click";
+      const eventName = isMobile ? "touchstart" : "click";
       const clickHandler = () => {
         const fruitArray = fruitEmojiMap[randomFruit];
         if (fruitArray) {
@@ -38,27 +53,25 @@ export default function Page() {
 
       setTimeout(() => {
         fruit.remove();
-      }, 10000);
-    }, 1000);
+      }, 5000);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
     };
   }, []);
 
-  const [checkerWidth, setCheckerWidth] = useState<number>(0);
-
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
 
-    if (window.outerWidth < 450) {
-      setCheckerWidth(window.outerWidth / 7);
+    if (isMobile) {
+      setCheckerWidth(windowWidth / 5);
     } else {
-      setCheckerWidth(window.outerWidth / 14);
+      setCheckerWidth(windowWidth / 10);
     }
-  }, []);
+  }, [windowWidth]);
 
   return (
     <>
@@ -69,7 +82,11 @@ export default function Page() {
           backgroundPosition: `0 0, 0 ${checkerWidth}px, ${checkerWidth}px -${checkerWidth}px, -${checkerWidth}px 0px`,
         }}
       >
-        <div id="container" className={styles["falling-fruits"]}></div>
+        <div
+          id="container"
+          style={{ fontSize: `${checkerWidth}px` }}
+          className={styles["falling-fruits"]}
+        ></div>
       </div>
     </>
   );

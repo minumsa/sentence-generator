@@ -23,7 +23,6 @@
 }
 
 .falling-fruits div {
-  font-size: 10rem;
   position: absolute;
   top: -20%;
   width: 10px;

@@ -16,7 +16,6 @@ interface ImageModalProps {
   onClick: any;
 }
 
-// FIXME:  icon 객체로 통일하기
 const iconSize = {
   folder: {
     width: 80,
@@ -33,27 +32,39 @@ const iconSize = {
 };
 
 export default function Main({ language }: PageProps) {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showImage, setShowImage] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState<number>(window.innerHeight);
+  const isMobile: boolean = windowWidth < 630;
+
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
-    let width: number = 720;
-    let height: number = 960;
+    let height: number = windowHeight / 1.2;
+    let width: number = windowHeight * 0.65;
 
     if (isMobile) {
+      width = windowWidth * 0.9;
+      height = width * 1.3;
+
       if (alt === "readme") {
-        width /= 2;
-        height /= 1.5;
-      } else {
-        width /= 2;
-        height /= 2;
+        width = windowWidth * 0.9;
+        height = width * 1.6;
       }
     }
 
-    //FIXME: readme 상태 변수 삭제
-    // readmecomponent, imagecomponent 분리
     function ReadmeComponent(props: { path: string; icon: any }) {
       const { path, icon } = props;
 
@@ -79,10 +90,11 @@ export default function Main({ language }: PageProps) {
           {/* <Image src={src} alt={alt} width={width} height={isMobile ? 0 : 50} /> */}
           <div
             className={styles["last-updated"]}
-            style={{
-              margin: isMobile ? "10px 0 0 0" : "0 0 30px 0",
-              paddingTop: isMobile ? undefined : "10px",
-            }}
+            style={
+              isMobile ? { margin: "10px 0 0 0" } : { margin: "0 0 30px 0", paddingTop: "10px" }
+              // margin: isMobile ? "10px 0 0 0" : "0 0 30px 0",
+              // paddingTop: isMobile ? undefined : "10px",
+            }
           >
             {readme.lastUpdated.text[language]}
           </div>
@@ -127,19 +139,6 @@ export default function Main({ language }: PageProps) {
     ko: string;
   }
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const handleWindowResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
-
   // TODO: 바깥으로 빼라. (파일 분리까지!)
   function DraggableComponent(props: {
     className: string;
@@ -154,35 +153,23 @@ export default function Main({ language }: PageProps) {
     const { className, path, type, title, width, height } = props;
 
     const handleIconClick = (type: string) => {
-      // TODO: 이 함수 정리해보기
-
       if (type === "fortune") {
         handleFortuneClick();
       } else if (type === "folder") {
-        window.open(type, "_blank");
-      } else {
-        handleImageClick(type);
+        window.open(path, "_blank");
+      } else if (type === "image") {
+        handleImageClick(path);
       }
-    };
-
-    const handleDesktopClick = () => {
-      setIsMobile(false);
-      handleIconClick(type);
-    };
-
-    const handleMobileClick = () => {
-      setIsMobile(true);
-      handleIconClick(type);
     };
 
     const draggableContent = (
       <div
         className={`${styles["icon"]} ${styles[className]}`}
         onDoubleClick={() => {
-          windowWidth > 600 ? handleDesktopClick() : undefined;
+          windowWidth > 630 ? handleIconClick(type) : undefined;
         }}
         onClick={() => {
-          windowWidth > 600 ? undefined : handleMobileClick();
+          windowWidth > 630 ? undefined : handleIconClick(type);
         }}
       >
         <div
@@ -193,7 +180,7 @@ export default function Main({ language }: PageProps) {
             backgroundImage:
               type === "image" ? `url(/divdivdiv/${path}.webp)` : `url(/divdivdiv/${type}.webp)`,
             boxShadow: type === "image" ? "1px 2px 5px gray" : undefined,
-            border: path === "readme" ? 0 : " 4px solid white",
+            border: type === "image" && path !== "readme" ? "4px solid white" : 0,
           }}
         ></div>
         <div
@@ -207,7 +194,7 @@ export default function Main({ language }: PageProps) {
       </div>
     );
 
-    return windowWidth > 600 ? (
+    return windowWidth > 630 ? (
       <Draggable>{draggableContent}</Draggable>
     ) : (
       <React.Fragment>{draggableContent}</React.Fragment>
@@ -215,7 +202,7 @@ export default function Main({ language }: PageProps) {
   }
 
   return (
-    <div className={windowWidth < 600 ? styles["mobile-icon-container"] : ""}>
+    <div className={windowWidth > 630 ? "" : styles["mobile-icon-container"]}>
       {showImage && <ImageModal src={imgSrc} alt={imgAlt} onClick={handleModalClick} />}
       <DraggableComponent
         className="icon-blog"
