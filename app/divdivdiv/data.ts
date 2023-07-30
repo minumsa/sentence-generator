@@ -123,7 +123,31 @@ export const readme = {
   },
 };
 
-export const icon = {
+export const iconTitle = {
+  blog: {
+    en: "Blog",
+    ko: "블로그",
+  },
+  music: {
+    en: "Carver Chart",
+    ko: "카버 차트",
+  },
+  cinephile: {
+    en: "Cinephile",
+    ko: "시네필 테스트",
+  },
+  pomodoro: {
+    en: "Pomodoro",
+    ko: "뽀모도로",
+  },
+  fruits: {
+    en: "Fruits",
+    ko: "과일 생성기",
+  },
+  pride: {
+    en: "Sentence Generator",
+    ko: "문장 생성기",
+  },
   cat: {
     en: "cat.webp",
     ko: "고양이.webp",

@@ -43,6 +43,7 @@ export default function Home() {
   // FIXME: language 를 React.Context 일것!
   // => 모든 컴포넌트의 props 에 language 가 없어야 함!
   const [language, setLanguage] = useState<Language>("ko");
+
   const [weatherData, setWeatherData] = useState<any | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("main");
 
@@ -90,6 +91,7 @@ export default function Home() {
           <div className={styles["nav"]}>
             <RenderButtonLeft text="divdivdiv" tab="main" />
             {/* FIXME: multi locale string 처리를 모두 통일하기 */}
+            {/* data.about.title[lang]  */}
             <RenderButtonLeft text={language === "en" ? "About" : "소개"} tab="about" />
             <RenderButtonLeft text={language === "en" ? "Contact" : "연결"} tab="contact" />
             <div className={styles["blank-space"]}></div>
@@ -114,7 +116,7 @@ export default function Home() {
                 setLanguage(language === "en" ? "ko" : "en");
               }}
             >
-              {language}
+              {language === "en" ? "A" : "한"}
             </div>
             <div className={`${styles["button-right"]} ${styles["calender"]}`}>
               {language === "en"
