@@ -8,6 +8,7 @@ import Clock from "./divdivdiv/Clock";
 import About from "./divdivdiv/About";
 import Contact from "./divdivdiv/Contact";
 import Main from "./divdivdiv/Main";
+import NoSSR from "./divdivdiv/NoSSR";
 
 type Tab = "main" | "about" | "contact";
 
@@ -126,7 +127,11 @@ export default function Home() {
           </div>
         </div>
         <div className={styles["content"]}>
-          {activeTab === "main" && <Main language={language} />}
+          {activeTab === "main" && (
+            <NoSSR>
+              <Main language={language} />
+            </NoSSR>
+          )}
           {activeTab === "about" && <About language={language} />}
           {activeTab === "contact" && <Contact language={language} />}
         </div>
