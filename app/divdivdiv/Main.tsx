@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import styles from "./index.module.css";
+import styles from "./divdivdiv.module.css";
 import { fortune, icon, readme } from "./data";
 
 interface PageProps {
