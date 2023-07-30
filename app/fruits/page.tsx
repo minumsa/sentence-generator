@@ -54,8 +54,8 @@ function Fruits() {
 
       setTimeout(() => {
         fruit.remove();
-      }, 6000);
-    }, 3000);
+      }, 5000);
+    }, 2500);
 
     return () => {
       clearInterval(interval);

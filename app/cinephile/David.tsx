@@ -3,12 +3,6 @@ import styles from "./cine.module.css";
 import { data } from "./data";
 
 export default function David() {
-  //     <a
-  //     href="https://youtu.be/WjJ6pdVeOAg?t=88"
-  //     target="_blank"
-  //     style={{ color: "white", textDecoration: "none" }}
-  //   >
-
   return (
     <div>
       <div className={styles["question"]}>
@@ -25,14 +19,20 @@ export default function David() {
                     key={index}
                     className={`${styles["options"]} ${styles["options-commentary"]}`}
                     style={{
+                      cursor: "default",
                       backgroundColor: index === data[dataIndex].answer ? "#000000" : undefined,
                       color: index === data[dataIndex].answer ? "#ffffff" : undefined,
                     }}
                   >
                     {`${index + 1}) ${option}`}
-                    {index === data[dataIndex].answer ? (
+                    {index === data[dataIndex].answer && data[dataIndex].caption ? (
+                      <span className={styles["caption"]}>{`// ${data[dataIndex].caption}`}</span>
+                    ) : null}
+                    {index === data[dataIndex].answer && data[dataIndex].reference ? (
                       <a href={data[dataIndex].reference}>
-                        <span className={styles["reference"]}>관련 자료</span>
+                        <div className={styles["reference"]}>
+                          <span className={styles["reference-text"]}>관련 자료</span>
+                        </div>
                       </a>
                     ) : null}
                   </div>

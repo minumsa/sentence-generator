@@ -174,55 +174,57 @@ export default function Page() {
           )}
         </div>
         {/* 버튼 */}
-        {pageType === "answer" ? (
-          <div
-            className={styles["button"]}
-            onClick={() => {
-              setPageType("result");
-            }}
-          >
-            이전 페이지로 돌아가기
-          </div>
-        ) : pageType === "result" ? (
-          <React.Fragment>
-            <div
-              className={`${styles.button} ${styles.twitter}`}
-              onClick={() => {
-                window.open(
-                  `https://twitter.com/share?url=https://divdivdiv.com/cinephile&text=나의 시네필 평점은?${starCount}`
-                );
-              }}
-            >
-              트위터 공유하기
-            </div>
-            <div
-              className={`${styles.button} ${styles.kakao}`}
-              onClick={() => {
-                onShare();
-              }}
-            >
-              카카오톡 공유하기
-            </div>
+        <div style={{ paddingBottom: "30px" }}>
+          {pageType === "answer" ? (
             <div
               className={styles["button"]}
               onClick={() => {
-                setPageType("answer");
+                setPageType("result");
               }}
             >
-              정답 및 해설 보기
+              이전 페이지로 돌아가기
             </div>
-          </React.Fragment>
-        ) : (
-          ""
-        )}
-        <div className={styles["button"]} onClick={handleButton}>
-          {pageType === "index"
-            ? "테스트 시작"
-            : pageType === "test" && testPage === testPageMax
-            ? "결과 확인하기"
-            : pageType === "test"
-            ? "다음 문제"
-            : "다시 도전하기"}
+          ) : pageType === "result" ? (
+            <React.Fragment>
+              <div
+                className={`${styles.button} ${styles.twitter}`}
+                onClick={() => {
+                  window.open(
+                    `https://twitter.com/share?url=https://divdivdiv.com/cinephile&text=나의 시네필 평점은?${starCount}`
+                  );
+                }}
+              >
+                트위터 공유하기
+              </div>
+              <div
+                className={`${styles.button} ${styles.kakao}`}
+                onClick={() => {
+                  onShare();
+                }}
+              >
+                카카오톡 공유하기
+              </div>
+              <div
+                className={styles["button"]}
+                onClick={() => {
+                  setPageType("answer");
+                }}
+              >
+                정답 및 해설 보기
+              </div>
+            </React.Fragment>
+          ) : (
+            ""
+          )}
+          <div className={styles["button"]} onClick={handleButton}>
+            {pageType === "index"
+              ? "테스트 시작"
+              : pageType === "test" && testPage === testPageMax
+              ? "결과 확인하기"
+              : pageType === "test"
+              ? "다음 문제"
+              : "다시 도전하기"}
+          </div>
         </div>
       </div>
       <Script src="https://developers.kakao.com/sdk/js/kakao.js" onLoad={kakaoInit} />
