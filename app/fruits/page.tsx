@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./fruits.module.css";
 import { fruitEmojiMap } from "./fruits";
+import NoSSR from "../divdivdiv/NoSSR";
 
 function getRandomItem(arr: string[]): string {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -74,7 +75,7 @@ export default function Page() {
   }, [windowWidth]);
 
   return (
-    <>
+    <NoSSR>
       <div
         className={styles["container"]}
         style={{
@@ -88,6 +89,6 @@ export default function Page() {
           className={styles["falling-fruits"]}
         ></div>
       </div>
-    </>
+    </NoSSR>
   );
 }

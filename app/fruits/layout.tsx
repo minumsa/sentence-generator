@@ -1,5 +1,4 @@
 import React from "react";
-import NoSSR from "../divdivdiv/NoSSR";
 
 export const metadata = {
   title: "과일 생성기",
@@ -24,7 +23,7 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-  return <NoSSR>{children}</NoSSR>;
+  return <div>{children}</div>;
 };
 
 export default Layout;
