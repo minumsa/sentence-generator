@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import styles from "./index.module.css";
+import styles from "./divdivdiv.module.css";
 import { fortune, icon, readme } from "./data";
 
 interface PageProps {
@@ -141,18 +141,37 @@ export default function Main({ language }: PageProps) {
     ko: string;
   }
 
+  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // const handleWindowResize = () => {
+  //   setWindowWidth(window.innerWidth);
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleWindowResize);
+  //   return () => {
+  //     window.removeEventListener("resize", handleWindowResize);
+  //   };
+  // }, []);
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const handleWindowResize = () => {
-    setWindowWidth(window.innerWidth);
+  const handleWindowResize = (entries: ResizeObserverEntry[]) => {
+    for (const entry of entries) {
+      setWindowWidth(entry.contentRect.width);
+    }
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
+    const resizeObserver = new ResizeObserver(handleWindowResize);
+    resizeObserver.observe(document.documentElement);
+
     return () => {
-      window.removeEventListener("resize", handleWindowResize);
+      resizeObserver.unobserve(document.documentElement);
     };
   }, []);
+
+  console.log(windowWidth);
 
   // TODO: 바깥으로 빼라. (파일 분리까지!)
   function DraggableComponent(props: {

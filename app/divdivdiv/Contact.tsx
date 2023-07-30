@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./index.module.css";
+import styles from "./divdivdiv.module.css";
 
 interface PageProps {
   language: string;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import styles from "./divdivdiv/index.module.css";
+import styles from "./divdivdiv/divdivdiv.module.css";
 import { Language } from "./divdivdiv/data";
 import Clock from "./divdivdiv/Clock";
 import About from "./divdivdiv/About";

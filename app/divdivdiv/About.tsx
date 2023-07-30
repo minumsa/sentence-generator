@@ -1,7 +1,7 @@
 "use client";
 
 import { Language } from "./data";
-import styles from "./index.module.css";
+import styles from "./divdivdiv.module.css";
 
 interface PageProps {
   language: Language;
