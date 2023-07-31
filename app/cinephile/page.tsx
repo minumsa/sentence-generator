@@ -136,13 +136,7 @@ export default function Page() {
               />
             </div>
           ) : pageType === "test" ? (
-            <Question
-              page={testPage}
-              score={score}
-              setTotalScore={setTotalScore}
-              userAnswer={userAnswer}
-              setUserAnswer={setUserAnswer}
-            />
+            <Question page={testPage} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
           ) : pageType === "result" ? (
             <div className={styles["result-container"]}>
               <div className={styles["result-text"]}>
