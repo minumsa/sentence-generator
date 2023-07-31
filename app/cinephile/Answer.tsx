@@ -1,40 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./cine.module.css";
-import { data } from "./data";
+import { data, negativeWord } from "./data";
 import Image from "next/image";
 
 export default function Answer() {
+  // const isNegative = data.some(item => negativeWord.some(word => item.question.includes(word)));
+
   return (
     <div>
       <div className={styles["question"]}>
-        {data.map((x, dataIndex) => {
+        {data.map((item, dataIndex) => {
+          const hasNegativeWord = item.question
+            .split(" ")
+            .some(element => negativeWord.includes(element));
+
           return (
             <div
               className={`${styles["question-container"]} ${styles["commentary-container"]}`}
               key={dataIndex}
             >
-              <div className={styles["question"]}>{`${dataIndex + 1}. ${x.question}`}</div>
-              {x.type === "multiple-choice" ? (
+              <div className={styles["question"]}>
+                {`${[dataIndex + 1]}. `}
+                {hasNegativeWord
+                  ? negativeWord.map((word, index) => {
+                      if (item.question.includes(word)) {
+                        const text = item.question.split(word);
+                        return (
+                          <React.Fragment key={index}>
+                            <span>{text[0]}</span>
+                            <span style={{ textDecoration: "underline" }}>{word}</span>
+                            <span>{text[1]}</span>
+                          </React.Fragment>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })
+                  : item.question}
+              </div>
+              {item.type === "multiple-choice" ? (
                 <React.Fragment>
-                  {x.type2 === "image" ? (
+                  {item.type2 === "image" ? (
                     <React.Fragment>
                       <div className={styles["image-container"]}>
                         <Image
                           className={styles["image"]}
-                          src={`/cinephile/${x.title}.webp`}
-                          alt={`${x.title}`}
-                          width={window.innerWidth > 450 ? "280" : "180"}
-                          height={window.innerWidth > 450 ? "190" : "120"}
+                          src={`/cinephile/${item.title}.webp`}
+                          alt={`${item.title}`}
+                          width={window.innerWidth > 450 ? "300" : "240"}
+                          height={window.innerWidth > 450 ? "220" : "175"}
                         />
                       </div>
                     </React.Fragment>
-                  ) : x.title === "chungking-express" ? (
+                  ) : item.title === "chungking-express" ? (
                     <React.Fragment>
                       <div className={styles["chungking-express"]}>📞 🍍 🕒 😎</div>
                       <div className={styles["chungking-express"]}>👮‍♂️ 💌 🔑 🛫</div>
                     </React.Fragment>
                   ) : null}
-                  {x.options?.map((option, index) => {
+                  {item.options?.map((option, index) => {
                     return (
                       <div
                         key={index}
@@ -62,19 +86,19 @@ export default function Answer() {
                     );
                   })}
                 </React.Fragment>
-              ) : x.type === "short-answer" ? (
+              ) : item.type === "short-answer" ? (
                 <div className={styles["short-answer-container"]}>
-                  {x.paragraph?.split(String(x.answer)).map((text, index) => {
+                  {item.paragraph?.split(String(item.answer)).map((text, index) => {
                     return index === 0 ? (
                       <React.Fragment key={index}>{text}</React.Fragment>
                     ) : (
                       <React.Fragment key={index}>
-                        <span className={styles["options-selected"]}>{x.answer}</span>
+                        <span className={styles["options-selected"]}>{item.answer}</span>
                         {text}
                       </React.Fragment>
                     );
                   })}
-                  {x.reference ? (
+                  {item.reference ? (
                     <a href={data[dataIndex].reference} target="_blank">
                       <div className={styles["reference"]}>
                         <span className={styles["options-selected"]}>관련 자료</span>

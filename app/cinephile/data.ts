@@ -245,3 +245,5 @@ export const data = [
     reference: "https://www.mk.co.kr/news/culture/8781694",
   },
 ];
+
+export const negativeWord: string[] = ["아닌", "않은", "않는"];

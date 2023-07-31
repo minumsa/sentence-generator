@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./cine.module.css";
-import { data } from "./data";
+import { data, negativeWord } from "./data";
 import React from "react";
 import Image from "next/image";
 
@@ -11,15 +11,12 @@ interface QuestionProps {
 }
 
 export function Question({ page, userAnswer, setUserAnswer }: QuestionProps) {
-  const negativeWord: string[] = ["아닌", "않은", "않는"];
-  const [isNagative, setIsNagative] = useState<boolean>(false);
+  const [hasNegativeWord, setHasNegativeWord] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsNagative(false);
-
-    negativeWord.map(word => {
-      if (data[page - 1].question.includes(word)) setIsNagative(true);
-    });
+    data[page - 1].question.split(" ").some(element => negativeWord.includes(element))
+      ? setHasNegativeWord(true)
+      : setHasNegativeWord(false);
   }, [page]);
 
   const Options = () => {
@@ -47,7 +44,7 @@ export function Question({ page, userAnswer, setUserAnswer }: QuestionProps) {
     <div className={styles["question-container"]}>
       <div className={styles["question"]}>
         {`${[page]}. `}
-        {isNagative
+        {hasNegativeWord
           ? negativeWord.map((word, index) => {
               if (data[page - 1].question.includes(word)) {
                 const text = data[page - 1].question.split(word);
@@ -72,8 +69,8 @@ export function Question({ page, userAnswer, setUserAnswer }: QuestionProps) {
                 className={styles["image"]}
                 src={`/cinephile/${data[page - 1].title}.webp`}
                 alt={`${data[page - 1].title}`}
-                width={window.innerWidth > 450 ? "280" : "180"}
-                height={window.innerWidth > 450 ? "190" : "120"}
+                width={window.innerWidth > 450 ? "420" : "240"}
+                height={window.innerWidth > 450 ? "290" : "160"}
               />
             </div>
             <Options />
