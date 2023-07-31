@@ -20,8 +20,7 @@ export default function Page() {
   const [score, setScore] = useState<number>(0);
   const [totalScore, setTotalScore] = useState<number>(0);
   const [testPage, setTestPage] = useState<number>(1);
-  // const testPageMax = data.length;
-  const testPageMax = 5;
+  const testPageMax = data.length;
   const progressWidth = `${(testPage / testPageMax) * 100}%`;
   const progressPercent = `${Math.floor((testPage / testPageMax) * 100)}%`;
   const [userAnswer, setUserAnswer] = useState<any>();
@@ -52,6 +51,7 @@ export default function Page() {
   };
 
   useEffect(() => {
+    // TODO: useEffect 안 쓰고 useState(score) 해도 될듯?
     if (data[testPage - 1].answer === userAnswer) {
       setScore(4);
     } else if (data[testPage - 1].answer !== userAnswer) {
@@ -78,7 +78,7 @@ export default function Page() {
 
   const comment = commentArr[grade.indexOf(Math.min(...grade))];
 
-  // TODO: vercel 백엔드 연결 숙지하기
+  // TODO: vercel 백엔드 연결 공부하기
   useEffect(() => {
     axios
       .post("/api/createResult", {
@@ -191,7 +191,7 @@ export default function Page() {
           ) : pageType === "result" ? (
             <React.Fragment>
               <div
-                className={`${styles.button} ${styles.twitter}`}
+                className={`${styles["button"]} ${styles["twitter"]}`}
                 onClick={() => {
                   window.open(
                     `https://twitter.com/share?url=https://divdivdiv.com/cinephile&text=나의 시네필 평점은?${starCount}`
@@ -201,7 +201,7 @@ export default function Page() {
                 트위터 공유하기
               </div>
               <div
-                className={`${styles.button} ${styles.kakao}`}
+                className={`${styles["button"]} ${styles["kakao"]}`}
                 onClick={() => {
                   onShare();
                 }}

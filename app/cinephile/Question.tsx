@@ -6,15 +6,11 @@ import Image from "next/image";
 
 interface QuestionProps {
   page: number;
-  score: number;
-  setTotalScore: React.Dispatch<React.SetStateAction<number>>;
   userAnswer: string | number;
   setUserAnswer: React.Dispatch<React.SetStateAction<string | number | null>>;
 }
 
-export function Question({ page, score, setTotalScore, userAnswer, setUserAnswer }: QuestionProps) {
-  // TODO: useEffect 안 쓰고 useState(score)하면 될듯!
-
+export function Question({ page, userAnswer, setUserAnswer }: QuestionProps) {
   const negativeWord: string[] = ["아닌", "않은", "않는"];
   const [isNagative, setIsNagative] = useState<boolean>(false);
 
