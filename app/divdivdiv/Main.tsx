@@ -100,7 +100,6 @@ export default function Main({ language }: PageProps) {
           </div>
           <ReadmeComponent path="https://blog.divdivdiv.com" icon={readme.blog} />
           <ReadmeComponent path="/cinephile" icon={readme.cinephile} />
-          <ReadmeComponent path="/pomodoro" icon={readme.pomodoro} />
           <ReadmeComponent path="/fruits" icon={readme.fruits} />
           <ReadmeComponent path="/pride" icon={readme.pride} />
           <ReadmeComponent path="/music" icon={readme.music} />
@@ -225,14 +224,6 @@ export default function Main({ language }: PageProps) {
         path="/cinephile"
         type="folder"
         title={iconTitle.cinephile}
-        width={iconSize.folder.width}
-        height={iconSize.folder.height}
-      />
-      <DraggableComponent
-        className="icon-pomodoro"
-        path="/pomodoro"
-        type="folder"
-        title={iconTitle.pomodoro}
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />

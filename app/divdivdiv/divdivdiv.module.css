@@ -54,19 +54,14 @@
   left: 360px;
 }
 
-.icon-pomodoro {
+.icon-pride {
   top: 100px;
   left: 490px;
 }
 
-.icon-pride {
-  top: 100px;
-  left: 620px;
-}
-
 .icon-fruits {
   top: 100px;
-  left: 750px;
+  left: 620px;
 }
 
 .icon-me {
@@ -342,7 +337,6 @@
 
   .icon-blog,
   .icon-cinephile,
-  .icon-pomodoro,
   .icon-fruits,
   .icon-pride,
   .icon-cat,

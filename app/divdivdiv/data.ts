@@ -77,17 +77,6 @@ export const readme = {
     },
     emoji: "🍿",
   },
-  pomodoro: {
-    title: {
-      en: "Pomodoro",
-      ko: "뽀모도로",
-    },
-    text: {
-      ko: "몇 년 전부터 생산성 향상을 위한 아이템으로 인기를 끈 뽀모도로 타이머를 웹으로 구현했습니다. 사용자가 원하는 대로 하루 목표량, 집중 및 휴식 시간을 설정할 수 있습니다.",
-      en: "I have implemented a web version of the popular Pomodoro timer, which has been popular as a productivity tool for several years. Users can set their daily goals, as well as focus and rest times according to their preferences.",
-    },
-    emoji: "🐑",
-  },
   fruits: {
     title: {
       ko: "과일 생성기",
@@ -135,10 +124,6 @@ export const iconTitle = {
   cinephile: {
     en: "Cinephile",
     ko: "시네필 테스트",
-  },
-  pomodoro: {
-    en: "Pomodoro",
-    ko: "뽀모도로",
   },
   fruits: {
     en: "Fruits",
