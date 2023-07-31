@@ -19,8 +19,6 @@ export function Question({ page, score, setTotalScore, userAnswer, setUserAnswer
   const [isNagative, setIsNagative] = useState<boolean>(false);
 
   useEffect(() => {
-    setTotalScore(prevScore => prevScore + score);
-    setUserAnswer(null);
     setIsNagative(false);
 
     negativeWord.map(word => {

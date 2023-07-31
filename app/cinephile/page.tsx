@@ -8,7 +8,6 @@ import axios from "axios";
 import Image from "next/image";
 import Script from "next/script";
 import Answer from "./Answer";
-import David from "./David";
 
 declare global {
   interface Window {
@@ -32,19 +31,24 @@ export default function Page() {
   const starCount: string = "⭐️".repeat(Math.round((totalScore / 100) * 5));
 
   const handleButton = () => {
-    if (pageType === "index") {
-      setTotalScore(0);
-      setPageType("test");
+    switch (pageType) {
+      case "index": // 테스트 시작
+        setPageType("test");
+        break;
+      case "test": // 다음 문제
+        setTestPage(page => page + 1);
+        setTotalScore(prevScore => prevScore + score);
+        setUserAnswer(null);
+        break;
+      default: // 다시 도전하기
+        setTotalScore(0);
+        setPageType("index");
     }
-    if (pageType === "test") setTestPage(page => page + 1);
+
     if (testPage === testPageMax) {
       setTestPage(1);
       setPageType("result");
     }
-    if (pageType === "result") {
-      setPageType("index");
-    }
-    if (pageType === "answer") "";
   };
 
   useEffect(() => {
@@ -74,11 +78,12 @@ export default function Page() {
 
   const comment = commentArr[grade.indexOf(Math.min(...grade))];
 
+  // TODO: vercel 백엔드 연결 숙지하기
   useEffect(() => {
     axios
-      .post("/api2/createResult", {
+      .post("/api/createResult", {
         name: userName,
-        score: score,
+        score: totalScore,
       })
       .then(function (response) {
         setRank(response.data.order);
@@ -167,9 +172,8 @@ export default function Page() {
             </div>
           ) : (
             <div className={styles["answer-container"]}>
-              <div className={styles["index-title"]}>정답 및 해설</div>
-              <David />
-              {/* <Answer /> */}
+              <div className={styles["index-title"]}>정답 및 해설 🧐</div>
+              <Answer />
             </div>
           )}
         </div>

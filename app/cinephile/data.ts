@@ -221,6 +221,7 @@ export const data = [
     paragraph: `1895년 겨울, 뤼미에르 형제는 프랑스의 한 카페에서 자신들의 작품을 공개했다. 이때 상영되었던 50초 분량의 <열차의 도착>이라는 작품은 세계 최초의 영화로 널리 알려져 있다.`,
     answer: "열차",
     caption: `"세계 최초의 영화"로 가장 많이 알려진 작품은 <열차의 도착>이지만, 사실 이 작품은 당시 뤼미에르 형제가 상영했던 단편영화 컬렉션 중 하나였다. 해당 컬렉션에서 가장 먼저 상영되었던 작품은 <공장 문을 나서는 노동자들>이었다.`,
+    reference: "https://www.youtube.com/watch?v=1FAj9fJQRZA&pp=ygUUYXJyaXZhbCBvZiB0aGUgdHJhaW4%3D",
   },
   {
     type: "multiple-choice",

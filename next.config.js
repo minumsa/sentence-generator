@@ -15,8 +15,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: "/api2/:path*",
-        destination: "https://cinephile-server.vercel.app/api/:path*",
+        source: "/api/:path*",
+        destination: "https://cinephile-api-server.vercel.app/api/:path*",
       },
     ];
   },
