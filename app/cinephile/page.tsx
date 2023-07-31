@@ -25,10 +25,14 @@ export default function Page() {
   const progressWidth = `${(testPage / testPageMax) * 100}%`;
   const progressPercent = `${Math.floor((testPage / testPageMax) * 100)}%`;
   const [userAnswer, setUserAnswer] = useState<any>();
+  const [userAnswerArray, setUserAnswerArray] = useState<(number | string)[]>(Array(25).fill(null));
   const [userName, setUserName] = useState<string>("참가자");
   const [rank, setRank] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const starCount: string = "⭐️".repeat(Math.round((totalScore / 100) * 5));
+
+  console.log(userAnswer, "userAnswer");
+  console.log(userAnswerArray, "userAnswerArray");
 
   const handleButton = () => {
     switch (pageType) {
@@ -58,6 +62,10 @@ export default function Page() {
     } else if (data[testPage - 1].answer !== userAnswer) {
       setScore(0);
     }
+
+    const updatedArray = [...userAnswerArray];
+    updatedArray[testPage - 1] = userAnswer;
+    setUserAnswerArray(updatedArray);
   }, [userAnswer]);
 
   const commentArr = [
@@ -137,7 +145,13 @@ export default function Page() {
               />
             </div>
           ) : pageType === "test" ? (
-            <Question page={testPage} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+            <Question
+              page={testPage}
+              userAnswer={userAnswer}
+              setUserAnswer={setUserAnswer}
+              userAnswerArray={userAnswerArray}
+              setUserAnswerArray={setUserAnswerArray}
+            />
           ) : pageType === "result" ? (
             <div className={styles["result-container"]}>
               <div className={styles["result-text"]}>
@@ -168,7 +182,7 @@ export default function Page() {
           ) : (
             <div className={styles["answer-container"]}>
               <div className={styles["index-title"]}>정답 및 해설 🧐</div>
-              <Answer />
+              <Answer userAnswerArray={userAnswerArray} />
             </div>
           )}
         </div>

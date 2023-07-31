@@ -6,7 +6,7 @@ import Image from "next/image";
 
 interface QuestionProps {
   page: number;
-  userAnswer: string | number;
+  userAnswer: number;
   setUserAnswer: React.Dispatch<React.SetStateAction<string | number | null>>;
 }
 

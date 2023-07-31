@@ -3,9 +3,7 @@ import styles from "./cine.module.css";
 import { data, negativeWord } from "./data";
 import Image from "next/image";
 
-export default function Answer() {
-  // const isNegative = data.some(item => negativeWord.some(word => item.question.includes(word)));
-
+export default function Answer(userAnswerArray: (string | number)[]) {
   return (
     <div>
       <div className={styles["question"]}>
@@ -59,6 +57,7 @@ export default function Answer() {
                     </React.Fragment>
                   ) : null}
                   {item.options?.map((option, index) => {
+                    // TODO: userAnswerArray 갖다 붙이기
                     return (
                       <div
                         key={index}
