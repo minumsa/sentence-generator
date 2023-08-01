@@ -4,14 +4,14 @@ import { data, negativeWord } from "./data";
 import Image from "next/image";
 
 interface pageProps {
-  userAnswerArray: (number | string)[];
+  answerArray: (number | string)[];
 }
 
-export default function Answer({ userAnswerArray }: pageProps) {
+export default function Answer({ answerArray }: pageProps) {
   return (
     <div>
       {data.map((item, dataIndex) => {
-        const userAnswer = userAnswerArray[dataIndex];
+        const answer = answerArray[dataIndex];
         const hasNegativeWord = item.question
           .split(" ")
           .some(element => negativeWord.includes(element));
@@ -43,7 +43,7 @@ export default function Answer({ userAnswerArray }: pageProps) {
                   <span>{item.question}</span>
                   {item.type === "short-answer" ? (
                     <span className={styles["user-answer"]}>
-                      {item.answer !== userAnswer ? userAnswer : ""}
+                      {item.answer !== answer ? answer : ""}
                     </span>
                   ) : (
                     ""
@@ -72,7 +72,6 @@ export default function Answer({ userAnswerArray }: pageProps) {
                   </React.Fragment>
                 ) : null}
                 {item.options?.map((option, index) => {
-                  // TODO: userAnswerArray 갖다 붙이기
                   return (
                     <div
                       key={index}
@@ -84,7 +83,7 @@ export default function Answer({ userAnswerArray }: pageProps) {
                       }}
                     >
                       {`${index + 1}) ${option}`}
-                      {index === userAnswer && data[dataIndex].answer !== userAnswer ? (
+                      {index === answer && data[dataIndex].answer !== answer ? (
                         <span className={styles["user-answer"]}>X</span>
                       ) : (
                         ""

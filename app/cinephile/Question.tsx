@@ -6,11 +6,11 @@ import Image from "next/image";
 
 interface QuestionProps {
   page: number;
-  userAnswer: number;
-  setUserAnswer: React.Dispatch<React.SetStateAction<string | number | null>>;
+  answer: number;
+  setAnswer: React.Dispatch<React.SetStateAction<string | number | null>>;
 }
 
-export function Question({ page, userAnswer, setUserAnswer }: QuestionProps) {
+export function Question({ page, answer, setAnswer }: QuestionProps) {
   const [hasNegativeWord, setHasNegativeWord] = useState<boolean>(false);
 
   useEffect(() => {
@@ -26,11 +26,11 @@ export function Question({ page, userAnswer, setUserAnswer }: QuestionProps) {
           <div
             className={styles["options"]}
             style={{
-              backgroundColor: index === userAnswer ? "#000000" : undefined,
-              color: index === userAnswer ? "#ffffff" : undefined,
+              backgroundColor: index === answer ? "#000000" : undefined,
+              color: index === answer ? "#ffffff" : undefined,
             }}
             onClick={() => {
-              setUserAnswer(index);
+              setAnswer(index);
             }}
           >
             {`${index + 1}) ${option}`}
@@ -93,7 +93,7 @@ export function Question({ page, userAnswer, setUserAnswer }: QuestionProps) {
                 <input
                   className={styles["short-answer-input"]}
                   onChange={e => {
-                    setUserAnswer(e.target.value);
+                    setAnswer(e.target.value);
                   }}
                 />
               </React.Fragment>

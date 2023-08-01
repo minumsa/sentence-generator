@@ -18,18 +18,17 @@ declare global {
 export default function Page() {
   const [pageType, setPageType] = useState<"index" | "test" | "result" | "answer">("index");
   const [score, setScore] = useState<number>(0);
-  const [totalScore, setTotalScore] = useState<number>(0);
   const [testPage, setTestPage] = useState<number>(1);
-  // const testPageMax = data.length;
-  const testPageMax = 5;
+  const testPageMax = data.length;
+  // const testPageMax = 5;
   const progressWidth = `${(testPage / testPageMax) * 100}%`;
   const progressPercent = `${Math.floor((testPage / testPageMax) * 100)}%`;
-  const [userAnswer, setUserAnswer] = useState<any>("");
-  const [userAnswerArray, setUserAnswerArray] = useState<(number | string)[]>(Array(25).fill(""));
+  const [answer, setAnswer] = useState<any>("");
+  const [answerArray, setAnswerArray] = useState<(number | string)[]>(Array(25).fill(""));
   const [userName, setUserName] = useState<string>("참가자");
   const [rank, setRank] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const starCount: string = "⭐️".repeat(Math.round((totalScore / 100) * 5));
+  const starCount: string = "⭐️".repeat(Math.round((score / 100) * 5));
 
   const handleButton = () => {
     switch (pageType) {
@@ -38,33 +37,29 @@ export default function Page() {
         break;
       case "test": // 다음 문제
         setTestPage(page => page + 1);
-        setTotalScore(prevScore => prevScore + score);
-        setUserAnswer("");
+        setAnswer("");
         break;
       default: // 다시 도전하기
         setTestPage(1);
-        setTotalScore(0);
+        setScore(0);
         setPageType("index");
     }
 
     // 결과 확인하기
     if (testPage === testPageMax) {
+      data.map((item, index) => {
+        if (item.answer === answerArray[index]) setScore(prevScore => prevScore + 4);
+      });
+
       setPageType("result");
     }
   };
 
   useEffect(() => {
-    // TODO: useEffect 안 쓰고 useState(score) 해도 될듯?
-    if (data[testPage - 1].answer === userAnswer) {
-      setScore(4);
-    } else if (data[testPage - 1].answer !== userAnswer) {
-      setScore(0);
-    }
-
-    const updatedArray = [...userAnswerArray];
-    updatedArray[testPage - 1] = userAnswer;
-    setUserAnswerArray(updatedArray);
-  }, [userAnswer]);
+    const updatedArray = [...answerArray];
+    updatedArray[testPage - 1] = answer;
+    setAnswerArray(updatedArray);
+  }, [answer]);
 
   const commentArr = [
     `${userName} 님, 문제 푼 거 맞나요? 🙄`,
@@ -80,7 +75,7 @@ export default function Page() {
   ];
 
   const grade = commentArr.map((_, index) => {
-    return Math.abs((index / commentArr.length) * 100 - totalScore);
+    return Math.abs((index / commentArr.length) * 100 - score);
   });
 
   const comment = commentArr[grade.indexOf(Math.min(...grade))];
@@ -90,7 +85,7 @@ export default function Page() {
     axios
       .post("/api/createResult", {
         name: userName,
-        score: totalScore,
+        score: score,
       })
       .then(function (response) {
         setRank(response.data.order);
@@ -142,13 +137,13 @@ export default function Page() {
               />
             </div>
           ) : pageType === "test" ? (
-            <Question page={testPage} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
+            <Question page={testPage} answer={answer} setAnswer={setAnswer} />
           ) : pageType === "result" ? (
             <div className={styles["result-container"]}>
               <div className={styles["result-text"]}>
                 {userName} 님은 {totalCount}명 중 {rank}등!
               </div>
-              <div className={styles["score"]}>{totalScore}점</div>
+              <div className={styles["score"]}>{score}점</div>
               <div className={styles["star-container"]}>
                 <Image
                   className={styles["star-color"]}
@@ -157,7 +152,7 @@ export default function Page() {
                   width={window.innerWidth > 450 ? "230" : "230"}
                   height={window.innerWidth > 450 ? "47" : "47"}
                   style={{
-                    clipPath: `inset(0 ${100 - totalScore}% 0 0)`,
+                    clipPath: `inset(0 ${100 - score}% 0 0)`,
                   }}
                 />
                 <Image
@@ -173,7 +168,7 @@ export default function Page() {
           ) : (
             <div className={styles["answer-container"]}>
               <div className={styles["index-title"]}>채점 결과 🧐</div>
-              <Answer userAnswerArray={userAnswerArray} />
+              <Answer answerArray={answerArray} />
             </div>
           )}
         </div>
