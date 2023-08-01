@@ -20,19 +20,16 @@ export default function Page() {
   const [score, setScore] = useState<number>(0);
   const [totalScore, setTotalScore] = useState<number>(0);
   const [testPage, setTestPage] = useState<number>(1);
-  // const testPageMax = data.length;
-  const testPageMax = 5;
+  const testPageMax = data.length;
+  // const testPageMax = 5;
   const progressWidth = `${(testPage / testPageMax) * 100}%`;
   const progressPercent = `${Math.floor((testPage / testPageMax) * 100)}%`;
-  const [userAnswer, setUserAnswer] = useState<any>();
-  const [userAnswerArray, setUserAnswerArray] = useState<(number | string)[]>(Array(25).fill(null));
+  const [userAnswer, setUserAnswer] = useState<any>("");
+  const [userAnswerArray, setUserAnswerArray] = useState<(number | string)[]>(Array(25).fill(""));
   const [userName, setUserName] = useState<string>("참가자");
   const [rank, setRank] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const starCount: string = "⭐️".repeat(Math.round((totalScore / 100) * 5));
-
-  console.log(userAnswer, "userAnswer");
-  console.log(userAnswerArray, "userAnswerArray");
 
   const handleButton = () => {
     switch (pageType) {
@@ -42,15 +39,16 @@ export default function Page() {
       case "test": // 다음 문제
         setTestPage(page => page + 1);
         setTotalScore(prevScore => prevScore + score);
-        setUserAnswer(null);
+        setUserAnswer("");
         break;
       default: // 다시 도전하기
+        setTestPage(1);
         setTotalScore(0);
         setPageType("index");
     }
 
+    // 결과 확인하기
     if (testPage === testPageMax) {
-      setTestPage(1);
       setPageType("result");
     }
   };
@@ -97,7 +95,6 @@ export default function Page() {
       .then(function (response) {
         setRank(response.data.order);
         setTotalCount(response.data.totalCount);
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
