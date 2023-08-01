@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@900&family=Open+Sans:wght@300&display=swap");
+  font-style: sans-serif;
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+@font-face {
+  font-family: "GothicA1-Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2")
+    format("woff2");
+  font-style: normal;
+  unicode-range: U+AC00-D7A3;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -10,10 +25,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+  font-family: "Montserrat", "GothicA1-Light";
+  /* font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  font-weight: 300;
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; */
+  font-weight: 400;
   background-color: #000000;
   color: #ffccff;
   -webkit-user-select: none;

@@ -11,8 +11,8 @@ export default function Page() {
   const pathName = usePathname();
   const [data, setData] = useState<AlbumItem[]>([]);
   const [sortType, setSortType] = useState<string>("upload");
-  const [uploadType, setUploadType] = useState<boolean>(false);
-  const [releaseType, setReleaseType] = useState<boolean>(false);
+  const [uploadOrder, setUploadOrder] = useState<boolean>(false);
+  const [releaseOrder, setReleaseOrder] = useState<boolean>(false);
 
   const handleCategory = (category: string) => {
     const pathName =
@@ -76,9 +76,9 @@ export default function Page() {
           }
           onClick={() => {
             setSortType("upload");
-            setUploadType(!uploadType);
+            setUploadOrder(!uploadOrder);
 
-            sortType === "upload" && !uploadType
+            sortType === "upload" && !uploadOrder
               ? data.sort(
                   (a: { uploadDate: string }, b: { uploadDate: string }) =>
                     Number(new Date(a.uploadDate)) - Number(new Date(b.uploadDate))
@@ -89,7 +89,7 @@ export default function Page() {
                 );
           }}
         >
-          {sortType === "upload" && uploadType ? "업로드 ↑" : "업로드 ↓"}
+          {sortType === "upload" && uploadOrder ? "업로드 ↑" : "업로드 ↓"}
         </div>
         <div
           className={styles["button-sort"]}
@@ -107,9 +107,9 @@ export default function Page() {
           }
           onClick={() => {
             setSortType("release");
-            setReleaseType(!releaseType);
+            setReleaseOrder(!releaseOrder);
 
-            sortType === "release" && !releaseType
+            sortType === "release" && !releaseOrder
               ? data.sort(
                   (a: { releaseDate: string }, b: { releaseDate: string }) =>
                     Number(a.releaseDate.slice(0, 4)) - Number(b.releaseDate.slice(0, 4))
@@ -120,7 +120,7 @@ export default function Page() {
                 );
           }}
         >
-          {sortType === "release" && releaseType ? "발매일 ↑" : "발매일 ↓"}
+          {sortType === "release" && releaseOrder ? "발매일 ↑" : "발매일 ↓"}
         </div>
         {data
           ? data.map((data, index) => {
