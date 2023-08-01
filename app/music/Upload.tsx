@@ -206,49 +206,42 @@ UploadProps) {
       <div style={{ textAlign: "center", fontWeight: "normal" }}>｟ 업로드 페이지 ｠</div>
       <div style={{ marginTop: "100px" }}>앨범 ID(Spotify)</div>
       <input
-        className={styles["music-post-input"]}
+        className={styles["input"]}
         value={albumId}
         onChange={e => {
           setAlbumId(e.target.value);
         }}
       ></input>
-      <div style={{ marginTop: "50px" }}>장르</div>
+      <div>장르</div>
       <input
-        className={styles["music-post-input"]}
+        className={styles["input"]}
         value={genre}
         onChange={e => {
           setGenre(e.target.value);
         }}
       ></input>
-      <div style={{ marginTop: "50px" }}>링크(Apple Music)</div>
+      <div>링크(Apple Music)</div>
       <input
-        className={styles["music-post-input"]}
+        className={styles["input"]}
         value={link}
         onChange={e => {
           setLink(e.target.value);
         }}
       ></input>
-      <div style={{ marginTop: "50px" }}>글</div>
+      <div>글</div>
       <textarea
-        className={`${styles["music-post-input"]} ${styles["music-post-input-text"]}`}
-        // type="text"
+        className={`${styles["input"]} ${styles["input-text"]}`}
         value={text}
         onChange={e => {
           setText(e.target.value);
         }}
       ></textarea>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div className={styles["music-post-submit"]} onClick={handleSubmit}>
+        <div className={`${styles["button"]} ${styles["submit"]}`} onClick={handleSubmit}>
           제출하기
         </div>
       </div>
-      <div
-        style={{
-          borderBottom: "1px solid #ffccff",
-          padding: "20px",
-          marginBottom: "100px",
-        }}
-      ></div>
+      <div className={styles["divider"]} style={{ marginBottom: "50px" }}></div>
     </div>
   );
 }

@@ -111,17 +111,21 @@
   font-weight: 900;
 }
 
-.button-sort {
+.button {
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 45px;
   font-size: 25px;
   border: 1px solid #ffccff;
   border-radius: 10000px;
+}
+
+.sort {
+  width: 150px;
+  height: 45px;
+
   position: absolute;
   right: 20px;
   top: 20px;
@@ -143,7 +147,7 @@
   margin: 10px 15px 0 0;
 }
 
-.button-sort:hover,
+.button:hover,
 .music-delete-menu:hover {
   color: #000000;
   font-weight: bold;
@@ -192,15 +196,15 @@
   padding: 0 10px 0 0;
 }
 
-.music-post-input {
+.input {
   height: 50px;
   width: 100%;
   font-size: 30px;
-  margin-top: 15px;
+  margin: 15px 0 50px 0;
   background-color: #ffccff;
 }
 
-.music-post-input-text {
+.input-text {
   color: #000000;
   line-height: 180%;
   height: 350px;
@@ -209,20 +213,8 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-.music-post-submit {
+.submit {
+  font-size: 30px;
   margin: 50px 0 10px 0;
-  border: 1px solid #ffccff;
-  width: fit-content;
   padding: 10px 30px;
-  border-radius: 1000px;
-  background-color: #000000;
-  z-index: 1000;
-  cursor: pointer;
-}
-
-.music-post-submit:hover {
-  color: #000000;
-  font-weight: bold;
-  border-radius: 0;
-  background-color: #ffccff;
 }

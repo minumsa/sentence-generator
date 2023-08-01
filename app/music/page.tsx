@@ -10,17 +10,24 @@ export default function Page() {
   const router = useRouter();
   const pathName = usePathname();
   const [data, setData] = useState<AlbumItem[]>([]);
-  const [sortType, setSortType] = useState<string>("upload");
+  const [sortType, setSortType] = useState<string>("UPLOAD");
   const [uploadOrder, setUploadOrder] = useState<boolean>(false);
-  const [releaseOrder, setReleaseOrder] = useState<boolean>(false);
+  const [releaseOrder, setReleaseOrder] = useState<boolean>(true);
 
   const handleCategory = (category: string) => {
-    const pathName =
-      category.toLowerCase() === "all"
-        ? ""
-        : category.toLowerCase() === "r&b/soul"
-        ? "r&b_soul"
-        : category.toLowerCase();
+    const categoryLowerCase = category.toLowerCase();
+    let pathName;
+
+    switch (categoryLowerCase) {
+      case "all":
+        pathName = "";
+        break;
+      case "r&b/soul":
+        pathName = "r&b_soul";
+        break;
+      default:
+        pathName = categoryLowerCase;
+    }
 
     router.push(`/music/${pathName}`);
   };
@@ -30,7 +37,21 @@ export default function Page() {
   }, []);
 
   // TODO: 버튼 컴포넌트 만들기
-  const ButtonComponent = () => {};
+
+  const activeStyle = {
+    color: "#000000",
+    fontWeight: "bold",
+    borderRadius: "0",
+    backgroundColor: "#ffccff",
+  };
+
+  const sortByUploadDate = (data: AlbumItem[], uploadOrder: boolean) => {
+    data.sort((a, b) =>
+      uploadOrder
+        ? Number(new Date(a.uploadDate)) - Number(new Date(b.uploadDate))
+        : Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
+    );
+  };
 
   return (
     <div className={styles["container"]}>
@@ -47,12 +68,7 @@ export default function Page() {
                 (pathName === "/music" && category === "ALL") ||
                 (pathName === "r&b_soul" && category === "R&B/SOUL") ||
                 pathName.includes(category.toLowerCase())
-                  ? {
-                      backgroundColor: "#ffccff",
-                      borderRadius: 0,
-                      color: "#000000",
-                      fontWeight: "bold",
-                    }
+                  ? activeStyle
                   : {}
               }
             >
@@ -63,64 +79,26 @@ export default function Page() {
       </div>
       <div className={styles["content-container"]}>
         <div
-          className={styles["button-sort"]}
-          style={
-            sortType === "upload"
-              ? {
-                  color: "#000000",
-                  fontWeight: "bold",
-                  borderRadius: "0",
-                  backgroundColor: "#ffccff",
-                }
-              : {}
-          }
+          className={`${styles["button"]} ${styles["sort"]}`}
+          style={sortType === "UPLOAD" ? activeStyle : {}}
           onClick={() => {
-            setSortType("upload");
+            setSortType("UPLOAD");
             setUploadOrder(!uploadOrder);
-
-            sortType === "upload" && !uploadOrder
-              ? data.sort(
-                  (a: { uploadDate: string }, b: { uploadDate: string }) =>
-                    Number(new Date(a.uploadDate)) - Number(new Date(b.uploadDate))
-                )
-              : data.sort(
-                  (a: { uploadDate: string }, b: { uploadDate: string }) =>
-                    Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
-                );
+            sortByUploadDate(data, !uploadOrder);
           }}
         >
-          {sortType === "upload" && uploadOrder ? "업로드 ↑" : "업로드 ↓"}
+          {sortType === "UPLOAD" && uploadOrder ? "UPLOAD ↑" : "UPLOAD ↓"}
         </div>
         <div
-          className={styles["button-sort"]}
-          style={
-            sortType === "release"
-              ? {
-                  right: "20px",
-                  top: "80px",
-                  color: "#000000",
-                  fontWeight: "bold",
-                  borderRadius: "0",
-                  backgroundColor: "#ffccff",
-                }
-              : { right: "20px", top: "80px" }
-          }
+          className={`${styles["button"]} ${styles["sort"]}`}
+          style={sortType === "RELEASE" ? { ...activeStyle, top: "80px" } : { top: "80px" }}
           onClick={() => {
-            setSortType("release");
+            setSortType("RELEASE");
             setReleaseOrder(!releaseOrder);
-
-            sortType === "release" && !releaseOrder
-              ? data.sort(
-                  (a: { releaseDate: string }, b: { releaseDate: string }) =>
-                    Number(a.releaseDate.slice(0, 4)) - Number(b.releaseDate.slice(0, 4))
-                )
-              : data.sort(
-                  (a: { releaseDate: string }, b: { releaseDate: string }) =>
-                    Number(b.releaseDate.slice(0, 4)) - Number(a.releaseDate.slice(0, 4))
-                );
+            sortByUploadDate(data, !releaseOrder);
           }}
         >
-          {sortType === "release" && releaseOrder ? "발매일 ↑" : "발매일 ↓"}
+          {sortType === "RELEASE" && releaseOrder ? "RELEASE ↑" : "RELEASE ↓"}
         </div>
         {data
           ? data.map((data, index) => {
