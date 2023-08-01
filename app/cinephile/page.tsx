@@ -20,8 +20,8 @@ export default function Page() {
   const [score, setScore] = useState<number>(0);
   const [totalScore, setTotalScore] = useState<number>(0);
   const [testPage, setTestPage] = useState<number>(1);
-  const testPageMax = data.length;
-  // const testPageMax = 5;
+  // const testPageMax = data.length;
+  const testPageMax = 5;
   const progressWidth = `${(testPage / testPageMax) * 100}%`;
   const progressPercent = `${Math.floor((testPage / testPageMax) * 100)}%`;
   const [userAnswer, setUserAnswer] = useState<any>("");
@@ -172,7 +172,7 @@ export default function Page() {
             </div>
           ) : (
             <div className={styles["answer-container"]}>
-              <div className={styles["index-title"]}>정답 및 해설 🧐</div>
+              <div className={styles["index-title"]}>채점 결과 🧐</div>
               <Answer userAnswerArray={userAnswerArray} />
             </div>
           )}
@@ -214,7 +214,7 @@ export default function Page() {
                   setPageType("answer");
                 }}
               >
-                정답 및 해설 보기
+                채점 결과 보기
               </div>
             </React.Fragment>
           ) : (
