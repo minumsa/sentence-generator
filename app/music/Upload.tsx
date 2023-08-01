@@ -202,10 +202,8 @@ UploadProps) {
   // console.log(musicData);
 
   return (
-    <div className={styles["music-post-container"]}>
-      <div style={{ textAlign: "center", fontWeight: "normal" }}>
-        ｟ 업로드 페이지 ｠
-      </div>
+    <div className={styles["album-container"]}>
+      <div style={{ textAlign: "center", fontWeight: "normal" }}>｟ 업로드 페이지 ｠</div>
       <div style={{ marginTop: "100px" }}>앨범 ID(Spotify)</div>
       <input
         className={styles["music-post-input"]}

@@ -1,13 +1,18 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
 .music-main-container {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   font-weight: 300;
   background-color: #000000;
   color: #ffccff;
@@ -17,13 +22,13 @@
   user-select: none;
 }
 
-.music-left-container {
+.category-container {
   width: 250px;
   height: 100%;
   overflow: scroll;
 }
 
-.music-right-container {
+.content-container {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -36,18 +41,12 @@
   user-select: none;
 }
 
-.music-left-container::-webkit-scrollbar,
-.music-right-container::-webkit-scrollbar {
+.category-container::-webkit-scrollbar,
+.content-container::-webkit-scrollbar {
   display: none;
 }
 
-.music-genre-container {
-  display: flex;
-  flex-direction: column;
-  font-size: 70px;
-}
-
-.music-genre {
+.category {
   cursor: pointer;
   width: 210px;
   height: 45px;
@@ -57,23 +56,20 @@
   justify-content: center;
   align-items: center;
   border: 1px solid #ffccff;
-  /* padding-left: 30px; */
   padding: 10px;
-  margin: 10px;
+  margin: 20px 10px;
   border-radius: 9000px;
 }
 
-.music-genre:hover {
+.category:hover {
   font-weight: bold;
   color: #000000;
   border: 1px solid #ffccff;
   background-color: #ffccff;
-  padding: 10px;
-  margin: 10px;
   border-radius: 0px;
 }
 
-.music-post-container {
+.album-container {
   display: flex;
   flex-direction: column;
   font-size: 30px;
@@ -81,12 +77,25 @@
   margin-top: 5px;
 }
 
-.music-post-container-block {
+.text-container {
   line-height: 200%;
   word-break: keep-all;
 }
 
-.music-top-menu {
+.line-break {
+  margin-bottom: 50px;
+}
+
+.divider {
+  border-bottom: 1px solid #ffccff;
+  padding: 20px;
+}
+
+.album-title {
+  font-weight: 900;
+}
+
+.button-sort {
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -118,7 +127,7 @@
   margin: 10px 15px 0 0;
 }
 
-.music-top-menu:hover,
+.button-sort:hover,
 .music-delete-menu:hover {
   color: #000000;
   font-weight: bold;
@@ -142,10 +151,20 @@
     border-radius: 2000px; */
 }
 
-.album-container {
+.album-information-container {
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+}
+
+.album-information {
+  margin: 30px;
+}
+
+.link {
+  cursor: pointer;
+  color: #ffccff;
+  text-decoration: none;
 }
 
 .play-applemusic {
@@ -169,10 +188,9 @@
   color: #000000;
   line-height: 180%;
   height: 350px;
-  font-family: "Pretendard Variable", "Pretendard", "-apple-system",
-    "BlinkMacSystemFont", system-ui, "Roboto", "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", "-apple-system", "BlinkMacSystemFont", system-ui,
+    "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .music-post-submit {

@@ -3,114 +3,50 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AlbumItem, album, contents, fetchData } from "./data";
 import styles from "./music.module.css";
-
-interface MongoItem {
-  id: string;
-  imgUrl: string;
-  artist: string;
-  album: string;
-  label: string;
-  releaseDate: string;
-  genre: string;
-  link: string;
-  text: string;
-  uploadDate: string;
-  duration: number;
-  tracks: number;
-}
 
 export default function Page() {
   const router = useRouter();
   const pathName = usePathname();
-  const genreByPath =
-    pathName.split("/").length > 2 ? pathName.split("/")[2].toUpperCase() : "";
-  const [mongoDataArr, setMongoDataArr] = useState<MongoItem[]>([]);
+  const [data, setData] = useState<AlbumItem[]>([]);
+  const [sortType, setSortType] = useState<string>("upload");
+  const [uploadType, setUploadType] = useState<boolean>(false);
+  const [releaseType, setReleaseType] = useState<boolean>(false);
 
-  const contents = [
-    "ALL",
-    "POP",
-    "K-POP",
-    "J-POP",
-    "ROCK",
-    "ALTERNATIVE",
-    "DISCO",
-    "ELECTRONIC",
-    "JAZZ",
-    "R&B/SOUL",
-    "FOLK",
-    "COUNTRY",
-    "CLASSICAL",
-    "SOUNDTRACK",
-  ];
-
-  const [activeGenre, setActiveGenre] = useState("ALL");
-
-  const handleGenreClick = (genre: any) => {
-    const genrePath = genre.toLowerCase();
-    const pathSuffix =
-      genrePath === "all"
+  const handleCategory = (category: string) => {
+    const pathName =
+      category.toLowerCase() === "all"
         ? ""
-        : genrePath === "r&b/soul"
+        : category.toLowerCase() === "r&b/soul"
         ? "r&b_soul"
-        : genrePath;
-    router.push(`/music/${pathSuffix}`);
+        : category.toLowerCase();
+
+    router.push(`/music/${pathName}`);
   };
 
-  async function fetchMongoData() {
-    try {
-      const response = await fetch("/api/music", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to upload music data");
-      }
-
-      const data = await response.json();
-      data.sort(
-        (a: { uploadDate: string }, b: { uploadDate: string }) =>
-          Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
-      );
-
-      setMongoDataArr(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
-    fetchMongoData();
+    fetchData(setData);
   }, []);
 
-  const [uploadSort, setUploadSort] = useState<boolean>(true);
-  const [releaseSort, setReleaseSort] = useState<boolean>(true);
-  const [currentSort, setCurrentSort] = useState<string>("uploadSort");
+  // TODO: 버튼 컴포넌트 만들기
+  const ButtonComponent = () => {};
 
   return (
-    <div style={{ display: "flex", width: "100%", height: "100%" }}>
-      <div className={styles["music-left-container"]}>
-        <div
-          className={styles["music-genre-container"]}
-          style={{ paddingTop: "10px" }}
-        >
-          {contents.map((genre, index) => (
+    <div className={styles["container"]}>
+      <div className={styles["category-container"]}>
+        {contents.map(category => {
+          return (
             <div
-              key={genre}
-              className={`${styles["music-genre"]} ${
-                activeGenre === genre ? styles["active"] : ""
-              }`}
+              key={category}
+              className={styles["category"]}
               onClick={() => {
-                setActiveGenre(genre);
-                handleGenreClick(genre);
+                handleCategory(category);
               }}
               style={
-                genreByPath === genre ||
-                (genre === "R&B/SOUL" && genreByPath === "R&B_SOUL") ||
-                (genreByPath.length < 1 && activeGenre === genre)
+                (pathName === "/music" && category === "ALL") ||
+                (pathName === "r&b_soul" && category === "R&B/SOUL") ||
+                pathName.includes(category.toLowerCase())
                   ? {
                       backgroundColor: "#ffccff",
                       borderRadius: 0,
@@ -120,16 +56,16 @@ export default function Page() {
                   : {}
               }
             >
-              {genre}
+              {category}
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
-      <div className={styles["music-right-container"]}>
+      <div className={styles["content-container"]}>
         <div
-          className={styles["music-top-menu"]}
+          className={styles["button-sort"]}
           style={
-            currentSort === "uploadSort"
+            sortType === "upload"
               ? {
                   color: "#000000",
                   fontWeight: "bold",
@@ -139,29 +75,26 @@ export default function Page() {
               : {}
           }
           onClick={() => {
-            setUploadSort(!uploadSort);
+            setSortType("upload");
+            setUploadType(!uploadType);
 
-            uploadSort
-              ? mongoDataArr.sort(
+            sortType === "upload" && !uploadType
+              ? data.sort(
                   (a: { uploadDate: string }, b: { uploadDate: string }) =>
-                    Number(new Date(a.uploadDate)) -
-                    Number(new Date(b.uploadDate))
+                    Number(new Date(a.uploadDate)) - Number(new Date(b.uploadDate))
                 )
-              : mongoDataArr.sort(
+              : data.sort(
                   (a: { uploadDate: string }, b: { uploadDate: string }) =>
-                    Number(new Date(b.uploadDate)) -
-                    Number(new Date(a.uploadDate))
+                    Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
                 );
-
-            setCurrentSort("uploadSort");
           }}
         >
-          {uploadSort ? "업로드 ↓" : "업로드 ↑"}
+          {sortType === "upload" && uploadType ? "업로드 ↑" : "업로드 ↓"}
         </div>
         <div
-          className={styles["music-top-menu"]}
+          className={styles["button-sort"]}
           style={
-            currentSort === "releaseSort"
+            sortType === "release"
               ? {
                   right: "20px",
                   top: "80px",
@@ -173,97 +106,58 @@ export default function Page() {
               : { right: "20px", top: "80px" }
           }
           onClick={() => {
-            setReleaseSort(!releaseSort);
-            setCurrentSort("releaseSort");
+            setSortType("release");
+            setReleaseType(!releaseType);
 
-            releaseSort
-              ? mongoDataArr.sort(
+            sortType === "release" && !releaseType
+              ? data.sort(
                   (a: { releaseDate: string }, b: { releaseDate: string }) =>
-                    Number(a.releaseDate.slice(0, 4)) -
-                    Number(b.releaseDate.slice(0, 4))
+                    Number(a.releaseDate.slice(0, 4)) - Number(b.releaseDate.slice(0, 4))
                 )
-              : mongoDataArr.sort(
+              : data.sort(
                   (a: { releaseDate: string }, b: { releaseDate: string }) =>
-                    Number(b.releaseDate.slice(0, 4)) -
-                    Number(a.releaseDate.slice(0, 4))
+                    Number(b.releaseDate.slice(0, 4)) - Number(a.releaseDate.slice(0, 4))
                 );
           }}
         >
-          {releaseSort ? "발매일 ↓" : "발매일 ↑"}
+          {sortType === "release" && releaseType ? "발매일 ↑" : "발매일 ↓"}
         </div>
-        {mongoDataArr
-          ? mongoDataArr.map((data, index) => {
+        {data
+          ? data.map((data, index) => {
+              const minutes = Math.floor(data.duration / 60);
+              const hours = Math.floor(minutes / 60);
+
               return (
-                <div className={styles["music-post-container"]} key={index}>
-                  <div className={styles["album-container"]}>
-                    <div style={{ marginRight: "20px" }}>
-                      <a
-                        href={data.link}
-                        target="_blank"
-                        style={{
-                          textDecoration: "none",
-                          color: "#ffccff",
-                        }}
-                      >
-                        <Image
-                          src={data.imgUrl}
-                          alt="album art"
-                          width={300}
-                          height={300}
-                          style={{ cursor: "pointer" }}
-                        />
-                      </a>
-                    </div>
-                    <div
-                      className={styles["music-post-container-block"]}
-                      style={{ marginLeft: "30px", marginTop: "30px" }}
-                    >
+                <div className={styles["album-container"]} key={index}>
+                  <div className={styles["album-information-container"]}>
+                    <a className={styles["link"]} href={data.link} target="_blank">
+                      <Image
+                        src={data.imgUrl}
+                        alt={data.album}
+                        width={album.width}
+                        height={album.height}
+                      />
+                    </a>
+                    <div className={`${styles["text-container"]} ${styles["album-information"]}`}>
                       <div>{data.artist}</div>
-                      <a
-                        href={data.link}
-                        target="_blank"
-                        style={{
-                          textDecoration: "none",
-                          color: "#ffccff",
-                        }}
-                      >
-                        <div
-                          className={styles["name-name"]}
-                          style={{ fontWeight: "800" }}
-                        >
-                          {data.album}
-                        </div>
+                      <a className={styles["link"]} href={data.link} target="_blank">
+                        <div className={styles["album-title"]}>{data.album}</div>
                       </a>
                       <div>
-                        <span>{data.label},</span>{" "}
-                        <span>{data.releaseDate.slice(0, 4)}</span>
+                        <span>{`${data.label}, ${data.releaseDate.slice(0, 4)}`}</span>
                       </div>
                       <div>
                         {`${data.tracks}곡, `}
-                        {Math.floor(data.duration / 60) < 60
-                          ? `${Math.floor(data.duration / 60)}분 ${
-                              data.duration % 60
-                            }초`
-                          : `${Math.floor(
-                              Math.floor(data.duration / 60) / 60
-                            )}시간 ${
-                              Math.floor(data.duration / 60) % 60 > 0
-                                ? (Math.floor(data.duration / 60) % 60) + "분"
-                                : ""
-                            }`}
+                        {minutes > 60
+                          ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
+                          : `${minutes}분`}
                       </div>
                     </div>
                   </div>
-                  <div
-                    className={styles["music-post-container-block"]}
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <div className={styles["text-container"]}>
                     {data.text.split("<br/>").map((text, index) => {
                       return index + 1 < data.text.split("<br/>").length ? (
-                        <div style={{ marginBottom: "50px" }} key={index}>
+                        <div className={styles["line-break"]} key={index}>
                           {text}
                         </div>
                       ) : (
@@ -271,12 +165,7 @@ export default function Page() {
                       );
                     })}
                   </div>
-                  <div
-                    style={{
-                      borderBottom: "1px solid #ffccff",
-                      padding: "20px",
-                    }}
-                  ></div>
+                  <div className={styles["divider"]} />
                 </div>
               );
             })
