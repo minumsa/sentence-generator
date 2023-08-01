@@ -77,7 +77,11 @@ export default function Answer(userAnswerArray: (string | number)[]) {
                         {index === data[dataIndex].answer && data[dataIndex].reference ? (
                           <a href={data[dataIndex].reference} target="_blank">
                             <div className={styles["reference"]}>
-                              <span className={styles["reference-text"]}>관련 자료</span>
+                              <span
+                                className={`${styles["reference-text"]} ${styles["reference-text-dark"]} `}
+                              >
+                                관련 자료
+                              </span>
                             </div>
                           </a>
                         ) : null}
@@ -100,7 +104,7 @@ export default function Answer(userAnswerArray: (string | number)[]) {
                   {item.reference ? (
                     <a href={data[dataIndex].reference} target="_blank">
                       <div className={styles["reference"]}>
-                        <span className={styles["options-selected"]}>관련 자료</span>
+                        <span className={styles["reference-text"]}>관련 자료</span>
                       </div>
                     </a>
                   ) : null}

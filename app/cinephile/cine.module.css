@@ -70,12 +70,12 @@
 
 .button:hover {
   background-color: #000000;
-  color: white;
+  color: #ffffff;
 }
 
 .twitter:hover {
   background-color: #00acee;
-  color: white;
+  color: #ffffff;
 }
 
 .kakao:hover {
@@ -97,7 +97,7 @@
 
 .options-button-flex:hover {
   background-color: #000000;
-  color: white;
+  color: #ffffff;
 }
 
 .cine-challenge-button-flex {
@@ -231,7 +231,7 @@
 }
 
 .options:hover {
-  color: white;
+  color: #ffffff;
   background-color: #000000;
 }
 
@@ -242,50 +242,25 @@
 
 .reference {
   display: inline-block;
-  color: white;
+  color: #ffffff;
   margin-left: 10px;
 }
 
 .reference-text {
-  border: 1.5px solid white;
   border-radius: 1000px;
-  padding: 3px 10px;
+  padding: 3px 5px;
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+.reference-text-dark {
+  border: 1.5px solid #ffffff;
+  color: #ffffff;
 }
 
 .caption {
   margin-left: 5px;
 }
-
-/* .options-top {
-  display: flex;
-  justify-content: space-between;
-  width: 400px;
-  height: 150px;
-}
-
-.options-bottom {
-  margin-top: 25px;
-  display: flex;
-  justify-content: space-between;
-  width: 400px;
-  height: 150px;
-}
-
-.options-top-left {
-  margin-left: 35px;
-  width: 150px;
-  height: 150px;
-
-  border: 1.5px solid #000000;
-}
-
-.options-top-right {
-  margin-right: 35px;
-  width: 150px;
-  height: 150px;
-
-  border: 1.5px solid #000000;
-} */
 
 .cine-top-img {
   width: 150px;
@@ -344,7 +319,7 @@
 
 .options-selected {
   background-color: #000000;
-  color: white;
+  color: #ffffff;
 }
 
 .options-answer {
@@ -355,13 +330,6 @@
   width: 100%;
   border-top: 1px dashed #000000;
   margin: 40px 0;
-}
-
-.cine-reference-black {
-  color: #000000;
-  border: 1.5px solid #000000;
-  padding: 5px;
-  margin-left: 10px;
 }
 
 .star-container {
@@ -381,13 +349,6 @@
   position: absolute;
   margin-top: 20px;
   z-index: 1;
-}
-
-.cine-reference-white {
-  color: white;
-  border: 1.5px solid white;
-  padding: 5px;
-  margin-left: 10px;
 }
 
 .commentary-container {
@@ -491,13 +452,5 @@
 
   .result-text {
     font-size: 22px;
-  }
-
-  .cine-nav-container {
-    width: 100%;
-  }
-
-  .cine-nav-32-container {
-    width: 100%;
   }
 }

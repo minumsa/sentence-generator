@@ -20,8 +20,8 @@ export default function Page() {
   const [score, setScore] = useState<number>(0);
   const [totalScore, setTotalScore] = useState<number>(0);
   const [testPage, setTestPage] = useState<number>(1);
-  const testPageMax = data.length;
-  // const testPageMax = 5;
+  // const testPageMax = data.length;
+  const testPageMax = 5;
   const progressWidth = `${(testPage / testPageMax) * 100}%`;
   const progressPercent = `${Math.floor((testPage / testPageMax) * 100)}%`;
   const [userAnswer, setUserAnswer] = useState<any>();
@@ -145,13 +145,7 @@ export default function Page() {
               />
             </div>
           ) : pageType === "test" ? (
-            <Question
-              page={testPage}
-              userAnswer={userAnswer}
-              setUserAnswer={setUserAnswer}
-              userAnswerArray={userAnswerArray}
-              setUserAnswerArray={setUserAnswerArray}
-            />
+            <Question page={testPage} userAnswer={userAnswer} setUserAnswer={setUserAnswer} />
           ) : pageType === "result" ? (
             <div className={styles["result-container"]}>
               <div className={styles["result-text"]}>
