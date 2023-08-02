@@ -51,6 +51,10 @@ export default function Main({ language }: PageProps) {
     };
   }, []);
 
+  // FIXME: Main 이 Desktop 이랑 ModalContainer 를 가지고 있어서
+  // Modal의 상태 변화가 Desktop 과 연관이 없도록 만들어주면
+  // Modal 이 열리고 닫힐때마다 Desktop 이 re-rendering 되지 않게 할수 있다.
+  // 상태 변수는 여기에 두고 props 형태로 자식 컴포넌트로 보내기
   const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
     let height: number = windowHeight / 1.2;
     let width: number = windowHeight * 0.65;
@@ -72,7 +76,6 @@ export default function Main({ language }: PageProps) {
         <div
           className={styles["paragraph"]}
           style={{
-            paddingBottom: icon === readme.techStack ? "20px" : 0,
             margin: isMobile ? "10px 30px" : "10px 70px",
           }}
         >
@@ -84,6 +87,7 @@ export default function Main({ language }: PageProps) {
       );
     }
 
+    // FIXME: 리드미와 이미지 모달 컴포넌트를 아예 별개로 분리
     return alt === "readme" ? (
       <div className={styles["modal-container"]} onClick={onClick}>
         <div className={styles["modal"]} style={{ width: width, height: height }}>
@@ -138,12 +142,9 @@ export default function Main({ language }: PageProps) {
     ko: string;
   }
 
-  // TODO: 바깥으로 빼라. (파일 분리까지!)
   function DraggableComponent(props: {
     className: string;
     path: string;
-    // FIXME: 함수를 받아랏!
-    //onClick: () => string,
     type: string;
     title: TitleProps;
     width: number;

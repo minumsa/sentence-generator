@@ -2,17 +2,32 @@
 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AlbumItem, album, contents, fetchData } from "./data";
 import styles from "./music.module.css";
+
+type SortType = "upload" | "release";
 
 export default function Page() {
   const router = useRouter();
   const pathName = usePathname();
   const [data, setData] = useState<AlbumItem[]>([]);
-  const [sortType, setSortType] = useState<string>("UPLOAD");
-  const [uploadOrder, setUploadOrder] = useState<boolean>(false);
-  const [releaseOrder, setReleaseOrder] = useState<boolean>(true);
+
+  // const [sortType, setSortType] = useState<SortType>("upload");
+  // const [uploadOrder, setUploadOrder] = useState<boolean>(false);
+  // const [releaseOrder, setReleaseOrder] = useState<boolean>(true);
+  const [sortData, setSortData] = useState<{
+    order: {
+      [K in SortType]: boolean;
+    };
+    type: SortType;
+  }>({
+    order: {
+      upload: false,
+      release: true,
+    },
+    type: "upload",
+  });
 
   const handleCategory = (category: string) => {
     const categoryLowerCase = category.toLowerCase();
@@ -45,13 +60,72 @@ export default function Page() {
     backgroundColor: "#ffccff",
   };
 
-  const sortByUploadDate = (data: AlbumItem[], uploadOrder: boolean) => {
-    data.sort((a, b) =>
-      uploadOrder
-        ? Number(new Date(a.uploadDate)) - Number(new Date(b.uploadDate))
-        : Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
+  const sortedData = useMemo(() => {
+    const order = sortData.order[sortData.type];
+    const type = sortData.type;
+    const dateFetcher = (item: AlbumItem) => {
+      if (type === "upload") {
+        return new Date(item.uploadDate);
+      } else if (type === "release") {
+        return new Date(item.releaseDate);
+      }
+    };
+    const newData = [...data];
+    newData.sort((a, b) =>
+      order
+        ? Number(dateFetcher(a)) - Number(dateFetcher(b))
+        : Number(dateFetcher(b)) - Number(dateFetcher(a))
     );
-  };
+    return newData;
+  }, [data, sortData]);
+
+  // const sortByDate = (data: AlbumItem[], order: boolean, type: SortType) => {
+  //   const dateFetcher = (item: AlbumItem) => {
+  //     if (type === "upload") {
+  //       return new Date(item.uploadDate);
+  //     } else if (type === "release") {
+  //       return new Date(item.releaseDate);
+  //     }
+  //   };
+  //   const newData = [...data];
+  //   newData.sort((a, b) =>
+  //     order
+  //       ? Number(dateFetcher(a)) - Number(dateFetcher(b))
+  //       : Number(dateFetcher(b)) - Number(dateFetcher(a))
+  //   );
+  //   setSortedData(newData);
+  // };
+
+  // useEffect(() => {
+  //   sortByDate();
+  // }, [sortData, data]);
+
+  function SortButton(props: { type: SortType; title: string }) {
+    const { type, title } = props;
+    return (
+      <div
+        className={`${styles["button"]} ${styles["sort"]}`}
+        style={
+          //TODO: revert
+          sortData.type === type
+            ? { ...activeStyle, top: type === "release" ? "80px" : "" }
+            : { top: type === "release" ? "80px" : "" }
+        }
+        onClick={() => {
+          setSortData(prevSortData => ({
+            type: type,
+            order: {
+              ...prevSortData.order,
+              [type]:
+                prevSortData.type === type ? !prevSortData.order[type] : prevSortData.order[type],
+            },
+          }));
+        }}
+      >
+        {title} {sortData.order[type] ? "↑" : "↓"}
+      </div>
+    );
+  }
 
   return (
     <div className={styles["container"]}>
@@ -78,30 +152,13 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <div
-          className={`${styles["button"]} ${styles["sort"]}`}
-          style={sortType === "UPLOAD" ? activeStyle : {}}
-          onClick={() => {
-            setSortType("UPLOAD");
-            setUploadOrder(!uploadOrder);
-            sortByUploadDate(data, !uploadOrder);
-          }}
-        >
-          {sortType === "UPLOAD" && uploadOrder ? "UPLOAD ↑" : "UPLOAD ↓"}
+        {/* TODO: absolute 위치는 flexbox에만 잡고 나머지는 그 안으로 넣기 */}
+        <div className={styles["sort-button-container"]}>
+          <SortButton type="upload" title="UPLOAD" />
+          <SortButton type="release" title="RELEASE" />
         </div>
-        <div
-          className={`${styles["button"]} ${styles["sort"]}`}
-          style={sortType === "RELEASE" ? { ...activeStyle, top: "80px" } : { top: "80px" }}
-          onClick={() => {
-            setSortType("RELEASE");
-            setReleaseOrder(!releaseOrder);
-            sortByUploadDate(data, !releaseOrder);
-          }}
-        >
-          {sortType === "RELEASE" && releaseOrder ? "RELEASE ↑" : "RELEASE ↓"}
-        </div>
-        {data
-          ? data.map((data, index) => {
+        {sortedData
+          ? sortedData.map((data, index) => {
               const minutes = Math.floor(data.duration / 60);
               const hours = Math.floor(minutes / 60);
 
