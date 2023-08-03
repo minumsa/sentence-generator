@@ -30,6 +30,13 @@ export interface AlbumInfo {
   tracks: number;
 }
 
+export interface UpdateInfo {
+  albumId: string;
+  genre: string;
+  link: string;
+  text: string;
+}
+
 export type SortType = "upload" | "release";
 
 export const album = {
@@ -106,12 +113,115 @@ export async function uploadData(albumData: AlbumInfo, password: string) {
   }
 }
 
+export const updateData = async (id: string, newData: Partial<AlbumInfo>) => {
+  try {
+    const response = await fetch("/api/music", {
+      method: "UPDATE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, newData: newData }),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const fetchSpotifyAccessToken = async () => {
+  try {
+    const url = "https://accounts.spotify.com/api/token";
+    const clientId = "9ba8de463724427689b855dfcabca1b1";
+    const clientSecret = "7cfb4b90f97a4b1a8f02f2fe6d2d42bc";
+    const basicToken = btoa(`${clientId}:${clientSecret}`);
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${basicToken}`,
+    };
+    const data = "grant_type=client_credentials";
+
+    const accessTokenResponse = await fetch(url, {
+      method: "POST",
+      headers,
+      body: data,
+    });
+
+    if (!accessTokenResponse.ok) {
+      console.error("Error: Access token fetch failed");
+    }
+
+    const accessTokenData = await accessTokenResponse.json();
+    return accessTokenData.access_token;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const fetchSpotify = async ({ albumId, genre, link, text }: UpdateInfo) => {
+  if (!albumId || !genre || !link || !text) {
+    alert("모든 항목을 채워주세요.");
+    return;
+  }
+
+  const item = {
+    albumId: albumId,
+    genre: genre,
+    link: link,
+    text: text,
+    uploadDate: Date(),
+  };
+
+  try {
+    const accessToken = await fetchSpotifyAccessToken();
+    if (!accessToken) {
+      // throw new Error("Access token is not available");
+      console.error("Error: Access token is not available");
+    }
+
+    const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+    const dataResponse = await fetch(url, { headers });
+
+    if (!dataResponse.ok) {
+      // throw new Error("music fetch failed");
+      console.error("Error: music fetch failed");
+    }
+
+    const data = await dataResponse.json();
+
+    const fetchedData: AlbumInfo = {
+      id: data.id,
+      imgUrl: data.images[0].url,
+      artist: data.artists[0].name,
+      album: data.name,
+      label: data.label,
+      releaseDate: data.release_date,
+      text: item.text,
+      genre: item.genre,
+      link: item.link,
+      uploadDate: item.uploadDate,
+      tracks: data.tracks.items.length,
+      duration: Math.floor(
+        data.tracks.items
+          .map((data: any) => data.duration_ms)
+          .reduce((a: number, b: number) => a + b) / 1000
+      ),
+    };
+
+    return fetchedData;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const deleteData = async (id: string) => {
   const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
   console.log(userPassword);
 
   try {
-    const response = await fetch(`/api/music`, {
+    const response = await fetch("/api/music", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
