@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import styles from "./music.module.css";
 
@@ -54,11 +52,7 @@ export default function Upload({
   setAlbumId,
   musicData,
   setMusicData,
-}: // uploadItem,
-// setUploadItem,
-// uploadItems,
-// setUploadItems,
-UploadProps) {
+}: UploadProps) {
   const [password, setPassword] = useState<string | null>("");
 
   const handleSubmit = async () => {
