@@ -10,11 +10,11 @@ export default function Page() {
   let pathName = usePathname();
 
   switch (pathName) {
-    case "/music/admin":
+    case "/music":
       pathName = "";
       break;
     default:
-      pathName = pathName.split("/music/admin/").join("");
+      pathName = pathName.split("/music/").join("");
       break;
   }
 
@@ -39,7 +39,7 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content category={pathName} />
+        <Content pathName={pathName} />
       </div>
     </div>
   );

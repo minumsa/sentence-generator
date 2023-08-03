@@ -41,7 +41,7 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content category={pathName} />
+        <Content pathName={pathName} />
         {pathName === "upload" && <Upload />}
       </div>
     </div>
