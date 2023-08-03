@@ -113,6 +113,7 @@ export async function uploadData(albumData: AlbumInfo, password: string) {
   }
 }
 
+// TODO: 수정 기능 만들기
 export const updateData = async (id: string, newData: Partial<AlbumInfo>) => {
   try {
     const response = await fetch("/api/music", {
