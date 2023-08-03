@@ -27,7 +27,7 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-  return <div className={styles["music-main-container"]}>{children}</div>;
+  return <div>{children}</div>;
 };
 
 export default Layout;

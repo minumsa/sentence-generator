@@ -15,7 +15,7 @@ export const contents = [
   "SOUNDTRACK",
 ];
 
-export interface AlbumItem {
+export interface AlbumInfo {
   id: string;
   imgUrl: string;
   artist: string;
@@ -30,7 +30,7 @@ export interface AlbumItem {
   tracks: number;
 }
 
-export async function fetchData(props: React.Dispatch<React.SetStateAction<AlbumItem[]>>) {
+export async function fetchData(setData: React.Dispatch<React.SetStateAction<AlbumInfo[]>>) {
   try {
     const response = await fetch("/api/music", {
       method: "GET",
@@ -44,12 +44,13 @@ export async function fetchData(props: React.Dispatch<React.SetStateAction<Album
     }
 
     const data = await response.json();
+
     data.sort(
       (a: { uploadDate: string }, b: { uploadDate: string }) =>
-        Number(new Date(b.uploadDate)) - Number(new Date(a.uploadDate))
+        new Date(b.uploadDate).getTime() - Number(new Date(a.uploadDate).getTime())
     );
 
-    props(data);
+    setData(data);
   } catch (error) {
     console.error(error);
   }

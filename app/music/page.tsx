@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { AlbumItem, album, contents, fetchData } from "./data";
+import { AlbumInfo, album, contents, fetchData } from "./data";
 import styles from "./music.module.css";
 
 type SortType = "upload" | "release";
@@ -11,29 +11,26 @@ type SortType = "upload" | "release";
 export default function Page() {
   const router = useRouter();
   const pathName = usePathname();
-  const [data, setData] = useState<AlbumItem[]>([]);
-
-  // const [sortType, setSortType] = useState<SortType>("upload");
-  // const [uploadOrder, setUploadOrder] = useState<boolean>(false);
-  // const [releaseOrder, setReleaseOrder] = useState<boolean>(true);
-  const [sortData, setSortData] = useState<{
-    order: {
-      [K in SortType]: boolean;
-    };
+  const [data, setData] = useState<AlbumInfo[]>([]);
+  const [sortingOptions, setSortingOptions] = useState<{
     type: SortType;
+    order: {
+      [Type in SortType]: boolean;
+    };
   }>({
+    type: "upload",
     order: {
       upload: false,
-      release: true,
+      release: false,
     },
-    type: "upload",
   });
 
   const handleCategory = (category: string) => {
-    const categoryLowerCase = category.toLowerCase();
+    const lowercasedCategory = category.toLowerCase();
     let pathName;
 
-    switch (categoryLowerCase) {
+    // TODO: break가 있고 없고의 차이는?
+    switch (lowercasedCategory) {
       case "all":
         pathName = "";
         break;
@@ -41,7 +38,7 @@ export default function Page() {
         pathName = "r&b_soul";
         break;
       default:
-        pathName = categoryLowerCase;
+        pathName = lowercasedCategory;
     }
 
     router.push(`/music/${pathName}`);
@@ -61,9 +58,9 @@ export default function Page() {
   };
 
   const sortedData = useMemo(() => {
-    const order = sortData.order[sortData.type];
-    const type = sortData.type;
-    const dateFetcher = (item: AlbumItem) => {
+    const order = sortingOptions.order[sortingOptions.type];
+    const type = sortingOptions.type;
+    const dateSelector = (item: AlbumInfo) => {
       if (type === "upload") {
         return new Date(item.uploadDate);
       } else if (type === "release") {
@@ -73,56 +70,31 @@ export default function Page() {
     const newData = [...data];
     newData.sort((a, b) =>
       order
-        ? Number(dateFetcher(a)) - Number(dateFetcher(b))
-        : Number(dateFetcher(b)) - Number(dateFetcher(a))
+        ? Number(dateSelector(a)) - Number(dateSelector(b))
+        : Number(dateSelector(b)) - Number(dateSelector(a))
     );
     return newData;
-  }, [data, sortData]);
+  }, [data, sortingOptions]);
 
-  // const sortByDate = (data: AlbumItem[], order: boolean, type: SortType) => {
-  //   const dateFetcher = (item: AlbumItem) => {
-  //     if (type === "upload") {
-  //       return new Date(item.uploadDate);
-  //     } else if (type === "release") {
-  //       return new Date(item.releaseDate);
-  //     }
-  //   };
-  //   const newData = [...data];
-  //   newData.sort((a, b) =>
-  //     order
-  //       ? Number(dateFetcher(a)) - Number(dateFetcher(b))
-  //       : Number(dateFetcher(b)) - Number(dateFetcher(a))
-  //   );
-  //   setSortedData(newData);
-  // };
-
-  // useEffect(() => {
-  //   sortByDate();
-  // }, [sortData, data]);
-
-  function SortButton(props: { type: SortType; title: string }) {
-    const { type, title } = props;
+  function SortToggleButton({ type }: { type: SortType }) {
     return (
       <div
         className={`${styles["button"]} ${styles["sort"]}`}
-        style={
-          //TODO: revert
-          sortData.type === type
-            ? { ...activeStyle, top: type === "release" ? "80px" : "" }
-            : { top: type === "release" ? "80px" : "" }
-        }
+        style={sortingOptions.type === type ? { ...activeStyle } : {}}
         onClick={() => {
-          setSortData(prevSortData => ({
+          setSortingOptions(prevSortingOption => ({
             type: type,
             order: {
-              ...prevSortData.order,
+              ...prevSortingOption.order,
               [type]:
-                prevSortData.type === type ? !prevSortData.order[type] : prevSortData.order[type],
+                prevSortingOption.type === type
+                  ? !prevSortingOption.order[type]
+                  : prevSortingOption.order[type],
             },
           }));
         }}
       >
-        {title} {sortData.order[type] ? "↑" : "↓"}
+        {type.toUpperCase()} {sortingOptions.order[type] ? "↑" : "↓"}
       </div>
     );
   }
@@ -152,10 +124,9 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        {/* TODO: absolute 위치는 flexbox에만 잡고 나머지는 그 안으로 넣기 */}
         <div className={styles["sort-button-container"]}>
-          <SortButton type="upload" title="UPLOAD" />
-          <SortButton type="release" title="RELEASE" />
+          <SortToggleButton type="upload" />
+          <SortToggleButton type="release" />
         </div>
         {sortedData
           ? sortedData.map((data, index) => {
