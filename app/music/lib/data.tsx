@@ -46,7 +46,7 @@ export const activeStyle = {
 
 export async function fetchData(
   setData: React.Dispatch<React.SetStateAction<AlbumInfo[]>>,
-  genre: string
+  pathName: string
 ) {
   try {
     const response = await fetch("/api/music", {
@@ -61,9 +61,11 @@ export async function fetchData(
     }
 
     let data = await response.json();
-    if (genre === "r&b_soul") genre = "r&b/soul";
-    if (genre !== "") {
-      data = data.filter((item: { genre: string }) => item.genre === genre);
+    if (pathName === "admin") pathName = "";
+    if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
+    if (pathName === "r&b_soul") pathName = "r&b/soul";
+    if (pathName !== "") {
+      data = data.filter((item: { genre: string }) => item.genre === pathName);
     }
 
     setData(data);
@@ -103,6 +105,33 @@ export async function uploadData(albumData: AlbumInfo, password: string) {
     }
   }
 }
+
+export const deleteData = async (id: string) => {
+  const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
+  console.log(userPassword);
+
+  try {
+    const response = await fetch(`/api/music`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, password: userPassword }),
+    });
+
+    if (response.status === 401) {
+      alert("관리자 비밀번호가 틀렸습니다.");
+    } else if (response.status === 404) {
+      alert("존재하지 않는 앨범입니다.");
+    } else if (!response.ok) {
+      throw new Error("Failed to upload music data");
+    } else {
+      alert("데이터가 성공적으로 삭제되었습니다.");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const filteredPathName = (pathName: string) => {
   const lowercasedPathName = pathName.toLowerCase();

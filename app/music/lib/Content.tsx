@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
 import Image from "next/image";
-import { AlbumInfo, SortType, activeStyle, album, fetchData } from "./data";
+import { AlbumInfo, SortType, activeStyle, album, deleteData, fetchData } from "./data";
 
-export default function Content({ category }: any) {
+export default function Content({ pathName }: any) {
+  console.log(pathName);
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortingOptions, setSortingOptions] = useState<{
     type: SortType;
@@ -19,7 +20,7 @@ export default function Content({ category }: any) {
   });
 
   useEffect(() => {
-    fetchData(setData, category);
+    fetchData(setData, pathName);
   }, []);
 
   function SortToggleButton({ type }: { type: SortType }) {
@@ -65,7 +66,7 @@ export default function Content({ category }: any) {
 
   return (
     <div>
-      {category !== "upload" && (
+      {pathName !== "upload" && (
         <div className={styles["sort-button-container"]}>
           <SortToggleButton type="upload" />
           <SortToggleButton type="release" />
@@ -100,6 +101,20 @@ export default function Content({ category }: any) {
                     ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
                     : `${minutes}분`}
                 </div>
+                {pathName.includes("admin") && (
+                  <div style={{ display: "flex" }}>
+                    <div
+                      className={styles["music-delete-menu"]}
+                      onClick={() => {
+                        deleteData(data.id);
+                        fetchData(setData, pathName);
+                      }}
+                    >
+                      삭제
+                    </div>
+                    <div className={styles["music-delete-menu"]}>수정</div>
+                  </div>
+                )}
               </div>
             </div>
             <div className={styles["text-container"]}>

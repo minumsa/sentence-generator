@@ -10,11 +10,11 @@ export default function Page() {
   let pathName = usePathname();
 
   switch (pathName) {
-    case "/music":
+    case "/music/admin":
       pathName = "";
       break;
     default:
-      pathName = pathName.split("/music/").join("");
+      pathName = pathName.split("/music/admin/").join("");
       break;
   }
 
