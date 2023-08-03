@@ -6,31 +6,32 @@ import styles from "./music.module.css";
 import Content from "./lib/Content";
 
 export default function Page() {
-  const pathName = usePathname();
-  console.log(pathName);
-
   const router = useRouter();
+  let pathName = usePathname();
 
-  // TODO: 버튼 컴포넌트 만들기
+  switch (pathName) {
+    case "/music":
+      pathName = "";
+      break;
+    default:
+      pathName = pathName.split("/music/").join("");
+      break;
+  }
 
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
         {contents.map(category => {
+          const categoryName = filteredPathName(category);
+
           return (
             <div
               key={category}
               className={styles["category"]}
               onClick={() => {
-                router.push(`/music/${filteredPathName(category)}`);
+                router.push(`/music/${categoryName}`);
               }}
-              style={
-                (pathName === "/music" && category === "ALL") ||
-                (pathName === "r&b_soul" && category === "R&B/SOUL") ||
-                pathName.includes(category.toLowerCase())
-                  ? activeStyle
-                  : {}
-              }
+              style={pathName === categoryName ? activeStyle : {}}
             >
               {category}
             </div>
@@ -38,7 +39,7 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content />
+        <Content category={pathName} />
       </div>
     </div>
   );

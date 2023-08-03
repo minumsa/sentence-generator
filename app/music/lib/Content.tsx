@@ -3,7 +3,7 @@ import styles from "../music.module.css";
 import Image from "next/image";
 import { AlbumInfo, SortType, activeStyle, album, fetchData } from "./data";
 
-export default function Content() {
+export default function Content({ category }: any) {
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortingOptions, setSortingOptions] = useState<{
     type: SortType;
@@ -19,7 +19,7 @@ export default function Content() {
   });
 
   useEffect(() => {
-    fetchData(setData);
+    fetchData(setData, category);
   }, []);
 
   function SortToggleButton({ type }: { type: SortType }) {
@@ -65,10 +65,12 @@ export default function Content() {
 
   return (
     <div>
-      <div className={styles["sort-button-container"]}>
-        <SortToggleButton type="upload" />
-        <SortToggleButton type="release" />
-      </div>
+      {category !== "upload" && (
+        <div className={styles["sort-button-container"]}>
+          <SortToggleButton type="upload" />
+          <SortToggleButton type="release" />
+        </div>
+      )}
       {sortedData.map((data, index) => {
         const minutes = Math.floor(data.duration / 60);
         const hours = Math.floor(minutes / 60);
