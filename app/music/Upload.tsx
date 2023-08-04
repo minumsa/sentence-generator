@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 interface UploadProps {
-  variablePathName?: string;
+  variablePathName: string;
 }
 
 export default function Upload({ variablePathName }: UploadProps) {
