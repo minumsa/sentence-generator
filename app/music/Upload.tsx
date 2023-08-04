@@ -94,7 +94,7 @@ export default function Upload({ variablePathName }: UploadProps) {
       <div>관리자 비밀번호</div>
       <input
         className={styles["input"]}
-        type="password"
+        // type="password"
         value={password}
         onChange={e => {
           setPassword(e.target.value);
