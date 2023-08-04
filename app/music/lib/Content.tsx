@@ -6,10 +6,9 @@ import { useRouter } from "next/navigation";
 
 interface pageProps {
   pathName: string;
-  setPostId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Content({ pathName, setPostId }: pageProps) {
+export default function Content({ pathName }: pageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortingOptions, setSortingOptions] = useState<{

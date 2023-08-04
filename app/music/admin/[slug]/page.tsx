@@ -31,7 +31,6 @@ export default function Page() {
         setVariablePathName(pathName.split("admin/").join(""));
         break;
     }
-    console.log(variablePathName);
   }, [pathName]);
 
   return (
@@ -57,7 +56,7 @@ export default function Page() {
         {variablePathName === "upload" || variablePathName.length > 20 ? (
           <Upload variablePathName={variablePathName} />
         ) : (
-          <Content pathName={pathName} setPostId={setPostId} />
+          <Content pathName={pathName} />
         )}
       </div>
     </div>

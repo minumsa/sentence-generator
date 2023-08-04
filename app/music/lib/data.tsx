@@ -236,7 +236,6 @@ export const fetchSpotify = async ({ albumId, genre, link, text }: UpdateInfo) =
 
 export const deleteData = async (id: string) => {
   const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
-  console.log(userPassword);
 
   try {
     const response = await fetch("/api/music", {

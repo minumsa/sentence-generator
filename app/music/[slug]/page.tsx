@@ -6,6 +6,7 @@ import styles from "../music.module.css";
 import { activeStyle, contents, filteredPathName } from "../lib/data";
 import Content from "../lib/Content";
 import Upload from "../Upload";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const router = useRouter();
