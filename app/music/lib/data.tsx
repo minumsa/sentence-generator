@@ -68,14 +68,19 @@ export async function fetchData(
     }
 
     let data = await response.json();
+
     if (pathName === "admin") pathName = "";
     if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
     if (pathName === "r&b_soul") pathName = "r&b/soul";
-    if (pathName !== "") {
+    if (pathName.length > 20) {
+      data = data.filter((item: { id: string }) => item.id === pathName)[0];
+    } else if (pathName !== "") {
       data = data.filter((item: { genre: string }) => item.genre === pathName);
     }
 
     setData(data);
+
+    return data;
   } catch (error) {
     console.error(error);
   }
@@ -98,9 +103,9 @@ export async function uploadData(albumData: AlbumInfo, password: string) {
       if (response.status === 401) {
         alert("관리자 비밀번호가 틀렸습니다.");
       } else if (response.status === 409) {
-        alert("이미 존재하는 앨범입니다.");
+        alert("이미 존재하는 데이터입니다.");
       } else if (!response.ok) {
-        throw new Error("업로드에 실패했습니다.");
+        throw new Error("데이터 업로드에 실패했습니다.");
       } else {
         alert("데이터가 성공적으로 저장되었습니다.");
       }
@@ -114,17 +119,29 @@ export async function uploadData(albumData: AlbumInfo, password: string) {
 }
 
 // TODO: 수정 기능 만들기
-export const updateData = async (id: string, newData: Partial<AlbumInfo>) => {
-  try {
-    const response = await fetch("/api/music", {
-      method: "UPDATE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: id, newData: newData }),
-    });
-  } catch (error) {
-    console.error(error);
+export const updateData = async (id: string, data: Partial<AlbumInfo>, password: string) => {
+  if (data !== null) {
+    try {
+      const response = await fetch("/api/music", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ albumId: id, data: data, password: password }),
+      });
+
+      if (response.status === 401) {
+        alert("관리자 비밀번호가 틀렸습니다.");
+      } else if (response.status === 404) {
+        alert("존재하지 않는 앨범입니다.");
+      } else if (!response.ok) {
+        throw new Error("데이터 수정에 실패했습니다.");
+      } else {
+        alert("데이터가 성공적으로 수정되었습니다.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 

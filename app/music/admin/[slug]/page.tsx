@@ -4,10 +4,14 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "../../music.module.css";
 import { activeStyle, contents, filteredPathName } from "../../lib/data";
 import Content from "../../lib/Content";
+import Upload from "../../Upload";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const router = useRouter();
   let pathName = usePathname();
+  const [variablePathName, setVariablePathName] = useState<string>("");
+  const [postId, setPostId] = useState<string>("");
 
   switch (pathName) {
     case "/music/admin":
@@ -18,17 +22,23 @@ export default function Page() {
       break;
   }
 
+  useEffect(() => {
+    switch (pathName) {
+      case "admin":
+        setVariablePathName("");
+        break;
+      default:
+        setVariablePathName(pathName.split("admin/").join(""));
+        break;
+    }
+    console.log(variablePathName);
+  }, [pathName]);
+
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
         {contents.map(category => {
           const categoryName = filteredPathName(category);
-          let newPathName = "";
-
-          if (pathName.split("admin").join("") !== "") {
-            newPathName = pathName.split("admin/").join("");
-          }
-
           return (
             <div
               key={category}
@@ -36,7 +46,7 @@ export default function Page() {
               onClick={() => {
                 router.push(`/music/admin/${categoryName}`);
               }}
-              style={newPathName === categoryName ? activeStyle : {}}
+              style={variablePathName === categoryName ? activeStyle : {}}
             >
               {category}
             </div>
@@ -44,7 +54,11 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} />
+        {variablePathName === "upload" || variablePathName.length > 20 ? (
+          <Upload variablePathName={variablePathName} />
+        ) : (
+          <Content pathName={pathName} setPostId={setPostId} />
+        )}
       </div>
     </div>
   );

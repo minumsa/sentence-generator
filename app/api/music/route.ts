@@ -26,10 +26,7 @@ export async function POST(request: Request) {
     } = data;
 
     if (password !== process.env.UPROAD_PASSWORD)
-      return NextResponse.json(
-        { message: "password is not correct" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
     const existingData = await Music.findOne({ id });
 
@@ -40,10 +37,7 @@ export async function POST(request: Request) {
     // return 값에 써있는 내용물을 응답으로 내려준다!
 
     if (existingData) {
-      return NextResponse.json(
-        { message: "album already exists" },
-        { status: 409 }
-      );
+      return NextResponse.json({ message: "album already exists" }, { status: 409 });
     }
 
     const newData = new Music({
@@ -88,10 +82,7 @@ export async function DELETE(request: Request) {
     const { id, password } = await request.json();
 
     if (password !== process.env.UPROAD_PASSWORD)
-      return NextResponse.json(
-        { message: "password is not correct" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
     const existingData = await Music.findOne({ id });
 
@@ -102,6 +93,57 @@ export async function DELETE(request: Request) {
     await existingData.deleteOne();
 
     return NextResponse.json({ message: "Data deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: "Server Error" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    require("dotenv").config();
+    await connectMongoDB();
+
+    const { albumId, data, password } = await request.json();
+    const {
+      id,
+      imgUrl,
+      artist,
+      album,
+      label,
+      releaseDate,
+      genre,
+      link,
+      text,
+      uploadDate,
+      duration,
+      tracks,
+    } = data;
+
+    if (password !== process.env.UPROAD_PASSWORD)
+      return NextResponse.json({ message: "password is not correct" }, { status: 401 });
+
+    const existingData = await Music.findOne({ id });
+
+    if (!existingData) {
+      return NextResponse.json({ message: "Data not found. Cannot update." }, { status: 404 });
+    }
+
+    existingData.id = id;
+    existingData.imgUrl = imgUrl;
+    existingData.artist = artist;
+    existingData.album = album;
+    existingData.label = label;
+    existingData.releaseDate = releaseDate;
+    existingData.genre = genre;
+    existingData.link = link;
+    existingData.text = text;
+    existingData.uploadDate = uploadDate;
+    existingData.duration = duration;
+    existingData.tracks = tracks;
+
+    await existingData.save();
+    return NextResponse.json(existingData.toJSON());
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

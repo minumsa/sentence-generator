@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import styles from "./music.module.css";
-import { AlbumInfo, album, fetchSpotify, uploadData } from "./lib/data";
+import { fetchData, fetchSpotify, updateData, uploadData } from "./lib/data";
+import { usePathname } from "next/navigation";
 
-export default function Upload() {
-  const [albumId, setAlbumId] = useState<string>("");
+interface UploadProps {
+  variablePathName: string;
+}
+
+export default function Upload({ variablePathName }: UploadProps) {
+  const [albumId, setAlbumId] = useState("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [data, setData] = useState<any>();
+  const pathName = usePathname();
+  const title: string = pathName.includes("upload") ? "업로드" : "수정";
 
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
@@ -20,21 +28,40 @@ export default function Upload() {
     if (newAlbumData) uploadData(newAlbumData, password);
   };
 
+  const handleEdit = () => {
+    updateData(albumId, data, password);
+  };
+
   const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleUpload();
+      title === "업로드" ? handleUpload() : handleEdit();
     }
   };
 
+  useEffect(() => {
+    async function handleData() {
+      const editData = await fetchData(setData, variablePathName);
+      setAlbumId(editData.id);
+      setGenre(editData.genre);
+      setLink(editData.link);
+      setText(editData.text);
+    }
+
+    if (title === "수정") handleData();
+  }, []);
+
+  console.log(password);
+
   return (
     <div className={styles["album-container"]}>
-      <div className={styles["title"]}>｟ 업로드 페이지 ｠</div>
+      <div className={styles["title"]}>{`｟${title} 페이지 ｠`}</div>
       <div>앨범 ID(Spotify)</div>
       <input
         className={styles["input"]}
         value={albumId}
         onChange={e => {
           setAlbumId(e.target.value);
+          title === "수정" && setData({ ...data, id: albumId });
         }}
       />
       <div>장르</div>
@@ -43,6 +70,7 @@ export default function Upload() {
         value={genre}
         onChange={e => {
           setGenre(e.target.value);
+          title === "수정" && setData({ ...data, genre: genre });
         }}
       />
       <div>링크(Apple Music)</div>
@@ -51,6 +79,7 @@ export default function Upload() {
         value={link}
         onChange={e => {
           setLink(e.target.value);
+          title === "수정" && setData({ ...data, link: link });
         }}
       />
       <div>글</div>
@@ -59,14 +88,17 @@ export default function Upload() {
         value={text}
         onChange={e => {
           setText(e.target.value);
+          title === "수정" && setData({ ...data, text: text });
         }}
       />
       <div>관리자 비밀번호</div>
       <input
         className={styles["input"]}
-        value={"*".repeat(password.length)}
+        value={password}
+        // value={"*".repeat(password.length)}
         onChange={e => {
           setPassword(e.target.value);
+          title === "수정" && setData({ ...data });
         }}
         onKeyDown={handlePasswordEnter}
       />
@@ -74,7 +106,7 @@ export default function Upload() {
         <div
           className={`${styles["button"]} ${styles["submit"]}`}
           onClick={() => {
-            handleUpload();
+            title === "업로드" ? handleUpload() : handleEdit();
           }}
         >
           제출하기
