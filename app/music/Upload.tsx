@@ -27,7 +27,10 @@ export default function Upload({ variablePathName }: UploadProps) {
       text,
     });
 
-    if (newAlbumData) uploadData(newAlbumData, password);
+    if (newAlbumData) {
+      await uploadData(newAlbumData, password);
+      router.push("/music/admin");
+    }
   };
 
   const handleEdit = () => {
@@ -42,7 +45,9 @@ export default function Upload({ variablePathName }: UploadProps) {
 
   useEffect(() => {
     async function handleData() {
-      const editData = await fetchData(setData, variablePathName);
+      // FIXME: setState는 바로 반영되지 않고, 다음 렌더링 때 반영된다.
+      const editData = await fetchData(variablePathName);
+      setData(editData);
       setAlbumId(editData.id);
       setGenre(editData.genre);
       setLink(editData.link);
@@ -95,6 +100,7 @@ export default function Upload({ variablePathName }: UploadProps) {
       <input
         className={styles["input"]}
         // type="password"
+        // autoComplete="false"
         value={password}
         onChange={e => {
           setPassword(e.target.value);

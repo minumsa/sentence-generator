@@ -1,22 +1,13 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { activeStyle, contents, filteredPathName } from "./lib/data";
 import styles from "./music.module.css";
 import Content from "./lib/Content";
 
 export default function Page() {
   const router = useRouter();
-  let pathName = usePathname();
-
-  switch (pathName) {
-    case "/music":
-      pathName = "";
-      break;
-    default:
-      pathName = pathName.split("/music/").join("");
-      break;
-  }
+  let pathName = "";
 
   return (
     <div className={styles["container"]}>

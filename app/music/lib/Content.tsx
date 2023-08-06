@@ -9,6 +9,8 @@ interface pageProps {
 }
 
 export default function Content({ pathName }: pageProps) {
+  // isAdmin: boolean,
+  // genre: string
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortingOptions, setSortingOptions] = useState<{
@@ -25,7 +27,11 @@ export default function Content({ pathName }: pageProps) {
   });
 
   useEffect(() => {
-    fetchData(setData, pathName);
+    async function loadData() {
+      setData(await fetchData(pathName));
+    }
+
+    loadData();
   }, []);
 
   function SortToggleButton({ type }: { type: SortType }) {
@@ -78,6 +84,7 @@ export default function Content({ pathName }: pageProps) {
         </div>
       )}
       {sortedData.map((data, index) => {
+        // FIXME: 시간을 나타내주는 함수(formatDuration())를 만들어라.
         const minutes = Math.floor(data.duration / 60);
         const hours = Math.floor(minutes / 60);
 
@@ -102,6 +109,7 @@ export default function Content({ pathName }: pageProps) {
                 </div>
                 <div>
                   {`${data.tracks}곡, `}
+                  {/* { formatDuration(data.duration) } */}
                   {minutes > 60
                     ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
                     : `${minutes}분`}
@@ -110,9 +118,9 @@ export default function Content({ pathName }: pageProps) {
                   <div className={styles["admin-button-container"]}>
                     <div
                       className={styles["admin-button"]}
-                      onClick={() => {
+                      onClick={async () => {
                         deleteData(data.id);
-                        fetchData(setData, pathName);
+                        setData(await fetchData(pathName));
                       }}
                     >
                       삭제
@@ -130,15 +138,22 @@ export default function Content({ pathName }: pageProps) {
               </div>
             </div>
             <div className={styles["text-container"]}>
-              {data.text.split("<br/>").map((text, index) => {
-                return index + 1 < data.text.split("<br/>").length ? (
+              {data.text.split("\n\n").map((text, index) => {
+                return (
+                  <p key={index} style={{ whiteSpace: "pre-wrap" }}>
+                    {text}
+                  </p>
+                );
+              })}
+              {/* {data.text.split("\n").map((text, index) => {
+                return index + 1 < data.text.split("\n").length ? (
                   <div className={styles["line-break"]} key={index}>
                     {text}
                   </div>
                 ) : (
                   <div key={index}>{text}</div>
                 );
-              })}
+              })} */}
             </div>
             <div className={styles["divider"]} />
           </div>
@@ -147,3 +162,5 @@ export default function Content({ pathName }: pageProps) {
     </div>
   );
 }
+
+("aasdfasdfa\nasdfasdf\nasdf");

@@ -1,3 +1,5 @@
+// FIXME: api는 다른 파일로 따로 빼기
+
 export const contents = [
   "ALL",
   "POP",
@@ -51,10 +53,7 @@ export const activeStyle = {
   backgroundColor: "#ffccff",
 };
 
-export async function fetchData(
-  setData: React.Dispatch<React.SetStateAction<AlbumInfo[]>>,
-  pathName: string
-) {
+export async function fetchData(pathName: string) {
   try {
     const response = await fetch("/api/music", {
       method: "GET",
@@ -77,8 +76,6 @@ export async function fetchData(
     } else if (pathName !== "") {
       data = data.filter((item: { genre: string }) => item.genre === pathName);
     }
-
-    setData(data);
 
     return data;
   } catch (error) {
@@ -118,7 +115,6 @@ export async function uploadData(albumData: AlbumInfo, password: string) {
   }
 }
 
-// TODO: 수정 기능 만들기
 export const updateData = async (id: string, data: Partial<AlbumInfo>, password: string) => {
   if (data !== null) {
     try {

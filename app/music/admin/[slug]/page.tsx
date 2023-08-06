@@ -11,7 +11,6 @@ export default function Page() {
   const router = useRouter();
   let pathName = usePathname();
   const [variablePathName, setVariablePathName] = useState<string>("");
-  const [postId, setPostId] = useState<string>("");
 
   switch (pathName) {
     case "/music/admin":

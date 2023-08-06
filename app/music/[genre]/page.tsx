@@ -5,21 +5,17 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents, filteredPathName } from "../lib/data";
 import Content from "../lib/Content";
-import Upload from "../Upload";
-import { useEffect, useState } from "react";
 
-export default function Page() {
+interface PageProps {
+  params: {
+    genre: string;
+  };
+}
+
+export default function Page({ params }: PageProps) {
+  // FIXME: Dynamic Routes params 방식으로 바꾸기
   const router = useRouter();
-  let pathName = usePathname();
-
-  switch (pathName) {
-    case "/music":
-      pathName = "";
-      break;
-    default:
-      pathName = pathName.split("/music/").join("");
-      break;
-  }
+  const pathName = params.genre;
 
   return (
     <div className={styles["container"]}>
