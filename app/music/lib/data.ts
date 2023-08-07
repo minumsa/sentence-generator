@@ -1,20 +1,20 @@
 // FIXME: api는 다른 파일로 따로 빼기
 
 export const contents = [
-  "ALL",
-  "POP",
-  "K-POP",
-  "J-POP",
-  "ROCK",
-  "ALTERNATIVE",
-  "DISCO",
-  "ELECTRONIC",
-  "JAZZ",
-  "R&B/SOUL",
-  "FOLK",
-  "COUNTRY",
-  "CLASSICAL",
-  "SOUNDTRACK",
+  "카버차트",
+  "팝",
+  "케이팝",
+  "제이팝",
+  "락",
+  "얼터너티브",
+  "디스코",
+  "일렉트로닉",
+  "재즈",
+  "알앤비/소울",
+  "포크",
+  "컨트리",
+  "클래식",
+  "사운드트랙",
 ];
 
 export interface AlbumInfo {
@@ -39,7 +39,7 @@ export interface UpdateInfo {
   text: string;
 }
 
-export type SortType = "upload" | "release";
+export type SortType = "업로드일" | "발매일";
 
 export const album = {
   width: 300,
@@ -48,9 +48,10 @@ export const album = {
 
 export const activeStyle = {
   color: "#000000",
-  fontWeight: "bold",
-  borderRadius: "0",
-  backgroundColor: "#ffccff",
+  fontWeight: "900",
+  backgroundColor: "#eaeaea",
+  // borderRadius: "100px",
+  // backgroundColor: "#000000",
 };
 
 export async function fetchData(pathName: string) {

@@ -3,6 +3,7 @@ import styles from "./music.module.css";
 import { fetchData, fetchSpotify, updateData, uploadData } from "./lib/data";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 interface UploadProps {
   variablePathName: string;
@@ -62,62 +63,64 @@ export default function Upload({ variablePathName }: UploadProps) {
   }, [albumId, genre, link, text]);
 
   return (
-    <div className={styles["album-container"]}>
-      <div className={styles["title"]}>{`｟${title} 페이지 ｠`}</div>
-      <div>앨범 ID(Spotify)</div>
-      <input
-        className={styles["input"]}
-        value={albumId}
-        onChange={e => {
-          setAlbumId(e.target.value);
-        }}
-      />
-      <div>장르</div>
-      <input
-        className={styles["input"]}
-        value={genre}
-        onChange={e => {
-          setGenre(e.target.value);
-        }}
-      />
-      <div>링크(Apple Music)</div>
-      <input
-        className={styles["input"]}
-        value={link}
-        onChange={e => {
-          setLink(e.target.value);
-        }}
-      />
-      <div>글</div>
-      <textarea
-        className={`${styles["input"]} ${styles["input-text"]}`}
-        value={text}
-        onChange={e => {
-          setText(e.target.value);
-        }}
-      />
-      <div>관리자 비밀번호</div>
-      <input
-        className={styles["input"]}
-        // type="password"
-        // autoComplete="false"
-        value={password}
-        onChange={e => {
-          setPassword(e.target.value);
-        }}
-        onKeyDown={handlePasswordEnter}
-      />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div
-          className={`${styles["button"]} ${styles["submit"]}`}
-          onClick={() => {
-            title === "업로드" ? handleUpload() : handleEdit();
+    <React.Fragment>
+      <div className={styles["album-container"]}>
+        <div className={styles["title"]}>{`｟${title} 페이지 ｠`}</div>
+        <div>앨범 ID(Spotify)</div>
+        <input
+          className={styles["input"]}
+          value={albumId}
+          onChange={e => {
+            setAlbumId(e.target.value);
           }}
-        >
-          제출하기
+        />
+        <div>장르</div>
+        <input
+          className={styles["input"]}
+          value={genre}
+          onChange={e => {
+            setGenre(e.target.value);
+          }}
+        />
+        <div>링크(Apple Music)</div>
+        <input
+          className={styles["input"]}
+          value={link}
+          onChange={e => {
+            setLink(e.target.value);
+          }}
+        />
+        <div>글</div>
+        <textarea
+          className={`${styles["input"]} ${styles["input-text"]}`}
+          value={text}
+          onChange={e => {
+            setText(e.target.value);
+          }}
+        />
+        <div>관리자 비밀번호</div>
+        <input
+          className={styles["input"]}
+          // type="password"
+          // autoComplete="false"
+          value={password}
+          onChange={e => {
+            setPassword(e.target.value);
+          }}
+          onKeyDown={handlePasswordEnter}
+        />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            className={`${styles["button"]} ${styles["submit"]}`}
+            onClick={() => {
+              title === "업로드" ? handleUpload() : handleEdit();
+            }}
+          >
+            제출하기
+          </div>
         </div>
       </div>
       <div className={styles["divider"]} style={{ marginBottom: "50px" }}></div>
-    </div>
+    </React.Fragment>
   );
 }

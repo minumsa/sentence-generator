@@ -25,8 +25,9 @@
     Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; */
   font-weight: 400;
-  background-color: #000000;
-  color: #ffccff;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1.5rem;
 }
 
 .category-container {
@@ -39,6 +40,35 @@
   user-select: none;
 }
 
+.category:first-child {
+  margin-bottom: 20px;
+}
+
+.category {
+  cursor: pointer;
+  display: flex;
+
+  /* border: 1px solid #ffffff; */
+  padding: 10px 20px;
+  font-weight: 400;
+  border-bottom: 1px solid #000000;
+}
+
+.category:hover {
+  color: #949494;
+  /* border: 1px solid #ffffff; */
+  /* background-color: #ffffff; */
+  border-radius: 0px;
+}
+
+.sup {
+  line-height: 0;
+  margin-left: 3px;
+  font-size: 0.8rem;
+  vertical-align: top;
+  top: 20px;
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
@@ -46,6 +76,8 @@
   width: calc(100% - 250px);
   height: 100%;
   overflow: scroll;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
 }
 
 .category-container::-webkit-scrollbar,
@@ -53,45 +85,21 @@
   display: none;
 }
 
-.category {
-  cursor: pointer;
-  width: 210px;
-  height: 45px;
-  font-size: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ffccff;
-  padding: 10px;
-  margin: 20px 10px;
-  border-radius: 9000px;
-}
-
-.category:hover {
-  font-weight: bold;
-  color: #000000;
-  border: 1px solid #ffccff;
-  background-color: #ffccff;
-  border-radius: 0px;
-}
-
 .album-container {
   display: flex;
   flex-direction: column;
-  font-size: 30px;
-  padding: 20px 50px;
-  margin-top: 5px;
+  padding: 50px 120px 80px 120px;
 }
 
 .text-container {
   line-height: 200%;
   word-break: keep-all;
+  margin-bottom: 70px;
 }
 
 .p::selection {
   color: #000000;
-  background-color: #ffccff;
+  background-color: #ffffff;
 }
 
 .line-break {
@@ -99,8 +107,7 @@
 }
 
 .divider {
-  border-bottom: 1px solid #ffccff;
-  padding: 20px;
+  border-bottom: 1px solid #000000;
 }
 
 .album-title {
@@ -111,14 +118,14 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  /* top: 30px; */
+  right: 5px;
 }
 
 .sort {
-  width: 160px;
-  height: 45px;
-  margin: 7px;
+  height: 30px;
+  margin: 2px;
+  padding: 5px 10px;
 }
 
 .button {
@@ -127,9 +134,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
-  border: 1px solid #ffccff;
-  border-radius: 10000px;
+  border: 1px solid #000000;
+  /* border-radius: 100px; */
 }
 
 .admin-button-container {
@@ -145,9 +151,8 @@
   align-items: center;
   width: 85px;
   height: 40px;
-  font-size: 20px;
-  border: 1px solid #ffccff;
-  border-radius: 10000px;
+  border: 1px solid #000000;
+  border-radius: 100px;
   margin-right: 10px;
 }
 
@@ -156,30 +161,14 @@
   color: #000000;
   font-weight: bold;
   border-radius: 0;
-  background-color: #ffccff;
-}
-
-.music-bottom-title {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: end;
-    flex-grow: 1; */
-  font-size: 60px;
-  /* font-family: "GabiaHeuldot"; */
-  /* padding: 20px; */
-  /* border: 1px solid #000000;
-    border-radius: 2000px; */
+  background-color: #ffffff;
 }
 
 .album-information-container {
   display: flex;
   flex-direction: row;
   height: 300px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .album-information {
@@ -191,25 +180,19 @@
 
 .link {
   cursor: pointer;
-  color: #ffccff;
+  color: #000000;
   text-decoration: none;
 }
 
-.play-applemusic {
-  margin-top: 10px;
-  border-top: 1px solid #ffccff;
-  border-bottom: 1px solid #ffccff;
-  cursor: pointer;
-  width: fit-content;
-  padding: 0 10px 0 0;
+.link:hover {
+  opacity: 80%;
 }
 
 .input {
   height: 50px;
   width: 100%;
-  font-size: 30px;
   margin: 15px 0 50px 0;
-  background-color: #ffccff;
+  background-color: #ffffff;
 }
 
 .input-text {
@@ -222,7 +205,6 @@
 }
 
 .submit {
-  font-size: 30px;
   padding: 10px 30px;
 }
 
@@ -231,22 +213,31 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #000000;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  font-size: 30px;
 }
 
 .modal {
   width: 800px;
   height: 800px;
-  border: 1px solid #ffccff;
+  border: 1px solid #ffffff;
   padding: 20px 0;
 }
 
 .title {
   text-align: center;
   margin-bottom: 100px;
+}
+
+.paragraph {
+  text-indent: 10%;
+  /* white-space: pre-wrap; */
+  margin: 0;
+}
+
+.paragraph:first-child {
+  text-indent: 0;
 }

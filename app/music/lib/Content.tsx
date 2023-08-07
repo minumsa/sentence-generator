@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
 import Image from "next/image";
 import { AlbumInfo, SortType, activeStyle, album, deleteData, fetchData, updateData } from "./data";
@@ -19,12 +19,13 @@ export default function Content({ pathName }: pageProps) {
       [Type in SortType]: boolean;
     };
   }>({
-    type: "upload",
+    type: "업로드일",
     order: {
-      upload: false,
-      release: false,
+      업로드일: false,
+      발매일: false,
     },
   });
+  const [showCategory, setShowCategory] = useState<boolean>(false);
 
   useEffect(() => {
     async function loadData() {
@@ -52,7 +53,7 @@ export default function Content({ pathName }: pageProps) {
           }));
         }}
       >
-        {type.toUpperCase()} {sortingOptions.order[type] ? "↑" : "↓"}
+        {type} {sortingOptions.order[type] ? "↑" : "▾"}
       </div>
     );
   }
@@ -61,9 +62,9 @@ export default function Content({ pathName }: pageProps) {
     const order = sortingOptions.order[sortingOptions.type];
     const type = sortingOptions.type;
     const dateSelector = (item: AlbumInfo) => {
-      if (type === "upload") {
+      if (type === "업로드일") {
         return new Date(item.uploadDate).getTime();
-      } else if (type === "release") {
+      } else if (type === "발매일") {
         return new Date(item.releaseDate).getTime();
       }
       return 0;
@@ -75,12 +76,38 @@ export default function Content({ pathName }: pageProps) {
     return newData;
   }, [data, sortingOptions]);
 
+  const handleMouseEnter = () => {
+    setShowCategory(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowCategory(false);
+  };
+
   return (
     <div>
       {pathName !== "upload" && (
         <div className={styles["sort-button-container"]}>
-          <SortToggleButton type="upload" />
-          <SortToggleButton type="release" />
+          <SortToggleButton type="업로드일" />
+          <SortToggleButton type="발매일" />
+
+          <div
+            className={styles["category-test"]}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            테스트 ▾
+          </div>
+          {showCategory && (
+            <div>
+              <ul style={{ margin: 0 }}>
+                <li>카테고리 1</li>
+                <li>카테고리 1</li>
+                <li>카테고리 1</li>
+                <li>카테고리 1</li>
+              </ul>
+            </div>
+          )}
         </div>
       )}
       {sortedData.map((data, index) => {
@@ -89,63 +116,68 @@ export default function Content({ pathName }: pageProps) {
         const hours = Math.floor(minutes / 60);
 
         return (
-          <div className={styles["album-container"]} key={index}>
-            <div className={styles["album-information-container"]}>
-              <a className={styles["link"]} href={data.link} target="_blank">
-                <Image
-                  src={data.imgUrl}
-                  alt={data.album}
-                  width={album.width}
-                  height={album.height}
-                />
-              </a>
-              <div className={`${styles["text-container"]} ${styles["album-information"]}`}>
-                <div>{data.artist}</div>
+          <div key={index}>
+            <div className={styles["album-container"]}>
+              <div className={styles["album-information-container"]}>
                 <a className={styles["link"]} href={data.link} target="_blank">
-                  <div className={styles["album-title"]}>{data.album}</div>
+                  <Image
+                    src={data.imgUrl}
+                    alt={data.album}
+                    width={album.width}
+                    height={album.height}
+                  />
                 </a>
-                <div>
-                  <span>{`${data.label}, ${data.releaseDate.slice(0, 4)}`}</span>
-                </div>
-                <div>
-                  {`${data.tracks}곡, `}
-                  {/* { formatDuration(data.duration) } */}
-                  {minutes > 60
-                    ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
-                    : `${minutes}분`}
-                </div>
-                {pathName.includes("admin") && (
-                  <div className={styles["admin-button-container"]}>
-                    <div
-                      className={styles["admin-button"]}
-                      onClick={async () => {
-                        deleteData(data.id);
-                        setData(await fetchData(pathName));
-                      }}
-                    >
-                      삭제
-                    </div>
-                    <div
-                      className={styles["admin-button"]}
-                      onClick={() => {
-                        router.push(`/music/admin/${data.id}`);
-                      }}
-                    >
-                      수정
-                    </div>
+                <div className={`${styles["text-container"]} ${styles["album-information"]}`}>
+                  <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
+                    <div style={{ marginRight: "5px" }}>{data.artist},</div>
+                    <a className={styles["link"]} href={data.link} target="_blank">
+                      <div className={styles["album-title"]}>{data.album}</div>
+                    </a>
                   </div>
-                )}
+                  <div style={{ borderBottom: "1px solid #000000" }}>
+                    <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
+                      data.releaseDate.slice(5, 7)
+                    )}월, ${data.label}`}</span>
+                  </div>
+                  <div style={{ borderBottom: "1px solid #000000" }}>
+                    {`${data.tracks}곡, `}
+                    {/* { formatDuration(data.duration) } */}
+                    {minutes > 60
+                      ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
+                      : `${minutes}분`}
+                  </div>
+                  {pathName.includes("admin") && (
+                    <div className={styles["admin-button-container"]}>
+                      <div
+                        className={styles["admin-button"]}
+                        onClick={async () => {
+                          deleteData(data.id);
+                          setData(await fetchData(pathName));
+                        }}
+                      >
+                        삭제
+                      </div>
+                      <div
+                        className={styles["admin-button"]}
+                        onClick={() => {
+                          router.push(`/music/admin/${data.id}`);
+                        }}
+                      >
+                        수정
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-            <div className={styles["text-container"]}>
-              {data.text.split("\n\n").map((text, index) => {
-                return (
-                  <p key={index} style={{ whiteSpace: "pre-wrap" }}>
-                    {text}
-                  </p>
-                );
-              })}
-              {/* {data.text.split("\n").map((text, index) => {
+              <div className={styles["text-container"]}>
+                {data.text.split("\n").map((text, index) => {
+                  return (
+                    <p key={index} className={styles["paragraph"]}>
+                      {text}
+                    </p>
+                  );
+                })}
+                {/* {data.text.split("\n").map((text, index) => {
                 return index + 1 < data.text.split("\n").length ? (
                   <div className={styles["line-break"]} key={index}>
                     {text}
@@ -154,6 +186,7 @@ export default function Content({ pathName }: pageProps) {
                   <div key={index}>{text}</div>
                 );
               })} */}
+              </div>
             </div>
             <div className={styles["divider"]} />
           </div>

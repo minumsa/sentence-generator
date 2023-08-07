@@ -71,7 +71,7 @@ export const readme = {
   },
   techStack: {
     title: {
-      ko: "Tech Stack",
+      ko: "Technical",
       en: "테크 스텍",
     },
     text: {
