@@ -1,7 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
 import Image from "next/image";
-import { AlbumInfo, SortType, activeStyle, album, deleteData, fetchData, updateData } from "./data";
+import {
+  AlbumInfo,
+  SortType,
+  activeStyle,
+  album,
+  deleteData,
+  fetchData,
+  sortItems,
+  updateData,
+} from "./data";
 import { useRouter } from "next/navigation";
 
 interface pageProps {
@@ -25,7 +34,10 @@ export default function Content({ pathName }: pageProps) {
       발매일: false,
     },
   });
-  const [showCategory, setShowCategory] = useState<boolean>(false);
+  const [sortCriteria, setSortCriteria] = useState<boolean>(false);
+  const [sortMethod, setSortMethod] = useState<boolean>(false);
+  const [currentMethod, setCurrentMethod] = useState<string>("업로드일");
+  const [currentCriteria, setCurrentCriteria] = useState<string>("내림차순");
 
   useEffect(() => {
     async function loadData() {
@@ -76,38 +88,96 @@ export default function Content({ pathName }: pageProps) {
     return newData;
   }, [data, sortingOptions]);
 
-  const handleMouseEnter = () => {
-    setShowCategory(true);
+  const handleMouseEnter = (type: string) => {
+    if (type === "method") {
+      setSortMethod(true);
+    } else if (type === "criteria") {
+      setSortCriteria(true);
+    }
   };
 
-  const handleMouseLeave = () => {
-    setShowCategory(false);
+  const handleMouseLeave = (type: string) => {
+    if (type === "method") {
+      setSortMethod(false);
+    } else if (type === "criteria") {
+      setSortCriteria(false);
+    }
   };
 
   return (
     <div>
       {pathName !== "upload" && (
         <div className={styles["sort-button-container"]}>
-          <SortToggleButton type="업로드일" />
-          <SortToggleButton type="발매일" />
-
+          {/* <SortToggleButton type="업로드일" />
+          <SortToggleButton type="발매일" /> */}
           <div
-            className={styles["category-test"]}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            className={styles["sort-criteria-container"]}
+            onMouseEnter={() => {
+              handleMouseEnter("method");
+            }}
+            onMouseLeave={() => {
+              handleMouseLeave("method");
+            }}
           >
-            테스트 ▾
+            {`${currentMethod} ▾`}
+            {sortMethod && (
+              <div
+                className={styles["sort-criteria"]}
+                style={{ cursor: "pointer" }}
+                onMouseEnter={() => {
+                  handleMouseEnter("method");
+                }}
+              >
+                {sortItems.method.map((item: string) => {
+                  return (
+                    <div
+                      className={styles["criteria"]}
+                      key={item}
+                      onClick={() => {
+                        setCurrentMethod(item);
+                      }}
+                    >
+                      {item}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
-          {showCategory && (
-            <div>
-              <ul style={{ margin: 0 }}>
-                <li>카테고리 1</li>
-                <li>카테고리 1</li>
-                <li>카테고리 1</li>
-                <li>카테고리 1</li>
-              </ul>
-            </div>
-          )}
+          <div
+            className={styles["sort-criteria-container"]}
+            onMouseEnter={() => {
+              handleMouseEnter("criteria");
+            }}
+            onMouseLeave={() => {
+              handleMouseLeave("criteria");
+            }}
+          >
+            {`${currentCriteria} ▾`}
+            {sortCriteria && (
+              <div
+                className={styles["sort-criteria"]}
+                style={{ cursor: "pointer" }}
+                onMouseEnter={() => {
+                  handleMouseEnter("criteria");
+                }}
+              >
+                {sortItems.criteria.map((item: string) => {
+                  return (
+                    <div
+                      className={styles["criteria"]}
+                      key={item}
+                      onClick={() => {
+                        setCurrentCriteria(item);
+                      }}
+                    >
+                      {item}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       )}
       {sortedData.map((data, index) => {
@@ -195,5 +265,3 @@ export default function Content({ pathName }: pageProps) {
     </div>
   );
 }
-
-("aasdfasdfa\nasdfasdf\nasdf");

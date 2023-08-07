@@ -270,3 +270,8 @@ export const filteredPathName = (pathName: string) => {
       return lowercasedPathName;
   }
 };
+
+export const sortItems = {
+  method: ["업로드일", "발매일"],
+  criteria: ["오름차순", "내림차순"],
+};

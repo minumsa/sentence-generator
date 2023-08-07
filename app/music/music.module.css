@@ -110,7 +110,6 @@
 
 .sort-button-container {
   display: flex;
-  flex-direction: column;
   position: absolute;
   /* top: 30px; */
   right: 5px;
@@ -234,4 +233,26 @@
 
 .paragraph:first-child {
   text-indent: 0;
+}
+
+.sort-criteria-container {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.sort-criteria {
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  padding: 5px 10px 10px 10px;
+}
+
+.criteria {
+  margin-bottom: 5px;
+}
+
+.criteria:last-child {
+  margin-bottom: 0;
 }
