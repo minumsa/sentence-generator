@@ -1,3 +1,28 @@
+import { createContext } from "react";
+
+export const LanguageContext = createContext<Language>("en");
+
+export interface Weather {
+  icon: string | null;
+  temp: number | null;
+}
+
+export const fetchData = async (setWeather: React.Dispatch<React.SetStateAction<Weather>>) => {
+  try {
+    const apiKey = "a363f14d94f369a4d926a27d5d44fc60";
+    const seoulWeatherResponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${apiKey}&lang=kr`
+    );
+    if (!seoulWeatherResponse.ok) {
+      throw "weather fetch failed";
+    }
+    const data = await seoulWeatherResponse.json();
+    setWeather({ icon: data.weather[0].icon, temp: data.main.temp });
+  } catch (error) {
+    console.error("Error fetching city data:", error);
+  }
+};
+
 export const fortune = {
   ko: [
     "집보다 나은 곳은 없습니다.",

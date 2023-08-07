@@ -1,14 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";
-import { fortune, iconTitle, readme } from "./data";
-
-interface PageProps {
-  language: "ko" | "en";
-}
+import { LanguageContext, fortune, iconTitle, readme } from "./data";
 
 interface ImageModalProps {
   src: string;
@@ -31,7 +27,8 @@ const iconSize = {
   },
 };
 
-export default function Main({ language }: PageProps) {
+export default function Main() {
+  const language = useContext(LanguageContext);
   const [showImage, setShowImage] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");

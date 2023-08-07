@@ -1,12 +1,12 @@
 "use client";
 
+import { useContext } from "react";
 import styles from "./divdivdiv.module.css";
+import { LanguageContext } from "./data";
 
-interface PageProps {
-  language: string;
-}
+export default function Contact() {
+  const language = useContext(LanguageContext);
 
-export default function Contact({ language }: PageProps) {
   return (
     <div className={styles["contact-container"]}>
       <a className={styles["contact-link"]} href="https://github.com/minumsa" target="_blank">

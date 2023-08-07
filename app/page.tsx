@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import styles from "./divdivdiv/divdivdiv.module.css";
-import { Language } from "./divdivdiv/data";
+import { Language, LanguageContext, Weather, fetchData } from "./divdivdiv/data";
 import Clock from "./divdivdiv/Clock";
 import About from "./divdivdiv/About";
 import Contact from "./divdivdiv/Contact";
@@ -11,6 +11,10 @@ import Main from "./divdivdiv/Main";
 import NoSSR from "./divdivdiv/NoSSR";
 
 type Tab = "main" | "about" | "contact";
+interface RenderButtonProps {
+  text: string;
+  tab: Tab;
+}
 
 export default function Home() {
   const currentDate = new Date();
@@ -39,38 +43,18 @@ export default function Home() {
     return [daysOfWeek[dayIndex], daysOfEngWeek[dayIndex]];
   }
 
-  // FIXME: locale 정보 : en, ko
   // FIXME: language 를 React.Context 일것!
   // => 모든 컴포넌트의 props 에 language 가 없어야 함!
   const [language, setLanguage] = useState<Language>("ko");
-
-  const [weatherData, setWeatherData] = useState<any | null>(null);
+  const [weather, setWeather] = useState<Weather>({
+    icon: null,
+    temp: null,
+  });
   const [activeTab, setActiveTab] = useState<Tab>("main");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apiKey = "a363f14d94f369a4d926a27d5d44fc60";
-        const seoulWeatherResponse = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${apiKey}&lang=kr`
-        );
-        if (!seoulWeatherResponse.ok) {
-          throw "weather fetch failed";
-        }
-        const data = await seoulWeatherResponse.json();
-        setWeatherData(data);
-      } catch (error) {
-        console.error("Error fetching city data:", error);
-      }
-    };
-
-    fetchData();
+    fetchData(setWeather);
   }, []);
-
-  interface RenderButtonProps {
-    text: string;
-    tab: Tab;
-  }
 
   function RenderButtonLeft({ text, tab }: RenderButtonProps) {
     return (
@@ -85,59 +69,59 @@ export default function Home() {
   }
 
   return (
-    <div className={styles["container-background"]}>
-      <div className={styles["container"]}>
-        <div className={styles["nav-container"]}>
-          <div className={styles["nav"]}>
-            <RenderButtonLeft text="divdivdiv" tab="main" />
-            {/* FIXME: multi locale string 처리를 모두 통일하기 */}
-            {/* data.about.title[lang]  */}
-            <RenderButtonLeft text={language === "en" ? "About" : "소개"} tab="about" />
-            <RenderButtonLeft text={language === "en" ? "Contact" : "연결"} tab="contact" />
-            <div className={styles["blank-space"]}></div>
-            {weatherData ? (
+    <LanguageContext.Provider value={language}>
+      <div className={styles["container-background"]}>
+        <div className={styles["container"]}>
+          <div className={styles["nav-container"]}>
+            <div className={styles["nav"]}>
+              <RenderButtonLeft text="divdivdiv" tab="main" />
+              <RenderButtonLeft text={language === "en" ? "About" : "소개"} tab="about" />
+              <RenderButtonLeft text={language === "en" ? "Contact" : "연결"} tab="contact" />
+              <div className={styles["blank-space"]}></div>
               <React.Fragment>
-                <div className={`${styles["button-right"]} ${styles["weather"]}`}>
-                  <Image
-                    src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-                    width={35}
-                    height={35}
-                    alt="Weather Icon"
-                  />
-                </div>
+                {weather.icon && (
+                  <div className={`${styles["button-right"]} ${styles["weather"]}`}>
+                    <Image
+                      src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                      width={35}
+                      height={35}
+                      alt="Weather Icon"
+                    />
+                  </div>
+                )}
                 <div className={`${styles["button-right"]} ${styles["temperature"]}`}>
-                  {(weatherData.main.temp - 273.15).toFixed(1)}°
+                  {weather.temp && `${(weather.temp - 273.15).toFixed(1)}°`}
                 </div>
               </React.Fragment>
-            ) : null}
-            <div
-              className={`${styles["button-right"]} ${styles["language"]}`}
-              onClick={() => {
-                setLanguage(language === "en" ? "ko" : "en");
-              }}
-            >
-              {language === "en" ? "A" : "한"}
-            </div>
-            <div className={`${styles["button-right"]} ${styles["calender"]}`}>
-              {language === "en"
-                ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
-                : `${month}월 ${day}일 (${dayOfWeek})`}
-            </div>
-            <div className={`${styles["button-right"]} ${styles["clock"]}`}>
-              <Clock language={language} />
+              <div
+                className={`${styles["button-right"]} ${styles["language"]}`}
+                onClick={() => {
+                  setLanguage(language === "en" ? "ko" : "en");
+                }}
+              >
+                {language === "en" ? "A" : "한"}
+              </div>
+              <div className={`${styles["button-right"]} ${styles["calender"]}`}>
+                {language === "en"
+                  ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
+                  : `${month}월 ${day}일 (${dayOfWeek})`}
+              </div>
+              <div className={`${styles["button-right"]} ${styles["clock"]}`}>
+                <Clock />
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles["content"]}>
-          {activeTab === "main" && (
-            <NoSSR>
-              <Main language={language} />
-            </NoSSR>
-          )}
-          {activeTab === "about" && <About language={language} />}
-          {activeTab === "contact" && <Contact language={language} />}
+          <div className={styles["content"]}>
+            {activeTab === "main" && (
+              <NoSSR>
+                <Main />
+              </NoSSR>
+            )}
+            {activeTab === "about" && <About />}
+            {activeTab === "contact" && <Contact />}
+          </div>
         </div>
       </div>
-    </div>
+    </LanguageContext.Provider>
   );
 }

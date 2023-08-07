@@ -1,13 +1,12 @@
 "use client";
 
-import { Language } from "./data";
+import { useContext } from "react";
+import { Language, LanguageContext } from "./data";
 import styles from "./divdivdiv.module.css";
 
-interface PageProps {
-  language: Language;
-}
+export default function About() {
+  const language: Language = useContext(LanguageContext);
 
-export default function About({ language }: PageProps) {
   const about = {
     job: {
       en: "I am working as a web developer in Seoul. 👨‍💻",
