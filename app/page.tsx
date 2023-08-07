@@ -43,8 +43,6 @@ export default function Home() {
     return [daysOfWeek[dayIndex], daysOfEngWeek[dayIndex]];
   }
 
-  // FIXME: language 를 React.Context 일것!
-  // => 모든 컴포넌트의 props 에 language 가 없어야 함!
   const [language, setLanguage] = useState<Language>("ko");
   const [weather, setWeather] = useState<Weather>({
     icon: null,
