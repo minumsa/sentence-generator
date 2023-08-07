@@ -1,7 +1,7 @@
 // FIXME: api는 다른 파일로 따로 빼기
 
 export const contents = [
-  "카버차트",
+  "divdivdiv",
   "팝",
   "케이팝",
   "제이팝",
