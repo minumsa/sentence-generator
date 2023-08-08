@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents } from "../lib/data";
 import Content from "../lib/Content";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   // TODO: [slug]와 all 페이지 파일을 컴포넌트화시켜서 더 코드를 깔끔하게 만들 수 있다.
@@ -13,23 +14,39 @@ export default function Page() {
   const pathName = "";
   const fullPathName = usePathname();
 
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const isMobile: boolean = windowWidth < 500 ? true : false;
+
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [windowWidth]);
+
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
-        {Object.keys(contents).map(category => {
-          return (
-            <div
-              key={category}
-              className={styles["category"]}
-              onClick={() => {
-                router.push(`/music/admin/${category}`);
-              }}
-              style={pathName === category ? activeStyle : {}}
-            >
-              {contents[category]}
-            </div>
-          );
-        })}
+        {isMobile
+          ? ""
+          : Object.keys(contents).map(category => {
+              return (
+                <div
+                  key={category}
+                  className={styles["category"]}
+                  onClick={() => {
+                    router.push(`/music/admin/${category}`);
+                  }}
+                  style={pathName === category ? activeStyle : {}}
+                >
+                  {contents[category]}
+                </div>
+              );
+            })}
       </div>
       <div className={styles["content-container"]}>
         <Content pathName={pathName} fullPathName={fullPathName} />

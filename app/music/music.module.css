@@ -12,11 +12,10 @@
 
 .container {
   display: flex;
+  flex-direction: row;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
   font-family: "Montserrat", "GothicA1-Light";
   font-weight: 400;
   background-color: #ffffff;
@@ -160,6 +159,7 @@
   flex-direction: row;
   height: 300px;
   margin-bottom: 50px;
+  line-height: 200%;
 }
 
 .album-information {
@@ -169,6 +169,8 @@
 }
 
 .link {
+  display: flex;
+  justify-content: center;
   cursor: pointer;
   color: #000000;
   text-decoration: none;
@@ -259,4 +261,95 @@
 
 .criteria:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .container {
+    flex-direction: column;
+    font-size: 1rem;
+  }
+
+  .category-container {
+    display: none;
+    /* width: fit-content;
+    height: fit-content;
+    border-left: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    background-color: #ffffff; */
+  }
+
+  .category {
+    border-bottom: none;
+    padding: 5px 10px 10px 10px;
+  }
+
+  .category:first-child {
+    margin-bottom: 0px;
+  }
+
+  .sort-button-container {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    border-top: 1px solid #000000;
+  }
+
+  .content-container {
+    width: 100%;
+    border-left: none;
+  }
+
+  .sort-criteria-container {
+    width: 50%;
+  }
+
+  .sort-criteria-container:first-child {
+    border-right: 1px solid #000000;
+    /* width: 115px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px; */
+  }
+
+  .sort-criteria {
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .album-container {
+    padding: 0;
+    align-items: center;
+  }
+
+  .album-information-container {
+    flex-direction: column;
+    height: fit-content;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .album-information {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 0;
+  }
+
+  .text-container {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 50px;
+
+    /* line-height: 200%;
+    word-break: keep-all; */
+  }
+
+  .paragraph {
+    padding: 15px;
+    /* text-indent: 10%; */
+    /* white-space: pre-wrap; */
+    /* margin: 0; */
+  }
 }

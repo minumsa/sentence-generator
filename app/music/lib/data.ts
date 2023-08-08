@@ -69,6 +69,10 @@ export type CriteriaType = "오름차순" | "내림차순";
 export const album = {
   width: 300,
   height: 300,
+  mobile: {
+    width: 250,
+    height: 250,
+  },
 };
 
 export const activeStyle = {
