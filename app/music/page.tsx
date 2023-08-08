@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { activeStyle, contents } from "./lib/data";
 import styles from "./music.module.css";
 import Content from "./lib/Content";
@@ -8,6 +8,7 @@ import Content from "./lib/Content";
 export default function Page() {
   const router = useRouter();
   const pathName = "";
+  const fullPathName = usePathname();
 
   return (
     <div className={styles["container"]}>
@@ -28,7 +29,7 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} />
+        <Content pathName={pathName} fullPathName={fullPathName} />
       </div>
     </div>
   );

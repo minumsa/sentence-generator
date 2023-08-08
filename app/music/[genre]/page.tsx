@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import styles from "../music.module.css";
 import { PageProps, activeStyle, contents } from "../lib/data";
@@ -10,8 +10,7 @@ export default function Page({ params }: PageProps) {
   // FIXME: Dynamic Routes params 방식으로 바꾸기
   const router = useRouter();
   const pathName = params.slug;
-
-  console.log(pathName);
+  const fullPathName = usePathname();
 
   return (
     <div className={styles["container"]}>
@@ -32,7 +31,7 @@ export default function Page({ params }: PageProps) {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} />
+        <Content pathName={pathName} fullPathName={fullPathName} />
       </div>
     </div>
   );
