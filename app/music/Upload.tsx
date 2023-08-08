@@ -67,7 +67,7 @@ export default function Upload({ variablePathName }: UploadProps) {
       <div className={styles["album-container"]}>
         <div className={styles["title"]}>{`｟${title} 페이지 ｠`}</div>
         <div>앨범 ID(Spotify)</div>
-        <input
+        <textarea
           className={styles["input"]}
           value={albumId}
           onChange={e => {
@@ -75,7 +75,7 @@ export default function Upload({ variablePathName }: UploadProps) {
           }}
         />
         <div>장르</div>
-        <input
+        <textarea
           className={styles["input"]}
           value={genre}
           onChange={e => {
@@ -83,7 +83,7 @@ export default function Upload({ variablePathName }: UploadProps) {
           }}
         />
         <div>링크(Apple Music)</div>
-        <input
+        <textarea
           className={styles["input"]}
           value={link}
           onChange={e => {
@@ -101,8 +101,6 @@ export default function Upload({ variablePathName }: UploadProps) {
         <div>관리자 비밀번호</div>
         <input
           className={styles["input"]}
-          // type="password"
-          // autoComplete="false"
           value={password}
           onChange={e => {
             setPassword(e.target.value);

@@ -1,13 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ContentsType, activeStyle, contents } from "./lib/data";
+import { activeStyle, contents } from "./lib/data";
 import styles from "./music.module.css";
 import Content from "./lib/Content";
 
 export default function Page() {
   const router = useRouter();
-  let pathName = "";
+  const pathName = "";
 
   return (
     <div className={styles["container"]}>

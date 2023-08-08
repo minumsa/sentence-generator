@@ -3,19 +3,13 @@
 import { useRouter } from "next/navigation";
 
 import styles from "../music.module.css";
-import { activeStyle, contents } from "../lib/data";
+import { PageProps, activeStyle, contents } from "../lib/data";
 import Content from "../lib/Content";
-
-interface PageProps {
-  params: {
-    genre: string;
-  };
-}
 
 export default function Page({ params }: PageProps) {
   // FIXME: Dynamic Routes params 방식으로 바꾸기
   const router = useRouter();
-  const pathName = params.genre;
+  const pathName = params.slug;
 
   console.log(pathName);
 

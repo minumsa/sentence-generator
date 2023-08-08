@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 
 interface pageProps {
   pathName: string;
+  fullPathName: string;
 }
 
-export default function Content({ pathName }: pageProps) {
+export default function Content({ pathName, fullPathName }: pageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -183,7 +184,7 @@ export default function Content({ pathName }: pageProps) {
                       ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
                       : `${minutes}분`}
                   </div>
-                  {pathName.includes("admin") && (
+                  {fullPathName.includes("admin") && (
                     <div className={styles["admin-button-container"]}>
                       <div
                         className={styles["admin-button"]}

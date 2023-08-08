@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+/* FIXME: 구글폰트에서 fontWeight 100~900 전체 링크 받아와서 font-face로 자유롭게 쓰는 방법 알아내기. */
 @font-face {
   font-family: "GothicA1-Light";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2")
@@ -178,19 +179,20 @@
 }
 
 .input {
-  height: 50px;
+  /* FIXME: vertical align 방법 알아내기. 지금은 height, padding으로 임시로 맞춰놓음. */
   width: 100%;
+  height: 30px;
+  padding: 10px;
   margin: 15px 0 50px 0;
   background-color: #ffffff;
+  font-family: "Montserrat", "GothicA1-Light";
+  font-size: 1.5rem;
 }
 
 .input-text {
   color: #000000;
   line-height: 180%;
   height: 350px;
-  font-family: "Pretendard Variable", "Pretendard", "-apple-system", "BlinkMacSystemFont", system-ui,
-    "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .submit {

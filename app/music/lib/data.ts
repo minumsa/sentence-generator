@@ -50,6 +50,12 @@ export interface AlbumInfo {
   tracks: number;
 }
 
+export interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
 export interface UpdateInfo {
   albumId: string;
   genre: string;
@@ -88,7 +94,6 @@ export async function fetchData(pathName: string) {
 
     if (pathName === "admin") pathName = "";
     if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
-    if (pathName === "r&b_soul") pathName = "r&b/soul";
     if (pathName.length > 20) {
       data = data.filter((item: { id: string }) => item.id === pathName)[0];
     } else if (pathName !== "") {
@@ -281,8 +286,6 @@ export const filteredPathName = (pathName: string) => {
   switch (lowercasedPathName) {
     case "all":
       return "";
-    case "r&b/soul":
-      return "r&b_soul";
     default:
       return lowercasedPathName;
   }
