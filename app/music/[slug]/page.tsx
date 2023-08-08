@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-
 import styles from "../music.module.css";
 import { PageProps, activeStyle, contents } from "../lib/data";
 import Content from "../lib/Content";
