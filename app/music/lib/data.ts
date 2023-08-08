@@ -52,7 +52,7 @@ export interface AlbumInfo {
 
 export interface PageProps {
   params: {
-    slug: string;
+    genre: string;
   };
 }
 

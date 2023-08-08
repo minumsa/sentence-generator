@@ -1,14 +1,14 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import styles from "../../music.module.css";
-import { PageProps, activeStyle, contents } from "../../lib/data";
-import Content from "../../lib/Content";
-import Upload from "../../Upload";
+import styles from "../music.module.css";
+import { PageProps, activeStyle, contents } from "../lib/data";
+import Content from "../lib/Content";
 
 export default function Page({ params }: PageProps) {
+  // FIXME: Dynamic Routes params 방식으로 바꾸기
   const router = useRouter();
-  const pathName = params.slug;
+  const pathName = params.genre;
   const fullPathName = usePathname();
 
   return (
@@ -20,7 +20,7 @@ export default function Page({ params }: PageProps) {
               key={category}
               className={styles["category"]}
               onClick={() => {
-                router.push(`/music/admin/${category}`);
+                router.push(`/music/${category}`);
               }}
               style={pathName === category ? activeStyle : {}}
             >
@@ -30,11 +30,7 @@ export default function Page({ params }: PageProps) {
         })}
       </div>
       <div className={styles["content-container"]}>
-        {pathName === "upload" || pathName.length > 20 ? (
-          <Upload variablePathName={pathName} />
-        ) : (
-          <Content pathName={pathName} fullPathName={fullPathName} />
-        )}
+        <Content pathName={pathName} fullPathName={fullPathName} />
       </div>
     </div>
   );
