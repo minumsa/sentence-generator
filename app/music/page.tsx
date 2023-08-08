@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { activeStyle, contents, filteredPathName } from "./lib/data";
+import { ContentsType, activeStyle, contents } from "./lib/data";
 import styles from "./music.module.css";
 import Content from "./lib/Content";
 
@@ -12,19 +12,17 @@ export default function Page() {
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
-        {contents.map(category => {
-          const categoryName = filteredPathName(category);
-
+        {Object.keys(contents).map(category => {
           return (
             <div
               key={category}
               className={styles["category"]}
               onClick={() => {
-                router.push(`/music/${categoryName}`);
+                router.push(`/music/${category}`);
               }}
-              style={pathName === categoryName ? activeStyle : {}}
+              style={pathName === category ? activeStyle : {}}
             >
-              {category}
+              {contents[category]}
             </div>
           );
         })}

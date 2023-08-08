@@ -1,21 +1,39 @@
 // FIXME: api는 다른 파일로 따로 빼기
 
-export const contents = [
-  "divdivdiv",
-  "팝",
-  "케이팝",
-  "제이팝",
-  "락",
-  "얼터너티브",
-  "디스코",
-  "일렉트로닉",
-  "재즈",
-  "알앤비/소울",
-  "포크",
-  "컨트리",
-  "클래식",
-  "사운드트랙",
-];
+export interface ContentsType {
+  "": string;
+  pop: string;
+  "k-pop": string;
+  "j-pop": string;
+  rock: string;
+  alternative: string;
+  disco: string;
+  electronic: string;
+  jazz: string;
+  soul: string;
+  folk: string;
+  country: string;
+  classical: string;
+  soundtrack: string;
+  [key: string]: string;
+}
+
+export const contents: ContentsType = {
+  "": "divdivdiv",
+  pop: "팝",
+  "k-pop": "케이팝",
+  "j-pop": "제이팝",
+  rock: "락",
+  alternative: "얼터너티브",
+  disco: "디스코",
+  electronic: "일렉트로닉",
+  jazz: "재즈",
+  soul: "알앤비/소울",
+  folk: "포크",
+  country: "컨트리",
+  classical: "클래식",
+  soundtrack: "사운드트랙",
+};
 
 export interface AlbumInfo {
   id: string;
@@ -48,11 +66,9 @@ export const album = {
 };
 
 export const activeStyle = {
-  color: "#000000",
-  fontWeight: "900",
-  backgroundColor: "#eaeaea",
-  // borderRadius: "100px",
-  // backgroundColor: "#000000",
+  color: "#949494",
+  // textDecoration: "underline",
+  // fontWeight: "500",
 };
 
 export async function fetchData(pathName: string) {

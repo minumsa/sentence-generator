@@ -76,21 +76,39 @@ export default function Content({ pathName }: pageProps) {
   };
 
   const sortedData = useMemo(() => {
-    const type = currentMethod;
     const dateSelector = (item: AlbumInfo) => {
-      if (type === "작성일") {
+      if (currentMethod === "작성일") {
         return new Date(item.uploadDate).getTime();
-      } else if (type === "발매일") {
+      } else if (currentMethod === "발매일") {
         return new Date(item.releaseDate).getTime();
       }
       return 0;
     };
+
     const newData = [...data];
+
     newData.sort((a, b) =>
       currentCriteria === "오름차순"
         ? dateSelector(a) - dateSelector(b)
         : dateSelector(b) - dateSelector(a)
     );
+
+    if (currentMethod === "아티스트") {
+      newData.sort((a, b) => {
+        return currentCriteria === "오름차순"
+          ? a.artist.localeCompare(b.artist)
+          : b.artist.localeCompare(a.artist);
+      });
+    }
+
+    if (currentMethod === "앨범") {
+      newData.sort((a, b) => {
+        return currentCriteria === "오름차순"
+          ? a.album.localeCompare(b.album)
+          : b.album.localeCompare(a.album);
+      });
+    }
+
     return newData;
   }, [data, currentMethod, currentCriteria]);
 

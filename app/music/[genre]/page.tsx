@@ -1,9 +1,9 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import styles from "../music.module.css";
-import { activeStyle, contents, filteredPathName } from "../lib/data";
+import { activeStyle, contents } from "../lib/data";
 import Content from "../lib/Content";
 
 interface PageProps {
@@ -17,22 +17,22 @@ export default function Page({ params }: PageProps) {
   const router = useRouter();
   const pathName = params.genre;
 
+  console.log(pathName);
+
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
-        {contents.map(category => {
-          const categoryName = filteredPathName(category);
-
+        {Object.keys(contents).map(category => {
           return (
             <div
               key={category}
               className={styles["category"]}
               onClick={() => {
-                router.push(`/music/${categoryName}`);
+                router.push(`/music/${category}`);
               }}
-              style={pathName === categoryName ? activeStyle : {}}
+              style={pathName === category ? activeStyle : {}}
             >
-              {category}
+              {contents[category]}
             </div>
           );
         })}
