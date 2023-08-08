@@ -13,56 +13,27 @@ export default function Page() {
   const fullPathName = usePathname();
   const [currentCategory, setCurrentCategory] = useState<string>("");
 
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  const isMobile: boolean = windowWidth < 500;
-
-  const handleWindowResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
-
   return (
-    <NoSSR>
-      <div className={styles["container"]}>
-        <div className={styles["category-container"]}>
-          {Object.keys(contents).map((category, index) => {
-            return isMobile ? (
-              index > 0 ? (
-                <div
-                  key={category}
-                  className={styles["category"]}
-                  onClick={() => {
-                    router.push(`/music/${category}`);
-                  }}
-                  style={pathName === category ? activeStyle : {}}
-                >
-                  {contents[category]}
-                </div>
-              ) : null
-            ) : (
-              <div
-                key={category}
-                className={styles["category"]}
-                onClick={() => {
-                  router.push(`/music/${category}`);
-                }}
-                style={pathName === category ? activeStyle : {}}
-              >
-                {contents[category]}
-              </div>
-            );
-          })}
-        </div>
-        <div className={styles["content-container"]}>
-          <Content pathName={pathName} fullPathName={fullPathName} />
-        </div>
+    <div className={styles["container"]}>
+      <div className={styles["category-container"]}>
+        {Object.keys(contents).map((category, index) => {
+          return (
+            <div
+              key={category}
+              className={styles["category"]}
+              onClick={() => {
+                router.push(`/music/${category}`);
+              }}
+              style={pathName === category ? activeStyle : {}}
+            >
+              {contents[category]}
+            </div>
+          );
+        })}
       </div>
-    </NoSSR>
+      <div className={styles["content-container"]}>
+        <Content pathName={pathName} fullPathName={fullPathName} />
+      </div>
+    </div>
   );
 }

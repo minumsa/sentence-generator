@@ -78,6 +78,7 @@
 }
 
 .album-container {
+  width: 1000px;
   display: flex;
   flex-direction: column;
   padding: 50px 120px 80px 120px;
@@ -168,6 +169,13 @@
   margin: 50px 0 0 50px;
 }
 
+.album-art {
+  display: flex;
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
 .link {
   display: flex;
   justify-content: center;
@@ -178,6 +186,14 @@
 
 .link:hover {
   opacity: 70%;
+}
+
+.information {
+  display: flex;
+  border-bottom: 1px solid #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .input {
@@ -263,7 +279,7 @@
   text-decoration: underline;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 499px) {
   .container {
     flex-direction: column;
     font-size: 1rem;
@@ -293,6 +309,7 @@
     bottom: 0;
     background-color: #ffffff;
     border-top: 1px solid #000000;
+    z-index: 10000;
   }
 
   .content-container {
@@ -325,6 +342,7 @@
   }
 
   .album-information-container {
+    width: 280px;
     flex-direction: column;
     height: fit-content;
     margin-top: 30px;
@@ -351,5 +369,17 @@
     /* text-indent: 10%; */
     /* white-space: pre-wrap; */
     /* margin: 0; */
+  }
+
+  .album-art {
+    width: 280px;
+    height: 280px;
+  }
+
+  /* FIXME: 왜 ellipsis 적용 안 될까? */
+  .information {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

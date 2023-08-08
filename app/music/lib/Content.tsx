@@ -17,19 +17,6 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useState<string>("작성일");
   const [currentCriteria, setCurrentCriteria] = useState<string>("내림차순");
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  const isMobile: boolean = windowWidth < 500;
-
-  const handleWindowResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
 
   useEffect(() => {
     async function loadData() {
@@ -38,9 +25,6 @@ export default function Content({ pathName, fullPathName }: pageProps) {
 
     loadData();
   }, []);
-
-  console.log("isMobile", isMobile);
-  console.log(windowWidth);
 
   const SortToggleButton = ({
     type,
@@ -176,53 +160,34 @@ export default function Content({ pathName, fullPathName }: pageProps) {
             <div key={index}>
               <div className={styles["album-container"]}>
                 <div className={styles["album-information-container"]}>
-                  <a className={styles["link"]} href={data.link} target="_blank">
-                    {isMobile ? (
-                      <Image
-                        src={data.imgUrl}
-                        alt={data.album}
-                        width={album.mobile.width}
-                        height={album.mobile.height}
-                      />
-                    ) : (
-                      <Image
+                  <div className={styles["album-art"]}>
+                    <a className={styles["link"]} href={data.link} target="_blank">
+                      <Image src={data.imgUrl} alt={data.album} fill={true} />
+                      {/* <Image
                         src={data.imgUrl}
                         alt={data.album}
                         width={album.width}
                         height={album.height}
-                      />
-                    )}
-                  </a>
+                      /> */}
+                    </a>
+                  </div>
                   <div className={` ${styles["album-information"]}`}>
-                    {isMobile ? (
-                      <div>
-                        <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
-                          <div style={{ marginRight: "5px" }}>{data.artist}</div>
-                        </div>
-                        <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
-                          <a className={styles["link"]} href={data.link} target="_blank">
-                            <div className={styles["album-title"]}>
-                              {data.album.length > 35
-                                ? `${data.album.slice(0, 35)}...`
-                                : data.album}
-                            </div>
-                          </a>
-                        </div>
+                    <div>
+                      <div className={styles["information"]}>
+                        <div style={{ marginRight: "5px" }}>{data.artist}</div>
                       </div>
-                    ) : (
-                      <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
-                        <div style={{ marginRight: "5px" }}>{data.artist},</div>
+                      <div className={styles["information"]}>
                         <a className={styles["link"]} href={data.link} target="_blank">
                           <div className={styles["album-title"]}>{data.album}</div>
                         </a>
                       </div>
-                    )}
-                    <div style={{ borderBottom: "1px solid #000000" }}>
+                    </div>
+                    <div className={styles["information"]}>
                       <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
                         data.releaseDate.slice(5, 7)
                       )}월, ${data.label}`}</span>
                     </div>
-                    <div style={{ borderBottom: "1px solid #000000" }}>
+                    <div className={styles["information"]}>
                       {`${data.tracks}곡, `}
                       {minutes > 60
                         ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
