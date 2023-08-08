@@ -72,7 +72,6 @@
   height: 100%;
   overflow: scroll;
   border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
 }
 
 .category-container::-webkit-scrollbar,
@@ -236,9 +235,10 @@
 }
 
 .sort-criteria-container {
-  width: fit-content;
+  width: 115px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   cursor: pointer;
   padding: 10px;
 }
@@ -255,4 +255,8 @@
 
 .criteria:last-child {
   margin-bottom: 0;
+}
+
+.criteria:hover {
+  text-decoration: underline;
 }

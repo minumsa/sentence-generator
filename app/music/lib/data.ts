@@ -39,7 +39,8 @@ export interface UpdateInfo {
   text: string;
 }
 
-export type SortType = "업로드일" | "발매일";
+export type MethodType = "작성일" | "발매일";
+export type CriteriaType = "오름차순" | "내림차순";
 
 export const album = {
   width: 300,
@@ -272,6 +273,6 @@ export const filteredPathName = (pathName: string) => {
 };
 
 export const sortItems = {
-  method: ["업로드일", "발매일"],
+  method: ["작성일", "발매일", "아티스트", "앨범"],
   criteria: ["오름차순", "내림차순"],
 };

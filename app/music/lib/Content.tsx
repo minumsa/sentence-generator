@@ -1,16 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
 import Image from "next/image";
-import {
-  AlbumInfo,
-  SortType,
-  activeStyle,
-  album,
-  deleteData,
-  fetchData,
-  sortItems,
-  updateData,
-} from "./data";
+import { AlbumInfo, album, deleteData, fetchData, sortItems } from "./data";
 import { useRouter } from "next/navigation";
 
 interface pageProps {
@@ -18,25 +9,11 @@ interface pageProps {
 }
 
 export default function Content({ pathName }: pageProps) {
-  // isAdmin: boolean,
-  // genre: string
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
-  const [sortingOptions, setSortingOptions] = useState<{
-    type: SortType;
-    order: {
-      [Type in SortType]: boolean;
-    };
-  }>({
-    type: "업로드일",
-    order: {
-      업로드일: false,
-      발매일: false,
-    },
-  });
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
-  const [currentMethod, setCurrentMethod] = useState<string>("업로드일");
+  const [currentMethod, setCurrentMethod] = useState<string>("작성일");
   const [currentCriteria, setCurrentCriteria] = useState<string>("내림차순");
 
   useEffect(() => {
@@ -47,34 +24,61 @@ export default function Content({ pathName }: pageProps) {
     loadData();
   }, []);
 
-  function SortToggleButton({ type }: { type: SortType }) {
+  const SortToggleButton = ({
+    type,
+    sortItem,
+    currentOrder,
+    sortWay,
+    setCurrentOrder,
+  }: {
+    type: string;
+    sortItem: string[];
+    currentOrder: string;
+    sortWay: boolean;
+    setCurrentOrder: React.Dispatch<React.SetStateAction<string>>;
+  }) => {
     return (
       <div
-        className={`${styles["button"]} ${styles["sort"]}`}
-        style={sortingOptions.type === type ? { ...activeStyle } : {}}
-        onClick={() => {
-          setSortingOptions(prevSortingOption => ({
-            type: type,
-            order: {
-              ...prevSortingOption.order,
-              [type]:
-                prevSortingOption.type === type
-                  ? !prevSortingOption.order[type]
-                  : prevSortingOption.order[type],
-            },
-          }));
+        className={styles["sort-criteria-container"]}
+        onMouseEnter={() => {
+          handleMouseEnter(type);
+        }}
+        onMouseLeave={() => {
+          handleMouseLeave(type);
         }}
       >
-        {type} {sortingOptions.order[type] ? "↑" : "▾"}
+        {`${currentOrder} ▾`}
+        {sortWay && (
+          <div
+            className={styles["sort-criteria"]}
+            style={{ cursor: "pointer" }}
+            onMouseEnter={() => {
+              handleMouseEnter(type);
+            }}
+          >
+            {sortItem.map((item: string) => {
+              return (
+                <div
+                  className={styles["criteria"]}
+                  key={item}
+                  onClick={() => {
+                    setCurrentOrder(item);
+                  }}
+                >
+                  {item}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     );
-  }
+  };
 
   const sortedData = useMemo(() => {
-    const order = sortingOptions.order[sortingOptions.type];
-    const type = sortingOptions.type;
+    const type = currentMethod;
     const dateSelector = (item: AlbumInfo) => {
-      if (type === "업로드일") {
+      if (type === "작성일") {
         return new Date(item.uploadDate).getTime();
       } else if (type === "발매일") {
         return new Date(item.releaseDate).getTime();
@@ -83,10 +87,12 @@ export default function Content({ pathName }: pageProps) {
     };
     const newData = [...data];
     newData.sort((a, b) =>
-      order ? dateSelector(a) - dateSelector(b) : dateSelector(b) - dateSelector(a)
+      currentCriteria === "오름차순"
+        ? dateSelector(a) - dateSelector(b)
+        : dateSelector(b) - dateSelector(a)
     );
     return newData;
-  }, [data, sortingOptions]);
+  }, [data, currentMethod, currentCriteria]);
 
   const handleMouseEnter = (type: string) => {
     if (type === "method") {
@@ -108,76 +114,20 @@ export default function Content({ pathName }: pageProps) {
     <div>
       {pathName !== "upload" && (
         <div className={styles["sort-button-container"]}>
-          {/* <SortToggleButton type="업로드일" />
-          <SortToggleButton type="발매일" /> */}
-          <div
-            className={styles["sort-criteria-container"]}
-            onMouseEnter={() => {
-              handleMouseEnter("method");
-            }}
-            onMouseLeave={() => {
-              handleMouseLeave("method");
-            }}
-          >
-            {`${currentMethod} ▾`}
-            {sortMethod && (
-              <div
-                className={styles["sort-criteria"]}
-                style={{ cursor: "pointer" }}
-                onMouseEnter={() => {
-                  handleMouseEnter("method");
-                }}
-              >
-                {sortItems.method.map((item: string) => {
-                  return (
-                    <div
-                      className={styles["criteria"]}
-                      key={item}
-                      onClick={() => {
-                        setCurrentMethod(item);
-                      }}
-                    >
-                      {item}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-          <div
-            className={styles["sort-criteria-container"]}
-            onMouseEnter={() => {
-              handleMouseEnter("criteria");
-            }}
-            onMouseLeave={() => {
-              handleMouseLeave("criteria");
-            }}
-          >
-            {`${currentCriteria} ▾`}
-            {sortCriteria && (
-              <div
-                className={styles["sort-criteria"]}
-                style={{ cursor: "pointer" }}
-                onMouseEnter={() => {
-                  handleMouseEnter("criteria");
-                }}
-              >
-                {sortItems.criteria.map((item: string) => {
-                  return (
-                    <div
-                      className={styles["criteria"]}
-                      key={item}
-                      onClick={() => {
-                        setCurrentCriteria(item);
-                      }}
-                    >
-                      {item}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+          <SortToggleButton
+            type="method"
+            sortItem={sortItems.method}
+            currentOrder={currentMethod}
+            setCurrentOrder={setCurrentMethod}
+            sortWay={sortMethod}
+          />
+          <SortToggleButton
+            type="criteria"
+            sortItem={sortItems.criteria}
+            currentOrder={currentCriteria}
+            setCurrentOrder={setCurrentCriteria}
+            sortWay={sortCriteria}
+          />
         </div>
       )}
       {sortedData.map((data, index) => {
@@ -211,7 +161,6 @@ export default function Content({ pathName }: pageProps) {
                   </div>
                   <div style={{ borderBottom: "1px solid #000000" }}>
                     {`${data.tracks}곡, `}
-                    {/* { formatDuration(data.duration) } */}
                     {minutes > 60
                       ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
                       : `${minutes}분`}
@@ -247,15 +196,6 @@ export default function Content({ pathName }: pageProps) {
                     </p>
                   );
                 })}
-                {/* {data.text.split("\n").map((text, index) => {
-                return index + 1 < data.text.split("\n").length ? (
-                  <div className={styles["line-break"]} key={index}>
-                    {text}
-                  </div>
-                ) : (
-                  <div key={index}>{text}</div>
-                );
-              })} */}
               </div>
             </div>
             <div className={styles["divider"]} />
