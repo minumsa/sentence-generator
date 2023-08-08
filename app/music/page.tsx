@@ -5,6 +5,7 @@ import { activeStyle, contents } from "./lib/data";
 import styles from "./music.module.css";
 import Content from "./lib/Content";
 import { useEffect, useState } from "react";
+import NoSSR from "../divdivdiv/NoSSR";
 
 export default function Page() {
   const router = useRouter();
@@ -27,11 +28,24 @@ export default function Page() {
   }, []);
 
   return (
-    <div className={styles["container"]}>
-      <div className={styles["category-container"]}>
-        {Object.keys(contents).map((category, index) => {
-          return isMobile ? (
-            index > 0 ? (
+    <NoSSR>
+      <div className={styles["container"]}>
+        <div className={styles["category-container"]}>
+          {Object.keys(contents).map((category, index) => {
+            return isMobile ? (
+              index > 0 ? (
+                <div
+                  key={category}
+                  className={styles["category"]}
+                  onClick={() => {
+                    router.push(`/music/${category}`);
+                  }}
+                  style={pathName === category ? activeStyle : {}}
+                >
+                  {contents[category]}
+                </div>
+              ) : null
+            ) : (
               <div
                 key={category}
                 className={styles["category"]}
@@ -42,24 +56,13 @@ export default function Page() {
               >
                 {contents[category]}
               </div>
-            ) : null
-          ) : (
-            <div
-              key={category}
-              className={styles["category"]}
-              onClick={() => {
-                router.push(`/music/${category}`);
-              }}
-              style={pathName === category ? activeStyle : {}}
-            >
-              {contents[category]}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <div className={styles["content-container"]}>
+          <Content pathName={pathName} fullPathName={fullPathName} />
+        </div>
       </div>
-      <div className={styles["content-container"]}>
-        <Content pathName={pathName} fullPathName={fullPathName} />
-      </div>
-    </div>
+    </NoSSR>
   );
 }

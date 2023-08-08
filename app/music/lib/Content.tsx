@@ -3,6 +3,7 @@ import styles from "../music.module.css";
 import Image from "next/image";
 import { AlbumInfo, album, deleteData, fetchData, sortItems } from "./data";
 import { useRouter } from "next/navigation";
+import NoSSR from "@/app/divdivdiv/NoSSR";
 
 interface pageProps {
   pathName: string;
@@ -146,121 +147,125 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   };
 
   return (
-    <div>
-      {pathName !== "upload" && (
-        <div className={styles["sort-button-container"]}>
-          <SortToggleButton
-            type="method"
-            sortItem={sortItems.method}
-            currentOrder={currentMethod}
-            setCurrentOrder={setCurrentMethod}
-            sortWay={sortMethod}
-          />
-          <SortToggleButton
-            type="criteria"
-            sortItem={sortItems.criteria}
-            currentOrder={currentCriteria}
-            setCurrentOrder={setCurrentCriteria}
-            sortWay={sortCriteria}
-          />
-        </div>
-      )}
-      {sortedData.map((data, index) => {
-        // FIXME: 시간을 나타내주는 함수(formatDuration())를 만들어라.
-        const minutes = Math.floor(data.duration / 60);
-        const hours = Math.floor(minutes / 60);
+    <NoSSR>
+      <div>
+        {pathName !== "upload" && (
+          <div className={styles["sort-button-container"]}>
+            <SortToggleButton
+              type="method"
+              sortItem={sortItems.method}
+              currentOrder={currentMethod}
+              setCurrentOrder={setCurrentMethod}
+              sortWay={sortMethod}
+            />
+            <SortToggleButton
+              type="criteria"
+              sortItem={sortItems.criteria}
+              currentOrder={currentCriteria}
+              setCurrentOrder={setCurrentCriteria}
+              sortWay={sortCriteria}
+            />
+          </div>
+        )}
+        {sortedData.map((data, index) => {
+          // FIXME: 시간을 나타내주는 함수(formatDuration())를 만들어라.
+          const minutes = Math.floor(data.duration / 60);
+          const hours = Math.floor(minutes / 60);
 
-        return (
-          <div key={index}>
-            <div className={styles["album-container"]}>
-              <div className={styles["album-information-container"]}>
-                <a className={styles["link"]} href={data.link} target="_blank">
-                  {isMobile ? (
-                    <Image
-                      src={data.imgUrl}
-                      alt={data.album}
-                      width={album.mobile.width}
-                      height={album.mobile.height}
-                    />
-                  ) : (
-                    <Image
-                      src={data.imgUrl}
-                      alt={data.album}
-                      width={album.width}
-                      height={album.height}
-                    />
-                  )}
-                </a>
-                <div className={` ${styles["album-information"]}`}>
-                  {isMobile ? (
-                    <div>
-                      <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
-                        <div style={{ marginRight: "5px" }}>{data.artist}</div>
+          return (
+            <div key={index}>
+              <div className={styles["album-container"]}>
+                <div className={styles["album-information-container"]}>
+                  <a className={styles["link"]} href={data.link} target="_blank">
+                    {isMobile ? (
+                      <Image
+                        src={data.imgUrl}
+                        alt={data.album}
+                        width={album.mobile.width}
+                        height={album.mobile.height}
+                      />
+                    ) : (
+                      <Image
+                        src={data.imgUrl}
+                        alt={data.album}
+                        width={album.width}
+                        height={album.height}
+                      />
+                    )}
+                  </a>
+                  <div className={` ${styles["album-information"]}`}>
+                    {isMobile ? (
+                      <div>
+                        <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
+                          <div style={{ marginRight: "5px" }}>{data.artist}</div>
+                        </div>
+                        <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
+                          <a className={styles["link"]} href={data.link} target="_blank">
+                            <div className={styles["album-title"]}>
+                              {data.album.length > 35
+                                ? `${data.album.slice(0, 35)}...`
+                                : data.album}
+                            </div>
+                          </a>
+                        </div>
                       </div>
+                    ) : (
                       <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
+                        <div style={{ marginRight: "5px" }}>{data.artist},</div>
                         <a className={styles["link"]} href={data.link} target="_blank">
-                          <div className={styles["album-title"]}>
-                            {data.album.length > 35 ? `${data.album.slice(0, 35)}...` : data.album}
-                          </div>
+                          <div className={styles["album-title"]}>{data.album}</div>
                         </a>
                       </div>
+                    )}
+                    <div style={{ borderBottom: "1px solid #000000" }}>
+                      <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
+                        data.releaseDate.slice(5, 7)
+                      )}월, ${data.label}`}</span>
                     </div>
-                  ) : (
-                    <div style={{ display: "flex", borderBottom: "1px solid #000000" }}>
-                      <div style={{ marginRight: "5px" }}>{data.artist},</div>
-                      <a className={styles["link"]} href={data.link} target="_blank">
-                        <div className={styles["album-title"]}>{data.album}</div>
-                      </a>
+                    <div style={{ borderBottom: "1px solid #000000" }}>
+                      {`${data.tracks}곡, `}
+                      {minutes > 60
+                        ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
+                        : `${minutes}분`}
                     </div>
-                  )}
-                  <div style={{ borderBottom: "1px solid #000000" }}>
-                    <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
-                      data.releaseDate.slice(5, 7)
-                    )}월, ${data.label}`}</span>
-                  </div>
-                  <div style={{ borderBottom: "1px solid #000000" }}>
-                    {`${data.tracks}곡, `}
-                    {minutes > 60
-                      ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
-                      : `${minutes}분`}
-                  </div>
-                  {fullPathName.includes("admin") && (
-                    <div className={styles["admin-button-container"]}>
-                      <div
-                        className={styles["admin-button"]}
-                        onClick={async () => {
-                          deleteData(data.id);
-                          setData(await fetchData(pathName));
-                        }}
-                      >
-                        삭제
+                    {fullPathName.includes("admin") && (
+                      <div className={styles["admin-button-container"]}>
+                        <div
+                          className={styles["admin-button"]}
+                          onClick={async () => {
+                            deleteData(data.id);
+                            setData(await fetchData(pathName));
+                          }}
+                        >
+                          삭제
+                        </div>
+                        <div
+                          className={styles["admin-button"]}
+                          onClick={() => {
+                            router.push(`/music/admin/${data.id}`);
+                          }}
+                        >
+                          수정
+                        </div>
                       </div>
-                      <div
-                        className={styles["admin-button"]}
-                        onClick={() => {
-                          router.push(`/music/admin/${data.id}`);
-                        }}
-                      >
-                        수정
-                      </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
+                </div>
+                <div className={styles["text-container"]}>
+                  {data.text.split("\n").map((text, index) => {
+                    return (
+                      <p key={index} className={styles["paragraph"]}>
+                        {text}
+                      </p>
+                    );
+                  })}
                 </div>
               </div>
-              <div className={styles["text-container"]}>
-                {data.text.split("\n").map((text, index) => {
-                  return (
-                    <p key={index} className={styles["paragraph"]}>
-                      {text}
-                    </p>
-                  );
-                })}
-              </div>
+              <div className={styles["divider"]} />
             </div>
-            <div className={styles["divider"]} />
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </NoSSR>
   );
 }
