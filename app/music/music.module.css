@@ -25,20 +25,20 @@
   font-weight: 400;
   unicode-range: U+AC00-D7A3;
 }
-
+/* 
 @font-face {
   font-family: "GothicA1";
   src: url("/GothicA1-Regular.ttf");
   font-style: normal;
   font-weight: 500;
   unicode-range: U+AC00-D7A3;
-}
+} */
 
 @font-face {
   font-family: "GothicA1";
   src: url("/GothicA1-Medium.ttf");
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   unicode-range: U+AC00-D7A3;
 }
 
