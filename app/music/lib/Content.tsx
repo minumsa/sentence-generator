@@ -15,7 +15,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
-  const [currentMethod, setCurrentMethod] = useState<string>("작성일");
+  const [currentMethod, setCurrentMethod] = useState<string>("발매일");
   const [currentCriteria, setCurrentCriteria] = useState<string>("내림차순");
 
   useEffect(() => {
