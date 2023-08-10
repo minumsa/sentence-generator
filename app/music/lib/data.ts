@@ -296,6 +296,12 @@ export const filteredPathName = (pathName: string) => {
 };
 
 export const sortItems = {
-  method: ["작성일", "발매일", "아티스트", "앨범"],
-  criteria: ["오름차순", "내림차순"],
+  method: {
+    ko: ["작성일", "발매일", "아티스트", "앨범"],
+    en: ["UPLOAD", "RELEASE", "ARTIST", "ALBUM"],
+  },
+  criteria: {
+    ko: ["오름차순", "내림차순"],
+    en: ["ASC", "DESC"],
+  },
 };

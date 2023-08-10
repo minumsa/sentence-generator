@@ -454,11 +454,6 @@
     align-items: center;
   }
 
-  .mobile-title,
-  .mobile-category {
-    /* border-right: 1px solid #000000; */
-  }
-
   .mobile-test {
     display: none;
   }
@@ -491,9 +486,46 @@
     z-index: 999;
   }
 
-  .mobile-sort-item {
+  .mobile-sort-criteria-container {
     display: flex;
     justify-content: center;
-    flex-grow: 1;
+    width: 50%;
+  }
+
+  .mobile-sort-criteria-left {
+    position: absolute;
+    width: 50%;
+    height: fit-content;
+    left: 0;
+    bottom: 33px;
+    /* border-left: 1px solid #000000; */
+    border-top: 1px solid #000000;
+    /* border-right: 1px solid #000000; */
+    background-color: #ffffff;
+  }
+
+  .mobile-sort-criteria-right {
+    position: absolute;
+    width: 50%;
+    height: fit-content;
+    right: 0;
+    bottom: 33px;
+    /* border-left: 1px solid #000000; */
+    border-top: 1px solid #000000;
+    /* border-right: 1px solid #000000; */
+    background-color: #ffffff;
+  }
+
+  .mobile-criteria {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .mobile-criteria:first-child {
+    margin-top: 10px;
+  }
+
+  .mobile-criteria:last-child {
+    margin-bottom: 5px;
   }
 }
