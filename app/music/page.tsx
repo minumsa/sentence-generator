@@ -10,7 +10,7 @@ export default function Page() {
   const router = useRouter();
   const pathName = "";
   const fullPathName = usePathname();
-  const [currentCategory, setCurrentCategory] = useState<string>("");
+  const [showCategory, setShowCategory] = useState<boolean>(false);
 
   return (
     <div className={styles["container"]}>
@@ -18,10 +18,33 @@ export default function Page() {
         <div className={styles["mobile-title"]}>
           <div>divdivdiv</div>
         </div>
-        <div className={styles["hamburger-container"]}>
+        <div
+          className={styles["hamburger-container"]}
+          onClick={() => {
+            setShowCategory(!showCategory);
+          }}
+        >
           <div className={styles["hamburger"]}></div>
+          {showCategory ? (
+            <div className={styles["hamburger-category"]}>
+              {Object.keys(contents).map((category, index) => {
+                if (index > 0)
+                  return (
+                    <div
+                      key={category}
+                      className={styles["hamburger-content"]}
+                      onClick={() => {
+                        router.push(`/music/${category}`);
+                      }}
+                      style={pathName === category ? activeStyle : {}}
+                    >
+                      {contents[category]}
+                    </div>
+                  );
+              })}
+            </div>
+          ) : null}
         </div>
-
         <div className={styles["mobile-test"]}>
           {Object.keys(contents).map((category, index) => {
             return (

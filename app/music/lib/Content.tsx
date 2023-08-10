@@ -202,7 +202,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <div style={{ height: "calc(100% - 33px)", overflow: "scroll" }}>
+      <div className={styles["mobile-flexbox"]}>
         {pathName !== "upload" && (
           <div className={styles["sort-button-container"]}>
             <SortToggleButton
