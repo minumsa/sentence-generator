@@ -201,7 +201,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    <div style={{ display: "flex", flexDirection: "column", marginTop: "2rem" }}>
       <div className={styles["mobile-flexbox"]}>
         {pathName !== "upload" && (
           <div className={styles["sort-button-container"]}>
@@ -301,7 +301,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
           );
         })}
       </div>
-      <div className={styles["mobile-bottom-container"]}>
+      {/* <div className={styles["mobile-bottom-container"]}>
         <MobileSortToggleButton
           type="method"
           sortItem={sortItems.method.en}
@@ -316,7 +316,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
           setCurrentOrder={setMobileCurrentCriteria}
           sortWay={mobileSortCriteria}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -20,7 +20,12 @@ export default function Page({ params }: PageProps) {
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
-        <div className={styles["mobile-title"]}>
+        <div
+          className={styles["mobile-title"]}
+          onClick={() => {
+            router.push("/music");
+          }}
+        >
           <div>divdivdiv</div>
         </div>
         <div
