@@ -132,6 +132,17 @@ export default function Content({ pathName, fullPathName }: pageProps) {
 
   return (
     <div>
+      <div className={styles["mobile-bottom-container"]}>
+        <div className={styles["mobile-sort-item"]}>
+          <div>ALL</div>
+        </div>
+        <div className={styles["mobile-sort-item"]}>
+          <div>RELEASE</div>
+        </div>
+        <div className={styles["mobile-sort-item"]}>
+          <div>DESC</div>
+        </div>
+      </div>
       {pathName !== "upload" && (
         <div className={styles["sort-button-container"]}>
           <SortToggleButton
