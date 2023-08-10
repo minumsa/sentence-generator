@@ -325,6 +325,10 @@
   display: none;
 }
 
+.mobile-bottom-container {
+  display: none;
+}
+
 @media (max-width: 499px) {
   .container {
     flex-direction: column;
