@@ -469,7 +469,7 @@
 
   .hamburger-container {
     height: 23px;
-    margin-right: 10px;
+    margin-right: 15px;
     cursor: pointer;
   }
 
@@ -544,12 +544,12 @@
     height: fit-content;
     background-color: #ffffff;
     border-bottom: 1px solid #000000;
-    width: 110px;
+    width: 130px;
     padding-bottom: 5px;
   }
 
   .hamburger-content {
     text-align: right;
-    padding: 4px 11px;
+    padding: 4px 15px;
   }
 }
