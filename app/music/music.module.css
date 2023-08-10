@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
 /* FIXME: 구글폰트에서 fontWeight 100~900 전체 링크 받아와서 font-face로 자유롭게 쓰는 방법 알아내기. */
 @font-face {
   font-family: "GothicA1-Light";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2")
     format("woff2");
-  font-weight: 200;
+  font-weight: 300;
   font-style: normal;
   unicode-range: U+AC00-D7A3;
 }
@@ -336,6 +337,7 @@
     /* display: none; */
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 35px;
     border-left: none;
@@ -440,18 +442,34 @@
 
   .mobile-title,
   .mobile-category {
+    /* font-size: 0.9rem; */
     display: flex;
-    width: 50%;
+    width: 25%;
     height: 100%;
     justify-content: center;
     align-items: center;
   }
 
-  .mobile-title {
-    border-right: 1px solid #000000;
+  .mobile-title,
+  .mobile-category {
+    /* border-right: 1px solid #000000; */
   }
 
   .mobile-test {
     display: none;
+  }
+
+  .hamburger-container {
+    height: 23px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .hamburger {
+    width: 21px;
+    height: 1.5px;
+    margin-top: 3px;
+    background-color: #000000;
+    box-shadow: 0 7px 0 #000000, 0 14px 0 #000000;
   }
 }

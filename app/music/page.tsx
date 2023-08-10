@@ -18,9 +18,10 @@ export default function Page() {
         <div className={styles["mobile-title"]}>
           <div>divdivdiv</div>
         </div>
-        <div className={styles["mobile-category"]}>
-          <div>모든 장르 ▾</div>
+        <div className={styles["hamburger-container"]}>
+          <div className={styles["hamburger"]}></div>
         </div>
+
         <div className={styles["mobile-test"]}>
           {Object.keys(contents).map((category, index) => {
             return (
