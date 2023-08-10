@@ -339,7 +339,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 35px;
+    height: 33px;
     border-left: none;
     border-bottom: 1px solid #000000;
     background-color: #ffffff;
@@ -442,7 +442,7 @@
 
   .mobile-title,
   .mobile-category {
-    /* font-size: 0.9rem; */
+    font-size: 0.95rem;
     display: flex;
     width: 25%;
     height: 100%;
@@ -474,16 +474,17 @@
   }
 
   .mobile-bottom-container {
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 35px;
+    height: 33px;
     border-top: 1px solid #000000;
     background-color: #ffffff;
-    font-size: 0.9rem;
+    z-index: 999;
   }
 
   .mobile-sort-item {
