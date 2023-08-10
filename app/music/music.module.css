@@ -55,7 +55,7 @@
   display: flex;
   flex-direction: row;
   width: 100vw;
-  /* height: 100vh; */
+  height: 100vh;
   overflow: hidden;
   font-family: "Montserrat", "GothicA1";
   font-weight: 400;
@@ -65,14 +65,13 @@
 }
 
 .category-container {
-  display: flex;
   width: 250px;
   height: 100%;
-  overflow: scroll;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  z-index: 100;
 }
 
 .category:first-child {
@@ -151,7 +150,7 @@
 .sort-button-container {
   display: flex;
   position: absolute;
-  /* top: 30px; */
+  top: 0;
   right: 5px;
 }
 
@@ -259,25 +258,6 @@
   padding: 10px 30px;
 }
 
-.modal-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.modal {
-  width: 800px;
-  height: 800px;
-  border: 1px solid #ffffff;
-  padding: 20px 0;
-}
-
 .title {
   text-align: center;
   margin-bottom: 100px;
@@ -341,6 +321,7 @@
   } */
 
   .container {
+    height: auto;
     flex-direction: column;
     font-size: 1rem;
     font-family: "Montserrat", "GothicA1";
@@ -356,17 +337,16 @@
     border-left: none;
     border-bottom: 1px solid #000000;
     background-color: #ffffff;
-    z-index: 100;
   } */
 
   .category-container {
+    display: flex;
     position: fixed;
     top: 0;
     height: 33px;
     width: 100%;
     border-bottom: 1px solid #000000;
     background-color: #ffffff;
-    z-index: 9999999;
     justify-content: space-between;
     align-items: center;
     /* width: 250px;
@@ -394,7 +374,6 @@
     bottom: 0;
     background-color: #ffffff;
     border-top: 1px solid #000000;
-    z-index: 10000;
   }
 
   .content-container {
@@ -488,10 +467,11 @@
   }
 
   .hamburger-container {
+    display: flex;
+    justify-content: center;
     height: 23px;
-    margin-right: 15px;
+    width: 50px;
     cursor: pointer;
-    z-index: 999999999999;
   }
 
   .hamburger {
@@ -510,7 +490,6 @@
     height: 33px;
     border-top: 1px solid #000000;
     background-color: #ffffff;
-    z-index: 100000;
   }
 
   .mobile-sort-criteria-container {
@@ -568,7 +547,6 @@
     width: 120px;
     padding-bottom: 5px;
     font-size: 0.9rem;
-    z-index: 99999999999999;
   }
 
   .hamburger-content {
