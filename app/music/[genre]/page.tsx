@@ -55,7 +55,7 @@ export default function Page({ params }: PageProps) {
             </div>
           ) : null}
         </div>
-        <div className={styles["mobile-test"]}>
+        <div className={styles["desktop-category"]}>
           {Object.keys(contents).map(category => {
             return (
               <div

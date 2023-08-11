@@ -12,8 +12,6 @@ export default function Page() {
   const fullPathName = usePathname();
   const [showCategory, setShowCategory] = useState<boolean>(false);
 
-  console.log(showCategory);
-
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
@@ -32,10 +30,10 @@ export default function Page() {
           }}
         >
           <div
-            className={styles["hamburger"]}
+            className={styles["hamburger-icon"]}
             style={{ display: showCategory ? "none" : "flex" }}
           ></div>
-          <div className={styles["close"]} style={{ display: showCategory ? "flex" : "none" }}>
+          <div className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
             <div>×</div>
           </div>
           {showCategory ? (
@@ -58,7 +56,7 @@ export default function Page() {
             </div>
           ) : null}
         </div>
-        <div className={styles["mobile-test"]}>
+        <div className={styles["desktop-category"]}>
           {Object.keys(contents).map((category, index) => {
             return (
               <div

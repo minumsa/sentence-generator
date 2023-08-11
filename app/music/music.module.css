@@ -462,7 +462,7 @@
     align-items: center;
   }
 
-  .mobile-test {
+  .desktop-category {
     display: none;
   }
 
@@ -474,7 +474,7 @@
     cursor: pointer;
   }
 
-  .hamburger {
+  .hamburger-icon {
     width: 20px;
     height: 1.5px;
     margin-top: 3px;
@@ -482,7 +482,7 @@
     box-shadow: 0 7px 0 #000000, 0 14px 0 #000000;
   }
 
-  .close {
+  .close-icon {
     display: flex;
     justify-content: center;
     align-items: center;
