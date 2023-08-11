@@ -31,7 +31,13 @@ export default function Page() {
             setShowCategory(!showCategory);
           }}
         >
-          <div className={styles["hamburger"]}></div>
+          <div
+            className={styles["hamburger"]}
+            style={{ display: showCategory ? "none" : "flex" }}
+          ></div>
+          <div className={styles["close"]} style={{ display: showCategory ? "flex" : "none" }}>
+            <div>×</div>
+          </div>
           {showCategory ? (
             <div className={styles["hamburger-category"]}>
               {Object.keys(contents).map((category, index) => {

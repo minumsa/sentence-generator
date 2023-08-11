@@ -482,6 +482,15 @@
     box-shadow: 0 7px 0 #000000, 0 14px 0 #000000;
   }
 
+  .close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 250;
+    padding-left: 4px;
+  }
+
   .mobile-bottom-container {
     display: flex;
     align-items: center;
@@ -545,12 +554,13 @@
     background-color: #ffffff;
     border-bottom: 1px solid #000000;
     width: 120px;
-    padding-bottom: 5px;
     font-size: 0.9rem;
+    padding-top: 7px;
+    padding-bottom: 10px;
   }
 
   .hamburger-content {
     text-align: right;
-    padding: 4px 16px;
+    padding: 5px 16px;
   }
 }
