@@ -29,6 +29,7 @@ export default function Page() {
             setShowCategory(!showCategory);
           }}
         >
+          {/* FIXME: 터치 영역 바꾸기 */}
           <div
             className={styles["hamburger-icon"]}
             style={{ display: showCategory ? "none" : "flex" }}

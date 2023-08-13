@@ -14,9 +14,9 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
+  // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
   const [currentMethod, setCurrentMethod] = useState<string>("발매일");
   const [currentCriteria, setCurrentCriteria] = useState<string>("내림차순");
-  const [mobileCurrentGenre, setMobileCurrentGenre] = useState<string>("ALL");
   const [mobileCurrentMethod, setMobileCurrentMethod] = useState<string>("RELEASE");
   const [mobileCurrentCriteria, setMobileCurrentCriteria] = useState<string>("DESC");
   const [mobileSortGenre, setMobileSortGenre] = useState<boolean>(false);
@@ -137,6 +137,8 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     );
   };
 
+  // FIXME: 모바일 정렬 기능 만들었던 거 다 빼기
+  // 로직의 내용물은 영어로만 쓰는 게 일반적이다.
   const sortedData = useMemo(() => {
     const dateSelector = (item: AlbumInfo) => {
       if (currentMethod === "작성일" || mobileCurrentMethod === "UPLOAD") {
@@ -174,6 +176,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     return newData;
   }, [data, currentMethod, currentCriteria, mobileCurrentMethod, mobileCurrentCriteria]);
 
+  // FIXME: 유니언 타입으로 바꾸기...
   const handleMouseEnter = (type: string) => {
     if (type === "method") {
       setSortMethod(true);
@@ -222,7 +225,8 @@ export default function Content({ pathName, fullPathName }: pageProps) {
           </div>
         )}
         {sortedData.map((data, index) => {
-          // FIXME: 시간을 나타내주는 함수(formatDuration())를 만들어라.
+          // FIXME: 시간을 나타내주는 유틸리티 함수(formatDuration())를 만들어라.
+          // utils.ts로 빼라.
           const minutes = Math.floor(data.duration / 60);
           const hours = Math.floor(minutes / 60);
 
