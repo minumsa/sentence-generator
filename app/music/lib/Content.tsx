@@ -291,6 +291,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                   </div>
                 </div>
                 <div className={styles["text-container"]}>
+                  {/* FIXME: 클릭하면 링크로 연결되는 기능 만들기 */}
                   {data.text.split("\n").map((text, index) => {
                     return (
                       <p key={index} className={styles["paragraph"]}>
