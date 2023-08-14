@@ -7,7 +7,6 @@ import Content from "../lib/Content";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: PageProps) {
-  // FIXME: Dynamic Routes params 방식으로 바꾸기
   const router = useRouter();
   const pathName = params.genre;
   const fullPathName = usePathname();

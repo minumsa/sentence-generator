@@ -4,8 +4,6 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents } from "../lib/data";
 import Content from "../lib/Content";
-import { useEffect, useState } from "react";
-import NoSSR from "@/app/divdivdiv/NoSSR";
 
 export default function Page() {
   // TODO: [slug]와 all 페이지 파일을 컴포넌트화시켜서 더 코드를 깔끔하게 만들 수 있다.

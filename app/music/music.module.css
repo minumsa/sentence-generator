@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
-/* FIXME: 구글폰트에서 fontWeight 100~900 전체 링크 받아와서 font-face로 자유롭게 쓰는 방법 알아내기. */
 @font-face {
   font-family: "GothicA1-Light";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2")
@@ -207,7 +205,8 @@
 .album-information {
   display: flex;
   flex-direction: column;
-  margin: 50px 0 0 50px;
+  justify-content: center;
+  margin-left: 50px;
 }
 
 .album-art {
@@ -235,6 +234,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 3px;
 }
 
 .input {
@@ -251,7 +251,7 @@
 .input-text {
   color: #000000;
   line-height: 180%;
-  height: 350px;
+  height: 400px;
 }
 
 .submit {
@@ -447,8 +447,8 @@
 
   /* FIXME: 왜 ellipsis 적용 안 될까? */
   .information {
-    overflow: hidden;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
 

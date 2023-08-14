@@ -1,13 +1,18 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
 import Image from "next/image";
-import { AlbumInfo, album, contents, deleteData, fetchData, sortItems } from "./data";
+import { AlbumInfo, sortItems } from "./data";
 import { useRouter } from "next/navigation";
+import { deleteData, fetchData } from "./api";
 
 interface pageProps {
   pathName: string;
   fullPathName: string;
 }
+
+type OrderType = "method" | "criteria";
+type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
+type CriteriaType = "오름차순" | "내림차순";
 
 export default function Content({ pathName, fullPathName }: pageProps) {
   const router = useRouter();
@@ -15,13 +20,8 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
-  const [currentMethod, setCurrentMethod] = useState<string>("발매일");
-  const [currentCriteria, setCurrentCriteria] = useState<string>("내림차순");
-  const [mobileCurrentMethod, setMobileCurrentMethod] = useState<string>("RELEASE");
-  const [mobileCurrentCriteria, setMobileCurrentCriteria] = useState<string>("DESC");
-  const [mobileSortGenre, setMobileSortGenre] = useState<boolean>(false);
-  const [mobileSortCriteria, setMobileSortCriteria] = useState<boolean>(false);
-  const [mobileSortMethod, setMobileSortMethod] = useState<boolean>(false);
+  const [currentMethod, setCurrentMethod] = useState<MethodType>("발매일");
+  const [currentCriteria, setCurrentCriteria] = useState<CriteriaType>("내림차순");
 
   useEffect(() => {
     async function loadData() {
@@ -38,10 +38,12 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     setCurrentOrder,
     sortWay,
   }: {
-    type: string;
+    type: OrderType;
     sortItem: string[];
-    currentOrder: string;
-    setCurrentOrder: React.Dispatch<React.SetStateAction<string>>;
+    currentOrder: MethodType | CriteriaType;
+    setCurrentOrder:
+      | React.Dispatch<React.SetStateAction<MethodType>>
+      | React.Dispatch<React.SetStateAction<CriteriaType>>;
     sortWay: boolean;
   }) => {
     return (
@@ -63,7 +65,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
               handleMouseEnter(type);
             }}
           >
-            {sortItem.map((item: string) => {
+            {sortItem.map((item: any) => {
               return (
                 <div
                   className={styles["criteria"]}
@@ -82,68 +84,12 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     );
   };
 
-  const MobileSortToggleButton = ({
-    type,
-    sortItem,
-    currentOrder,
-    setCurrentOrder,
-    sortWay,
-  }: {
-    type: string;
-    sortItem: string[];
-    currentOrder: string;
-    setCurrentOrder: React.Dispatch<React.SetStateAction<string>>;
-    sortWay: boolean;
-  }) => {
-    return (
-      <div
-        className={styles["mobile-sort-criteria-container"]}
-        onClick={() => {
-          handleTouch(type);
-        }}
-      >
-        <div>
-          {currentOrder}
-          {sortWay && (
-            <div
-              className={
-                type === "method"
-                  ? styles["mobile-sort-criteria-left"]
-                  : styles["mobile-sort-criteria-right"]
-              }
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                handleTouch(type);
-              }}
-            >
-              {/* TODO: 바깥쪽 클릭하면 활성화 메뉴창 사라지게 하기 */}
-              {sortItem.map((item: string) => {
-                return (
-                  <div
-                    className={styles["mobile-criteria"]}
-                    key={item}
-                    onClick={() => {
-                      setCurrentOrder(item);
-                    }}
-                  >
-                    {item}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  // FIXME: 모바일 정렬 기능 만들었던 거 다 빼기
-  // 로직의 내용물은 영어로만 쓰는 게 일반적이다.
+  // FIXME: 로직의 내용물은 영어로만 쓰는 게 일반적이다.
   const sortedData = useMemo(() => {
     const dateSelector = (item: AlbumInfo) => {
-      if (currentMethod === "작성일" || mobileCurrentMethod === "UPLOAD") {
+      if (currentMethod === "작성일") {
         return new Date(item.uploadDate).getTime();
-      } else if (currentMethod === "발매일" || mobileCurrentMethod === "RELEASE") {
+      } else if (currentMethod === "발매일") {
         return new Date(item.releaseDate).getTime();
       }
       return 0;
@@ -152,32 +98,31 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     const newData = [...data];
 
     newData.sort((a, b) =>
-      currentCriteria === "오름차순" || mobileCurrentCriteria === "ASC"
+      currentCriteria === "오름차순"
         ? dateSelector(a) - dateSelector(b)
         : dateSelector(b) - dateSelector(a)
     );
 
-    if (currentMethod === "아티스트" || mobileCurrentMethod === "ARTIST") {
+    if (currentMethod === "아티스트") {
       newData.sort((a, b) => {
-        return currentCriteria === "오름차순" || mobileCurrentCriteria === "ASC"
+        return currentCriteria === "오름차순"
           ? a.artist.localeCompare(b.artist)
           : b.artist.localeCompare(a.artist);
       });
     }
 
-    if (currentMethod === "앨범" || mobileCurrentMethod === "ALBUM") {
+    if (currentMethod === "앨범") {
       newData.sort((a, b) => {
-        return currentCriteria === "오름차순" || mobileCurrentCriteria === "ASC"
+        return currentCriteria === "오름차순"
           ? a.album.localeCompare(b.album)
           : b.album.localeCompare(a.album);
       });
     }
 
     return newData;
-  }, [data, currentMethod, currentCriteria, mobileCurrentMethod, mobileCurrentCriteria]);
+  }, [data, currentMethod, currentCriteria]);
 
-  // FIXME: 유니언 타입으로 바꾸기...
-  const handleMouseEnter = (type: string) => {
+  const handleMouseEnter = (type: OrderType) => {
     if (type === "method") {
       setSortMethod(true);
     } else if (type === "criteria") {
@@ -185,21 +130,11 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     }
   };
 
-  const handleMouseLeave = (type: string) => {
+  const handleMouseLeave = (type: OrderType) => {
     if (type === "method") {
       setSortMethod(false);
     } else if (type === "criteria") {
       setSortCriteria(false);
-    }
-  };
-
-  const handleTouch = (type: string) => {
-    if (type === "genre") {
-      setMobileSortGenre(!mobileSortGenre);
-    } else if (type === "method") {
-      setMobileSortMethod(!mobileSortMethod);
-    } else if (type === "criteria") {
-      setMobileSortCriteria(!mobileSortCriteria);
     }
   };
 
@@ -210,14 +145,14 @@ export default function Content({ pathName, fullPathName }: pageProps) {
           <div className={styles["sort-button-container"]}>
             <SortToggleButton
               type="method"
-              sortItem={sortItems.method.ko}
+              sortItem={sortItems.method}
               currentOrder={currentMethod}
               setCurrentOrder={setCurrentMethod}
               sortWay={sortMethod}
             />
             <SortToggleButton
               type="criteria"
-              sortItem={sortItems.criteria.ko}
+              sortItem={sortItems.criteria}
               currentOrder={currentCriteria}
               setCurrentOrder={setCurrentCriteria}
               sortWay={sortCriteria}
@@ -237,12 +172,6 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                   <div className={styles["album-art"]}>
                     <a className={styles["link"]} href={data.link} target="_blank">
                       <Image src={data.imgUrl} alt={data.album} fill={true} />
-                      {/* <Image
-                        src={data.imgUrl}
-                        alt={data.album}
-                        width={album.width}
-                        height={album.height}
-                      /> */}
                     </a>
                   </div>
                   <div className={` ${styles["album-information"]}`}>
@@ -306,22 +235,6 @@ export default function Content({ pathName, fullPathName }: pageProps) {
           );
         })}
       </div>
-      {/* <div className={styles["mobile-bottom-container"]}>
-        <MobileSortToggleButton
-          type="method"
-          sortItem={sortItems.method.en}
-          currentOrder={mobileCurrentMethod}
-          setCurrentOrder={setMobileCurrentMethod}
-          sortWay={mobileSortMethod}
-        />
-        <MobileSortToggleButton
-          type="criteria"
-          sortItem={sortItems.criteria.en}
-          currentOrder={mobileCurrentCriteria}
-          setCurrentOrder={setMobileCurrentCriteria}
-          sortWay={mobileSortCriteria}
-        />
-      </div> */}
     </div>
   );
 }
