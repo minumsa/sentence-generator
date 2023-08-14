@@ -87,6 +87,32 @@ export const updateData = async (id: string, data: Partial<AlbumInfo>, password:
   }
 };
 
+export const deleteData = async (id: string) => {
+  const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
+
+  try {
+    const response = await fetch("/api/music", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, password: userPassword }),
+    });
+
+    if (response.status === 401) {
+      alert("관리자 비밀번호가 틀렸습니다.");
+    } else if (response.status === 404) {
+      alert("존재하지 않는 앨범입니다.");
+    } else if (!response.ok) {
+      throw new Error("Failed to upload music data");
+    } else {
+      alert("데이터가 성공적으로 삭제되었습니다.");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const fetchSpotifyAccessToken = async () => {
   try {
     const url = "https://accounts.spotify.com/api/token";
@@ -171,32 +197,6 @@ export const fetchSpotify = async ({ albumId, genre, link, text }: UpdateInfo) =
     };
 
     return fetchedData;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const deleteData = async (id: string) => {
-  const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
-
-  try {
-    const response = await fetch("/api/music", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: id, password: userPassword }),
-    });
-
-    if (response.status === 401) {
-      alert("관리자 비밀번호가 틀렸습니다.");
-    } else if (response.status === 404) {
-      alert("존재하지 않는 앨범입니다.");
-    } else if (!response.ok) {
-      throw new Error("Failed to upload music data");
-    } else {
-      alert("데이터가 성공적으로 삭제되었습니다.");
-    }
   } catch (error) {
     console.error(error);
   }

@@ -30,7 +30,7 @@ npm run dev
 
 ## 코드 스니펫
 
-### 몽고DB의 데이터를 가져오는 부분
+### 몽고DB의 데이터를 가져오(GET)는 부분
 
 `pathName`에 따라 서버로부터 음악 데이터를 가져오는 역할을 합니다. API를 호출해 응답을 받아 데이터를 필터링한 후 반환합니다.
 
@@ -39,12 +39,205 @@ npm run dev
 
 export async function fetchData(pathName: string) {
   try {
-    // ... (fetching data from API)
+    const response = await fetch("/api/music", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload music data");
+    }
+
+    let data = await response.json();
+
+    if (pathName === "admin") pathName = "";
+    if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
+    if (pathName.length > 20) {
+      data = data.filter((item: { id: string }) => item.id === pathName)[0];
+    } else if (pathName !== "") {
+      data = data.filter((item: { genre: string }) => item.genre === pathName);
+    }
+
     return data;
   } catch (error) {
     console.error(error);
   }
 }
+```
+
+### 몽고DB에 데이터를 업로드(POST)하는 부분
+
+앨범 정보와 관리자 비밀번호를 받아와 서버로 데이터를 업로드하는 역할을 합니다. API를 호출해 업로드 결과에 따라 알림을 출력합니다.
+
+```typescript
+// api.ts
+
+export async function uploadData(albumData: AlbumInfo, password: string) {
+  if (albumData !== null) {
+    try {
+      const response = await fetch("/api/music", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: albumData,
+          password: password,
+        }),
+      });
+
+      if (response.status === 401) {
+        alert("관리자 비밀번호가 틀렸습니다.");
+      } else if (response.status === 409) {
+        alert("이미 존재하는 데이터입니다.");
+      } else if (!response.ok) {
+        throw new Error("데이터 업로드에 실패했습니다.");
+      } else {
+        alert("데이터가 성공적으로 저장되었습니다.");
+      }
+
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
+}
+```
+
+### 몽고DB의 데이터를 수정(PUT)하는 부분
+
+앨범 정보와 관리자 비밀번호를 받아와 서버로 데이터를 업로드하는 역할을 합니다. API를 호출해 업로드 결과에 따라 알림을 출력합니다.
+
+```typescript
+// api.ts
+
+export const updateData = async (id: string, data: Partial<AlbumInfo>, password: string) => {
+  if (data !== null) {
+    try {
+      const response = await fetch("/api/music", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ albumId: id, data: data, password: password }),
+      });
+
+      if (response.status === 401) {
+        alert("관리자 비밀번호가 틀렸습니다.");
+      } else if (response.status === 404) {
+        alert("존재하지 않는 앨범입니다.");
+      } else if (!response.ok) {
+        throw new Error("데이터 수정에 실패했습니다.");
+      } else {
+        alert("데이터가 성공적으로 수정되었습니다.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+```
+
+### 몽고DB의 데이터를 삭제(DELETE)하는 부분
+
+앨범 ID를 받아서 서버로부터 데이터를 삭제하는 역할을 합니다. API를 호출해 삭제 결과에 따라 알림을 출력합니다.
+
+```typescript
+// api.ts
+
+export const deleteData = async (id: string) => {
+  const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
+
+  try {
+    const response = await fetch("/api/music", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id, password: userPassword }),
+    });
+
+    if (response.status === 401) {
+      alert("관리자 비밀번호가 틀렸습니다.");
+    } else if (response.status === 404) {
+      alert("존재하지 않는 앨범입니다.");
+    } else if (!response.ok) {
+      throw new Error("Failed to upload music data");
+    } else {
+      alert("데이터가 성공적으로 삭제되었습니다.");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
+
+### Spotify에서 음악 데이터를 가져오는 부분
+
+앨범 ID, 장르, 링크, 텍스트 정보를 받아서 Spotify에서 앨범 데이터를 가져오는 역할을 합니다. Spotify API를 이용해 데이터를 요청하고, 가져온 데이터를 형식에 맞게 가공해 반환합니다.
+
+```typescript
+// api.ts
+
+export const fetchSpotify = async ({ albumId, genre, link, text }: UpdateInfo) => {
+  if (!albumId || !genre || !link || !text) {
+    alert("모든 항목을 채워주세요.");
+    return;
+  }
+
+  const item = {
+    albumId: albumId,
+    genre: genre,
+    link: link,
+    text: text,
+    uploadDate: Date(),
+  };
+
+  try {
+    const accessToken = await fetchSpotifyAccessToken();
+    if (!accessToken) {
+      console.error("Error: Access token is not available");
+    }
+
+    const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+    const dataResponse = await fetch(url, { headers });
+
+    if (!dataResponse.ok) {
+      console.error("Error: music fetch failed");
+    }
+
+    const data = await dataResponse.json();
+
+    const fetchedData: AlbumInfo = {
+      id: data.id,
+      imgUrl: data.images[0].url,
+      artist: data.artists[0].name,
+      album: data.name,
+      label: data.label,
+      releaseDate: data.release_date,
+      text: item.text,
+      genre: item.genre,
+      link: item.link,
+      uploadDate: item.uploadDate,
+      tracks: data.tracks.items.length,
+      duration: Math.floor(
+        data.tracks.items
+          .map((data: any) => data.duration_ms)
+          .reduce((a: number, b: number) => a + b) / 1000
+      ),
+    };
+
+    return fetchedData;
+  } catch (error) {
+    console.error(error);
+  }
+};
 ```
 
 ### 정렬 버튼 이벤트 핸들러 부분
