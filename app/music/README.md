@@ -1,5 +1,6 @@
-## 링크
+<img width="1791" alt="image" src="https://github.com/minumsa/divdivdiv/assets/83910706/57b94be0-91a7-4291-b0b9-60c659f8fee4">
 
+## 링크
 https://divdivdiv.com/music
 
 ## 프로젝트 설명
