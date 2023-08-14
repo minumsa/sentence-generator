@@ -34,7 +34,7 @@ npm run dev
 
 ### 몽고DB의 데이터를 가져오(GET)는 부분
 
-`pathName`에 따라 서버로부터 음악 데이터를 가져오는 역할을 합니다. API를 호출해 응답을 받아 데이터를 필터링한 후 반환합니다.
+`pathName`에 따라 서버로부터 음악 데이터를 가져옵니다. API를 호출해 응답을 받아 데이터를 필터링한 후 반환합니다.
 
 ```typescript
 // api.ts
@@ -71,7 +71,7 @@ export async function fetchData(pathName: string) {
 
 ### 몽고DB에 데이터를 업로드(POST)하는 부분
 
-앨범 정보와 관리자 비밀번호를 받아와 서버로 데이터를 업로드하는 역할을 합니다. API를 호출해 업로드 결과에 따라 알림을 출력합니다.
+앨범 정보와 관리자 비밀번호를 받아와 서버로 데이터를 업로드합니다. API를 호출해 업로드 결과에 따라 알림을 출력합니다.
 
 ```typescript
 // api.ts
@@ -111,7 +111,7 @@ export async function uploadData(albumData: AlbumInfo, password: string) {
 
 ### 몽고DB의 데이터를 수정(PUT)하는 부분
 
-앨범 정보와 관리자 비밀번호를 받아와 서버로 데이터를 업로드하는 역할을 합니다. API를 호출해 업로드 결과에 따라 알림을 출력합니다.
+앨범 정보와 관리자 비밀번호를 받아와 서버로 데이터를 업로드합니다. API를 호출해 업로드 결과에 따라 알림을 출력합니다.
 
 ```typescript
 // api.ts
@@ -145,7 +145,7 @@ export const updateData = async (id: string, data: Partial<AlbumInfo>, password:
 
 ### 몽고DB의 데이터를 삭제(DELETE)하는 부분
 
-앨범 ID를 받아서 서버로부터 데이터를 삭제하는 역할을 합니다. API를 호출해 삭제 결과에 따라 알림을 출력합니다.
+앨범 ID를 받아서 서버로부터 데이터를 삭제합니다. API를 호출해 삭제 결과에 따라 알림을 출력합니다.
 
 ```typescript
 // api.ts
@@ -179,7 +179,7 @@ export const deleteData = async (id: string) => {
 
 ### Spotify에서 음악 데이터를 가져오는 부분
 
-앨범 ID, 장르, 링크, 텍스트 정보를 받아서 Spotify에서 앨범 데이터를 가져오는 역할을 합니다. Spotify API를 이용해 데이터를 요청하고, 가져온 데이터를 형식에 맞게 가공해 반환합니다.
+앨범 ID, 장르, 링크, 텍스트 정보를 받아서 Spotify에서 앨범 데이터를 가져옵니다. Spotify API를 이용해 데이터를 요청하고, 가져온 데이터를 형식에 맞게 가공해 반환합니다.
 
 ```typescript
 // api.ts
