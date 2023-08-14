@@ -1,4 +1,4 @@
-![스크린샷 2023-07-24 오후 6 35 50](https://github.com/minumsa/divdivdiv/assets/83910706/e0c3e960-6ffd-4596-adbf-1687455985f1)
+<img width="1788" alt="image" src="https://github.com/minumsa/divdivdiv/assets/83910706/eaf2df5c-60e4-4092-9caa-5783e00c5cab">
 
 ## 링크
 
