@@ -91,6 +91,17 @@ export const readme = {
     },
     emoji: "✍️",
   },
+  music: {
+    title: {
+      ko: "카버 차트",
+      en: "Carver Chart",
+    },
+    text: {
+      ko: "좋아하는 음반을 소개하는 페이지입니다. 스포티파이에서 제공하는 API를 활용해 음반 정보, 짧은 글을 함께 업로드합니다. 관리자 페이지에서 암호를 입력하면 글을 쓰거나 수정, 삭제할 수 있습니다. 관련 데이터는 모두 MongoDB에 저장했습니다.",
+      en: "The project I'm currently working on is a page that introduces favorite albums. It utilizes the Spotify API to upload album information along with short write-ups. When the administrator enters a password on the management page, they can write, modify, or delete the write-ups. All relevant data is stored in MongoDB.",
+    },
+    emoji: "🎶",
+  },
   cinephile: {
     title: {
       en: "Cinephile Test",
@@ -123,17 +134,6 @@ export const readme = {
       en: "This page was created to commemorate the 2023 Pride Month. Predefined subjects, objects, and verbs are randomly combined to generate various sentences, depending on the circumstances.",
     },
     emoji: "🌈",
-  },
-  music: {
-    title: {
-      ko: "카버 차트",
-      en: "Carver Chart",
-    },
-    text: {
-      ko: "현재 작업 중인 프로젝트로, 좋아하는 음반을 소개하는 페이지입니다. 스포티파이에서 제공하는 API를 활용해 음반 정보, 짧은 글을 함께 업로드합니다. 관리자 페이지에서 암호를 입력하면 글을 쓰거나 수정, 삭제할 수 있습니다. 관련 데이터는 모두 MongoDB에 저장해두었습니다.",
-      en: "The project I'm currently working on is a page that introduces favorite albums. It utilizes the Spotify API to upload album information along with short write-ups. When the administrator enters a password on the management page, they can write, modify, or delete the write-ups. All relevant data is stored in MongoDB.",
-    },
-    emoji: "🎶",
   },
 };
 

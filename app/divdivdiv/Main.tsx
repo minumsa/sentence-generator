@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";

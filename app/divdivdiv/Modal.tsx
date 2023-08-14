@@ -79,10 +79,10 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
           {readme.lastUpdated.text[language]}
         </div>
         <ReadmeComponent path="https://blog.divdivdiv.com" icon={readme.blog} />
+        <ReadmeComponent path="/music" icon={readme.music} />
         <ReadmeComponent path="/cinephile" icon={readme.cinephile} />
         <ReadmeComponent path="/fruits" icon={readme.fruits} />
         <ReadmeComponent path="/pride" icon={readme.pride} />
-        <ReadmeComponent path="/music" icon={readme.music} />
         <ReadmeComponent path="/" icon={readme.techStack} />
       </div>
     </div>
