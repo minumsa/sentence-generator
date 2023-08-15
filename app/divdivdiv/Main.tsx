@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";
-import { LanguageContext, fortune, iconTitle, readme } from "./data";
+import { Language, LanguageContext, fortune, iconTitle, readme } from "./data";
 import { ImageModal } from "./Modal";
 
 const iconSize = {
@@ -35,6 +35,34 @@ export default function Main() {
     setImgAlt("");
   };
 
+  return (
+    // TODO: 코드 정리하고 관련 개념 기록해두기.
+    // 문제 해결 경험 중심으로 블로그에 작성하기. (모든 걸 다 x)
+    <div className={isMobile ? styles["mobile-icon-container"] : ""}>
+      {showImage && (
+        <ImageModal isMobile={isMobile} src={imgSrc} alt={imgAlt} onClick={handleModalClick} />
+      )}
+      <MemoizedIcons
+        setImgSrc={setImgSrc}
+        setImgAlt={setImgAlt}
+        setShowImage={setShowImage}
+        language={language}
+        isMobile={isMobile}
+      />
+    </div>
+  );
+}
+
+interface IconsProps {
+  setImgSrc: React.Dispatch<React.SetStateAction<string>>;
+  setImgAlt: React.Dispatch<React.SetStateAction<string>>;
+  setShowImage: React.Dispatch<React.SetStateAction<boolean>>;
+  language: Language;
+  isMobile: boolean;
+}
+
+function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: IconsProps) {
+  console.log("Icons render");
   const handleImageClick = (path: string) => {
     if (path === "readme") {
       setImgSrc(`/divdivdiv/readme-${language}.webp`);
@@ -114,10 +142,7 @@ export default function Main() {
   }
 
   return (
-    <div className={isMobile ? styles["mobile-icon-container"] : ""}>
-      {showImage && (
-        <ImageModal isMobile={isMobile} src={imgSrc} alt={imgAlt} onClick={handleModalClick} />
-      )}
+    <div>
       <DraggableComponent
         className="icon-blog"
         path="https://blog.divdivdiv.com"
@@ -193,3 +218,8 @@ export default function Main() {
     </div>
   );
 }
+
+// useMemo와 memo의 차이점
+// useMemo는 훅. 컴포넌트 내에서 useMemo를 해서 특정 값을 저장해두었다가 반복되면 다시 계산하지 않는다.
+// memo는 훅이 아님. memo는 컴포넌트를 컴포넌트로 바꿔준다(감싸준다). props의 값이 바뀌지 않으면 렌더링을 발생시키지 않는다.
+const MemoizedIcons = memo(Icons);
