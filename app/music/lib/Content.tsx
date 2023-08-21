@@ -159,7 +159,20 @@ export default function Content({ pathName, fullPathName }: pageProps) {
             />
           </div>
         )}
-        {data ? (
+        {sortedData.length === 0 ? (
+          <div
+            style={{
+              width: "100%",
+              height: "90vh",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div>데이터를 불러오는 중입니다...</div>
+          </div>
+        ) : (
           sortedData.map((data, index) => {
             // FIXME: 시간을 나타내주는 유틸리티 함수(formatDuration())를 만들어라.
             // utils.ts로 빼라.
@@ -235,8 +248,6 @@ export default function Content({ pathName, fullPathName }: pageProps) {
               </div>
             );
           })
-        ) : (
-          <div>데이터를 불러오고 있습니다...</div>
         )}
       </div>
     </div>
