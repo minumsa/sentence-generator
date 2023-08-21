@@ -62,7 +62,6 @@ interface IconsProps {
 }
 
 function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: IconsProps) {
-  console.log("Icons render");
   const handleImageClick = (path: string) => {
     if (path === "readme") {
       setImgSrc(`/divdivdiv/readme-${language}.webp`);
