@@ -141,7 +141,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
   }
 
   return (
-    <div>
+    <React.Fragment>
       <DraggableComponent
         className="icon-blog"
         path="https://blog.divdivdiv.com"
@@ -214,7 +214,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
         width={iconSize.image.width}
         height={iconSize.image.height}
       />
-    </div>
+    </React.Fragment>
   );
 }
 
