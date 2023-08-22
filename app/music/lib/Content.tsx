@@ -160,16 +160,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
           </div>
         )}
         {sortedData.length === 0 ? (
-          <div
-            style={{
-              width: "100%",
-              height: "90vh",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className={styles["loading"]}>
             <div>데이터를 불러오는 중입니다...</div>
           </div>
         ) : (
