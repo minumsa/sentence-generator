@@ -9,10 +9,7 @@ https://divdivdiv.com
 개인 프로젝트를 업로드하는 포트폴리오 페이지입니다.
 
 ## 기술 스텍
-
-- ![Next][Next.js]
-- ![React][React.js]
-- ![TypeScript][TypeScript]
+![Next][Next.js] ![React][React.js] ![TypeScript][TypeScript]
 
 ## 동작 방법
 
