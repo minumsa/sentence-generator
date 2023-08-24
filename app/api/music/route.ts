@@ -1,6 +1,5 @@
-import connectMongoDB from "@/libs/mongodb";
+import connectMongoDB from "@/app/music/lib/mongodb";
 import Music from "@/models/music";
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
