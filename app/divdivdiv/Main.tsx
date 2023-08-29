@@ -5,6 +5,7 @@ import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";
 import { Language, LanguageContext, fortune, iconTitle, readme } from "./data";
 import { ImageModal } from "./Modal";
+import NoSSR from "./NoSSR";
 
 const iconSize = {
   folder: {
@@ -27,7 +28,24 @@ export default function Main() {
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  const isMobile: boolean = windowWidth < 630;
+  const isMobile: boolean = windowWidth < 620;
+
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+  }, [windowWidth]);
 
   const handleModalClick = () => {
     setShowImage(false);

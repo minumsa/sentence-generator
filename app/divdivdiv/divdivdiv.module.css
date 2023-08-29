@@ -301,7 +301,7 @@
   }
 }
 
-@media (max-width: 629px) {
+@media (max-width: 620px) {
   .icon {
     position: relative;
     padding-bottom: 20px;
@@ -366,6 +366,7 @@
     padding: 1px 5px;
     margin: 0 5px;
     font-size: 13px;
+    display: none;
   }
 
   .language {
@@ -386,7 +387,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 499px) {
   .button-left {
     margin: 0 7px;
     cursor: pointer;
