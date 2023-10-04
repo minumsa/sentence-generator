@@ -177,6 +177,14 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
         height={iconSize.folder.height}
       />
       <DraggableComponent
+        className="icon-barbershop"
+        path="https://barbershop.divdivdiv.com"
+        type="folder"
+        title={iconTitle.barbershop}
+        width={iconSize.folder.width}
+        height={iconSize.folder.height}
+      />
+      <DraggableComponent
         className="icon-cinephile"
         path="/cinephile"
         type="folder"

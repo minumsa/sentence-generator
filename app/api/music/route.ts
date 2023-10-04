@@ -119,7 +119,7 @@ export async function PUT(request: Request) {
       tracks,
     } = data;
 
-    if (password !== process.env.UPROAD_PASSWORD)
+    if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
     const existingData = await Music.findOne({ id });

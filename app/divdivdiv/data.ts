@@ -65,8 +65,8 @@ export const fortune = {
 export const readme = {
   lastUpdated: {
     text: {
-      ko: "최근 업데이트: 2023년 7월 26일",
-      en: "Last Updated: 2023-07-26",
+      ko: "최근 업데이트: 2023년 10월 4일",
+      en: "Last Updated: 2023-10-04",
     },
   },
   techStack: {
@@ -101,6 +101,17 @@ export const readme = {
       en: "The project I'm currently working on is a page that introduces favorite albums. It utilizes the Spotify API to upload album information along with short write-ups. When the administrator enters a password on the management page, they can write, modify, or delete the write-ups. All relevant data is stored in MongoDB.",
     },
     emoji: "🎶",
+  },
+  barbershop: {
+    title: {
+      ko: "바버샵 찾기",
+      en: "Barbershop",
+    },
+    text: {
+      ko: "작성하지 않음",
+      en: "test",
+    },
+    emoji: "💈",
   },
   cinephile: {
     title: {
@@ -145,6 +156,10 @@ export const iconTitle = {
   music: {
     en: "Carver Chart",
     ko: "카버 차트",
+  },
+  barbershop: {
+    en: "Barbershop",
+    ko: "바버샵 찾기",
   },
   cinephile: {
     en: "Cinephile",

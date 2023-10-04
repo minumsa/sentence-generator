@@ -49,19 +49,24 @@
   left: 230px;
 }
 
-.icon-cinephile {
+.icon-barbershop {
   top: 100px;
   left: 360px;
 }
 
-.icon-pride {
+.icon-cinephile {
   top: 100px;
   left: 490px;
 }
 
-.icon-fruits {
+.icon-pride {
   top: 100px;
   left: 620px;
+}
+
+.icon-fruits {
+  top: 100px;
+  left: 750px;
 }
 
 .icon-me {
@@ -343,7 +348,8 @@
   .icon-me,
   .icon-fortune,
   .icon-readme,
-  .icon-music {
+  .icon-music,
+  .icon-barbershop {
     top: unset;
     left: unset;
     right: unset;
