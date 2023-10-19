@@ -4,11 +4,11 @@
 
 ## 링크
 
-https://divdivdiv.com/pride
+https://divdivdiv.com/words
 
 ## 프로젝트 설명
 
-2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해둔 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다.
+데이터베이스에 있는 약 100개의 단어들이 경우의 수에 따라 랜덤하게 조합되며 화면에 다양한 직유법을 만들어냅니다.
 
 ## 기술 스텍
 
@@ -30,7 +30,7 @@ npm run dev
 1. `layout.tsx`: 메타데이터 정보를 정의하고 컴포넌트를 구성합니다.
 2. `page.tsx`: 랜덤하게 조합되며 생성되는 문장을 보여줍니다.
 3. `words.ts`: 주어, 문장, 동사에 해당하는 문자열의 배열을 저장합니다.
-4. `pride.module.css`: 전체 웹의 CSS를 담당합니다.
+4. `words.module.css`: 전체 웹의 CSS를 담당합니다.
 
 ## 코드 스니펫
 
@@ -66,15 +66,13 @@ const generateRandomColor = (): string => {
 // page.tsx
 
 export default function RandomSentenceGenerator() {
-  const [randomSubject, setRandomSubject] = useState<string>("Pride");
-  const [randomObject, setRandomObject] = useState<string>("Month");
-  const [randomVerb, setRandomVerb] = useState<string>("2023");
+   const [randomWord1, setRandomWord1] = useState<string>(words[0]);
+  const [randomWord2, setRandomWord2] = useState<string>(words[9]);
   const [isRunning, setIsRunning] = useState<boolean>(true);
 
   const generateRandomSentence = () => {
-    setRandomSubject(getRandomItemFromArray(subjects));
-    setRandomObject(getRandomItemFromArray(objects));
-    setRandomVerb(getRandomItemFromArray(verbs));
+    setRandomWord1(getRandomItemFromArray(words));
+    setRandomWord2(getRandomItemFromArray(words));
   };
 
   useEffect(() => {

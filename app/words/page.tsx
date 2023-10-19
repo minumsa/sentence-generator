@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import styles from "./pride.module.css";
+import styles from "./words.module.css";
 import { words } from "./words";
 
 // 따로 뺀 거 좋다. 컴포넌트와 관계 없는 로직이란 것을 보여줘서. 이 함수 내에서 컴포넌트 안에 있는 변수를 사용하지 않는다는 걸 보장해줘서.

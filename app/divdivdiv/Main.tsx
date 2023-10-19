@@ -201,10 +201,10 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
         height={iconSize.folder.height}
       />
       <DraggableComponent
-        className="icon-pride"
-        path="/pride"
+        className="icon-words"
+        path="/words"
         type="folder"
-        title={iconTitle.pride}
+        title={iconTitle.words}
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />

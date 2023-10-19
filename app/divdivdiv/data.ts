@@ -135,14 +135,14 @@ export const readme = {
     },
     emoji: "🍇",
   },
-  pride: {
+  words: {
     title: {
       ko: "문장 생성기",
       en: "Sentence Generator",
     },
     text: {
-      ko: "2023 프라이드 먼스를 기념해 만든 페이지로, 미리 입력해둔 주어와 목적어, 동사가 경우의 수에 따라 랜덤하게 조합되며 다양한 문장을 만들어냅니다.",
-      en: "This page was created to commemorate the 2023 Pride Month. Predefined subjects, objects, and verbs are randomly combined to generate various sentences, depending on the circumstances.",
+      ko: "데이터베이스에 있는 약 100개의 단어들이 경우의 수에 따라 랜덤하게 조합되며 화면에 다양한 직유법을 만들어냅니다.",
+      en: "About 100 words in the database are randomly combined based on various possibilities to create different scenarios.",
     },
     emoji: "🌈",
   },
@@ -169,7 +169,7 @@ export const iconTitle = {
     en: "Fruits",
     ko: "과일 생성기",
   },
-  pride: {
+  words: {
     en: "Sentence Generator",
     ko: "문장 생성기",
   },

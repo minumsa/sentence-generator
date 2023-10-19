@@ -82,7 +82,7 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
         <ReadmeComponent path="/music" icon={readme.music} />
         <ReadmeComponent path="/cinephile" icon={readme.cinephile} />
         <ReadmeComponent path="/fruits" icon={readme.fruits} />
-        <ReadmeComponent path="/pride" icon={readme.pride} />
+        <ReadmeComponent path="/words" icon={readme.words} />
         <ReadmeComponent path="/" icon={readme.techStack} />
       </div>
     </div>
