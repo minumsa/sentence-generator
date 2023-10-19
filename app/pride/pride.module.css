@@ -2,10 +2,9 @@
   width: 100vw;
   height: 100vh;
   background-color: #000000;
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .sentence-container {
@@ -16,7 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4.7vw;
+  font-size: 5rem;
   font-weight: 900;
 }
 
@@ -24,25 +23,14 @@
   cursor: pointer;
 }
 
-.subject,
-.object,
-.verb {
+.word1,
+.word2,
+.word3 {
   display: inline-block;
   margin-right: 0.2em;
 }
 
-.mobile-container {
-  display: none;
-}
-
-@media (max-width: 1000px) {
-  .mobile-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-  }
-
+/* @media (max-width: 1000px) {
   .sentence-container {
     text-align: center;
   }
@@ -50,42 +38,12 @@
   .sentence {
     display: none;
   }
+} */
 
-  .mobile-sentence {
-    display: flex;
-    font-size: 10vw;
-    word-break: keep-all;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
-  }
-
-  .mobile-subject,
-  .mobile-object,
-  .mobile-verb {
-    display: inline-block;
-    font-size: 8vw;
-  }
-
-  .mobile-object {
-    margin-left: 1.8vw;
-  }
-
-  .mobile-verb {
-    height: 15vh;
-    margin-top: 3vh;
-  }
-}
-
-@media (max-width: 500px) {
+@media (max-width: 510px) {
   .sentence-container {
     height: 92%;
     width: 100%;
-  }
-
-  .mobile-verb {
-    height: 0;
+    font-size: 2rem;
   }
 }
