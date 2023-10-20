@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
-import Image from "next/image";
 import { AlbumInfo, sortItems } from "./data";
 import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "./api";
@@ -176,7 +175,8 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                   <div className={styles["album-information-container"]}>
                     <div className={styles["album-art"]}>
                       <a className={styles["link"]} href={data.link} target="_blank">
-                        <Image src={data.imgUrl} alt={data.album} fill={true} />
+                        <img src={data.imgUrl} alt={data.album} loading="lazy" />
+                        {/* <Image src={data.imgUrl} alt={data.album} fill={true} /> */}
                       </a>
                     </div>
                     <div className={` ${styles["album-information"]}`}>

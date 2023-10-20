@@ -88,7 +88,8 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
     </div>
   ) : (
     <div className={styles["modal-image"]} onClick={onClick}>
-      <Image src={src} alt={alt} width={width} height={height} />
+      {/* <Image src={src} alt={alt} width={width} height={height} /> */}
+      <img src={src} alt={alt} loading="lazy" width={width} height={height} />
     </div>
   );
 };
