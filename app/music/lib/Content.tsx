@@ -173,9 +173,14 @@ export default function Content({ pathName, fullPathName }: pageProps) {
               <div key={index}>
                 <div className={styles["album-container"]}>
                   <div className={styles["album-information-container"]}>
-                    <div className={styles["album-art"]}>
+                    <div>
                       <a className={styles["link"]} href={data.link} target="_blank">
-                        <img src={data.imgUrl} alt={data.album} loading="lazy" />
+                        <img
+                          className={styles["album-art"]}
+                          src={data.imgUrl}
+                          alt={data.album}
+                          loading="lazy"
+                        />
                         {/* <Image src={data.imgUrl} alt={data.album} fill={true} /> */}
                       </a>
                     </div>
