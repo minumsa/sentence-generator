@@ -98,18 +98,18 @@ export const readme = {
     },
     text: {
       ko: "좋아하는 음반을 소개하는 페이지입니다. 스포티파이에서 제공하는 API를 활용해 음반 정보, 짧은 글을 함께 업로드합니다. 관리자 페이지에서 암호를 입력하면 글을 쓰거나 수정, 삭제할 수 있습니다. 관련 데이터는 모두 MongoDB에 저장했습니다.",
-      en: "The project I'm currently working on is a page that introduces favorite albums. It utilizes the Spotify API to upload album information along with short write-ups. When the administrator enters a password on the management page, they can write, modify, or delete the write-ups. All relevant data is stored in MongoDB.",
+      en: "This is a page where you can introduce your favorite albums. It utilizes the API provided by Spotify to upload album information and short descriptions. On the admin page, you can enter a password to write, edit, or delete posts. All related data is stored in MongoDB.",
     },
     emoji: "🎶",
   },
   barbershop: {
     title: {
-      ko: "바버샵 찾기",
-      en: "Barbershop",
+      ko: "바버샵 파인더",
+      en: "Barbershop Finder",
     },
     text: {
-      ko: "작성하지 않음",
-      en: "test",
+      ko: "검색어를 입력하면 해당 지역에 있는 바버샵을 찾아줍니다. 화면 좌측에는 바버샵 검색 결과를 리스트 형태로 보여주는 메인 탭, 우측에는 네이버 지도 API가 제공됩니다. 지도의 핀을 클릭하면 바버샵에 관한 간단한 정보가 모달 창으로 표시되며, 더보기를 누르면 상세 탭으로 이동합니다.",
+      en: "When you enter a search term, this page will help you find barbershops in the respective area. The main tab on the left of this page displays barbershop search results in a list format, while on the right, the Naver Maps API is provided. Clicking on a pin on the map will display basic information about the barbershop in a modal window, and clicking 'More' will take you to the detailed tab.",
     },
     emoji: "💈",
   },
@@ -137,7 +137,7 @@ export const readme = {
   },
   words: {
     title: {
-      ko: "문장 생성기",
+      ko: "직유법",
       en: "Sentence Generator",
     },
     text: {

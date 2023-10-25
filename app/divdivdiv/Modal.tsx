@@ -80,6 +80,7 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
         </div>
         <ReadmeComponent path="https://blog.divdivdiv.com" icon={readme.blog} />
         <ReadmeComponent path="/music" icon={readme.music} />
+        <ReadmeComponent path="/barbershop" icon={readme.barbershop} />
         <ReadmeComponent path="/cinephile" icon={readme.cinephile} />
         <ReadmeComponent path="/fruits" icon={readme.fruits} />
         <ReadmeComponent path="/words" icon={readme.words} />
