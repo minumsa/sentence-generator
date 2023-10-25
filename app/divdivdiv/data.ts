@@ -159,7 +159,7 @@ export const iconTitle = {
   },
   barbershop: {
     en: "Barbershop",
-    ko: "바버샵 찾기",
+    ko: "바버샵 파인더",
   },
   cinephile: {
     en: "Cinephile",
@@ -171,7 +171,7 @@ export const iconTitle = {
   },
   words: {
     en: "Sentence Generator",
-    ko: "문장 생성기",
+    ko: "직유법",
   },
   cat: {
     en: "cat.webp",
