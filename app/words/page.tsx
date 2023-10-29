@@ -45,19 +45,21 @@ export default function RandomSentenceGenerator() {
     const elementToCapture = document.querySelector(`.${styles["sentence-container"]}`);
 
     html2canvas(elementToCapture as HTMLElement).then(canvas => {
-      canvas.toBlob(blob => {
-        if (blob) {
-          const item = new ClipboardItem({ "image/png": blob });
-          navigator.clipboard
-            .write([item])
-            .then(() => {
-              console.log("전체 화면이 클립보드에 복사되었습니다.");
-            })
-            .catch(error => {
-              console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
-            });
-        }
-      });
+      if (canvas) {
+        canvas.toBlob(blob => {
+          if (blob) {
+            const item = new ClipboardItem({ "image/png": blob });
+            navigator.clipboard
+              .write([item])
+              .then(() => {
+                console.log("전체 화면이 클립보드에 복사되었습니다.");
+              })
+              .catch(error => {
+                console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
+              });
+          }
+        });
+      }
     });
   };
 
