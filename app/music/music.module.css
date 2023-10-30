@@ -209,6 +209,11 @@
   position: relative;
   width: 300px;
   height: 300px;
+  -webkit-box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+}
+
+.album-art:hover {
+  -webkit-box-shadow: 0 8px 40px rgba(0, 0, 0, 1.5);
 }
 
 .link {
@@ -420,6 +425,7 @@
   .album-art {
     width: 280px;
     height: 280px;
+    -webkit-box-shadow: none;
   }
 
   /* FIXME: 왜 ellipsis 적용 안 될까? */

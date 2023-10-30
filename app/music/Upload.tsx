@@ -30,7 +30,7 @@ export default function Upload({ variablePathName }: UploadProps) {
 
     if (newAlbumData) {
       await uploadData(newAlbumData, password);
-      router.push("/music/admin");
+      // router.push("/music/admin");
     }
   };
 
@@ -62,11 +62,19 @@ export default function Upload({ variablePathName }: UploadProps) {
     title === "수정" && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
   }, [albumId, genre, link, text]);
 
+  console.log(password);
+
   return (
     <React.Fragment>
       <div className={styles["album-container"]}>
-        <div className={styles["title"]}>{`｟${title} 페이지 ｠`}</div>
-        <div>앨범 ID(Spotify)</div>
+        <div className={styles["title"]}>{`${title} 페이지`}</div>
+        <a
+          href="https://open.spotify.com/search"
+          target="_blank"
+          style={{ textDecoration: "none", color: "#000" }}
+        >
+          <div>앨범 ID(Spotify)</div>
+        </a>
         <textarea
           className={styles["input"]}
           value={albumId}
