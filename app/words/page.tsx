@@ -39,6 +39,7 @@ export default function RandomSentenceGenerator() {
     generateRandomSentence();
   };
 
+  // FIXME: 모바일에선 캡처 기능이 작동하지 않아서 일단 보이지 않게 해뒀음
   const handleCapture = () => {
     const elementToCapture = document.querySelector(`.${styles["sentence-container"]}`);
 
@@ -63,6 +64,8 @@ export default function RandomSentenceGenerator() {
 
   return (
     <div className={styles["container"]}>
+      {/* FIXME: 가로 기준 가운데 정렬하기 */}
+      {/* FIXME: 캡처 버튼 눌렀을 때만 작동시키기 */}
       <div className={styles["fade-in-out-text"]}>Screenshot copied to clipboard!</div>
       <div className={styles["capture-icon"]} onClick={handleCapture}>
         <FontAwesomeIcon icon={faCamera} />
