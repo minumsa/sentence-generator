@@ -233,7 +233,12 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                     {/* FIXME: 클릭하면 링크로 연결되는 기능 만들기 */}
                     {data.text.split("\n").map((text, index) => {
                       return (
-                        <p key={index} className={styles["paragraph"]}>
+                        <p
+                          key={index}
+                          className={`${styles["paragraph"]} ${
+                            text.length < 1 ? styles["paragraph-blank"] : undefined
+                          }`}
+                        >
                           {text}
                         </p>
                       );

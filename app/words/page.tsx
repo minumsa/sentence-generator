@@ -40,32 +40,36 @@ export default function RandomSentenceGenerator() {
     generateRandomSentence();
   };
 
-  const handleCapture = () => {
-    const elementToCapture = document.querySelector(`.${styles["sentence-container"]}`);
+  // FIXME: 빌드 오류로 인해 임시 각주 처리
+  // const handleCapture = () => {
+  //   const elementToCapture = document.querySelector(`.${styles["sentence-container"]}`);
 
-    html2canvas(elementToCapture as HTMLElement).then(canvas => {
-      if (canvas) {
-        canvas.toBlob(blob => {
-          if (blob) {
-            const item = new ClipboardItem({ "image/png": blob });
-            navigator.clipboard
-              .write([item])
-              .then(() => {
-                console.log("전체 화면이 클립보드에 복사되었습니다.");
-              })
-              .catch(error => {
-                console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
-              });
-          }
-        });
-      }
-    });
-  };
+  //   html2canvas(elementToCapture as HTMLElement).then(canvas => {
+  //     if (canvas) {
+  //       canvas.toBlob(blob => {
+  //         if (blob) {
+  //           const item = new ClipboardItem({ "image/png": blob });
+  //           navigator.clipboard
+  //             .write([item])
+  //             .then(() => {
+  //               console.log("전체 화면이 클립보드에 복사되었습니다.");
+  //             })
+  //             .catch(error => {
+  //               console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
+  //             });
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
 
   return (
     <div className={styles["container"]}>
       {/* <div className={styles["fade-in-out-text"]}>Screenshot copied to clipboard!</div> */}
-      <div className={styles["capture-icon"]} onClick={handleCapture}>
+      <div
+        className={styles["capture-icon"]}
+        // onClick={handleCapture}
+      >
         <FontAwesomeIcon icon={faCamera} size={isMobile ? "sm" : "lg"} />
       </div>
       <div className={styles["sentence-container"]}>
