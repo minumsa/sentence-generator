@@ -15,7 +15,6 @@ export const metadata = {
     card: "summary_large_image",
     creator: "@dev_carver",
     // description: "나의 시네필 평점은 몇 점일까?",
-    // images: ["https://divdivdiv.com/cinephile/thumbnail.webp"],
   },
 };
 

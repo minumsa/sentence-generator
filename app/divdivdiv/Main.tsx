@@ -99,6 +99,8 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
     ko: string;
   }
 
+  // TODO: 별개 컴포넌트 파일로 빼기
+  // TODO: 인터페이스, 타입 리팩토링
   function DraggableComponent(props: {
     className: string;
     path: string;

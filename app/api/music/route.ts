@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       tracks,
     } = data;
 
-    if (password !== process.env.UPROAD_PASSWORD)
+    if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
     const existingData = await Music.findOne({ id });
@@ -80,7 +80,7 @@ export async function DELETE(request: Request) {
 
     const { id, password } = await request.json();
 
-    if (password !== process.env.UPROAD_PASSWORD)
+    if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
     const existingData = await Music.findOne({ id });
