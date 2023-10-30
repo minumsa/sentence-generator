@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./words.module.css";
 import { words } from "./words";
-import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import html2canvas from "html2canvas";
 
 const getRandomItemFromArray = (array: string[]): string => {
   return array[Math.floor(Math.random() * array.length)];
@@ -19,7 +19,6 @@ export default function RandomSentenceGenerator() {
   const [randomWord1, setRandomWord1] = useState<string>(words[0]);
   const [randomWord2, setRandomWord2] = useState<string>(words[9]);
   const [isRunning, setIsRunning] = useState<boolean>(true);
-  const isMobile = window.innerWidth < 500;
 
   const generateRandomSentence = () => {
     setRandomWord1(getRandomItemFromArray(words));
@@ -40,37 +39,33 @@ export default function RandomSentenceGenerator() {
     generateRandomSentence();
   };
 
-  // FIXME: 빌드 오류로 인해 임시 각주 처리
-  // const handleCapture = () => {
-  //   const elementToCapture = document.querySelector(`.${styles["sentence-container"]}`);
+  const handleCapture = () => {
+    const elementToCapture = document.querySelector(`.${styles["sentence-container"]}`);
 
-  //   html2canvas(elementToCapture as HTMLElement).then(canvas => {
-  //     if (canvas) {
-  //       canvas.toBlob(blob => {
-  //         if (blob) {
-  //           const item = new ClipboardItem({ "image/png": blob });
-  //           navigator.clipboard
-  //             .write([item])
-  //             .then(() => {
-  //               console.log("전체 화면이 클립보드에 복사되었습니다.");
-  //             })
-  //             .catch(error => {
-  //               console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
-  //             });
-  //         }
-  //       });
-  //     }
-  //   });
-  // };
+    html2canvas(elementToCapture as HTMLElement).then(canvas => {
+      if (canvas) {
+        canvas.toBlob(blob => {
+          if (blob) {
+            const item = new ClipboardItem({ "image/png": blob });
+            navigator.clipboard
+              .write([item])
+              .then(() => {
+                console.log("전체 화면이 클립보드에 복사되었습니다.");
+              })
+              .catch(error => {
+                console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
+              });
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div className={styles["container"]}>
-      {/* <div className={styles["fade-in-out-text"]}>Screenshot copied to clipboard!</div> */}
-      <div
-        className={styles["capture-icon"]}
-        // onClick={handleCapture}
-      >
-        <FontAwesomeIcon icon={faCamera} size={isMobile ? "sm" : "lg"} />
+      <div className={styles["fade-in-out-text"]}>Screenshot copied to clipboard!</div>
+      <div className={styles["capture-icon"]} onClick={handleCapture}>
+        <FontAwesomeIcon icon={faCamera} />
       </div>
       <div className={styles["sentence-container"]}>
         <div className={styles["sentence"]} onClick={handleClick}>
