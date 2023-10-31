@@ -55,7 +55,7 @@ function Fruits() {
       setTimeout(() => {
         fruit.remove();
       }, 5000);
-    }, 2500);
+    }, 2000);
 
     return () => {
       clearInterval(interval);
@@ -68,9 +68,9 @@ function Fruits() {
     }
 
     if (isMobile) {
-      setCheckerWidth(windowWidth / 5);
+      setCheckerWidth(windowWidth / 6);
     } else {
-      setCheckerWidth(windowWidth / 10);
+      setCheckerWidth(windowWidth / 12);
     }
   }, [windowWidth]);
 
