@@ -20,6 +20,8 @@ export default function Upload({ variablePathName }: UploadProps) {
   const title: string = pathName.includes("upload") ? "업로드" : "수정";
   const router = useRouter();
 
+  console.log("genre", genre);
+
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
@@ -82,13 +84,29 @@ export default function Upload({ variablePathName }: UploadProps) {
           }}
         />
         <div className={styles["upload-item-title"]}>장르</div>
-        <textarea
-          className={styles["input"]}
-          value={genre}
-          onChange={e => {
-            setGenre(e.target.value);
-          }}
-        />
+        <div className={styles["select-container"]}>
+          <select
+            className={styles["select"]}
+            onChange={e => {
+              setGenre(e.target.value);
+            }}
+          >
+            <option value="">--장르를 선택해주세요--</option>
+            <option value="pop">팝</option>
+            <option value="k-pop">케이팝</option>
+            <option value="j-pop">제이팝</option>
+            <option value="rock">락</option>
+            <option value="alternative">얼터너티브</option>
+            <option value="disco">디스코</option>
+            <option value="electronic">일렉트로닉</option>
+            <option value="jazz">재즈</option>
+            <option value="soul">알앤비/소울</option>
+            <option value="folk">포크</option>
+            <option value="country">컨트리</option>
+            <option value="classic">클래식</option>
+            <option value="soundtrack">사운드트랙</option>
+          </select>
+        </div>
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
         <textarea
           className={styles["input"]}
