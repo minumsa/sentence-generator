@@ -347,6 +347,18 @@
   user-select: none;
 }
 
+.page-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.page {
+  cursor: pointer;
+  padding: 10px;
+  color: #949494;
+}
+
 @media (max-width: 499px) {
   .container {
     height: auto;

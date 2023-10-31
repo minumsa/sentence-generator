@@ -10,6 +10,7 @@ export default function Page({ params }: PageProps) {
   const router = useRouter();
   const pathName = params.genre;
   const fullPathName = usePathname();
+  const isUploadPage = pathName === "upload" || pathName.length > 20;
 
   return (
     <div className={styles["container"]}>
@@ -30,7 +31,7 @@ export default function Page({ params }: PageProps) {
         })}
       </div>
       <div className={styles["content-container"]}>
-        {pathName === "upload" || pathName.length > 20 ? (
+        {isUploadPage ? (
           <Upload variablePathName={pathName} />
         ) : (
           <Content pathName={pathName} fullPathName={fullPathName} />

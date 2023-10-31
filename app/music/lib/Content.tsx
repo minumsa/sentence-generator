@@ -24,6 +24,10 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   const [currentCriteria, setCurrentCriteria] = useState<CriteriaType>("내림차순");
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
+  const [dataPerPage, setDataPerPage] = useState<number>(5);
+  const totalPage = Math.ceil(data.length / dataPerPage);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
 
   useEffect(() => {
     async function loadData() {
@@ -31,7 +35,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     }
 
     loadData();
-  }, []);
+  }, [currentPage]);
 
   const SortToggleButton = ({
     type,
@@ -142,7 +146,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", marginTop: "2rem" }}>
-      <div className={styles["mobile-flexbox"]}>
+      <div>
         {!isUploadPage && !isLoading && (
           <div className={styles["sort-button-container"]}>
             <SortToggleButton
@@ -168,86 +172,107 @@ export default function Content({ pathName, fullPathName }: pageProps) {
         ) : (
           sortedData.map((data, index) => {
             const isLastData = index === sortedData.length - 1;
+            const isLastDataPerPage = (index + 1) % dataPerPage === 0;
             const albumDuration = formatDuration(data.duration);
+            const isCurrentPageData =
+              index + 1 <= currentPage * dataPerPage &&
+              index + 1 >= currentPage * dataPerPage - dataPerPage + 1;
 
-            return (
-              <div key={index}>
-                <div className={styles["album-container"]}>
-                  <div className={styles["album-information-container"]}>
-                    <div>
-                      <a className={styles["link"]} href={data.link} target="_blank">
-                        <img
-                          className={styles["album-art"]}
-                          src={data.imgUrl}
-                          alt={data.album}
-                          loading="lazy"
-                        />
-                      </a>
-                    </div>
-                    <div className={` ${styles["album-information"]}`}>
+            if (isCurrentPageData)
+              return (
+                <div key={index}>
+                  <div className={styles["album-container"]}>
+                    <div className={styles["album-information-container"]}>
                       <div>
-                        <div className={styles["information"]}>
-                          <div style={{ marginRight: "5px" }}>{data.artist}</div>
-                        </div>
-                        <div className={styles["information"]}>
-                          <a className={styles["link"]} href={data.link} target="_blank">
-                            <div className={styles["album-title"]}>{data.album}</div>
-                          </a>
-                        </div>
+                        <a className={styles["link"]} href={data.link} target="_blank">
+                          <img
+                            className={styles["album-art"]}
+                            src={data.imgUrl}
+                            alt={data.album}
+                            loading="lazy"
+                          />
+                        </a>
                       </div>
-                      <div className={styles["information"]}>
-                        <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
-                          data.releaseDate.slice(5, 7)
-                        )}월, ${data.label}`}</span>
-                      </div>
-                      <div className={styles["information"]}>
-                        {`${data.tracks}곡, ${albumDuration}`}
-                      </div>
-                      {fullPathName.includes("admin") && (
-                        <div className={styles["admin-button-container"]}>
-                          <div
-                            className={styles["admin-button"]}
-                            onClick={async () => {
-                              deleteData(data.id);
-                              setData(await fetchData(pathName));
-                            }}
-                          >
-                            삭제
+                      <div className={` ${styles["album-information"]}`}>
+                        <div>
+                          <div className={styles["information"]}>
+                            <div style={{ marginRight: "5px" }}>{data.artist}</div>
                           </div>
-                          <div
-                            className={styles["admin-button"]}
-                            onClick={() => {
-                              router.push(`/music/admin/${data.id}`);
-                            }}
-                          >
-                            수정
+                          <div className={styles["information"]}>
+                            <a className={styles["link"]} href={data.link} target="_blank">
+                              <div className={styles["album-title"]}>{data.album}</div>
+                            </a>
                           </div>
                         </div>
-                      )}
+                        <div className={styles["information"]}>
+                          <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
+                            data.releaseDate.slice(5, 7)
+                          )}월, ${data.label}`}</span>
+                        </div>
+                        <div className={styles["information"]}>
+                          {`${data.tracks}곡, ${albumDuration}`}
+                        </div>
+                        {fullPathName.includes("admin") && (
+                          <div className={styles["admin-button-container"]}>
+                            <div
+                              className={styles["admin-button"]}
+                              onClick={async () => {
+                                deleteData(data.id);
+                                setData(await fetchData(pathName));
+                              }}
+                            >
+                              삭제
+                            </div>
+                            <div
+                              className={styles["admin-button"]}
+                              onClick={() => {
+                                router.push(`/music/admin/${data.id}`);
+                              }}
+                            >
+                              수정
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className={styles["text-container"]}>
+                      {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
+                      {data.text.split("\n").map((text, index) => {
+                        const hasNoText = text.length < 1;
+                        return (
+                          <p
+                            key={index}
+                            className={`${styles["paragraph"]} ${
+                              hasNoText ? styles["paragraph-blank"] : undefined
+                            }`}
+                          >
+                            {text}
+                          </p>
+                        );
+                      })}
                     </div>
                   </div>
-                  <div className={styles["text-container"]}>
-                    {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
-                    {data.text.split("\n").map((text, index) => {
-                      const hasNoText = text.length < 1;
-                      return (
-                        <p
-                          key={index}
-                          className={`${styles["paragraph"]} ${
-                            hasNoText ? styles["paragraph-blank"] : undefined
-                          }`}
-                        >
-                          {text}
-                        </p>
-                      );
-                    })}
-                  </div>
+                  {isLastDataPerPage ? undefined : <div className={styles["divider"]} />}
                 </div>
-                {isLastData ? undefined : <div className={styles["divider"]} />}
-              </div>
-            );
+              );
           })
         )}
+      </div>
+      <div className={styles["page-container"]}>
+        {pageArray.map((page, index) => {
+          return (
+            <div
+              key={index}
+              className={styles["page"]}
+              onClick={() => {
+                setCurrentPage(index + 1);
+              }}
+              style={page === currentPage ? { fontWeight: 500, color: "#000" } : undefined}
+            >
+              {page}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

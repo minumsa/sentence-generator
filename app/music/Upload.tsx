@@ -87,6 +87,7 @@ export default function Upload({ variablePathName }: UploadProps) {
         <div className={styles["select-container"]}>
           <select
             className={styles["select"]}
+            value={genre}
             onChange={e => {
               setGenre(e.target.value);
             }}
