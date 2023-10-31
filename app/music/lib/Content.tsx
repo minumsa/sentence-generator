@@ -168,6 +168,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
             // utils.ts로 빼라.
             const minutes = Math.floor(data.duration / 60);
             const hours = Math.floor(minutes / 60);
+            const isLastData = index === sortedData.length - 1;
 
             return (
               <div key={index}>
@@ -181,7 +182,6 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                           alt={data.album}
                           loading="lazy"
                         />
-                        {/* <Image src={data.imgUrl} alt={data.album} fill={true} /> */}
                       </a>
                     </div>
                     <div className={` ${styles["album-information"]}`}>
@@ -230,13 +230,14 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                     </div>
                   </div>
                   <div className={styles["text-container"]}>
-                    {/* FIXME: 클릭하면 링크로 연결되는 기능 만들기 */}
+                    {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
                     {data.text.split("\n").map((text, index) => {
+                      const hasNoText = text.length < 1;
                       return (
                         <p
                           key={index}
                           className={`${styles["paragraph"]} ${
-                            text.length < 1 ? styles["paragraph-blank"] : undefined
+                            hasNoText ? styles["paragraph-blank"] : undefined
                           }`}
                         >
                           {text}
@@ -245,7 +246,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                     })}
                   </div>
                 </div>
-                <div className={styles["divider"]} />
+                {isLastData ? undefined : <div className={styles["divider"]} />}
               </div>
             );
           })

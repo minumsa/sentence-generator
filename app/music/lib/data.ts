@@ -11,7 +11,7 @@ export interface ContentsType {
   soul: string;
   folk: string;
   country: string;
-  classical: string;
+  classic: string;
   soundtrack: string;
   [key: string]: string;
 }
@@ -29,7 +29,7 @@ export const contents: ContentsType = {
   soul: "알앤비/소울",
   folk: "포크",
   country: "컨트리",
-  classical: "클래식",
+  classic: "클래식",
   soundtrack: "사운드트랙",
 };
 
