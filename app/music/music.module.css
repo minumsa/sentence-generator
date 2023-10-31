@@ -116,7 +116,7 @@
   min-width: 1000px;
   display: flex;
   flex-direction: column;
-  padding: 50px 120px 80px 120px;
+  padding: 80px 120px;
 }
 
 .text-container {
@@ -350,7 +350,7 @@
 .page-container {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 100px;
 }
 
@@ -578,5 +578,9 @@
 
   .loading {
     height: 80vh;
+  }
+
+  .page-container {
+    margin-top: 20px;
   }
 }

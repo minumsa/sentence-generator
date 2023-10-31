@@ -18,6 +18,7 @@ export default function Page({ params }: PageProps) {
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
         {Object.keys(contents).map(category => {
+          const isActiveCategory = pathName === category || (isMainPage && category === "");
           return (
             <div
               key={category}
@@ -25,7 +26,7 @@ export default function Page({ params }: PageProps) {
               onClick={() => {
                 router.push(`/music/admin/${category}/1`);
               }}
-              style={pathName === category ? activeStyle : {}}
+              style={isActiveCategory ? activeStyle : {}}
             >
               {contents[category]}
             </div>

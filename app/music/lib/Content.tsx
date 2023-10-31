@@ -178,6 +178,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
             const albumDuration = formatDuration(data.duration);
             const dataIndex = index + 1;
             const isLastData = index === sortedData.length - 1;
+            const isFirstDataPerPage = dataIndex % perPageCount === 1;
             const isLastDataPerPage = dataIndex % perPageCount === 0;
             const isCurrentPageData =
               dataIndex > (currentPage - 1) * perPageCount &&
@@ -186,7 +187,10 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
             if (isCurrentPageData)
               return (
                 <div key={index}>
-                  <div className={styles["album-container"]}>
+                  <div
+                    className={styles["album-container"]}
+                    style={isFirstDataPerPage ? { paddingTop: "20px" } : undefined}
+                  >
                     <div className={styles["album-information-container"]}>
                       <div>
                         <a className={styles["link"]} href={data.link} target="_blank">

@@ -10,6 +10,8 @@ export default function Page({ params }: PageProps) {
   const router = useRouter();
   const pathName = params.genre;
   const isMainPage = Number(pathName) > 0;
+  console.log("isMainPage", isMainPage);
+
   const fullPathName = usePathname();
   const [showCategory, setShowCategory] = useState<boolean>(false);
 
@@ -44,6 +46,7 @@ export default function Page({ params }: PageProps) {
           {showCategory ? (
             <div className={styles["hamburger-category"]}>
               {Object.keys(contents).map((category, index) => {
+                const isActiveCategory = pathName === category || (isMainPage && category === "");
                 if (index > 0)
                   return (
                     <div
@@ -52,7 +55,7 @@ export default function Page({ params }: PageProps) {
                       onClick={() => {
                         router.push(`/music/${category}/1`);
                       }}
-                      style={pathName === category ? activeStyle : {}}
+                      style={isActiveCategory ? activeStyle : {}}
                     >
                       {contents[category]}
                     </div>
@@ -63,6 +66,7 @@ export default function Page({ params }: PageProps) {
         </div>
         <div className={styles["desktop-category"]}>
           {Object.keys(contents).map(category => {
+            const isActiveCategory = pathName === category || (isMainPage && category === "");
             return (
               <div
                 key={category}
@@ -70,7 +74,7 @@ export default function Page({ params }: PageProps) {
                 onClick={() => {
                   router.push(`/music/${category}/1`);
                 }}
-                style={pathName === category ? activeStyle : {}}
+                style={isActiveCategory ? activeStyle : {}}
               >
                 {contents[category]}
               </div>
