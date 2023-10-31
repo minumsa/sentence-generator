@@ -3,6 +3,7 @@ import styles from "../music.module.css";
 import { AlbumInfo, sortItems } from "./data";
 import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "./api";
+import { formatDuration } from "./utils";
 
 interface pageProps {
   pathName: string;
@@ -21,6 +22,8 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
   const [currentMethod, setCurrentMethod] = useState<MethodType>("발매일");
   const [currentCriteria, setCurrentCriteria] = useState<CriteriaType>("내림차순");
+  const isUploadPage = pathName === "upload";
+  const isLoading = data.length === 0;
 
   useEffect(() => {
     async function loadData() {
@@ -140,7 +143,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", marginTop: "2rem" }}>
       <div className={styles["mobile-flexbox"]}>
-        {pathName !== "upload" && (
+        {!isUploadPage && !isLoading && (
           <div className={styles["sort-button-container"]}>
             <SortToggleButton
               type="method"
@@ -158,17 +161,14 @@ export default function Content({ pathName, fullPathName }: pageProps) {
             />
           </div>
         )}
-        {sortedData.length === 0 ? (
+        {isLoading ? (
           <div className={styles["loading"]}>
             <div>데이터를 불러오는 중입니다...</div>
           </div>
         ) : (
           sortedData.map((data, index) => {
-            // FIXME: 시간을 나타내주는 유틸리티 함수(formatDuration())를 만들어라.
-            // utils.ts로 빼라.
-            const minutes = Math.floor(data.duration / 60);
-            const hours = Math.floor(minutes / 60);
             const isLastData = index === sortedData.length - 1;
+            const albumDuration = formatDuration(data.duration);
 
             return (
               <div key={index}>
@@ -201,10 +201,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                         )}월, ${data.label}`}</span>
                       </div>
                       <div className={styles["information"]}>
-                        {`${data.tracks}곡, `}
-                        {minutes > 60
-                          ? `${hours}시간 ${minutes % 60 > 0 ? `${minutes % 60}분` : ""}`
-                          : `${minutes}분`}
+                        {`${data.tracks}곡, ${albumDuration}`}
                       </div>
                       {fullPathName.includes("admin") && (
                         <div className={styles["admin-button-container"]}>
