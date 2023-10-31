@@ -1,15 +1,15 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import styles from "../music.module.css";
-import { PageProps, activeStyle, contents } from "../lib/data";
-import Content from "../lib/Content";
+import styles from "../../music.module.css";
 import { useEffect, useState } from "react";
+import { PageProps, activeStyle, contents } from "../../lib/data";
+import Content from "../../lib/Content";
 
 export default function Page({ params }: PageProps) {
   const router = useRouter();
-  const pathName = params.genre;
-  const isMainPage = Number(pathName) > 0;
+  const currentCategory = params.genre;
+  const currentPage = Number(params.page);
   const fullPathName = usePathname();
   const [showCategory, setShowCategory] = useState<boolean>(false);
 
@@ -52,7 +52,7 @@ export default function Page({ params }: PageProps) {
                       onClick={() => {
                         router.push(`/music/${category}/1`);
                       }}
-                      style={pathName === category ? activeStyle : {}}
+                      style={currentCategory === category ? activeStyle : {}}
                     >
                       {contents[category]}
                     </div>
@@ -70,7 +70,7 @@ export default function Page({ params }: PageProps) {
                 onClick={() => {
                   router.push(`/music/${category}/1`);
                 }}
-                style={pathName === category ? activeStyle : {}}
+                style={currentCategory === category ? activeStyle : {}}
               >
                 {contents[category]}
               </div>
@@ -79,11 +79,7 @@ export default function Page({ params }: PageProps) {
         </div>
       </div>
       <div className={styles["content-container"]}>
-        <Content
-          pathName={isMainPage ? "" : pathName}
-          fullPathName={fullPathName}
-          currentPage={Number(pathName)}
-        />
+        <Content pathName={currentCategory} fullPathName={fullPathName} currentPage={currentPage} />
       </div>
     </div>
   );

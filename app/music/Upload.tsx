@@ -20,8 +20,6 @@ export default function Upload({ variablePathName }: UploadProps) {
   const title: string = pathName.includes("upload") ? "업로드" : "수정";
   const router = useRouter();
 
-  console.log("genre", genre);
-
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
@@ -62,8 +60,6 @@ export default function Upload({ variablePathName }: UploadProps) {
   useEffect(() => {
     title === "수정" && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
   }, [albumId, genre, link, text]);
-
-  console.log(password);
 
   return (
     <>

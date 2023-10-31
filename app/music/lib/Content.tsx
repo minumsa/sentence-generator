@@ -5,16 +5,17 @@ import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "./api";
 import { formatDuration } from "./utils";
 
-interface pageProps {
+interface PageProps {
   pathName: string;
   fullPathName: string;
+  currentPage: number;
 }
 
 type OrderType = "method" | "criteria";
 type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
 type CriteriaType = "오름차순" | "내림차순";
 
-export default function Content({ pathName, fullPathName }: pageProps) {
+export default function Content({ pathName, fullPathName, currentPage }: PageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -24,10 +25,12 @@ export default function Content({ pathName, fullPathName }: pageProps) {
   const [currentCriteria, setCurrentCriteria] = useState<CriteriaType>("내림차순");
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
-  const [dataPerPage, setDataPerPage] = useState<number>(5);
-  const totalPage = Math.ceil(data.length / dataPerPage);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [perPageCount, setDataPerPage] = useState<number>(5);
+  const totalPage = Math.ceil(data.length / perPageCount);
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
+  const isAdminMainPage = fullPathName.includes("admin");
+  const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
+  const isMainPage = pathName === "";
 
   useEffect(() => {
     async function loadData() {
@@ -37,6 +40,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
     loadData();
   }, [currentPage]);
 
+  // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
     type,
     sortItem,
@@ -171,12 +175,13 @@ export default function Content({ pathName, fullPathName }: pageProps) {
           </div>
         ) : (
           sortedData.map((data, index) => {
-            const isLastData = index === sortedData.length - 1;
-            const isLastDataPerPage = (index + 1) % dataPerPage === 0;
             const albumDuration = formatDuration(data.duration);
+            const dataIndex = index + 1;
+            const isLastData = index === sortedData.length - 1;
+            const isLastDataPerPage = dataIndex % perPageCount === 0;
             const isCurrentPageData =
-              index + 1 <= currentPage * dataPerPage &&
-              index + 1 >= currentPage * dataPerPage - dataPerPage + 1;
+              dataIndex > (currentPage - 1) * perPageCount &&
+              dataIndex <= currentPage * perPageCount;
 
             if (isCurrentPageData)
               return (
@@ -212,7 +217,7 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                         <div className={styles["information"]}>
                           {`${data.tracks}곡, ${albumDuration}`}
                         </div>
-                        {fullPathName.includes("admin") && (
+                        {isAdminMainPage && (
                           <div className={styles["admin-button-container"]}>
                             <div
                               className={styles["admin-button"]}
@@ -252,22 +257,35 @@ export default function Content({ pathName, fullPathName }: pageProps) {
                       })}
                     </div>
                   </div>
-                  {isLastDataPerPage ? undefined : <div className={styles["divider"]} />}
+                  {isLastDataPerPage || isLastData ? undefined : (
+                    <div className={styles["divider"]} />
+                  )}
                 </div>
               );
           })
         )}
       </div>
+      {/* TODO: 다음 페이지(>, <) 버튼 만들기 */}
       <div className={styles["page-container"]}>
         {pageArray.map((page, index) => {
+          const clickedPage = index + 1;
+
           return (
             <div
               key={index}
               className={styles["page"]}
               onClick={() => {
-                setCurrentPage(index + 1);
+                if (isAdminGenrePage) {
+                  router.push(`/music/admin/${pathName}/${clickedPage}`);
+                } else if (isAdminMainPage) {
+                  router.push(`/music/admin/${clickedPage}`);
+                } else if (isMainPage) {
+                  router.push(`/music/${clickedPage}`);
+                } else {
+                  router.push(`/music/${pathName}/${clickedPage}`);
+                }
               }}
-              style={page === currentPage ? { fontWeight: 500, color: "#000" } : undefined}
+              style={currentPage === page ? { fontWeight: 500, color: "#000" } : undefined}
             >
               {page}
             </div>

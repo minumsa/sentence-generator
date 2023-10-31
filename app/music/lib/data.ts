@@ -50,6 +50,7 @@ export interface AlbumInfo {
 
 export interface PageProps {
   params: {
+    page: number;
     genre: string;
   };
 }

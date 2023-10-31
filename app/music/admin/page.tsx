@@ -22,7 +22,7 @@ export default function Page() {
               key={category}
               className={styles["category"]}
               onClick={() => {
-                router.push(`/music/admin/${category}`);
+                router.push(`/music/admin/${category}/1`);
               }}
               style={pathName === category ? activeStyle : {}}
             >
@@ -32,7 +32,7 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} fullPathName={fullPathName} />
+        <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} />
       </div>
     </div>
   );

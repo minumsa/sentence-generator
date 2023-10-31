@@ -1,18 +1,17 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import styles from "../../music.module.css";
-import { PageProps, activeStyle, contents } from "../../lib/data";
-import Content from "../../lib/Content";
-import Upload from "../../Upload";
+import styles from "../../../music.module.css";
+import { PageProps, activeStyle, contents } from "@/app/music/lib/data";
+import Upload from "@/app/music/Upload";
+import Content from "@/app/music/lib/Content";
 
 export default function Page({ params }: PageProps) {
   const router = useRouter();
   const pathName = params.genre;
-  const currentPage = Number(pathName);
-  const isMainPage = Number(pathName) > 0;
   const fullPathName = usePathname();
   const isUploadPage = pathName === "upload" || pathName.length > 20;
+  const currentPage = Number(params.page);
 
   return (
     <div className={styles["container"]}>
@@ -36,11 +35,7 @@ export default function Page({ params }: PageProps) {
         {isUploadPage ? (
           <Upload variablePathName={pathName} />
         ) : (
-          <Content
-            pathName={isMainPage ? "" : pathName}
-            fullPathName={fullPathName}
-            currentPage={currentPage}
-          />
+          <Content pathName={pathName} fullPathName={fullPathName} currentPage={currentPage} />
         )}
       </div>
     </div>
