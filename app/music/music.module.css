@@ -327,6 +327,13 @@
   align-items: center;
 }
 
+.upload-item-title {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 @media (max-width: 499px) {
   .container {
     height: auto;

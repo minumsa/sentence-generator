@@ -46,7 +46,6 @@ export default function Upload({ variablePathName }: UploadProps) {
 
   useEffect(() => {
     async function handleData() {
-      // FIXME: setState는 바로 반영되지 않고, 다음 렌더링 때 반영된다.
       const editData = await fetchData(variablePathName);
       setData(editData);
       setAlbumId(editData.id);
@@ -65,7 +64,7 @@ export default function Upload({ variablePathName }: UploadProps) {
   console.log(password);
 
   return (
-    <React.Fragment>
+    <>
       <div className={styles["album-container"]}>
         <div className={styles["title"]}>{`${title} 페이지`}</div>
         <a
@@ -73,7 +72,7 @@ export default function Upload({ variablePathName }: UploadProps) {
           target="_blank"
           style={{ textDecoration: "none", color: "#000" }}
         >
-          <div>앨범 ID(Spotify)</div>
+          <div className={styles["upload-item-title"]}>앨범 ID(Spotify)</div>
         </a>
         <textarea
           className={styles["input"]}
@@ -82,7 +81,7 @@ export default function Upload({ variablePathName }: UploadProps) {
             setAlbumId(e.target.value);
           }}
         />
-        <div>장르</div>
+        <div className={styles["upload-item-title"]}>장르</div>
         <textarea
           className={styles["input"]}
           value={genre}
@@ -90,7 +89,7 @@ export default function Upload({ variablePathName }: UploadProps) {
             setGenre(e.target.value);
           }}
         />
-        <div>링크(Apple Music)</div>
+        <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
         <textarea
           className={styles["input"]}
           value={link}
@@ -98,7 +97,7 @@ export default function Upload({ variablePathName }: UploadProps) {
             setLink(e.target.value);
           }}
         />
-        <div>글</div>
+        <div className={styles["upload-item-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}
           value={text}
@@ -106,7 +105,7 @@ export default function Upload({ variablePathName }: UploadProps) {
             setText(e.target.value);
           }}
         />
-        <div>관리자 비밀번호</div>
+        <div className={styles["upload-item-title"]}>관리자 비밀번호</div>
         <input
           className={styles["input"]}
           value={password}
@@ -126,7 +125,6 @@ export default function Upload({ variablePathName }: UploadProps) {
           </div>
         </div>
       </div>
-      <div className={styles["divider"]} style={{ marginBottom: "50px" }}></div>
-    </React.Fragment>
+    </>
   );
 }
