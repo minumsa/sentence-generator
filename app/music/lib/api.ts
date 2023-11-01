@@ -1,8 +1,17 @@
 import { AlbumInfo, UpdateInfo } from "./data";
 
-export async function fetchData(pathName: string) {
+interface FetchData {
+  pathName: string;
+  perPageCount: number;
+  currentPage: number;
+}
+
+export async function fetchData({ pathName, perPageCount, currentPage }: FetchData) {
   try {
-    const response = await fetch("/api/music", {
+    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}`;
+    const url = `/api/music${queryString}`;
+
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

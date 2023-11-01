@@ -58,28 +58,19 @@ export async function GET(request: Request) {
   try {
     require("dotenv").config();
     await connectMongoDB();
+    const url = new URL(request.url);
+    const perPageCount = Number(url.searchParams.get("perPageCount"));
+    const currentPage = Number(url.searchParams.get("currentPage"));
     const dataArr = await Music.find();
-    return NextResponse.json(dataArr.map(data => data.toJSON()));
+    const slicedData = dataArr
+      .map(data => data.toJSON())
+      .slice(perPageCount * currentPage - perPageCount, perPageCount * currentPage);
+    return NextResponse.json(slicedData);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
   }
 }
-
-// export async function GET(request: Request) {
-//   try {
-//     require("dotenv").config();
-//     await connectMongoDB();
-//     const dataArr = await Music.find();
-
-//     // 배열의 1~5번째 요소를 추출
-//     const slicedData = dataArr.map(data => data.toJSON()).slice(0, 5);
-//     return NextResponse.json(slicedData);
-//   } catch (error) {
-//     console.error(error);
-//     return NextResponse.json({ message: "Server Error" }, { status: 500 });
-//   }
-// }
 
 export async function DELETE(request: Request) {
   try {
