@@ -423,7 +423,7 @@
   .album-container {
     width: 100%;
     min-width: 0;
-    padding: 0;
+    padding: 20px 0;
     align-items: center;
   }
 
@@ -431,8 +431,8 @@
     width: 280px;
     flex-direction: column;
     height: fit-content;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
 
   .album-information {
@@ -458,7 +458,6 @@
   .album-art {
     width: 280px;
     height: 280px;
-    -webkit-box-shadow: none;
   }
 
   /* FIXME: 왜 ellipsis 적용 안 될까? */
