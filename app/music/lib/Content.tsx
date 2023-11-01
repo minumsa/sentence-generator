@@ -22,12 +22,14 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
+  // FIXME: jotai 타입 오류 해결해야 함 MethodType 또는 Criteria 타입으로
   const [currentMethod, setCurrentMethod] = useAtom(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom(initialCriteria);
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
-  const [perPageCount, setDataPerPage] = useState<number>(10);
-  const totalPage = Math.ceil(data.length / perPageCount);
+  const [perPageCount, setDataPerPage] = useState<number>(5);
+  // const totalPage = Math.ceil(data.length / perPageCount);
+  const [totalPage, setTotalPage] = useState<number>(Math.ceil(data.length / perPageCount));
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
@@ -35,13 +37,19 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
   useEffect(() => {
     async function loadData() {
-      setData(await fetchData({ pathName, perPageCount, currentPage }));
+      const result = await fetchData({ pathName, perPageCount, currentPage });
+      setData(result?.dataByGenre);
+      setTotalPage(Math.ceil(result?.genreDataLength / perPageCount));
     }
-
     loadData();
   }, [currentPage]);
 
+  console.log("pathName", pathName);
+  console.log("pathName.length", pathName.length);
   console.log("data.length", data.length);
+  console.log("data", data);
+  console.log("totalPage", totalPage);
+  console.log("currentPage", currentPage);
 
   // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
@@ -230,7 +238,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
                               className={styles["admin-button"]}
                               onClick={async () => {
                                 deleteData(data.id);
-                                setData(await fetchData(pathName));
+                                // setData(await fetchData(pathName));
                               }}
                             >
                               삭제

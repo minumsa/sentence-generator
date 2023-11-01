@@ -8,7 +8,7 @@ interface FetchData {
 
 export async function fetchData({ pathName, perPageCount, currentPage }: FetchData) {
   try {
-    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}`;
+    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}`;
     const url = `/api/music${queryString}`;
 
     const response = await fetch(url, {
@@ -22,17 +22,17 @@ export async function fetchData({ pathName, perPageCount, currentPage }: FetchDa
       throw new Error("Failed to upload music data");
     }
 
-    let data = await response.json();
+    let { dataByGenre, genreDataLength } = await response.json();
 
-    if (pathName === "admin") pathName = "";
-    if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
-    if (pathName.length > 20) {
-      data = data.filter((item: { id: string }) => item.id === pathName)[0];
-    } else if (pathName !== "") {
-      data = data.filter((item: { genre: string }) => item.genre === pathName);
-    }
+    // if (pathName === "admin") pathName = "";
+    // if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
+    // if (pathName.length > 20) {
+    //   data = data.filter((item: { id: string }) => item.id === pathName)[0];
+    // } else if (pathName !== "") {
+    //   data = data.filter((item: { genre: string }) => item.genre === pathName);
+    // }
 
-    return data;
+    return { dataByGenre, genreDataLength };
   } catch (error) {
     console.error(error);
   }

@@ -61,11 +61,20 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const currentPage = Number(url.searchParams.get("currentPage"));
+    const pathName = url.searchParams.get("pathName");
+    const isMainPage = pathName == null;
     const dataArr = await Music.find();
-    const slicedData = dataArr
-      .map(data => data.toJSON())
-      .slice(perPageCount * currentPage - perPageCount, perPageCount * currentPage);
-    return NextResponse.json(slicedData);
+    const data = dataArr.map(data => data.toJSON());
+    // 징르별 필터링
+    const dataByGenre = pathName ? data.filter(data => data.genre === pathName) : data;
+    // 장르별 데이터 양
+    const genreDataLength = dataByGenre.length;
+    // 페이지별 필터링
+    const currentPageData = dataByGenre.slice(
+      perPageCount * currentPage - perPageCount,
+      perPageCount * currentPage
+    );
+    return NextResponse.json({ dataByGenre, genreDataLength });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
