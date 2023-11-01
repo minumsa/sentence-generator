@@ -58,12 +58,14 @@ export async function GET(request: Request) {
   try {
     require("dotenv").config();
     await connectMongoDB();
+
+    // 기본 데이터 가져오기
+
     const url = new URL(request.url);
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const currentPage = Number(url.searchParams.get("currentPage"));
     const pathName = url.searchParams.get("pathName");
 
-    // MongoDB에서 장르별 데이터 필터링 및 가져오기
     // pathName이 있는 경우 해당 장르로 필터링, 그렇지 않으면 모든 데이터 가져오기
     const query = pathName ? { genre: pathName } : {};
     const genreDataLength = await Music.find(query).count();

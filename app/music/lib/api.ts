@@ -24,15 +24,31 @@ export async function fetchData({ pathName, perPageCount, currentPage }: FetchDa
 
     let { slicedData, genreDataLength } = await response.json();
 
-    // if (pathName === "admin") pathName = "";
-    // if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
-    // if (pathName.length > 20) {
-    //   data = data.filter((item: { id: string }) => item.id === pathName)[0];
-    // } else if (pathName !== "") {
-    //   data = data.filter((item: { genre: string }) => item.genre === pathName);
-    // }
-
     return { slicedData, genreDataLength };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// FIXME: 메서드 변수명(GOT) 수정 및 기능 체크
+export async function fetchDataForUpdate(variablePathName: string) {
+  try {
+    const queryString = `?variablePathName=${variablePathName}`;
+    const url = `/api/music/test${queryString}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload music data");
+    }
+
+    let data = await response.json();
+    return data;
   } catch (error) {
     console.error(error);
   }

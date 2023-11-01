@@ -3,7 +3,7 @@ import styles from "./music.module.css";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { fetchData, fetchSpotify, updateData, uploadData } from "./lib/api";
+import { fetchData, fetchDataForUpdate, fetchSpotify, updateData, uploadData } from "./lib/api";
 
 interface UploadProps {
   variablePathName: string;
@@ -45,13 +45,15 @@ export default function Upload({ variablePathName }: UploadProps) {
   };
 
   useEffect(() => {
+    console.log("variablePathName", variablePathName);
+
     async function handleData() {
-      const editData = await fetchData(variablePathName);
-      setData(editData);
-      setAlbumId(editData.id);
-      setGenre(editData.genre);
-      setLink(editData.link);
-      setText(editData.text);
+      const dataForUpdate = await fetchDataForUpdate(variablePathName);
+      setData(dataForUpdate);
+      setAlbumId(dataForUpdate.id);
+      setGenre(dataForUpdate.genre);
+      setLink(dataForUpdate.link);
+      setText(dataForUpdate.text);
     }
 
     if (title === "수정") handleData();
