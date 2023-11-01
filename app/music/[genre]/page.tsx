@@ -8,46 +8,19 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { Hamburger } from "../lib/Hamburger";
 import { MobileTitle } from "../lib/MobileTitle";
+import { Category } from "../lib/Category";
 
 export default function Page({ params }: PageProps) {
-  const router = useRouter();
   const pathName = params.genre;
   const isMainPage = Number(pathName) > 0;
   const fullPathName = usePathname();
-  const [showCategory, setShowCategory] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
-
-  useEffect(() => {
-    setShowCategory(false);
-  }, []);
 
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
         <MobileTitle />
-        <Hamburger
-          pathName={pathName}
-          showCategory={showCategory}
-          setShowCategory={setShowCategory}
-        />
-        <div className={styles["desktop-category"]}>
-          {Object.keys(contents).map(category => {
-            const isActiveCategory = pathName === category || (isMainPage && category === "");
-            return (
-              <div
-                key={category}
-                className={styles["category"]}
-                onClick={() => {
-                  setCurrentPage(1);
-                  router.push(`/music/${category}/1`);
-                }}
-                style={isActiveCategory ? activeStyle : {}}
-              >
-                {contents[category]}
-              </div>
-            );
-          })}
-        </div>
+        <Hamburger pathName={pathName} />
+        <Category pathName={pathName} />
       </div>
       <div className={styles["content-container"]}>
         <Content pathName={isMainPage ? "" : pathName} fullPathName={fullPathName} />
