@@ -1,16 +1,18 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { activeStyle, contents } from "./lib/data";
+import { activeStyle, contents, initialCurrentPage } from "./lib/data";
 import styles from "./music.module.css";
 import Content from "./lib/Content";
 import { useState } from "react";
+import { useAtom } from "jotai";
 
 export default function Page() {
   const router = useRouter();
   const pathName = "";
   const fullPathName = usePathname();
   const [showCategory, setShowCategory] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
 
   return (
     <div className={styles["container"]}>
@@ -46,6 +48,7 @@ export default function Page() {
                       key={category}
                       className={styles["hamburger-content"]}
                       onClick={() => {
+                        setCurrentPage(1);
                         router.push(`/music/${category}/1`);
                       }}
                       style={pathName === category ? activeStyle : {}}
@@ -75,7 +78,7 @@ export default function Page() {
         </div>
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} />
+        <Content pathName={pathName} fullPathName={fullPathName} />
       </div>
     </div>
   );

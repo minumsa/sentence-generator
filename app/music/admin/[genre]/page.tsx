@@ -10,10 +10,10 @@ import { useAtom } from "jotai";
 export default function Page({ params }: PageProps) {
   const router = useRouter();
   const pathName = params.genre;
-  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
   const isMainPage = Number(pathName) > 0;
   const fullPathName = usePathname();
   const isUploadPage = pathName === "upload" || pathName.length > 20;
+  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
 
   return (
     <div className={styles["container"]}>
@@ -25,6 +25,7 @@ export default function Page({ params }: PageProps) {
               key={category}
               className={styles["category"]}
               onClick={() => {
+                setCurrentPage(1);
                 router.push(`/music/admin/${category}/1`);
               }}
               style={isActiveCategory ? activeStyle : {}}

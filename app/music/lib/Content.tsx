@@ -56,13 +56,13 @@ PageProps) {
     loadData();
   }, [currentPage]);
 
-  console.log("pathName", pathName);
-  console.log("pathName.length", pathName.length);
-  console.log("data.length", data.length);
-  console.log("data", data);
-  console.log("totalPage", totalPage);
-  console.log("currentPage", currentPage);
-  console.log("perPageCount", perPageCount);
+  // console.log("pathName", pathName);
+  // console.log("pathName.length", pathName.length);
+  // console.log("data.length", data.length);
+  // console.log("data", data);
+  // console.log("totalPage", totalPage);
+  // console.log("currentPage", currentPage);
+  // console.log("perPageCount", perPageCount);
 
   // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
@@ -303,6 +303,7 @@ PageProps) {
               key={index}
               className={styles["page"]}
               onClick={() => {
+                setCurrentPage(clickedPage);
                 if (isAdminGenrePage) {
                   router.push(`/music/admin/${pathName}/${clickedPage}`);
                 } else if (isAdminMainPage) {

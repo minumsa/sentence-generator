@@ -2,8 +2,9 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { activeStyle, contents } from "../lib/data";
+import { activeStyle, contents, initialCurrentPage } from "../lib/data";
 import Content from "../lib/Content";
+import { useAtom } from "jotai";
 
 export default function Page() {
   // TODO: [slug]와 all 페이지 파일을 컴포넌트화시켜서 더 코드를 깔끔하게 만들 수 있다.
@@ -12,6 +13,7 @@ export default function Page() {
   const router = useRouter();
   const pathName = "";
   const fullPathName = usePathname();
+  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
 
   return (
     <div className={styles["container"]}>
@@ -22,6 +24,7 @@ export default function Page() {
               key={category}
               className={styles["category"]}
               onClick={() => {
+                setCurrentPage(1);
                 router.push(`/music/admin/${category}/1`);
               }}
               style={pathName === category ? activeStyle : {}}
@@ -32,7 +35,7 @@ export default function Page() {
         })}
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} />
+        <Content pathName={pathName} fullPathName={fullPathName} />
       </div>
     </div>
   );
