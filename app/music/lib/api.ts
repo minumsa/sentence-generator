@@ -22,7 +22,7 @@ export async function fetchData({ pathName, perPageCount, currentPage }: FetchDa
       throw new Error("Failed to upload music data");
     }
 
-    let { dataByGenre, genreDataLength } = await response.json();
+    let { slicedData, genreDataLength } = await response.json();
 
     // if (pathName === "admin") pathName = "";
     // if (pathName.includes("admin")) pathName = pathName.split("admin/").join("");
@@ -32,7 +32,7 @@ export async function fetchData({ pathName, perPageCount, currentPage }: FetchDa
     //   data = data.filter((item: { genre: string }) => item.genre === pathName);
     // }
 
-    return { dataByGenre, genreDataLength };
+    return { slicedData, genreDataLength };
   } catch (error) {
     console.error(error);
   }

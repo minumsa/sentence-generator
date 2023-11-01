@@ -84,3 +84,5 @@ export const sortItems = {
 
 export const initialMethod = atom("발매일");
 export const initialCriteria = atom("내림차순");
+export const initialPerPageCount = atom(5);
+export const initialCurrentPage = atom(1);

@@ -62,19 +62,21 @@ export async function GET(request: Request) {
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const currentPage = Number(url.searchParams.get("currentPage"));
     const pathName = url.searchParams.get("pathName");
-    const isMainPage = pathName == null;
-    const dataArr = await Music.find();
+
+    // MongoDB에서 장르별 데이터 필터링 및 가져오기
+    // pathName이 있는 경우 해당 장르로 필터링, 그렇지 않으면 모든 데이터 가져오기
+    const query = pathName ? { genre: pathName } : {};
+    const dataArr = await Music.find(query);
     const data = dataArr.map(data => data.toJSON());
-    // 징르별 필터링
-    const dataByGenre = pathName ? data.filter(data => data.genre === pathName) : data;
-    // 장르별 데이터 양
-    const genreDataLength = dataByGenre.length;
-    // 페이지별 필터링
-    const currentPageData = dataByGenre.slice(
-      perPageCount * currentPage - perPageCount,
-      perPageCount * currentPage
-    );
-    return NextResponse.json({ dataByGenre, genreDataLength });
+    const genreDataLength = data.length;
+
+    // // 페이지별 필터링 (MongoDB 메서드 사용)
+    // // FIXME: 정상적으로 작동하지 않음
+    // const startIndex = perPageCount * currentPage - perPageCount;
+    // const endIndex = perPageCount * currentPage;
+    // const slicedData = await Music.find(query).skip(startIndex).limit(perPageCount);
+
+    return NextResponse.json({ slicedData: data, genreDataLength });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

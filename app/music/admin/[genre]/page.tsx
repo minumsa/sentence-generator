@@ -2,14 +2,15 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../../music.module.css";
-import { PageProps, activeStyle, contents } from "../../lib/data";
+import { PageProps, activeStyle, contents, initialCurrentPage } from "../../lib/data";
 import Content from "../../lib/Content";
 import Upload from "../../Upload";
+import { useAtom } from "jotai";
 
 export default function Page({ params }: PageProps) {
   const router = useRouter();
   const pathName = params.genre;
-  const currentPage = Number(pathName);
+  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
   const isMainPage = Number(pathName) > 0;
   const fullPathName = usePathname();
   const isUploadPage = pathName === "upload" || pathName.length > 20;
@@ -37,11 +38,7 @@ export default function Page({ params }: PageProps) {
         {isUploadPage ? (
           <Upload variablePathName={pathName} />
         ) : (
-          <Content
-            pathName={isMainPage ? "" : pathName}
-            fullPathName={fullPathName}
-            currentPage={currentPage}
-          />
+          <Content pathName={isMainPage ? "" : pathName} fullPathName={fullPathName} />
         )}
       </div>
     </div>

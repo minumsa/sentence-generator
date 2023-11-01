@@ -1,6 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
-import { AlbumInfo, initialCriteria, initialMethod, sortItems } from "./data";
+import {
+  AlbumInfo,
+  initialCriteria,
+  initialCurrentPage,
+  initialMethod,
+  initialPerPageCount,
+  sortItems,
+} from "./data";
 import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "./api";
 import { formatDuration } from "./utils";
@@ -9,14 +16,18 @@ import { useAtom } from "jotai";
 interface PageProps {
   pathName: string;
   fullPathName: string;
-  currentPage: number;
+  // currentPage: number;
 }
 
 type OrderType = "method" | "criteria";
 type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
 type CriteriaType = "오름차순" | "내림차순";
 
-export default function Content({ pathName, fullPathName, currentPage }: PageProps) {
+export default function Content({
+  pathName,
+  fullPathName,
+}: // currentPage
+PageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -27,7 +38,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const [currentCriteria, setCurrentCriteria] = useAtom(initialCriteria);
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
-  const [perPageCount, setDataPerPage] = useState<number>(5);
+  const [perPageCount, setDataPerPage] = useAtom(initialPerPageCount);
+  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
   // const totalPage = Math.ceil(data.length / perPageCount);
   const [totalPage, setTotalPage] = useState<number>(Math.ceil(data.length / perPageCount));
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
@@ -38,7 +50,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   useEffect(() => {
     async function loadData() {
       const result = await fetchData({ pathName, perPageCount, currentPage });
-      setData(result?.dataByGenre);
+      setData(result?.slicedData);
       setTotalPage(Math.ceil(result?.genreDataLength / perPageCount));
     }
     loadData();
@@ -50,6 +62,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   console.log("data", data);
   console.log("totalPage", totalPage);
   console.log("currentPage", currentPage);
+  console.log("perPageCount", perPageCount);
 
   // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
