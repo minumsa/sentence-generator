@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
-import { AlbumInfo, sortItems } from "./data";
+import { AlbumInfo, initialCriteria, initialMethod, sortItems } from "./data";
 import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "./api";
 import { formatDuration } from "./utils";
+import { useAtom } from "jotai";
 
 interface PageProps {
   pathName: string;
@@ -21,8 +22,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
-  const [currentMethod, setCurrentMethod] = useState<MethodType>("발매일");
-  const [currentCriteria, setCurrentCriteria] = useState<CriteriaType>("내림차순");
+  const [currentMethod, setCurrentMethod] = useAtom(initialMethod);
+  const [currentCriteria, setCurrentCriteria] = useAtom(initialCriteria);
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState<number>(5);

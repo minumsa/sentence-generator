@@ -7,7 +7,6 @@ export async function POST(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    // body: JSON.stringify(newItem) <=== 얘를 변수로 설정한 것!
     const { data, password } = await request.json();
     const {
       id,
@@ -28,12 +27,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
     const existingData = await Music.findOne({ id });
-
-    // NextResponse.json({ message: "Music created" }, { status: 201 });
-    // NextResponse.json({ message: "Server Error" }, { status: 500 });
-
-    // return하는 값에 따라 next.js가 밑으로 내려준다?!..
-    // return 값에 써있는 내용물을 응답으로 내려준다!
 
     if (existingData) {
       return NextResponse.json({ message: "album already exists" }, { status: 409 });
@@ -72,6 +65,21 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
   }
 }
+
+// export async function GET(request: Request) {
+//   try {
+//     require("dotenv").config();
+//     await connectMongoDB();
+//     const dataArr = await Music.find();
+
+//     // 배열의 1~5번째 요소를 추출
+//     const slicedData = dataArr.map(data => data.toJSON()).slice(0, 5);
+//     return NextResponse.json(slicedData);
+//   } catch (error) {
+//     console.error(error);
+//     return NextResponse.json({ message: "Server Error" }, { status: 500 });
+//   }
+// }
 
 export async function DELETE(request: Request) {
   try {

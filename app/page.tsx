@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./divdivdiv/divdivdiv.module.css";
 import { Language, LanguageContext, Weather, fetchData } from "./divdivdiv/data";
 import Clock from "./divdivdiv/Clock";

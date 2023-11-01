@@ -1,3 +1,5 @@
+import { atom } from "jotai";
+
 export interface ContentsType {
   "": string;
   pop: string;
@@ -79,3 +81,6 @@ export const sortItems = {
   method: ["작성일", "발매일", "아티스트", "앨범"],
   criteria: ["오름차순", "내림차순"],
 };
+
+export const initialMethod = atom("발매일");
+export const initialCriteria = atom("내림차순");

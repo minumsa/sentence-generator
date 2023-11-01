@@ -10,7 +10,6 @@ export default function Page({ params }: PageProps) {
   const router = useRouter();
   const pathName = params.genre;
   const isMainPage = Number(pathName) > 0;
-  console.log("isMainPage", isMainPage);
 
   const fullPathName = usePathname();
   const [showCategory, setShowCategory] = useState<boolean>(false);
