@@ -70,13 +70,15 @@ export async function GET(request: Request) {
     const data = dataArr.map(data => data.toJSON());
     const genreDataLength = data.length;
 
-    // // 페이지별 필터링 (MongoDB 메서드 사용)
-    // // FIXME: 정상적으로 작동하지 않음
-    // const startIndex = perPageCount * currentPage - perPageCount;
-    // const endIndex = perPageCount * currentPage;
-    // const slicedData = await Music.find(query).skip(startIndex).limit(perPageCount);
+    // 페이지별 필터링 (MongoDB 메서드 사용)
+    // FIXME: 정상적으로 작동하지 않음
+    // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
+    const startIndex = perPageCount * currentPage - perPageCount;
+    const slicedData = await Music.find(query) //
+      .skip(startIndex) //
+      .limit(perPageCount);
 
-    return NextResponse.json({ slicedData: data, genreDataLength });
+    return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
@@ -132,27 +134,31 @@ export async function PUT(request: Request) {
     if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
-    const existingData = await Music.findOne({ id });
+    // 수정할 데이터를 id로 찾아 originalData라는 변수에 할당
+    const originalData = await Music.findOne({ id });
 
-    if (!existingData) {
+    if (!originalData) {
       return NextResponse.json({ message: "Data not found. Cannot update." }, { status: 404 });
     }
 
-    existingData.id = id;
-    existingData.imgUrl = imgUrl;
-    existingData.artist = artist;
-    existingData.album = album;
-    existingData.label = label;
-    existingData.releaseDate = releaseDate;
-    existingData.genre = genre;
-    existingData.link = link;
-    existingData.text = text;
-    existingData.uploadDate = uploadDate;
-    existingData.duration = duration;
-    existingData.tracks = tracks;
+    // TODO: Object.assign 메서드 나중에 블로그에 정리
+    Object.assign(originalData, {
+      id,
+      imgUrl,
+      artist,
+      album,
+      label,
+      releaseDate,
+      genre,
+      link,
+      text,
+      uploadDate,
+      duration,
+      tracks,
+    });
 
-    await existingData.save();
-    return NextResponse.json(existingData.toJSON());
+    await originalData.save();
+    return NextResponse.json(originalData.toJSON());
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

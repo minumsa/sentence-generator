@@ -1,5 +1,7 @@
 import { atom } from "jotai";
 
+// FIXME: 현재 타입, 모듈이 모두 data.ts에 뭉쳐 있는데 생산적으로 관리하는 법 구글링
+
 export interface ContentsType {
   "": string;
   pop: string;
@@ -82,7 +84,11 @@ export const sortItems = {
   criteria: ["오름차순", "내림차순"],
 };
 
-export const initialMethod = atom("발매일");
-export const initialCriteria = atom("내림차순");
+export type OrderType = "method" | "criteria";
+export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
+export type CriteriaType = "오름차순" | "내림차순";
+
+export const initialMethod = atom<MethodType>("발매일");
+export const initialCriteria = atom<CriteriaType>("내림차순");
 export const initialPerPageCount = atom(5);
 export const initialCurrentPage = atom(1);

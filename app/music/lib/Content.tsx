@@ -2,6 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
 import {
   AlbumInfo,
+  CriteriaType,
+  MethodType,
+  OrderType,
   initialCriteria,
   initialCurrentPage,
   initialMethod,
@@ -16,31 +19,21 @@ import { useAtom } from "jotai";
 interface PageProps {
   pathName: string;
   fullPathName: string;
-  // currentPage: number;
 }
 
-type OrderType = "method" | "criteria";
-type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
-type CriteriaType = "오름차순" | "내림차순";
-
-export default function Content({
-  pathName,
-  fullPathName,
-}: // currentPage
-PageProps) {
+export default function Content({ pathName, fullPathName }: PageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
   // FIXME: jotai 타입 오류 해결해야 함 MethodType 또는 Criteria 타입으로
-  const [currentMethod, setCurrentMethod] = useAtom(initialMethod);
-  const [currentCriteria, setCurrentCriteria] = useAtom(initialCriteria);
+  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
+  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useAtom(initialPerPageCount);
   const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
-  // const totalPage = Math.ceil(data.length / perPageCount);
   const [totalPage, setTotalPage] = useState<number>(Math.ceil(data.length / perPageCount));
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const isAdminMainPage = fullPathName.includes("admin");
@@ -55,14 +48,6 @@ PageProps) {
     }
     loadData();
   }, [currentPage]);
-
-  // console.log("pathName", pathName);
-  // console.log("pathName.length", pathName.length);
-  // console.log("data.length", data.length);
-  // console.log("data", data);
-  // console.log("totalPage", totalPage);
-  // console.log("currentPage", currentPage);
-  // console.log("perPageCount", perPageCount);
 
   // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
@@ -204,92 +189,88 @@ PageProps) {
             const isLastData = index === sortedData.length - 1;
             const isFirstDataPerPage = dataIndex % perPageCount === 1;
             const isLastDataPerPage = dataIndex % perPageCount === 0;
-            const isCurrentPageData =
-              dataIndex > (currentPage - 1) * perPageCount &&
-              dataIndex <= currentPage * perPageCount;
 
-            if (isCurrentPageData)
-              return (
-                <div key={index}>
-                  <div
-                    className={styles["album-container"]}
-                    style={isFirstDataPerPage ? { paddingTop: "20px" } : undefined}
-                  >
-                    <div className={styles["album-information-container"]}>
-                      <div>
-                        <a className={styles["link"]} href={data.link} target="_blank">
-                          <img
-                            className={styles["album-art"]}
-                            src={data.imgUrl}
-                            alt={data.album}
-                            loading="lazy"
-                          />
-                        </a>
-                      </div>
-                      <div className={` ${styles["album-information"]}`}>
-                        <div>
-                          <div className={styles["information"]}>
-                            <div style={{ marginRight: "5px" }}>{data.artist}</div>
-                          </div>
-                          <div className={styles["information"]}>
-                            <a className={styles["link"]} href={data.link} target="_blank">
-                              <div className={styles["album-title"]}>{data.album}</div>
-                            </a>
-                          </div>
-                        </div>
-                        <div className={styles["information"]}>
-                          <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
-                            data.releaseDate.slice(5, 7)
-                          )}월, ${data.label}`}</span>
-                        </div>
-                        <div className={styles["information"]}>
-                          {`${data.tracks}곡, ${albumDuration}`}
-                        </div>
-                        {isAdminMainPage && (
-                          <div className={styles["admin-button-container"]}>
-                            <div
-                              className={styles["admin-button"]}
-                              onClick={async () => {
-                                deleteData(data.id);
-                                // setData(await fetchData(pathName));
-                              }}
-                            >
-                              삭제
-                            </div>
-                            <div
-                              className={styles["admin-button"]}
-                              onClick={() => {
-                                router.push(`/music/admin/${data.id}`);
-                              }}
-                            >
-                              수정
-                            </div>
-                          </div>
-                        )}
-                      </div>
+            return (
+              <div key={index}>
+                <div
+                  className={styles["album-container"]}
+                  style={isFirstDataPerPage ? { paddingTop: "20px" } : undefined}
+                >
+                  <div className={styles["album-information-container"]}>
+                    <div>
+                      <a className={styles["link"]} href={data.link} target="_blank">
+                        <img
+                          className={styles["album-art"]}
+                          src={data.imgUrl}
+                          alt={data.album}
+                          loading="lazy"
+                        />
+                      </a>
                     </div>
-                    <div className={styles["text-container"]}>
-                      {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
-                      {data.text.split("\n").map((text, index) => {
-                        const hasNoText = text.length < 1;
-                        return (
-                          <p
-                            key={index}
-                            className={`${styles["paragraph"]} ${
-                              hasNoText ? styles["paragraph-blank"] : undefined
-                            }`}
+                    <div className={` ${styles["album-information"]}`}>
+                      <div>
+                        <div className={styles["information"]}>
+                          <div style={{ marginRight: "5px" }}>{data.artist}</div>
+                        </div>
+                        <div className={styles["information"]}>
+                          <a className={styles["link"]} href={data.link} target="_blank">
+                            <div className={styles["album-title"]}>{data.album}</div>
+                          </a>
+                        </div>
+                      </div>
+                      <div className={styles["information"]}>
+                        <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
+                          data.releaseDate.slice(5, 7)
+                        )}월, ${data.label}`}</span>
+                      </div>
+                      <div className={styles["information"]}>
+                        {`${data.tracks}곡, ${albumDuration}`}
+                      </div>
+                      {isAdminMainPage && (
+                        <div className={styles["admin-button-container"]}>
+                          <div
+                            className={styles["admin-button"]}
+                            onClick={async () => {
+                              deleteData(data.id);
+                              // setData(await fetchData(pathName));
+                            }}
                           >
-                            {text}
-                          </p>
-                        );
-                      })}
+                            삭제
+                          </div>
+                          <div
+                            className={styles["admin-button"]}
+                            onClick={() => {
+                              router.push(`/music/admin/${data.id}`);
+                            }}
+                          >
+                            수정
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  {isLastDataPerPage || isLastData ? undefined : (
-                    <div className={styles["divider"]} />
-                  )}
+                  <div className={styles["text-container"]}>
+                    {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
+                    {data.text.split("\n").map((text, index) => {
+                      const hasNoText = text.length < 1;
+                      return (
+                        <p
+                          key={index}
+                          className={`${styles["paragraph"]} ${
+                            hasNoText ? styles["paragraph-blank"] : undefined
+                          }`}
+                        >
+                          {text}
+                        </p>
+                      );
+                    })}
+                  </div>
                 </div>
-              );
+                {isLastDataPerPage || isLastData ? undefined : (
+                  <div className={styles["divider"]} />
+                )}
+              </div>
+            );
           })
         )}
       </div>

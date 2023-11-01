@@ -48,7 +48,6 @@ export default function Page() {
                       key={category}
                       className={styles["hamburger-content"]}
                       onClick={() => {
-                        setCurrentPage(1);
                         router.push(`/music/${category}/1`);
                       }}
                       style={pathName === category ? activeStyle : {}}
@@ -67,6 +66,7 @@ export default function Page() {
                 key={category}
                 className={styles["category"]}
                 onClick={() => {
+                  setCurrentPage(1);
                   router.push(`/music/${category}/1`);
                 }}
                 style={pathName === category ? activeStyle : {}}

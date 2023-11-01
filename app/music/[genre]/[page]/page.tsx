@@ -3,15 +3,16 @@
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../../music.module.css";
 import { useEffect, useState } from "react";
-import { PageProps, activeStyle, contents } from "../../lib/data";
+import { PageProps, activeStyle, contents, initialCurrentPage } from "../../lib/data";
 import Content from "../../lib/Content";
+import { useAtom } from "jotai";
 
 export default function Page({ params }: PageProps) {
   const router = useRouter();
   const currentCategory = params.genre;
-  const currentPage = Number(params.page);
   const fullPathName = usePathname();
   const [showCategory, setShowCategory] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
 
   useEffect(() => {
     setShowCategory(false);
@@ -68,6 +69,7 @@ export default function Page({ params }: PageProps) {
                 key={category}
                 className={styles["category"]}
                 onClick={() => {
+                  setCurrentPage(1);
                   router.push(`/music/${category}/1`);
                 }}
                 style={currentCategory === category ? activeStyle : {}}
