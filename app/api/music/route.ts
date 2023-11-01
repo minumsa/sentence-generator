@@ -66,9 +66,7 @@ export async function GET(request: Request) {
     // MongoDB에서 장르별 데이터 필터링 및 가져오기
     // pathName이 있는 경우 해당 장르로 필터링, 그렇지 않으면 모든 데이터 가져오기
     const query = pathName ? { genre: pathName } : {};
-    const dataArr = await Music.find(query);
-    const data = dataArr.map(data => data.toJSON());
-    const genreDataLength = data.length;
+    const genreDataLength = await Music.find(query).count();
 
     // 페이지별 필터링 (MongoDB 메서드 사용)
     // FIXME: 정상적으로 작동하지 않음

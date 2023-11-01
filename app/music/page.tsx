@@ -6,6 +6,8 @@ import styles from "./music.module.css";
 import Content from "./lib/Content";
 import { useState } from "react";
 import { useAtom } from "jotai";
+import { MobileTitle } from "./lib/MobileTitle";
+import { Hamburger } from "./lib/Hamburger";
 
 export default function Page() {
   const router = useRouter();
@@ -17,48 +19,12 @@ export default function Page() {
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
-        <div
-          className={styles["mobile-title"]}
-          onClick={() => {
-            router.push("/music");
-          }}
-        >
-          <div>divdivdiv</div>
-        </div>
-        <div
-          className={styles["hamburger-container"]}
-          onClick={() => {
-            setShowCategory(!showCategory);
-          }}
-        >
-          {/* FIXME: 터치 영역 바꾸기 */}
-          <div
-            className={styles["hamburger-icon"]}
-            style={{ display: showCategory ? "none" : "flex" }}
-          ></div>
-          <div className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
-            <div>×</div>
-          </div>
-          {showCategory ? (
-            <div className={styles["hamburger-category"]}>
-              {Object.keys(contents).map((category, index) => {
-                if (index > 0)
-                  return (
-                    <div
-                      key={category}
-                      className={styles["hamburger-content"]}
-                      onClick={() => {
-                        router.push(`/music/${category}/1`);
-                      }}
-                      style={pathName === category ? activeStyle : {}}
-                    >
-                      {contents[category]}
-                    </div>
-                  );
-              })}
-            </div>
-          ) : null}
-        </div>
+        <MobileTitle />
+        <Hamburger
+          pathName={pathName}
+          showCategory={showCategory}
+          setShowCategory={setShowCategory}
+        />
         <div className={styles["desktop-category"]}>
           {Object.keys(contents).map((category, index) => {
             return (
