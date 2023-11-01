@@ -6,6 +6,8 @@ import { PageProps, activeStyle, contents, initialCurrentPage } from "../lib/dat
 import Content from "../lib/Content";
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
+import { Hamburger } from "../lib/Hamburger";
+import { MobileTitle } from "../lib/MobileTitle";
 
 export default function Page({ params }: PageProps) {
   const router = useRouter();
@@ -22,48 +24,12 @@ export default function Page({ params }: PageProps) {
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
-        <div
-          className={styles["mobile-title"]}
-          onClick={() => {
-            router.push("/music");
-          }}
-        >
-          <div>divdivdiv</div>
-        </div>
-        <div
-          className={styles["hamburger-container"]}
-          onClick={() => {
-            setShowCategory(!showCategory);
-          }}
-        >
-          <div
-            className={styles["hamburger-icon"]}
-            style={{ display: showCategory ? "none" : "flex" }}
-          ></div>
-          <div className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
-            <div>×</div>
-          </div>
-          {showCategory ? (
-            <div className={styles["hamburger-category"]}>
-              {Object.keys(contents).map((category, index) => {
-                const isActiveCategory = pathName === category || (isMainPage && category === "");
-                if (index > 0)
-                  return (
-                    <div
-                      key={category}
-                      className={styles["hamburger-content"]}
-                      onClick={() => {
-                        router.push(`/music/${category}/1`);
-                      }}
-                      style={isActiveCategory ? activeStyle : {}}
-                    >
-                      {contents[category]}
-                    </div>
-                  );
-              })}
-            </div>
-          ) : null}
-        </div>
+        <MobileTitle />
+        <Hamburger
+          pathName={pathName}
+          showCategory={showCategory}
+          setShowCategory={setShowCategory}
+        />
         <div className={styles["desktop-category"]}>
           {Object.keys(contents).map(category => {
             const isActiveCategory = pathName === category || (isMainPage && category === "");
