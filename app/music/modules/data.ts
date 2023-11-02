@@ -99,3 +99,7 @@ export const isUploadPage = (pathName: string) => {
 export const isMainPage = (pathName: string) => {
   return Number(pathName) > 0;
 };
+
+export const isAdminPage = (pathName: string) => {
+  return pathName.includes("admin");
+};
