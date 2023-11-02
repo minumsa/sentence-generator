@@ -8,8 +8,11 @@ import {
   initialCriteria,
   initialCurrentPage,
   initialMethod,
+  initialMaxPage,
   initialPerPageCount,
+  initialTotalPage,
   sortItems,
+  initialMinPage,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "../modules/api";
@@ -34,12 +37,13 @@ export default function Content({ pathName, fullPathName }: PageProps) {
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useAtom(initialPerPageCount);
   const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
-  const [totalPage, setTotalPage] = useState<number>(Math.ceil(data.length / perPageCount));
+  const [totalPage, setTotalPage] = useAtom(initialTotalPage);
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
   const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
+  const [maxPage, setMaxPage] = useAtom(initialMaxPage);
 
   useEffect(() => {
     async function loadData() {
@@ -51,10 +55,17 @@ export default function Content({ pathName, fullPathName }: PageProps) {
         currentCriteria,
       });
       setData(result?.slicedData);
-      setTotalPage(Math.ceil(result?.genreDataLength / perPageCount));
+      const dataLength = result?.genreDataLength;
+      setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
     }
     loadData();
   }, [pathName, currentPage, currentMethod, currentCriteria]);
+
+  useEffect(() => {
+    setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
+  }, [currentPage]);
+
+  console.log("currentpagedsds", currentPage);
 
   // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
@@ -184,7 +195,6 @@ export default function Content({ pathName, fullPathName }: PageProps) {
       <div>
         {!isUploadPage && !isLoading && (
           <div className={styles["sort-button-container"]}>
-            {/* TODO: 페이지별 포스트 수 추가 */}
             <SortToggleButton
               type="method"
               sortItem={sortItems.method}
@@ -255,7 +265,6 @@ export default function Content({ pathName, fullPathName }: PageProps) {
                             className={styles["admin-button"]}
                             onClick={async () => {
                               deleteData(data.id);
-                              // setData(await fetchData(pathName));
                             }}
                           >
                             삭제
@@ -298,37 +307,91 @@ export default function Content({ pathName, fullPathName }: PageProps) {
         )}
       </div>
       {/* TODO: 다음 페이지(>, <) 버튼 만들기 */}
-      <div className={styles["page-container"]}>
-        {pageArray.map((page, index) => {
-          const clickedPage = index + 1;
-
-          return (
+      {!isLoading && (
+        <div className={styles["page-container"]}>
+          {currentPage > 5 && (
             <div
-              key={index}
               className={styles["page"]}
               onClick={() => {
-                setCurrentPage(clickedPage);
-                // 관리자 장르 페이지인 경우
-                if (isAdminGenrePage) {
-                  router.push(`/music/admin/${pathName}/${clickedPage}`);
-                  // 관리자 메인 페이지인 경우
-                } else if (isAdminMainPage) {
-                  router.push(`/music/admin/${clickedPage}`);
-                  // 메인 페이지인 경우
-                } else if (isMainPage) {
-                  router.push(`/music/${clickedPage}`);
-                  // 장르 페이지인 경우
-                } else {
-                  router.push(`/music/${pathName}/${clickedPage}`);
+                if (maxPage > 5) {
+                  setCurrentPage(maxPage - 9);
+
+                  // 관리자 장르 페이지인 경우
+                  if (isAdminGenrePage) {
+                    router.push(`/music/admin/${pathName}/${currentPage}`);
+                    // 관리자 메인 페이지인 경우
+                  } else if (isAdminMainPage) {
+                    router.push(`/music/admin/${currentPage}`);
+                    // 메인 페이지인 경우
+                  } else if (isMainPage) {
+                    router.push(`/music/${currentPage}`);
+                    // 장르 페이지인 경우
+                  } else {
+                    router.push(`/music/${pathName}/${currentPage}`);
+                  }
                 }
               }}
-              style={currentPage === page ? { fontWeight: 500, color: "#000" } : undefined}
             >
-              {page}
+              〈
             </div>
-          );
-        })}
-      </div>
+          )}
+          {pageArray.map((page, index) => {
+            const pageNumber = index + 1;
+            const minPage = maxPage - perPageCount + 1;
+
+            if (pageNumber >= minPage && pageNumber <= maxPage)
+              return (
+                <div
+                  key={index}
+                  className={styles["page"]}
+                  onClick={() => {
+                    setCurrentPage(pageNumber);
+                    // 관리자 장르 페이지인 경우
+                    if (isAdminGenrePage) {
+                      router.push(`/music/admin/${pathName}/${pageNumber}`);
+                      // 관리자 메인 페이지인 경우
+                    } else if (isAdminMainPage) {
+                      router.push(`/music/admin/${pageNumber}`);
+                      // 메인 페이지인 경우
+                    } else if (isMainPage) {
+                      router.push(`/music/${pageNumber}`);
+                      // 장르 페이지인 경우
+                    } else {
+                      router.push(`/music/${pathName}/${pageNumber}`);
+                    }
+                  }}
+                  style={currentPage === page ? { fontWeight: 500, color: "#000" } : undefined}
+                >
+                  {page}
+                </div>
+              );
+          })}
+          {totalPage > 5 && (
+            <div
+              className={styles["page"]}
+              onClick={() => {
+                setCurrentPage(maxPage + 1);
+
+                // 관리자 장르 페이지인 경우
+                if (isAdminGenrePage) {
+                  router.push(`/music/admin/${pathName}/${currentPage}`);
+                  // 관리자 메인 페이지인 경우
+                } else if (isAdminMainPage) {
+                  router.push(`/music/admin/${currentPage}`);
+                  // 메인 페이지인 경우
+                } else if (isMainPage) {
+                  router.push(`/music/${currentPage}`);
+                  // 장르 페이지인 경우
+                } else {
+                  router.push(`/music/${pathName}/${currentPage}`);
+                }
+              }}
+            >
+              〉
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

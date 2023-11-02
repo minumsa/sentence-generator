@@ -4,6 +4,7 @@ import {
   activeStyle,
   contents,
   initialCurrentPage,
+  initialMaxPage,
   isAdminPage,
   isMainPage,
 } from "../modules/data";

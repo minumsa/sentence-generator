@@ -92,6 +92,12 @@ export const initialMethod = atom<MethodType>("발매일");
 export const initialCriteria = atom<CriteriaType>("내림차순");
 export const initialPerPageCount = atom(5);
 export const initialCurrentPage = atom(1);
+// export const initialTotalPage = (data: AlbumInfo[], perPageCount: number) => {
+//   return atom(Math.ceil(data.length / perPageCount));
+// };
+export const initialTotalPage = atom(1);
+export const initialMaxPage = atom(5);
+export const initialMinPage = atom(1);
 
 export const isUploadPage = (pathName: string) => {
   return pathName === "upload" || pathName.length > 20;
