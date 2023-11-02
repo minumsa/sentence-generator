@@ -43,12 +43,18 @@ export default function Content({ pathName, fullPathName }: PageProps) {
 
   useEffect(() => {
     async function loadData() {
-      const result = await fetchData({ pathName, perPageCount, currentPage });
+      const result = await fetchData({
+        pathName,
+        perPageCount,
+        currentPage,
+        currentMethod,
+        currentCriteria,
+      });
       setData(result?.slicedData);
       setTotalPage(Math.ceil(result?.genreDataLength / perPageCount));
     }
     loadData();
-  }, [pathName, currentPage]);
+  }, [pathName, currentPage, currentMethod, currentCriteria]);
 
   // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
@@ -178,6 +184,7 @@ export default function Content({ pathName, fullPathName }: PageProps) {
       <div>
         {!isUploadPage && !isLoading && (
           <div className={styles["sort-button-container"]}>
+            {/* TODO: 페이지별 포스트 수 추가 */}
             <SortToggleButton
               type="method"
               sortItem={sortItems.method}

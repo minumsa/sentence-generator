@@ -1,14 +1,22 @@
-import { AlbumInfo, UpdateInfo } from "./data";
+import { AlbumInfo, CriteriaType, MethodType, UpdateInfo } from "./data";
 
 interface FetchData {
   pathName: string;
   perPageCount: number;
   currentPage: number;
+  currentMethod: MethodType;
+  currentCriteria: CriteriaType;
 }
 
-export async function fetchData({ pathName, perPageCount, currentPage }: FetchData) {
+export async function fetchData({
+  pathName,
+  perPageCount,
+  currentPage,
+  currentMethod,
+  currentCriteria,
+}: FetchData) {
   try {
-    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}`;
+    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
     const url = `/api/music${queryString}`;
 
     const response = await fetch(url, {

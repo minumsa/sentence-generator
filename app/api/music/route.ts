@@ -59,21 +59,33 @@ export async function GET(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    // 기본 데이터 가져오기
-
+    // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const currentPage = Number(url.searchParams.get("currentPage"));
     const pathName = url.searchParams.get("pathName");
+    const currentMethod = url.searchParams.get("currentMethod");
+    const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
+    let sortKey = {};
+    if (currentMethod === "발매일") {
+      sortKey = { releaseDate: currentCriteria };
+    } else if (currentMethod === "작성일") {
+      sortKey = { uploadDate: currentCriteria };
+    } else if (currentMethod === "아티스트") {
+      sortKey = { artist: currentCriteria };
+    } else if (currentMethod === "앨범") {
+      sortKey = { album: currentCriteria };
+    }
 
     // pathName이 있는 경우 해당 장르로 필터링, 그렇지 않으면 모든 데이터 가져오기
     const query = pathName ? { genre: pathName } : {};
     const genreDataLength = await Music.find(query).count();
 
-    // 페이지별 필터링 (MongoDB 메서드 사용)
+    // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
     const startIndex = perPageCount * currentPage - perPageCount;
     const slicedData = await Music.find(query) //
+      .sort(sortKey)
       .skip(startIndex) //
       .limit(perPageCount);
 
