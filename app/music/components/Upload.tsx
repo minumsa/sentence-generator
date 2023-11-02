@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { fetchDataForUpdate, fetchSpotify, updateData, uploadData } from "../modules/api";
 
@@ -10,15 +9,16 @@ interface UploadProps {
 }
 
 export default function Upload({ idByPathName }: UploadProps) {
+  const pathName = usePathname();
+  const isUploadPage: boolean = pathName.includes("upload");
+  const isUpdatePage: boolean = !isUploadPage;
+  const variableTitle: string = isUploadPage ? "업로드" : "수정";
+  const [data, setData] = useState<any>();
   const [albumId, setAlbumId] = useState("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [data, setData] = useState<any>();
-  const pathName = usePathname();
-  const title: string = pathName.includes("upload") ? "업로드" : "수정";
-  const router = useRouter();
 
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
@@ -30,41 +30,41 @@ export default function Upload({ idByPathName }: UploadProps) {
 
     if (newAlbumData) {
       await uploadData(newAlbumData, password);
-      // router.push("/music/admin");
     }
   };
 
-  const handleEdit = () => {
+  const handleUpdate = () => {
     updateData(albumId, data, password);
   };
 
   const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      title === "업로드" ? handleUpload() : handleEdit();
+      isUploadPage ? handleUpload() : handleUpdate();
     }
   };
 
   useEffect(() => {
-    async function handleData() {
+    async function getData() {
       const dataForUpdate = await fetchDataForUpdate(idByPathName);
       setData(dataForUpdate);
-      setAlbumId(dataForUpdate.id);
-      setGenre(dataForUpdate.genre);
-      setLink(dataForUpdate.link);
-      setText(dataForUpdate.text);
+      const { id, genre, link, text } = dataForUpdate;
+      setAlbumId(id);
+      setGenre(genre);
+      setLink(link);
+      setText(text);
     }
 
-    if (title === "수정") handleData();
+    if (isUpdatePage) getData();
   }, []);
 
   useEffect(() => {
-    title === "수정" && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
+    isUpdatePage && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
   }, [albumId, genre, link, text]);
 
   return (
     <>
       <div className={styles["album-container"]}>
-        <div className={styles["title"]}>{`${title} 페이지`}</div>
+        <div className={styles["title"]}>{`${variableTitle} 페이지`}</div>
         <a
           href="https://open.spotify.com/search"
           target="_blank"
@@ -133,7 +133,7 @@ export default function Upload({ idByPathName }: UploadProps) {
           <div
             className={`${styles["button"]} ${styles["submit"]}`}
             onClick={() => {
-              title === "업로드" ? handleUpload() : handleEdit();
+              isUploadPage ? handleUpload() : handleUpdate();
             }}
           >
             제출하기
