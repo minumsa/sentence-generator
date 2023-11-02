@@ -1,19 +1,15 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { activeStyle, contents, initialCurrentPage } from "./lib/data";
+import { usePathname } from "next/navigation";
 import styles from "./music.module.css";
-import Content from "./lib/Content";
-import { useState } from "react";
-import { useAtom } from "jotai";
-import { MobileTitle } from "./lib/MobileTitle";
-import { Hamburger } from "./lib/Hamburger";
-import { Category } from "./lib/Category";
+import Content from "./components/Content";
+import { MobileTitle } from "./components/MobileTitle";
+import { Hamburger } from "./components/Hamburger";
+import { Category } from "./components/Category";
 
 export default function Page() {
   const pathName = "";
   const fullPathName = usePathname();
-  const isMainPage = Number(pathName) > 0;
 
   return (
     <div className={styles["container"]}>
@@ -23,7 +19,7 @@ export default function Page() {
         <Category pathName={pathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={isMainPage ? "" : pathName} fullPathName={fullPathName} />
+        <Content pathName={pathName} fullPathName={fullPathName} />
       </div>
     </div>
   );

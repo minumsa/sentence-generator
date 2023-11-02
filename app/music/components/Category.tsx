@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { activeStyle, contents, initialCurrentPage } from "./data";
+import { activeStyle, contents, initialCurrentPage } from "../modules/data";
 import { useAtom } from "jotai";
 
 interface CategoryProps {

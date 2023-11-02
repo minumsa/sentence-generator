@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import styles from "./music.module.css";
+import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { fetchData, fetchDataForUpdate, fetchSpotify, updateData, uploadData } from "./lib/api";
+import { fetchDataForUpdate, fetchSpotify, updateData, uploadData } from "../modules/api";
 
 interface UploadProps {
   idByPathName: string;

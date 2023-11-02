@@ -1,45 +1,30 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import styles from "../../music.module.css";
-import { PageProps, activeStyle, contents, initialCurrentPage } from "../../lib/data";
-import Content from "../../lib/Content";
-import Upload from "../../Upload";
-import { useAtom } from "jotai";
+import { PageProps, isMainPage, isUploadPage } from "../../modules/data";
+import Content from "../../components/Content";
+import Upload from "../../components/Upload";
+import { MobileTitle } from "../../components/MobileTitle";
+import { Hamburger } from "../../components/Hamburger";
+import { Category } from "../../components/Category";
 
 export default function Page({ params }: PageProps) {
-  const router = useRouter();
   const pathName = params.genre;
-  const isMainPage = Number(pathName) > 0;
   const fullPathName = usePathname();
-  const isUploadPage = pathName === "upload" || pathName.length > 20;
-  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
 
   return (
     <div className={styles["container"]}>
       <div className={styles["category-container"]}>
-        {Object.keys(contents).map(category => {
-          const isActiveCategory = pathName === category || (isMainPage && category === "");
-          return (
-            <div
-              key={category}
-              className={styles["category"]}
-              onClick={() => {
-                setCurrentPage(1);
-                router.push(`/music/admin/${category}/1`);
-              }}
-              style={isActiveCategory ? activeStyle : {}}
-            >
-              {contents[category]}
-            </div>
-          );
-        })}
+        <MobileTitle />
+        <Hamburger pathName={pathName} />
+        <Category pathName={pathName} />
       </div>
       <div className={styles["content-container"]}>
-        {isUploadPage ? (
+        {isUploadPage(pathName) ? (
           <Upload idByPathName={pathName} />
         ) : (
-          <Content pathName={isMainPage ? "" : pathName} fullPathName={fullPathName} />
+          <Content pathName={isMainPage(pathName) ? "" : pathName} fullPathName={fullPathName} />
         )}
       </div>
     </div>

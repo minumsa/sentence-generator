@@ -10,10 +10,10 @@ import {
   initialMethod,
   initialPerPageCount,
   sortItems,
-} from "./data";
+} from "../modules/data";
 import { useRouter } from "next/navigation";
-import { deleteData, fetchData } from "./api";
-import { formatDuration } from "./utils";
+import { deleteData, fetchData } from "../modules/api";
+import { formatDuration } from "../modules/utils";
 import { useAtom } from "jotai";
 
 interface PageProps {

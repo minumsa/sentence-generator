@@ -1,4 +1,4 @@
-import connectMongoDB from "@/app/music/lib/mongodb";
+import connectMongoDB from "@/app/music/modules/mongodb";
 import Music from "@/models/music";
 import { NextResponse } from "next/server";
 

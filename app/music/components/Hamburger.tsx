@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { activeStyle, contents } from "./data";
+import { activeStyle, contents } from "../modules/data";
 import { useEffect, useState } from "react";
 
 interface HamburgerProps {
