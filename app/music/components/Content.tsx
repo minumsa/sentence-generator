@@ -39,7 +39,7 @@ export default function Content({ pathName, fullPathName }: PageProps) {
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
-  const hasPageNumber = Number(fullPathName.split("").at(-1)) > 0;
+  const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
 
   useEffect(() => {
     async function loadData() {
@@ -91,7 +91,7 @@ export default function Content({ pathName, fullPathName }: PageProps) {
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
-                    const variablePathByNumber = hasPageNumber ? "/" : "/1";
+                    const variablePathByNumber = hasNoPageNumber ? "/1" : "/";
                     setCurrentOrder(item);
                     setCurrentPage(1);
 
