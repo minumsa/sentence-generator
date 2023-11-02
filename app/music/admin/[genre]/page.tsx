@@ -24,7 +24,11 @@ export default function Page({ params }: PageProps) {
         {isUploadPage(pathName) ? (
           <Upload idByPathName={pathName} />
         ) : (
-          <Content pathName={isMainPage(pathName) ? "" : pathName} fullPathName={fullPathName} />
+          <Content
+            pathName={isMainPage(pathName) ? "" : pathName}
+            fullPathName={fullPathName}
+            currentPage={isMainPage(pathName) ? Number(pathName) : 1}
+          />
         )}
       </div>
     </div>

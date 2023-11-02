@@ -11,6 +11,7 @@ import { Hamburger } from "@/app/music/components/Hamburger";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
+  const currentPage = params.page;
   const fullPathName = usePathname();
 
   return (
@@ -24,7 +25,11 @@ export default function Page({ params }: PageProps) {
         {isUploadPage(pathName) ? (
           <Upload idByPathName={pathName} />
         ) : (
-          <Content pathName={isMainPage(pathName) ? "" : pathName} fullPathName={fullPathName} />
+          <Content
+            pathName={isMainPage(pathName) ? "" : pathName}
+            fullPathName={fullPathName}
+            currentPage={Number(currentPage)}
+          />
         )}
       </div>
     </div>

@@ -22,9 +22,10 @@ import { useAtom } from "jotai";
 interface PageProps {
   pathName: string;
   fullPathName: string;
+  currentPage: number;
 }
 
-export default function Content({ pathName, fullPathName }: PageProps) {
+export default function Content({ pathName, fullPathName, currentPage }: PageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -36,14 +37,13 @@ export default function Content({ pathName, fullPathName }: PageProps) {
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useAtom(initialPerPageCount);
-  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
   const [totalPage, setTotalPage] = useAtom(initialTotalPage);
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
   const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
-  const [maxPage, setMaxPage] = useAtom(initialMaxPage);
+  const [maxPage, setMaxPage] = useState<number>(5);
 
   useEffect(() => {
     async function loadData() {
@@ -65,9 +65,6 @@ export default function Content({ pathName, fullPathName }: PageProps) {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
   }, [currentPage]);
 
-  console.log("currentpagedsds", currentPage);
-
-  // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
     type,
     sortItem,
@@ -108,22 +105,9 @@ export default function Content({ pathName, fullPathName }: PageProps) {
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
-                    const variablePathByNumber = hasNoPageNumber ? "/1" : "/";
+                    const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    setCurrentPage(1);
-
-                    if (isAdminGenrePage) {
-                      router.push(`/music/admin/${pathName}${variablePathByNumber}`);
-                      // 관리자 메인 페이지인 경우
-                    } else if (isAdminMainPage) {
-                      router.push(`/music/admin${variablePathByNumber}`);
-                      // 메인 페이지인 경우
-                    } else if (isMainPage) {
-                      router.push(`/music${variablePathByNumber}`);
-                      // 장르 페이지인 경우
-                    } else {
-                      router.push(`/music/${pathName}${variablePathByNumber}`);
-                    }
+                    handlePageNumber(variablePathByNumber);
                   }}
                 >
                   {item}
@@ -187,6 +171,22 @@ export default function Content({ pathName, fullPathName }: PageProps) {
       setSortMethod(false);
     } else if (type === "criteria") {
       setSortCriteria(false);
+    }
+  };
+
+  const handlePageNumber = (variablePageNumber: number | "/") => {
+    // 관리자 장르 페이지인 경우
+    if (isAdminGenrePage) {
+      router.push(`/music/admin/${pathName}/${variablePageNumber}`);
+      // 관리자 메인 페이지인 경우
+    } else if (isAdminMainPage) {
+      router.push(`/music/admin/${variablePageNumber}`);
+      // 메인 페이지인 경우
+    } else if (isMainPage) {
+      router.push(`/music/${variablePageNumber}`);
+      // 장르 페이지인 경우
+    } else {
+      router.push(`/music/${pathName}/${variablePageNumber}`);
     }
   };
 
@@ -306,7 +306,6 @@ export default function Content({ pathName, fullPathName }: PageProps) {
           })
         )}
       </div>
-      {/* TODO: 다음 페이지(>, <) 버튼 만들기 */}
       {!isLoading && (
         <div className={styles["page-container"]}>
           {currentPage > 5 && (
@@ -314,21 +313,8 @@ export default function Content({ pathName, fullPathName }: PageProps) {
               className={styles["page"]}
               onClick={() => {
                 if (maxPage > 5) {
-                  setCurrentPage(maxPage - 9);
-
-                  // 관리자 장르 페이지인 경우
-                  if (isAdminGenrePage) {
-                    router.push(`/music/admin/${pathName}/${currentPage}`);
-                    // 관리자 메인 페이지인 경우
-                  } else if (isAdminMainPage) {
-                    router.push(`/music/admin/${currentPage}`);
-                    // 메인 페이지인 경우
-                  } else if (isMainPage) {
-                    router.push(`/music/${currentPage}`);
-                    // 장르 페이지인 경우
-                  } else {
-                    router.push(`/music/${pathName}/${currentPage}`);
-                  }
+                  const prevPageBlock = maxPage - 5;
+                  handlePageNumber(prevPageBlock);
                 }
               }}
             >
@@ -345,46 +331,22 @@ export default function Content({ pathName, fullPathName }: PageProps) {
                   key={index}
                   className={styles["page"]}
                   onClick={() => {
-                    setCurrentPage(pageNumber);
-                    // 관리자 장르 페이지인 경우
-                    if (isAdminGenrePage) {
-                      router.push(`/music/admin/${pathName}/${pageNumber}`);
-                      // 관리자 메인 페이지인 경우
-                    } else if (isAdminMainPage) {
-                      router.push(`/music/admin/${pageNumber}`);
-                      // 메인 페이지인 경우
-                    } else if (isMainPage) {
-                      router.push(`/music/${pageNumber}`);
-                      // 장르 페이지인 경우
-                    } else {
-                      router.push(`/music/${pathName}/${pageNumber}`);
-                    }
+                    handlePageNumber(pageNumber);
                   }}
-                  style={currentPage === page ? { fontWeight: 500, color: "#000" } : undefined}
+                  style={
+                    currentPage === pageNumber ? { fontWeight: 500, color: "#000" } : undefined
+                  }
                 >
                   {page}
                 </div>
               );
           })}
-          {totalPage > 5 && (
+          {totalPage - maxPage > 0 && (
             <div
               className={styles["page"]}
               onClick={() => {
-                setCurrentPage(maxPage + 1);
-
-                // 관리자 장르 페이지인 경우
-                if (isAdminGenrePage) {
-                  router.push(`/music/admin/${pathName}/${currentPage}`);
-                  // 관리자 메인 페이지인 경우
-                } else if (isAdminMainPage) {
-                  router.push(`/music/admin/${currentPage}`);
-                  // 메인 페이지인 경우
-                } else if (isMainPage) {
-                  router.push(`/music/${currentPage}`);
-                  // 장르 페이지인 경우
-                } else {
-                  router.push(`/music/${pathName}/${currentPage}`);
-                }
+                const nextPageBlock = maxPage + 1;
+                handlePageNumber(nextPageBlock);
               }}
             >
               〉

@@ -10,6 +10,7 @@ import { Category } from "../../components/Category";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
+  const currentPage = params.page;
   const fullPathName = usePathname();
 
   return (
@@ -20,7 +21,11 @@ export default function Page({ params }: PageProps) {
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={isMainPage(pathName) ? "" : pathName} fullPathName={fullPathName} />
+        <Content
+          pathName={isMainPage(pathName) ? "" : pathName}
+          fullPathName={fullPathName}
+          currentPage={Number(currentPage)}
+        />
       </div>
     </div>
   );

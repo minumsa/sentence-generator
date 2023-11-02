@@ -1,13 +1,6 @@
 import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import {
-  activeStyle,
-  contents,
-  initialCurrentPage,
-  initialMaxPage,
-  isAdminPage,
-  isMainPage,
-} from "../modules/data";
+import { activeStyle, contents, isAdminPage, isMainPage } from "../modules/data";
 import { useAtom } from "jotai";
 
 interface CategoryProps {
@@ -17,7 +10,6 @@ interface CategoryProps {
 
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
   const router = useRouter();
-  const [currentPage, setCurrentPage] = useAtom(initialCurrentPage);
 
   return (
     <div className={styles["desktop-category"]}>
@@ -28,7 +20,6 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
             key={category}
             className={styles["category"]}
             onClick={() => {
-              setCurrentPage(1);
               router.push(
                 isAdminPage(fullPathName) ? `/music/admin/${category}/1` : `/music/${category}/1`
               );

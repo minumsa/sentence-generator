@@ -16,10 +16,10 @@ export default function Page() {
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />
-        <Category pathName={pathName} />
+        <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} fullPathName={fullPathName} />
+        <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} />
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ export default function Page() {
         {isUploadPage(pathName) ? (
           <Upload idByPathName={pathName} />
         ) : (
-          <Content pathName={pathName} fullPathName={fullPathName} />
+          <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} />
         )}
       </div>
     </div>
