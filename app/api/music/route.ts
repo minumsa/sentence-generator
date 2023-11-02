@@ -71,7 +71,6 @@ export async function GET(request: Request) {
     const genreDataLength = await Music.find(query).count();
 
     // 페이지별 필터링 (MongoDB 메서드 사용)
-    // FIXME: 정상적으로 작동하지 않음
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
     const startIndex = perPageCount * currentPage - perPageCount;
     const slicedData = await Music.find(query) //

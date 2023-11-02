@@ -6,10 +6,10 @@ import React from "react";
 import { fetchData, fetchDataForUpdate, fetchSpotify, updateData, uploadData } from "./lib/api";
 
 interface UploadProps {
-  variablePathName: string;
+  idByPathName: string;
 }
 
-export default function Upload({ variablePathName }: UploadProps) {
+export default function Upload({ idByPathName }: UploadProps) {
   const [albumId, setAlbumId] = useState("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
@@ -45,10 +45,8 @@ export default function Upload({ variablePathName }: UploadProps) {
   };
 
   useEffect(() => {
-    console.log("variablePathName", variablePathName);
-
     async function handleData() {
-      const dataForUpdate = await fetchDataForUpdate(variablePathName);
+      const dataForUpdate = await fetchDataForUpdate(idByPathName);
       setData(dataForUpdate);
       setAlbumId(dataForUpdate.id);
       setGenre(dataForUpdate.genre);

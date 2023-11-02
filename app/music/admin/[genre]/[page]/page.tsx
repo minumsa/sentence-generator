@@ -35,7 +35,7 @@ export default function Page({ params }: PageProps) {
       </div>
       <div className={styles["content-container"]}>
         {isUploadPage ? (
-          <Upload variablePathName={pathName} />
+          <Upload idByPathName={pathName} />
         ) : (
           <Content pathName={pathName} fullPathName={fullPathName} />
         )}

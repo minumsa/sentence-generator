@@ -31,10 +31,10 @@ export async function fetchData({ pathName, perPageCount, currentPage }: FetchDa
 }
 
 // FIXME: 메서드 변수명(GOT) 수정 및 기능 체크
-export async function fetchDataForUpdate(variablePathName: string) {
+export async function fetchDataForUpdate(id: string) {
   try {
-    const queryString = `?variablePathName=${variablePathName}`;
-    const url = `/api/music/test${queryString}`;
+    const queryString = `?id=${id}`;
+    const url = `/api/music/update${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",

@@ -9,10 +9,10 @@ export async function GET(request: Request) {
     await connectMongoDB();
 
     const url = new URL(request.url);
-    const variablePathName = url.searchParams.get("variablePathName");
+    const id = url.searchParams.get("id");
 
-    // 몽고디비에서 id가 variablePathName과 일치하는 데이터를 찾는다
-    const data = await Music.findOne({ id: variablePathName });
+    // 몽고디비 아이템의 id와 파라미터로 받아온 id가 일치하는 데이터를 찾음
+    const data = await Music.findOne({ id: id });
 
     if (!data) {
       return NextResponse.json({ message: "데이터를 찾을 수 없습니다." }, { status: 404 });

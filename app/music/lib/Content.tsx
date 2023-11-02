@@ -49,8 +49,6 @@ export default function Content({ pathName, fullPathName }: PageProps) {
     loadData();
   }, [pathName, currentPage]);
 
-  console.log(data);
-
   // FIXME: 페이지 바뀌면 정렬 부분이 초기화됨. 전역 변수로 관리해야 할까?
   const SortToggleButton = ({
     type,
