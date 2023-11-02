@@ -39,6 +39,7 @@ export default function Content({ pathName, fullPathName }: PageProps) {
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
+  const hasPageNumber = Number(fullPathName.split("").at(-1)) > 0;
 
   useEffect(() => {
     async function loadData() {
@@ -90,7 +91,22 @@ export default function Content({ pathName, fullPathName }: PageProps) {
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
+                    const variablePathByNumber = hasPageNumber ? "/" : "/1";
                     setCurrentOrder(item);
+                    setCurrentPage(1);
+
+                    if (isAdminGenrePage) {
+                      router.push(`/music/admin/${pathName}${variablePathByNumber}`);
+                      // 관리자 메인 페이지인 경우
+                    } else if (isAdminMainPage) {
+                      router.push(`/music/admin${variablePathByNumber}`);
+                      // 메인 페이지인 경우
+                    } else if (isMainPage) {
+                      router.push(`/music${variablePathByNumber}`);
+                      // 장르 페이지인 경우
+                    } else {
+                      router.push(`/music/${pathName}${variablePathByNumber}`);
+                    }
                   }}
                 >
                   {item}
@@ -285,12 +301,16 @@ export default function Content({ pathName, fullPathName }: PageProps) {
               className={styles["page"]}
               onClick={() => {
                 setCurrentPage(clickedPage);
+                // 관리자 장르 페이지인 경우
                 if (isAdminGenrePage) {
                   router.push(`/music/admin/${pathName}/${clickedPage}`);
+                  // 관리자 메인 페이지인 경우
                 } else if (isAdminMainPage) {
                   router.push(`/music/admin/${clickedPage}`);
+                  // 메인 페이지인 경우
                 } else if (isMainPage) {
                   router.push(`/music/${clickedPage}`);
+                  // 장르 페이지인 경우
                 } else {
                   router.push(`/music/${pathName}/${clickedPage}`);
                 }

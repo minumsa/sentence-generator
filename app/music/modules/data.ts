@@ -101,5 +101,5 @@ export const isMainPage = (pathName: string) => {
 };
 
 export const isAdminPage = (pathName: string) => {
-  return pathName.includes("admin");
+  return pathName?.includes("admin");
 };

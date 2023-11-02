@@ -17,7 +17,7 @@ export default function Page({ params }: PageProps) {
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />
-        <Category pathName={pathName} />
+        <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
         <Content pathName={isMainPage(pathName) ? "" : pathName} fullPathName={fullPathName} />
