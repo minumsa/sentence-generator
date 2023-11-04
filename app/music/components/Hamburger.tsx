@@ -9,8 +9,6 @@ interface HamburgerProps {
 
 // FIXME: 컴포넌트화 시킬 수 있는 부분 전부 작업
 // FIXME: 컴포넌트화 시키면서 안 쓰게 된 코드들 모두 삭제
-// FIXME: 컴포넌트, 모듈 폴더 분리
-
 export const Hamburger = ({ pathName }: HamburgerProps) => {
   const router = useRouter();
   const isMainPage = Number(pathName) > 0;

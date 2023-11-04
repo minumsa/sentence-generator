@@ -79,25 +79,21 @@ export const activeStyle = {
   color: "#949494",
 };
 
-export const sortItems = {
+export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
+export type CriteriaType = "오름차순" | "내림차순";
+
+export const sortItems: {
+  method: MethodType[];
+  criteria: CriteriaType[];
+} = {
   method: ["작성일", "발매일", "아티스트", "앨범"],
   criteria: ["오름차순", "내림차순"],
 };
 
 export type OrderType = "method" | "criteria";
-export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
-export type CriteriaType = "오름차순" | "내림차순";
 
 export const initialMethod = atom<MethodType>("발매일");
 export const initialCriteria = atom<CriteriaType>("내림차순");
-export const initialPerPageCount = atom(5);
-export const initialCurrentPage = atom(1);
-// export const initialTotalPage = (data: AlbumInfo[], perPageCount: number) => {
-//   return atom(Math.ceil(data.length / perPageCount));
-// };
-export const initialTotalPage = atom(1);
-export const initialMaxPage = atom(5);
-export const initialMinPage = atom(1);
 
 export const isUploadPage = (pathName: string) => {
   return pathName === "upload" || pathName.length > 20;

@@ -6,13 +6,8 @@ import {
   MethodType,
   OrderType,
   initialCriteria,
-  initialCurrentPage,
   initialMethod,
-  initialMaxPage,
-  initialPerPageCount,
-  initialTotalPage,
   sortItems,
-  initialMinPage,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "../modules/api";
@@ -36,14 +31,13 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
-  const [perPageCount, setDataPerPage] = useAtom(initialPerPageCount);
-  const [totalPage, setTotalPage] = useAtom(initialTotalPage);
+  const [perPageCount, setDataPerPage] = useState(5);
+  const [totalPage, setTotalPage] = useState(1);
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
-  const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
-  const [maxPage, setMaxPage] = useState<number>(5);
+  const [maxPageNumber, setMaxPage] = useState<number>(5);
 
   useEffect(() => {
     async function loadData() {
@@ -73,11 +67,9 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     sortWay,
   }: {
     type: OrderType;
-    sortItem: string[];
+    sortItem: MethodType[] | CriteriaType[];
     currentOrder: MethodType | CriteriaType;
-    setCurrentOrder:
-      | React.Dispatch<React.SetStateAction<MethodType>>
-      | React.Dispatch<React.SetStateAction<CriteriaType>>;
+    setCurrentOrder: React.Dispatch<React.SetStateAction<MethodType | CriteriaType>>;
     sortWay: boolean;
   }) => {
     return (
@@ -99,15 +91,18 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
               handleMouseEnter(type);
             }}
           >
-            {sortItem.map((item: any) => {
+            {sortItem.map((item: MethodType | CriteriaType) => {
               return (
                 <div
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
+                    console.log(item);
+
+                    const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    handlePageNumber(variablePathByNumber);
+                    handleDynamicPage(variablePathByNumber);
                   }}
                 >
                   {item}
@@ -120,7 +115,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     );
   };
 
-  // FIXME: 로직의 내용물은 영어로만 쓰는 게 일반적이다.
+  // FIXME: 로직의 내용물은 영어로만 쓰는 게 일반적
   const sortedData = useMemo(() => {
     const dateSelector = (item: AlbumInfo) => {
       if (currentMethod === "작성일") {
@@ -174,7 +169,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     }
   };
 
-  const handlePageNumber = (variablePageNumber: number | "/") => {
+  const handleDynamicPage = (variablePageNumber: number | "/") => {
     // 관리자 장르 페이지인 경우
     if (isAdminGenrePage) {
       router.push(`/music/admin/${pathName}/${variablePageNumber}`);
@@ -312,9 +307,9 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
             <div
               className={styles["page"]}
               onClick={() => {
-                if (maxPage > 5) {
-                  const prevPageBlock = maxPage - 5;
-                  handlePageNumber(prevPageBlock);
+                if (maxPageNumber > 5) {
+                  const prevPageBlock = maxPageNumber - 5;
+                  handleDynamicPage(prevPageBlock);
                 }
               }}
             >
@@ -322,31 +317,32 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
             </div>
           )}
           {pageArray.map((page, index) => {
-            const pageNumber = index + 1;
-            const minPage = maxPage - perPageCount + 1;
-
-            if (pageNumber >= minPage && pageNumber <= maxPage)
+            const minPageNumber = maxPageNumber - perPageCount + 1;
+            const pageButtonNumber = index + 1;
+            if (pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber)
               return (
                 <div
                   key={index}
                   className={styles["page"]}
                   onClick={() => {
-                    handlePageNumber(pageNumber);
+                    handleDynamicPage(pageButtonNumber);
                   }}
                   style={
-                    currentPage === pageNumber ? { fontWeight: 500, color: "#000" } : undefined
+                    currentPage === pageButtonNumber
+                      ? { fontWeight: 500, color: "#000" }
+                      : undefined
                   }
                 >
                   {page}
                 </div>
               );
           })}
-          {totalPage - maxPage > 0 && (
+          {totalPage - maxPageNumber > 0 && (
             <div
               className={styles["page"]}
               onClick={() => {
-                const nextPageBlock = maxPage + 1;
-                handlePageNumber(nextPageBlock);
+                const nextPageBlock = maxPageNumber + 1;
+                handleDynamicPage(nextPageBlock);
               }}
             >
               〉
