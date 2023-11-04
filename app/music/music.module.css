@@ -277,10 +277,54 @@
   margin-bottom: 100px;
 }
 
+.paragraph-container-test {
+  position: relative;
+}
+
 .paragraph {
   text-indent: 10%;
   /* white-space: pre-wrap; */
   margin: 0;
+}
+
+.blur-end {
+  /* 마스킹 줄 수  */
+  --lines: 4;
+  /* 마스킹 높이 */
+  --line-height: 60;
+  /* 마스킹 길이 */
+  --link-length: 10;
+  /* 얘 뭘까? */
+  --one-ch: 9;
+  --fade-direction: 270deg;
+  overflow: hidden;
+  text-overflow: clip;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--lines);
+
+  mask: linear-gradient(
+      0deg,
+      transparent 0,
+      transparent calc(var(--line-height) * 1px),
+      #000 calc(var(--line-height) * 1px)
+    ),
+    linear-gradient(
+      270deg,
+      transparent 0,
+      transparent calc((var(--link-length) * var(--one-ch)) * 1px),
+      #000 calc((var(--link-length) * var(--one-ch) + var(--line-height) * 2) * 1px)
+    );
+}
+
+.more-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-weight: 450;
+  font-size: 1.2rem;
+  padding-right: 20px;
+  cursor: pointer;
 }
 
 .paragraph-blank {
@@ -289,6 +333,14 @@
 
 .paragraph:first-child {
   text-indent: 0;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  height: 50px;
 }
 
 .sort-criteria-container {
@@ -582,5 +634,19 @@
 
   .page-container {
     margin-top: 20px;
+  }
+
+  .blur-end {
+    --lines: 5;
+    --line-height: 30;
+    --link-length: 10;
+    --one-ch: 8;
+  }
+
+  .more-button {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding-right: 30px;
+    bottom: 0.5px;
   }
 }

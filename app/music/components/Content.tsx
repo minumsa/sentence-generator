@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import { deleteData, fetchData } from "../modules/api";
 import { formatDuration } from "../modules/utils";
 import { useAtom } from "jotai";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 interface PageProps {
   pathName: string;
@@ -190,6 +192,10 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
       <div>
         {!isUploadPage && !isLoading && (
           <div className={styles["sort-button-container"]}>
+            {/* TODO: 검색 기능 만들지 말지 고민 */}
+            {/* <div className={styles["search-container"]}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </div> */}
             <SortToggleButton
               type="method"
               sortItem={sortItems.method}
@@ -280,16 +286,33 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
                     {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
                     {data.text.split("\n").map((text, index) => {
                       const hasNoText = text.length < 1;
-                      return (
-                        <p
-                          key={index}
-                          className={`${styles["paragraph"]} ${
-                            hasNoText ? styles["paragraph-blank"] : undefined
-                          }`}
-                        >
-                          {text}
-                        </p>
-                      );
+                      const longTextStandard = 300;
+                      const isLongText = text.length > longTextStandard;
+                      const longText = text.substring(0, longTextStandard);
+
+                      // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
+                      if (index === 0)
+                        return (
+                          <div className={styles["paragraph-container-test"]}>
+                            <p
+                              key={index}
+                              className={`${styles["paragraph"]} ${
+                                isLongText ? styles["blur-end"] : undefined
+                              } ${hasNoText ? styles["paragraph-blank"] : undefined}`}
+                            >
+                              {text}
+                            </p>
+                            {isLongText && <span className={styles["more-button"]}>더 보기</span>}
+                          </div>
+                          // <p
+                          //   key={index}
+                          //   className={`${styles["paragraph"]} ${styles["blur-end"]} ${
+                          //     hasNoText ? styles["paragraph-blank"] : undefined
+                          //   }`}
+                          // >
+                          //   {text}
+                          // </p>
+                        );
                     })}
                   </div>
                 </div>
