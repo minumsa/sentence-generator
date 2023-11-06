@@ -3,6 +3,7 @@ import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
 import { deleteData } from "../modules/api";
+import { Loading } from "./Loading";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -22,13 +23,14 @@ export const Album = ({
   const router = useRouter();
   const albumDuration = formatDuration(data.duration);
   const isFirstDataPerPage = dataIndex % perPageCount === 1;
+  const isEmptyData = data.id === "";
 
-  console.log(isPostPage);
-
-  return (
+  return isEmptyData ? (
+    <Loading />
+  ) : (
     <div
       className={styles["album-container"]}
-      style={isFirstDataPerPage ? { paddingTop: "20px" } : undefined}
+      style={isFirstDataPerPage ? { paddingTop: "50px" } : undefined}
     >
       <div className={styles["album-information-container"]}>
         <div>
@@ -97,9 +99,8 @@ export const Album = ({
           } else {
             if (index === 0)
               return (
-                <div className={styles["paragraph-container"]}>
+                <div className={styles["paragraph-container"]} key={index}>
                   <p
-                    key={index}
                     className={`${styles["paragraph"]} ${
                       isLongText ? styles["blur-end"] : undefined
                     } ${hasNoText ? styles["paragraph-blank"] : undefined}`}

@@ -340,9 +340,17 @@
 
 .upload-button {
   border: none;
+  width: fit-content;
   height: 41px;
   padding: 5px;
   margin-right: 5px;
+}
+
+.post-button {
+  width: fit-content;
+  padding: 0 5px;
+  margin: 10px;
+  border: 1px solid #000;
 }
 
 .sort-criteria-container {
@@ -393,6 +401,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .upload-item-title {

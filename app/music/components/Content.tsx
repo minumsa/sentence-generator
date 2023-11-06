@@ -7,11 +7,11 @@ import {
   OrderType,
   initialCriteria,
   initialMethod,
+  isAdminPage,
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
-import { deleteData, fetchData, fetchDataById } from "../modules/api";
-import { formatDuration } from "../modules/utils";
+import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -189,19 +189,21 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", marginTop: "2rem" }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <div>
         {!isUploadPage && !isLoading && (
           <div className={styles["top-menu-container"]}>
             {/* TODO: 검색 기능 만들지 말지 고민 */}
-            <div
-              className={`${styles["admin-button"]} ${styles["upload-button"]}`}
-              onClick={() => {
-                router.push("/music/admin/upload");
-              }}
-            >
-              업로드
-            </div>
+            {isAdminPage(fullPathName) && (
+              <div
+                className={`${styles["admin-button"]} ${styles["upload-button"]}`}
+                onClick={() => {
+                  router.push("/music/admin/upload");
+                }}
+              >
+                업로드
+              </div>
+            )}
             <SortToggleButton
               type="method"
               sortItem={sortItems.method}
