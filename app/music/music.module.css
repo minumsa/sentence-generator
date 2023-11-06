@@ -164,7 +164,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid #000000;
+  box-shadow: 0 0 0 1px #000 inset;
 }
 
 .admin-button-container {
@@ -292,13 +292,13 @@
 
 .blur-end {
   /* 마스킹 줄 수  */
-  --lines: 4;
+  --lines: 1;
   /* 마스킹 높이 */
   --line-height: 60;
   /* 마스킹 길이 */
   --link-length: 10;
-  /* 얘 뭘까? */
-  --one-ch: 9;
+  /* 페이드 길이 */
+  --one-ch: 7;
   --fade-direction: 270deg;
   overflow: hidden;
   text-overflow: clip;
@@ -326,8 +326,13 @@
   bottom: 0;
   font-weight: 450;
   font-size: 1.2rem;
-  padding-right: 20px;
   cursor: pointer;
+  padding: 0 12px;
+}
+
+.more-button:hover {
+  box-shadow: 0 0 0 1px #000 inset;
+  border-radius: 50%;
 }
 
 .paragraph-blank {
@@ -350,7 +355,6 @@
   width: fit-content;
   padding: 0 5px;
   margin: 10px;
-  border: 1px solid #000;
 }
 
 .sort-criteria-container {
@@ -425,6 +429,12 @@
   cursor: pointer;
   color: #949494;
   padding: 0 18px;
+}
+
+.post-date {
+  position: absolute;
+  margin-left: 15px;
+  font-size: 1.3rem;
 }
 
 @media (max-width: 499px) {
@@ -651,7 +661,7 @@
   }
 
   .blur-end {
-    --lines: 5;
+    --lines: 3;
     --line-height: 30;
     --link-length: 10;
     --one-ch: 8;
@@ -662,5 +672,11 @@
     font-weight: 600;
     padding-right: 30px;
     bottom: 0.5px;
+  }
+
+  .post-date {
+    position: absolute;
+    margin-left: 10px;
+    font-size: 0.9rem;
   }
 }

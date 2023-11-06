@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { formatDuration } from "../modules/utils";
+import { formatDate, formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
 import { deleteData } from "../modules/api";
@@ -24,6 +24,7 @@ export const Album = ({
   const albumDuration = formatDuration(data.duration);
   const isFirstDataPerPage = dataIndex % perPageCount === 1;
   const isEmptyData = data.id === "";
+  const totalParagraph = data.text.split("\n").length;
 
   return isEmptyData ? (
     <Loading />
@@ -86,15 +87,25 @@ export const Album = ({
         {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
         {data.text.split("\n").map((text, index) => {
           const hasNoText = text.length < 1;
-          const longTextStandard = 300;
+          const longTextStandard = 100;
           const isLongText = text.length > longTextStandard;
+          const isLastParagraph = index + 1 === totalParagraph;
 
           // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
           if (isPostPage) {
             return (
-              <p key={index} className={styles["paragraph"]}>
-                {text}
-              </p>
+              <>
+                <p key={index} className={styles["paragraph"]}>
+                  {isLastParagraph ? (
+                    <>
+                      <span>{text}</span>
+                      <span className={styles["post-date"]}>{formatDate(data.uploadDate)}</span>
+                    </>
+                  ) : (
+                    text
+                  )}
+                </p>
+              </>
             );
           } else {
             if (index === 0)
@@ -121,6 +132,9 @@ export const Album = ({
               );
           }
         })}
+        {/* <div style={{ display: "flex", justifyContent: "flex-end", marginRight: "20px" }}>
+          {isPostPage && `작성일 : ${}`}
+        </div> */}
       </div>
     </div>
   );
