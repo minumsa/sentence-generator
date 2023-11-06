@@ -94,18 +94,16 @@ export const Album = ({
           // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
           if (isPostPage) {
             return (
-              <>
-                <p key={index} className={styles["paragraph"]}>
-                  {isLastParagraph ? (
-                    <>
-                      <span>{text}</span>
-                      <span className={styles["post-date"]}>{formatDate(data.uploadDate)}</span>
-                    </>
-                  ) : (
-                    text
-                  )}
-                </p>
-              </>
+              <p key={index} className={styles["paragraph"]}>
+                {isLastParagraph ? (
+                  <span>
+                    {text}
+                    <span className={styles["post-date"]}>{formatDate(data.uploadDate)}</span>
+                  </span>
+                ) : (
+                  text
+                )}
+              </p>
             );
           } else {
             if (index === 0)

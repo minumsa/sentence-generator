@@ -73,6 +73,7 @@
   /* top-menu-container와 영역 겹쳐서 지정 */
   z-index: 10000;
   background-color: #fff;
+  border-right: 1px solid #000;
 }
 
 .category:first-child {
@@ -106,7 +107,6 @@
   width: calc(100% - 250px);
   height: 100%;
   overflow: scroll;
-  border-left: 1px solid #000000;
 }
 
 .category-container::-webkit-scrollbar,
@@ -432,7 +432,6 @@
 }
 
 .post-date {
-  position: absolute;
   margin-left: 15px;
   font-size: 1.3rem;
 }
