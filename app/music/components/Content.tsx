@@ -10,11 +10,13 @@ import {
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
-import { deleteData, fetchData } from "../modules/api";
+import { deleteData, fetchData, fetchDataById } from "../modules/api";
 import { formatDuration } from "../modules/utils";
 import { useAtom } from "jotai";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Loading } from "./Loading";
+import { Album } from "./Album";
 
 interface PageProps {
   pathName: string;
@@ -35,11 +37,11 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalPage, setTotalPage] = useState(1);
+  const [maxPageNumber, setMaxPage] = useState<number>(5);
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
-  const [maxPageNumber, setMaxPage] = useState<number>(5);
 
   useEffect(() => {
     async function loadData() {
@@ -54,6 +56,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
       const dataLength = result?.genreDataLength;
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
     }
+
     loadData();
   }, [pathName, currentPage, currentMethod, currentCriteria]);
 
@@ -99,8 +102,6 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
-                    console.log(item);
-
                     const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
@@ -191,11 +192,16 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     <div style={{ display: "flex", flexDirection: "column", marginTop: "2rem" }}>
       <div>
         {!isUploadPage && !isLoading && (
-          <div className={styles["sort-button-container"]}>
+          <div className={styles["top-menu-container"]}>
             {/* TODO: 검색 기능 만들지 말지 고민 */}
-            {/* <div className={styles["search-container"]}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </div> */}
+            <div
+              className={`${styles["admin-button"]} ${styles["upload-button"]}`}
+              onClick={() => {
+                router.push("/music/admin/upload");
+              }}
+            >
+              업로드
+            </div>
             <SortToggleButton
               type="method"
               sortItem={sortItems.method}
@@ -213,109 +219,22 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
           </div>
         )}
         {isLoading ? (
-          <div className={styles["loading"]}>
-            <div>데이터를 불러오는 중입니다...</div>
-          </div>
+          <Loading />
         ) : (
           sortedData.map((data, index) => {
-            const albumDuration = formatDuration(data.duration);
             const dataIndex = index + 1;
             const isLastData = index === sortedData.length - 1;
-            const isFirstDataPerPage = dataIndex % perPageCount === 1;
             const isLastDataPerPage = dataIndex % perPageCount === 0;
 
             return (
               <div key={index}>
-                <div
-                  className={styles["album-container"]}
-                  style={isFirstDataPerPage ? { paddingTop: "20px" } : undefined}
-                >
-                  <div className={styles["album-information-container"]}>
-                    <div>
-                      <a className={styles["link"]} href={data.link} target="_blank">
-                        <img
-                          className={styles["album-art"]}
-                          src={data.imgUrl}
-                          alt={data.album}
-                          loading="lazy"
-                        />
-                      </a>
-                    </div>
-                    <div className={` ${styles["album-information"]}`}>
-                      <div>
-                        <div className={styles["information"]}>
-                          <div style={{ marginRight: "5px" }}>{data.artist}</div>
-                        </div>
-                        <div className={styles["information"]}>
-                          <a className={styles["link"]} href={data.link} target="_blank">
-                            <div className={styles["album-title"]}>{data.album}</div>
-                          </a>
-                        </div>
-                      </div>
-                      <div className={styles["information"]}>
-                        <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(
-                          data.releaseDate.slice(5, 7)
-                        )}월, ${data.label}`}</span>
-                      </div>
-                      <div className={styles["information"]}>
-                        {`${data.tracks}곡, ${albumDuration}`}
-                      </div>
-                      {isAdminMainPage && (
-                        <div className={styles["admin-button-container"]}>
-                          <div
-                            className={styles["admin-button"]}
-                            onClick={async () => {
-                              deleteData(data.id);
-                            }}
-                          >
-                            삭제
-                          </div>
-                          <div
-                            className={styles["admin-button"]}
-                            onClick={() => {
-                              router.push(`/music/admin/${data.id}`);
-                            }}
-                          >
-                            수정
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles["text-container"]}>
-                    {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
-                    {data.text.split("\n").map((text, index) => {
-                      const hasNoText = text.length < 1;
-                      const longTextStandard = 300;
-                      const isLongText = text.length > longTextStandard;
-                      const longText = text.substring(0, longTextStandard);
-
-                      // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
-                      if (index === 0)
-                        return (
-                          <div className={styles["paragraph-container-test"]}>
-                            <p
-                              key={index}
-                              className={`${styles["paragraph"]} ${
-                                isLongText ? styles["blur-end"] : undefined
-                              } ${hasNoText ? styles["paragraph-blank"] : undefined}`}
-                            >
-                              {text}
-                            </p>
-                            {isLongText && <span className={styles["more-button"]}>더 보기</span>}
-                          </div>
-                          // <p
-                          //   key={index}
-                          //   className={`${styles["paragraph"]} ${styles["blur-end"]} ${
-                          //     hasNoText ? styles["paragraph-blank"] : undefined
-                          //   }`}
-                          // >
-                          //   {text}
-                          // </p>
-                        );
-                    })}
-                  </div>
-                </div>
+                <Album
+                  data={data}
+                  dataIndex={dataIndex}
+                  perPageCount={perPageCount}
+                  isAdminMainPage={isAdminMainPage}
+                  isPostPage={false}
+                />
                 {isLastDataPerPage || isLastData ? undefined : (
                   <div className={styles["divider"]} />
                 )}

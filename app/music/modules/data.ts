@@ -52,6 +52,21 @@ export interface AlbumInfo {
   tracks: number;
 }
 
+export const initialAlbumInfo: AlbumInfo = {
+  id: "",
+  imgUrl: "",
+  artist: "",
+  album: "",
+  label: "",
+  releaseDate: "",
+  genre: "",
+  link: "",
+  text: "",
+  uploadDate: "",
+  duration: 0,
+  tracks: 0,
+};
+
 export interface PageProps {
   params: {
     page: number;

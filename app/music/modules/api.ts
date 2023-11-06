@@ -39,7 +39,7 @@ export async function fetchData({
 }
 
 // FIXME: 메서드 변수명(GOT) 수정 및 기능 체크
-export async function fetchDataForUpdate(id: string) {
+export async function fetchDataById(id: string) {
   try {
     const queryString = `?id=${id}`;
     const url = `/api/music/update${queryString}`;

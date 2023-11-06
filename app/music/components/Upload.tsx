@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { fetchDataForUpdate, fetchSpotify, updateData, uploadData } from "../modules/api";
+import { fetchDataById, fetchSpotify, updateData, uploadData } from "../modules/api";
 
 interface UploadProps {
   idByPathName: string;
@@ -45,7 +45,7 @@ export default function Upload({ idByPathName }: UploadProps) {
 
   useEffect(() => {
     async function getData() {
-      const dataForUpdate = await fetchDataForUpdate(idByPathName);
+      const dataForUpdate = await fetchDataById(idByPathName);
       setData(dataForUpdate);
       const { id, genre, link, text } = dataForUpdate;
       setAlbumId(id);

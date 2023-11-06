@@ -69,7 +69,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  z-index: 100;
+
+  /* top-menu-container와 영역 겹쳐서 지정 */
+  z-index: 10000;
+  background-color: #fff;
 }
 
 .category:first-child {
@@ -141,7 +144,7 @@
   font-weight: 500;
 }
 
-.sort-button-container {
+.top-menu-container {
   display: flex;
   position: absolute;
   top: 0;
@@ -277,7 +280,7 @@
   margin-bottom: 100px;
 }
 
-.paragraph-container-test {
+.paragraph-container {
   position: relative;
 }
 
@@ -335,12 +338,11 @@
   text-indent: 0;
 }
 
-.search-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  cursor: pointer;
-  height: 50px;
+.upload-button {
+  border: none;
+  height: 41px;
+  padding: 5px;
+  margin-right: 5px;
 }
 
 .sort-criteria-container {
@@ -443,7 +445,7 @@
     margin-bottom: 0px;
   }
 
-  .sort-button-container {
+  .top-menu-container {
     display: none;
     width: 100%;
     left: 0;
