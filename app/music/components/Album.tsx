@@ -26,6 +26,8 @@ export const Album = ({
   const isEmptyData = data.id === "";
   const totalParagraph = data.text.split("\n").length;
 
+  console.log(data.text.split("\n"));
+
   return isEmptyData ? (
     <Loading />
   ) : (
@@ -90,20 +92,21 @@ export const Album = ({
           const longTextStandard = 100;
           const isLongText = text.length > longTextStandard;
           const isLastParagraph = index + 1 === totalParagraph;
+          const isBlankLine = text === "";
 
           // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
           if (isPostPage) {
-            return (
+            return isLastParagraph ? (
               <p key={index} className={styles["paragraph"]}>
-                {isLastParagraph ? (
-                  <span>
-                    {text}
-                    <span className={styles["post-date"]}>{formatDate(data.uploadDate)}</span>
-                  </span>
-                ) : (
-                  text
-                )}
+                <span>
+                  {text}
+                  <span className={styles["post-date"]}>{formatDate(data.uploadDate)}</span>
+                </span>
               </p>
+            ) : isBlankLine ? (
+              <p></p>
+            ) : (
+              <p className={styles["paragraph"]}>{text}</p>
             );
           } else {
             if (index === 0)
