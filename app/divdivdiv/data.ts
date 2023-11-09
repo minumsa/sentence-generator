@@ -140,7 +140,7 @@ export const readme = {
   fruits: {
     title: {
       ko: "과일 생성기",
-      en: "Fruit Generator",
+      en: "Fruits",
     },
     text: {
       ko: "페이지 상단에서 과일이 무한하게 생성되며 하강합니다. 특정 과일을 클릭하면 해당 과일에 대한 재밌고 유용한 정보가 화면에 나타납니다.",
@@ -151,7 +151,7 @@ export const readme = {
   words: {
     title: {
       ko: "직유법",
-      en: "Sentence Generator",
+      en: "Sentences",
     },
     text: {
       ko: "데이터베이스에 있는 약 100개의 단어들이 경우의 수에 따라 랜덤하게 조합되며 화면에 다양한 직유법을 만들어냅니다.",
@@ -183,7 +183,7 @@ export const iconTitle = {
     ko: "과일 생성기",
   },
   words: {
-    en: "Sentence Generator",
+    en: "Sentences",
     ko: "직유법",
   },
   cat: {
@@ -195,7 +195,7 @@ export const iconTitle = {
     ko: "나.webp",
   },
   fortune: {
-    en: "fortune.exe",
+    en: "Fortune Cookies.exe",
     ko: "포춘쿠키.exe",
   },
   readme: {

@@ -66,7 +66,13 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
 
   // FIXME: 리드미와 이미지 모달 컴포넌트를 아예 별개로 분리
   return alt === "readme" ? (
-    <div className={styles["modal-container"]} onClick={onClick}>
+    <div
+      className={styles["modal-container"]}
+      onClick={onClick}
+      style={{
+        textAlign: language === "ko" ? "justify" : undefined,
+      }}
+    >
       <div className={styles["modal"]} style={{ width: width, height: height }}>
         {/* <Image src={src} alt={alt} width={width} height={isMobile ? 0 : 50} /> */}
         <div
