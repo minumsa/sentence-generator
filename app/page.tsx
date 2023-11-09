@@ -73,8 +73,8 @@ export default function Home() {
           <div className={styles["nav-container"]}>
             <div className={styles["nav"]}>
               <RenderButtonLeft text="divdivdiv" tab="main" />
-              <RenderButtonLeft text={language === "en" ? "About" : "소개"} tab="about" />
-              <RenderButtonLeft text={language === "en" ? "Contact" : "연결"} tab="contact" />
+              <RenderButtonLeft text={language === "en" ? "about" : "소개"} tab="about" />
+              <RenderButtonLeft text={language === "en" ? "contact" : "연결"} tab="contact" />
               <div className={styles["blank-space"]}></div>
               <React.Fragment>
                 {weather.icon && (

@@ -53,10 +53,11 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
         className={styles["paragraph"]}
         style={{
           margin: isMobile ? "10px 30px" : "10px 70px",
+          wordBreak: language === "ko" ? "break-all" : undefined,
         }}
       >
         <div className={styles["paragraph-title"]} onClick={() => window.open(path, "_blank")}>
-          {`${icon.title[language]} ${icon.emoji}`}
+          {`${icon.title[language].toUpperCase()} ${icon.emoji}`}
         </div>
         {icon.text[language]}
       </div>

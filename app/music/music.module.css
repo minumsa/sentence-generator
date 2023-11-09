@@ -2,17 +2,8 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
 
 @font-face {
-  font-family: "GothicA1-Light";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2")
-    format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  unicode-range: U+AC00-D7A3;
-}
-
-@font-face {
   font-family: "GothicA1";
-  src: url("/GothicA1-ExtraLight.ttf");
+  src: url("/fonts/GothicA1-ExtraLight.ttf");
   font-style: normal;
   font-weight: 300;
   unicode-range: U+AC00-D7A3;
@@ -20,23 +11,15 @@
 
 @font-face {
   font-family: "GothicA1";
-  src: url("/GothicA1-Light.ttf");
+  src: url("/fonts/GothicA1-Light.ttf");
   font-style: normal;
   font-weight: 400;
   unicode-range: U+AC00-D7A3;
 }
-/* 
-@font-face {
-  font-family: "GothicA1";
-  src: url("/GothicA1-Regular.ttf");
-  font-style: normal;
-  font-weight: 500;
-  unicode-range: U+AC00-D7A3;
-} */
 
 @font-face {
   font-family: "GothicA1";
-  src: url("/GothicA1-Medium.ttf");
+  src: url("/fonts/GothicA1-Medium.ttf");
   font-style: normal;
   font-weight: 500;
   unicode-range: U+AC00-D7A3;
@@ -44,15 +27,17 @@
 
 @font-face {
   font-family: "GothicA1";
-  src: url("/GothicA1-SemiBold.ttf");
+  src: url("/fonts/GothicA1-Regular.ttf");
+  font-style: normal;
+  font-weight: 600;
+  unicode-range: U+AC00-D7A3;
+}
+
+@font-face {
+  font-family: "GothicA1";
+  src: url("/fonts/GothicA1-SemiBold.ttf");
   font-style: normal;
   font-weight: 700;
-  unicode-range: U+AC00-D7A3;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
   unicode-range: U+AC00-D7A3;
 }
 
