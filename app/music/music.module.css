@@ -680,7 +680,7 @@
   }
 
   .blur-end {
-    --lines: 3;
+    --lines: 1;
     --line-height: 30;
     --link-length: 8;
     --one-ch: 8;

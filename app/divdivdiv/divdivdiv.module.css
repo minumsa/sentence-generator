@@ -1,10 +1,10 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 @font-face {
-  font-family: "GabiaHeuldot";
-  src: url("/GabiaHeuldot.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
+  font-family: "Karla";
+  src: url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+  unicode-range: U+0041-005A, U+0061-007A;
 }
 
 .container-background {
@@ -16,9 +16,9 @@
   height: 100vh;
   background-color: #000000;
   font-weight: 400;
-  font-family: "Pretendard Variable", "Pretendard", "-apple-system", "BlinkMacSystemFont", system-ui,
-    "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Karla", "Pretendard Variable", "Pretendard", "-apple-system", "BlinkMacSystemFont",
+    system-ui, "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .container {
@@ -175,6 +175,7 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  cursor: pointer;
 }
 
 .index-img-text {
