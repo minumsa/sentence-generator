@@ -233,6 +233,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
         height={iconSize.image.height}
       />
       <Draggable>
+        {/* FIXME: 컴포넌트화 */}
         <div
           className={styles["postIt-container"]}
           style={closePostIt ? { display: "none" } : undefined}
