@@ -23,6 +23,19 @@ export const fetchData = async (setWeather: React.Dispatch<React.SetStateAction<
   }
 };
 
+export const postIt = {
+  ko: [
+    "메인 화면의 아이콘은 자유롭게 드래그할 수 있습니다.",
+    "개별 아이콘을 더블 클릭하면 실행됩니다.",
+    "상단의 날씨 정보는 서울 기준입니다.",
+  ],
+  en: [
+    "Icons on the main screen can be freely dragged.",
+    "Double-clicking individual icons will execute them.",
+    "The weather information at the top is based on Seoul.",
+  ],
+};
+
 export const fortune = {
   ko: [
     "집보다 나은 곳은 없습니다.",
@@ -188,6 +201,25 @@ export const iconTitle = {
   readme: {
     en: "README.txt",
     ko: "프로젝트.txt",
+  },
+};
+
+export const iconSize = {
+  folder: {
+    width: 80,
+    height: 65,
+  },
+  image: {
+    width: 72,
+    height: 96,
+  },
+  fortune: {
+    width: 80,
+    height: 83,
+  },
+  postIt: {
+    width: 200,
+    height: 300,
   },
 };
 

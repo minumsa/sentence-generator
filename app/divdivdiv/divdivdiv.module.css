@@ -97,6 +97,47 @@
   width: max-content;
 }
 
+.postIt-container {
+  width: 250px;
+  height: 170px;
+  cursor: move;
+  position: absolute;
+  right: 180px;
+  bottom: 180px;
+  font-size: 0.8rem;
+  box-shadow: 1px 2px 5px rgb(200, 200, 200);
+  border: 1px solid hsl(0, 0%, 90%);
+  line-height: 160%;
+}
+
+.postIt-top {
+  width: 100%;
+  height: 10%;
+  background-color: #ffec3c;
+}
+
+.postIt-close-button {
+  font-size: 1rem;
+  font-weight: 300;
+  top: -3px;
+  right: 5px;
+  position: absolute;
+  overflow: hidden;
+  width: fit-content;
+  height: 100%;
+  cursor: pointer;
+}
+
+.postIt {
+  width: 100%;
+  height: 90%;
+  background-color: #fef49c;
+}
+
+.postIt-text {
+  padding: 10px;
+}
+
 .modal-container {
   position: fixed;
   top: 50%;
@@ -389,6 +430,10 @@
 
   .language {
     margin: 0 5px;
+  }
+
+  .postIt-container {
+    display: none;
   }
 }
 

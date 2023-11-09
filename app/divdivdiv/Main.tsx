@@ -3,24 +3,9 @@
 import React, { memo, useContext, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";
-import { Language, LanguageContext, fortune, iconTitle, readme } from "./data";
+import { Language, LanguageContext, fortune, iconSize, iconTitle, postIt, readme } from "./data";
 import { ImageModal } from "./Modal";
 import NoSSR from "./NoSSR";
-
-const iconSize = {
-  folder: {
-    width: 80,
-    height: 65,
-  },
-  image: {
-    width: 72,
-    height: 96,
-  },
-  fortune: {
-    width: 80,
-    height: 83,
-  },
-};
 
 export default function Main() {
   const language = useContext(LanguageContext);
@@ -28,6 +13,7 @@ export default function Main() {
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgAlt, setImgAlt] = useState<string>("");
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  // FIXME: 가능하면 isMobile 없애기
   const isMobile: boolean = windowWidth < 620;
 
   const handleWindowResize = () => {
@@ -80,6 +66,8 @@ interface IconsProps {
 }
 
 function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: IconsProps) {
+  const [closePostIt, setClosePostIt] = useState<boolean>(false);
+
   const handleImageClick = (path: string) => {
     if (path === "readme") {
       setImgSrc(`/divdivdiv/readme-${language}.webp`);
@@ -105,7 +93,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
     className: string;
     path: string;
     type: string;
-    title: TitleProps;
+    title: TitleProps | null;
     width: number;
     height: number;
   }) {
@@ -142,14 +130,16 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
             border: type === "image" && path !== "readme" ? "4px solid white" : 0,
           }}
         ></div>
-        <div
-          className={styles["icon-title"]}
-          style={{
-            marginTop: type === "folder" || type === "fortune" ? "5px" : "10px",
-          }}
-        >
-          <div>{title[language]}</div>
-        </div>
+        {title && (
+          <div
+            className={styles["icon-title"]}
+            style={{
+              marginTop: type === "folder" || type === "fortune" ? "5px" : "10px",
+            }}
+          >
+            <div>{title[language]}</div>
+          </div>
+        )}
       </div>
     );
 
@@ -161,7 +151,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
   }
 
   return (
-    <React.Fragment>
+    <>
       <DraggableComponent
         className="icon-blog"
         path="https://blog.divdivdiv.com"
@@ -242,7 +232,34 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
         width={iconSize.image.width}
         height={iconSize.image.height}
       />
-    </React.Fragment>
+      <Draggable>
+        <div
+          className={styles["postIt-container"]}
+          style={closePostIt ? { display: "none" } : undefined}
+        >
+          <div
+            className={styles["postIt-close-button"]}
+            onClick={() => {
+              setClosePostIt(true);
+            }}
+          >
+            ×
+          </div>
+          <div className={styles["postIt-top"]}></div>
+          <div className={styles["postIt"]}>
+            <div className={styles["postIt-text"]}>
+              {postIt[language].map((text, index) => {
+                return (
+                  <li key={index} style={{ listStyle: "number" }}>
+                    {text}
+                  </li>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </Draggable>
+    </>
   );
 }
 

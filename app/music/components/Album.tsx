@@ -101,22 +101,20 @@ export const Album = ({
               return (
                 <div className={styles["paragraph-container"]} key={index}>
                   <p
-                    className={`${styles["paragraph"]} ${
-                      isLongText ? styles["blur-end"] : undefined
-                    } ${hasNoText ? styles["paragraph-blank"] : undefined}`}
+                    className={`${styles["paragraph"]} ${styles["blur-end"]} ${
+                      hasNoText ? styles["paragraph-blank"] : undefined
+                    }`}
                   >
                     {text}
                   </p>
-                  {isLongText && (
-                    <span
-                      className={styles["more-button"]}
-                      onClick={() => {
-                        router.push(`/music/${data.id}`);
-                      }}
-                    >
-                      더 보기
-                    </span>
-                  )}
+                  <span
+                    className={styles["more-button"]}
+                    onClick={() => {
+                      router.push(`/music/${data.id}`);
+                    }}
+                  >
+                    더 보기
+                  </span>
                 </div>
               );
           }
