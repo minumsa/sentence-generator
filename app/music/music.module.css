@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
 
 @font-face {
   font-family: "GothicA1-Light";
@@ -49,6 +50,12 @@
   unicode-range: U+AC00-D7A3;
 }
 
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css");
+  unicode-range: U+AC00-D7A3;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -73,6 +80,7 @@
   /* top-menu-container와 영역 겹쳐서 지정 */
   z-index: 10000;
   background-color: #fff;
+  border-right: 1px solid #000;
 }
 
 .category:first-child {
@@ -106,7 +114,6 @@
   width: calc(100% - 250px);
   height: 100%;
   overflow: scroll;
-  border-left: 1px solid #000000;
 }
 
 .category-container::-webkit-scrollbar,
@@ -116,10 +123,11 @@
 
 .album-container {
   width: 80%;
-  min-width: 1000px;
+  min-width: 950px;
   display: flex;
   flex-direction: column;
-  padding: 80px 120px;
+  /* padding: 80px 120px; */
+  padding: 80px 100px 80px 140px;
 }
 
 .text-container {
@@ -164,7 +172,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid #000000;
+  box-shadow: 0 0 0 1px #000 inset;
 }
 
 .admin-button-container {
@@ -286,7 +294,6 @@
 
 .paragraph {
   text-indent: 10%;
-  /* white-space: pre-wrap; */
   margin: 0;
 }
 
@@ -297,8 +304,8 @@
   --line-height: 60;
   /* 마스킹 길이 */
   --link-length: 10;
-  /* 얘 뭘까? */
-  --one-ch: 9;
+  /* 페이드 길이 */
+  --one-ch: 7;
   --fade-direction: 270deg;
   overflow: hidden;
   text-overflow: clip;
@@ -326,8 +333,13 @@
   bottom: 0;
   font-weight: 450;
   font-size: 1.2rem;
-  padding-right: 20px;
   cursor: pointer;
+  padding: 0 12px;
+}
+
+.more-button:hover {
+  box-shadow: 0 0 0 1px #000 inset;
+  border-radius: 50%;
 }
 
 .paragraph-blank {
@@ -350,7 +362,12 @@
   width: fit-content;
   padding: 0 5px;
   margin: 10px;
-  border: 1px solid #000;
+  border: none;
+}
+
+.post-button:hover {
+  opacity: 70%;
+  font-weight: 400;
 }
 
 .sort-criteria-container {
@@ -418,34 +435,41 @@
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .page {
   cursor: pointer;
   color: #949494;
-  padding: 0 18px;
+  padding: 5px 18px;
+}
+
+.post-date {
+  margin-left: 15px;
+  font-size: 1.3rem;
 }
 
 @media (max-width: 499px) {
   .container {
     height: auto;
     flex-direction: column;
-    font-size: 1rem;
-    font-family: "Montserrat", "GothicA1";
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 450;
+    font-family: "Montserrat", "Pretendard";
   }
 
   .category-container {
     display: flex;
     position: fixed;
     top: 0;
-    height: 33px;
-    width: 100%;
+    height: 40px;
+    width: calc(100% - 20px);
     border-bottom: 1px solid #000000;
     background-color: #ffffff;
     justify-content: space-between;
     align-items: center;
+    margin: 0 10px;
+    border-right: none;
   }
 
   .category {
@@ -490,7 +514,7 @@
   .album-container {
     width: 100%;
     min-width: 0;
-    padding: 20px 0;
+    padding: 30px 0;
     align-items: center;
   }
 
@@ -499,19 +523,19 @@
     flex-direction: column;
     height: fit-content;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .album-information {
     display: flex;
     flex-direction: column;
-    margin: 10px 0 0 0;
+    margin: 15px 0 0 0;
   }
 
   .text-container {
     width: 100%;
     height: fit-content;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
   }
 
   .paragraph {
@@ -536,12 +560,16 @@
 
   .mobile-title,
   .mobile-category {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     display: flex;
     width: 25%;
     height: 100%;
     justify-content: center;
     align-items: center;
+  }
+
+  .mobile-title {
+    width: fit-content;
   }
 
   .desktop-category {
@@ -552,7 +580,8 @@
     display: flex;
     justify-content: center;
     height: 23px;
-    width: 50px;
+    width: fit-content;
+    margin-right: 2px;
     cursor: pointer;
   }
 
@@ -651,16 +680,25 @@
   }
 
   .blur-end {
-    --lines: 5;
+    --lines: 3;
     --line-height: 30;
-    --link-length: 10;
+    --link-length: 8;
     --one-ch: 8;
   }
 
   .more-button {
     font-size: 0.9rem;
     font-weight: 600;
-    padding-right: 30px;
     bottom: 0.5px;
+    margin-right: 15px;
+  }
+
+  .post-date {
+    margin-left: 10px;
+    font-size: 0.9rem;
+  }
+
+  .divider {
+    margin: 0 10px;
   }
 }
