@@ -146,25 +146,27 @@
 
 .postIt-top {
   width: 100%;
-  height: 10%;
+  height: 8%;
   background-color: #ffec3c;
 }
 
 .postIt-close-button {
+  color: #aca559;
   font-size: 1rem;
   font-weight: 300;
-  top: -3px;
-  right: 5px;
+  top: -4.5px;
+  right: 3px;
   position: absolute;
   overflow: hidden;
   width: fit-content;
-  height: 100%;
+  height: fit-content;
   cursor: pointer;
+  padding: 0 2px;
 }
 
 .postIt {
   width: 100%;
-  height: 90%;
+  height: 92%;
   background-color: #fef49c;
 }
 
