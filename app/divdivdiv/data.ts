@@ -154,8 +154,8 @@ export const readme = {
       en: "Sentences",
     },
     text: {
-      ko: "데이터베이스에 있는 약 100개의 단어들이 경우의 수에 따라 랜덤하게 조합되며 화면에 다양한 직유법을 만들어냅니다.",
-      en: "About 100 words in the database are randomly combined based on various possibilities to create different scenarios.",
+      ko: "데이터베이스에 있는 약 100개의 단어들이 경우의 수에 따라 랜덤하게 조합되며 화면에 다양한 직유법을 만들어냅니다. 우측 상단의 카메라 버튼을 클릭하면 현재 화면이 클립보드에 저장됩니다.",
+      en: "Around 100 words from the database are randomly combined based on permutations to generate various puns on the screen. Click the camera button in the upper right corner to save the current screen to the clipboard.",
     },
     emoji: "🌈",
   },
