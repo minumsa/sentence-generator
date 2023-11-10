@@ -68,10 +68,6 @@
   border-right: 1px solid #000;
 }
 
-.category:first-child {
-  margin-bottom: 20px;
-}
-
 .category {
   cursor: pointer;
   display: flex;
@@ -101,8 +97,8 @@
   overflow: scroll;
 }
 
-.category-container::-webkit-scrollbar,
-.content-container::-webkit-scrollbar {
+/* .content-container::-webkit-scrollbar */
+.category-container::-webkit-scrollbar {
   display: none;
 }
 
