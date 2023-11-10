@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./cine.module.css";
 import { data, negativeWord } from "./data";
-import Image from "next/image";
 
 interface pageProps {
   answerArray: (number | string)[];
@@ -56,12 +55,11 @@ export default function Answer({ answerArray }: pageProps) {
                 {item.type2 === "image" ? (
                   <React.Fragment>
                     <div className={styles["image-container"]}>
-                      <Image
+                      <img
                         className={styles["image"]}
                         src={`/cinephile/${item.title}.webp`}
                         alt={`${item.title}`}
-                        width={window.innerWidth > 450 ? "300" : "240"}
-                        height={window.innerWidth > 450 ? "220" : "175"}
+                        loading="lazy"
                       />
                     </div>
                   </React.Fragment>

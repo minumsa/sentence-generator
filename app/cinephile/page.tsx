@@ -145,22 +145,20 @@ export default function Page() {
               </div>
               <div className={styles["score"]}>{score}점</div>
               <div className={styles["star-container"]}>
-                <Image
+                <img
                   className={styles["star-color"]}
                   src="/cinephile/star-color.webp"
                   alt="star-color"
-                  width={window.innerWidth > 450 ? "230" : "230"}
-                  height={window.innerWidth > 450 ? "47" : "47"}
                   style={{
                     clipPath: `inset(0 ${100 - score}% 0 0)`,
                   }}
+                  loading="lazy"
                 />
-                <Image
+                <img
                   className={styles["star-mono"]}
                   src="/cinephile/star-mono.webp"
                   alt="star-mono"
-                  width={window.innerWidth > 450 ? "230" : "230"}
-                  height={window.innerWidth > 450 ? "47" : "47"}
+                  loading="lazy"
                 />
               </div>
               <div className={styles["comment"]}>{comment}</div>

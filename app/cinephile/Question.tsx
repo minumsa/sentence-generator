@@ -65,12 +65,11 @@ export function Question({ page, answer, setAnswer }: QuestionProps) {
         data[page - 1].type2 === "image" ? (
           <React.Fragment>
             <div className={styles["image-container"]}>
-              <Image
+              <img
                 className={styles["image"]}
                 src={`/cinephile/${data[page - 1].title}.webp`}
                 alt={`${data[page - 1].title}`}
-                width={window.innerWidth > 450 ? "420" : "240"}
-                height={window.innerWidth > 450 ? "290" : "160"}
+                loading="lazy"
               />
             </div>
             <Options />
