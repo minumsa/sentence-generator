@@ -322,11 +322,6 @@
   padding: 0 12px;
 }
 
-.more-button:hover {
-  box-shadow: 0 0 0 1px #000 inset;
-  border-radius: 50%;
-}
-
 .paragraph-blank {
   margin-bottom: 2rem;
 }

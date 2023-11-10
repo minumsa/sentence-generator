@@ -111,27 +111,26 @@ export const Album = ({
               return (
                 <div className={styles["paragraph-container"]} key={index}>
                   <p
-                    className={`${styles["paragraph"]} ${styles["blur-end"]} ${
-                      hasNoText ? styles["paragraph-blank"] : undefined
-                    }`}
+                    className={`${styles["paragraph"]} 
+                    ${isLongText ? styles["blur-end"] : undefined} 
+                    ${hasNoText ? styles["paragraph-blank"] : undefined}`}
                   >
                     {text}
                   </p>
-                  <span
-                    className={styles["more-button"]}
-                    onClick={() => {
-                      router.push(`/music/${data.id}`);
-                    }}
-                  >
-                    더 보기
-                  </span>
+                  {isLongText && (
+                    <span
+                      className={styles["more-button"]}
+                      onClick={() => {
+                        router.push(`/music/${data.id}`);
+                      }}
+                    >
+                      더 보기
+                    </span>
+                  )}
                 </div>
               );
           }
         })}
-        {/* <div style={{ display: "flex", justifyContent: "flex-end", marginRight: "20px" }}>
-          {isPostPage && `작성일 : ${}`}
-        </div> */}
       </div>
     </div>
   );
