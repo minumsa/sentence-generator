@@ -21,7 +21,7 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
             className={styles["category"]}
             onClick={() => {
               router.push(
-                isAdminPage(fullPathName) ? `/music/admin/${category}/1` : `/music/${category}/1`
+                isAdminPage(fullPathName) ? `/music/admin/${category}` : `/music/${category}`
               );
             }}
             style={isActiveCategory ? activeStyle : {}}
