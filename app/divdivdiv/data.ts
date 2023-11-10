@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
 export const LanguageContext = createContext<Language>("en");
+export const PostitContext = createContext<boolean>(false);
 
 export interface Weather {
   icon: string | null;
@@ -23,7 +24,7 @@ export const fetchData = async (setWeather: React.Dispatch<React.SetStateAction<
   }
 };
 
-export const postIt = {
+export const postit = {
   ko: [
     "메인 화면의 아이콘은 자유롭게 드래그할 수 있습니다.",
     "개별 아이콘을 더블 클릭하면 실행됩니다.",
@@ -217,7 +218,7 @@ export const iconSize = {
     width: 80,
     height: 83,
   },
-  postIt: {
+  postit: {
     width: 200,
     height: 300,
   },
