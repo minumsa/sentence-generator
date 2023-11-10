@@ -3,16 +3,7 @@
 import React, { memo, useContext, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";
-import {
-  Language,
-  LanguageContext,
-  PostitContext,
-  fortune,
-  iconSize,
-  iconTitle,
-  postit,
-  readme,
-} from "./data";
+import { Language, LanguageContext, fortune, iconSize, iconTitle, postit, readme } from "./data";
 import { ImageModal } from "./Modal";
 
 export default function Main() {
