@@ -1,7 +1,6 @@
 import { createContext } from "react";
 
 export const LanguageContext = createContext<Language>("en");
-export const PostitContext = createContext<boolean>(false);
 
 export interface Weather {
   icon: string | null;
