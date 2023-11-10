@@ -6,6 +6,7 @@ import { words } from "./words";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from "html2canvas";
+import { isMobile } from "react-device-detect";
 
 const getRandomItemFromArray = (array: string[]): string => {
   return array[Math.floor(Math.random() * array.length)];
@@ -18,7 +19,7 @@ const generateRandomColor = (): string => {
 export default function RandomSentenceGenerator() {
   const [randomWord1, setRandomWord1] = useState<string>(words[0]);
   const [randomWord2, setRandomWord2] = useState<string>(words[9]);
-  const [isRunning, setIsRunning] = useState<boolean>(true);
+  const [isTriggered, setIsTriggered] = useState<boolean>(true);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const generateRandomSentence = () => {
@@ -26,58 +27,71 @@ export default function RandomSentenceGenerator() {
     setRandomWord2(getRandomItemFromArray(words));
   };
 
-  // FIXME: isRunning의 변수 이름이 조금 이상. false일 때도 활성화되기 때문에.
   useEffect(() => {
     const intervalId = setInterval(generateRandomSentence, 2000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [isRunning]);
+  }, [isTriggered]);
 
   const handleClick = () => {
-    setIsRunning(prevIsRunning => !prevIsRunning);
+    setIsTriggered(prevIsRunning => !prevIsRunning);
     generateRandomSentence();
   };
 
-  // FIXME: 모바일에선 캡처 기능이 작동하지 않아서 일단 보이지 않게 해뒀음
   const handleCapture = () => {
     setIsAnimating(true);
 
     setTimeout(() => {
       setIsAnimating(false);
-    }, 2000);
+    }, 3000);
+
     const elementToCapture = document.querySelector(`.${styles["sentence-container"]}`);
 
     html2canvas(elementToCapture as HTMLElement).then(canvas => {
       if (canvas) {
-        canvas.toBlob(blob => {
-          if (blob) {
-            const item = new ClipboardItem({ "image/png": blob });
-            navigator.clipboard
-              .write([item])
-              .then(() => {
-                console.log("전체 화면이 클립보드에 복사되었습니다.");
-              })
-              .catch(error => {
-                console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
-              });
-          }
-        });
+        if (isMobile) {
+          const dataURL = canvas.toDataURL("image/png");
+
+          const a = document.createElement("a");
+          a.href = dataURL;
+          a.download = "captured_image.png";
+
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+
+          console.log("이미지가 다운로드되었습니다.");
+        } else {
+          canvas.toBlob(blob => {
+            if (blob) {
+              const item = new ClipboardItem({ "image/png": blob });
+              navigator.clipboard
+                .write([item])
+                .then(() => {
+                  console.log("전체 화면이 클립보드에 복사되었습니다.");
+                })
+                .catch(error => {
+                  console.error("클립보드 복사 중 오류가 발생했습니다: ", error);
+                });
+            }
+          });
+        }
       }
     });
   };
 
   return (
     <div className={styles["container"]}>
-      {/* FIXME: 가로 기준 가운데 정렬하기 */}
-      {/* FIXME: 캡처 버튼 눌렀을 때만 작동시키기 */}
       <div
-        className={`${styles["fade-in-out-text"]} ${
-          isAnimating ? styles["fade-in-out-animation"] : undefined
+        className={`${styles["download-container"]} ${
+          isAnimating ? styles["download-animation"] : undefined
         }`}
       >
-        <div className={styles["fade-test"]}>이미지가 클립보드에 저장되었습니다!</div>
+        <div className={styles["download-text"]}>
+          {isMobile ? "이미지 파일이 생성되었습니다!" : "이미지가 클립보드에 저장되었습니다!"}
+        </div>
       </div>
       <div className={styles["capture-icon"]} onClick={handleCapture}>
         <FontAwesomeIcon icon={faCamera} />
