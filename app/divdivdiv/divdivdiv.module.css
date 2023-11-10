@@ -223,7 +223,11 @@
 }
 
 .button-left {
-  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  /* padding: 8px 10px; */
   font-size: 14px;
   margin: 0 15px;
   cursor: pointer;

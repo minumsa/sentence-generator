@@ -58,10 +58,17 @@ export default function Home() {
     return (
       <div
         className={styles["button-left"]}
-        style={{ fontWeight: activeTab === tab ? "600" : "400" }}
+        style={
+          activeTab === tab
+            ? {
+                fontWeight: "600",
+                // borderBottom: "1px solid #000"
+              }
+            : undefined
+        }
         onClick={() => setActiveTab(tab)}
       >
-        {text}
+        <div>{text}</div>
       </div>
     );
   }
