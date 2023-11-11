@@ -19,6 +19,7 @@ export default function Upload({ idByPathName }: UploadProps) {
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
 
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
@@ -63,22 +64,8 @@ export default function Upload({ idByPathName }: UploadProps) {
 
   return (
     <>
-      <div className={styles["album-container"]}>
+      <div className={styles["album-container"]} style={{ paddingTop: "50px" }}>
         <div className={styles["title"]}>{`${variableTitle} 페이지`}</div>
-        <a
-          href="https://open.spotify.com/search"
-          target="_blank"
-          style={{ textDecoration: "none", color: "#000" }}
-        >
-          <div className={styles["upload-item-title"]}>앨범 ID(Spotify)</div>
-        </a>
-        <textarea
-          className={styles["input"]}
-          value={albumId}
-          onChange={e => {
-            setAlbumId(e.target.value);
-          }}
-        />
         <div className={styles["upload-item-title"]}>장르</div>
         <div className={styles["select-container"]}>
           <select
@@ -110,6 +97,16 @@ export default function Upload({ idByPathName }: UploadProps) {
           value={link}
           onChange={e => {
             setLink(e.target.value);
+          }}
+        />
+        <a href={spotifyLink} target="_blank" style={{ textDecoration: "none", color: "#000" }}>
+          <div className={styles["upload-item-title"]}>앨범 ID(Spotify)</div>
+        </a>
+        <textarea
+          className={styles["input"]}
+          value={albumId}
+          onChange={e => {
+            setAlbumId(e.target.value);
           }}
         />
         <div className={styles["upload-item-title"]}>글</div>
