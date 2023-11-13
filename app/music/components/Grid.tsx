@@ -80,6 +80,7 @@ export const Grid = () => {
               onClick={() => {
                 router.push(`/music/${item.id}`);
               }}
+              ref={isLastItem ? ref : undefined}
             >
               <img
                 className={styles["grid-album-image"]}
@@ -93,7 +94,6 @@ export const Grid = () => {
               onClick={() => {
                 router.push(`/music/${item.id}`);
               }}
-              ref={isLastItem ? ref : undefined}
             >{`${item.artist} [${item.album}]`}</div>
           </div>
         );
