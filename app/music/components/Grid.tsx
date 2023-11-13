@@ -13,6 +13,7 @@ import {
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
+import { Loading } from "./Loading";
 
 export const Grid = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ export const Grid = () => {
     threshold: 0,
     triggerOnce: true,
   });
+  const isLoading = data.length === 0;
 
   useEffect(() => {
     if (inView) setCurrentPage(prevPage => prevPage + 1);
@@ -56,9 +58,11 @@ export const Grid = () => {
     loadData();
   }, [pathName, currentMethod, currentCriteria, currentPage]);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className={styles["grid-div"]}>
-      {data?.map((item, index) => {
+      {data.map((item, index) => {
         // const lastItemInRow = (index + 1) % 7 === 0;
         const firstLineMobile = isMobile && index < 2;
         const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
