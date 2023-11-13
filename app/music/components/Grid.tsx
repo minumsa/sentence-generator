@@ -3,6 +3,7 @@ import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
 import { usePathname, useRouter } from "next/navigation";
 import { useAtom } from "jotai";
+import React from "react";
 import {
   AlbumInfo,
   CriteriaType,
@@ -11,17 +12,29 @@ import {
   initialMethod,
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
+import useObserver from "../modules/useObserver";
+import NoSSR from "../modules/NoSSR";
 
 export const Grid = () => {
   const router = useRouter();
   const pathName = "";
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalPage, setTotalPage] = useState(1);
-  const [perPageCount, setDataPerPage] = useState(40);
-  const [currentPage, setcurrentPage] = useState(1);
+  const [perPageCount, setDataPerPage] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
+
+  const [ref, inView] = useObserver({
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  }, [inView]);
 
   useEffect(() => {
     async function loadData() {
@@ -40,30 +53,21 @@ export const Grid = () => {
     loadData();
   }, [pathName, currentPage, currentMethod, currentCriteria]);
 
-  console.log(data);
-
   return (
-    <>
+    <NoSSR>
       <div className={styles["grid-div"]}>
         {data.map((data, index) => {
           // const lastItemInRow = (index + 1) % 7 === 0;
           const firstLineMobile = isMobile && index < 2;
           const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
 
+          const mobileStyle = {
+            borderTop: firstLineMobile ? "none" : undefined,
+            borderRight: evenIndexMobile ? "none" : undefined,
+          };
+
           return (
-            <div
-              key={index}
-              className={styles["grid-item-container"]}
-              style={
-                evenIndexMobile && firstLineMobile
-                  ? { borderTop: "none", borderRight: "none" }
-                  : firstLineMobile
-                  ? { borderTop: "none" }
-                  : evenIndexMobile
-                  ? { borderRight: "none" }
-                  : undefined
-              }
-            >
+            <div key={index} className={styles["grid-item-container"]} style={mobileStyle}>
               <div
                 className={styles["grid-album-container"]}
                 onClick={() => {
@@ -87,6 +91,6 @@ export const Grid = () => {
           );
         })}
       </div>
-    </>
+    </NoSSR>
   );
 };
