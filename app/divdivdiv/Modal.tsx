@@ -97,7 +97,14 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
   ) : (
     <div className={styles["modal-image"]} onClick={onClick}>
       {/* <Image src={src} alt={alt} width={width} height={height} /> */}
-      <img src={src} alt={alt} loading="lazy" width={width} height={height} />
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        width={width}
+        height={height}
+        style={{ zIndex: 2020200 }}
+      />
     </div>
   );
 };

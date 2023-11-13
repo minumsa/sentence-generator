@@ -3,18 +3,31 @@
 import React, { memo, useContext, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";
-import { Language, LanguageContext, fortune, iconSize, iconTitle, postit, readme } from "./data";
+import {
+  Language,
+  LanguageContext,
+  fortune,
+  iconSize,
+  iconTitle,
+  initialImgAlt,
+  initialImgSrc,
+  initialIsMobile,
+  initialShowImage,
+  postit,
+  readme,
+} from "./data";
 import { ImageModal } from "./Modal";
+import { useAtom } from "jotai";
 
 export default function Main() {
   const language = useContext(LanguageContext);
   // FIXME: 포스트잇 닫을 때 아이콘 초기화되는 문제 해결
-  const [showImage, setShowImage] = useState<boolean>(false);
-  const [imgSrc, setImgSrc] = useState<string>("");
-  const [imgAlt, setImgAlt] = useState<string>("");
+  const [showImage, setShowImage] = useAtom(initialShowImage);
+  const [imgSrc, setImgSrc] = useAtom<string>(initialImgSrc);
+  const [imgAlt, setImgAlt] = useAtom<string>(initialImgAlt);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   // FIXME: 가능하면 isMobile 없애기
-  const isMobile: boolean = windowWidth < 620;
+  const [isMobile, setIsMobile] = useAtom(initialIsMobile);
 
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
@@ -28,24 +41,17 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
+    setIsMobile(windowWidth < 620);
+
     if (typeof window === "undefined") {
       return;
     }
   }, [windowWidth]);
 
-  const handleModalClick = () => {
-    setShowImage(false);
-    setImgSrc("");
-    setImgAlt("");
-  };
-
   return (
     // TODO: 코드 정리하고 관련 개념 기록해두기.
     // 문제 해결 경험 중심으로 블로그에 작성하기. (모든 걸 다 x)
     <>
-      {showImage && (
-        <ImageModal isMobile={isMobile} src={imgSrc} alt={imgAlt} onClick={handleModalClick} />
-      )}
       <MemoizedIcons
         setImgSrc={setImgSrc}
         setImgAlt={setImgAlt}

@@ -3,12 +3,23 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./divdivdiv/divdivdiv.module.css";
-import { Language, LanguageContext, Weather, fetchData } from "./divdivdiv/data";
+import {
+  Language,
+  LanguageContext,
+  Weather,
+  fetchData,
+  initialImgAlt,
+  initialImgSrc,
+  initialIsMobile,
+  initialShowImage,
+} from "./divdivdiv/data";
 import Clock from "./divdivdiv/Clock";
 import About from "./divdivdiv/About";
 import Contact from "./divdivdiv/Contact";
 import Main from "./divdivdiv/Main";
 import NoSSR from "./divdivdiv/NoSSR";
+import { ImageModal } from "./divdivdiv/Modal";
+import { useAtom } from "jotai";
 
 type Tab = "main" | "about" | "contact";
 interface RenderButtonProps {
@@ -17,6 +28,10 @@ interface RenderButtonProps {
 }
 
 export default function Home() {
+  const [showImage, setShowImage] = useAtom(initialShowImage);
+  const [isMobile, setIsMobile] = useAtom(initialIsMobile);
+  const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
+  const [imgAlt, setImgAlt] = useAtom(initialImgAlt);
   const currentDate = new Date();
   const month = currentDate.getMonth() + 1;
   const months: string[] = [
@@ -73,57 +88,69 @@ export default function Home() {
     );
   }
 
+  const handleModalClick = () => {
+    setShowImage(false);
+    setImgSrc("");
+    setImgAlt("");
+    console.log(imgAlt);
+  };
+
   return (
     <LanguageContext.Provider value={language}>
+      {showImage && (
+        <ImageModal isMobile={isMobile} src={imgSrc} alt={imgAlt} onClick={handleModalClick} />
+      )}
       <div className={styles["container-background"]}>
-        <div className={styles["container"]}>
-          <div className={styles["nav-container"]}>
-            <div className={styles["nav"]}>
-              <RenderButtonLeft text="divdivdiv" tab="main" />
-              <RenderButtonLeft text={language === "en" ? "about" : "소개"} tab="about" />
-              <RenderButtonLeft text={language === "en" ? "contact" : "연결"} tab="contact" />
-              <div className={styles["blank-space"]}></div>
-              <React.Fragment>
-                {weather.icon && (
-                  <div className={`${styles["button-right"]} ${styles["weather"]}`}>
-                    <Image
-                      src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                      width={35}
-                      height={35}
-                      alt="Weather Icon"
-                    />
+        <div className={styles["container-fade"]} style={{ opacity: showImage ? 0.5 : undefined }}>
+          <div className={styles["container"]}>
+            <div className={styles["nav-container"]}>
+              <div className={styles["nav"]}>
+                <RenderButtonLeft text="divdivdiv" tab="main" />
+                <RenderButtonLeft text={language === "en" ? "about" : "소개"} tab="about" />
+                <RenderButtonLeft text={language === "en" ? "contact" : "연결"} tab="contact" />
+                <div className={styles["blank-space"]}></div>
+                <React.Fragment>
+                  {weather.icon && (
+                    <div className={`${styles["button-right"]} ${styles["weather"]}`}>
+                      <Image
+                        src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                        width={35}
+                        height={35}
+                        alt="Weather Icon"
+                      />
+                    </div>
+                  )}
+                  <div className={`${styles["button-right"]} ${styles["temperature"]}`}>
+                    {weather.temp && `${(weather.temp - 273.15).toFixed(1)}°`}
                   </div>
-                )}
-                <div className={`${styles["button-right"]} ${styles["temperature"]}`}>
-                  {weather.temp && `${(weather.temp - 273.15).toFixed(1)}°`}
+                </React.Fragment>
+                <div
+                  className={`${styles["button-right"]} ${styles["language"]}`}
+                  onClick={() => {
+                    setLanguage(language === "en" ? "ko" : "en");
+                  }}
+                >
+                  {language === "en" ? "A" : "한"}
                 </div>
-              </React.Fragment>
-              <div
-                className={`${styles["button-right"]} ${styles["language"]}`}
-                onClick={() => {
-                  setLanguage(language === "en" ? "ko" : "en");
-                }}
-              >
-                {language === "en" ? "A" : "한"}
-              </div>
-              <div className={`${styles["button-right"]} ${styles["calender"]}`}>
-                {language === "en"
-                  ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
-                  : `${month}월 ${day}일 (${dayOfWeek})`}
-              </div>
-              <div className={`${styles["button-right"]} ${styles["clock"]}`}>
-                <Clock />
+                <div className={`${styles["button-right"]} ${styles["calender"]}`}>
+                  {language === "en"
+                    ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
+                    : `${month}월 ${day}일 (${dayOfWeek})`}
+                </div>
+                <div className={`${styles["button-right"]} ${styles["clock"]}`}>
+                  <Clock />
+                </div>
               </div>
             </div>
-          </div>
-          <div className={styles["content"]}>
-            {activeTab === "main" && (
-              <NoSSR>
-                <Main />
-              </NoSSR>
-            )}
-            {activeTab === "about" && <About />}
-            {activeTab === "contact" && <Contact />}
+            <div className={styles["content"]}>
+              {activeTab === "main" && (
+                <NoSSR>
+                  <Main />
+                </NoSSR>
+              )}
+              {activeTab === "about" && <About />}
+              {activeTab === "contact" && <Contact />}
+            </div>
           </div>
         </div>
       </div>
