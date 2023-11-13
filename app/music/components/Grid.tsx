@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import React from "react";
 import {
@@ -12,8 +12,7 @@ import {
   initialMethod,
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
-import useObserver from "../modules/useObserver";
-import NoSSR from "../modules/NoSSR";
+import { useInView } from "react-intersection-observer";
 
 export const Grid = () => {
   const router = useRouter();
@@ -25,16 +24,16 @@ export const Grid = () => {
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
-
-  const [ref, inView] = useObserver({
+  const { ref, inView } = useInView({
+    threshold: 0,
     triggerOnce: true,
   });
 
   useEffect(() => {
-    if (inView) {
-      setCurrentPage(prevPage => prevPage + 1);
-    }
+    console.log("view");
+    setCurrentPage(prev => prev + 1);
   }, [inView]);
+  console.log("currentPage", currentPage);
 
   useEffect(() => {
     async function loadData() {
@@ -51,46 +50,46 @@ export const Grid = () => {
     }
 
     loadData();
-  }, [pathName, currentPage, currentMethod, currentCriteria]);
+  }, [pathName, currentMethod, currentCriteria]);
 
   return (
-    <NoSSR>
-      <div className={styles["grid-div"]}>
-        {data.map((data, index) => {
-          // const lastItemInRow = (index + 1) % 7 === 0;
-          const firstLineMobile = isMobile && index < 2;
-          const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
+    <div className={styles["grid-div"]}>
+      {data?.map((item, index) => {
+        // const lastItemInRow = (index + 1) % 7 === 0;
+        const firstLineMobile = isMobile && index < 2;
+        const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
+        const isLastItem = index + 1 === data.length;
 
-          const mobileStyle = {
-            borderTop: firstLineMobile ? "none" : undefined,
-            borderRight: evenIndexMobile ? "none" : undefined,
-          };
+        const mobileStyle = {
+          borderTop: firstLineMobile ? "none" : undefined,
+          borderRight: evenIndexMobile ? "none" : undefined,
+        };
 
-          return (
-            <div key={index} className={styles["grid-item-container"]} style={mobileStyle}>
-              <div
-                className={styles["grid-album-container"]}
-                onClick={() => {
-                  router.push(`/music/${data.id}`);
-                }}
-              >
-                <img
-                  className={styles["grid-album-image"]}
-                  src={data.imgUrl}
-                  alt={data.album}
-                  loading="lazy"
-                />
-              </div>
-              <div
-                className={styles["grid-album-title"]}
-                onClick={() => {
-                  router.push(`/music/${data.id}`);
-                }}
-              >{`${data.artist} [${data.album}]`}</div>
+        return (
+          <div key={index} className={styles["grid-item-container"]} style={mobileStyle}>
+            <div
+              className={styles["grid-album-container"]}
+              onClick={() => {
+                router.push(`/music/${item.id}`);
+              }}
+            >
+              <img
+                className={styles["grid-album-image"]}
+                src={item.imgUrl}
+                alt={item.album}
+                loading="lazy"
+              />
             </div>
-          );
-        })}
-      </div>
-    </NoSSR>
+            <div
+              className={styles["grid-album-title"]}
+              onClick={() => {
+                router.push(`/music/${item.id}`);
+              }}
+              ref={isLastItem ? ref : undefined}
+            >{`${item.artist} [${item.album}]`}</div>
+          </div>
+        );
+      })}
+    </div>
   );
 };
