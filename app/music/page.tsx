@@ -6,6 +6,7 @@ import Content from "./components/Content";
 import { MobileTitle } from "./components/MobileTitle";
 import { Hamburger } from "./components/Hamburger";
 import { Category } from "./components/Category";
+import { Grid } from "./components/Grid";
 
 export default function Page() {
   const pathName = "";
@@ -19,7 +20,8 @@ export default function Page() {
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} />
+        <Grid />
+        {/* <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} /> */}
       </div>
     </div>
   );
