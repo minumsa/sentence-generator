@@ -132,7 +132,7 @@
 
 .p::selection {
   color: #000000;
-  background-color: #ffffff;
+  backfound-color: #ffffff;
 }
 
 .line-break {
@@ -470,7 +470,7 @@
 .grid-album-image {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 20px;
   /* width: 90%;
   height: 90%; */
   cursor: pointer;
@@ -479,9 +479,7 @@
 .grid-album-title {
   font-size: 1rem;
   font-weight: 500;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
+  padding: 0 20px 20px 20px;
   cursor: pointer;
   margin-top: -8px;
 }
@@ -490,7 +488,15 @@
   opacity: 70%;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1550px) {
+  .grid-album-image {
+    padding: 15px;
+  }
+
+  .grid-album-title {
+    padding: 0 15px 15px 15px;
+  }
+
   .grid-item-container {
     --width-large: (100vw - 250px) / 6;
     width: calc(var(--width-large) - 3px);
@@ -498,6 +504,14 @@
 }
 
 @media (max-width: 1200px) {
+  .grid-album-image {
+    padding: 10px;
+  }
+
+  .grid-album-title {
+    padding: 0 10px 10px 10px;
+  }
+
   .grid-item-container {
     --width-large: (100vw - 250px) / 5;
     width: calc(var(--width-large) - 3px);
@@ -519,6 +533,14 @@
 }
 
 @media (max-width: 800px) {
+  .grid-album-image {
+    padding: 15px;
+  }
+
+  .grid-album-title {
+    padding: 0 15px 15px 15px;
+  }
+
   .grid-item-container {
     --width-large: (100vw - 250px) / 2;
     width: calc(var(--width-large) - 6px);
@@ -526,6 +548,14 @@
 }
 
 @media (max-width: 650px) {
+  .grid-album-image {
+    padding: 20px;
+  }
+
+  .grid-album-title {
+    padding: 0 20px 20px 20px;
+  }
+
   .grid-item-container {
     --width-large: (100vw - 250px);
     width: calc(var(--width-large) - 6px);
