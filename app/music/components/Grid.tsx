@@ -19,7 +19,7 @@ export const Grid = () => {
   const pathName = "";
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalPage, setTotalPage] = useState(1);
-  const [perPageCount, setDataPerPage] = useState(30);
+  const [perPageCount, setPerPageCount] = useState(isMobile ? 8 : 30);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
@@ -30,10 +30,8 @@ export const Grid = () => {
   });
 
   useEffect(() => {
-    console.log("view");
-    setCurrentPage(prev => prev + 1);
+    if (inView) setCurrentPage(prevPage => prevPage + 1);
   }, [inView]);
-  console.log("currentPage", currentPage);
 
   useEffect(() => {
     async function loadData() {
@@ -44,13 +42,19 @@ export const Grid = () => {
         currentMethod,
         currentCriteria,
       });
-      setData(result?.slicedData);
+
+      if (data.length > 1) {
+        setData(prevData => [...prevData, ...result?.slicedData]);
+      } else {
+        setData(result?.slicedData);
+      }
+
       const dataLength = result?.genreDataLength;
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
     }
 
     loadData();
-  }, [pathName, currentMethod, currentCriteria]);
+  }, [pathName, currentMethod, currentCriteria, currentPage]);
 
   return (
     <div className={styles["grid-div"]}>
