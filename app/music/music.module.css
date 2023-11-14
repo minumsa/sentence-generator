@@ -455,7 +455,7 @@
   /* background-color: yellow; */
   margin: -1px 0 0 -1px;
 
-  --width-large: (100vw - 250px) / 9;
+  --width-large: (100vw - 250px) / 10;
   width: calc(var(--width-large) - 3px);
 }
 
@@ -487,6 +487,13 @@
 
 .grid-album-title:hover {
   opacity: 70%;
+}
+
+@media (max-width: 1850px) {
+  .grid-item-container {
+    --width-large: (100vw - 250px) / 9;
+    width: calc(var(--width-large) - 3px);
+  }
 }
 
 @media (max-width: 1700px) {
