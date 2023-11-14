@@ -94,7 +94,17 @@ export const Grid = () => {
               onClick={() => {
                 router.push(`/music/${item.id}`);
               }}
-            >{`${item.artist} [${item.album}]`}</div>
+            >
+              <span
+                style={{
+                  backgroundColor: "#000",
+                  color: "#cfcfcf",
+                  padding: "4px 0 4px 0",
+                  lineHeight: "170%",
+                  textIndent: 0,
+                }}
+              >{`${item.artist} [${item.album}]`}</span>
+            </div>
           </div>
         );
       })}
