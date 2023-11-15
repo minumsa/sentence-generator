@@ -75,18 +75,13 @@ export const Grid = () => {
 
         return (
           <div key={index} className={styles["grid-item-container"]} style={mobileStyle}>
-            <div
-              className={styles["grid-album-container"]}
-              onClick={() => {
-                router.push(`/music/${item.id}`);
-              }}
-              ref={isLastItem ? ref : undefined}
-            >
+            <div className={styles["grid-album-container"]} ref={isLastItem ? ref : undefined}>
               <img
                 className={styles["grid-album-image"]}
                 src={item.imgUrl}
                 alt={item.album}
                 loading="lazy"
+                style={{ backgroundColor: "gray" }}
               />
             </div>
             <div
