@@ -4,6 +4,7 @@ import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
 import { deleteData } from "../modules/api";
 import { Loading } from "./Loading";
+import { url } from "inspector";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -22,7 +23,6 @@ export const Album = ({
 }: AlbumProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(data.duration);
-  const isFirstDataPerPage = dataIndex % perPageCount === 1;
   const isEmptyData = data.id === "";
   const totalParagraph = data.text.split("\n").length;
 
@@ -41,9 +41,35 @@ export const Album = ({
             />
           </a>
         </div>
-        <div
-          className={styles["album-metadata"]}
-        >{`${data.artist} / ${data.label} / ${data.album} / ${data.tracks}곡 / ${albumDuration}`}</div>
+        <div className={styles["album-metadata"]}>
+          <div className={styles["post-date"]} style={{ marginBottom: 0 }}>
+            아티스트
+          </div>
+          <div>
+            <span className={styles["black-masking"]}>{data.artist}</span>
+          </div>
+          <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
+            앨범
+          </div>
+          <div>
+            <span className={styles["black-masking"]}>{data.album}</span>
+          </div>
+          <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
+            레이블
+          </div>
+          <div>
+            <span className={styles["black-masking"]}>{data.label}</span>
+          </div>
+          <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
+            러닝타임
+          </div>
+          <div>
+            <span className={styles["black-masking"]}>
+              {albumDuration}, {data.tracks}곡
+            </span>
+          </div>
+          {/* {`${data.artist} / ${data.label} / ${data.album} / ${data.tracks}곡 / ${albumDuration}`} */}
+        </div>
         <div className={`${styles["album-information"]}`}>
           <div>
             <div className={styles["information"]}>
@@ -102,7 +128,7 @@ export const Album = ({
           const isFirstParagraph = index === 0;
           const isLastParagraph = index + 1 === totalParagraph;
           const isBlankText = text === "";
-          const isParagraphTitle = text.length < 50;
+          const isParagraphTitle = text.length < 40;
 
           // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
           if (isPostPage) {

@@ -214,10 +214,6 @@
   overflow: scroll;
 }
 
-.modal::-webkit-scrollbar {
-  display: none;
-}
-
 .modal-image {
   position: fixed;
   top: 50%;

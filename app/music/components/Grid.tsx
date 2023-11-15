@@ -13,7 +13,7 @@ import {
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
-import { Loading } from "./Loading";
+import Image from "next/image";
 
 export const Grid = () => {
   const router = useRouter();
@@ -73,13 +73,35 @@ export const Grid = () => {
 
         return (
           <div key={index} className={styles["grid-item-container"]} style={mobileStyle}>
-            <div className={styles["grid-album-container"]} ref={isLastItem ? ref : undefined}>
-              <img
-                className={styles["grid-album-image"]}
-                src={item.imgUrl}
-                alt={item.album}
-                loading="lazy"
-              />
+            <div
+              className={styles["grid-album-container"]}
+              ref={isLastItem ? ref : undefined}
+              style={{ position: "relative", width: "100%" }}
+            >
+              {item.imgUrl ? (
+                <img
+                  className={styles["grid-album-image"]}
+                  src={item.imgUrl}
+                  alt={item.album}
+                  loading="lazy"
+                  style={{}}
+                />
+              ) : (
+                <div
+                  className={styles["grid-album-image"]}
+                  // src={item.imgUrl}
+                  // alt={item.album}
+                  // loading="lazy"
+                  style={{
+                    width: "100%",
+                    backgroundRepeat: "repeat",
+                    // backgroundImage: `url(/1x1#000.png)`,
+                    content: item.imgUrl,
+                    backgroundColor: "black",
+                    backgroundSize: "cover",
+                  }}
+                />
+              )}
             </div>
             <div
               className={styles["grid-album-title"]}
@@ -87,15 +109,7 @@ export const Grid = () => {
                 router.push(`/music/${item.id}`);
               }}
             >
-              <span
-                style={{
-                  backgroundColor: "#000",
-                  color: "#cfcfcf",
-                  padding: "4px 0 4px 0",
-                  lineHeight: "170%",
-                  textIndent: 0,
-                }}
-              >{`${item.artist} [${item.album}]`}</span>
+              <span className={styles["black-masking"]}>{`${item.artist} [${item.album}]`}</span>
             </div>
           </div>
         );

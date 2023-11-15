@@ -38,18 +38,10 @@ export const Post = ({ pathName, isPostPage }: PostProps) => {
         <div
           className={`${styles["admin-button"]} ${styles["post-button"]}`}
           onClick={() => {
-            copyToClipboard();
-          }}
-        >
-          링크 복사
-        </div>
-        <div
-          className={`${styles["admin-button"]} ${styles["post-button"]}`}
-          onClick={() => {
             router.back();
           }}
         >
-          뒤로 가기
+          ✕
         </div>
       </div>
       <Album
