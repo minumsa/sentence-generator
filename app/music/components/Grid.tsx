@@ -20,7 +20,7 @@ export const Grid = () => {
   const pathName = "";
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalPage, setTotalPage] = useState(1);
-  const [perPageCount, setPerPageCount] = useState(isMobile ? 8 : 30);
+  const [perPageCount, setPerPageCount] = useState(isMobile ? 8 : 42);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
@@ -70,11 +70,10 @@ export const Grid = () => {
           borderTop: firstLineMobile ? "none" : undefined,
           borderRight: evenIndexMobile ? "none" : undefined,
         };
-
         return (
-          <div key={index} className={styles["grid-item-container"]} style={mobileStyle}>
+          <div key={index} className={`${styles["grid-item-container"]}`} style={mobileStyle}>
             <div
-              className={styles["grid-album-container"]}
+              className={`${styles["grid-album-container"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
               ref={isLastItem ? ref : undefined}
               style={{ position: "relative", width: "100%" }}
             >
@@ -104,7 +103,7 @@ export const Grid = () => {
               )}
             </div>
             <div
-              className={styles["grid-album-title"]}
+              className={`${styles["grid-album-title"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
               onClick={() => {
                 router.push(`/music/${item.id}`);
               }}

@@ -64,7 +64,10 @@ export default function Upload({ idByPathName }: UploadProps) {
 
   return (
     <>
-      <div className={styles["album-container"]} style={{ paddingTop: "50px" }}>
+      <div
+        className={styles["album-container"]}
+        style={{ flexDirection: "column", paddingTop: "50px" }}
+      >
         <div className={styles["title"]}>{`${variableTitle} 페이지`}</div>
         <div className={styles["upload-item-title"]}>장르</div>
         <div className={styles["select-container"]}>
@@ -99,7 +102,7 @@ export default function Upload({ idByPathName }: UploadProps) {
             setLink(e.target.value);
           }}
         />
-        <a href={spotifyLink} target="_blank" style={{ textDecoration: "none", color: "#000" }}>
+        <a href={spotifyLink} target="_blank" style={{ textDecoration: "none", color: "#cfcfcf" }}>
           <div className={styles["upload-item-title"]}>앨범 ID(Spotify)</div>
         </a>
         <textarea
@@ -132,6 +135,7 @@ export default function Upload({ idByPathName }: UploadProps) {
             onClick={() => {
               isUploadPage ? handleUpload() : handleUpdate();
             }}
+            style={{ boxShadow: "0 0 0 1px #242424 inset" }}
           >
             제출하기
           </div>

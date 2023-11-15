@@ -51,9 +51,62 @@
     Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   font-weight: 400;
-  background-color: #333333;
-  color: #fff;
+
+  color: #cfcfcf;
   font-size: 1.2rem;
+
+  background-color: #333333;
+  background-image: linear-gradient(90deg, #000, #242424, #1c1c1c, #242424, #000);
+  background-size: 2000% 100%;
+  animation: animateBg 20s linear infinite; /* 애니메이션 적용 */
+}
+
+@keyframes animateBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translate3d(0, 40px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+    transform: translate3d(0, 40px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+}
+
+.animatedFadeInUp {
+  opacity: 0;
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
 }
 
 .category-container {
@@ -66,15 +119,14 @@
 
   /* top-menu-container와 영역 겹쳐서 지정 */
   z-index: 10000;
-  background-color: #333333;
-  border-right: 1px solid #000;
+  border-right: 1px solid #242424;
 }
 
 .category {
   cursor: pointer;
   display: flex;
   padding: 10px 20px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #242424;
 }
 
 .category:hover {
@@ -97,6 +149,7 @@
   width: calc(100% - 250px);
   height: 100%;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 /* .content-container::-webkit-scrollbar {
@@ -156,7 +209,6 @@
 
 .p::selection {
   color: #000;
-  backfound-color: #fff;
 }
 
 .line-break {
@@ -497,8 +549,8 @@
   /* border: 1px solid #000; */
   /* background-color: yellow; */
   margin: -1px 0 0 -1px;
-  --width-large: (100vw - 250px) / 10;
-  width: calc(var(--width-large));
+  --width-large: calc((100vw - 250px) / 10 - 1px);
+  width: var(--width-large);
 }
 
 .grid-album-container {
@@ -555,15 +607,15 @@
 
 @media (max-width: 1850px) {
   .grid-item-container {
-    --width-large: (100vw - 250px) / 9;
-    width: calc(var(--width-large));
+    --width-large: calc((100vw - 250px) / 9 - 1px);
+    width: var(--width-large);
   }
 }
 
 @media (max-width: 1700px) {
   .grid-item-container {
-    --width-large: (100vw - 250px) / 8;
-    width: calc(var(--width-large) - 0.5px);
+    --width-large: calc((100vw - 250px) / 8 - 1px);
+    width: var(--width-large);
   }
 }
 
@@ -571,41 +623,43 @@
   .grid-item-container {
     box-sizing: border-box;
     padding: 15px 15px 0 15px;
-    --width-large: (100vw - 250px) / 7;
+    --width-large: calc((100vw - 250px) / 7 - 1.5px);
+    width: var(--width-large);
   }
 }
 
 @media (max-width: 1400px) {
   .grid-item-container {
-    --width-large: (100vw - 250px) / 6;
+    --width-large: calc((100vw - 250px) / 6 - 2px);
+    width: var(--width-large);
   }
 }
 
 @media (max-width: 1200px) {
   .grid-item-container {
-    --width-large: (100vw - 250px) / 5;
-    width: calc(var(--width-large) - 1px);
+    --width-large: calc((100vw - 250px) / 5 - 2.5px);
+    width: var(--width-large);
   }
 }
 
 @media (max-width: 1050px) {
   .grid-item-container {
-    --width-large: (100vw - 250px) / 4;
-    width: calc(var(--width-large) - 2px);
+    --width-large: calc((100vw - 250px) / 4 - 3px);
+    width: var(--width-large);
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
   .grid-item-container {
-    --width-large: (100vw - 250px) / 3;
-    width: calc(var(--width-large) - 3px);
+    --width-large: calc((100vw - 250px) / 3 - 4.5px);
+    width: var(--width-large);
   }
 }
 
 @media (max-width: 800px) {
   .grid-item-container {
-    --width-large: (100vw - 250px) / 2;
-    width: calc(var(--width-large) - 4px);
+    --width-large: calc((100vw - 250px) / 2 - 7px);
+    width: var(--width-large);
   }
 }
 
