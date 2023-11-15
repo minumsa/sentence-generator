@@ -58,9 +58,7 @@ export const Grid = () => {
     loadData();
   }, [pathName, currentMethod, currentCriteria, currentPage]);
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <div className={styles["grid-div"]}>
       {data.map((item, index) => {
         // const lastItemInRow = (index + 1) % 7 === 0;
@@ -81,7 +79,6 @@ export const Grid = () => {
                 src={item.imgUrl}
                 alt={item.album}
                 loading="lazy"
-                style={{ backgroundColor: "gray" }}
               />
             </div>
             <div

@@ -29,10 +29,7 @@ export const Album = ({
   return isEmptyData ? (
     <Loading />
   ) : (
-    <div
-      className={styles["album-container"]}
-      style={isFirstDataPerPage ? { paddingTop: "50px" } : undefined}
-    >
+    <div className={styles["album-container"]}>
       <div className={styles["album-information-container"]}>
         <div>
           <a className={styles["link"]} href={data.link} target="_blank">
@@ -44,7 +41,10 @@ export const Album = ({
             />
           </a>
         </div>
-        <div className={` ${styles["album-information"]}`}>
+        <div
+          className={styles["album-metadata"]}
+        >{`${data.artist} / ${data.label} / ${data.album} / ${data.tracks}곡 / ${albumDuration}`}</div>
+        <div className={`${styles["album-information"]}`}>
           <div>
             <div className={styles["information"]}>
               <div style={{ marginRight: "5px" }}>{data.artist}</div>
@@ -84,30 +84,40 @@ export const Album = ({
         </div>
       </div>
       <div className={styles["text-container"]}>
+        {/* {isPostPage && (
+          <div>
+            <div className={styles["post-date"]}>앨범</div>
+            <div>{data.album}</div>
+            <div className={styles["paragraph-division-line"]}></div>
+            <div className={styles["post-date"]}>레이블</div>
+            <div>{`${data.artist}, ${data.label}`}</div>
+            <div className={styles["paragraph-division-line"]}></div>
+          </div>
+        )} */}
         {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
         {data.text.split("\n").map((text, index) => {
           const hasNoText = text.length < 1;
           const longTextStandard = 100;
           const isLongText = text.length > longTextStandard;
+          const isFirstParagraph = index === 0;
           const isLastParagraph = index + 1 === totalParagraph;
           const isBlankText = text === "";
+          const isParagraphTitle = text.length < 50;
 
           // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
           if (isPostPage) {
-            return isLastParagraph ? (
-              <p key={index} className={styles["paragraph"]}>
-                <span>
-                  {text}
-                  <span className={styles["post-date"]}>{formatDate(data.uploadDate)}</span>
-                </span>
-              </p>
-            ) : isBlankText ? (
+            return isBlankText ? (
               <p></p>
             ) : (
-              <p className={styles["paragraph"]}>{text}</p>
+              <p
+                className={styles["paragraph"]}
+                style={isParagraphTitle ? { fontWeight: 600, marginBottom: "10px" } : undefined}
+              >
+                {text}
+              </p>
             );
           } else {
-            if (index === 0)
+            if (isFirstParagraph)
               return (
                 <div className={styles["paragraph-container"]} key={index}>
                   <p
@@ -131,6 +141,11 @@ export const Album = ({
               );
           }
         })}
+        <div className={styles["paragraph-division-line"]}></div>
+        <div className={styles["post-date"]} style={{ marginBottom: "10px" }}>
+          작성일
+        </div>
+        <div>{formatDate(data.uploadDate)}</div>
       </div>
     </div>
   );
