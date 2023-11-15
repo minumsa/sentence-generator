@@ -7,6 +7,7 @@ import { MobileTitle } from "./components/MobileTitle";
 import { Hamburger } from "./components/Hamburger";
 import { Category } from "./components/Category";
 import { Grid } from "./components/Grid";
+import Snowfall from "react-snowfall";
 
 export default function Page() {
   const pathName = "";
@@ -14,6 +15,7 @@ export default function Page() {
 
   return (
     <div className={styles["container"]}>
+      <Snowfall snowflakeCount={150} speed={[0, 2]} />
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />
