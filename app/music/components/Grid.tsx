@@ -77,30 +77,12 @@ export const Grid = () => {
               ref={isLastItem ? ref : undefined}
               style={{ position: "relative", width: "100%" }}
             >
-              {item.imgUrl ? (
-                <img
-                  className={styles["grid-album-image"]}
-                  src={item.imgUrl}
-                  alt={item.album}
-                  loading="lazy"
-                  style={{}}
-                />
-              ) : (
-                <div
-                  className={styles["grid-album-image"]}
-                  // src={item.imgUrl}
-                  // alt={item.album}
-                  // loading="lazy"
-                  style={{
-                    width: "100%",
-                    backgroundRepeat: "repeat",
-                    // backgroundImage: `url(/1x1#000.png)`,
-                    content: item.imgUrl,
-                    backgroundColor: "black",
-                    backgroundSize: "cover",
-                  }}
-                />
-              )}
+              <img
+                className={styles["grid-album-image"]}
+                src={item.imgUrl}
+                alt={item.album}
+                loading="lazy"
+              />
             </div>
             <div
               className={`${styles["grid-album-title"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
