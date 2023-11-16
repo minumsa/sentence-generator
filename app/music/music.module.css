@@ -193,14 +193,14 @@
 
   /* top-menu-container와 영역 겹쳐서 지정 */
   z-index: 10000;
-  border-right: 1px solid #242424;
+  border-right: 1px solid #000;
 }
 
 .category {
   cursor: pointer;
   display: flex;
   padding: 10px 20px;
-  border-bottom: 1px solid #242424;
+  border-bottom: 1px solid #000;
 }
 
 .category:hover {
