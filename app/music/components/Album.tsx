@@ -203,7 +203,7 @@ export const Album = ({
                           loading="lazy"
                         />
                       </div>
-                      <div>{`Taylor Swift • ${data.releaseDate.slice(0, 4)} • ${
+                      <div>{`${data.artist} • ${data.releaseDate.slice(0, 4)} • ${
                         data.tracks
                       }곡, ${albumDuration}`}</div>
                     </div>
