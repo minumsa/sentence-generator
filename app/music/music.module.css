@@ -456,14 +456,15 @@
 }
 
 .blur-end {
+  text-align: justify;
   /* 마스킹 줄 수  */
-  --lines: 1;
+  --lines: 3;
   /* 마스킹 높이 */
-  --line-height: 60;
+  --line-height: 40;
   /* 마스킹 길이 */
   --link-length: 10;
   /* 페이드 길이 */
-  --one-ch: 7;
+  --one-ch: 5;
   --fade-direction: 270deg;
   overflow: hidden;
   text-overflow: clip;
@@ -492,7 +493,7 @@
   font-weight: 450;
   font-size: 1.2rem;
   cursor: pointer;
-  padding: 0 12px;
+  /* padding: 0 12px; */
 }
 
 .paragraph-blank {
@@ -675,6 +676,35 @@
   line-height: 155%;
   text-indent: 0;
   font-weight: 400;
+}
+
+.category-meta-title {
+  font-weight: 600;
+  font-size: 2.2rem;
+  padding-bottom: 15px;
+}
+
+.category-meta {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.category-meta-image-container {
+  width: 24px;
+  height: 24px;
+  inset-inline-start: 0px;
+  user-select: auto;
+  margin-right: 5px;
+}
+
+.category-meta-image {
+  border-radius: 50%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
 }
 
 @media (max-width: 1850px) {

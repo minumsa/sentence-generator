@@ -111,8 +111,9 @@ export const Album = ({
           )}
         </div> */}
       </div>
-      <div className={styles["text-container"]}>
-        {/* {isPostPage && (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div className={styles["text-container"]}>
+          {/* {isPostPage && (
           <div>
             <div className={styles["post-date"]}>앨범</div>
             <div>{data.album}</div>
@@ -122,60 +123,82 @@ export const Album = ({
             <div className={styles["paragraph-division-line"]}></div>
           </div>
         )} */}
-        {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
-        {data.text.split("\n").map((text, index) => {
-          const hasNoText = text.length < 1;
-          const longTextStandard = 100;
-          const isLongText = text.length > longTextStandard;
-          const isFirstParagraph = index === 0;
-          const isLastParagraph = index + 1 === totalParagraph;
-          const isBlankText = text === "";
-          const isParagraphTitle = text.length < 40;
+          {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
+          {data.text.split("\n").map((text, index) => {
+            const hasNoText = text.length < 1;
+            const longTextStandard = 100;
+            const isLongText = text.length > longTextStandard;
+            const isFirstParagraph = index === 0;
+            const isLastParagraph = index + 1 === totalParagraph;
+            const isBlankText = text === "";
+            const isParagraphTitle = text.length < 40;
 
-          // 포스트 페이지일 때 표시할 부분
-          if (isPostPage) {
-            return isBlankText ? (
-              <p></p>
-            ) : (
-              <p
-                className={styles["paragraph"]}
-                style={isParagraphTitle ? { fontWeight: 600, marginBottom: "10px" } : undefined}
-              >
-                {text}
-              </p>
-            );
-          } else {
-            // 카테고리 페이지일 때 표시할 부분
-            // 첫 번째 문단만 표시
-            if (isFirstParagraph)
-              return (
-                <div className={styles["paragraph-container"]} key={index}>
-                  <p
-                    className={`${styles["paragraph"]} 
+            // 포스트 페이지일 때 표시할 부분
+            if (isPostPage) {
+              return isBlankText ? (
+                <p></p>
+              ) : (
+                <p
+                  className={styles["paragraph"]}
+                  style={isParagraphTitle ? { fontWeight: 600, marginBottom: "10px" } : undefined}
+                >
+                  {text}
+                </p>
+              );
+            } else {
+              // 카테고리 페이지일 때 표시할 부분
+              // 첫 번째 문단만 표시
+              if (isFirstParagraph)
+                return (
+                  <div
+                    className={styles["paragraph-container"]}
+                    key={index}
+                    style={!isMobile && !isLongText ? { marginBottom: "50px" } : undefined}
+                  >
+                    <div className={styles["category-meta-title"]}>{data.album}</div>
+                    <div className={styles["category-meta"]}>
+                      <div className={styles["category-meta-image-container"]}>
+                        <img
+                          src="https://i.scdn.co/image/ab6761610000f178859e4c14fa59296c8649e0e4"
+                          alt="test"
+                          className={styles["category-meta-image"]}
+                          loading="lazy"
+                        />
+                      </div>
+                      <div>Taylor Swift • 2023 • 22곡, 1시간 44분</div>
+                    </div>
+                    <p
+                      className={`${styles["paragraph"]} 
                     ${isLongText ? styles["blur-end"] : undefined} 
                     ${hasNoText ? styles["paragraph-blank"] : undefined}`}
-                  >
-                    {text}
-                  </p>
-                  {isLongText && (
-                    <span
-                      className={styles["more-button"]}
-                      onClick={() => {
-                        router.push(`/music/${data.id}`);
-                      }}
                     >
-                      더 보기
-                    </span>
-                  )}
-                </div>
-              );
-          }
-        })}
-        <div className={styles["paragraph-division-line"]}></div>
-        <div className={styles["post-date"]} style={{ marginBottom: "10px" }}>
-          작성일
+                      {text}
+                    </p>
+                    {isLongText && (
+                      <span
+                        className={styles["more-button"]}
+                        onClick={() => {
+                          router.push(`/music/${data.id}`);
+                        }}
+                      >
+                        더 보기
+                      </span>
+                    )}
+                  </div>
+                );
+            }
+          })}
+
+          {isPostPage && (
+            <>
+              <div className={styles["paragraph-division-line"]}></div>
+              <div className={styles["post-date"]} style={{ marginBottom: "10px" }}>
+                작성일
+              </div>
+              <div>{formatDate(data.uploadDate)}</div>
+            </>
+          )}
         </div>
-        <div>{formatDate(data.uploadDate)}</div>
       </div>
     </div>
   );
