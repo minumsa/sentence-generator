@@ -6,6 +6,7 @@ import { deleteData } from "../modules/api";
 import { Loading } from "./Loading";
 import { url } from "inspector";
 import { isMobile } from "react-device-detect";
+import { useEffect, useRef, useState } from "react";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -26,6 +27,33 @@ export const Album = ({
   const albumDuration = formatDuration(data.duration);
   const isEmptyData = data.id === "";
   const totalParagraph = data.text.split("\n").length;
+  const divRef = useRef<HTMLDivElement>(null);
+  const [numberOfLines, setNumberOfLines] = useState(0);
+
+  // 텍스트 줄 수를 업데이트하는 함수
+  const updateNumberOfLines = () => {
+    if (divRef.current) {
+      const lineHeight = parseFloat(window.getComputedStyle(divRef.current).lineHeight);
+      const height = divRef.current.clientHeight;
+      const lines = Math.floor(height / lineHeight);
+      setNumberOfLines(lines);
+    }
+  };
+
+  useEffect(() => {
+    updateNumberOfLines();
+  }, []);
+
+  useEffect(() => {
+    // resize 이벤트 핸들러 등록
+    window.addEventListener("resize", updateNumberOfLines);
+    // 컴포넌트가 unmount될 때 이벤트 제거
+    return () => {
+      window.removeEventListener("resize", updateNumberOfLines);
+    };
+  }, []);
+
+  console.log(numberOfLines);
 
   return isEmptyData ? (
     <Loading />
@@ -126,7 +154,9 @@ export const Album = ({
           {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
           {data.text.split("\n").map((text, index) => {
             const hasNoText = text.length < 1;
-            const longTextStandard = 100;
+            const isVeryShortText = text.length < 90;
+            const isShortText = text.length < 130;
+            const longTextStandard = 240;
             const isLongText = text.length > longTextStandard;
             const isFirstParagraph = index === 0;
             const isLastParagraph = index + 1 === totalParagraph;
@@ -153,7 +183,15 @@ export const Album = ({
                   <div
                     className={styles["paragraph-container"]}
                     key={index}
-                    style={!isMobile && !isLongText ? { marginBottom: "50px" } : undefined}
+                    style={
+                      !isPostPage && !isMobile
+                        ? isVeryShortText
+                          ? { marginBottom: "50px" }
+                          : isShortText
+                          ? { marginBottom: "25px" }
+                          : undefined
+                        : undefined
+                    }
                   >
                     <div className={styles["category-meta-title"]}>{data.album}</div>
                     <div className={styles["category-meta"]}>
@@ -165,16 +203,19 @@ export const Album = ({
                           loading="lazy"
                         />
                       </div>
-                      <div>Taylor Swift • 2023 • 22곡, 1시간 44분</div>
+                      <div>{`Taylor Swift • ${data.releaseDate.slice(0, 4)} • ${
+                        data.tracks
+                      }곡, ${albumDuration}`}</div>
                     </div>
                     <p
+                      ref={divRef}
                       className={`${styles["paragraph"]} 
-                    ${isLongText ? styles["blur-end"] : undefined} 
+                    ${numberOfLines > 2 ? styles["blur-end"] : undefined} 
                     ${hasNoText ? styles["paragraph-blank"] : undefined}`}
                     >
                       {text}
                     </p>
-                    {isLongText && (
+                    {numberOfLines > 2 && (
                       <span
                         className={styles["more-button"]}
                         onClick={() => {

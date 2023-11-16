@@ -464,6 +464,7 @@
 }
 
 .blur-end {
+  word-break: normal;
   text-align: justify;
   /* 마스킹 줄 수  */
   --lines: 3;
