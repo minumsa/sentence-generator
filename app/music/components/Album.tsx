@@ -41,35 +41,36 @@ export const Album = ({
             />
           </a>
         </div>
-        <div className={styles["album-metadata"]}>
-          <div className={styles["post-date"]} style={{ marginBottom: 0 }}>
-            아티스트
+        {isPostPage ? (
+          <div className={styles["album-metadata"]}>
+            <div className={styles["post-date"]} style={{ marginBottom: 0 }}>
+              아티스트
+            </div>
+            <div>
+              <span className={styles["black-masking"]}>{data.artist}</span>
+            </div>
+            <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
+              앨범
+            </div>
+            <div>
+              <span className={styles["black-masking"]}>{data.album}</span>
+            </div>
+            <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
+              레이블
+            </div>
+            <div>
+              <span className={styles["black-masking"]}>{data.label}</span>
+            </div>
+            <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
+              러닝타임
+            </div>
+            <div>
+              <span className={styles["black-masking"]}>
+                {albumDuration}, {data.tracks}곡
+              </span>
+            </div>
           </div>
-          <div>
-            <span className={styles["black-masking"]}>{data.artist}</span>
-          </div>
-          <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
-            앨범
-          </div>
-          <div>
-            <span className={styles["black-masking"]}>{data.album}</span>
-          </div>
-          <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
-            레이블
-          </div>
-          <div>
-            <span className={styles["black-masking"]}>{data.label}</span>
-          </div>
-          <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
-            러닝타임
-          </div>
-          <div>
-            <span className={styles["black-masking"]}>
-              {albumDuration}, {data.tracks}곡
-            </span>
-          </div>
-          {/* {`${data.artist} / ${data.label} / ${data.album} / ${data.tracks}곡 / ${albumDuration}`} */}
-        </div>
+        ) : undefined}
         {/* <div className={`${styles["album-information"]}`}>
           <div>
             <div className={styles["information"]}>
@@ -130,7 +131,7 @@ export const Album = ({
           const isBlankText = text === "";
           const isParagraphTitle = text.length < 40;
 
-          // 우선 첫 번째 문단만 표시되게 조건 걸어놓음
+          // 포스트 페이지일 때 표시할 부분
           if (isPostPage) {
             return isBlankText ? (
               <p></p>
@@ -143,6 +144,8 @@ export const Album = ({
               </p>
             );
           } else {
+            // 카테고리 페이지일 때 표시할 부분
+            // 첫 번째 문단만 표시
             if (isFirstParagraph)
               return (
                 <div className={styles["paragraph-container"]} key={index}>

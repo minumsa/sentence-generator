@@ -189,62 +189,58 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div>
-        {!isUploadPage && !isLoading && (
-          <div className={styles["top-menu-container"]}>
-            {/* TODO: 검색 기능 만들지 말지 고민 */}
-            {isAdminPage(fullPathName) && (
-              <div
-                className={`${styles["admin-button"]} ${styles["upload-button"]}`}
-                onClick={() => {
-                  router.push("/music/admin/upload");
-                }}
-              >
-                업로드
-              </div>
-            )}
-            <SortToggleButton
-              type="method"
-              sortItem={sortItems.method}
-              currentOrder={currentMethod}
-              setCurrentOrder={setCurrentMethod}
-              sortWay={sortMethod}
-            />
-            <SortToggleButton
-              type="criteria"
-              sortItem={sortItems.criteria}
-              currentOrder={currentCriteria}
-              setCurrentOrder={setCurrentCriteria}
-              sortWay={sortCriteria}
-            />
-          </div>
-        )}
-        {isLoading ? (
-          <Loading />
-        ) : (
-          sortedData.map((data, index) => {
-            const dataIndex = index + 1;
-            const isLastData = index === sortedData.length - 1;
-            const isLastDataPerPage = dataIndex % perPageCount === 0;
+    <>
+      {!isUploadPage && !isLoading && (
+        <div className={styles["top-menu-container"]}>
+          {/* TODO: 검색 기능 만들지 말지 고민 */}
+          {isAdminPage(fullPathName) && (
+            <div
+              className={`${styles["admin-button"]} ${styles["upload-button"]}`}
+              onClick={() => {
+                router.push("/music/admin/upload");
+              }}
+            >
+              업로드
+            </div>
+          )}
+          <SortToggleButton
+            type="method"
+            sortItem={sortItems.method}
+            currentOrder={currentMethod}
+            setCurrentOrder={setCurrentMethod}
+            sortWay={sortMethod}
+          />
+          <SortToggleButton
+            type="criteria"
+            sortItem={sortItems.criteria}
+            currentOrder={currentCriteria}
+            setCurrentOrder={setCurrentCriteria}
+            sortWay={sortCriteria}
+          />
+        </div>
+      )}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        sortedData.map((data, index) => {
+          const dataIndex = index + 1;
+          const isLastData = index === sortedData.length - 1;
+          const isLastDataPerPage = dataIndex % perPageCount === 0;
 
-            return (
-              <div key={index}>
-                <Album
-                  data={data}
-                  dataIndex={dataIndex}
-                  perPageCount={perPageCount}
-                  isAdminMainPage={isAdminMainPage}
-                  isPostPage={false}
-                />
-                {isLastDataPerPage || isLastData ? undefined : (
-                  <div className={styles["divider"]} />
-                )}
-              </div>
-            );
-          })
-        )}
-      </div>
+          return (
+            <div key={index}>
+              <Album
+                data={data}
+                dataIndex={dataIndex}
+                perPageCount={perPageCount}
+                isAdminMainPage={isAdminMainPage}
+                isPostPage={false}
+              />
+              {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
+            </div>
+          );
+        })
+      )}
       {!isLoading && (
         <div className={styles["page-container"]}>
           {currentPage > 5 && (
@@ -294,6 +290,6 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }

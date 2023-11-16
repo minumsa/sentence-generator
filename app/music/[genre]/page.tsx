@@ -8,8 +8,7 @@ import { Hamburger } from "../components/Hamburger";
 import { MobileTitle } from "../components/MobileTitle";
 import { Category } from "../components/Category";
 import { Post } from "../components/Post";
-import Snowfall from "react-snowfall";
-import { isMobile } from "react-device-detect";
+import { Snow } from "../components/Snow";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
@@ -18,13 +17,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <div className={styles["container"]}>
-      <div className={styles["snowfall-container"]}>
-        <Snowfall
-          snowflakeCount={isMobile ? 90 : 110}
-          speed={isMobile ? [0, 2] : [0, 2.5]}
-          radius={isMobile ? [0.1, 1.2] : undefined}
-        />
-      </div>
+      <Snow />
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />

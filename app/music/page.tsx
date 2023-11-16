@@ -7,8 +7,7 @@ import { MobileTitle } from "./components/MobileTitle";
 import { Hamburger } from "./components/Hamburger";
 import { Category } from "./components/Category";
 import { Grid } from "./components/Grid";
-import Snowfall from "react-snowfall";
-import { isMobile } from "react-device-detect";
+import { Snow } from "./components/Snow";
 
 export default function Page() {
   const pathName = "";
@@ -16,17 +15,11 @@ export default function Page() {
 
   return (
     <div className={styles["container"]}>
-      <div className={styles["snowfall-container"]}>
-        <Snowfall
-          snowflakeCount={isMobile ? 90 : 110}
-          speed={isMobile ? [0, 2] : [0, 2.5]}
-          radius={isMobile ? [0.1, 1.2] : undefined}
-        />
-      </div>
+      <Snow />
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />
-        <Category pathName={pathName} fullPathName={fullPathName} />
+        <Category pathName={pathName} fullPathName={fullPathName} />S
       </div>
       <div className={styles["content-container"]}>
         <Grid />
