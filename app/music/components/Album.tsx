@@ -30,10 +30,7 @@ export const Album = ({
   return isEmptyData ? (
     <Loading />
   ) : (
-    <div
-      className={styles["album-container"]}
-      style={isMobile && isPostPage ? { padding: "41px 0" } : undefined}
-    >
+    <div className={styles["album-container"]}>
       <div className={styles["album-information-container"]}>
         <div>
           <a className={styles["link"]} href={data.link} target="_blank">

@@ -416,6 +416,7 @@
 .paragraph-division-line {
   height: 1px;
   width: 100%;
+
   background-color: rgb(207, 207, 207);
   margin: 50px 0 50px 0;
 }
@@ -759,7 +760,7 @@
     top: 0;
     height: 40px;
     width: calc(100% - 20px);
-    border-bottom: 1px solid #fff;
+    /* border-bottom: 1px solid #fff; */
     /* background-color: #fff; */
     justify-content: space-between;
     align-items: center;
@@ -810,7 +811,7 @@
   .album-container {
     width: 100%;
     min-width: 0;
-    padding: 30px 0;
+    padding: 41px 0;
     align-items: center;
 
     display: flex;
@@ -836,10 +837,9 @@
     width: 100%;
     height: fit-content;
     margin-bottom: 10px;
-  }
-
-  .paragraph {
     padding: 0 15px;
+    box-sizing: border-box;
+    line-height: 200%;
   }
 
   .paragraph-blank {
@@ -897,8 +897,9 @@
     justify-content: center;
     align-items: center;
     font-size: 35px;
-    font-weight: 250;
+    font-weight: 100;
     padding-left: 4px;
+    padding-bottom: 6px;
   }
 
   .mobile-bottom-container {
@@ -957,8 +958,7 @@
     top: 30px;
     right: 0;
     height: fit-content;
-    background-color: #fff;
-    border-bottom: 1px solid #000;
+    background-color: #000;
     width: 120px;
     font-size: 0.9rem;
     padding-top: 7px;
