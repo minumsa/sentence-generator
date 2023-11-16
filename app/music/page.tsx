@@ -19,7 +19,7 @@ export default function Page() {
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />
-        <Category pathName={pathName} fullPathName={fullPathName} />S
+        <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
         <Grid />

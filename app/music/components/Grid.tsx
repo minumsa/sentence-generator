@@ -83,15 +83,20 @@ export const Grid = () => {
                 src={item.imgUrl}
                 alt={item.album}
                 loading="lazy"
+                onClick={() => {
+                  router.push(`/music/${item.id}`);
+                }}
               />
             </div>
             <div
               className={`${styles["grid-album-title"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
-              onClick={() => {
-                router.push(`/music/${item.id}`);
-              }}
             >
-              <span className={styles["black-masking"]}>{`${item.artist} [${item.album}]`}</span>
+              <span
+                className={styles["black-masking"]}
+                onClick={() => {
+                  router.push(`/music/${item.id}`);
+                }}
+              >{`${item.artist} [${item.album}]`}</span>
             </div>
           </div>
         );

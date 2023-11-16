@@ -36,7 +36,7 @@ export const Post = ({ pathName, isPostPage }: PostProps) => {
     <>
       <div className={styles["top-menu-container"]}>
         <div
-          className={`${styles["admin-button"]} ${styles["post-button"]}`}
+          className={`${styles["admin-button"]} ${styles["close-button"]}`}
           onClick={() => {
             router.back();
           }}
