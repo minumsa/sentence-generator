@@ -5,6 +5,7 @@ import { AlbumInfo } from "../modules/data";
 import { deleteData } from "../modules/api";
 import { Loading } from "./Loading";
 import { url } from "inspector";
+import { isMobile } from "react-device-detect";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -29,7 +30,10 @@ export const Album = ({
   return isEmptyData ? (
     <Loading />
   ) : (
-    <div className={styles["album-container"]}>
+    <div
+      className={styles["album-container"]}
+      style={isMobile && isPostPage ? { padding: "41px 0" } : undefined}
+    >
       <div className={styles["album-information-container"]}>
         <div>
           <a className={styles["link"]} href={data.link} target="_blank">
