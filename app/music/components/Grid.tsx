@@ -15,6 +15,7 @@ import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import Snowfall from "react-snowfall";
+import { Loading } from "./Loading";
 
 export const Grid = () => {
   const router = useRouter();
@@ -61,46 +62,50 @@ export const Grid = () => {
 
   return (
     <div className={styles["grid-div"]}>
-      {data.map((item, index) => {
-        // const lastItemInRow = (index + 1) % 7 === 0;
-        const firstLineMobile = isMobile && index < 2;
-        const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
-        const isLastItem = index + 1 === data.length;
+      {isLoading ? (
+        <Loading />
+      ) : (
+        data.map((item, index) => {
+          // const lastItemInRow = (index + 1) % 7 === 0;
+          const firstLineMobile = isMobile && index < 2;
+          const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
+          const isLastItem = index + 1 === data.length;
 
-        const mobileStyle = {
-          borderTop: firstLineMobile ? "none" : undefined,
-          borderRight: evenIndexMobile ? "none" : undefined,
-        };
-        return (
-          <div key={index} className={`${styles["grid-item-container"]}`} style={mobileStyle}>
-            <div
-              className={`${styles["grid-album-container"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
-              ref={isLastItem ? ref : undefined}
-              style={{ position: "relative", width: "100%" }}
-            >
-              <img
-                className={styles["grid-album-image"]}
-                src={item.imgUrl}
-                alt={item.album}
-                loading="lazy"
-                onClick={() => {
-                  router.push(`/music/${item.id}`);
-                }}
-              />
+          const mobileStyle = {
+            borderTop: firstLineMobile ? "none" : undefined,
+            borderRight: evenIndexMobile ? "none" : undefined,
+          };
+          return (
+            <div key={index} className={`${styles["grid-item-container"]}`} style={mobileStyle}>
+              <div
+                className={`${styles["grid-album-container"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
+                ref={isLastItem ? ref : undefined}
+                style={{ position: "relative", width: "100%" }}
+              >
+                <img
+                  className={styles["grid-album-image"]}
+                  src={item.imgUrl}
+                  alt={item.album}
+                  loading="lazy"
+                  onClick={() => {
+                    router.push(`/music/${item.id}`);
+                  }}
+                />
+              </div>
+              <div
+                className={`${styles["grid-album-title"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
+              >
+                <span
+                  className={styles["black-masking"]}
+                  onClick={() => {
+                    router.push(`/music/${item.id}`);
+                  }}
+                >{`${item.artist} [${item.album}]`}</span>
+              </div>
             </div>
-            <div
-              className={`${styles["grid-album-title"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
-            >
-              <span
-                className={styles["black-masking"]}
-                onClick={() => {
-                  router.push(`/music/${item.id}`);
-                }}
-              >{`${item.artist} [${item.album}]`}</span>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </div>
   );
 };
