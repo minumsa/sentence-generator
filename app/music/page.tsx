@@ -16,8 +16,12 @@ export default function Page() {
 
   return (
     <div className={styles["container"]}>
-      <div style={{ position: "fixed", height: "100%", width: "100%" }}>
-        <Snowfall snowflakeCount={100} speed={[0, 2.5]} />
+      <div className={styles["snowfall-container"]}>
+        <Snowfall
+          snowflakeCount={isMobile ? 90 : 110}
+          speed={isMobile ? [0, 2] : [0, 2.5]}
+          radius={isMobile ? [0.1, 1.2] : undefined}
+        />
       </div>
       <div className={styles["category-container"]}>
         <MobileTitle />

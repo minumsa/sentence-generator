@@ -41,6 +41,13 @@
   unicode-range: U+AC00-D7A3;
 }
 
+.body {
+  background-color: #333333;
+  background-image: linear-gradient(90deg, #000, #242424, #1c1c1c, #242424, #000);
+  background-size: 2000% 100%;
+  animation: animateBg 20s linear infinite;
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -54,11 +61,12 @@
 
   color: #cfcfcf;
   font-size: 1.2rem;
+}
 
-  background-color: #333333;
-  background-image: linear-gradient(90deg, #000, #242424, #1c1c1c, #242424, #000);
-  background-size: 2000% 100%;
-  animation: animateBg 20s linear infinite; /* 애니메이션 적용 */
+.snowfall-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
 }
 
 @keyframes animateBg {
@@ -500,7 +508,7 @@
 
 .loading {
   width: 100%;
-  height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -706,7 +714,6 @@
   }
 
   .container {
-    height: auto;
     flex-direction: column;
     font-size: 0.95rem;
     font-weight: 450;
@@ -928,10 +935,6 @@
   .hamburger-content {
     text-align: right;
     padding: 5px 16px;
-  }
-
-  .loading {
-    height: 80vh;
   }
 
   .page-container {

@@ -27,7 +27,7 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-  return <div>{children}</div>;
+  return <body className={styles["body"]}>{children}</body>;
 };
 
 export default Layout;

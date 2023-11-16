@@ -70,7 +70,7 @@ export const Album = ({
           </div>
           {/* {`${data.artist} / ${data.label} / ${data.album} / ${data.tracks}곡 / ${albumDuration}`} */}
         </div>
-        <div className={`${styles["album-information"]}`}>
+        {/* <div className={`${styles["album-information"]}`}>
           <div>
             <div className={styles["information"]}>
               <div style={{ marginRight: "5px" }}>{data.artist}</div>
@@ -107,7 +107,7 @@ export const Album = ({
               </div>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
       <div className={styles["text-container"]}>
         {/* {isPostPage && (
