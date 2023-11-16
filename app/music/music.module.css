@@ -150,6 +150,7 @@
   height: 100%;
   overflow: scroll;
   overflow-x: hidden;
+  z-index: 100;
 }
 
 /* .content-container::-webkit-scrollbar {

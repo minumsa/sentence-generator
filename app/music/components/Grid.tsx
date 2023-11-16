@@ -14,6 +14,7 @@ import {
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
+import Snowfall from "react-snowfall";
 
 export const Grid = () => {
   const router = useRouter();
