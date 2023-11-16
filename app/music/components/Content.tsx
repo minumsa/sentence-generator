@@ -273,7 +273,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
                   }}
                   style={
                     currentPage === pageButtonNumber
-                      ? { fontWeight: 500, color: "#000" }
+                      ? { fontWeight: 500, opacity: "70%" }
                       : undefined
                   }
                 >
