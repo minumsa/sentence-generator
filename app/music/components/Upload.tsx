@@ -65,7 +65,7 @@ export default function Upload({ idByPathName }: UploadProps) {
   return (
     <>
       <div
-        className={styles["album-container"]}
+        className={`${styles["album-container"]} ${styles["upload-container"]}`}
         style={{ flexDirection: "column", paddingTop: "50px" }}
       >
         <div className={styles["title"]}>{`${variableTitle} 페이지`}</div>

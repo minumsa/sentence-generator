@@ -13,8 +13,6 @@ import {
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
-import Image from "next/image";
-import Snowfall from "react-snowfall";
 import { Loading } from "./Loading";
 
 export const Grid = () => {
