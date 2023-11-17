@@ -82,7 +82,7 @@ export default function Upload({ idByPathName }: UploadProps) {
             <option value="pop">팝</option>
             <option value="k-pop">케이팝</option>
             <option value="j-pop">제이팝</option>
-            <option value="rock">락</option>
+            <option value="rock">록</option>
             <option value="alternative">얼터너티브</option>
             <option value="disco">디스코</option>
             <option value="electronic">일렉트로닉</option>

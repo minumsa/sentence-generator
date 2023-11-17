@@ -197,11 +197,11 @@ export const fetchSpotify = async ({ albumId, genre, link, text }: UpdateInfo) =
       console.error("Error: Access token is not available");
     }
 
-    const url = `https://api.spotify.com/v1/albums/${item.albumId}`;
+    const albumUrl = `https://api.spotify.com/v1/albums/${item.albumId}`;
     const headers = {
       Authorization: `Bearer ${accessToken}`,
     };
-    const dataResponse = await fetch(url, { headers });
+    const dataResponse = await fetch(albumUrl, { headers });
 
     if (!dataResponse.ok) {
       // throw new Error("music fetch failed");
