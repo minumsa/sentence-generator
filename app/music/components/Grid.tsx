@@ -84,7 +84,7 @@ export const Grid = () => {
               data-aos="fade-up"
               // data-aos-delay="50"
               data-aos-duration="2500"
-              data-aos-offset={isMobile ? "50" : "-1500"}
+              data-aos-offset={isMobile ? "50" : "100"}
               data-aos-once="false"
               key={index}
               className={`${styles["grid-item-container"]}`}
@@ -94,24 +94,24 @@ export const Grid = () => {
               <div
                 className={styles["grid-album-container"]}
                 style={{ position: "relative", width: "100%" }}
+                onClick={() => {
+                  router.push(`/music/${item.id}`);
+                }}
               >
                 <img
                   className={styles["grid-album-image"]}
                   src={item.imgUrl}
                   alt={item.album}
                   loading="lazy"
-                  onClick={() => {
-                    router.push(`/music/${item.artistId}`);
-                  }}
                 />
               </div>
-              <div className={styles["grid-album-title"]}>
-                <span
-                  className={styles["black-masking"]}
-                  onClick={() => {
-                    router.push(`/music/${item.id}`);
-                  }}
-                >{`${item.artist} [${item.album}]`}</span>
+              <div
+                className={styles["grid-album-title"]}
+                onClick={() => {
+                  router.push(`/music/${item.id}`);
+                }}
+              >
+                <span className={styles["black-masking"]}>{`${item.artist} [${item.album}]`}</span>
               </div>
             </div>
           );

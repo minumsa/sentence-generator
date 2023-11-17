@@ -73,7 +73,12 @@ export const Album = ({
             <div className={styles["post-date"]} style={{ marginBottom: 0 }}>
               아티스트
             </div>
-            <div>
+            <div
+              onClick={() => {
+                router.push(`/music/artist/${data.artistId}`);
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <span className={styles["black-masking"]}>{data.artist}</span>
             </div>
             <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
