@@ -8,6 +8,7 @@ import Upload from "../../components/Upload";
 import { MobileTitle } from "../../components/MobileTitle";
 import { Hamburger } from "../../components/Hamburger";
 import { Category } from "../../components/Category";
+import { Snow } from "../../components/Snow";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
@@ -15,6 +16,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <div className={styles["container"]}>
+      <Snow />
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />

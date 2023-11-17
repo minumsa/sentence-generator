@@ -8,6 +8,7 @@ import { Hamburger } from "../components/Hamburger";
 import { Category } from "../components/Category";
 import Upload from "../components/Upload";
 import { isUploadPage } from "../modules/data";
+import { Snow } from "../components/Snow";
 
 export default function Page() {
   const pathName = "";
@@ -15,6 +16,7 @@ export default function Page() {
 
   return (
     <div className={styles["container"]}>
+      <Snow />
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />

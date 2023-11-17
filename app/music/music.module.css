@@ -696,16 +696,16 @@
 .category-meta {
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-bottom: 5px;
 }
 
 .category-meta-image-container {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   inset-inline-start: 0px;
   user-select: auto;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .category-meta-image {
