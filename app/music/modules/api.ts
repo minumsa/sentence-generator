@@ -226,6 +226,7 @@ export const fetchSpotify = async ({ albumId, artistId, genre, link, text }: Upd
 
     const fetchedData: AlbumInfo = {
       id: albumData.id,
+      artistId: artistId,
       imgUrl: albumData.images[0].url,
       artistImgUrl: artistData.images[0].url,
       artist: albumData.artists[0].name,

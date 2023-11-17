@@ -200,6 +200,10 @@ export const Album = ({
                             alt="test"
                             className={styles["category-meta-image"]}
                             loading="lazy"
+                            onClick={() => {
+                              router.push(`/music/artist/${data.artistId}`);
+                            }}
+                            style={{ cursor: "pointer" }}
                           />
                         </div>
                         <div>
@@ -207,6 +211,7 @@ export const Album = ({
                             onClick={() => {
                               router.push(`/music/artist/${data.artistId}`);
                             }}
+                            style={{ cursor: "pointer" }}
                           >
                             {data.artist}
                           </span>

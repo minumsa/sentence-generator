@@ -63,6 +63,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     loadData();
   }, [pathName, currentPage, currentMethod, currentCriteria]);
 
+  console.log(data);
+
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
   }, [currentPage]);
