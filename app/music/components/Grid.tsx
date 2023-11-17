@@ -82,7 +82,7 @@ export const Grid = () => {
               data-aos="fade-up"
               data-aos-delay="50"
               data-aos-duration="3000"
-              data-aos-offset={isMobile ? 200 : -2500}
+              data-aos-offset={isMobile ? "200" : "-2500"}
               data-aos-once="false"
               key={index}
               className={`${styles["grid-item-container"]}`}
