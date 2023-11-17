@@ -14,7 +14,7 @@ import {
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import { Loading } from "./Loading";
-import "aos/dist/aos.css"; // You can also use <link> for styles
+import "aos/dist/aos.css";
 import Aos from "aos";
 
 export const Grid = () => {
@@ -33,7 +33,9 @@ export const Grid = () => {
   });
   const isLoading = data.length === 0;
 
-  Aos.init();
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   useEffect(() => {
     if (inView) setCurrentPage(prevPage => prevPage + 1);
@@ -82,7 +84,7 @@ export const Grid = () => {
               data-aos="fade-up"
               data-aos-delay="50"
               data-aos-duration="3000"
-              data-aos-offset={isMobile ? "200" : "-2500"}
+              data-aos-offset={isMobile ? "200" : "-1500"}
               data-aos-once="false"
               key={index}
               className={`${styles["grid-item-container"]}`}
