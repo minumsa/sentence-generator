@@ -39,6 +39,7 @@ export const contents: ContentsType = {
 
 export interface AlbumInfo {
   id: string;
+  artistId: string;
   imgUrl: string;
   artistImgUrl: string;
   artist: string;
@@ -55,6 +56,7 @@ export interface AlbumInfo {
 
 export const initialAlbumInfo: AlbumInfo = {
   id: "",
+  artistId: "",
   imgUrl: "",
   artistImgUrl: "",
   artist: "",

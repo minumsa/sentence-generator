@@ -63,8 +63,8 @@ export async function GET(request: Request) {
 
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
-    const perPageCount = Number(url.searchParams.get("perPageCount"));
     const currentPage = Number(url.searchParams.get("currentPage"));
+    const perPageCount = Number(url.searchParams.get("perPageCount"));
     const pathName = url.searchParams.get("pathName");
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
@@ -86,6 +86,23 @@ export async function GET(request: Request) {
     // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
     const startIndex = perPageCount * currentPage - perPageCount;
+
+    // const isArtistPage = isNaN(currentPage);
+    // let slicedData = undefined;
+
+    // if (isArtistPage) {
+    //   slicedData = await Music.find(query)
+    //     .findOne({ currentPage })
+    //     .sort(sortKey)
+    //     .skip(startIndex) //
+    //     .limit(perPageCount);
+    // } else {
+    //   slicedData = await Music.find(query) //
+    //     .sort(sortKey)
+    //     .skip(startIndex) //
+    //     .limit(perPageCount);
+    // }
+
     const slicedData = await Music.find(query) //
       .sort(sortKey)
       .skip(startIndex) //

@@ -13,6 +13,7 @@ export default function Page({ params }: PageProps) {
   const pathName = params.genre;
   const currentPage = params.page;
   const fullPathName = usePathname();
+  const isArtistPage = pathName.includes("artist");
 
   return (
     <div className={styles["container"]}>
@@ -24,9 +25,9 @@ export default function Page({ params }: PageProps) {
       </div>
       <div className={styles["content-container"]}>
         <Content
-          pathName={isMainPage(pathName) ? "" : pathName}
+          pathName={isMainPage(pathName) || isArtistPage ? "" : pathName}
           fullPathName={fullPathName}
-          currentPage={Number(currentPage)}
+          currentPage={isArtistPage ? currentPage : Number(currentPage)}
         />
       </div>
     </div>

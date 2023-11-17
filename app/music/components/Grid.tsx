@@ -22,7 +22,7 @@ export const Grid = () => {
   const pathName = "";
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalPage, setTotalPage] = useState(1);
-  const [perPageCount, setPerPageCount] = useState(isMobile ? 8 : 42);
+  const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 42);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
@@ -82,9 +82,9 @@ export const Grid = () => {
           return (
             <div
               data-aos="fade-up"
-              data-aos-delay="50"
-              data-aos-duration="3000"
-              data-aos-offset={isMobile ? "200" : "-1500"}
+              // data-aos-delay="50"
+              data-aos-duration="2500"
+              data-aos-offset={isMobile ? "50" : "-1500"}
               data-aos-once="false"
               key={index}
               className={`${styles["grid-item-container"]}`}
@@ -101,7 +101,7 @@ export const Grid = () => {
                   alt={item.album}
                   loading="lazy"
                   onClick={() => {
-                    router.push(`/music/${item.id}`);
+                    router.push(`/music/${item.artistId}`);
                   }}
                 />
               </div>

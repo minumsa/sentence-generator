@@ -43,6 +43,9 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
 
+  console.log(pathName);
+  console.log("currentPage", currentPage);
+
   useEffect(() => {
     async function loadData() {
       const result = await fetchData({

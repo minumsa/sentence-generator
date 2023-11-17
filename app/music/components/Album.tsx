@@ -202,9 +202,18 @@ export const Album = ({
                             loading="lazy"
                           />
                         </div>
-                        <div>{`${data.artist} • ${data.releaseDate.slice(0, 4)} • ${
-                          data.tracks
-                        }곡, ${albumDuration}`}</div>
+                        <div>
+                          <span
+                            onClick={() => {
+                              router.push(`/music/artist/${data.artistId}`);
+                            }}
+                          >
+                            {data.artist}
+                          </span>
+                          {` • ${data.releaseDate.slice(0, 4)} • ${
+                            data.tracks
+                          }곡, ${albumDuration}`}
+                        </div>
                       </div>
                       <p
                         ref={divRef}
