@@ -15,6 +15,7 @@ export default function Upload({ idByPathName }: UploadProps) {
   const variableTitle: string = isUploadPage ? "업로드" : "수정";
   const [data, setData] = useState<any>();
   const [albumId, setAlbumId] = useState("");
+  const [artistId, setArtistId] = useState("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
@@ -24,6 +25,7 @@ export default function Upload({ idByPathName }: UploadProps) {
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
+      artistId,
       genre,
       link,
       text,
@@ -34,8 +36,18 @@ export default function Upload({ idByPathName }: UploadProps) {
     }
   };
 
-  const handleUpdate = () => {
-    updateData(albumId, data, password);
+  const handleUpdate = async () => {
+    const newAlbumData = await fetchSpotify({
+      albumId,
+      artistId,
+      genre,
+      link,
+      text,
+    });
+
+    if (newAlbumData) {
+      updateData(albumId, artistId, newAlbumData, password);
+    }
   };
 
   const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -48,8 +60,9 @@ export default function Upload({ idByPathName }: UploadProps) {
     async function getData() {
       const dataForUpdate = await fetchDataById(idByPathName);
       setData(dataForUpdate);
-      const { id, genre, link, text } = dataForUpdate;
+      const { id, artistId, genre, link, text } = dataForUpdate;
       setAlbumId(id);
+      setArtistId(artistId);
       setGenre(genre);
       setLink(link);
       setText(text);
@@ -57,6 +70,8 @@ export default function Upload({ idByPathName }: UploadProps) {
 
     if (isUpdatePage) getData();
   }, []);
+
+  console.log(data);
 
   useEffect(() => {
     isUpdatePage && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
@@ -110,6 +125,14 @@ export default function Upload({ idByPathName }: UploadProps) {
           value={albumId}
           onChange={e => {
             setAlbumId(e.target.value);
+          }}
+        />
+        <div className={styles["upload-item-title"]}>아티스트 ID(Spotify)</div>
+        <textarea
+          className={styles["input"]}
+          value={artistId}
+          onChange={e => {
+            setArtistId(e.target.value);
           }}
         />
         <div className={styles["upload-item-title"]}>글</div>

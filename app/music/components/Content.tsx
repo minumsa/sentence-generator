@@ -193,7 +193,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
       {!isUploadPage && !isLoading && (
         <div className={styles["top-menu-container"]}>
           {/* TODO: 검색 기능 만들지 말지 고민 */}
-          {isAdminPage(fullPathName) && (
+          {/* {isAdminPage(fullPathName) && (
             <div
               className={`${styles["admin-button"]} ${styles["upload-button"]}`}
               onClick={() => {
@@ -202,7 +202,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
             >
               업로드
             </div>
-          )}
+          )} */}
           <SortToggleButton
             type="method"
             sortItem={sortItems.method}

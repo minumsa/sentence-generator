@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     const {
       id,
       imgUrl,
+      artistImgUrl,
       artist,
       album,
       label,
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
     const newData = new Music({
       id,
       imgUrl,
+      artistImgUrl,
       artist,
       album,
       label,
@@ -126,10 +128,11 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { albumId, data, password } = await request.json();
+    const { originalId, artistId, data, password } = await request.json();
     const {
       id,
       imgUrl,
+      artistImgUrl,
       artist,
       album,
       label,
@@ -156,6 +159,8 @@ export async function PUT(request: Request) {
     Object.assign(originalData, {
       id,
       imgUrl,
+      artistId,
+      artistImgUrl,
       artist,
       album,
       label,

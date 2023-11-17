@@ -53,8 +53,6 @@ export const Album = ({
     };
   }, []);
 
-  console.log(numberOfLines);
-
   return isEmptyData ? (
     <Loading />
   ) : (
@@ -180,52 +178,74 @@ export const Album = ({
               // 첫 번째 문단만 표시
               if (isFirstParagraph)
                 return (
-                  <div
-                    className={styles["paragraph-container"]}
-                    key={index}
-                    style={
-                      !isPostPage && !isMobile
-                        ? isVeryShortText
-                          ? { marginBottom: "50px" }
-                          : isShortText
-                          ? { marginBottom: "25px" }
+                  <>
+                    <div
+                      className={styles["paragraph-container"]}
+                      key={index}
+                      style={
+                        !isPostPage && !isMobile
+                          ? isVeryShortText
+                            ? { marginBottom: "50px" }
+                            : isShortText
+                            ? { marginBottom: "25px" }
+                            : undefined
                           : undefined
-                        : undefined
-                    }
-                  >
-                    <div className={styles["category-meta-title"]}>{data.album}</div>
-                    <div className={styles["category-meta"]}>
-                      <div className={styles["category-meta-image-container"]}>
-                        <img
-                          src="https://i.scdn.co/image/ab6761610000f178859e4c14fa59296c8649e0e4"
-                          alt="test"
-                          className={styles["category-meta-image"]}
-                          loading="lazy"
-                        />
+                      }
+                    >
+                      <div className={styles["category-meta-title"]}>{data.album}</div>
+                      <div className={styles["category-meta"]}>
+                        <div className={styles["category-meta-image-container"]}>
+                          <img
+                            src={data.artistImgUrl}
+                            alt="test"
+                            className={styles["category-meta-image"]}
+                            loading="lazy"
+                          />
+                        </div>
+                        <div>{`${data.artist} • ${data.releaseDate.slice(0, 4)} • ${
+                          data.tracks
+                        }곡, ${albumDuration}`}</div>
                       </div>
-                      <div>{`${data.artist} • ${data.releaseDate.slice(0, 4)} • ${
-                        data.tracks
-                      }곡, ${albumDuration}`}</div>
-                    </div>
-                    <p
-                      ref={divRef}
-                      className={`${styles["paragraph"]} 
+                      <p
+                        ref={divRef}
+                        className={`${styles["paragraph"]} 
                     ${numberOfLines > 2 ? styles["blur-end"] : undefined} 
                     ${hasNoText ? styles["paragraph-blank"] : undefined}`}
-                    >
-                      {text}
-                    </p>
-                    {numberOfLines > 2 && (
-                      <span
-                        className={styles["more-button"]}
-                        onClick={() => {
-                          router.push(`/music/${data.id}`);
-                        }}
                       >
-                        더 보기
-                      </span>
+                        {text}
+                      </p>
+                      {numberOfLines > 2 && (
+                        <span
+                          className={styles["more-button"]}
+                          onClick={() => {
+                            router.push(`/music/${data.id}`);
+                          }}
+                        >
+                          더 보기
+                        </span>
+                      )}
+                    </div>
+                    {isAdminMainPage && (
+                      <div className={styles["admin-button-container"]}>
+                        <div
+                          className={styles["admin-button"]}
+                          onClick={async () => {
+                            deleteData(data.id);
+                          }}
+                        >
+                          삭제
+                        </div>
+                        <div
+                          className={styles["admin-button"]}
+                          onClick={() => {
+                            router.push(`/music/admin/${data.id}`);
+                          }}
+                        >
+                          수정
+                        </div>
+                      </div>
                     )}
-                  </div>
+                  </>
                 );
             }
           })}
