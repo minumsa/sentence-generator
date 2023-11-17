@@ -14,6 +14,8 @@ import {
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import { Loading } from "./Loading";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
 
 export const Grid = () => {
   const router = useRouter();
@@ -27,9 +29,11 @@ export const Grid = () => {
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const { ref, inView } = useInView({
     threshold: 0,
-    triggerOnce: true,
+    triggerOnce: false,
   });
   const isLoading = data.length === 0;
+
+  AOS.init();
 
   useEffect(() => {
     if (inView) setCurrentPage(prevPage => prevPage + 1);
@@ -74,10 +78,19 @@ export const Grid = () => {
             borderRight: evenIndexMobile ? "none" : undefined,
           };
           return (
-            <div key={index} className={`${styles["grid-item-container"]}`} style={mobileStyle}>
+            <div
+              data-aos="fade-up"
+              data-aos-delay="50"
+              data-aos-duration="3000"
+              data-aos-offset={isMobile ? 200 : -3000}
+              data-aos-once="false"
+              key={index}
+              className={`${styles["grid-item-container"]}`}
+              style={mobileStyle}
+              ref={isLastItem ? ref : undefined}
+            >
               <div
-                className={`${styles["grid-album-container"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
-                ref={isLastItem ? ref : undefined}
+                className={styles["grid-album-container"]}
                 style={{ position: "relative", width: "100%" }}
               >
                 <img
@@ -90,9 +103,7 @@ export const Grid = () => {
                   }}
                 />
               </div>
-              <div
-                className={`${styles["grid-album-title"]} ${styles["animated"]} ${styles["animatedFadeInUp"]} ${styles["fadeInUp"]}`}
-              >
+              <div className={styles["grid-album-title"]}>
                 <span
                   className={styles["black-masking"]}
                   onClick={() => {
