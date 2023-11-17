@@ -45,6 +45,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
   console.log(pathName);
   console.log("currentPage", currentPage);
+  console.log("isUploadPage", isUploadPage);
 
   useEffect(() => {
     async function loadData() {

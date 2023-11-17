@@ -63,6 +63,7 @@ export async function GET(request: Request) {
 
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
+    const artistId = url.searchParams.get("currentPage");
     const currentPage = Number(url.searchParams.get("currentPage"));
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const pathName = url.searchParams.get("pathName");
@@ -87,23 +88,22 @@ export async function GET(request: Request) {
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
 
     const isArtistPage = isNaN(currentPage);
+    let startIndex = undefined;
     let slicedData = undefined;
 
+    // FIXME: artistId 가 있는지 여부로 확인하는게?
     if (isArtistPage) {
-      slicedData = await Music.find({ artistId: currentPage });
+      startIndex = perPageCount * 1 - perPageCount;
+      slicedData = await Music.find({ artistId: artistId })
+        .skip(startIndex) //
+        .limit(perPageCount);
     } else {
-      const startIndex = perPageCount * currentPage - perPageCount;
-
+      startIndex = perPageCount * currentPage - perPageCount;
       slicedData = await Music.find(query) //
         .sort(sortKey)
         .skip(startIndex) //
         .limit(perPageCount);
     }
-
-    // const slicedData = await Music.find(query) //
-    //   .sort(sortKey)
-    //   .skip(startIndex) //
-    //   .limit(perPageCount);
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
