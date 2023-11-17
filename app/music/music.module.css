@@ -814,10 +814,6 @@
     opacity: 1;
   }
 
-  .content-container {
-    overflow: hidden;
-  }
-
   .content-container::-webkit-scrollbar {
     display: none;
   }
@@ -886,7 +882,7 @@
   .content-container {
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow: hidden;
     border-left: none;
   }
 
