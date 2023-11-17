@@ -379,10 +379,7 @@
 .album-information-container {
   display: flex;
   flex-direction: column;
-  /* FIXME: 임시 수정 */
   width: 300px;
-  /* FIXME: 임시 수정 */
-  height: 300px;
   margin-right: 100px;
   line-height: 200%;
 }
