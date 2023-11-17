@@ -7,6 +7,7 @@ import { Loading } from "./Loading";
 import { url } from "inspector";
 import { isMobile } from "react-device-detect";
 import { useEffect, useRef, useState } from "react";
+import { renderToString } from "react-dom/server";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -52,6 +53,28 @@ export const Album = ({
       window.removeEventListener("resize", updateNumberOfLines);
     };
   }, []);
+
+  // HTML을 string 형태로 바꾸기 위한 부분
+  // const HTMLtest = () => {
+  //   return (
+  //     <div>
+  //       <p className={styles["paragraph"]}>
+  //         악뮤 이찬혁의 독창적이고 감각적인 음악 세계를 담은 첫 솔로 앨범. 지금 공간 음향으로
+  //         만나세요.
+  //       </p>
+  //       <div style={{ width: "100%", marginTop: "2rem" }}>
+  //         <img
+  //           src="https://www.jeonmae.co.kr/news/photo/202210/917522_608251_352.jpg"
+  //           alt="akmu"
+  //           loading="lazy"
+  //           style={{ width: "100%" }}
+  //         />
+  //       </div>
+  //     </div>
+  //   );
+  // };
+
+  // console.log(renderToString(<HTMLtest />));
 
   return isEmptyData ? (
     <Loading />
@@ -154,7 +177,16 @@ export const Album = ({
             <div className={styles["paragraph-division-line"]}></div>
           </div>
         )} */}
+          {/* FIXME: 안전하게 바꾸기 */}
           {/* FIXME: 텍스트의 특정 단어를 클릭하면 링크로 연결되는 기능 만들기 */}
+          {isPostPage && data.text.includes("div") && (
+            <div
+              style={{ width: "100%" }}
+              dangerouslySetInnerHTML={{
+                __html: data.text,
+              }}
+            />
+          )}
           {data.text.split("\n").map((text, index) => {
             const hasNoText = text.length < 1;
             const isVeryShortText = text.length < 90;
@@ -165,19 +197,20 @@ export const Album = ({
             const isLastParagraph = index + 1 === totalParagraph;
             const isBlankText = text === "";
             const isParagraphTitle = text.length < 40;
+            const isHTMLText = text.includes("<div>");
 
             // 포스트 페이지일 때 표시할 부분
             if (isPostPage) {
               return isBlankText ? (
                 <p></p>
-              ) : (
+              ) : !isHTMLText ? (
                 <p
                   className={styles["paragraph"]}
                   style={isParagraphTitle ? { fontWeight: 600, marginBottom: "10px" } : undefined}
                 >
                   {text}
                 </p>
-              );
+              ) : undefined;
             } else {
               // 카테고리 페이지일 때 표시할 부분
               // 첫 번째 문단만 표시
