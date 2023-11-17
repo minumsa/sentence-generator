@@ -803,6 +803,11 @@
 }
 
 @media (max-width: 525px) {
+  .snowfall-container {
+    position: fixed;
+    z-index: 0;
+  }
+
   .container {
     margin-left: 0;
   }
