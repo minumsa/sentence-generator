@@ -107,7 +107,12 @@ export const Album = ({
             <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
               앨범
             </div>
-            <div>
+            <div
+              onClick={() => {
+                router.push(`/music/${data.id}`);
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <span className={styles["black-masking"]}>{data.album}</span>
             </div>
             <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
@@ -167,7 +172,7 @@ export const Album = ({
       </div>
 
       {/* FIXME: 모바일에선 alignItems center? */}
-      <div style={{ display: "flex", width: "100%" }}>
+      <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
         <div className={styles["text-container"]}>
           {/* {isPostPage && (
           <div>
