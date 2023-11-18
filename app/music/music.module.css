@@ -112,6 +112,7 @@
   background-size: 2000% 100%;
   animation: animateBg 20s linear infinite;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .container {
@@ -808,7 +809,7 @@
 
   .snowfall-container {
     position: fixed;
-    z-index: 0;
+    z-index: -1;
   }
 
   .container {
@@ -868,6 +869,7 @@
     align-items: center;
     padding: 0 10px;
     border-right: none;
+    z-index: 2;
   }
 
   .category {
@@ -893,6 +895,7 @@
     height: 100%;
     overflow: hidden;
     border-left: none;
+    z-index: 1;
   }
 
   .sort-criteria-container {
