@@ -193,7 +193,7 @@ export const Album = ({
             const hasNoText = text.length < 1;
             const isVeryShortText = text.length < 90;
             const isShortText = text.length < 130;
-            const longTextStandard = 240;
+            const longTextStandard = isMobile ? 130 : 240;
             const isLongText = text.length > longTextStandard;
             const isFirstParagraph = index === 0;
             const isLastParagraph = index + 1 === totalParagraph;
@@ -262,13 +262,13 @@ export const Album = ({
                       </div>
                       <p
                         ref={divRef}
-                        className={`${styles["paragraph"]} 
-                    ${numberOfLines > 2 ? styles["blur-end"] : undefined} 
+                        className={`${styles["paragraph"]} ${styles["paragraph-category"]}
+                    ${isLongText ? styles["blur-end"] : undefined} 
                     ${hasNoText ? styles["paragraph-blank"] : undefined}`}
                       >
                         {text}
                       </p>
-                      {numberOfLines > 2 && (
+                      {isLongText && (
                         <span
                           className={styles["more-button"]}
                           onClick={() => {
