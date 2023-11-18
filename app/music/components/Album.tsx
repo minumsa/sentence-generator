@@ -172,7 +172,9 @@ export const Album = ({
       </div>
 
       {/* FIXME: 모바일에선 alignItems center? */}
-      <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+      <div
+        style={{ display: "flex", width: "100%", alignItems: isPostPage ? undefined : "center" }}
+      >
         <div className={styles["text-container"]}>
           {/* {isPostPage && (
           <div>
