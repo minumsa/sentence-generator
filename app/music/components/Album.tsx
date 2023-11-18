@@ -32,27 +32,25 @@ export const Album = ({
   const [numberOfLines, setNumberOfLines] = useState(0);
 
   // 텍스트 줄 수를 업데이트하는 함수
-  const updateNumberOfLines = () => {
-    if (divRef.current) {
-      const lineHeight = parseFloat(window.getComputedStyle(divRef.current).lineHeight);
-      const height = divRef.current.clientHeight;
-      const lines = Math.floor(height / lineHeight);
-      setNumberOfLines(lines);
-    }
-  };
+  // const updateNumberOfLines = () => {
+  //   if (divRef.current) {
+  //     const lineHeight = parseFloat(window.getComputedStyle(divRef.current).lineHeight);
+  //     const height = divRef.current.clientHeight;
+  //     const lines = Math.floor(height / lineHeight);
+  //     setNumberOfLines(lines);
+  //   }
+  // };
 
-  useEffect(() => {
-    updateNumberOfLines();
-  }, []);
+  // useEffect(() => {
+  //   updateNumberOfLines();
+  // }, []);
 
-  useEffect(() => {
-    // resize 이벤트 핸들러 등록
-    window.addEventListener("resize", updateNumberOfLines);
-    // 컴포넌트가 unmount될 때 이벤트 제거
-    return () => {
-      window.removeEventListener("resize", updateNumberOfLines);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("resize", updateNumberOfLines);
+  //   return () => {
+  //     window.removeEventListener("resize", updateNumberOfLines);
+  //   };
+  // }, []);
 
   // HTML을 string 형태로 바꾸기 위한 부분
   // const HTMLtest = () => {
