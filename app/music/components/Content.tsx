@@ -43,10 +43,6 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
 
-  console.log(pathName);
-  console.log("currentPage", currentPage);
-  console.log("isUploadPage", isUploadPage);
-
   useEffect(() => {
     async function loadData() {
       const result = await fetchData({
@@ -63,8 +59,6 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
     loadData();
   }, [pathName, currentPage, currentMethod, currentCriteria]);
-
-  console.log(data);
 
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);

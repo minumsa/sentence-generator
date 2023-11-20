@@ -92,7 +92,6 @@ export default function Home() {
     setShowImage(false);
     setImgSrc("");
     setImgAlt("");
-    console.log(imgAlt);
   };
 
   return (

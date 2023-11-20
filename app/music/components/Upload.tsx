@@ -71,8 +71,6 @@ export default function Upload({ idByPathName }: UploadProps) {
     if (isUpdatePage) getData();
   }, []);
 
-  console.log(data);
-
   useEffect(() => {
     isUpdatePage && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
   }, [albumId, genre, link, text]);
