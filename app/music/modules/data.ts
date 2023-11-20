@@ -3,7 +3,6 @@ import { atom } from "jotai";
 // FIXME: 현재 타입, 모듈이 모두 data.ts에 뭉쳐 있는데 생산적으로 관리하는 법 구글링
 
 export interface ContentsType {
-  "": string;
   pop: string;
   "k-pop": string;
   "j-pop": string;
@@ -21,7 +20,6 @@ export interface ContentsType {
 }
 
 export const contents: ContentsType = {
-  "": "divdivdiv",
   pop: "팝",
   "k-pop": "케이팝",
   "j-pop": "제이팝",

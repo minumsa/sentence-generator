@@ -82,7 +82,6 @@ export const Grid = () => {
           return (
             <div
               data-aos="fade-up"
-              // data-aos-delay="50"
               data-aos-duration="2500"
               data-aos-offset={isMobile ? "50" : "100"}
               data-aos-once="false"
