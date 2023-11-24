@@ -279,7 +279,7 @@
 } */
 
 .album-container {
-  width: 80%;
+  width: 85%;
   min-width: 950px;
   display: flex;
   /* FIXME: 임시 수정 */

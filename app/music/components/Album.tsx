@@ -188,6 +188,9 @@ export const Album = ({
             const isBlankText = text === "";
             const isParagraphTitle = text.length < 40;
             const isHTMLText = text.includes("<div>");
+            const findFirstParagraphInHTML = text.match(
+              /<p class="music_paragraph__z0WKJ">(.*?)<\/p>/
+            );
 
             // 포스트 페이지일 때 표시할 부분
             if (isPostPage) {
@@ -254,7 +257,7 @@ export const Album = ({
                     ${isLongText ? styles["blur-end"] : undefined} 
                     ${hasNoText ? styles["paragraph-blank"] : undefined}`}
                       >
-                        {text}
+                        {findFirstParagraphInHTML ? findFirstParagraphInHTML[1] : text}
                       </p>
                       {isLongText && (
                         <span
