@@ -24,6 +24,7 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
         className={styles["category"]}
         onClick={() => {
           setBoardIsVisible(!boardIsVisible);
+          router.push("/music");
         }}
         style={pathName === "" ? activeStyle : {}}
       >
