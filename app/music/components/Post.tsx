@@ -13,16 +13,6 @@ interface PostProps {
 export const Post = ({ pathName, isPostPage }: PostProps) => {
   const [data, setData] = useState<AlbumInfo>(initialAlbumInfo);
   const router = useRouter();
-  const [copied, setCopied] = useState(false);
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-    } catch (err) {
-      console.error("Failed to copy to clipboard: ", err);
-    }
-  };
 
   useEffect(() => {
     async function getData() {
@@ -41,7 +31,7 @@ export const Post = ({ pathName, isPostPage }: PostProps) => {
             router.back();
           }}
         >
-          ✕
+          {data.text && "✕"}
         </div>
       </div>
       <Album
