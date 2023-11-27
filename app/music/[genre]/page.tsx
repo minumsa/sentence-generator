@@ -13,6 +13,7 @@ import { Snow } from "../components/Snow";
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
   const fullPathName = usePathname();
+  // const isSearchPage = pathName.length > 20;
   const isPostPage = pathName.length > 20;
 
   return (

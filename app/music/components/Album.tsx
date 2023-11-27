@@ -263,7 +263,7 @@ export const Album = ({
                         <span
                           className={styles["more-button"]}
                           onClick={() => {
-                            router.push(`/music/${data.id}`);
+                            router.push(`/music/post/${data.id}`);
                           }}
                         >
                           더 보기

@@ -80,14 +80,22 @@ export async function GET(request: Request) {
       sortKey = { album: currentCriteria };
     }
 
-    // pathName이 있는 경우 해당 장르로 필터링, 그렇지 않으면 모든 데이터 가져오기
-    const query = pathName ? { genre: pathName } : {};
+    // pathName이 장르(pop, kpop...)인 경우 해당 장르로 필터링
+    // 그렇지 않으면(post, artist, "") 모든 데이터 가져오기(query === {})
+    let query = undefined;
+
+    if (pathName === "post" || pathName === "artist" || pathName === "") {
+      query = {};
+    } else {
+      query = { genre: pathName };
+    }
+
+    // const query = pathName ? { genre: pathName } : {};
     const genreDataLength = await Music.find(query).count();
 
     // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
-
-    const isArtistPage = isNaN(currentPage);
+    const isArtistPage = pathName === "artist";
     let startIndex = undefined;
     let slicedData = undefined;
 
