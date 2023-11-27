@@ -16,6 +16,7 @@ export default function Page({ params }: PageProps) {
   const fullPathName = usePathname();
   const isPostPage = pathName.includes("post");
   const isArtistPage = pathName.includes("artist");
+  const isSearchPage = pathName.includes("search");
 
   return (
     <div className={styles["container"]}>
@@ -32,7 +33,9 @@ export default function Page({ params }: PageProps) {
           <Content
             pathName={isMainPage(pathName) ? "" : pathName}
             fullPathName={fullPathName}
-            currentPage={isArtistPage || isPostPage ? currentPage : Number(currentPage)}
+            currentPage={
+              isArtistPage || isPostPage || isSearchPage ? currentPage : Number(currentPage)
+            }
           />
         )}
       </div>

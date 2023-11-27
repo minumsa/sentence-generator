@@ -64,11 +64,23 @@ export async function GET(request: Request) {
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
     const artistId = url.searchParams.get("currentPage");
-    const currentPage = Number(url.searchParams.get("currentPage"));
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const pathName = url.searchParams.get("pathName");
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
+
+    const isArtistPage = pathName === "artist";
+    const isSearchPage = pathName === "search";
+
+    let currentPage = 0;
+    let keyword: any = "";
+
+    if (isSearchPage) {
+      keyword = url.searchParams.get("currentPage");
+    } else {
+      currentPage = Number(url.searchParams.get("currentPage"));
+    }
+
     let sortKey = {};
     if (currentMethod === "발매일") {
       sortKey = { releaseDate: currentCriteria };
@@ -84,7 +96,7 @@ export async function GET(request: Request) {
     // 그렇지 않으면(post, artist, "") 모든 데이터 가져오기(query === {})
     let query = undefined;
 
-    if (pathName === "post" || pathName === "artist" || pathName === "") {
+    if (pathName === "artist" || pathName === "search" || pathName === "") {
       query = {};
     } else {
       query = { genre: pathName };
@@ -95,16 +107,27 @@ export async function GET(request: Request) {
 
     // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
-    const isArtistPage = pathName === "artist";
+
     let startIndex = undefined;
     let slicedData = undefined;
 
     // FIXME: artistId 가 있는지 여부로 확인하는게?
     if (isArtistPage) {
-      startIndex = perPageCount * 1 - perPageCount;
-      slicedData = await Music.find({ artistId: artistId })
-        .skip(startIndex) //
-        .limit(perPageCount);
+      startIndex = 0;
+      slicedData = await Music.find({ artistId: artistId });
+      // .skip(startIndex)
+      // .limit(perPageCount);
+    } else if (isSearchPage) {
+      startIndex = 0;
+      slicedData = await Music.find({
+        $or: [
+          { text: { $regex: new RegExp(keyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
+          { artist: { $regex: new RegExp(keyword, "i") } },
+          { album: { $regex: new RegExp(keyword, "i") } },
+        ],
+      });
+      // .skip(startIndex)
+      // .limit(perPageCount);
     } else {
       startIndex = perPageCount * currentPage - perPageCount;
       slicedData = await Music.find(query) //

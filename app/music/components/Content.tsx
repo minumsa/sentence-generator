@@ -18,7 +18,7 @@ import { Album } from "./Album";
 interface PageProps {
   pathName: string;
   fullPathName: string;
-  currentPage: number;
+  currentPage: any;
 }
 
 export default function Content({ pathName, fullPathName, currentPage }: PageProps) {
@@ -44,16 +44,30 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
   useEffect(() => {
     async function loadData() {
-      const result = await fetchData({
-        pathName,
-        perPageCount,
-        currentPage,
-        currentMethod,
-        currentCriteria,
-      });
-      setData(result?.slicedData);
-      const dataLength = result?.genreDataLength;
-      setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
+      // 검색 데이터를 fetch할 때는 currentPage를 keyword로 보내줌
+      if (isSearching) {
+        const result = await fetchData({
+          pathName,
+          perPageCount,
+          currentPage: keyword,
+          currentMethod,
+          currentCriteria,
+        });
+        setData(result?.slicedData);
+        const dataLength = result?.genreDataLength;
+        setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
+      } else {
+        const result = await fetchData({
+          pathName,
+          perPageCount,
+          currentPage,
+          currentMethod,
+          currentCriteria,
+        });
+        setData(result?.slicedData);
+        const dataLength = result?.genreDataLength;
+        setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
+      }
     }
 
     loadData();
@@ -190,6 +204,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   async function handleSearch() {
     // 1. "music/검색어"로 router.push
     // 2. pathName으로 loadData()
+
+    router.push(`/music/search/${keyword}`);
   }
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {

@@ -3,7 +3,7 @@ import { AlbumInfo, CriteriaType, MethodType, UpdateInfo } from "./data";
 interface FetchData {
   pathName: string;
   perPageCount: number;
-  currentPage: number;
+  currentPage: any;
   currentMethod: MethodType;
   currentCriteria: CriteriaType;
 }
