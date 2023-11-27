@@ -831,6 +831,10 @@
 }
 
 @media (max-width: 525px) {
+  .body {
+    background-color: #000;
+  }
+
   .category-meta-image-container {
     width: 25px;
     height: 25px;
