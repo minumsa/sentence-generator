@@ -68,7 +68,7 @@ export const Grid = () => {
   return (
     <div className={styles["grid-div"]}>
       {isLoading ? (
-        <Loading />
+        <Loading dataLength={undefined} />
       ) : (
         data.map((item, index) => {
           // const lastItemInRow = (index + 1) % 7 === 0;

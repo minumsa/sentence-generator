@@ -73,7 +73,7 @@ export const Album = ({
   // console.log(renderToString(<HTMLtest />));
 
   return isEmptyData ? (
-    <Loading />
+    <Loading dataLength={undefined} />
   ) : (
     <div className={styles["album-container"]}>
       <div className={styles["album-information-container"]}>
