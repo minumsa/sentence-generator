@@ -334,10 +334,20 @@
 
 .top-menu-container {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 15px;
   z-index: 100;
+}
+
+.top-magnifying-glass {
+  width: 20px;
+  height: 24.5px;
+  padding: 10px;
+  background-image: url(/music/magnifying-glass.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .sort {

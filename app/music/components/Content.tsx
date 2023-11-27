@@ -203,6 +203,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
               업로드
             </div>
           )} */}
+          <div className={styles["top-magnifying-glass"]}></div>
           <SortToggleButton
             type="method"
             sortItem={sortItems.method}
