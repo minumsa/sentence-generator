@@ -34,6 +34,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState(5);
+  const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
   const [maxPageNumber, setMaxPage] = useState<number>(5);
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
@@ -46,29 +47,17 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   useEffect(() => {
     async function loadData() {
       // 검색 데이터를 fetch할 때는 currentPage를 keyword로 보내줌
-      if (isSearching) {
-        const result = await fetchData({
-          pathName,
-          perPageCount,
-          currentPage: keyword,
-          currentMethod,
-          currentCriteria,
-        });
-        setData(result?.slicedData);
-        const dataLength = result?.genreDataLength;
-        setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
-      } else {
-        const result = await fetchData({
-          pathName,
-          perPageCount,
-          currentPage,
-          currentMethod,
-          currentCriteria,
-        });
-        setData(result?.slicedData);
-        const dataLength = result?.genreDataLength;
-        setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
-      }
+      const result = await fetchData({
+        pathName,
+        perPageCount,
+        currentPage: isSearching ? keyword : currentPage,
+        currentMethod,
+        currentCriteria,
+      });
+      setData(result?.slicedData);
+      const genreDataLength = result?.genreDataLength;
+      setDataLength(genreDataLength);
+      setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
     }
 
     loadData();
@@ -208,8 +197,6 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
       : router.push(`/music/search/${keyword}`);
   }
 
-  console.log(pathName);
-
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearch();
@@ -266,7 +253,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
         </div>
       )}
       {isLoading ? (
-        <Loading />
+        <Loading dataLength={dataLength} />
       ) : (
         sortedData.map((data, index) => {
           const dataIndex = index + 1;

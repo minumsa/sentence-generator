@@ -103,7 +103,7 @@ export async function GET(request: Request) {
     }
 
     // const query = pathName ? { genre: pathName } : {};
-    const genreDataLength = await Music.find(query).count();
+    let genreDataLength = await Music.find(query).count();
 
     // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
@@ -126,6 +126,13 @@ export async function GET(request: Request) {
           { album: { $regex: new RegExp(keyword, "i") } },
         ],
       });
+      genreDataLength = await Music.find({
+        $or: [
+          { text: { $regex: new RegExp(keyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
+          { artist: { $regex: new RegExp(keyword, "i") } },
+          { album: { $regex: new RegExp(keyword, "i") } },
+        ],
+      }).count();
       // .skip(startIndex)
       // .limit(perPageCount);
     } else {
