@@ -7,14 +7,11 @@ import {
   OrderType,
   initialCriteria,
   initialMethod,
-  isAdminPage,
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
 import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Loading } from "./Loading";
 import { Album } from "./Album";
 
@@ -42,6 +39,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [keyword, setKeyword] = useState<string>("");
 
   useEffect(() => {
     async function loadData() {
@@ -188,6 +187,17 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     }
   };
 
+  async function handleSearch() {
+    // 1. "music/검색어"로 router.push
+    // 2. pathName으로 loadData()
+  }
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <>
       {!isUploadPage && !isLoading && (
@@ -203,7 +213,24 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
               업로드
             </div>
           )} */}
-          <div className={styles["top-magnifying-glass"]}></div>
+          <div className={styles["top-search-container"]}>
+            {isSearching && (
+              <input
+                className={styles["top-search-input"]}
+                placeholder="검색어를 입력해주세요"
+                onChange={e => {
+                  setKeyword(e.target.value);
+                }}
+                onKeyDown={handleEnter}
+              ></input>
+            )}
+          </div>
+          <div
+            className={styles["top-magnifying-glass"]}
+            onClick={() => {
+              setIsSearching(!isSearching);
+            }}
+          ></div>
           <SortToggleButton
             type="method"
             sortItem={sortItems.method}

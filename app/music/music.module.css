@@ -340,6 +340,23 @@
   z-index: 100;
 }
 
+.top-search-container {
+  display: flex;
+  align-items: center;
+  height: 44.5px;
+  margin-right: 5px;
+}
+
+.top-search-input {
+  font-family: "Lato", "Noto Sans KR", sans-serif;
+  font-size: 1.1rem;
+  width: 200px;
+  height: 26px;
+  background-color: #333333;
+  color: #cfcfcf;
+  box-shadow: none;
+}
+
 .top-magnifying-glass {
   width: 20px;
   height: 24.5px;
