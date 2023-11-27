@@ -7,6 +7,7 @@ import {
   OrderType,
   initialCriteria,
   initialMethod,
+  isAdminPage,
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
@@ -202,11 +203,12 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   };
 
   async function handleSearch() {
-    // 1. "music/검색어"로 router.push
-    // 2. pathName으로 loadData()
-
-    router.push(`/music/search/${keyword}`);
+    isAdminPage(fullPathName)
+      ? router.push(`/music/admin/search/${keyword}`)
+      : router.push(`/music/search/${keyword}`);
   }
+
+  console.log(pathName);
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

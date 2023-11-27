@@ -9,11 +9,17 @@ import { Category } from "@/app/music/components/Category";
 import { MobileTitle } from "@/app/music/components/MobileTitle";
 import { Hamburger } from "@/app/music/components/Hamburger";
 import { Snow } from "@/app/music/components/Snow";
+import { Post } from "@/app/music/components/Post";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
-  const currentPage = params.page;
+  const currentPage: any = params.page;
   const fullPathName = usePathname();
+  const isPostPage = pathName.includes("post");
+  const isArtistPage = pathName.includes("artist");
+  const isSearchPage = pathName.includes("search");
+
+  // http://localhost:3000/music/admin/search/earth
 
   return (
     <div className={styles["container"]}>
@@ -26,11 +32,15 @@ export default function Page({ params }: PageProps) {
       <div className={styles["content-container"]}>
         {isUploadPage(pathName) ? (
           <Upload idByPathName={pathName} />
+        ) : isPostPage ? (
+          <Post pathName={currentPage} isPostPage={isPostPage} />
         ) : (
           <Content
             pathName={isMainPage(pathName) ? "" : pathName}
             fullPathName={fullPathName}
-            currentPage={Number(currentPage)}
+            currentPage={
+              isArtistPage || isPostPage || isSearchPage ? currentPage : Number(currentPage)
+            }
           />
         )}
       </div>

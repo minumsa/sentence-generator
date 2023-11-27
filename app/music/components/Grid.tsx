@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAtom } from "jotai";
 import React from "react";
 import {
@@ -10,6 +10,7 @@ import {
   MethodType,
   initialCriteria,
   initialMethod,
+  isAdminPage,
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
@@ -19,7 +20,7 @@ import Aos from "aos";
 
 export const Grid = () => {
   const router = useRouter();
-  const pathName = "";
+  const pathName = usePathname();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalPage, setTotalPage] = useState(1);
   const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 42);
@@ -44,7 +45,7 @@ export const Grid = () => {
   useEffect(() => {
     async function loadData() {
       const result = await fetchData({
-        pathName,
+        pathName: "",
         perPageCount,
         currentPage,
         currentMethod,
@@ -94,7 +95,9 @@ export const Grid = () => {
                 className={styles["grid-album-container"]}
                 style={{ position: "relative", width: "100%" }}
                 onClick={() => {
-                  router.push(`/music/${item.id}`);
+                  isAdminPage(pathName)
+                    ? router.push(`/music/admin/${item.id}`)
+                    : router.push(`/music/${item.id}`);
                 }}
               >
                 <img
@@ -107,7 +110,9 @@ export const Grid = () => {
               <div
                 className={styles["grid-album-title"]}
                 onClick={() => {
-                  router.push(`/music/${item.id}`);
+                  isAdminPage(pathName)
+                    ? router.push(`/music/admin/post/${item.id}`)
+                    : router.push(`/music/post/${item.id}`);
                 }}
               >
                 <span className={styles["black-masking"]}>{`${item.artist} [${item.album}]`}</span>

@@ -9,6 +9,7 @@ import { Category } from "../components/Category";
 import Upload from "../components/Upload";
 import { isUploadPage } from "../modules/data";
 import { Snow } from "../components/Snow";
+import { Grid } from "../components/Grid";
 
 export default function Page() {
   const pathName = "";
@@ -23,11 +24,7 @@ export default function Page() {
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        {isUploadPage(pathName) ? (
-          <Upload idByPathName={pathName} />
-        ) : (
-          <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} />
-        )}
+        {isUploadPage(pathName) ? <Upload idByPathName={pathName} /> : <Grid />}
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
         className={styles["category"]}
         onClick={() => {
           setBoardIsVisible(!boardIsVisible);
-          router.push("/music");
+          router.push(isAdminPage(fullPathName) ? `/music/admin` : `/music`);
         }}
         style={pathName === "" ? activeStyle : {}}
       >

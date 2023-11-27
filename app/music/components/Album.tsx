@@ -1,7 +1,7 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { formatDate, formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
-import { AlbumInfo } from "../modules/data";
+import { AlbumInfo, isAdminPage } from "../modules/data";
 import { deleteData } from "../modules/api";
 import { Loading } from "./Loading";
 import { isMobile } from "react-device-detect";
@@ -27,6 +27,7 @@ export const Album = ({
   const isEmptyData = data.id === "";
   const totalParagraph = data.text.split("\n").length;
   const divRef = useRef<HTMLDivElement>(null);
+  const pathName = usePathname();
 
   // 텍스트 줄 수를 업데이트하는 함수
   // const updateNumberOfLines = () => {
@@ -263,7 +264,9 @@ export const Album = ({
                         <span
                           className={styles["more-button"]}
                           onClick={() => {
-                            router.push(`/music/post/${data.id}`);
+                            isAdminPage(pathName)
+                              ? router.push(`/music/admin/post/${data.id}`)
+                              : router.push(`/music/post/${data.id}`);
                           }}
                         >
                           더 보기
