@@ -5,7 +5,9 @@ import { AlbumInfo, isAdminPage } from "../modules/data";
 import { deleteData } from "../modules/api";
 import { Loading } from "./Loading";
 import { isMobile } from "react-device-detect";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { renderToString } from "react-dom/server";
+import DOMPurify from "isomorphic-dompurify";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -19,49 +21,51 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
   const isLoading = data.id === "";
   const divRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
+  const sanitizer = DOMPurify.sanitize;
 
   // 텍스트 줄 수를 업데이트하는 함수
-  // const updateNumberOfLines = () => {
-  //   if (divRef.current) {
-  //     const lineHeight = parseFloat(window.getComputedStyle(divRef.current).lineHeight);
-  //     const height = divRef.current.clientHeight;
-  //     const lines = Math.floor(height / lineHeight);
-  //     setNumberOfLines(lines);
-  //   }
-  // };
+  function updateNumberOfLines() {
+    if (divRef.current) {
+      const lineHeight = parseFloat(window.getComputedStyle(divRef.current).lineHeight);
+      const height = divRef.current.clientHeight;
+      const lines = Math.floor(height / lineHeight);
+      // setNumbersOfLines(lines);
+    }
+  }
 
-  // useEffect(() => {
-  //   updateNumberOfLines();
-  // }, []);
+  useEffect(() => {
+    updateNumberOfLines();
+  }, []);
 
-  // useEffect(() => {
-  //   window.addEventListener("resize", updateNumberOfLines);
-  //   return () => {
-  //     window.removeEventListener("resize", updateNumberOfLines);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.addEventListener("resize", updateNumberOfLines);
+    return () => {
+      window.removeEventListener("resize", updateNumberOfLines);
+    };
+  }, []);
 
   // HTML을 string 형태로 바꾸기 위한 부분
-  // const HTMLtest = () => {
-  //   return (
-  //     <div>
-  //       <p className={styles["paragraph"]}>
-  //         악뮤 이찬혁의 독창적이고 감각적인 음악 세계를 담은 첫 솔로 앨범. 지금 공간 음향으로
-  //         만나세요.
-  //       </p>
-  //       <div style={{ width: "100%", marginTop: "2rem" }}>
-  //         <img
-  //           src="https://www.jeonmae.co.kr/news/photo/202210/917522_608251_352.jpg"
-  //           alt="akmu"
-  //           loading="lazy"
-  //           style={{ width: "100%" }}
-  //         />
-  //       </div>
-  //     </div>
-  //   );
-  // };
+  const HTMLToString = (htmlData: any) => {
+    return (
+      // <div>
+      //   <p className={styles["paragraph"]}>
+      //     악뮤 이찬혁의 독창적이고 감각적인 음악 세계를 담은 첫 솔로 앨범. 지금 공간 음향으로
+      //     만나세요.
+      //   </p>
+      //   <div style={{ width: "100%", marginTop: "2rem" }}>
+      //     <img
+      //       src="https://www.jeonmae.co.kr/news/photo/202210/917522_608251_352.jpg"
+      //       alt="akmu"
+      //       loading="lazy"
+      //       style={{ width: "100%" }}
+      //     />
+      //   </div>
+      // </div>
+      renderToString(htmlData)
+    );
+  };
 
-  // console.log(renderToString(<HTMLtest />));
+  console.log();
 
   return isLoading ? (
     <Loading dataLength={undefined} />
@@ -120,7 +124,7 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
             <div
               style={{ width: "100%" }}
               dangerouslySetInnerHTML={{
-                __html: data.text,
+                __html: sanitizer(data.text),
               }}
             />
           )}

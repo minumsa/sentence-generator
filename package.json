@@ -26,6 +26,7 @@
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "html2canvas": "^1.4.1",
+    "isomorphic-dompurify": "^1.9.0",
     "jotai": "^2.5.0",
     "kerberos": "^2.0.1",
     "mongodb": "^5.7.0",
