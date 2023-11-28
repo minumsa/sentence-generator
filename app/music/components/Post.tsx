@@ -34,13 +34,7 @@ export const Post = ({ pathName, isPostPage }: PostProps) => {
           {data.text && "✕"}
         </div>
       </div>
-      <Album
-        data={data}
-        dataIndex={1}
-        perPageCount={5}
-        isAdminMainPage={false}
-        isPostPage={isPostPage}
-      />
+      <Album data={data} isAdminMainPage={false} isPostPage={isPostPage} />
     </>
   );
 };

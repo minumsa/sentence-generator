@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { fetchDataById, fetchSpotify, updateData, uploadData } from "../modules/api";
 import { contents } from "../modules/data";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface UploadProps {
   idByPathName: string;
@@ -20,9 +22,9 @@ export default function Upload({ idByPathName }: UploadProps) {
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
-  const [uploadDate, setUploadDate] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
+  const [uploadDate, setUploadDate] = useState(new Date());
 
   // 업로드 API
   const handleUpload = async () => {
@@ -79,11 +81,24 @@ export default function Upload({ idByPathName }: UploadProps) {
     if (isUpdatePage) getData();
   }, []);
 
-  console.log(data);
-
   useEffect(() => {
     isUpdatePage && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
   }, [albumId, genre, link, text]);
+
+  interface ExampleCustomInputProps {
+    value: string;
+    onClick: () => void;
+  }
+
+  const ExampleCustomInput = forwardRef<HTMLButtonElement, ExampleCustomInputProps>(
+    ({ value, onClick }, ref) => (
+      <button className={styles["calendar-input"]} onClick={onClick} ref={ref}>
+        {value}
+      </button>
+    )
+  );
+
+  ExampleCustomInput.displayName = "ExampleCustomInput";
 
   return (
     <>
@@ -146,6 +161,19 @@ export default function Upload({ idByPathName }: UploadProps) {
           }}
         />
         <div className={styles["upload-item-title"]}>작성일</div>
+        <DatePicker
+          selected={uploadDate}
+          onChange={date => date && setUploadDate(date)}
+          dateFormat={"yyyy/MM/dd"}
+          customInput={
+            <ExampleCustomInput
+              value={""}
+              onClick={function (): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+          }
+        />
         {/* <textarea
           className={styles["input"]}
           value={uploadDate}
@@ -153,7 +181,9 @@ export default function Upload({ idByPathName }: UploadProps) {
             setUploadDate(e.target.value);
           }}
         /> */}
-        <div className={styles["upload-item-title"]}>관리자 비밀번호</div>
+        <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
+          관리자 비밀번호
+        </div>
         <input
           className={styles["input"]}
           value={password}
