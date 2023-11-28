@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from "html2canvas";
 import { isMobile } from "react-device-detect";
+import NoSSR from "../divdivdiv/NoSSR";
 
 const getRandomItemFromArray = (array: string[]): string => {
   return array[Math.floor(Math.random() * array.length)];
@@ -33,7 +34,7 @@ export default function RandomSentenceGenerator() {
     return () => {
       clearInterval(intervalId);
     };
-  }, [isTriggered]);
+  }, []);
 
   const handleClick = () => {
     setIsTriggered(prevIsRunning => !prevIsRunning);
@@ -90,7 +91,9 @@ export default function RandomSentenceGenerator() {
         }`}
       >
         <div className={styles["download-text"]}>
-          {isMobile ? "이미지 파일이 생성되었습니다!" : "이미지가 클립보드에 저장되었습니다!"}
+          <NoSSR>
+            {isMobile ? "이미지 파일이 생성되었습니다!" : "이미지가 클립보드에 저장되었습니다!"}
+          </NoSSR>
         </div>
       </div>
       <div className={styles["capture-icon"]} onClick={handleCapture}>
