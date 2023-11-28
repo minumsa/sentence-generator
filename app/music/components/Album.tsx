@@ -5,27 +5,18 @@ import { AlbumInfo, isAdminPage } from "../modules/data";
 import { deleteData } from "../modules/api";
 import { Loading } from "./Loading";
 import { isMobile } from "react-device-detect";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 interface AlbumProps {
   data: AlbumInfo;
-  dataIndex: number;
-  perPageCount: number;
   isAdminMainPage: boolean;
   isPostPage: boolean;
 }
 
-export const Album = ({
-  data,
-  dataIndex,
-  perPageCount,
-  isAdminMainPage,
-  isPostPage,
-}: AlbumProps) => {
+export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(data.duration);
-  const isEmptyData = data.id === "";
-  const totalParagraph = data.text.split("\n").length;
+  const isLoading = data.id === "";
   const divRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
 
@@ -72,7 +63,7 @@ export const Album = ({
 
   // console.log(renderToString(<HTMLtest />));
 
-  return isEmptyData ? (
+  return isLoading ? (
     <Loading dataLength={undefined} />
   ) : (
     <div className={styles["album-container"]}>
@@ -89,9 +80,7 @@ export const Album = ({
         </div>
         {isPostPage ? (
           <div className={styles["album-metadata"]}>
-            <div className={styles["post-date"]} style={{ marginBottom: 0 }}>
-              아티스트
-            </div>
+            <div className={styles["post-date"]}>아티스트</div>
             <div
               onClick={() => {
                 router.push(`/music/artist/${data.artistId}`);
@@ -100,9 +89,7 @@ export const Album = ({
             >
               <span className={styles["black-masking"]}>{data.artist}</span>
             </div>
-            <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
-              앨범
-            </div>
+            <div className={styles["post-date"]}>앨범</div>
             <div
               onClick={() => {
                 router.push(`/music/${data.id}`);
@@ -111,15 +98,11 @@ export const Album = ({
             >
               <span className={styles["black-masking"]}>{data.album}</span>
             </div>
-            <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
-              레이블
-            </div>
+            <div className={styles["post-date"]}>레이블</div>
             <div>
               <span className={styles["black-masking"]}>{data.label}</span>
             </div>
-            <div className={styles["post-date"]} style={{ marginTop: "15px" }}>
-              러닝타임
-            </div>
+            <div className={styles["post-date"]}>러닝타임</div>
             <div>
               <span className={styles["black-masking"]}>
                 {albumDuration}, {data.tracks}곡
@@ -127,44 +110,6 @@ export const Album = ({
             </div>
           </div>
         ) : undefined}
-        {/* <div className={`${styles["album-information"]}`}>
-          <div>
-            <div className={styles["information"]}>
-              <div style={{ marginRight: "5px" }}>{data.artist}</div>
-            </div>
-            <div className={styles["information"]}>
-              <a className={styles["link"]} href={data.link} target="_blank">
-                <div className={styles["album-title"]}>{data.album}</div>
-              </a>
-            </div>
-          </div>
-          <div className={styles["information"]}>
-            <span>{`${data.releaseDate.slice(0, 4)}년 ${Number(data.releaseDate.slice(5, 7))}월, ${
-              data.label
-            }`}</span>
-          </div>
-          <div className={styles["information"]}>{`${data.tracks}곡, ${albumDuration}`}</div>
-          {isAdminMainPage && (
-            <div className={styles["admin-button-container"]}>
-              <div
-                className={styles["admin-button"]}
-                onClick={async () => {
-                  deleteData(data.id);
-                }}
-              >
-                삭제
-              </div>
-              <div
-                className={styles["admin-button"]}
-                onClick={() => {
-                  router.push(`/music/admin/${data.id}`);
-                }}
-              >
-                수정
-              </div>
-            </div>
-          )}
-        </div> */}
       </div>
       <div
         style={{ display: "flex", width: "100%", alignItems: isPostPage ? undefined : "center" }}
@@ -183,47 +128,37 @@ export const Album = ({
             const hasNoText = text.length < 1;
             const isVeryShortText = text.length < 90;
             const isShortText = text.length < 130;
-            const longTextStandard = isMobile ? 130 : 200;
-            const isLongText = text.length > longTextStandard;
+            const longTextStandard = isMobile ? 100 : 180;
             const isFirstParagraph = index === 0;
-            const isBlankText = text === "";
+            const isLineBreak = text === "";
             const isParagraphTitle = text.length < 40;
             const isHTMLText = text.includes("<div>");
-            const findFirstParagraphInHTML = text.match(
+            const isFirstParagraphInHTML = text.match(
               /<p class="music_paragraph__z0WKJ">(.*?)<\/p>/
             );
+            const isLongText = isFirstParagraphInHTML
+              ? isFirstParagraphInHTML[1].length > longTextStandard
+              : text.length > longTextStandard;
 
-            // 포스트 페이지일 때 표시할 부분
+            // 포스트 페이지일 때 표시할 앨범 텍스트
             if (isPostPage) {
-              return isBlankText ? (
+              return isLineBreak ? (
                 <p></p>
-              ) : !isHTMLText ? (
+              ) : isHTMLText ? undefined : (
                 <p
                   className={styles["paragraph"]}
                   style={isParagraphTitle ? { fontWeight: 600, marginBottom: "10px" } : undefined}
                 >
                   {text}
                 </p>
-              ) : undefined;
+              );
             } else {
-              // 카테고리 페이지일 때 표시할 부분
-              // 첫 번째 문단만 표시
-              if (isFirstParagraph)
+              // 카테고리 페이지일 때 표시할 앨범 메타데이터
+              // 전체 텍스트 첫 번째 문단의 3줄까지만 미리보기로 표시
+              if (isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : isFirstParagraph)
                 return (
                   <>
-                    <div
-                      className={styles["paragraph-container"]}
-                      key={index}
-                      style={
-                        !isPostPage && !isMobile
-                          ? isVeryShortText
-                            ? { marginBottom: "50px" }
-                            : isShortText
-                            ? { marginBottom: "25px" }
-                            : undefined
-                          : undefined
-                      }
-                    >
+                    <div className={styles["paragraph-container"]} key={index}>
                       <div className={styles["category-meta-title"]}>{data.album}</div>
                       <div className={styles["category-meta"]}>
                         <div className={styles["category-meta-image-container"]}>
@@ -235,7 +170,6 @@ export const Album = ({
                             onClick={() => {
                               router.push(`/music/artist/${data.artistId}`);
                             }}
-                            style={{ cursor: "pointer" }}
                           />
                         </div>
                         <div>
@@ -247,18 +181,20 @@ export const Album = ({
                           >
                             {data.artist}
                           </span>
-                          {` • ${data.releaseDate.slice(0, 4)} • ${
-                            data.tracks
-                          }곡, ${albumDuration}`}
+                          <span>
+                            {` • ${data.releaseDate.slice(0, 4)} • ${
+                              data.tracks
+                            }곡, ${albumDuration}`}
+                          </span>
                         </div>
                       </div>
                       <p
                         ref={divRef}
-                        className={`${styles["paragraph"]} ${styles["paragraph-category"]}
-                    ${isLongText ? styles["blur-end"] : undefined} 
-                    ${hasNoText ? styles["paragraph-blank"] : undefined}`}
+                        className={`${styles["paragraph"]} ${styles["paragraph-category"]} ${
+                          isLongText ? styles["blur-end"] : undefined
+                        }`}
                       >
-                        {findFirstParagraphInHTML ? findFirstParagraphInHTML[1] : text}
+                        {isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : text}
                       </p>
                       {isLongText && (
                         <span
@@ -273,6 +209,7 @@ export const Album = ({
                         </span>
                       )}
                     </div>
+                    {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                     {isAdminMainPage && (
                       <div className={styles["admin-button-container"]}>
                         <div
@@ -297,6 +234,7 @@ export const Album = ({
                 );
             }
           })}
+          {/* 포스트 페이지일 때 표시할 앨범 메타데이터 */}
           {isPostPage && (
             <>
               <div className={styles["paragraph-division-line"]}></div>

@@ -656,6 +656,7 @@
 
 .post-date {
   font-weight: 600;
+  margin-top: 15px;
 }
 
 .grid-div {
@@ -751,6 +752,7 @@
   inset-inline-start: 0px;
   user-select: auto;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .category-meta-image {
