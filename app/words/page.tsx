@@ -18,14 +18,25 @@ const generateRandomColor = (): string => {
 };
 
 export default function RandomSentenceGenerator() {
-  const [randomWord1, setRandomWord1] = useState<string>(words[0]);
-  const [randomWord2, setRandomWord2] = useState<string>(words[9]);
   const [isTriggered, setIsTriggered] = useState<boolean>(true);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
+  const [sentence, setSentence] = useState({
+    word1: words[0],
+    word2: words[9],
+    color1: generateRandomColor(),
+    color2: generateRandomColor(),
+    color3: generateRandomColor(),
+  });
+
   const generateRandomSentence = () => {
-    setRandomWord1(getRandomItemFromArray(words));
-    setRandomWord2(getRandomItemFromArray(words));
+    setSentence({
+      word1: getRandomItemFromArray(words),
+      word2: getRandomItemFromArray(words),
+      color1: generateRandomColor(),
+      color2: generateRandomColor(),
+      color3: generateRandomColor(),
+    });
   };
 
   useEffect(() => {
@@ -101,29 +112,14 @@ export default function RandomSentenceGenerator() {
       </div>
       <div className={styles["sentence-container"]}>
         <div className={styles["sentence"]} onClick={handleClick}>
-          <span
-            className={styles["word1"]}
-            style={{
-              color: generateRandomColor(),
-            }}
-          >
-            {randomWord1}{" "}
+          <span className={styles["word1"]} style={{ color: sentence.color1 }}>
+            {sentence.word1}{" "}
           </span>
-          <span
-            className={styles["word3"]}
-            style={{
-              color: generateRandomColor(),
-            }}
-          >
+          <span className={styles["word3"]} style={{ color: sentence.color2 }}>
             같은{" "}
           </span>
-          <span
-            className={styles["word2"]}
-            style={{
-              color: generateRandomColor(),
-            }}
-          >
-            {randomWord2}
+          <span className={styles["word2"]} style={{ color: sentence.color3 }}>
+            {sentence.word2}
           </span>
         </div>
       </div>
