@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./fruits.module.css";
 import { fruitEmojiMap } from "./fruits";
 import NoSSR from "../divdivdiv/NoSSR";
+import { isMobile } from "react-device-detect";
 
 function getRandomItem(arr: string[]): string {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -11,7 +12,6 @@ function getRandomItem(arr: string[]): string {
 
 function Fruits() {
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  const isMobile: boolean = windowWidth < 650;
   const [checkerWidth, setCheckerWidth] = useState<number>(0);
 
   const handleWindowResize = () => {
@@ -55,7 +55,7 @@ function Fruits() {
       setTimeout(() => {
         fruit.remove();
       }, 5000);
-    }, 2000);
+    }, 500);
 
     return () => {
       clearInterval(interval);
