@@ -2,7 +2,6 @@ import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents, isAdminPage, isMainPage } from "../modules/data";
 import { useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
 import Aos from "aos";
 
 interface CategoryProps {
@@ -47,34 +46,6 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
           </div>
         );
       })}
-      {/* <div
-        className={styles["category"]}
-        onClick={() => {
-          setBoardIsVisible(!boardIsVisible);
-        }}
-      >
-        게시판
-      </div>
-      <div
-        className={styles["category"]}
-        style={{ display: boardIsVisible ? undefined : "none" }}
-        data-aos="fade-up"
-        data-aos-duration="2500"
-        data-aos-offset={isMobile ? "50" : "100"}
-        data-aos-once="false"
-      >
-        소개
-      </div>
-      <div
-        className={styles["category"]}
-        style={{ display: boardIsVisible ? undefined : "none" }}
-        data-aos="fade-up"
-        data-aos-duration="2500"
-        data-aos-offset={isMobile ? "50" : "100"}
-        data-aos-once="false"
-      >
-        연결
-      </div> */}
     </div>
   );
 };

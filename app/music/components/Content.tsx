@@ -262,13 +262,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
           return (
             <div key={index}>
-              <Album
-                data={data}
-                dataIndex={dataIndex}
-                perPageCount={perPageCount}
-                isAdminMainPage={isAdminMainPage}
-                isPostPage={false}
-              />
+              <Album data={data} isAdminMainPage={isAdminMainPage} isPostPage={false} />
               {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
             </div>
           );

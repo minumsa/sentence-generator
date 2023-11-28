@@ -3,6 +3,7 @@ import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { fetchDataById, fetchSpotify, updateData, uploadData } from "../modules/api";
+import { contents } from "../modules/data";
 
 interface UploadProps {
   idByPathName: string;
@@ -19,9 +20,11 @@ export default function Upload({ idByPathName }: UploadProps) {
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
+  const [uploadDate, setUploadDate] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
 
+  // 업로드 API
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
@@ -36,6 +39,7 @@ export default function Upload({ idByPathName }: UploadProps) {
     }
   };
 
+  // 수정 API
   const handleUpdate = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
@@ -56,20 +60,26 @@ export default function Upload({ idByPathName }: UploadProps) {
     }
   };
 
+  // 수정 페이지일 때 데이터 가져오기
   useEffect(() => {
     async function getData() {
-      const dataForUpdate = await fetchDataById(idByPathName);
-      setData(dataForUpdate);
-      const { id, artistId, genre, link, text } = dataForUpdate;
+      const fetchData = await fetchDataById(idByPathName);
+      setData(fetchData);
+      const { id, artistId, genre, link, text } = fetchData;
+      // const { id, artistId, genre, link, text, uploadDate } = fetchData;
+
       setAlbumId(id);
       setArtistId(artistId);
       setGenre(genre);
       setLink(link);
       setText(text);
+      // setUploadDate(uploadDate);
     }
 
     if (isUpdatePage) getData();
   }, []);
+
+  console.log(data);
 
   useEffect(() => {
     isUpdatePage && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
@@ -92,19 +102,13 @@ export default function Upload({ idByPathName }: UploadProps) {
             }}
           >
             <option value="">--장르를 선택해주세요--</option>
-            <option value="pop">팝</option>
-            <option value="k-pop">케이팝</option>
-            <option value="j-pop">제이팝</option>
-            <option value="rock">록</option>
-            <option value="alternative">얼터너티브</option>
-            <option value="disco">디스코</option>
-            <option value="electronic">일렉트로닉</option>
-            <option value="jazz">재즈</option>
-            <option value="soul">알앤비/소울</option>
-            <option value="folk">포크</option>
-            <option value="country">컨트리</option>
-            <option value="classic">클래식</option>
-            <option value="soundtrack">사운드트랙</option>
+            {Object.entries(contents).map(([key, value]) => {
+              return (
+                <option value={key} key={key}>
+                  {value}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
@@ -141,6 +145,14 @@ export default function Upload({ idByPathName }: UploadProps) {
             setText(e.target.value);
           }}
         />
+        <div className={styles["upload-item-title"]}>작성일</div>
+        {/* <textarea
+          className={styles["input"]}
+          value={uploadDate}
+          onChange={e => {
+            setUploadDate(e.target.value);
+          }}
+        /> */}
         <div className={styles["upload-item-title"]}>관리자 비밀번호</div>
         <input
           className={styles["input"]}
