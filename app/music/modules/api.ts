@@ -186,7 +186,14 @@ const fetchSpotifyAccessToken = async () => {
   }
 };
 
-export const fetchSpotify = async ({ albumId, artistId, genre, link, text }: UpdateInfo) => {
+export const fetchSpotify = async ({
+  albumId,
+  artistId,
+  genre,
+  link,
+  text,
+  uploadDate,
+}: UpdateInfo) => {
   if (!albumId || !genre || !link || !text) {
     alert("모든 항목을 채워주세요.");
     return;
@@ -198,7 +205,7 @@ export const fetchSpotify = async ({ albumId, artistId, genre, link, text }: Upd
     genre: genre,
     link: link,
     text: text,
-    uploadDate: Date(),
+    uploadDate: uploadDate,
   };
 
   try {

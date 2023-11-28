@@ -47,7 +47,7 @@ export interface AlbumInfo {
   genre: string;
   link: string;
   text: string;
-  uploadDate: string;
+  uploadDate: Date;
   duration: number;
   tracks: number;
 }
@@ -64,7 +64,7 @@ export const initialAlbumInfo: AlbumInfo = {
   genre: "",
   link: "",
   text: "",
-  uploadDate: "",
+  uploadDate: new Date(),
   duration: 0,
   tracks: 0,
 };
@@ -82,6 +82,7 @@ export interface UpdateInfo {
   genre: string;
   link: string;
   text: string;
+  uploadDate: Date;
 }
 
 export const album = {

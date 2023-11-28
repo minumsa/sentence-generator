@@ -34,6 +34,7 @@ export default function Upload({ idByPathName }: UploadProps) {
       genre,
       link,
       text,
+      uploadDate,
     });
 
     if (newAlbumData) {
@@ -49,6 +50,7 @@ export default function Upload({ idByPathName }: UploadProps) {
       genre,
       link,
       text,
+      uploadDate,
     });
 
     if (newAlbumData) {
@@ -67,15 +69,14 @@ export default function Upload({ idByPathName }: UploadProps) {
     async function getData() {
       const fetchData = await fetchDataById(idByPathName);
       setData(fetchData);
-      const { id, artistId, genre, link, text } = fetchData;
-      // const { id, artistId, genre, link, text, uploadDate } = fetchData;
+      const { id, artistId, genre, link, text, uploadDate } = fetchData;
 
       setAlbumId(id);
       setArtistId(artistId);
       setGenre(genre);
       setLink(link);
       setText(text);
-      // setUploadDate(uploadDate);
+      setUploadDate(new Date(uploadDate));
     }
 
     if (isUpdatePage) getData();
@@ -174,13 +175,6 @@ export default function Upload({ idByPathName }: UploadProps) {
             />
           }
         />
-        {/* <textarea
-          className={styles["input"]}
-          value={uploadDate}
-          onChange={e => {
-            setUploadDate(e.target.value);
-          }}
-        /> */}
         <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
           관리자 비밀번호
         </div>
