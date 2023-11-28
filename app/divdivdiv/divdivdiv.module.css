@@ -272,7 +272,7 @@
   padding: 1px 7px;
 }
 
-.calender {
+.calendar {
   border: 1px solid #000000;
   border-radius: 5px;
 }
@@ -466,11 +466,11 @@
   }
 
   .clock,
-  .calender {
+  .calendar {
     display: none;
   }
 
-  .calender {
+  .calendar {
     padding: 1px 5px;
     margin: 0 5px;
     font-size: 13px;

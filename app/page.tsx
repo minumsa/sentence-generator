@@ -131,7 +131,7 @@ export default function Home() {
                 >
                   {language === "en" ? "A" : "한"}
                 </div>
-                <div className={`${styles["button-right"]} ${styles["calender"]}`}>
+                <div className={`${styles["button-right"]} ${styles["calendar"]}`}>
                   {language === "en"
                     ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
                     : `${month}월 ${day}일 (${dayOfWeek})`}

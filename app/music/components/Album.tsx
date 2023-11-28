@@ -65,8 +65,6 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
     );
   };
 
-  console.log();
-
   return isLoading ? (
     <Loading dataLength={undefined} />
   ) : (
@@ -245,7 +243,7 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
               <div className={styles["post-date"]} style={{ marginBottom: "10px" }}>
                 작성일
               </div>
-              <div>{formatDate(data.uploadDate)}</div>
+              <div>{formatDate(data.uploadDate.toString())}</div>
             </>
           )}
         </div>
