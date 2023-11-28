@@ -832,7 +832,9 @@
 
 @media (max-width: 525px) {
   .body {
-    background-color: #000;
+    background-color: linear-gradient(90deg, #000, #242424, #1c1c1c, #242424, #000);
+    background-size: 2000% 100%;
+    animation: animateBg 20s linear infinite;
   }
 
   .category-meta-image-container {

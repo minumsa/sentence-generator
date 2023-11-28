@@ -28,7 +28,7 @@ export const Post = ({ pathName, isPostPage }: PostProps) => {
         <div
           className={`${styles["admin-button"]} ${styles["close-button"]}`}
           onClick={() => {
-            router.back();
+            window.history.length < 2 ? router.push("/music") : router.back();
           }}
         >
           {data.text && "✕"}
