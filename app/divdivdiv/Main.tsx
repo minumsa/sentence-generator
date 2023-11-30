@@ -13,14 +13,12 @@ import {
   initialImgSrc,
   initialIsMobile,
   initialShowImage,
-  postit,
-  readme,
 } from "./data";
-import { ImageModal } from "./Modal";
 import { useAtom } from "jotai";
+import { PostIt } from "./components/PostIt";
 
 export default function Main() {
-  const language = useContext(LanguageContext);
+  const language = useContext<Language>(LanguageContext);
   // FIXME: 포스트잇 닫을 때 아이콘 초기화되는 문제 해결
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [imgSrc, setImgSrc] = useAtom<string>(initialImgSrc);
@@ -49,8 +47,8 @@ export default function Main() {
   }, [windowWidth]);
 
   return (
-    // TODO: 코드 정리하고 관련 개념 기록해두기.
-    // 문제 해결 경험 중심으로 블로그에 작성하기. (모든 걸 다 x)
+    // TODO: 코드 정리하고 관련 개념 기록해두기
+    // 문제 해결 경험 중심으로 블로그에 작성하기 (모든 걸 다 x)
     <>
       <MemoizedIcons
         setImgSrc={setImgSrc}
@@ -72,8 +70,6 @@ interface IconsProps {
 }
 
 function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: IconsProps) {
-  const [closePostIt, setClosePostIt] = useState<boolean>(false);
-
   const handleImageClick = (path: string) => {
     if (path === "readme") {
       setImgSrc(`/divdivdiv/readme-${language}.webp`);
@@ -238,34 +234,10 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
         width={iconSize.image.width}
         height={iconSize.image.height}
       />
-      <Draggable>
-        {/* FIXME: 컴포넌트화 */}
-        <div
-          className={styles["postit-container"]}
-          style={closePostIt ? { display: "none" } : undefined}
-        >
-          <div
-            className={styles["postit-close-button"]}
-            onClick={() => {
-              setClosePostIt(true);
-            }}
-          >
-            ×
-          </div>
-          <div className={styles["postit-top"]}></div>
-          <div className={styles["postit"]}>
-            <div className={styles["postit-text"]}>
-              {postit[language].map((text, index) => {
-                return (
-                  <li key={index} style={{ listStyle: "number" }}>
-                    {text}
-                  </li>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </Draggable>
+      {/* FIXME: 컴포넌트화 */}
+      {/* <Draggable>
+        <PostIt language={language} />
+      </Draggable> */}
     </div>
   );
 }
