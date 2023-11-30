@@ -630,8 +630,10 @@
 }
 
 .grid-album-image {
+  aspect-ratio: 1 / 1;
   width: 100%;
   cursor: pointer;
+  background-color: #949494;
 }
 
 .grid-album-image::after {
@@ -644,7 +646,8 @@
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0 20px 20px 20px;
-  margin-top: -3px;
+  /* FIXME: 향후에 바꿀 수 있음 */
+  margin-top: 1px;
   cursor: pointer;
   z-index: 100;
 }

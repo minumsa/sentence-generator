@@ -65,6 +65,12 @@ export const Grid = () => {
     loadData();
   }, [pathName, currentMethod, currentCriteria, currentPage]);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <div className={styles["grid-div"]}>
       {isLoading ? (
@@ -100,11 +106,22 @@ export const Grid = () => {
                     : router.push(`/music/${item.id}`);
                 }}
               >
-                <img
+                <div
                   className={styles["grid-album-image"]}
+                  style={
+                    imageLoaded
+                      ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
+                      : undefined
+                  }
+                  // src={item.imgUrl}
+                  // alt={item.album}
+                  // loading="lazy"
+                />
+                <img
                   src={item.imgUrl}
                   alt={item.album}
-                  loading="lazy"
+                  style={{ display: "none" }}
+                  onLoad={handleImageLoad}
                 />
               </div>
               <div
