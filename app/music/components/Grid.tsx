@@ -25,7 +25,6 @@ export const Grid = () => {
   const [totalPage, setTotalPage] = useState(1);
   const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 42);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const { ref, inView } = useInView({
@@ -77,7 +76,6 @@ export const Grid = () => {
         <Loading dataLength={undefined} />
       ) : (
         data.map((item, index) => {
-          // const lastItemInRow = (index + 1) % 7 === 0;
           const firstLineMobile = isMobile && index < 2;
           const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
           const isLastItem = index + 1 === data.length;
@@ -102,8 +100,8 @@ export const Grid = () => {
                 style={{ position: "relative", width: "100%" }}
                 onClick={() => {
                   isAdminPage(pathName)
-                    ? router.push(`/music/admin/${item.id}`)
-                    : router.push(`/music/${item.id}`);
+                    ? router.push(`/music/admin/post/${item.id}`)
+                    : router.push(`/music/post/${item.id}`);
                 }}
               >
                 <div
@@ -113,9 +111,6 @@ export const Grid = () => {
                       ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
                       : undefined
                   }
-                  // src={item.imgUrl}
-                  // alt={item.album}
-                  // loading="lazy"
                 />
                 <img
                   src={item.imgUrl}

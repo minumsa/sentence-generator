@@ -23,27 +23,6 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
   const pathName = usePathname();
   const sanitizer = DOMPurify.sanitize;
 
-  // 텍스트 줄 수를 업데이트하는 함수
-  function updateNumberOfLines() {
-    if (divRef.current) {
-      const lineHeight = parseFloat(window.getComputedStyle(divRef.current).lineHeight);
-      const height = divRef.current.clientHeight;
-      const lines = Math.floor(height / lineHeight);
-      // setNumbersOfLines(lines);
-    }
-  }
-
-  useEffect(() => {
-    updateNumberOfLines();
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("resize", updateNumberOfLines);
-    return () => {
-      window.removeEventListener("resize", updateNumberOfLines);
-    };
-  }, []);
-
   // HTML을 string 형태로 바꾸기 위한 부분
   const HTMLToString = (htmlData: any) => {
     return (
@@ -92,12 +71,7 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
               <span className={styles["black-masking"]}>{data.artist}</span>
             </div>
             <div className={styles["post-date"]}>앨범</div>
-            <div
-              onClick={() => {
-                router.push(`/music/${data.id}`);
-              }}
-              style={{ cursor: "pointer" }}
-            >
+            <div>
               <span className={styles["black-masking"]}>{data.album}</span>
             </div>
             <div className={styles["post-date"]}>레이블</div>
@@ -127,9 +101,6 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
             />
           )}
           {data.text.split("\n").map((text, index) => {
-            const hasNoText = text.length < 1;
-            const isVeryShortText = text.length < 90;
-            const isShortText = text.length < 130;
             const longTextStandard = isMobile ? 100 : 180;
             const isFirstParagraph = index === 0;
             const isLineBreak = text === "";

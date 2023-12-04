@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import styles from "./music.module.css";
-import Content from "./components/Content";
 import { MobileTitle } from "./components/MobileTitle";
 import { Hamburger } from "./components/Hamburger";
 import { Category } from "./components/Category";
