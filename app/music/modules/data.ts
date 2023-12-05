@@ -71,6 +71,7 @@ export const initialAlbumInfo: AlbumInfo = {
 
 export interface PageProps {
   params: {
+    id: string;
     page: number;
     genre: string;
   };
