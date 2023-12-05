@@ -11,7 +11,7 @@ import {
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
-import { fetchData } from "../modules/api";
+import { SearchData, fetchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { Loading } from "./Loading";
 import { Album } from "./Album";
@@ -19,10 +19,16 @@ import { Album } from "./Album";
 interface PageProps {
   pathName: string;
   fullPathName: string;
-  currentPage: any;
+  currentKeyword: string;
+  currentPage: number;
 }
 
-export default function Content({ pathName, fullPathName, currentPage }: PageProps) {
+export default function SearchContent({
+  pathName,
+  fullPathName,
+  currentKeyword,
+  currentPage,
+}: PageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -47,10 +53,11 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   useEffect(() => {
     async function loadData() {
       // 검색 데이터를 fetch할 때는 currentPage를 keyword로 보내줌
-      const result = await fetchData({
+      const result = await SearchData({
         pathName,
         perPageCount,
-        currentPage: isSearching ? keyword : currentPage,
+        currentPage,
+        currentKeyword: currentKeyword,
         currentMethod,
         currentCriteria,
       });
@@ -61,11 +68,11 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     }
 
     loadData();
-  }, [pathName, currentPage, currentMethod, currentCriteria]);
+  }, [pathName, currentKeyword, currentMethod, currentCriteria]);
 
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
-  }, [currentPage]);
+  }, [currentKeyword]);
 
   const SortToggleButton = ({
     type,
@@ -281,7 +288,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
                   key={index}
                   className={styles["page"]}
                   onClick={() => {
-                    handleDynamicPage(pageButtonNumber);
+                    router.push(`/music/search/${currentKeyword}/${pageButtonNumber}`);
                   }}
                   style={
                     currentPage === pageButtonNumber

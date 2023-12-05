@@ -70,16 +70,11 @@ export async function GET(request: Request) {
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
 
     const isArtistPage = pathName === "artist";
-    const isSearchPage = pathName === "search";
 
     let currentPage = 0;
     let keyword: any = "";
 
-    if (isSearchPage) {
-      keyword = url.searchParams.get("currentPage");
-    } else {
-      currentPage = Number(url.searchParams.get("currentPage"));
-    }
+    currentPage = Number(url.searchParams.get("currentPage"));
 
     let sortKey = {};
     if (currentMethod === "발매일") {
@@ -96,7 +91,7 @@ export async function GET(request: Request) {
     // 그렇지 않으면(post, artist, "") 모든 데이터 가져오기(query === {})
     let query = undefined;
 
-    if (pathName === "artist" || pathName === "search" || pathName === "") {
+    if (pathName === "artist" || pathName === "") {
       query = {};
     } else {
       query = { genre: pathName };
@@ -115,24 +110,6 @@ export async function GET(request: Request) {
     if (isArtistPage) {
       startIndex = 0;
       slicedData = await Music.find({ artistId: artistId });
-      // .skip(startIndex)
-      // .limit(perPageCount);
-    } else if (isSearchPage) {
-      startIndex = 0;
-      slicedData = await Music.find({
-        $or: [
-          { text: { $regex: new RegExp(keyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
-          { artist: { $regex: new RegExp(keyword, "i") } },
-          { album: { $regex: new RegExp(keyword, "i") } },
-        ],
-      });
-      genreDataLength = await Music.find({
-        $or: [
-          { text: { $regex: new RegExp(keyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
-          { artist: { $regex: new RegExp(keyword, "i") } },
-          { album: { $regex: new RegExp(keyword, "i") } },
-        ],
-      }).count();
       // .skip(startIndex)
       // .limit(perPageCount);
     } else {

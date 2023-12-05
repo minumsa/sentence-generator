@@ -3,7 +3,16 @@ import { AlbumInfo, CriteriaType, MethodType, UpdateInfo } from "./data";
 interface FetchData {
   pathName: string;
   perPageCount: number;
-  currentPage: any;
+  currentPage: number;
+  currentMethod: MethodType;
+  currentCriteria: CriteriaType;
+}
+
+interface SearchData {
+  pathName: string;
+  perPageCount: number;
+  currentPage: number;
+  currentKeyword: string;
   currentMethod: MethodType;
   currentCriteria: CriteriaType;
 }
@@ -18,6 +27,37 @@ export async function fetchData({
   try {
     const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
     const url = `/api/music${queryString}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload music data");
+    }
+
+    let { slicedData, genreDataLength } = await response.json();
+
+    return { slicedData, genreDataLength };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function SearchData({
+  pathName,
+  perPageCount,
+  currentPage,
+  currentKeyword,
+  currentMethod,
+  currentCriteria,
+}: SearchData) {
+  try {
+    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&currentKeyword=${currentKeyword}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
+    const url = `/api/music/search${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
