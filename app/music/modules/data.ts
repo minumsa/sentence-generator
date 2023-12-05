@@ -16,7 +16,6 @@ export interface ContentsType {
   country: string;
   classic: string;
   soundtrack: string;
-  [key: string]: string;
 }
 
 export const contents: ContentsType = {
@@ -72,6 +71,7 @@ export const initialAlbumInfo: AlbumInfo = {
 export interface PageProps {
   params: {
     id: string;
+    keyword: string;
     page: number;
     genre: string;
   };

@@ -33,9 +33,7 @@ export default function Page({ params }: PageProps) {
           <Content
             pathName={isMainPage(pathName) ? "" : pathName}
             fullPathName={fullPathName}
-            currentPage={
-              isArtistPage || isPostPage || isSearchPage ? currentPage : Number(currentPage)
-            }
+            currentPage={isArtistPage || isSearchPage ? currentPage : Number(currentPage)}
           />
         )}
       </div>

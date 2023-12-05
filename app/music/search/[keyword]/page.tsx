@@ -2,15 +2,15 @@
 
 import { usePathname } from "next/navigation";
 import styles from "../../music.module.css";
-import { PageProps } from "../../modules/data";
-import { Hamburger } from "../../components/Hamburger";
-import { MobileTitle } from "../../components/MobileTitle";
-import { Category } from "../../components/Category";
+import { PageProps, isMainPage } from "../../modules/data";
 import { Snow } from "../../components/Snow";
-import { Post } from "../../components/Post";
+import { MobileTitle } from "../../components/MobileTitle";
+import { Hamburger } from "../../components/Hamburger";
+import { Category } from "../../components/Category";
+import Content from "../../components/Content";
 
 export default function Page({ params }: PageProps) {
-  const currentId = params.id;
+  const currentKeyword: string = params.keyword;
   const fullPathName = usePathname();
 
   return (
@@ -18,11 +18,11 @@ export default function Page({ params }: PageProps) {
       <Snow />
       <div className={styles["category-container"]}>
         <MobileTitle />
-        <Hamburger pathName={"post"} />
-        <Category pathName={"post"} fullPathName={fullPathName} />
+        <Hamburger pathName={"search"} />
+        <Category pathName={"search"} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Post pathName={currentId} isPostPage={true} />
+        <Content pathName={"search"} fullPathName={fullPathName} currentPage={currentKeyword} />
       </div>
     </div>
   );
