@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import styles from "./divdivdiv/divdivdiv.module.css";
+import styles from "../divdivdiv/divdivdiv.module.css";
 import {
   Language,
   LanguageContext,
@@ -12,18 +12,26 @@ import {
   initialImgSrc,
   initialIsMobile,
   initialShowImage,
-} from "./divdivdiv/data";
-import Clock from "./divdivdiv/Clock";
-import About from "./divdivdiv/About";
-import Contact from "./divdivdiv/Contact";
-import Main from "./divdivdiv/Main";
-import NoSSR from "./divdivdiv/NoSSR";
-import { ImageModal } from "./divdivdiv/Modal";
+} from "../divdivdiv/data";
 import { useAtom } from "jotai";
+import { ImageModal } from "../divdivdiv/Modal";
+import Clock from "../divdivdiv/Clock";
+import About from "../divdivdiv/About";
 import { usePathname, useRouter } from "next/navigation";
-import { RenderButtonLeft } from "./divdivdiv/components/RenderButtonLeft";
+import { RenderButtonLeft } from "../divdivdiv/components/RenderButtonLeft";
 
-export default function Page() {
+interface RenderButtonProps {
+  text: string;
+  path: string;
+}
+
+interface PageProps {
+  params: {};
+}
+
+export default function Page({ params }: PageProps) {
+  const router = useRouter();
+  const currentPath = usePathname();
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [isMobile, setIsMobile] = useAtom(initialIsMobile);
   const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
@@ -118,11 +126,7 @@ export default function Page() {
               </div>
             </div>
             <div className={styles["content"]}>
-              <NoSSR>
-                <Main />
-              </NoSSR>
-              {/* {activeTab === "about" && <About />}
-              {activeTab === "contact" && <Contact />} */}
+              <About />
             </div>
           </div>
         </div>
