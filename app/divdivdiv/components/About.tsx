@@ -1,13 +1,19 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { Language, initialLanguage } from "../data";
+import { Language, initialLanguage } from "../modules/data";
 import styles from "../divdivdiv.module.css";
 
 export default function About() {
   const [language, setLanguage] = useAtom(initialLanguage);
 
-  const about = {
+  interface About {
+    job: Record<Language, string>;
+    interest: Record<Language, string>;
+    ai: Record<Language, string>;
+  }
+
+  const about: About = {
     job: {
       en: "I am working as a web developer in Seoul. 👨‍💻",
       ko: "서울에서 웹 개발자로 활동하고 있습니다. 👨‍💻",
@@ -25,9 +31,9 @@ export default function About() {
   return (
     <div className={styles["about-container"]}>
       <ul>
-        <li>{about.job[language]}</li>
-        <li>{about.interest[language]}</li>
-        <li>{about.ai[language]}</li>
+        {Object.keys(about).map(key => {
+          return <li key={key}>{about[key as keyof About][language]}</li>;
+        })}
       </ul>
     </div>
   );

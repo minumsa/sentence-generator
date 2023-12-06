@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import styles from "../divdivdiv.module.css";
 import { useAtom } from "jotai";
-import { initialLanguage } from "../data";
+import { initialLanguage } from "../modules/data";
 
 export default function Contact() {
   const [language, setLanguage] = useAtom(initialLanguage);

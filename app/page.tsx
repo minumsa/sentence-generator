@@ -1,11 +1,16 @@
 "use client";
 
 import styles from "./divdivdiv/divdivdiv.module.css";
-import { initialImgAlt, initialImgSrc, initialIsMobile, initialShowImage } from "./divdivdiv/data";
-import Main from "./divdivdiv/Main";
-import { ImageModal } from "./divdivdiv/Modal";
+import {
+  initialImgAlt,
+  initialImgSrc,
+  initialIsMobile,
+  initialShowImage,
+} from "./divdivdiv/modules/data";
+import Main from "./divdivdiv/components/Main";
+import { ImageModal } from "./divdivdiv/components/Modal";
 import { useAtom } from "jotai";
-import NoSSR from "./divdivdiv/NoSSR";
+import NoSSR from "./divdivdiv/modules/NoSSR";
 import { Nav } from "./divdivdiv/components/Nav";
 
 export default function Page() {

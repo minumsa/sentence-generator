@@ -1,8 +1,8 @@
 "use client";
 
-import React, { memo, useContext, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import styles from "./divdivdiv.module.css";
+import styles from "../divdivdiv.module.css";
 import {
   Language,
   fortune,
@@ -13,7 +13,7 @@ import {
   initialIsMobile,
   initialLanguage,
   initialShowImage,
-} from "./data";
+} from "../modules/data";
 import { useAtom } from "jotai";
 
 export default function Main() {

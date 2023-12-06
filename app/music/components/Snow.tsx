@@ -1,7 +1,7 @@
 import Snowfall from "react-snowfall";
 import { isMobile } from "react-device-detect";
 import styles from "../music.module.css";
-import NoSSR from "@/app/divdivdiv/NoSSR";
+import NoSSR from "@/app/divdivdiv/modules/NoSSR";
 
 export const Snow = () => {
   return (

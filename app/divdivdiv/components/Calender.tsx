@@ -1,4 +1,4 @@
-import { Language } from "../data";
+import { Language } from "../modules/data";
 import styles from "../divdivdiv.module.css";
 
 interface CalenderProps {

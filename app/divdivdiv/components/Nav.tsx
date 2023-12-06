@@ -1,6 +1,6 @@
 import { RenderButtonLeft } from "./RenderButtonLeft";
 import styles from "../divdivdiv.module.css";
-import { Language, initialLanguage } from "../data";
+import { Language, initialLanguage } from "../modules/data";
 import { CurrentWeather } from "./Weather";
 import { LanguageToggleButton } from "./LanguageToggleButton";
 import { useAtom } from "jotai";

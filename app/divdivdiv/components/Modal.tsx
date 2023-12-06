@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import styles from "./divdivdiv.module.css";
-import Image from "next/image";
-import { initialLanguage, readme } from "./data";
+import { useEffect, useState } from "react";
+import styles from "../divdivdiv.module.css";
+import { initialLanguage, readme } from "../modules/data";
 import { useAtom } from "jotai";
 
 interface ImageModalProps {

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from "html2canvas";
 import { isMobile } from "react-device-detect";
-import NoSSR from "../divdivdiv/NoSSR";
+import NoSSR from "../divdivdiv/modules/NoSSR";
 
 const getRandomItemFromArray = (array: string[]): string => {
   return array[Math.floor(Math.random() * array.length)];

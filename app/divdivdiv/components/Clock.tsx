@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import NoSSR from "../NoSSR";
+import NoSSR from "../modules/NoSSR";
 import styles from "../divdivdiv.module.css";
-import { Language } from "../data";
+import { Language } from "../modules/data";
 
 interface ClockProps {
   language: Language;
