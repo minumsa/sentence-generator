@@ -1,8 +1,7 @@
 import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents, isAdminPage, isMainPage } from "../modules/data";
-import { useEffect, useState } from "react";
-import Aos from "aos";
+import { useState } from "react";
 
 interface CategoryProps {
   pathName: string;
@@ -12,10 +11,6 @@ interface CategoryProps {
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
   const router = useRouter();
   const [boardIsVisible, setBoardIsVisible] = useState(false);
-
-  useEffect(() => {
-    Aos.init();
-  }, []);
 
   return (
     <div className={styles["desktop-category"]}>
