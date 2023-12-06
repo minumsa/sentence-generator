@@ -2,7 +2,7 @@
 
 import styles from "../divdivdiv/divdivdiv.module.css";
 import { Nav } from "../divdivdiv/components/Nav";
-import About from "../divdivdiv/components/About";
+import Contact from "../divdivdiv/components/Contact";
 
 export default function Page() {
   return (
@@ -12,7 +12,7 @@ export default function Page() {
           <Nav />
         </div>
         <div className={styles["content"]}>
-          <About />
+          <Contact />
         </div>
       </div>
     </div>

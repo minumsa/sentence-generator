@@ -1,13 +1,12 @@
 "use client";
 
-import { Language } from "../data";
+import { useAtom } from "jotai";
+import { Language, initialLanguage } from "../data";
 import styles from "../divdivdiv.module.css";
 
-interface AboutProps {
-  language: Language;
-}
+export default function About() {
+  const [language, setLanguage] = useAtom(initialLanguage);
 
-export default function About({ language }: AboutProps) {
   const about = {
     job: {
       en: "I am working as a web developer in Seoul. 👨‍💻",

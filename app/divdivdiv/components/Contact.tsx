@@ -2,10 +2,11 @@
 
 import { useContext } from "react";
 import styles from "../divdivdiv.module.css";
-import { LanguageContext } from "../data";
+import { useAtom } from "jotai";
+import { initialLanguage } from "../data";
 
 export default function Contact() {
-  const language = useContext(LanguageContext);
+  const [language, setLanguage] = useAtom(initialLanguage);
 
   return (
     <div className={styles["contact-container"]}>
