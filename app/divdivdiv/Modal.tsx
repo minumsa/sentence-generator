@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./divdivdiv.module.css";
 import Image from "next/image";
-import { LanguageContext, readme } from "./data";
+import { initialLanguage, readme } from "./data";
+import { useAtom } from "jotai";
 
 interface ImageModalProps {
   isMobile: boolean;
@@ -11,13 +12,13 @@ interface ImageModalProps {
 }
 
 export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => {
-  const language = useContext(LanguageContext);
+  const [language, setLanguage] = useAtom(initialLanguage);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState<number>(window.innerHeight);
 
-  // FIXME: Main 이 Desktop 이랑 ModalContainer 를 가지고 있어서
-  // Modal의 상태 변화가 Desktop 과 연관이 없도록 만들어주면
-  // Modal 이 열리고 닫힐때마다 Desktop 이 re-rendering 되지 않게 할수 있다.
+  // FIXME: Main 이 Desktop 이랑 ModalContainer를 가지고 있어서
+  // Modal의 상태 변화가 Desktop과 연관이 없도록 만들어주면
+  // Modal이 열리고 닫힐 때마다 Desktop이 리렌더링 되지 않게 할 수 있다.
   // 상태 변수는 여기에 두고 props 형태로 자식 컴포넌트로 보내기
 
   const handleWindowResize = () => {
@@ -74,17 +75,7 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
       }}
     >
       <div className={styles["modal"]} style={{ width: width, height: height }}>
-        {/* <Image src={src} alt={alt} width={width} height={isMobile ? 0 : 50} /> */}
-        <div
-          className={styles["last-updated"]}
-          style={
-            isMobile ? { margin: "10px 0 0 0" } : { margin: "0 0 30px 0", paddingTop: "10px" }
-            // margin: isMobile ? "10px 0 0 0" : "0 0 30px 0",
-            // paddingTop: isMobile ? undefined : "10px",
-          }
-        >
-          {readme.lastUpdated.text[language]}
-        </div>
+        <div className={styles["last-updated"]}>{readme.lastUpdated.text[language]}</div>
         <ReadmeComponent path="https://blog.divdivdiv.com" icon={readme.blog} />
         <ReadmeComponent path="/music" icon={readme.music} />
         <ReadmeComponent path="/barbershop" icon={readme.barbershop} />
@@ -96,15 +87,7 @@ export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => 
     </div>
   ) : (
     <div className={styles["modal-image"]} onClick={onClick}>
-      {/* <Image src={src} alt={alt} width={width} height={height} /> */}
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        width={width}
-        height={height}
-        style={{ zIndex: 2020200 }}
-      />
+      <img src={src} alt={alt} loading="lazy" width={width} height={height} />
     </div>
   );
 };

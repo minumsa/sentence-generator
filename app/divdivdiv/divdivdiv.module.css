@@ -202,7 +202,7 @@
   align-items: center;
   justify-content: center;
   /* box-shadow: 1px 2px 5px rgb(200, 200, 200); */
-  padding: 5px 0;
+  padding: 10px 0;
   z-index: 9999;
   border: 1px solid #e6e6e6;
   background-color: #ffffff;
@@ -213,7 +213,27 @@
   flex-direction: column;
   background-color: #ffffff;
   color: #222222;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modal::-webkit-scrollbar {
+  background: none;
+  width: 10px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-clip: content-box;
+  background-color: #fff;
+}
+
+.modal::-webkit-scrollbar-track-piece {
+  background: white;
+}
+
+.modal:hover::-webkit-scrollbar-thumb {
+  background-color: #cfcfcf;
 }
 
 .modal-image {
