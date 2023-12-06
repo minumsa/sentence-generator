@@ -4,8 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./divdivdiv/divdivdiv.module.css";
 import {
-  Weather,
-  fetchData,
+  fetchWeather,
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
@@ -20,6 +19,7 @@ import { RenderButtonLeft } from "./divdivdiv/components/RenderButtonLeft";
 import { Calender } from "./divdivdiv/components/Calender";
 import NoSSR from "./divdivdiv/NoSSR";
 import { LanguageToggleButton } from "./divdivdiv/components/LanguageToggleButton";
+import { CurrentWeather } from "./divdivdiv/components/Weather";
 
 export default function Page() {
   const [showImage, setShowImage] = useAtom(initialShowImage);
@@ -27,14 +27,6 @@ export default function Page() {
   const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
   const [imgAlt, setImgAlt] = useAtom(initialImgAlt);
   const [language, setLanguage] = useAtom(initialLanguage);
-  const [weather, setWeather] = useState<Weather>({
-    icon: null,
-    temp: null,
-  });
-
-  useEffect(() => {
-    fetchData(setWeather);
-  }, []);
 
   const handleModalClick = () => {
     setShowImage(false);
@@ -56,21 +48,7 @@ export default function Page() {
                 <RenderButtonLeft text={language === "en" ? "about" : "소개"} path="/about" />
                 <RenderButtonLeft text={language === "en" ? "contact" : "연결"} path="/contact" />
                 <div className={styles["blank-space"]}></div>
-                <React.Fragment>
-                  {weather.icon && (
-                    <div className={`${styles["button-right"]} ${styles["weather"]}`}>
-                      <Image
-                        src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                        width={35}
-                        height={35}
-                        alt="Weather Icon"
-                      />
-                    </div>
-                  )}
-                  <div className={`${styles["button-right"]} ${styles["temperature"]}`}>
-                    {weather.temp && `${(weather.temp - 273.15).toFixed(1)}°`}
-                  </div>
-                </React.Fragment>
+                <CurrentWeather />
                 <LanguageToggleButton language={language} setLanguage={setLanguage} />
                 <Calender language={language} />
                 <Clock language={language} />

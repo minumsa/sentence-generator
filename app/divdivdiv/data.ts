@@ -12,7 +12,7 @@ export interface Weather {
   temp: number | null;
 }
 
-export const fetchData = async (setWeather: React.Dispatch<React.SetStateAction<Weather>>) => {
+export const fetchWeather = async (setWeather: React.Dispatch<React.SetStateAction<Weather>>) => {
   try {
     const apiKey = "a363f14d94f369a4d926a27d5d44fc60";
     const seoulWeatherResponse = await fetch(

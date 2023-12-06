@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../divdivdiv/divdivdiv.module.css";
 import {
   Weather,
-  fetchData,
+  fetchWeather,
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
@@ -32,7 +32,7 @@ export default function Page() {
   });
 
   useEffect(() => {
-    fetchData(setWeather);
+    fetchWeather(setWeather);
   }, []);
 
   const handleModalClick = () => {

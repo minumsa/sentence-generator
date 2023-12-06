@@ -235,7 +235,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
         width={iconSize.image.width}
         height={iconSize.image.height}
       />
-      {/* FIXME: 컴포넌트화 */}
+      {/* PostIt 애매해서 일단 각주 처리! */}
       {/* <Draggable>
         <PostIt language={language} />
       </Draggable> */}
