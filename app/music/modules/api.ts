@@ -17,6 +17,15 @@ interface SearchData {
   currentCriteria: CriteriaType;
 }
 
+interface FetchArtistData {
+  pathName: string;
+  perPageCount: number;
+  currentPage: number;
+  artistId: string;
+  currentMethod: MethodType;
+  currentCriteria: CriteriaType;
+}
+
 export async function fetchData({
   pathName,
   perPageCount,
@@ -27,6 +36,37 @@ export async function fetchData({
   try {
     const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
     const url = `/api/music${queryString}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload music data");
+    }
+
+    let { slicedData, genreDataLength } = await response.json();
+
+    return { slicedData, genreDataLength };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function FetchArtistData({
+  pathName,
+  perPageCount,
+  currentPage,
+  artistId,
+  currentMethod,
+  currentCriteria,
+}: FetchArtistData) {
+  try {
+    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&artistId=${artistId}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
+    const url = `/api/music/artist${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",

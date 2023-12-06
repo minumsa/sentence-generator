@@ -19,8 +19,6 @@ export default function Page({ params }: PageProps) {
   const isArtistPage = pathName.includes("artist");
   const isSearchPage = pathName.includes("search");
 
-  // http://localhost:3000/music/admin/search/earth
-
   return (
     <div className={styles["container"]}>
       <Snow />
@@ -32,8 +30,6 @@ export default function Page({ params }: PageProps) {
       <div className={styles["content-container"]}>
         {isUploadPage(pathName) ? (
           <Upload idByPathName={pathName} />
-        ) : isPostPage ? (
-          <Post pathName={currentPage} isPostPage={isPostPage} />
         ) : (
           <Content
             pathName={isMainPage(pathName) ? "" : pathName}

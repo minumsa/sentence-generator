@@ -11,50 +11,43 @@ import {
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
-import { SearchData, fetchData } from "../modules/api";
+import { FetchArtistData } from "../modules/api";
 import { useAtom } from "jotai";
 import { Loading } from "./Loading";
 import { Album } from "./Album";
 
 interface PageProps {
-  pathName: string;
   fullPathName: string;
-  currentKeyword: string;
+  artistId: string;
   currentPage: number;
 }
 
-export default function SearchContent({
-  pathName,
-  fullPathName,
-  currentKeyword,
-  currentPage,
-}: PageProps) {
+export default function ArtistContent({ fullPathName, artistId, currentPage }: PageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
+  // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
+  // FIXME: jotai 타입 오류 해결해야 함 MethodType 또는 Criteria 타입으로
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
-  const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState(5);
   const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
   const [maxPageNumber, setMaxPage] = useState<number>(5);
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
-  const isAdminMainPage = fullPathName.includes("admin");
-  const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
-  const isMainPage = pathName === "";
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
 
   useEffect(() => {
     async function loadData() {
-      const result = await SearchData({
-        pathName,
+      // 검색 데이터를 fetch할 때는 currentPage를 keyword로 보내줌
+      const result = await FetchArtistData({
+        pathName: "",
         perPageCount,
         currentPage,
-        currentKeyword,
+        artistId,
         currentMethod,
         currentCriteria,
       });
@@ -65,11 +58,11 @@ export default function SearchContent({
     }
 
     loadData();
-  }, [pathName, currentKeyword, currentMethod, currentCriteria]);
+  }, [artistId, currentMethod, currentCriteria]);
 
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
-  }, [currentKeyword]);
+  }, [artistId]);
 
   const SortToggleButton = ({
     type,
@@ -179,22 +172,6 @@ export default function SearchContent({
     }
   };
 
-  const handleDynamicPage = (variablePageNumber: number | "/") => {
-    // 관리자 장르 페이지인 경우
-    if (isAdminGenrePage) {
-      router.push(`/music/admin/${pathName}/${variablePageNumber}`);
-      // 관리자 메인 페이지인 경우
-    } else if (isAdminMainPage) {
-      router.push(`/music/admin/${variablePageNumber}`);
-      // 메인 페이지인 경우
-    } else if (isMainPage) {
-      router.push(`/music/${variablePageNumber}`);
-      // 장르 페이지인 경우
-    } else {
-      router.push(`/music/${pathName}/${variablePageNumber}`);
-    }
-  };
-
   async function handleSearch() {
     isAdminPage(fullPathName)
       ? router.push(`/music/admin/search/${keyword}/1`)
@@ -209,7 +186,7 @@ export default function SearchContent({
 
   return (
     <>
-      {!isUploadPage && !isLoading && (
+      {!isLoading && (
         <div className={styles["top-menu-container"]}>
           <div className={styles["top-search-container"]}>
             {isSearching && (
@@ -255,7 +232,7 @@ export default function SearchContent({
 
           return (
             <div key={index}>
-              <Album data={data} isAdminMainPage={isAdminMainPage} isPostPage={false} />
+              <Album data={data} isAdminMainPage={false} isPostPage={false} />
               {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
             </div>
           );
@@ -285,7 +262,7 @@ export default function SearchContent({
                   key={index}
                   className={styles["page"]}
                   onClick={() => {
-                    router.push(`/music/search/${currentKeyword}/${pageButtonNumber}`);
+                    router.push(`/music/search/${artistId}/${pageButtonNumber}`);
                   }}
                   style={
                     currentPage === pageButtonNumber

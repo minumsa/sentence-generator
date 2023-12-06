@@ -64,7 +64,7 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
             <div className={styles["post-date"]}>아티스트</div>
             <div
               onClick={() => {
-                router.push(`/music/artist/${data.artistId}`);
+                router.push(`/music/artist/${data.artistId}/1`);
               }}
               style={{ cursor: "pointer" }}
             >
@@ -141,14 +141,14 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
                             className={styles["category-meta-image"]}
                             loading="lazy"
                             onClick={() => {
-                              router.push(`/music/artist/${data.artistId}`);
+                              router.push(`/music/artist/${data.artistId}/1`);
                             }}
                           />
                         </div>
                         <div>
                           <span
                             onClick={() => {
-                              router.push(`/music/artist/${data.artistId}`);
+                              router.push(`/music/artist/${data.artistId}/1`);
                             }}
                             style={{ cursor: "pointer" }}
                           >

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Language, postit } from "../modules/data";
 import styles from "../divdivdiv.module.css";
 
-interface PostItProps {
+interface PostIt {
   language: Language;
 }
 
-export const PostIt = ({ language }: PostItProps) => {
+export const PostIt = ({ language }: PostIt) => {
   const [closePostIt, setClosePostIt] = useState<boolean>(false);
 
   return (
