@@ -1,12 +1,9 @@
-import { Language } from "../modules/data";
+import { useAtom } from "jotai";
 import styles from "../divdivdiv.module.css";
+import { initialLanguage } from "../modules/data";
 
-interface LanguageToggleButtonProps {
-  language: Language;
-  setLanguage: React.Dispatch<React.SetStateAction<Language>>;
-}
-
-export const LanguageToggleButton = ({ language, setLanguage }: LanguageToggleButtonProps) => {
+export const LanguageToggleButton = () => {
+  const [language, setLanguage] = useAtom(initialLanguage);
   return (
     <div
       className={`${styles["button-right"]} ${styles["language"]}`}

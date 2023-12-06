@@ -17,7 +17,7 @@ export const Nav = () => {
       <RenderButtonLeft text={language === "en" ? "contact" : "연결"} path="/contact" />
       <div className={styles["blank-space"]}></div>
       <CurrentWeather />
-      <LanguageToggleButton language={language} setLanguage={setLanguage} />
+      <LanguageToggleButton />
       <Calender language={language} />
       <Clock language={language} />
     </div>

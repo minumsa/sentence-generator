@@ -1,11 +1,11 @@
 import { Language } from "../modules/data";
 import styles from "../divdivdiv.module.css";
 
-interface CalenderProps {
+interface Calender {
   language: Language;
 }
 
-export const Calender = ({ language }: CalenderProps) => {
+export const Calender = ({ language }: Calender) => {
   function getDayOfWeek(date: Date): [string, string] {
     const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
     const daysOfEngWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

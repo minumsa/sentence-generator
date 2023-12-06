@@ -1,6 +1,5 @@
 "use client";
 
-import { useContext } from "react";
 import styles from "../divdivdiv.module.css";
 import { useAtom } from "jotai";
 import { initialLanguage } from "../modules/data";

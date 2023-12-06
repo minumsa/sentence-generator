@@ -3,11 +3,11 @@ import NoSSR from "../modules/NoSSR";
 import styles from "../divdivdiv.module.css";
 import { Language } from "../modules/data";
 
-interface ClockProps {
+interface Clock {
   language: Language;
 }
 
-export default function Clock({ language }: ClockProps) {
+export default function Clock({ language }: Clock) {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   useEffect(() => {
