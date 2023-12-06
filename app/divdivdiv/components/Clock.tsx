@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import NoSSR from "../NoSSR";
-import { LanguageContext } from "../data";
 import styles from "../divdivdiv.module.css";
+import { Language } from "../data";
 
-export default function Clock() {
-  const language = useContext(LanguageContext);
+interface ClockProps {
+  language: Language;
+}
+
+export default function Clock({ language }: ClockProps) {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   useEffect(() => {

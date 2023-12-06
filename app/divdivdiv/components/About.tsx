@@ -1,12 +1,13 @@
 "use client";
 
-import { useContext } from "react";
-import { Language, LanguageContext } from "../data";
+import { Language } from "../data";
 import styles from "../divdivdiv.module.css";
 
-export default function About() {
-  const language: Language = useContext(LanguageContext);
+interface AboutProps {
+  language: Language;
+}
 
+export default function About({ language }: AboutProps) {
   const about = {
     job: {
       en: "I am working as a web developer in Seoul. 👨‍💻",

@@ -4,13 +4,12 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./divdivdiv/divdivdiv.module.css";
 import {
-  Language,
-  LanguageContext,
   Weather,
   fetchData,
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
+  initialLanguage,
   initialShowImage,
 } from "./divdivdiv/data";
 import Clock from "./divdivdiv/components/Clock";
@@ -19,14 +18,15 @@ import { ImageModal } from "./divdivdiv/Modal";
 import { useAtom } from "jotai";
 import { RenderButtonLeft } from "./divdivdiv/components/RenderButtonLeft";
 import { Calender } from "./divdivdiv/components/Calender";
+import NoSSR from "./divdivdiv/NoSSR";
+import { LanguageToggleButton } from "./divdivdiv/components/LanguageToggleButton";
 
 export default function Page() {
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [isMobile, setIsMobile] = useAtom(initialIsMobile);
   const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
   const [imgAlt, setImgAlt] = useAtom(initialImgAlt);
-
-  const [language, setLanguage] = useState<Language>("ko");
+  const [language, setLanguage] = useAtom(initialLanguage);
   const [weather, setWeather] = useState<Weather>({
     icon: null,
     temp: null,
@@ -43,7 +43,7 @@ export default function Page() {
   };
 
   return (
-    <LanguageContext.Provider value={language}>
+    <>
       {showImage && (
         <ImageModal isMobile={isMobile} src={imgSrc} alt={imgAlt} onClick={handleModalClick} />
       )}
@@ -71,24 +71,20 @@ export default function Page() {
                     {weather.temp && `${(weather.temp - 273.15).toFixed(1)}°`}
                   </div>
                 </React.Fragment>
-                <div
-                  className={`${styles["button-right"]} ${styles["language"]}`}
-                  onClick={() => {
-                    setLanguage(language === "en" ? "ko" : "en");
-                  }}
-                >
-                  {language === "en" ? "A" : "한"}
-                </div>
+                <LanguageToggleButton language={language} setLanguage={setLanguage} />
                 <Calender language={language} />
-                <Clock />
+                <Clock language={language} />
               </div>
             </div>
             <div className={styles["content"]}>
-              <Main />
+              {/* FIXME: 이미지 모달 사진 크기 때문에 window.innerWidth 사용해서 NoSSR 넣음. 추후에 미디어 쿼리 등 다른 방향으로 수정할 수 있으면 하고 NoSSR 제거하기.*/}
+              <NoSSR>
+                <Main language={language} />
+              </NoSSR>
             </div>
           </div>
         </div>
       </div>
-    </LanguageContext.Provider>
+    </>
   );
 }

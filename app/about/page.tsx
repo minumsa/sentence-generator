@@ -4,65 +4,28 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "../divdivdiv/divdivdiv.module.css";
 import {
-  Language,
-  LanguageContext,
   Weather,
   fetchData,
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
+  initialLanguage,
   initialShowImage,
 } from "../divdivdiv/data";
+import About from "../divdivdiv/components/About";
 import { useAtom } from "jotai";
 import { ImageModal } from "../divdivdiv/Modal";
-import Clock from "../divdivdiv/components/Clock";
-import About from "../divdivdiv/components/About";
-import { usePathname, useRouter } from "next/navigation";
 import { RenderButtonLeft } from "../divdivdiv/components/RenderButtonLeft";
+import { LanguageToggleButton } from "../divdivdiv/components/LanguageToggleButton";
+import { Calender } from "../divdivdiv/components/Calender";
+import Clock from "../divdivdiv/components/Clock";
 
-interface RenderButtonProps {
-  text: string;
-  path: string;
-}
-
-interface PageProps {
-  params: {};
-}
-
-export default function Page({ params }: PageProps) {
-  const router = useRouter();
-  const currentPath = usePathname();
+export default function Page() {
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [isMobile, setIsMobile] = useAtom(initialIsMobile);
   const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
   const [imgAlt, setImgAlt] = useAtom(initialImgAlt);
-  const currentDate = new Date();
-  const month = currentDate.getMonth() + 1;
-  const months: string[] = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const day = currentDate.getDate();
-  const [dayOfWeek, dayOfEngWeek] = getDayOfWeek(currentDate);
-
-  function getDayOfWeek(date: Date): [string, string] {
-    const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-    const daysOfEngWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const dayIndex = date.getDay();
-    return [daysOfWeek[dayIndex], daysOfEngWeek[dayIndex]];
-  }
-
-  const [language, setLanguage] = useState<Language>("ko");
+  const [language, setLanguage] = useAtom(initialLanguage);
   const [weather, setWeather] = useState<Weather>({
     icon: null,
     temp: null,
@@ -79,7 +42,7 @@ export default function Page({ params }: PageProps) {
   };
 
   return (
-    <LanguageContext.Provider value={language}>
+    <>
       {showImage && (
         <ImageModal isMobile={isMobile} src={imgSrc} alt={imgAlt} onClick={handleModalClick} />
       )}
@@ -107,30 +70,18 @@ export default function Page({ params }: PageProps) {
                     {weather.temp && `${(weather.temp - 273.15).toFixed(1)}°`}
                   </div>
                 </React.Fragment>
-                <div
-                  className={`${styles["button-right"]} ${styles["language"]}`}
-                  onClick={() => {
-                    setLanguage(language === "en" ? "ko" : "en");
-                  }}
-                >
-                  {language === "en" ? "A" : "한"}
-                </div>
-                <div className={`${styles["button-right"]} ${styles["calendar"]}`}>
-                  {language === "en"
-                    ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
-                    : `${month}월 ${day}일 (${dayOfWeek})`}
-                </div>
-                <div className={`${styles["button-right"]} ${styles["clock"]}`}>
-                  <Clock />
-                </div>
+                <LanguageToggleButton language={language} setLanguage={setLanguage} />
+                <Calender language={language} />
+                <Clock language={language} />
               </div>
             </div>
             <div className={styles["content"]}>
-              <About />
+              {/* FIXME: 이미지 모달 사진 크기 때문에 window.innerWidth 사용해서 NoSSR 넣음. 추후에 미디어 쿼리 등 다른 방향으로 수정할 수 있으면 하고 NoSSR 제거하기.*/}
+              <About language={language} />
             </div>
           </div>
         </div>
       </div>
-    </LanguageContext.Provider>
+    </>
   );
 }

@@ -5,7 +5,6 @@ import Draggable from "react-draggable";
 import styles from "./divdivdiv.module.css";
 import {
   Language,
-  LanguageContext,
   fortune,
   iconSize,
   iconTitle,
@@ -15,10 +14,12 @@ import {
   initialShowImage,
 } from "./data";
 import { useAtom } from "jotai";
-import { PostIt } from "./components/PostIt";
 
-export default function Main() {
-  const language = useContext<Language>(LanguageContext);
+interface MainProps {
+  language: Language;
+}
+
+export default function Main({ language }: MainProps) {
   // FIXME: 포스트잇 닫을 때 아이콘 초기화되는 문제 해결
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [imgSrc, setImgSrc] = useAtom<string>(initialImgSrc);
