@@ -103,9 +103,8 @@ export default function ArtistContent({ fullPathName, artistId, currentPage }: P
                   key={item}
                   onClick={() => {
                     const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
-                    const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    handleDynamicPage(variablePathByNumber);
+                    router.push(`/music/artist/${artistId}/1`);
                   }}
                 >
                   {item}
@@ -246,7 +245,7 @@ export default function ArtistContent({ fullPathName, artistId, currentPage }: P
               onClick={() => {
                 if (maxPageNumber > 5) {
                   const prevPageBlock = maxPageNumber - 5;
-                  handleDynamicPage(prevPageBlock);
+                  router.push(`/music/artist/${artistId}/${prevPageBlock}`);
                 }
               }}
             >
@@ -279,7 +278,7 @@ export default function ArtistContent({ fullPathName, artistId, currentPage }: P
               className={styles["page"]}
               onClick={() => {
                 const nextPageBlock = maxPageNumber + 1;
-                handleDynamicPage(nextPageBlock);
+                router.push(`/music/artist/${artistId}/${nextPageBlock}`);
               }}
             >
               〉
