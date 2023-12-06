@@ -15,8 +15,8 @@ import {
 } from "../divdivdiv/data";
 import { useAtom } from "jotai";
 import { ImageModal } from "../divdivdiv/Modal";
-import Clock from "../divdivdiv/Clock";
-import About from "../divdivdiv/About";
+import Clock from "../divdivdiv/components/Clock";
+import About from "../divdivdiv/components/About";
 import { usePathname, useRouter } from "next/navigation";
 import { RenderButtonLeft } from "../divdivdiv/components/RenderButtonLeft";
 

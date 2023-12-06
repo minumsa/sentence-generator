@@ -1,8 +1,8 @@
 "use client";
 
 import { useContext } from "react";
-import styles from "./divdivdiv.module.css";
-import { LanguageContext } from "./data";
+import styles from "../divdivdiv.module.css";
+import { LanguageContext } from "../data";
 
 export default function Contact() {
   const language = useContext(LanguageContext);

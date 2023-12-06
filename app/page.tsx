@@ -13,46 +13,18 @@ import {
   initialIsMobile,
   initialShowImage,
 } from "./divdivdiv/data";
-import Clock from "./divdivdiv/Clock";
-import About from "./divdivdiv/About";
-import Contact from "./divdivdiv/Contact";
+import Clock from "./divdivdiv/components/Clock";
 import Main from "./divdivdiv/Main";
-import NoSSR from "./divdivdiv/NoSSR";
 import { ImageModal } from "./divdivdiv/Modal";
 import { useAtom } from "jotai";
-import { usePathname, useRouter } from "next/navigation";
 import { RenderButtonLeft } from "./divdivdiv/components/RenderButtonLeft";
+import { Calender } from "./divdivdiv/components/Calender";
 
 export default function Page() {
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [isMobile, setIsMobile] = useAtom(initialIsMobile);
   const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
   const [imgAlt, setImgAlt] = useAtom(initialImgAlt);
-  const currentDate = new Date();
-  const month = currentDate.getMonth() + 1;
-  const months: string[] = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const day = currentDate.getDate();
-  const [dayOfWeek, dayOfEngWeek] = getDayOfWeek(currentDate);
-
-  function getDayOfWeek(date: Date): [string, string] {
-    const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-    const daysOfEngWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const dayIndex = date.getDay();
-    return [daysOfWeek[dayIndex], daysOfEngWeek[dayIndex]];
-  }
 
   const [language, setLanguage] = useState<Language>("ko");
   const [weather, setWeather] = useState<Weather>({
@@ -107,22 +79,12 @@ export default function Page() {
                 >
                   {language === "en" ? "A" : "한"}
                 </div>
-                <div className={`${styles["button-right"]} ${styles["calendar"]}`}>
-                  {language === "en"
-                    ? `${months[month - 1]} ${day} (${dayOfEngWeek})`
-                    : `${month}월 ${day}일 (${dayOfWeek})`}
-                </div>
-                <div className={`${styles["button-right"]} ${styles["clock"]}`}>
-                  <Clock />
-                </div>
+                <Calender language={language} />
+                <Clock />
               </div>
             </div>
             <div className={styles["content"]}>
-              <NoSSR>
-                <Main />
-              </NoSSR>
-              {/* {activeTab === "about" && <About />}
-              {activeTab === "contact" && <Contact />} */}
+              <Main />
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import NoSSR from "./NoSSR";
-import { LanguageContext } from "./data";
+import NoSSR from "../NoSSR";
+import { LanguageContext } from "../data";
+import styles from "../divdivdiv.module.css";
 
 export default function Clock() {
   const language = useContext(LanguageContext);
@@ -29,5 +30,9 @@ export default function Clock() {
 
   const clock = `${period} ${String(twelveHourFormat).padStart(2, "0")}:${minutes}`;
 
-  return <NoSSR>{clock}</NoSSR>;
+  return (
+    <NoSSR>
+      <div className={`${styles["button-right"]} ${styles["clock"]}`}>{clock}</div>
+    </NoSSR>
+  );
 }
