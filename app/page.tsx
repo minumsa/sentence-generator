@@ -1,32 +1,18 @@
 "use client";
 
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import styles from "./divdivdiv/divdivdiv.module.css";
-import {
-  fetchWeather,
-  initialImgAlt,
-  initialImgSrc,
-  initialIsMobile,
-  initialLanguage,
-  initialShowImage,
-} from "./divdivdiv/data";
-import Clock from "./divdivdiv/components/Clock";
+import { initialImgAlt, initialImgSrc, initialIsMobile, initialShowImage } from "./divdivdiv/data";
 import Main from "./divdivdiv/Main";
 import { ImageModal } from "./divdivdiv/Modal";
 import { useAtom } from "jotai";
-import { RenderButtonLeft } from "./divdivdiv/components/RenderButtonLeft";
-import { Calender } from "./divdivdiv/components/Calender";
 import NoSSR from "./divdivdiv/NoSSR";
-import { LanguageToggleButton } from "./divdivdiv/components/LanguageToggleButton";
-import { CurrentWeather } from "./divdivdiv/components/Weather";
+import { Nav } from "./divdivdiv/components/Nav";
 
 export default function Page() {
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [isMobile, setIsMobile] = useAtom(initialIsMobile);
   const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
   const [imgAlt, setImgAlt] = useAtom(initialImgAlt);
-  const [language, setLanguage] = useAtom(initialLanguage);
 
   const handleModalClick = () => {
     setShowImage(false);
@@ -43,21 +29,12 @@ export default function Page() {
         <div className={styles["container-fade"]} style={{ opacity: showImage ? 0.5 : undefined }}>
           <div className={styles["container"]}>
             <div className={styles["nav-container"]}>
-              <div className={styles["nav"]}>
-                <RenderButtonLeft text="divdivdiv" path="/" />
-                <RenderButtonLeft text={language === "en" ? "about" : "소개"} path="/about" />
-                <RenderButtonLeft text={language === "en" ? "contact" : "연결"} path="/contact" />
-                <div className={styles["blank-space"]}></div>
-                <CurrentWeather />
-                <LanguageToggleButton language={language} setLanguage={setLanguage} />
-                <Calender language={language} />
-                <Clock language={language} />
-              </div>
+              <Nav />
             </div>
             <div className={styles["content"]}>
               {/* FIXME: 이미지 모달 사진 크기 때문에 window.innerWidth 사용해서 NoSSR 넣음. 추후에 미디어 쿼리 등 다른 방향으로 수정할 수 있으면 하고 NoSSR 제거하기.*/}
               <NoSSR>
-                <Main language={language} />
+                <Main />
               </NoSSR>
             </div>
           </div>

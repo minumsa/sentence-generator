@@ -11,16 +11,14 @@ import {
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
+  initialLanguage,
   initialShowImage,
 } from "./data";
 import { useAtom } from "jotai";
 
-interface MainProps {
-  language: Language;
-}
-
-export default function Main({ language }: MainProps) {
+export default function Main() {
   // FIXME: 포스트잇 닫을 때 아이콘 초기화되는 문제 해결
+  const [language, setLanguage] = useAtom(initialLanguage);
   const [showImage, setShowImage] = useAtom(initialShowImage);
   const [imgSrc, setImgSrc] = useAtom<string>(initialImgSrc);
   const [imgAlt, setImgAlt] = useAtom<string>(initialImgAlt);
