@@ -22,7 +22,7 @@ export default function Page({ params }: PageProps) {
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Upload currentId={""} isUpdatePage={false} />
+        <Upload />
       </div>
     </div>
   );

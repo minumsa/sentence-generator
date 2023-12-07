@@ -7,13 +7,7 @@ import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-interface UploadProps {
-  currentId: string;
-  isUpdatePage: boolean;
-}
-
-export default function Upload({ currentId, isUpdatePage }: UploadProps) {
-  const variableTitle: string = isUpdatePage ? "수정" : "업로드";
+export default function Upload() {
   const [data, setData] = useState<any>();
   const [albumId, setAlbumId] = useState("");
   const [artistId, setArtistId] = useState("");
@@ -24,7 +18,6 @@ export default function Upload({ currentId, isUpdatePage }: UploadProps) {
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
   const [uploadDate, setUploadDate] = useState(new Date());
 
-  // 업로드 API
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
@@ -40,49 +33,11 @@ export default function Upload({ currentId, isUpdatePage }: UploadProps) {
     }
   };
 
-  // 수정 API
-  const handleUpdate = async () => {
-    const newAlbumData = await fetchSpotify({
-      albumId,
-      artistId,
-      genre,
-      link,
-      text,
-      uploadDate,
-    });
-
-    if (newAlbumData) {
-      updateData(albumId, artistId, newAlbumData, password);
-    }
-  };
-
   const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      isUpdatePage ? handleUpdate() : handleUpload();
+      handleUpload();
     }
   };
-
-  // 수정 페이지일 때 데이터 가져오기
-  useEffect(() => {
-    async function getData() {
-      const fetchData = await fetchDataById(currentId);
-      setData(fetchData);
-      const { id, artistId, genre, link, text, uploadDate } = fetchData;
-
-      setAlbumId(id);
-      setArtistId(artistId);
-      setGenre(genre);
-      setLink(link);
-      setText(text);
-      setUploadDate(new Date(uploadDate));
-    }
-
-    if (isUpdatePage) getData();
-  }, []);
-
-  useEffect(() => {
-    isUpdatePage && setData({ ...data, id: albumId, genre: genre, link: link, text: text });
-  }, [albumId, genre, link, text]);
 
   interface ExampleCustomInputProps {
     value: string;
@@ -105,7 +60,7 @@ export default function Upload({ currentId, isUpdatePage }: UploadProps) {
         className={`${styles["album-container"]} ${styles["upload-container"]}`}
         style={{ flexDirection: "column", paddingTop: "50px" }}
       >
-        <div className={styles["title"]}>{`${variableTitle} 페이지`}</div>
+        <div className={styles["title"]}>업로드 페이지</div>
         <div className={styles["upload-item-title"]}>장르</div>
         <div className={styles["select-container"]}>
           <select
@@ -188,7 +143,7 @@ export default function Upload({ currentId, isUpdatePage }: UploadProps) {
           <div
             className={`${styles["button"]} ${styles["submit"]}`}
             onClick={() => {
-              isUpdatePage ? handleUpdate() : handleUpload();
+              handleUpload();
             }}
             style={{ boxShadow: "0 0 0 1px #242424 inset" }}
           >
