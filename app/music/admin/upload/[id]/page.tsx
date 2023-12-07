@@ -7,7 +7,7 @@ import { Snow } from "@/app/music/components/Snow";
 import { MobileTitle } from "@/app/music/components/MobileTitle";
 import { Hamburger } from "@/app/music/components/Hamburger";
 import { Category } from "@/app/music/components/Category";
-import Upload from "@/app/music/components/Upload";
+import Update from "@/app/music/components/Update";
 
 export default function Page({ params }: PageProps) {
   const currentId = params.id;
@@ -22,7 +22,7 @@ export default function Page({ params }: PageProps) {
         <Category pathName={""} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Upload currentId={currentId} isUpdatePage={true} />
+        <Update currentId={currentId} />
       </div>
     </div>
   );
