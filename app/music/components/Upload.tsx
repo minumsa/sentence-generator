@@ -8,14 +8,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface UploadProps {
-  idByPathName: string;
+  currentId: string;
+  isUpdatePage: boolean;
 }
 
-export default function Upload({ idByPathName }: UploadProps) {
-  const pathName = usePathname();
-  const isUploadPage: boolean = pathName.includes("upload");
-  const isUpdatePage: boolean = !isUploadPage;
-  const variableTitle: string = isUploadPage ? "업로드" : "수정";
+export default function Upload({ currentId, isUpdatePage }: UploadProps) {
+  const variableTitle: string = isUpdatePage ? "수정" : "업로드";
   const [data, setData] = useState<any>();
   const [albumId, setAlbumId] = useState("");
   const [artistId, setArtistId] = useState("");
@@ -60,14 +58,14 @@ export default function Upload({ idByPathName }: UploadProps) {
 
   const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      isUploadPage ? handleUpload() : handleUpdate();
+      isUpdatePage ? handleUpdate() : handleUpload();
     }
   };
 
   // 수정 페이지일 때 데이터 가져오기
   useEffect(() => {
     async function getData() {
-      const fetchData = await fetchDataById(idByPathName);
+      const fetchData = await fetchDataById(currentId);
       setData(fetchData);
       const { id, artistId, genre, link, text, uploadDate } = fetchData;
 
@@ -190,7 +188,7 @@ export default function Upload({ idByPathName }: UploadProps) {
           <div
             className={`${styles["button"]} ${styles["submit"]}`}
             onClick={() => {
-              isUploadPage ? handleUpload() : handleUpdate();
+              isUpdatePage ? handleUpdate() : handleUpload();
             }}
             style={{ boxShadow: "0 0 0 1px #242424 inset" }}
           >

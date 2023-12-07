@@ -200,7 +200,7 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
                         <div
                           className={styles["admin-button"]}
                           onClick={() => {
-                            router.push(`/music/admin/${data.id}`);
+                            router.push(`/music/admin/upload/${data.id}`);
                           }}
                         >
                           수정

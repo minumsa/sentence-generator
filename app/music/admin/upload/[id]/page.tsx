@@ -1,14 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import styles from "../../music.module.css";
+import styles from "../../../music.module.css";
 import { PageProps } from "@/app/music/modules/data";
 import { Snow } from "@/app/music/components/Snow";
 import { MobileTitle } from "@/app/music/components/MobileTitle";
 import { Hamburger } from "@/app/music/components/Hamburger";
 import { Category } from "@/app/music/components/Category";
 import Upload from "@/app/music/components/Upload";
-import path from "path";
 
 export default function Page({ params }: PageProps) {
   const currentId = params.id;
@@ -23,7 +22,7 @@ export default function Page({ params }: PageProps) {
         <Category pathName={""} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Upload idByPathName={currentId} />
+        <Upload currentId={currentId} isUpdatePage={true} />
       </div>
     </div>
   );

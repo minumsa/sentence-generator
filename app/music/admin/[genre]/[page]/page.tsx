@@ -24,15 +24,11 @@ export default function Page({ params }: PageProps) {
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        {isUploadPage(pathName) ? (
-          <Upload idByPathName={pathName} />
-        ) : (
-          <Content
-            pathName={isMainPage(pathName) ? "" : pathName}
-            fullPathName={fullPathName}
-            currentPage={Number(currentPage)}
-          />
-        )}
+        <Content
+          pathName={isMainPage(pathName) ? "" : pathName}
+          fullPathName={fullPathName}
+          currentPage={Number(currentPage)}
+        />
       </div>
     </div>
   );
