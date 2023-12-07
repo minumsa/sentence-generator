@@ -141,14 +141,18 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
                             className={styles["category-meta-image"]}
                             loading="lazy"
                             onClick={() => {
-                              router.push(`/music/artist/${data.artistId}/1`);
+                              isAdminPage(pathName)
+                                ? router.push(`/music/admin/artist/${data.artistId}/1`)
+                                : router.push(`/music/artist/${data.artistId}/1`);
                             }}
                           />
                         </div>
                         <div>
                           <span
                             onClick={() => {
-                              router.push(`/music/artist/${data.artistId}/1`);
+                              isAdminPage(pathName)
+                                ? router.push(`/music/admin/artist/${data.artistId}/1`)
+                                : router.push(`/music/artist/${data.artistId}/1`);
                             }}
                             style={{ cursor: "pointer" }}
                           >

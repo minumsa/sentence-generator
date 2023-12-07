@@ -35,7 +35,7 @@ export async function fetchData({
 }: FetchData) {
   try {
     const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
-    const url = `/music/api/${queryString}`;
+    const url = `/music/api${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -290,7 +290,6 @@ export const fetchSpotify = async ({
   try {
     const accessToken = await fetchSpotifyAccessToken();
     if (!accessToken) {
-      // throw new Error("Access token is not available");
       console.error("Error: Access token is not available");
     }
 
@@ -303,7 +302,6 @@ export const fetchSpotify = async ({
     const artistDataResponse = await fetch(artistUrl, { headers });
 
     if (!albumDataResponse.ok) {
-      // throw new Error("music fetch failed");
       console.error("Error: music fetch failed");
     }
 

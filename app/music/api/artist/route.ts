@@ -14,9 +14,7 @@ export async function GET(request: Request) {
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
 
-    let currentPage = 0;
-
-    currentPage = Number(url.searchParams.get("currentPage"));
+    const currentPage = Number(url.searchParams.get("currentPage"));
 
     let sortKey = {};
     if (currentMethod === "발매일") {
@@ -31,9 +29,7 @@ export async function GET(request: Request) {
 
     const genreDataLength = await Music.find({ artistId: artistId }).count();
     const startIndex = perPageCount * currentPage - perPageCount;
-    const slicedData = await Music.find({ artistId: artistId })
-      .skip(startIndex)
-      .limit(perPageCount);
+    const slicedData = await Music.find({ artistId: artistId });
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {

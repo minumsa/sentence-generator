@@ -1,13 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import styles from "../../../music.module.css";
-import { PageProps } from "../../../modules/data";
-import { Hamburger } from "../../../components/Hamburger";
-import { MobileTitle } from "../../../components/MobileTitle";
-import { Category } from "../../../components/Category";
-import { Snow } from "../../../components/Snow";
-import ArtistContent from "../../../components/ArtistContent";
+import styles from "../../../../music.module.css";
+import { Snow } from "@/app/music/components/Snow";
+import { PageProps } from "@/app/music/modules/data";
+import { MobileTitle } from "@/app/music/components/MobileTitle";
+import { Hamburger } from "@/app/music/components/Hamburger";
+import { Category } from "@/app/music/components/Category";
+import ArtistContent from "@/app/music/components/ArtistContent";
 
 export default function Page({ params }: PageProps) {
   const artistId = params.id;

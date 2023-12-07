@@ -2,12 +2,12 @@
 
 import { usePathname } from "next/navigation";
 import styles from "../../music.module.css";
-import { PageProps, isMainPage } from "../../modules/data";
-import Content from "../../components/Content";
+import { Snow } from "../../components/Snow";
 import { MobileTitle } from "../../components/MobileTitle";
+import { PageProps } from "../../modules/data";
 import { Hamburger } from "../../components/Hamburger";
 import { Category } from "../../components/Category";
-import { Snow } from "../../components/Snow";
+import Upload from "../../components/Upload";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
@@ -22,11 +22,7 @@ export default function Page({ params }: PageProps) {
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Content
-          pathName={isMainPage(pathName) ? "" : pathName}
-          fullPathName={fullPathName}
-          currentPage={isMainPage(pathName) ? Number(pathName) : 1}
-        />
+        <Upload idByPathName={""} />
       </div>
     </div>
   );
