@@ -8,15 +8,11 @@ import { Hamburger } from "../../components/Hamburger";
 import { MobileTitle } from "../../components/MobileTitle";
 import { Category } from "../../components/Category";
 import { Snow } from "../../components/Snow";
-import { Post } from "../../components/Post";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
   const currentPage: any = params.page;
   const fullPathName = usePathname();
-  const isPostPage = pathName.includes("post");
-  const isArtistPage = pathName.includes("artist");
-  const isSearchPage = pathName.includes("search");
 
   return (
     <div className={styles["container"]}>
@@ -27,15 +23,11 @@ export default function Page({ params }: PageProps) {
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        {isPostPage ? (
-          <Post pathName={currentPage} isPostPage={isPostPage} />
-        ) : (
-          <Content
-            pathName={isMainPage(pathName) ? "" : pathName}
-            fullPathName={fullPathName}
-            currentPage={isArtistPage || isSearchPage ? currentPage : Number(currentPage)}
-          />
-        )}
+        <Content
+          pathName={isMainPage(pathName) ? "" : pathName}
+          fullPathName={fullPathName}
+          currentPage={Number(currentPage)}
+        />
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ export async function fetchData({
 }: FetchData) {
   try {
     const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
-    const url = `/api/music${queryString}`;
+    const url = `/music/api/${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -66,7 +66,7 @@ export async function FetchArtistData({
 }: FetchArtistData) {
   try {
     const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&artistId=${artistId}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
-    const url = `/api/music/artist${queryString}`;
+    const url = `/music/api/artist${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -97,7 +97,7 @@ export async function SearchData({
 }: SearchData) {
   try {
     const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&currentKeyword=${currentKeyword}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
-    const url = `/api/music/search${queryString}`;
+    const url = `/music/api/search${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -118,11 +118,10 @@ export async function SearchData({
   }
 }
 
-// FIXME: 메서드 변수명(GOT) 수정 및 기능 체크
 export async function fetchDataById(id: string) {
   try {
     const queryString = `?id=${id}`;
-    const url = `/api/music/update${queryString}`;
+    const url = `/music/api/update${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -145,7 +144,7 @@ export async function fetchDataById(id: string) {
 export async function uploadData(uploadData: AlbumInfo, password: string) {
   if (uploadData !== null) {
     try {
-      const response = await fetch("/api/music", {
+      const response = await fetch("/music/api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +181,7 @@ export const updateData = async (
 ) => {
   if (data !== null) {
     try {
-      const response = await fetch("/api/music", {
+      const response = await fetch("/music/api", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -214,7 +213,7 @@ export const deleteData = async (id: string) => {
   const userPassword = prompt("관리자 비밀번호를 입력해주세요.");
 
   try {
-    const response = await fetch("/api/music", {
+    const response = await fetch("/music/api", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

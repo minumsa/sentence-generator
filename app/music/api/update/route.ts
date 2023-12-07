@@ -2,7 +2,6 @@ import connectMongoDB from "@/app/music/modules/mongodb";
 import Music from "@/models/music";
 import { NextResponse } from "next/server";
 
-// FIXME: 폴더명 수정 및 리팩토링
 export async function GET(request: Request) {
   try {
     require("dotenv").config();
@@ -11,7 +10,6 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const id = url.searchParams.get("id");
 
-    // 몽고디비 아이템의 id와 파라미터로 받아온 id가 일치하는 데이터를 찾음
     const data = await Music.findOne({ id: id });
 
     if (!data) {

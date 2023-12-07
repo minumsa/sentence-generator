@@ -7,10 +7,9 @@ import { useRouter } from "next/navigation";
 
 interface PostProps {
   pathName: string;
-  isPostPage: boolean;
 }
 
-export const Post = ({ pathName, isPostPage }: PostProps) => {
+export const Post = ({ pathName }: PostProps) => {
   const [data, setData] = useState<AlbumInfo>(initialAlbumInfo);
   const router = useRouter();
 
@@ -34,7 +33,7 @@ export const Post = ({ pathName, isPostPage }: PostProps) => {
           {data.text && "✕"}
         </div>
       </div>
-      <Album data={data} isAdminMainPage={false} isPostPage={isPostPage} />
+      <Album data={data} isAdminMainPage={false} isPostPage={true} />
     </>
   );
 };

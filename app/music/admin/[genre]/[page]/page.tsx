@@ -9,15 +9,11 @@ import { Category } from "@/app/music/components/Category";
 import { MobileTitle } from "@/app/music/components/MobileTitle";
 import { Hamburger } from "@/app/music/components/Hamburger";
 import { Snow } from "@/app/music/components/Snow";
-import { Post } from "@/app/music/components/Post";
 
 export default function Page({ params }: PageProps) {
   const pathName = params.genre;
   const currentPage: any = params.page;
   const fullPathName = usePathname();
-  const isPostPage = pathName.includes("post");
-  const isArtistPage = pathName.includes("artist");
-  const isSearchPage = pathName.includes("search");
 
   return (
     <div className={styles["container"]}>
@@ -34,9 +30,7 @@ export default function Page({ params }: PageProps) {
           <Content
             pathName={isMainPage(pathName) ? "" : pathName}
             fullPathName={fullPathName}
-            currentPage={
-              isArtistPage || isPostPage || isSearchPage ? currentPage : Number(currentPage)
-            }
+            currentPage={Number(currentPage)}
           />
         )}
       </div>

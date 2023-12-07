@@ -42,7 +42,6 @@ export default function ArtistContent({ fullPathName, artistId, currentPage }: P
 
   useEffect(() => {
     async function loadData() {
-      // 검색 데이터를 fetch할 때는 currentPage를 keyword로 보내줌
       const result = await FetchArtistData({
         pathName: "",
         perPageCount,

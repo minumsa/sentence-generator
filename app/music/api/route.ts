@@ -63,18 +63,11 @@ export async function GET(request: Request) {
 
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
-    const artistId = url.searchParams.get("currentPage");
+    const currentPage = Number(url.searchParams.get("currentPage"));
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const pathName = url.searchParams.get("pathName");
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
-
-    const isArtistPage = pathName === "artist";
-
-    let currentPage = 0;
-    let keyword: any = "";
-
-    currentPage = Number(url.searchParams.get("currentPage"));
 
     let sortKey = {};
     if (currentMethod === "발매일") {
@@ -88,37 +81,24 @@ export async function GET(request: Request) {
     }
 
     // pathName이 장르(pop, kpop...)인 경우 해당 장르로 필터링
-    // 그렇지 않으면(post, artist, "") 모든 데이터 가져오기(query === {})
+    // 그렇지 않으면 모든 데이터 가져오기(query === {})
     let query = undefined;
 
-    if (pathName === "artist" || pathName === "") {
+    if (pathName === "") {
       query = {};
     } else {
       query = { genre: pathName };
     }
 
-    // const query = pathName ? { genre: pathName } : {};
     let genreDataLength = await Music.find(query).count();
 
     // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
-
-    let startIndex = undefined;
-    let slicedData = undefined;
-
-    // FIXME: artistId 가 있는지 여부로 확인하는게?
-    if (isArtistPage) {
-      startIndex = 0;
-      slicedData = await Music.find({ artistId: artistId });
-      // .skip(startIndex)
-      // .limit(perPageCount);
-    } else {
-      startIndex = perPageCount * currentPage - perPageCount;
-      slicedData = await Music.find(query) //
-        .sort(sortKey)
-        .skip(startIndex) //
-        .limit(perPageCount);
-    }
+    const startIndex = perPageCount * currentPage - perPageCount;
+    const slicedData = await Music.find(query) //
+      .sort(sortKey)
+      .skip(startIndex) //
+      .limit(perPageCount);
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
