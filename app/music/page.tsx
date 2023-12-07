@@ -22,7 +22,6 @@ export default function Page() {
       </div>
       <div className={styles["content-container"]}>
         <Grid />
-        {/* <Content pathName={pathName} fullPathName={fullPathName} currentPage={1} /> */}
       </div>
     </div>
   );
