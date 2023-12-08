@@ -1,23 +1,12 @@
 import { useAtom } from "jotai";
-import { imgAltAtom, imgSrcAtom, isMobileAtom, languageAtom, showImageAtom } from "../modules/data";
+import { languageAtom, showImageAtom } from "../modules/data";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { ImageModal } from "./Modal";
 import { Nav } from "./Nav";
 import styles from "../divdivdiv.module.css";
 
 export const FunctionalLayout = ({ children }: { children: React.ReactNode }) => {
   const [showImage, setShowImage] = useAtom(showImageAtom);
-  const [isMobile, setIsMobile] = useAtom(isMobileAtom);
-  const [imgSrc, setImgSrc] = useAtom(imgSrcAtom);
-  const [imgAlt, setImgAlt] = useAtom(imgAltAtom);
-
-  const handleModalClick = () => {
-    setShowImage(false);
-    setImgSrc("");
-    setImgAlt("");
-  };
-
   const [language, setLanguage] = useAtom(languageAtom);
   const searchParams = useSearchParams();
   const currentLanguage: any = searchParams.get("language");

@@ -1,7 +1,6 @@
 import { atom } from "jotai";
 
 export const showImageAtom = atom(false);
-export const isMobileAtom = atom(false);
 export const imgSrcAtom = atom("");
 export const imgAltAtom = atom("");
 export const languageAtom = atom<Language>("ko");

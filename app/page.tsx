@@ -1,14 +1,13 @@
 "use client";
 
-import { imgAltAtom, imgSrcAtom, isMobileAtom, showImageAtom } from "./divdivdiv/modules/data";
-import DraggableContents from "./divdivdiv/components/DraggableContents";
+import { imgAltAtom, imgSrcAtom, showImageAtom } from "./divdivdiv/modules/data";
+import DraggableIcons from "./divdivdiv/components/DraggableIcons";
 import { ImageModal } from "./divdivdiv/components/Modal";
 import { useAtom } from "jotai";
 import { FunctionalLayout } from "./divdivdiv/components/FunctionalLayout";
 
 export default function Page() {
   const [showImage, setShowImage] = useAtom(showImageAtom);
-  const [isMobile, setIsMobile] = useAtom(isMobileAtom);
   const [imgSrc, setImgSrc] = useAtom(imgSrcAtom);
   const [imgAlt, setImgAlt] = useAtom(imgAltAtom);
 
@@ -20,11 +19,9 @@ export default function Page() {
 
   return (
     <>
-      {showImage && (
-        <ImageModal isMobile={isMobile} src={imgSrc} alt={imgAlt} onClick={handleModalClick} />
-      )}
+      {showImage && <ImageModal src={imgSrc} alt={imgAlt} onClick={handleModalClick} />}
       <FunctionalLayout>
-        <DraggableContents />
+        <DraggableIcons />
       </FunctionalLayout>
     </>
   );

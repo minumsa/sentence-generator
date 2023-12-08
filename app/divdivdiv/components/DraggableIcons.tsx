@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useEffect, useState } from "react";
+import React, { memo } from "react";
 import Draggable from "react-draggable";
 import styles from "../divdivdiv.module.css";
 import {
@@ -16,7 +16,7 @@ import {
 import { useAtom } from "jotai";
 import { isMobile } from "react-device-detect";
 
-export default function DraggableContents() {
+export default function DraggableIcons() {
   // FIXME: 포스트잇 닫을 때 아이콘 초기화되는 문제 해결
   const [language, setLanguage] = useAtom(languageAtom);
   const [showImage, setShowImage] = useAtom(showImageAtom);
@@ -59,7 +59,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
 
   // TODO: 별개 컴포넌트 파일로 빼기
   // TODO: 인터페이스, 타입 리팩토링
-  function DraggableComponent(props: {
+  function DraggableIcon(props: {
     className: string;
     path: string;
     type: string;
@@ -123,7 +123,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
 
   return (
     <div className={styles["icons-container"]}>
-      <DraggableComponent
+      <DraggableIcon
         className="icon-blog"
         path="https://blog.divdivdiv.com"
         type="folder"
@@ -131,7 +131,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-music"
         path="/music"
         type="folder"
@@ -139,7 +139,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-barbershop"
         path="https://barbershop.divdivdiv.com"
         type="folder"
@@ -147,7 +147,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-cinephile"
         path="/cinephile"
         type="folder"
@@ -155,7 +155,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-fruits"
         path="/fruits"
         type="folder"
@@ -163,7 +163,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-words"
         path="/words"
         type="folder"
@@ -171,7 +171,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.folder.width}
         height={iconSize.folder.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-cat"
         path="cat"
         type="image"
@@ -179,7 +179,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.image.width}
         height={iconSize.image.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-me"
         path="me"
         type="image"
@@ -187,7 +187,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.image.width}
         height={iconSize.image.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-fortune"
         path="fortune"
         type="fortune"
@@ -195,7 +195,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
         width={iconSize.fortune.width}
         height={iconSize.fortune.height}
       />
-      <DraggableComponent
+      <DraggableIcon
         className="icon-readme"
         path="readme"
         type="image"

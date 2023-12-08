@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import styles from "../divdivdiv.module.css";
 import { languageAtom, readme } from "../modules/data";
 import { useAtom } from "jotai";
+import { isMobile } from "react-device-detect";
 
 interface ImageModalProps {
-  isMobile: boolean;
   src: string;
   alt: string;
   onClick: any;
 }
 
-export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => {
+export const ImageModal = ({ src, alt, onClick }: ImageModalProps) => {
   const [language, setLanguage] = useAtom(languageAtom);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState<number>(window.innerHeight);
