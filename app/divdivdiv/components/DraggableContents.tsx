@@ -10,21 +10,19 @@ import {
   iconTitle,
   imgAltAtom,
   imgSrcAtom,
-  isMobileAtom,
   showImageAtom,
   languageAtom,
 } from "../modules/data";
 import { useAtom } from "jotai";
+import { isMobile } from "react-device-detect";
 
-export default function Main() {
+export default function DraggableContents() {
   // FIXME: 포스트잇 닫을 때 아이콘 초기화되는 문제 해결
   const [language, setLanguage] = useAtom(languageAtom);
   const [showImage, setShowImage] = useAtom(showImageAtom);
   const [imgSrc, setImgSrc] = useAtom<string>(imgSrcAtom);
   const [imgAlt, setImgAlt] = useAtom<string>(imgAltAtom);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-  // FIXME: 가능하면 isMobile 없애기
-  const [isMobile, setIsMobile] = useAtom(isMobileAtom);
 
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
@@ -37,14 +35,6 @@ export default function Main() {
     };
   }, []);
 
-  useEffect(() => {
-    setIsMobile(windowWidth < 620);
-
-    if (typeof window === "undefined") {
-      return;
-    }
-  }, [windowWidth]);
-
   return (
     // TODO: 코드 정리하고 관련 개념 기록해두기
     // 문제 해결 경험 중심으로 블로그에 작성하기 (모든 걸 다 x)
@@ -54,7 +44,6 @@ export default function Main() {
         setImgAlt={setImgAlt}
         setShowImage={setShowImage}
         language={language}
-        isMobile={isMobile}
       />
     </>
   );
@@ -65,10 +54,9 @@ interface IconsProps {
   setImgAlt: React.Dispatch<React.SetStateAction<string>>;
   setShowImage: React.Dispatch<React.SetStateAction<boolean>>;
   language: Language;
-  isMobile: boolean;
 }
 
-function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: IconsProps) {
+function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
   const handleImageClick = (path: string) => {
     if (path === "readme") {
       setImgSrc(`/divdivdiv/readme-${language}.webp`);

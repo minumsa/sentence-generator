@@ -8,7 +8,7 @@ import {
   showImageAtom,
   languageAtom,
 } from "./divdivdiv/modules/data";
-import Main from "./divdivdiv/components/Main";
+import DraggableContents from "./divdivdiv/components/DraggableContents";
 import { ImageModal } from "./divdivdiv/components/Modal";
 import { useAtom } from "jotai";
 import NoSSR from "./divdivdiv/modules/NoSSR";
@@ -50,7 +50,7 @@ export default function Page() {
             <div className={styles["content"]}>
               {/* FIXME: 이미지 모달 사진 크기 때문에 window.innerWidth 사용해서 NoSSR 넣음. 추후에 미디어 쿼리 등 다른 방향으로 수정할 수 있으면 하고 NoSSR 제거하기.*/}
               <NoSSR>
-                <Main />
+                <DraggableContents />
               </NoSSR>
             </div>
           </div>
