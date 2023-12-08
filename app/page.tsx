@@ -33,7 +33,7 @@ export default function Page() {
   const currentLanguage: any = searchParams.get("language");
 
   useEffect(() => {
-    setLanguage(currentLanguage);
+    setLanguage(currentLanguage ? currentLanguage : "ko");
   }, []);
 
   return (
