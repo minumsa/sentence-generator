@@ -1,6 +1,6 @@
 import { RenderButtonLeft } from "./RenderButtonLeft";
 import styles from "../divdivdiv.module.css";
-import { Language, initialLanguage } from "../modules/data";
+import { Language, initialLanguage, languageAtom } from "../modules/data";
 import { CurrentWeather } from "./Weather";
 import { LanguageToggleButton } from "./LanguageToggleButton";
 import { useAtom } from "jotai";
@@ -8,7 +8,7 @@ import { Calender } from "./Calender";
 import Clock from "./Clock";
 
 export const Nav = () => {
-  const [language, setLanguage] = useAtom(initialLanguage);
+  const [language, setLanguage] = useAtom(languageAtom);
 
   return (
     <div className={styles["nav"]}>
@@ -18,8 +18,8 @@ export const Nav = () => {
       <div className={styles["blank-space"]}></div>
       <CurrentWeather />
       <LanguageToggleButton />
-      <Calender language={language} />
-      <Clock language={language} />
+      <Calender />
+      <Clock />
     </div>
   );
 };

@@ -1,11 +1,9 @@
-import { Language } from "../modules/data";
+import { Language, languageAtom } from "../modules/data";
 import styles from "../divdivdiv.module.css";
+import { useAtom } from "jotai";
 
-interface Calender {
-  language: Language;
-}
-
-export const Calender = ({ language }: Calender) => {
+export const Calender = () => {
+  const [language, setLanguage] = useAtom(languageAtom);
   function getDayOfWeek(date: Date): [string, string] {
     const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
     const daysOfEngWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

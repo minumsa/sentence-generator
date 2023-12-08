@@ -5,6 +5,7 @@ import {
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
+  initialLanguage,
   initialShowImage,
 } from "./divdivdiv/modules/data";
 import Main from "./divdivdiv/components/Main";

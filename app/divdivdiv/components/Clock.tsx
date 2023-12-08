@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NoSSR from "../modules/NoSSR";
 import styles from "../divdivdiv.module.css";
-import { Language } from "../modules/data";
+import { languageAtom } from "../modules/data";
+import { useAtom } from "jotai";
 
-interface Clock {
-  language: Language;
-}
-
-export default function Clock({ language }: Clock) {
+export default function Clock() {
+  const [language, setLanguage] = useAtom(languageAtom);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../divdivdiv.module.css";
-import { initialLanguage, readme } from "../modules/data";
+import { languageAtom, readme } from "../modules/data";
 import { useAtom } from "jotai";
 
 interface ImageModalProps {
@@ -11,7 +11,7 @@ interface ImageModalProps {
 }
 
 export const ImageModal = ({ isMobile, src, alt, onClick }: ImageModalProps) => {
-  const [language, setLanguage] = useAtom(initialLanguage);
+  const [language, setLanguage] = useAtom(languageAtom);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState<number>(window.innerHeight);
 
