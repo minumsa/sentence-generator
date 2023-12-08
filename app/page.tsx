@@ -2,10 +2,10 @@
 
 import styles from "./divdivdiv/divdivdiv.module.css";
 import {
-  initialImgAlt,
-  initialImgSrc,
-  initialIsMobile,
-  initialShowImage,
+  imgAltAtom,
+  imgSrcAtom,
+  isMobileAtom,
+  showImageAtom,
   languageAtom,
 } from "./divdivdiv/modules/data";
 import Main from "./divdivdiv/components/Main";
@@ -17,10 +17,10 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function Page() {
-  const [showImage, setShowImage] = useAtom(initialShowImage);
-  const [isMobile, setIsMobile] = useAtom(initialIsMobile);
-  const [imgSrc, setImgSrc] = useAtom(initialImgSrc);
-  const [imgAlt, setImgAlt] = useAtom(initialImgAlt);
+  const [showImage, setShowImage] = useAtom(showImageAtom);
+  const [isMobile, setIsMobile] = useAtom(isMobileAtom);
+  const [imgSrc, setImgSrc] = useAtom(imgSrcAtom);
+  const [imgAlt, setImgAlt] = useAtom(imgAltAtom);
 
   const handleModalClick = () => {
     setShowImage(false);

@@ -1,12 +1,10 @@
 import { atom } from "jotai";
-import { createContext } from "react";
 
-export const initialShowImage = atom(false);
-export const initialIsMobile = atom(false);
-export const initialImgSrc = atom("");
-export const initialImgAlt = atom("");
-export const initialLanguage = "ko";
-export const languageAtom = atom<Language>(initialLanguage);
+export const showImageAtom = atom(false);
+export const isMobileAtom = atom(false);
+export const imgSrcAtom = atom("");
+export const imgAltAtom = atom("");
+export const languageAtom = atom<Language>("ko");
 
 export interface Weather {
   icon: string | null;

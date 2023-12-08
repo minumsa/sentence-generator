@@ -8,10 +8,10 @@ import {
   fortune,
   iconSize,
   iconTitle,
-  initialImgAlt,
-  initialImgSrc,
-  initialIsMobile,
-  initialShowImage,
+  imgAltAtom,
+  imgSrcAtom,
+  isMobileAtom,
+  showImageAtom,
   languageAtom,
 } from "../modules/data";
 import { useAtom } from "jotai";
@@ -19,12 +19,12 @@ import { useAtom } from "jotai";
 export default function Main() {
   // FIXME: 포스트잇 닫을 때 아이콘 초기화되는 문제 해결
   const [language, setLanguage] = useAtom(languageAtom);
-  const [showImage, setShowImage] = useAtom(initialShowImage);
-  const [imgSrc, setImgSrc] = useAtom<string>(initialImgSrc);
-  const [imgAlt, setImgAlt] = useAtom<string>(initialImgAlt);
+  const [showImage, setShowImage] = useAtom(showImageAtom);
+  const [imgSrc, setImgSrc] = useAtom<string>(imgSrcAtom);
+  const [imgAlt, setImgAlt] = useAtom<string>(imgAltAtom);
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   // FIXME: 가능하면 isMobile 없애기
-  const [isMobile, setIsMobile] = useAtom(initialIsMobile);
+  const [isMobile, setIsMobile] = useAtom(isMobileAtom);
 
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
