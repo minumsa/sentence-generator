@@ -38,14 +38,12 @@ export default function DraggableContents() {
   return (
     // TODO: 코드 정리하고 관련 개념 기록해두기
     // 문제 해결 경험 중심으로 블로그에 작성하기 (모든 걸 다 x)
-    <>
-      <MemoizedIcons
-        setImgSrc={setImgSrc}
-        setImgAlt={setImgAlt}
-        setShowImage={setShowImage}
-        language={language}
-      />
-    </>
+    <MemoizedIcons
+      setImgSrc={setImgSrc}
+      setImgAlt={setImgAlt}
+      setShowImage={setShowImage}
+      language={language}
+    />
   );
 }
 
@@ -127,6 +125,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
       </div>
     );
 
+    // 데스크톱에서만 드래그 가능한 아이콘으로 설정
     return isMobile ? (
       <React.Fragment>{draggableContent}</React.Fragment>
     ) : (
@@ -135,7 +134,7 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language }: IconsProps) {
   }
 
   return (
-    <div className={isMobile ? styles["mobile-icon-container"] : styles["icons-container"]}>
+    <div className={styles["icons-container"]}>
       <DraggableComponent
         className="icon-blog"
         path="https://blog.divdivdiv.com"
