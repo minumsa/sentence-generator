@@ -22,7 +22,7 @@ export default function Page({ params }: PageProps) {
         <Category pathName={"post"} fullPathName={fullPathName} />
       </div>
       <div className={styles["content-container"]}>
-        <Post pathName={currentId} isPostPage={true} />
+        <Post pathName={currentId} />
       </div>
     </div>
   );
