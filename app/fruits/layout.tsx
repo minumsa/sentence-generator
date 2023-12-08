@@ -23,7 +23,11 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-  return <body>{children}</body>;
+  return (
+    <html color="#fff">
+      <body>{children}</body>
+    </html>
+  );
 };
 
 export default Layout;
