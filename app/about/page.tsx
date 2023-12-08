@@ -6,11 +6,12 @@ import About from "../divdivdiv/components/About";
 import { useAtom } from "jotai";
 import { languageAtom } from "../divdivdiv/modules/data";
 import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
-  const currentUrl = window.location.href;
-  const currentLanguage: any = currentUrl.split("contact?language=")[1];
   const [language, setLanguage] = useAtom(languageAtom);
+  const searchParams = useSearchParams();
+  const currentLanguage: any = searchParams.get("language");
 
   useEffect(() => {
     setLanguage(currentLanguage);

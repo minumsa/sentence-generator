@@ -2,11 +2,9 @@
 
 import styles from "./divdivdiv/divdivdiv.module.css";
 import {
-  Language,
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
-  initialLanguage,
   initialShowImage,
   languageAtom,
 } from "./divdivdiv/modules/data";
@@ -16,6 +14,7 @@ import { useAtom } from "jotai";
 import NoSSR from "./divdivdiv/modules/NoSSR";
 import { Nav } from "./divdivdiv/components/Nav";
 import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
   const [showImage, setShowImage] = useAtom(initialShowImage);
@@ -29,9 +28,9 @@ export default function Page() {
     setImgAlt("");
   };
 
-  const currentUrl = window.location.href;
-  const currentLanguage: any = currentUrl.split("contact?language=")[1];
   const [language, setLanguage] = useAtom(languageAtom);
+  const searchParams = useSearchParams();
+  const currentLanguage: any = searchParams.get("language");
 
   useEffect(() => {
     setLanguage(currentLanguage);
