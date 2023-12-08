@@ -83,18 +83,13 @@ function Icons({ setImgSrc, setImgAlt, setShowImage, language, isMobile }: Icons
     alert(fortune[language][Math.floor(Math.random() * fortune[language].length)]);
   };
 
-  interface TitleProps {
-    en: string;
-    ko: string;
-  }
-
   // TODO: 별개 컴포넌트 파일로 빼기
   // TODO: 인터페이스, 타입 리팩토링
   function DraggableComponent(props: {
     className: string;
     path: string;
     type: string;
-    title: TitleProps | null;
+    title: any[any] | null;
     width: number;
     height: number;
   }) {

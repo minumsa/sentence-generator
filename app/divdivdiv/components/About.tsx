@@ -8,9 +8,9 @@ export default function About() {
   const [language, setLanguage] = useAtom(languageAtom);
 
   interface About {
-    job: Record<Language, string>;
-    interest: Record<Language, string>;
-    ai: Record<Language, string>;
+    job: Record<any, string>;
+    interest: Record<any, string>;
+    ai: Record<any, string>;
   }
 
   const about: About = {

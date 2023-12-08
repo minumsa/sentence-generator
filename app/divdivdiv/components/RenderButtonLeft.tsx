@@ -1,14 +1,17 @@
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../divdivdiv.module.css";
+import { useAtom } from "jotai";
+import { languageAtom } from "../modules/data";
 
 interface RenderButtonProps {
   text: string;
-  path: string;
+  path: any;
 }
 
 export function RenderButtonLeft({ text, path }: RenderButtonProps) {
   const router = useRouter();
   const currentPath = usePathname();
+  const [language, setLanguage] = useAtom(languageAtom);
 
   return (
     <div
@@ -21,7 +24,7 @@ export function RenderButtonLeft({ text, path }: RenderButtonProps) {
           : undefined
       }
       onClick={() => {
-        router.push(path);
+        router.push(`${path}?language=${language}`);
       }}
     >
       <div>{text}</div>

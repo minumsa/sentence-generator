@@ -5,7 +5,7 @@ export const initialShowImage = atom(false);
 export const initialIsMobile = atom(false);
 export const initialImgSrc = atom("");
 export const initialImgAlt = atom("");
-export const initialLanguage = "en";
+export const initialLanguage = "ko";
 export const languageAtom = atom<Language>(initialLanguage);
 
 export interface Weather {

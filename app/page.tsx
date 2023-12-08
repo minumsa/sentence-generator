@@ -2,17 +2,20 @@
 
 import styles from "./divdivdiv/divdivdiv.module.css";
 import {
+  Language,
   initialImgAlt,
   initialImgSrc,
   initialIsMobile,
   initialLanguage,
   initialShowImage,
+  languageAtom,
 } from "./divdivdiv/modules/data";
 import Main from "./divdivdiv/components/Main";
 import { ImageModal } from "./divdivdiv/components/Modal";
 import { useAtom } from "jotai";
 import NoSSR from "./divdivdiv/modules/NoSSR";
 import { Nav } from "./divdivdiv/components/Nav";
+import { useEffect } from "react";
 
 export default function Page() {
   const [showImage, setShowImage] = useAtom(initialShowImage);
@@ -25,6 +28,14 @@ export default function Page() {
     setImgSrc("");
     setImgAlt("");
   };
+
+  const currentUrl = window.location.href;
+  const currentLanguage: any = currentUrl.split("contact?language=")[1];
+  const [language, setLanguage] = useAtom(languageAtom);
+
+  useEffect(() => {
+    setLanguage(currentLanguage);
+  }, []);
 
   return (
     <>
