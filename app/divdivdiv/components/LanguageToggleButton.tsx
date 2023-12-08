@@ -11,7 +11,7 @@ export const LanguageToggleButton = () => {
   const toggleLanguage = () => {
     const newLanguage = language === "en" ? "ko" : "en";
     setLanguage(newLanguage);
-    router.push(`${path}?language=${newLanguage}`);
+    // router.push(`${path}?language=${newLanguage}`);
   };
 
   return (
