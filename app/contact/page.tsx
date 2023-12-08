@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useAtom } from "jotai";
 import { languageAtom } from "../divdivdiv/modules/data";
 
-export default function Page(request: Request) {
+export default function Page() {
   const [language, setLanguage] = useAtom(languageAtom);
   const searchParams = useSearchParams();
   const currentLanguage: any = searchParams.get("language");
