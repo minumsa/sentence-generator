@@ -22,18 +22,6 @@ export default function DraggableContents() {
   const [showImage, setShowImage] = useAtom(showImageAtom);
   const [imgSrc, setImgSrc] = useAtom<string>(imgSrcAtom);
   const [imgAlt, setImgAlt] = useAtom<string>(imgAltAtom);
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-
-  const handleWindowResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
 
   return (
     // TODO: 코드 정리하고 관련 개념 기록해두기

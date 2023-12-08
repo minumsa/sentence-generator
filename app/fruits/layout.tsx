@@ -18,11 +18,7 @@ export const metadata = {
   },
 };
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const Layout = ({ children }: Props) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html color="#fff">
       <body>{children}</body>
