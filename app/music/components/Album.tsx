@@ -111,7 +111,7 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
             );
             const isLongText = isFirstParagraphInHTML
               ? isFirstParagraphInHTML[1].length > longTextStandard
-              : text.length > longTextStandard;
+              : data.text.length > longTextStandard;
 
             // 포스트 페이지일 때 표시할 앨범 텍스트
             if (isPostPage) {
