@@ -26,7 +26,6 @@ export default function Update({ currentId }: UpdateProps) {
   const handleUpdate = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
-      artistId,
       genre,
       link,
       text,
@@ -34,7 +33,7 @@ export default function Update({ currentId }: UpdateProps) {
     });
 
     if (newAlbumData) {
-      updateData(albumId, artistId, newAlbumData, password);
+      updateData(albumId, newAlbumData, password);
     }
   };
 

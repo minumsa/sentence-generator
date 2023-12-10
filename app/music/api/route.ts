@@ -12,6 +12,7 @@ export async function POST(request: Request) {
       id,
       imgUrl,
       artistImgUrl,
+      artistId,
       artist,
       album,
       label,
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
       id,
       imgUrl,
       artistImgUrl,
+      artistId,
       artist,
       album,
       label,
@@ -137,11 +139,12 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { originalId, artistId, data, password } = await request.json();
+    const { data, password } = await request.json();
     const {
       id,
       imgUrl,
       artistImgUrl,
+      artistId,
       artist,
       album,
       label,

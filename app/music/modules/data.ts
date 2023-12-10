@@ -80,7 +80,6 @@ export interface PageProps {
 
 export interface UpdateInfo {
   albumId: string;
-  artistId: string;
   genre: string;
   link: string;
   text: string;

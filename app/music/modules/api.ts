@@ -175,7 +175,6 @@ export async function uploadData(uploadData: AlbumInfo, password: string) {
 
 export const updateData = async (
   originalId: string,
-  artistId: string,
   data: Partial<AlbumInfo>,
   password: string
 ) => {
@@ -188,7 +187,6 @@ export const updateData = async (
         },
         body: JSON.stringify({
           originalId: originalId,
-          artistId: artistId,
           data: data,
           password: password,
         }),
@@ -265,14 +263,7 @@ const fetchSpotifyAccessToken = async () => {
   }
 };
 
-export const fetchSpotify = async ({
-  albumId,
-  artistId,
-  genre,
-  link,
-  text,
-  uploadDate,
-}: UpdateInfo) => {
+export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: UpdateInfo) => {
   if (!albumId || !genre || !link || !text) {
     alert("모든 항목을 채워주세요.");
     return;
@@ -280,7 +271,6 @@ export const fetchSpotify = async ({
 
   const item = {
     albumId: albumId,
-    artistId: artistId,
     genre: genre,
     link: link,
     text: text,
@@ -294,23 +284,32 @@ export const fetchSpotify = async ({
     }
 
     const albumUrl = `https://api.spotify.com/v1/albums/${item.albumId}`;
-    const artistUrl = `https://api.spotify.com/v1/artists/${item.artistId}`;
+
     const headers = {
       Authorization: `Bearer ${accessToken}`,
     };
     const albumDataResponse = await fetch(albumUrl, { headers });
-    const artistDataResponse = await fetch(artistUrl, { headers });
 
     if (!albumDataResponse.ok) {
-      console.error("Error: music fetch failed");
+      console.error("Error: albumData fetch failed");
     }
 
     const albumData = await albumDataResponse.json();
+
+    const artistId = albumData.artists[0].id;
+    const artistUrl = `https://api.spotify.com/v1/artists/${artistId}`;
+
+    const artistDataResponse = await fetch(artistUrl, { headers });
+
+    if (!artistDataResponse.ok) {
+      console.error("Error: artistDataResponse fetch failed");
+    }
+
     const artistData = await artistDataResponse.json();
 
     const fetchedData: AlbumInfo = {
       id: albumData.id,
-      artistId: artistId,
+      artistId: albumData.artists[0].id,
       imgUrl: albumData.images[0].url,
       artistImgUrl: artistData.images[0].url,
       artist: albumData.artists[0].name,

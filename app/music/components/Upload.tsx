@@ -1,16 +1,13 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useState } from "react";
 import styles from "../music.module.css";
-import { usePathname } from "next/navigation";
 import React from "react";
-import { fetchDataById, fetchSpotify, updateData, uploadData } from "../modules/api";
+import { fetchSpotify, uploadData } from "../modules/api";
 import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Upload() {
-  const [data, setData] = useState<any>();
   const [albumId, setAlbumId] = useState("");
-  const [artistId, setArtistId] = useState("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
@@ -21,7 +18,6 @@ export default function Upload() {
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
-      artistId,
       genre,
       link,
       text,
@@ -96,14 +92,6 @@ export default function Upload() {
           value={albumId}
           onChange={e => {
             setAlbumId(e.target.value);
-          }}
-        />
-        <div className={styles["upload-item-title"]}>아티스트 ID(Spotify)</div>
-        <textarea
-          className={styles["input"]}
-          value={artistId}
-          onChange={e => {
-            setArtistId(e.target.value);
           }}
         />
         <div className={styles["upload-item-title"]}>글</div>
