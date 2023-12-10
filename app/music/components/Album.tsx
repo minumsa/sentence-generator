@@ -78,6 +78,10 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
             <div>
               <span className={styles["black-masking"]}>{data.label}</span>
             </div>
+            <div className={styles["post-date"]}>발매일</div>
+            <div>
+              <span className={styles["black-masking"]}>{data.releaseDate}</span>
+            </div>
             <div className={styles["post-date"]}>러닝타임</div>
             <div>
               <span className={styles["black-masking"]}>

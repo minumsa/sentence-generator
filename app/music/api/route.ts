@@ -139,7 +139,7 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { data, password } = await request.json();
+    const { currentId, data, password } = await request.json();
     const {
       id,
       imgUrl,
@@ -161,7 +161,7 @@ export async function PUT(request: Request) {
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
     // 수정할 데이터를 id로 찾아 originalData라는 변수에 할당
-    const originalData = await Music.findOne({ id });
+    const originalData = await Music.findOne({ id: currentId });
 
     if (!originalData) {
       return NextResponse.json({ message: "Data not found. Cannot update." }, { status: 404 });

@@ -1,8 +1,7 @@
 import { forwardRef, useEffect, useState } from "react";
 import styles from "../music.module.css";
-import { usePathname } from "next/navigation";
 import React from "react";
-import { fetchDataById, fetchSpotify, updateData, uploadData } from "../modules/api";
+import { fetchDataById, fetchSpotify, updateData } from "../modules/api";
 import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -33,7 +32,7 @@ export default function Update({ currentId }: UpdateProps) {
     });
 
     if (newAlbumData) {
-      updateData(albumId, newAlbumData, password);
+      updateData(currentId, newAlbumData, password);
     }
   };
 

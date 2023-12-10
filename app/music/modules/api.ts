@@ -173,11 +173,7 @@ export async function uploadData(uploadData: AlbumInfo, password: string) {
   }
 }
 
-export const updateData = async (
-  originalId: string,
-  data: Partial<AlbumInfo>,
-  password: string
-) => {
+export const updateData = async (currentId: string, data: Partial<AlbumInfo>, password: string) => {
   if (data !== null) {
     try {
       const response = await fetch("/music/api", {
@@ -186,9 +182,9 @@ export const updateData = async (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          originalId: originalId,
-          data: data,
-          password: password,
+          currentId,
+          data,
+          password,
         }),
       });
 

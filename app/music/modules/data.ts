@@ -29,6 +29,7 @@ export const contents: ContentsType = {
   electronic: "일렉트로닉",
   jazz: "재즈",
   soul: "알앤비/소울",
+  hiphop: "힙합/랩",
   folk: "포크",
   country: "컨트리",
   classic: "클래식",
