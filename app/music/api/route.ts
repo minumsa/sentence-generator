@@ -72,6 +72,7 @@ export async function GET(request: Request) {
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
 
     let sortKey = {};
+
     if (currentMethod === "발매일") {
       sortKey = { releaseDate: currentCriteria };
     } else if (currentMethod === "작성일") {
@@ -80,6 +81,10 @@ export async function GET(request: Request) {
       sortKey = { artist: currentCriteria };
     } else if (currentMethod === "앨범") {
       sortKey = { album: currentCriteria };
+    }
+
+    if (pathName === "") {
+      sortKey = { releaseDate: 1 };
     }
 
     // pathName이 장르(pop, kpop...)인 경우 해당 장르로 필터링
@@ -97,10 +102,7 @@ export async function GET(request: Request) {
     // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
     const startIndex = perPageCount * currentPage - perPageCount;
-    const slicedData = await Music.find(query) //
-      .sort(sortKey)
-      .skip(startIndex) //
-      .limit(perPageCount);
+    const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
