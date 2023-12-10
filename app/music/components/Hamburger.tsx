@@ -36,19 +36,18 @@ export const Hamburger = ({ pathName }: HamburgerProps) => {
         <div className={styles["hamburger-category"]}>
           {Object.keys(contents).map((category, index) => {
             const isActiveCategory = pathName === category || (isMainPage && category === "");
-            if (index > 0)
-              return (
-                <div
-                  key={category}
-                  className={styles["hamburger-content"]}
-                  onClick={() => {
-                    router.push(`/music/${category}/1`);
-                  }}
-                  style={isActiveCategory ? activeStyle : {}}
-                >
-                  {contents[category]}
-                </div>
-              );
+            return (
+              <div
+                key={category}
+                className={styles["hamburger-content"]}
+                onClick={() => {
+                  router.push(`/music/${category}/1`);
+                }}
+                style={isActiveCategory ? activeStyle : {}}
+              >
+                {contents[category]}
+              </div>
+            );
           })}
         </div>
       ) : null}
