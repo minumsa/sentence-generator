@@ -517,6 +517,10 @@
 }
 
 @media (max-width: 499px) {
+  .container {
+    border: 3.5px solid #000;
+  }
+
   .icon-title {
     font-size: 0.8rem;
   }
