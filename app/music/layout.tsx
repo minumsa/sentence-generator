@@ -4,9 +4,14 @@ import styles from "./music.module.css";
 
 export const metadata = {
   title: "카버 차트",
-  // description: "",
+  description: "",
   openGraph: {
-    // images: [{ url: "/lunch_thumbnail.webp", width: 1800, height: 945 }],
+    images: [
+      {
+        url: "",
+        // width: 1800, height: 945
+      },
+    ],
     locale: "ko_KR",
     siteName: "divdivdiv",
     title: "카버 차트",

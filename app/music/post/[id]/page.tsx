@@ -5,7 +5,7 @@ import { Post } from "../../components/Post";
 import { MusicLayout } from "../../components/MusicLayout";
 import { useEffect, useState } from "react";
 import { fetchDataById } from "../../modules/api";
-import Head from "next/head";
+import { metadata } from "../../layout";
 
 export default function Page({ params }: PageProps) {
   const currentId = params.id;
@@ -17,18 +17,15 @@ export default function Page({ params }: PageProps) {
       setData(result);
     }
     getData();
+
+    metadata.title = data.album;
+    metadata.description = data.text;
+    metadata.openGraph.images[0].url = data.imgUrl;
   }, []);
 
   return (
-    <>
-      <Head>
-        <meta property="og:title" content={data.album}></meta>
-        <meta property="og:description" content={data.text}></meta>
-        <meta property="og:image" content={data.imgUrl}></meta>
-      </Head>
-      <MusicLayout>
-        <Post pathName={currentId} />
-      </MusicLayout>
-    </>
+    <MusicLayout>
+      <Post pathName={currentId} />
+    </MusicLayout>
   );
 }
