@@ -1,22 +1,10 @@
-import { AlbumInfo, PageProps, initialAlbumInfo } from "../../modules/data";
+import { PageProps } from "../../modules/data";
 import { Post } from "../../components/Post";
 import { MusicLayout } from "../../components/MusicLayout";
-import { metadata } from "../../layout";
-import Head from "next/head";
-import { Metadata, ResolvingMetadata } from "next/dist/lib/metadata/types/metadata-interface";
-import { fetchDataById } from "../../modules/api";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
 export default function Page({ params }: PageProps) {
   const currentId = params.id;
-  // const [data, setData] = useState<AlbumInfo>(initialAlbumInfo);
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     const result = await fetchDataById(currentId);
-  //     setData(result);
-  //   }
-  //   getData();
-  // }, []);
 
   return (
     <MusicLayout>
@@ -25,17 +13,11 @@ export default function Page({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata(
-  { params }: any,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const currentId = params.id;
-  const data = await fetch(`https://divdivdiv.com/music/api/update?id=${currentId}`).then(res =>
-    res.json()
-  );
-  // const data = await fetchDataById(currentId);
-
-  // const previousImages = (await parent).openGraph?.images || [];
+  const queryString = `?id=${currentId}`;
+  const url = `https://divdivdiv.com/music/api/update${queryString}`;
+  const data = await fetch(url).then(res => res.json());
 
   return {
     title: data?.album,
@@ -43,6 +25,7 @@ export async function generateMetadata(
     openGraph: {
       title: `${data?.artist} - ${data?.album}`,
       images: [data.imgUrl],
+      description: data?.text.split(". ")[0] + ".",
     },
   };
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "../music.module.css";
 import {
@@ -17,12 +19,12 @@ import { Loading } from "./Loading";
 import { Album } from "./Album";
 
 interface PageProps {
-  fullPathName: string;
+  isAdminPage: boolean;
   artistId: string;
   currentPage: number;
 }
 
-export default function ArtistContent({ fullPathName, artistId, currentPage }: PageProps) {
+export default function ArtistContent({ isAdminPage, artistId, currentPage }: PageProps) {
   const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -101,7 +103,6 @@ export default function ArtistContent({ fullPathName, artistId, currentPage }: P
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
-                    const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     setCurrentOrder(item);
                     router.push(`/music/artist/${artistId}/1`);
                   }}
@@ -171,7 +172,7 @@ export default function ArtistContent({ fullPathName, artistId, currentPage }: P
   };
 
   async function handleSearch() {
-    isAdminPage(fullPathName)
+    isAdminPage
       ? router.push(`/music/admin/search/${keyword}/1`)
       : router.push(`/music/search/${keyword}/1`);
   }
