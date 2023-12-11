@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { fetchDataById } from "../modules/api";
-import { AlbumInfo, initialAlbumInfo } from "../modules/data";
+import { AlbumInfo, PageProps, initialAlbumInfo } from "../modules/data";
 import { Album } from "./Album";
 import styles from "../music.module.css";
 import { useRouter } from "next/navigation";
