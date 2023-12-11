@@ -22,14 +22,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const url = `https://divdivdiv.com/music/api/artist${queryString}`;
   const fetchArtistData = await fetch(url).then(res => res.json());
   const data = fetchArtistData?.slicedData[0];
+  const { artistImgUrl, artist, album, text } = data;
 
   return {
-    title: data.album,
-    description: data.text.split(". ")[0] + ".",
+    title: artist,
+    // description: text.split(". ")[0] + ".",
     openGraph: {
-      title: `${data.artist}`,
-      images: [data.artistImgUrl],
-      description: data.text.split(". ")[0] + ".",
+      title: `${artist}`,
+      images: [artistImgUrl],
+      // description: text.split(". ")[0] + ".",
     },
   };
 }

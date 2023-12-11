@@ -18,14 +18,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const queryString = `?id=${currentId}`;
   const url = `https://divdivdiv.com/music/api/update${queryString}`;
   const data = await fetch(url).then(res => res.json());
+  const { imgUrl, artist, album, text } = data;
+  const firstSentence = text.split(". ")[0] + ".";
 
   return {
-    title: data?.album,
-    description: data?.text.split(". ")[0] + ".",
+    title: `${artist} - ${album}`,
+    description: firstSentence,
     openGraph: {
-      title: `${data?.artist} - ${data?.album}`,
-      images: [data.imgUrl],
-      description: data?.text.split(". ")[0] + ".",
+      title: `${artist} - ${album}`,
+      images: [imgUrl],
+      description: firstSentence,
     },
   };
 }
