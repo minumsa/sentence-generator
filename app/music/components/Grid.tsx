@@ -31,7 +31,8 @@ export const Grid = () => {
     threshold: 0,
     triggerOnce: false,
   });
-  const isLoading = data.length === 0;
+  // const isLoading = data.length === 0;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     Aos.init();
@@ -59,6 +60,7 @@ export const Grid = () => {
 
       const dataLength = result?.genreDataLength;
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
+      setIsLoading(false);
     }
 
     loadData();
@@ -99,6 +101,7 @@ export const Grid = () => {
                 className={styles["grid-album-container"]}
                 style={{ position: "relative", width: "100%" }}
                 onClick={() => {
+                  setIsLoading(true);
                   isAdminPage(pathName)
                     ? router.push(`/music/admin/post/${item.id}`)
                     : router.push(`/music/post/${item.id}`);
@@ -122,6 +125,7 @@ export const Grid = () => {
               <div
                 className={styles["grid-album-title"]}
                 onClick={() => {
+                  setIsLoading(true);
                   isAdminPage(pathName)
                     ? router.push(`/music/admin/post/${item.id}`)
                     : router.push(`/music/post/${item.id}`);
