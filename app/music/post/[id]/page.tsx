@@ -30,21 +30,31 @@ export default function Page({ params }: PageProps) {
   );
 }
 
-export async function getServerSideProps({ params }: any) {
-  const currentId = params.id;
+// export async function getServerSideProps({ params }: any) {
+//   const currentId = params.id;
 
-  // Fetch data using fetchDataById or any other method
-  const result = await fetchDataById(currentId);
+//   // Fetch data using fetchDataById or any other method
+//   const result = await fetchDataById(currentId);
 
-  // Set metadata values
-  metadata.title = result.album;
-  metadata.description = result.text;
-  metadata.openGraph.images[0].url = result.imgUrl;
+//   // Set metadata values
+//   metadata.title = result.album;
+//   metadata.description = result.text;
+//   metadata.openGraph.images[0].url = result.imgUrl;
 
-  // Return data as props
+//   // Return data as props
+//   return {
+//     props: {
+//       data: result,
+//     },
+//   };
+// }
+
+export async function generateMetadata({ params }: any) {
+  const id = params.id;
+  const result = await fetchDataById(id);
+
   return {
-    props: {
-      data: result,
-    },
+    title: result.title,
+    description: result.description,
   };
 }
