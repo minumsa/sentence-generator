@@ -9,23 +9,42 @@ import { metadata } from "../../layout";
 
 export default function Page({ params }: PageProps) {
   const currentId = params.id;
-  const [data, setData] = useState<AlbumInfo>(initialAlbumInfo);
+  // const [data, setData] = useState<AlbumInfo>(initialAlbumInfo);
 
-  useEffect(() => {
-    async function getData() {
-      const result = await fetchDataById(currentId);
-      setData(result);
-    }
-    getData();
+  // useEffect(() => {
+  //   async function getData() {
+  //     const result = await fetchDataById(currentId);
+  //     setData(result);
+  //   }
+  //   getData();
 
-    metadata.title = data.album;
-    metadata.description = data.text;
-    metadata.openGraph.images[0].url = data.imgUrl;
-  }, []);
+  //   metadata.title = data.album;
+  //   metadata.description = data.text;
+  //   metadata.openGraph.images[0].url = data.imgUrl;
+  // }, []);
 
   return (
     <MusicLayout>
       <Post pathName={currentId} />
     </MusicLayout>
   );
+}
+
+export async function getServerSideProps({ params }: any) {
+  const currentId = params.id;
+
+  // Fetch data using fetchDataById or any other method
+  const result = await fetchDataById(currentId);
+
+  // Set metadata values
+  metadata.title = result.album;
+  metadata.description = result.text;
+  metadata.openGraph.images[0].url = result.imgUrl;
+
+  // Return data as props
+  return {
+    props: {
+      data: result,
+    },
+  };
 }
