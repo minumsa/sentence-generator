@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const data = await fetch(url).then(res => res.json());
   const { imgUrl, artist, album, text } = data;
   const firstSentence = text.split(". ")[0] + ".";
+  const currentUrl = `https://divdivdiv.com/music/post/${currentId}`;
 
   return {
     title: `${artist} - ${album}`,
@@ -28,6 +29,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `${artist} - ${album}`,
       images: [imgUrl],
       description: firstSentence,
+      url: currentUrl,
+      type: "website",
+      siteName: "divdivdiv",
     },
   };
 }

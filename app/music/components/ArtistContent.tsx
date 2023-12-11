@@ -9,7 +9,6 @@ import {
   OrderType,
   initialCriteria,
   initialMethod,
-  isAdminPage,
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
@@ -33,7 +32,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
   // FIXME: jotai 타입 오류 해결해야 함 MethodType 또는 Criteria 타입으로
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
-  const isLoading = data.length === 0;
+  const [isLoading, setIsLoading] = useState(true);
   const [perPageCount, setDataPerPage] = useState(5);
   const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
@@ -56,6 +55,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
       const genreDataLength = result?.genreDataLength;
       setDataLength(genreDataLength);
       setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
+      setIsLoading(false);
     }
 
     loadData();
@@ -105,6 +105,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
                   onClick={() => {
                     setCurrentOrder(item);
                     router.push(`/music/artist/${artistId}/1`);
+                    setIsLoading(true);
                   }}
                 >
                   {item}
@@ -219,6 +220,18 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
             setCurrentOrder={setCurrentCriteria}
             sortWay={sortCriteria}
           />
+        </div>
+      )}
+      {!isLoading && (
+        <div className={styles["artist-image-container"]}>
+          <div className={styles["album-art"]}>
+            <img
+              src={data[0].artistImgUrl}
+              alt="test"
+              className={styles["category-meta-image"]}
+              loading="lazy"
+            />
+          </div>
         </div>
       )}
       {isLoading ? (
