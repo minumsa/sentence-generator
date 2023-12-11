@@ -1,5 +1,3 @@
-"use client";
-
 import { AlbumInfo, PageProps, initialAlbumInfo } from "../../modules/data";
 import { Post } from "../../components/Post";
 import { MusicLayout } from "../../components/MusicLayout";
