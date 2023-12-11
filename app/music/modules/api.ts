@@ -120,8 +120,7 @@ export async function SearchData({
 
 export async function fetchDataById(id: string) {
   try {
-    const queryString = `?id=${id}`;
-    const url = `/music/api/update${queryString}`;
+    const url = `/music/api/update?id=${id}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -131,7 +130,7 @@ export async function fetchDataById(id: string) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to upload music data");
+      throw new Error("Failed to update music data");
     }
 
     let data = await response.json();

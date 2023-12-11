@@ -1,11 +1,10 @@
 import { AlbumInfo, PageProps, initialAlbumInfo } from "../../modules/data";
 import { Post } from "../../components/Post";
 import { MusicLayout } from "../../components/MusicLayout";
-import { useEffect, useState } from "react";
-import { fetchDataById } from "../../modules/api";
 import { metadata } from "../../layout";
 import Head from "next/head";
 import { Metadata, ResolvingMetadata } from "next/dist/lib/metadata/types/metadata-interface";
+import { fetchDataById } from "../../modules/api";
 
 export default function Page({ params }: PageProps) {
   const currentId = params.id;
@@ -21,7 +20,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <MusicLayout>
-      <Post pathName={currentId} />
+      <Post currentId={currentId} />
     </MusicLayout>
   );
 }
@@ -31,14 +30,19 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const currentId = params.id;
-  const data = await fetchDataById(currentId);
+  const data = await fetch(`https://divdivdiv.com/music/api/update?id=${currentId}`).then(res =>
+    res.json()
+  );
+  // const data = await fetchDataById(currentId);
+
   // const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: data.album,
-    description: data.text,
-    // openGraph: {
-    //   images: ["/some-specific-page-image.jpg", ...previousImages],
-    // },
+    title: data?.album,
+    description: data?.text.split(". ")[0] + ".",
+    openGraph: {
+      title: `${data?.artist} - ${data?.album}`,
+      images: [data.imgUrl],
+    },
   };
 }

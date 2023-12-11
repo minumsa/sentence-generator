@@ -9,7 +9,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <MusicLayout>
-      <Post pathName={currentId} />
+      <Post currentId={currentId} />
     </MusicLayout>
   );
 }

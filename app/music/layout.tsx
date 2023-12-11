@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./music.module.css";
 
 export const metadata = {
-  title: "카버 차트",
+  // title: "카버 차트",
   description: "",
   openGraph: {
     images: [

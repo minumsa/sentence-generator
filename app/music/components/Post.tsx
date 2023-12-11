@@ -8,16 +8,16 @@ import styles from "../music.module.css";
 import { useRouter } from "next/navigation";
 
 interface PostProps {
-  pathName: string;
+  currentId: string;
 }
 
-export const Post = ({ pathName }: PostProps) => {
+export const Post = ({ currentId }: PostProps) => {
   const [data, setData] = useState<AlbumInfo>(initialAlbumInfo);
   const router = useRouter();
 
   useEffect(() => {
     async function getData() {
-      const result = await fetchDataById(pathName);
+      const result = await fetchDataById(currentId);
       setData(result);
     }
     getData();
