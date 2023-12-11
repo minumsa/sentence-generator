@@ -758,6 +758,10 @@
     --width-large: calc(100% / 5 - 2.5px);
     width: var(--width-large);
   }
+
+  .artist-image-container {
+    display: none;
+  }
 }
 
 @media (max-width: 1050px) {
@@ -1152,10 +1156,6 @@
 
   .album-metadata {
     z-index: 1;
-  }
-
-  .artist-image-container {
-    display: none;
   }
 }
 
