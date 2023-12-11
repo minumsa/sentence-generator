@@ -22,9 +22,9 @@ export default function Page({ params }: PageProps) {
   return (
     <>
       <Head>
-        <title>{data.album}</title>
-        <meta name="description" content={data.text}></meta>
-        <meta name="images" content={data.imgUrl}></meta>
+        <meta property="og:title" content={data.album}></meta>
+        <meta property="og:description" content={data.text}></meta>
+        <meta property="og:image" content={data.imgUrl}></meta>
       </Head>
       <MusicLayout>
         <Post pathName={currentId} />
