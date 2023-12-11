@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: any) {
   const result = await fetchDataById(id);
 
   return {
-    title: result.title,
-    description: result.description,
+    title: result.album,
+    description: result.text,
   };
 }
