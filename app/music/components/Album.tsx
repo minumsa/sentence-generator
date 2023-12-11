@@ -136,7 +136,16 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
                 return (
                   <>
                     <div className={styles["paragraph-container"]} key={index}>
-                      <div className={styles["category-meta-title"]}>{data.album}</div>
+                      <div
+                        className={styles["category-meta-title"]}
+                        onClick={() => {
+                          isAdminPage(pathName)
+                            ? router.push(`/music/admin/post/${data.id}`)
+                            : router.push(`/music/post/${data.id}`);
+                        }}
+                      >
+                        {data.album}
+                      </div>
                       <div className={styles["category-meta"]}>
                         <div className={styles["category-meta-image-container"]}>
                           <img
