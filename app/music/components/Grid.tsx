@@ -64,8 +64,6 @@ export const Grid = () => {
     loadData();
   }, [pathName, currentMethod, currentCriteria, currentPage]);
 
-  console.log(data);
-
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = () => {

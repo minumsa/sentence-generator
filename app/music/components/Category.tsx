@@ -20,12 +20,12 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
           setBoardIsVisible(!boardIsVisible);
           router.push(isAdminPage(fullPathName) ? `/music/admin` : `/music`);
         }}
-        style={pathName === "" ? activeStyle : {}}
+        style={pathName === "/music/admin" || pathName === "/music" ? activeStyle : {}}
       >
         divdivdiv
       </div>
       {Object.keys(contents).map(category => {
-        const isActiveCategory = pathName === category || (isMainPage(pathName) && category === "");
+        const isActiveCategory = pathName.includes(category);
         return (
           <div
             key={category}
