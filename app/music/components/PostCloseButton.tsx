@@ -3,10 +3,10 @@ import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
 
 interface PostCloseButtonProps {
-  data: AlbumInfo;
+  albumData: AlbumInfo;
 }
 
-export const PostCloseButton = ({ data }: PostCloseButtonProps) => {
+export const PostCloseButton = ({ albumData }: PostCloseButtonProps) => {
   const router = useRouter();
 
   return (
@@ -17,7 +17,7 @@ export const PostCloseButton = ({ data }: PostCloseButtonProps) => {
           window.history.length < 2 ? router.push("/music") : router.back();
         }}
       >
-        {data.text && "✕"}
+        {albumData.text && "✕"}
       </div>
     </div>
   );
