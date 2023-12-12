@@ -1,18 +1,17 @@
 import { usePathname, useRouter } from "next/navigation";
 import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
-import { AlbumInfo, isAdminPage } from "../modules/data";
+import { AlbumInfo } from "../modules/data";
 import { deleteData } from "../modules/api";
-import { Loading } from "./Loading";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
 
 interface AlbumProps {
   data: AlbumInfo;
-  isAdminMainPage: boolean;
+  isAdminPage: boolean;
 }
 
-export const Album = ({ data, isAdminMainPage }: AlbumProps) => {
+export const Album = ({ data, isAdminPage }: AlbumProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(data.duration);
   const divRef = useRef<HTMLDivElement>(null);
@@ -115,7 +114,7 @@ export const Album = ({ data, isAdminMainPage }: AlbumProps) => {
                     )}
                   </div>
                   {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
-                  {isAdminMainPage && (
+                  {isAdminPage && (
                     <div className={styles["admin-button-container"]}>
                       <div
                         className={styles["admin-button"]}

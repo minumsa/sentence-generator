@@ -7,14 +7,14 @@ import {
   OrderType,
   initialCriteria,
   initialMethod,
-  isAdminPage,
   sortItems,
 } from "../modules/data";
 import { useRouter } from "next/navigation";
-import { SearchData, fetchData } from "../modules/api";
+import { SearchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { Loading } from "./Loading";
 import { Album } from "./Album";
+import { PageNumbers } from "./PageNumbers";
 
 interface PageProps {
   pathName: string;
@@ -35,18 +35,19 @@ export default function SearchContent({
   const [sortMethod, setSortMethod] = useState<boolean>(false);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
-  const isUploadPage = pathName === "upload";
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState(5);
   const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
   const [maxPageNumber, setMaxPage] = useState<number>(5);
-  const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const isAdminMainPage = fullPathName.includes("admin");
   const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
   const isMainPage = pathName === "";
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
+  const [isAdminPage, setIsAdminPage] = useState(false);
+
+  console.log(pathName, "pathName");
 
   useEffect(() => {
     async function loadData() {
@@ -70,6 +71,10 @@ export default function SearchContent({
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
   }, [currentKeyword]);
+
+  useEffect(() => {
+    if (fullPathName.includes("admin")) setIsAdminPage(true);
+  }, []);
 
   const SortToggleButton = ({
     type,
@@ -196,7 +201,7 @@ export default function SearchContent({
   };
 
   async function handleSearch() {
-    isAdminPage(fullPathName)
+    isAdminPage
       ? router.push(`/music/admin/search/${keyword}/1`)
       : router.push(`/music/search/${keyword}/1`);
   }
@@ -209,7 +214,7 @@ export default function SearchContent({
 
   return (
     <>
-      {!isUploadPage && !isLoading && (
+      {!isLoading && (
         <div className={styles["top-menu-container"]}>
           <div className={styles["top-search-container"]}>
             {isSearching && (
@@ -255,60 +260,22 @@ export default function SearchContent({
 
           return (
             <div key={index}>
-              <Album data={data} isAdminMainPage={isAdminMainPage} />
+              <Album data={data} isAdminPage={isAdminMainPage} />
               {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
             </div>
           );
         })
       )}
       {!isLoading && (
-        <div className={styles["page-container"]}>
-          {currentPage > 5 && (
-            <div
-              className={styles["page"]}
-              onClick={() => {
-                if (maxPageNumber > 5) {
-                  const prevPageBlock = maxPageNumber - 5;
-                  handleDynamicPage(prevPageBlock);
-                }
-              }}
-            >
-              〈
-            </div>
-          )}
-          {pageArray.map((page, index) => {
-            const minPageNumber = maxPageNumber - perPageCount + 1;
-            const pageButtonNumber = index + 1;
-            if (pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber)
-              return (
-                <div
-                  key={index}
-                  className={styles["page"]}
-                  onClick={() => {
-                    router.push(`/music/search/${currentKeyword}/${pageButtonNumber}`);
-                  }}
-                  style={
-                    currentPage === pageButtonNumber
-                      ? { fontWeight: 500, opacity: "70%" }
-                      : undefined
-                  }
-                >
-                  {page}
-                </div>
-              );
-          })}
-          {totalPage - maxPageNumber > 0 && (
-            <div
-              className={styles["page"]}
-              onClick={() => {
-                const nextPageBlock = maxPageNumber + 1;
-                handleDynamicPage(nextPageBlock);
-              }}
-            >
-              〉
-            </div>
-          )}
-        </div>
+        <PageNumbers
+          pathName={
+            isAdminPage ? `admin/${pathName}/${currentKeyword}` : `${pathName}/${currentKeyword}`
+          }
+          currentPage={currentPage}
+          totalPage={totalPage}
+          maxPageNumber={maxPageNumber}
+          perPageCount={perPageCount}
+        />
       )}
     </>
   );

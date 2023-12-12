@@ -2,19 +2,19 @@ import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
 
 interface PageNumbersProps {
+  pathName: string;
   currentPage: number;
   totalPage: number;
   maxPageNumber: number;
   perPageCount: number;
-  currentId: string;
 }
 
 export const PageNumbers = ({
+  pathName,
   currentPage,
   totalPage,
   maxPageNumber,
   perPageCount,
-  currentId,
 }: PageNumbersProps) => {
   const router = useRouter();
   const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
@@ -27,7 +27,7 @@ export const PageNumbers = ({
           onClick={() => {
             if (maxPageNumber > 5) {
               const prevPageBlock = maxPageNumber - 5;
-              router.push(`/music/artist/${currentId}/${prevPageBlock}`);
+              router.push(`/music/${pathName}/${prevPageBlock}`);
             }
           }}
         >
@@ -43,7 +43,7 @@ export const PageNumbers = ({
               key={index}
               className={styles["page"]}
               onClick={() => {
-                router.push(`/music/search/${currentId}/${pageButtonNumber}`);
+                router.push(`/music/${pathName}/${pageButtonNumber}`);
               }}
               style={
                 currentPage === pageButtonNumber ? { fontWeight: 500, opacity: "70%" } : undefined
@@ -58,7 +58,7 @@ export const PageNumbers = ({
           className={styles["page"]}
           onClick={() => {
             const nextPageBlock = maxPageNumber + 1;
-            router.push(`/music/artist/${currentId}/${nextPageBlock}`);
+            router.push(`/music/${pathName}/${nextPageBlock}`);
           }}
         >
           〉

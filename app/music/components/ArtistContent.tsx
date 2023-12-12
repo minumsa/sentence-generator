@@ -237,17 +237,17 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
 
         return (
           <div key={index}>
-            <Album data={data} isAdminMainPage={false} />
+            <Album data={data} isAdminPage={false} />
             {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
           </div>
         );
       })}
       <PageNumbers
+        pathName={isAdminPage ? `admin/${artistId}` : artistId}
         currentPage={currentPage}
         totalPage={totalPage}
         maxPageNumber={maxPageNumber}
         perPageCount={perPageCount}
-        currentId={artistId}
       />
     </>
   );

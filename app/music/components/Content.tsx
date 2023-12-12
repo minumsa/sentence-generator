@@ -36,14 +36,9 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
   const [maxPageNumber, setMaxPage] = useState<number>(5);
-  const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
-  const isAdminMainPage = fullPathName.includes("admin");
-  const isAdminGenrePage = fullPathName.includes("admin") && pathName.length > 0;
-  const isMainPage = pathName === "";
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
-
-  console.log("pathName", pathName);
+  const [isAdminPage, setIsAdminPage] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -67,6 +62,10 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
   }, [currentPage]);
+
+  useEffect(() => {
+    if (fullPathName.includes("admin")) setIsAdminPage(true);
+  }, []);
 
   const SortToggleButton = ({
     type,
@@ -177,24 +176,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     }
   };
 
-  const handleDynamicPage = (variablePageNumber: number | "/") => {
-    // 관리자 장르 페이지인 경우
-    if (isAdminGenrePage) {
-      router.push(`/music/admin/${pathName}/${variablePageNumber}`);
-      // 관리자 메인 페이지인 경우
-    } else if (isAdminMainPage) {
-      router.push(`/music/admin/${variablePageNumber}`);
-      // 메인 페이지인 경우
-    } else if (isMainPage) {
-      router.push(`/music/${variablePageNumber}`);
-      // 장르 페이지인 경우
-    } else {
-      router.push(`/music/${pathName}/${variablePageNumber}`);
-    }
-  };
-
   async function handleSearch() {
-    isAdminPage(fullPathName)
+    isAdminPage
       ? router.push(`/music/admin/search/${keyword}/1`)
       : router.push(`/music/search/${keyword}/1`);
   }
@@ -250,17 +233,17 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
         return (
           <div key={index}>
-            <Album data={data} isAdminMainPage={isAdminMainPage} />
+            <Album data={data} isAdminPage={isAdminPage} />
             {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
           </div>
         );
       })}
       <PageNumbers
+        pathName={isAdminPage ? `admin/${pathName}` : pathName}
         currentPage={currentPage}
         totalPage={totalPage}
         maxPageNumber={maxPageNumber}
         perPageCount={perPageCount}
-        currentId={pathName}
       />
     </>
   );
