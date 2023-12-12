@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { FetchArtistData } from "../modules/api";
 import { useAtom } from "jotai";
 import { Album } from "./Album";
+import { PageNumbers } from "./PageNumbers";
 
 interface PageProps {
   isAdminPage: boolean;
@@ -35,7 +36,6 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
   const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
   const [maxPageNumber, setMaxPage] = useState<number>(5);
-  const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
 
@@ -242,55 +242,13 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
           </div>
         );
       })}
-      {
-        <div className={styles["page-container"]}>
-          {currentPage > 5 && (
-            <div
-              className={styles["page"]}
-              onClick={() => {
-                if (maxPageNumber > 5) {
-                  const prevPageBlock = maxPageNumber - 5;
-                  router.push(`/music/artist/${artistId}/${prevPageBlock}`);
-                }
-              }}
-            >
-              〈
-            </div>
-          )}
-          {pageArray.map((page, index) => {
-            const minPageNumber = maxPageNumber - perPageCount + 1;
-            const pageButtonNumber = index + 1;
-            if (pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber)
-              return (
-                <div
-                  key={index}
-                  className={styles["page"]}
-                  onClick={() => {
-                    router.push(`/music/search/${artistId}/${pageButtonNumber}`);
-                  }}
-                  style={
-                    currentPage === pageButtonNumber
-                      ? { fontWeight: 500, opacity: "70%" }
-                      : undefined
-                  }
-                >
-                  {page}
-                </div>
-              );
-          })}
-          {totalPage - maxPageNumber > 0 && (
-            <div
-              className={styles["page"]}
-              onClick={() => {
-                const nextPageBlock = maxPageNumber + 1;
-                router.push(`/music/artist/${artistId}/${nextPageBlock}`);
-              }}
-            >
-              〉
-            </div>
-          )}
-        </div>
-      }
+      <PageNumbers
+        currentPage={currentPage}
+        totalPage={totalPage}
+        maxPageNumber={maxPageNumber}
+        perPageCount={perPageCount}
+        currentId={artistId}
+      />
     </>
   );
 }

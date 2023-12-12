@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { Album } from "./Album";
+import { PageNumbers } from "./PageNumbers";
 
 interface PageProps {
   pathName: string;
@@ -41,6 +42,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const isMainPage = pathName === "";
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
+
+  console.log("pathName", pathName);
 
   useEffect(() => {
     async function loadData() {
@@ -106,7 +109,8 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
                     const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    handleDynamicPage(variablePathByNumber);
+                    // router.push(`/music/${pathName}/${variablePageNumber}`)
+                    // handleDynamicPage(variablePathByNumber);
                   }}
                 >
                   {item}
@@ -251,55 +255,13 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
           </div>
         );
       })}
-      {
-        <div className={styles["page-container"]}>
-          {currentPage > 5 && (
-            <div
-              className={styles["page"]}
-              onClick={() => {
-                if (maxPageNumber > 5) {
-                  const prevPageBlock = maxPageNumber - 5;
-                  handleDynamicPage(prevPageBlock);
-                }
-              }}
-            >
-              〈
-            </div>
-          )}
-          {pageArray.map((page, index) => {
-            const minPageNumber = maxPageNumber - perPageCount + 1;
-            const pageButtonNumber = index + 1;
-            if (pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber)
-              return (
-                <div
-                  key={index}
-                  className={styles["page"]}
-                  onClick={() => {
-                    handleDynamicPage(pageButtonNumber);
-                  }}
-                  style={
-                    currentPage === pageButtonNumber
-                      ? { fontWeight: 500, opacity: "70%" }
-                      : undefined
-                  }
-                >
-                  {page}
-                </div>
-              );
-          })}
-          {totalPage - maxPageNumber > 0 && (
-            <div
-              className={styles["page"]}
-              onClick={() => {
-                const nextPageBlock = maxPageNumber + 1;
-                handleDynamicPage(nextPageBlock);
-              }}
-            >
-              〉
-            </div>
-          )}
-        </div>
-      }
+      <PageNumbers
+        currentPage={currentPage}
+        totalPage={totalPage}
+        maxPageNumber={maxPageNumber}
+        perPageCount={perPageCount}
+        currentId={pathName}
+      />
     </>
   );
 }
