@@ -114,10 +114,12 @@ export default function SearchContent({
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
-                    const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
-                    const variablePathByNumber = hasNoPageNumber ? 1 : "/";
+                    // const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
+                    // const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    handleDynamicPage(variablePathByNumber);
+                    isAdminPage
+                      ? router.push(`/music/admin/search/${currentKeyword}/1`)
+                      : router.push(`/music/search/${currentKeyword}/1`);
                   }}
                 >
                   {item}
@@ -181,22 +183,6 @@ export default function SearchContent({
       setSortMethod(false);
     } else if (type === "criteria") {
       setSortCriteria(false);
-    }
-  };
-
-  const handleDynamicPage = (variablePageNumber: number | "/") => {
-    // 관리자 장르 페이지인 경우
-    if (isAdminGenrePage) {
-      router.push(`/music/admin/${pathName}/${variablePageNumber}`);
-      // 관리자 메인 페이지인 경우
-    } else if (isAdminMainPage) {
-      router.push(`/music/admin/${variablePageNumber}`);
-      // 메인 페이지인 경우
-    } else if (isMainPage) {
-      router.push(`/music/${variablePageNumber}`);
-      // 장르 페이지인 경우
-    } else {
-      router.push(`/music/${pathName}/${variablePageNumber}`);
     }
   };
 
