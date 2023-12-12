@@ -13,6 +13,18 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={styles["container"]}>
+      {/* TODO: TopNav도 MusicLayout에 추가 */}
+      {/* <TopNav
+            pathName={pathName}
+            isAdminPage={isAdminPage}
+            keyword={keyword}
+            currentKeyword={undefined}
+            setKeyword={setKeyword}
+            currentMethod={currentMethod}
+            setCurrentMethod={setCurrentMethod}
+            currentCriteria={currentCriteria}
+            setCurrentCriteria={setCurrentCriteria}
+          /> */}
       <Snow />
       <div className={styles["category-container"]}>
         <MobileTitle />

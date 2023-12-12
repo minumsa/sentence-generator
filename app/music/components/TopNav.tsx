@@ -7,7 +7,7 @@ interface TopNavProps {
   pathName: string;
   isAdminPage: boolean;
   keyword: string;
-  currentKeyword: string;
+  currentKeyword: string | undefined;
   setKeyword: React.Dispatch<React.SetStateAction<string>>;
   currentMethod: MethodType;
   setCurrentMethod: React.Dispatch<React.SetStateAction<CriteriaType | MethodType>>;

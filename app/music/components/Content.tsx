@@ -15,6 +15,9 @@ import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { Album } from "./Album";
 import { PageNumbers } from "./PageNumbers";
+import { Loading } from "./Loading";
+import { AlbumContents } from "./AlbumContents";
+import { TopNav } from "./TopNav";
 
 interface PageProps {
   pathName: string;
@@ -39,6 +42,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
   const [isAdminPage, setIsAdminPage] = useState(false);
+  const isLoading = data.length === 0;
 
   useEffect(() => {
     async function loadData() {
@@ -122,44 +126,6 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
     );
   };
 
-  // FIXME: 로직의 내용물은 영어로만 쓰는 게 일반적
-  const sortedData = useMemo(() => {
-    const dateSelector = (item: AlbumInfo) => {
-      if (currentMethod === "작성일") {
-        return new Date(item.uploadDate).getTime();
-      } else if (currentMethod === "발매일") {
-        return new Date(item.releaseDate).getTime();
-      }
-      return 0;
-    };
-
-    const newData = [...data];
-
-    newData.sort((a, b) =>
-      currentCriteria === "오름차순"
-        ? dateSelector(a) - dateSelector(b)
-        : dateSelector(b) - dateSelector(a)
-    );
-
-    if (currentMethod === "아티스트") {
-      newData.sort((a, b) => {
-        return currentCriteria === "오름차순"
-          ? a.artist.localeCompare(b.artist)
-          : b.artist.localeCompare(a.artist);
-      });
-    }
-
-    if (currentMethod === "앨범") {
-      newData.sort((a, b) => {
-        return currentCriteria === "오름차순"
-          ? a.album.localeCompare(b.album)
-          : b.album.localeCompare(a.album);
-      });
-    }
-
-    return newData;
-  }, [data, currentMethod, currentCriteria]);
-
   const handleMouseEnter = (type: OrderType) => {
     if (type === "method") {
       setSortMethod(true);
@@ -190,61 +156,30 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
   return (
     <>
-      {!isUploadPage && (
-        <div className={styles["top-menu-container"]}>
-          <div className={styles["top-search-container"]}>
-            {isSearching && (
-              <input
-                className={styles["top-search-input"]}
-                placeholder="검색어를 입력해주세요"
-                onChange={e => {
-                  setKeyword(e.target.value);
-                }}
-                onKeyDown={handleEnter}
-              ></input>
-            )}
-          </div>
-          <div
-            className={styles["top-magnifying-glass"]}
-            onClick={() => {
-              setIsSearching(!isSearching);
-            }}
-          ></div>
-          <SortToggleButton
-            type="method"
-            sortItem={sortItems.method}
-            currentOrder={currentMethod}
-            setCurrentOrder={setCurrentMethod}
-            sortWay={sortMethod}
+      {isLoading && <Loading dataLength={dataLength} />}
+      {!isLoading && (
+        <>
+          <TopNav
+            pathName={pathName}
+            isAdminPage={isAdminPage}
+            keyword={keyword}
+            currentKeyword={undefined}
+            setKeyword={setKeyword}
+            currentMethod={currentMethod}
+            setCurrentMethod={setCurrentMethod}
+            currentCriteria={currentCriteria}
+            setCurrentCriteria={setCurrentCriteria}
           />
-          <SortToggleButton
-            type="criteria"
-            sortItem={sortItems.criteria}
-            currentOrder={currentCriteria}
-            setCurrentOrder={setCurrentCriteria}
-            sortWay={sortCriteria}
+          <AlbumContents data={data} isAdminPage={isAdminPage} perPageCount={perPageCount} />
+          <PageNumbers
+            pathName={isAdminPage ? `admin/${pathName}` : pathName}
+            currentPage={currentPage}
+            totalPage={totalPage}
+            maxPageNumber={maxPageNumber}
+            perPageCount={perPageCount}
           />
-        </div>
+        </>
       )}
-      {sortedData.map((data, index) => {
-        const dataIndex = index + 1;
-        const isLastData = index === sortedData.length - 1;
-        const isLastDataPerPage = dataIndex % perPageCount === 0;
-
-        return (
-          <div key={index}>
-            <Album data={data} isAdminPage={isAdminPage} />
-            {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
-          </div>
-        );
-      })}
-      <PageNumbers
-        pathName={isAdminPage ? `admin/${pathName}` : pathName}
-        currentPage={currentPage}
-        totalPage={totalPage}
-        maxPageNumber={maxPageNumber}
-        perPageCount={perPageCount}
-      />
     </>
   );
 }
