@@ -244,7 +244,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
 
           return (
             <div key={index}>
-              <Album data={data} isAdminMainPage={false} isPostPage={false} />
+              <Album data={data} isAdminMainPage={false} />
               {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
             </div>
           );

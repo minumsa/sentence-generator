@@ -255,7 +255,7 @@ export default function SearchContent({
 
           return (
             <div key={index}>
-              <Album data={data} isAdminMainPage={isAdminMainPage} isPostPage={false} />
+              <Album data={data} isAdminMainPage={isAdminMainPage} />
               {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
             </div>
           );

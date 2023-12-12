@@ -38,7 +38,7 @@ export const PostAlbumText = ({ albumData }: PostAlbumTextProps) => {
 
   return (
     <div style={{ display: "flex", width: "100%", alignItems: undefined }}>
-      <div className={styles["text-container"]}>
+      <div className={styles["album-metadata-container"]}>
         {/* FIXME: 안전하게 바꾸기 */}
         {albumData.text.includes("div") && (
           <div
