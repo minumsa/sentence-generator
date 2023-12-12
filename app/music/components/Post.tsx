@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { fetchDataById } from "../modules/api";
-import { AlbumInfo, PageProps, initialAlbumInfo } from "../modules/data";
+import { AlbumInfo, initialAlbumInfo } from "../modules/data";
 import { Album } from "./Album";
-import styles from "../music.module.css";
-import { useRouter } from "next/navigation";
+import { PostCloseButton } from "./PostCloseButton";
 
 interface PostProps {
   currentId: string;
@@ -13,7 +12,6 @@ interface PostProps {
 
 export const Post = ({ currentId }: PostProps) => {
   const [data, setData] = useState<AlbumInfo>(initialAlbumInfo);
-  const router = useRouter();
 
   useEffect(() => {
     async function getData() {
@@ -25,16 +23,7 @@ export const Post = ({ currentId }: PostProps) => {
 
   return (
     <>
-      <div className={styles["top-menu-container"]}>
-        <div
-          className={`${styles["admin-button"]} ${styles["close-button"]}`}
-          onClick={() => {
-            window.history.length < 2 ? router.push("/music") : router.back();
-          }}
-        >
-          {data.text && "✕"}
-        </div>
-      </div>
+      <PostCloseButton data={data} />
       <Album data={data} isAdminMainPage={false} isPostPage={true} />
     </>
   );

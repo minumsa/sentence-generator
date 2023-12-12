@@ -7,7 +7,7 @@ import { Loading } from "./Loading";
 import { isMobile } from "react-device-detect";
 import { useEffect, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
-import DOMPurify from "isomorphic-dompurify";
+// import DOMPurify from "isomorphic-dompurify";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -21,7 +21,7 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
   const isLoading = data.id === "";
   const divRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
-  const sanitizer = DOMPurify.sanitize;
+  // const sanitizer = DOMPurify.sanitize;
 
   // HTML을 string 형태로 바꾸기 위한 부분
   const HTMLToString = (htmlData: any) => {
@@ -99,9 +99,9 @@ export const Album = ({ data, isAdminMainPage, isPostPage }: AlbumProps) => {
           {isPostPage && data.text.includes("div") && (
             <div
               style={{ width: "100%" }}
-              dangerouslySetInnerHTML={{
-                __html: sanitizer(data.text),
-              }}
+              // dangerouslySetInnerHTML={{
+              //   __html: sanitizer(data.text),
+              // }}
             />
           )}
           {data.text.split("\n").map((text, index) => {
