@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
@@ -15,7 +15,6 @@ export const Album = ({ data, isAdminPage }: AlbumProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(data.duration);
   const divRef = useRef<HTMLDivElement>(null);
-  const pathName = usePathname();
 
   return (
     <div className={styles["album-container"]}>
@@ -53,7 +52,7 @@ export const Album = ({ data, isAdminPage }: AlbumProps) => {
                     <div
                       className={styles["category-meta-title"]}
                       onClick={() => {
-                        isAdminPage(pathName)
+                        isAdminPage
                           ? router.push(`/music/admin/post/${data.id}`)
                           : router.push(`/music/post/${data.id}`);
                       }}
@@ -68,7 +67,7 @@ export const Album = ({ data, isAdminPage }: AlbumProps) => {
                           className={styles["category-meta-image"]}
                           loading="lazy"
                           onClick={() => {
-                            isAdminPage(pathName)
+                            isAdminPage
                               ? router.push(`/music/admin/artist/${data.artistId}/1`)
                               : router.push(`/music/artist/${data.artistId}/1`);
                           }}
@@ -77,7 +76,7 @@ export const Album = ({ data, isAdminPage }: AlbumProps) => {
                       <div>
                         <span
                           onClick={() => {
-                            isAdminPage(pathName)
+                            isAdminPage
                               ? router.push(`/music/admin/artist/${data.artistId}/1`)
                               : router.push(`/music/artist/${data.artistId}/1`);
                           }}
@@ -104,7 +103,7 @@ export const Album = ({ data, isAdminPage }: AlbumProps) => {
                       <span
                         className={styles["more-button"]}
                         onClick={() => {
-                          isAdminPage(pathName)
+                          isAdminPage
                             ? router.push(`/music/admin/post/${data.id}`)
                             : router.push(`/music/post/${data.id}`);
                         }}

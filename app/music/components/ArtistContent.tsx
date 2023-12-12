@@ -56,11 +56,11 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
     }
 
     loadData();
-  }, [artistId, currentMethod, currentCriteria]);
+  }, [artistId, currentMethod, currentCriteria, currentPage, perPageCount]);
 
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
-  }, [artistId]);
+  }, [artistId, currentPage, perPageCount]);
 
   const SortToggleButton = ({
     type,
