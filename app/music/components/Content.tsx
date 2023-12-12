@@ -13,7 +13,6 @@ import {
 import { useRouter } from "next/navigation";
 import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
-import { Loading } from "./Loading";
 import { Album } from "./Album";
 
 interface PageProps {
@@ -32,7 +31,6 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const isUploadPage = pathName === "upload";
-  const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState(5);
   const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
@@ -205,7 +203,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
 
   return (
     <>
-      {!isUploadPage && !isLoading && (
+      {!isUploadPage && (
         <div className={styles["top-menu-container"]}>
           <div className={styles["top-search-container"]}>
             {isSearching && (
@@ -241,23 +239,19 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
           />
         </div>
       )}
-      {isLoading ? (
-        <Loading dataLength={dataLength} />
-      ) : (
-        sortedData.map((data, index) => {
-          const dataIndex = index + 1;
-          const isLastData = index === sortedData.length - 1;
-          const isLastDataPerPage = dataIndex % perPageCount === 0;
+      {sortedData.map((data, index) => {
+        const dataIndex = index + 1;
+        const isLastData = index === sortedData.length - 1;
+        const isLastDataPerPage = dataIndex % perPageCount === 0;
 
-          return (
-            <div key={index}>
-              <Album data={data} isAdminMainPage={isAdminMainPage} />
-              {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
-            </div>
-          );
-        })
-      )}
-      {!isLoading && (
+        return (
+          <div key={index}>
+            <Album data={data} isAdminMainPage={isAdminMainPage} />
+            {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
+          </div>
+        );
+      })}
+      {
         <div className={styles["page-container"]}>
           {currentPage > 5 && (
             <div
@@ -305,7 +299,7 @@ export default function Content({ pathName, fullPathName, currentPage }: PagePro
             </div>
           )}
         </div>
-      )}
+      }
     </>
   );
 }

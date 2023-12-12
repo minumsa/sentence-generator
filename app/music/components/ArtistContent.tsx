@@ -14,7 +14,6 @@ import {
 import { useRouter } from "next/navigation";
 import { FetchArtistData } from "../modules/api";
 import { useAtom } from "jotai";
-import { Loading } from "./Loading";
 import { Album } from "./Album";
 
 interface PageProps {
@@ -32,7 +31,6 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
   // FIXME: jotai 타입 오류 해결해야 함 MethodType 또는 Criteria 타입으로
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
-  const [isLoading, setIsLoading] = useState(true);
   const [perPageCount, setDataPerPage] = useState(5);
   const [dataLength, setDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
@@ -55,7 +53,6 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
       const genreDataLength = result?.genreDataLength;
       setDataLength(genreDataLength);
       setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
-      setIsLoading(false);
     }
 
     loadData();
@@ -105,7 +102,6 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
                   onClick={() => {
                     setCurrentOrder(item);
                     router.push(`/music/artist/${artistId}/1`);
-                    setIsLoading(true);
                   }}
                 >
                   {item}
@@ -186,7 +182,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
 
   return (
     <>
-      {!isLoading && (
+      {
         <div className={styles["top-menu-container"]}>
           <div className={styles["top-search-container"]}>
             {isSearching && (
@@ -221,8 +217,8 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
             sortWay={sortCriteria}
           />
         </div>
-      )}
-      {!isLoading && (
+      }
+      {
         <div className={styles["artist-image-container"]}>
           <div className={styles["album-art"]}>
             <img
@@ -233,24 +229,20 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
             />
           </div>
         </div>
-      )}
-      {isLoading ? (
-        <Loading dataLength={dataLength} />
-      ) : (
-        sortedData.map((data, index) => {
-          const dataIndex = index + 1;
-          const isLastData = index === sortedData.length - 1;
-          const isLastDataPerPage = dataIndex % perPageCount === 0;
+      }
+      {sortedData.map((data, index) => {
+        const dataIndex = index + 1;
+        const isLastData = index === sortedData.length - 1;
+        const isLastDataPerPage = dataIndex % perPageCount === 0;
 
-          return (
-            <div key={index}>
-              <Album data={data} isAdminMainPage={false} />
-              {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
-            </div>
-          );
-        })
-      )}
-      {!isLoading && (
+        return (
+          <div key={index}>
+            <Album data={data} isAdminMainPage={false} />
+            {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
+          </div>
+        );
+      })}
+      {
         <div className={styles["page-container"]}>
           {currentPage > 5 && (
             <div
@@ -298,7 +290,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
             </div>
           )}
         </div>
-      )}
+      }
     </>
   );
 }

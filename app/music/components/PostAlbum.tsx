@@ -9,11 +9,7 @@ interface AlbumProps {
 }
 
 export const PostAlbum = ({ albumData }: AlbumProps) => {
-  const isLoading = albumData.id === "";
-
-  return isLoading ? (
-    <Loading dataLength={undefined} />
-  ) : (
+  return (
     <div className={styles["album-container"]}>
       <PostAlbumMetadata albumData={albumData} />
       <PostAlbumText albumData={albumData} />

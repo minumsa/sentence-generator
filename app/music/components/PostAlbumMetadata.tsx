@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { AlbumInfo } from "../modules/data";
 import styles from "../music.module.css";
 import { formatDuration } from "../modules/utils";
+import { useState } from "react";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -10,18 +11,35 @@ interface PostAlbumMetadataProps {
 export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(albumData.duration);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  console.log(imageLoaded);
 
   return (
     <div className={styles["album-information-container"]}>
-      <div>
-        <a className={styles["link"]} href={albumData.link} target="_blank">
-          <img
-            className={styles["album-art"]}
-            src={albumData.imgUrl}
-            alt={albumData.album}
-            loading="lazy"
-          />
-        </a>
+      <div className={styles["grid-album-image-container"]}>
+        <div
+          className={styles["grid-album-image"]}
+          style={
+            imageLoaded
+              ? {
+                  backgroundImage: `url(${albumData.imgUrl})`,
+                  backgroundSize: "cover",
+                  backgroundColor: "undefined",
+                }
+              : undefined
+          }
+        />
+        <img
+          src={albumData.imgUrl}
+          alt={albumData.album}
+          style={{ display: "none" }}
+          onLoad={handleImageLoad}
+        />
       </div>
       <div className={styles["album-metadata"]}>
         <div className={styles["post-date"]}>아티스트</div>

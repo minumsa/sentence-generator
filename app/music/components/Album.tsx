@@ -15,13 +15,10 @@ interface AlbumProps {
 export const Album = ({ data, isAdminMainPage }: AlbumProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(data.duration);
-  const isLoading = data.id === "";
   const divRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
 
-  return isLoading ? (
-    <Loading dataLength={undefined} />
-  ) : (
+  return (
     <div className={styles["album-container"]}>
       <div className={styles["album-information-container"]}>
         <div>

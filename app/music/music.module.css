@@ -629,6 +629,12 @@
   padding: 20px 20px 0 20px;
 }
 
+.grid-album-image-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
 .grid-album-image {
   aspect-ratio: 1 / 1;
   width: 100%;
@@ -1161,6 +1167,11 @@
 }
 
 @media (max-width: 499px) {
+  .grid-album-image-container {
+    width: 280px;
+    height: 280px;
+  }
+
   .grid-item-container {
     width: calc(var(--width-large) - 0.5px);
   }
