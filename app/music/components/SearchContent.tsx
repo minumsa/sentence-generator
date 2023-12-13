@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "../music.module.css";
 import {
   AlbumInfo,
   CriteriaType,
@@ -9,35 +8,23 @@ import {
 } from "../modules/data";
 import { SearchData } from "../modules/api";
 import { useAtom } from "jotai";
-import { Loading } from "./Loading";
-import { Album } from "./Album";
-import { PageNumbers } from "./PageNumbers";
-import { TopNav } from "./TopNav";
 import { AlbumContents } from "./AlbumContents";
+import { ContentLayout } from "./ContentLayout";
 
 interface PageProps {
   pathName: string;
-  fullPathName: string;
   currentKeyword: string;
   currentPage: number;
 }
 
-export default function SearchContent({
-  pathName,
-  fullPathName,
-  currentKeyword,
-  currentPage,
-}: PageProps) {
+export default function SearchContent({ pathName, currentKeyword, currentPage }: PageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
-  const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
-  const [maxPageNumber, setMaxPage] = useState<number>(5);
   const [keyword, setKeyword] = useState<string>("");
-  const [isAdminPage, setIsAdminPage] = useState(false);
 
   useEffect(() => {
     async function loadData() {
@@ -56,37 +43,21 @@ export default function SearchContent({
     }
 
     loadData();
-  }, [pathName, currentKeyword, currentMethod, currentCriteria]);
-
-  useEffect(() => {
-    setMaxPage(Math.ceil(currentPage / perPageCount) * perPageCount);
-  }, [currentKeyword]);
-
-  useEffect(() => {
-    if (fullPathName.includes("admin")) setIsAdminPage(true);
-  }, []);
+  }, [pathName, currentKeyword, currentMethod, currentCriteria, perPageCount, currentPage]);
 
   return (
-    <>
-      {isLoading && <Loading dataLength={totalDataLength} />}
-      {!isLoading && (
-        <>
-          <TopNav
-            keyword={keyword}
-            setKeyword={setKeyword}
-            currentMethod={currentMethod}
-            setCurrentMethod={setCurrentMethod}
-            currentCriteria={currentCriteria}
-            setCurrentCriteria={setCurrentCriteria}
-          />
-          <AlbumContents data={data} perPageCount={perPageCount} />
-          <PageNumbers
-            currentPage={currentPage}
-            perPageCount={perPageCount}
-            totalDataLength={totalDataLength}
-          />
-        </>
-      )}
-    </>
+    <ContentLayout
+      keyword={keyword}
+      setKeyword={setKeyword}
+      currentMethod={currentMethod}
+      setCurrentMethod={setCurrentMethod}
+      currentCriteria={currentCriteria}
+      setCurrentCriteria={setCurrentCriteria}
+      currentPage={currentPage}
+      perPageCount={perPageCount}
+      totalDataLength={totalDataLength}
+    >
+      <AlbumContents data={data} perPageCount={perPageCount} />
+    </ContentLayout>
   );
 }

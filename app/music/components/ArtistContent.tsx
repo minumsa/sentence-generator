@@ -12,7 +12,7 @@ import { FetchArtistData } from "../modules/api";
 import { useAtom } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
-import styles from "../music.module.css";
+import { ArtistPageImage } from "./ArtistPageImage";
 
 interface PageProps {
   artistId: string;
@@ -61,18 +61,7 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
     >
-      {data.length > 0 && (
-        <div className={styles["artist-page-image-container"]}>
-          <div className={styles["artist-page-image"]}>
-            <img
-              className={styles["category-meta-image"]}
-              src={data[0].artistImgUrl}
-              alt={data[0].artist}
-              loading="lazy"
-            />
-          </div>
-        </div>
-      )}
+      <ArtistPageImage data={data} />
       <AlbumContents data={data} perPageCount={perPageCount} />
     </ContentLayout>
   );
