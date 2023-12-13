@@ -5,6 +5,7 @@ import { fetchDataById, fetchSpotify, updateData } from "../modules/api";
 import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/navigation";
 
 interface UpdateProps {
   currentId: string;
@@ -20,6 +21,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [password, setPassword] = useState<string>("");
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
   const [uploadDate, setUploadDate] = useState(new Date());
+  // const router= useRouter()
 
   // 수정 API
   const handleUpdate = async () => {
