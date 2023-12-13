@@ -75,7 +75,6 @@ export default function SearchContent({
         <>
           <TopNav
             pathName={pathName}
-            isAdminPage={isAdminPage}
             keyword={keyword}
             currentKeyword={currentKeyword}
             setKeyword={setKeyword}
