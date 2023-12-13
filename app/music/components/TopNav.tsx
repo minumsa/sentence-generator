@@ -31,19 +31,7 @@ export const TopNav = ({
   const fullPathName = usePathname();
   const [isSearchPage, setIsSearchPage] = useState(false);
   const [isAdminPage, setIsAdminPage] = useState(false);
-  const [slicedPathName, setSlicedPathName] = useState("");
-
-  useEffect(() => {
-    setSlicedPathName(
-      fullPathName
-        .split("/")
-        .filter(
-          (str, index, array) =>
-            index !== array.length - 1 || (index === array.length - 1 && isNaN(Number(str)))
-        )
-        .join("/")
-    );
-  }, []);
+  const pathNameWithoutPageNumber = fullPathName.replace(/\/\d+$/, "");
 
   // const slicedPathName = fullPathName
   //   .split("/")
@@ -129,7 +117,7 @@ export const TopNav = ({
                     // const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     // const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    router.push(`${slicedPathName}/1`);
+                    router.push(`${pathNameWithoutPageNumber}/1`);
                   }}
                 >
                   {item}

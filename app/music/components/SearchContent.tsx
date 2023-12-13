@@ -39,8 +39,6 @@ export default function SearchContent({
   const [keyword, setKeyword] = useState<string>("");
   const [isAdminPage, setIsAdminPage] = useState(false);
 
-  console.log(pathName, "pathName");
-
   useEffect(() => {
     async function loadData() {
       const result = await SearchData({
