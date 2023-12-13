@@ -10,11 +10,8 @@ export async function GET(request: Request) {
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
     const artistId = url.searchParams.get("artistId");
-    const perPageCount = Number(url.searchParams.get("perPageCount"));
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
-
-    const currentPage = Number(url.searchParams.get("currentPage"));
 
     let sortKey = {};
     if (currentMethod === "발매일") {
@@ -28,7 +25,6 @@ export async function GET(request: Request) {
     }
 
     const genreDataLength = await Music.find({ artistId: artistId }).count();
-    const startIndex = perPageCount * currentPage - perPageCount;
     const slicedData = await Music.find({ artistId: artistId });
 
     return NextResponse.json({ slicedData, genreDataLength });

@@ -10,7 +10,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <MusicLayout>
-      <ArtistContent isAdminPage={true} artistId={artistId} currentPage={currentPage} />
+      <ArtistContent artistId={artistId} currentPage={currentPage} />
     </MusicLayout>
   );
 }
