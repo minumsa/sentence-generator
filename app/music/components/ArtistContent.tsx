@@ -16,6 +16,7 @@ import { FetchArtistData } from "../modules/api";
 import { useAtom } from "jotai";
 import { Album } from "./Album";
 import { PageNumbers } from "./PageNumbers";
+import { AlbumContents } from "./AlbumContents";
 
 interface PageProps {
   isAdminPage: boolean;
@@ -230,18 +231,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
           </div>
         </div>
       }
-      {sortedData.map((data, index) => {
-        const dataIndex = index + 1;
-        const isLastData = index === sortedData.length - 1;
-        const isLastDataPerPage = dataIndex % perPageCount === 0;
-
-        return (
-          <div key={index}>
-            <Album data={data} isAdminPage={false} />
-            {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
-          </div>
-        );
-      })}
+      <AlbumContents data={data} isAdminPage={isAdminPage} perPageCount={perPageCount} />
       <PageNumbers
         pathName={isAdminPage ? `admin/${artistId}` : artistId}
         currentPage={currentPage}

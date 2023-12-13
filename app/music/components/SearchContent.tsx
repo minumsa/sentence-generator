@@ -13,6 +13,7 @@ import { Loading } from "./Loading";
 import { Album } from "./Album";
 import { PageNumbers } from "./PageNumbers";
 import { TopNav } from "./TopNav";
+import { AlbumContents } from "./AlbumContents";
 
 interface PageProps {
   pathName: string;
@@ -69,45 +70,31 @@ export default function SearchContent({
 
   return (
     <>
+      {isLoading && <Loading dataLength={dataLength} />}
       {!isLoading && (
-        <TopNav
-          pathName={pathName}
-          isAdminPage={isAdminPage}
-          keyword={keyword}
-          currentKeyword={currentKeyword}
-          setKeyword={setKeyword}
-          currentMethod={currentMethod}
-          setCurrentMethod={setCurrentMethod}
-          currentCriteria={currentCriteria}
-          setCurrentCriteria={setCurrentCriteria}
-        />
-      )}
-      {isLoading ? (
-        <Loading dataLength={dataLength} />
-      ) : (
-        data.map((item, index) => {
-          const dataIndex = index + 1;
-          const isLastData = index === data.length - 1;
-          const isLastDataPerPage = dataIndex % perPageCount === 0;
-
-          return (
-            <div key={index}>
-              <Album data={item} isAdminPage={isAdminPage} />
-              {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
-            </div>
-          );
-        })
-      )}
-      {!isLoading && (
-        <PageNumbers
-          pathName={
-            isAdminPage ? `admin/${pathName}/${currentKeyword}` : `${pathName}/${currentKeyword}`
-          }
-          currentPage={currentPage}
-          totalPage={totalPage}
-          maxPageNumber={maxPageNumber}
-          perPageCount={perPageCount}
-        />
+        <>
+          <TopNav
+            pathName={pathName}
+            isAdminPage={isAdminPage}
+            keyword={keyword}
+            currentKeyword={currentKeyword}
+            setKeyword={setKeyword}
+            currentMethod={currentMethod}
+            setCurrentMethod={setCurrentMethod}
+            currentCriteria={currentCriteria}
+            setCurrentCriteria={setCurrentCriteria}
+          />
+          <AlbumContents data={data} isAdminPage={isAdminPage} perPageCount={perPageCount} />
+          <PageNumbers
+            pathName={
+              isAdminPage ? `admin/${pathName}/${currentKeyword}` : `${pathName}/${currentKeyword}`
+            }
+            currentPage={currentPage}
+            totalPage={totalPage}
+            maxPageNumber={maxPageNumber}
+            perPageCount={perPageCount}
+          />
+        </>
       )}
     </>
   );

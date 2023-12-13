@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../music.module.css";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { CriteriaType, MethodType, OrderType, sortItems } from "../modules/data";
 
 interface TopNavProps {
   pathName: string;
-  isAdminPage: boolean;
   keyword: string;
   currentKeyword: string | undefined;
   setKeyword: React.Dispatch<React.SetStateAction<string>>;
@@ -17,7 +16,6 @@ interface TopNavProps {
 
 export const TopNav = ({
   pathName,
-  isAdminPage,
   keyword,
   currentKeyword,
   setKeyword,
@@ -30,6 +28,37 @@ export const TopNav = ({
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
+  const fullPathName = usePathname();
+  const [isSearchPage, setIsSearchPage] = useState(false);
+  const [isAdminPage, setIsAdminPage] = useState(false);
+  const [slicedPathName, setSlicedPathName] = useState("");
+
+  useEffect(() => {
+    setSlicedPathName(
+      fullPathName
+        .split("/")
+        .filter(
+          (str, index, array) =>
+            index !== array.length - 1 || (index === array.length - 1 && isNaN(Number(str)))
+        )
+        .join("/")
+    );
+  }, []);
+
+  // const slicedPathName = fullPathName
+  //   .split("/")
+  //   .map((path, index) => {
+  //     const firstOrlastIndex =
+  //       index > fullPathName.split("/").length - 2 && isNaN(Number(path)) === false;
+  //     if (!firstOrlastIndex) return `${path}/`;
+  //   })
+  //   .join("");
+  // console.log(slicedPathName);
+
+  useEffect(() => {
+    fullPathName.includes("search") && setIsSearchPage(true);
+    fullPathName.includes("admin") && setIsAdminPage(true);
+  }, []);
 
   async function handleSearch() {
     isAdminPage
@@ -100,9 +129,7 @@ export const TopNav = ({
                     // const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     // const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    isAdminPage
-                      ? router.push(`/music/admin/${pathName}/${currentKeyword}/1`)
-                      : router.push(`/music/${pathName}/${currentKeyword}/1`);
+                    router.push(`${slicedPathName}/1`);
                   }}
                 >
                   {item}
