@@ -9,6 +9,7 @@ interface CategoryProps {
 
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
   const router = useRouter();
+  const pathNameToArray = pathName.split("/");
 
   return (
     <div className={styles["desktop-category"]}>
@@ -22,7 +23,8 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
         divdivdiv
       </div>
       {Object.keys(contents).map(category => {
-        const isActiveCategory = pathName.includes(category);
+        const isActiveCategory = pathNameToArray.includes(category);
+
         return (
           <div
             key={category}
