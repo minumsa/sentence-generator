@@ -1,8 +1,9 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AlbumInfo } from "../modules/data";
 import styles from "../music.module.css";
 import { formatDuration } from "../modules/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { deleteData } from "../modules/api";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -12,34 +13,40 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(albumData.duration);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const pathName = usePathname();
+  const [isAdminPage, setIsAdminPage] = useState(false);
+
+  useEffect(() => {
+    pathName.includes("admin") ? setIsAdminPage(true) : setIsAdminPage(false);
+  }, []);
 
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
 
-  console.log(imageLoaded);
-
   return (
     <div className={styles["album-information-container"]}>
       <div className={styles["grid-album-image-container"]}>
-        <div
-          className={styles["grid-album-image"]}
-          style={
-            imageLoaded
-              ? {
-                  backgroundImage: `url(${albumData.imgUrl})`,
-                  backgroundSize: "cover",
-                  backgroundColor: "undefined",
-                }
-              : undefined
-          }
-        />
-        <img
-          src={albumData.imgUrl}
-          alt={albumData.album}
-          style={{ display: "none" }}
-          onLoad={handleImageLoad}
-        />
+        <a href={albumData.link} target="_blank">
+          <div
+            className={styles["grid-album-image"]}
+            style={
+              imageLoaded
+                ? {
+                    backgroundImage: `url(${albumData.imgUrl})`,
+                    backgroundSize: "cover",
+                    backgroundColor: "undefined",
+                  }
+                : undefined
+            }
+          />
+          <img
+            src={albumData.imgUrl}
+            alt={albumData.album}
+            style={{ display: "none" }}
+            onLoad={handleImageLoad}
+          />
+        </a>
       </div>
       <div className={styles["album-metadata"]}>
         <div className={styles["post-date"]}>아티스트</div>
@@ -69,6 +76,26 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             {albumDuration}, {albumData.tracks}곡
           </span>
         </div>
+        {isAdminPage && (
+          <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
+            <div
+              className={styles["admin-button"]}
+              onClick={async () => {
+                deleteData(albumData.id);
+              }}
+            >
+              삭제
+            </div>
+            <div
+              className={styles["admin-button"]}
+              onClick={() => {
+                router.push(`/music/admin/upload/${albumData.id}`);
+              }}
+            >
+              수정
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
