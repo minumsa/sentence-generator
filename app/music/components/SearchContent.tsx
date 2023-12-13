@@ -33,7 +33,7 @@ export default function SearchContent({
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const isLoading = data.length === 0;
   const [perPageCount, setDataPerPage] = useState(5);
-  const [dataLength, setDataLength] = useState(undefined);
+  const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
   const [maxPageNumber, setMaxPage] = useState<number>(5);
   const [keyword, setKeyword] = useState<string>("");
@@ -51,7 +51,7 @@ export default function SearchContent({
       });
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
-      setDataLength(genreDataLength);
+      setTotalDataLength(genreDataLength);
       setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
     }
 
@@ -68,28 +68,22 @@ export default function SearchContent({
 
   return (
     <>
-      {isLoading && <Loading dataLength={dataLength} />}
+      {isLoading && <Loading dataLength={totalDataLength} />}
       {!isLoading && (
         <>
           <TopNav
-            pathName={pathName}
             keyword={keyword}
-            currentKeyword={currentKeyword}
             setKeyword={setKeyword}
             currentMethod={currentMethod}
             setCurrentMethod={setCurrentMethod}
             currentCriteria={currentCriteria}
             setCurrentCriteria={setCurrentCriteria}
           />
-          <AlbumContents data={data} isAdminPage={isAdminPage} perPageCount={perPageCount} />
+          <AlbumContents data={data} perPageCount={perPageCount} />
           <PageNumbers
-            currentPathName={
-              isAdminPage ? `admin/${pathName}/${currentKeyword}` : `${pathName}/${currentKeyword}`
-            }
             currentPage={currentPage}
-            totalPage={totalPage}
-            maxPageNumber={maxPageNumber}
             perPageCount={perPageCount}
+            totalDataLength={totalDataLength}
           />
         </>
       )}

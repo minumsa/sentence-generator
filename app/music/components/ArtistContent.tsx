@@ -14,7 +14,6 @@ import {
 import { useRouter } from "next/navigation";
 import { FetchArtistData } from "../modules/api";
 import { useAtom } from "jotai";
-import { Album } from "./Album";
 import { PageNumbers } from "./PageNumbers";
 import { AlbumContents } from "./AlbumContents";
 
@@ -34,7 +33,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const [perPageCount, setDataPerPage] = useState(5);
-  const [dataLength, setDataLength] = useState(undefined);
+  const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
   const [maxPageNumber, setMaxPage] = useState<number>(5);
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -52,7 +51,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
       });
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
-      setDataLength(genreDataLength);
+      setTotalDataLength(genreDataLength);
       setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
     }
 
@@ -231,13 +230,11 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
           </div>
         </div>
       }
-      <AlbumContents data={data} isAdminPage={isAdminPage} perPageCount={perPageCount} />
+      <AlbumContents data={data} perPageCount={perPageCount} />
       <PageNumbers
-        currentPathName={isAdminPage ? `admin/${artistId}` : artistId}
         currentPage={currentPage}
-        totalPage={totalPage}
-        maxPageNumber={maxPageNumber}
         perPageCount={perPageCount}
+        totalDataLength={totalDataLength}
       />
     </>
   );
