@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
@@ -8,13 +8,14 @@ import { useRef } from "react";
 
 interface AlbumProps {
   data: AlbumInfo;
-  isAdminPage: boolean;
 }
 
-export const Album = ({ data, isAdminPage }: AlbumProps) => {
+export const Album = ({ data }: AlbumProps) => {
   const router = useRouter();
   const albumDuration = formatDuration(data.duration);
   const divRef = useRef<HTMLDivElement>(null);
+  const fullPathName = usePathname();
+  const isAdminPage = fullPathName.includes("admin");
 
   return (
     <div className={styles["album-container"]}>
@@ -47,8 +48,8 @@ export const Album = ({ data, isAdminPage }: AlbumProps) => {
             // 전체 텍스트 첫 번째 문단의 3줄까지만 미리보기로 표시
             if (isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : isFirstParagraph)
               return (
-                <>
-                  <div className={styles["paragraph-container"]} key={index}>
+                <div key={index}>
+                  <div className={styles["paragraph-container"]}>
                     <div
                       className={styles["category-meta-title"]}
                       onClick={() => {
@@ -133,7 +134,7 @@ export const Album = ({ data, isAdminPage }: AlbumProps) => {
                       </div>
                     </div>
                   )}
-                </>
+                </div>
               );
           })}
         </div>

@@ -233,7 +233,7 @@ export default function ArtistContent({ isAdminPage, artistId, currentPage }: Pa
       }
       <AlbumContents data={data} isAdminPage={isAdminPage} perPageCount={perPageCount} />
       <PageNumbers
-        pathName={isAdminPage ? `admin/${artistId}` : artistId}
+        currentPathName={isAdminPage ? `admin/${artistId}` : artistId}
         currentPage={currentPage}
         totalPage={totalPage}
         maxPageNumber={maxPageNumber}

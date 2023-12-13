@@ -83,7 +83,7 @@ export default function SearchContent({
           />
           <AlbumContents data={data} isAdminPage={isAdminPage} perPageCount={perPageCount} />
           <PageNumbers
-            pathName={
+            currentPathName={
               isAdminPage ? `admin/${pathName}/${currentKeyword}` : `${pathName}/${currentKeyword}`
             }
             currentPage={currentPage}

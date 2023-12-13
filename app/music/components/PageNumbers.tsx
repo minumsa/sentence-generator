@@ -1,23 +1,28 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
+import { useEffect, useState } from "react";
 
 interface PageNumbersProps {
-  pathName: string;
   currentPage: number;
-  totalPage: number;
-  maxPageNumber: number;
   perPageCount: number;
+  totalDataLength: number | undefined;
 }
 
-export const PageNumbers = ({
-  pathName,
-  currentPage,
-  totalPage,
-  maxPageNumber,
-  perPageCount,
-}: PageNumbersProps) => {
+export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: PageNumbersProps) => {
   const router = useRouter();
-  const pageArray = Array.from({ length: totalPage }, (_, i) => i + 1);
+  const [totalPage, setTotalPage] = useState(1);
+  const pageNumberToArray = Array.from({ length: totalPage }, (_, i) => i + 1);
+  const fullPathName = usePathname();
+  const pathNameWithoutPageNumber = fullPathName.replace(/\/\d+$/, "");
+  const [maxPageNumber, setMaxPageNumber] = useState<number>(5);
+
+  useEffect(() => {
+    setMaxPageNumber(Math.ceil(currentPage / perPageCount) * perPageCount);
+  }, [currentPage, perPageCount]);
+
+  useEffect(() => {
+    if (totalDataLength) setTotalPage(Math.max(1, Math.ceil(totalDataLength / 5)));
+  }, [totalDataLength]);
 
   return (
     <div className={styles["page-container"]}>
@@ -27,14 +32,14 @@ export const PageNumbers = ({
           onClick={() => {
             if (maxPageNumber > 5) {
               const prevPageBlock = maxPageNumber - 5;
-              router.push(`/music/${pathName}/${prevPageBlock}`);
+              router.push(`${pathNameWithoutPageNumber}/${prevPageBlock}`);
             }
           }}
         >
           〈
         </div>
       )}
-      {pageArray.map((page, index) => {
+      {pageNumberToArray.map((page, index) => {
         const minPageNumber = maxPageNumber - perPageCount + 1;
         const pageButtonNumber = index + 1;
         if (pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber)
@@ -43,7 +48,7 @@ export const PageNumbers = ({
               key={index}
               className={styles["page"]}
               onClick={() => {
-                router.push(`/music/${pathName}/${pageButtonNumber}`);
+                router.push(`${pathNameWithoutPageNumber}/${pageButtonNumber}`);
               }}
               style={
                 currentPage === pageButtonNumber ? { fontWeight: 500, opacity: "70%" } : undefined
@@ -58,7 +63,7 @@ export const PageNumbers = ({
           className={styles["page"]}
           onClick={() => {
             const nextPageBlock = maxPageNumber + 1;
-            router.push(`/music/${pathName}/${nextPageBlock}`);
+            router.push(`${pathNameWithoutPageNumber}/${nextPageBlock}`);
           }}
         >
           〉

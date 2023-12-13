@@ -4,9 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { CriteriaType, MethodType, OrderType, sortItems } from "../modules/data";
 
 interface TopNavProps {
-  pathName: string;
   keyword: string;
-  currentKeyword: string | undefined;
   setKeyword: React.Dispatch<React.SetStateAction<string>>;
   currentMethod: MethodType;
   setCurrentMethod: React.Dispatch<React.SetStateAction<CriteriaType | MethodType>>;
@@ -15,9 +13,7 @@ interface TopNavProps {
 }
 
 export const TopNav = ({
-  pathName,
   keyword,
-  currentKeyword,
   setKeyword,
   currentMethod,
   setCurrentMethod,
@@ -31,6 +27,7 @@ export const TopNav = ({
   const fullPathName = usePathname();
   const [isSearchPage, setIsSearchPage] = useState(false);
   const [isAdminPage, setIsAdminPage] = useState(false);
+  // TODO: 나중에 정규식 표현 블로그 정리
   const pathNameWithoutPageNumber = fullPathName.replace(/\/\d+$/, "");
 
   // const slicedPathName = fullPathName
@@ -76,7 +73,7 @@ export const TopNav = ({
     }
   };
 
-  const SortToggleButton = ({
+  const SortButton = ({
     type,
     sortItem,
     currentOrder,
@@ -141,7 +138,7 @@ export const TopNav = ({
               setKeyword(e.target.value);
             }}
             onKeyDown={handleEnter}
-          ></input>
+          />
         )}
       </div>
       <div
@@ -150,14 +147,14 @@ export const TopNav = ({
           setIsSearching(!isSearching);
         }}
       ></div>
-      <SortToggleButton
+      <SortButton
         type="method"
         sortItem={sortItems.method}
         currentOrder={currentMethod}
         setCurrentOrder={setCurrentMethod}
         sortWay={sortMethod}
       />
-      <SortToggleButton
+      <SortButton
         type="criteria"
         sortItem={sortItems.criteria}
         currentOrder={currentCriteria}
