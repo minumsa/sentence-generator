@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchDataById } from "../modules/api";
-import { AlbumInfo, initialAlbumInfo } from "../modules/data";
+import { AlbumInfo } from "../modules/data";
 import { PostCloseButton } from "./PostCloseButton";
 import { PostAlbum } from "./PostAlbum";
 import { Loading } from "./Loading";
@@ -12,8 +12,8 @@ interface PostProps {
 }
 
 export const Post = ({ currentId }: PostProps) => {
-  const [albumData, setAlbumData] = useState<AlbumInfo>(initialAlbumInfo);
-  const isLoading = albumData.id === "";
+  const [albumData, setAlbumData] = useState<AlbumInfo | undefined>();
+  const isLoading = albumData === undefined;
 
   useEffect(() => {
     async function getData() {

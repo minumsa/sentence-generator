@@ -11,7 +11,7 @@ interface PostAlbumMetadataProps {
 
 export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
   const router = useRouter();
-  const albumDuration = formatDuration(albumData.duration);
+  const albumDuration = albumData && formatDuration(albumData.duration);
   const [imageLoaded, setImageLoaded] = useState(false);
   const pathName = usePathname();
   const [isAdminPage, setIsAdminPage] = useState(false);
@@ -81,7 +81,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             <div
               className={styles["admin-button"]}
               onClick={async () => {
-                deleteData(albumData.id);
+                albumData && deleteData(albumData.id);
               }}
             >
               삭제
