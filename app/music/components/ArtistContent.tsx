@@ -51,6 +51,7 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
 
   return (
     <ContentLayout
+      data={data}
       keyword={keyword}
       setKeyword={setKeyword}
       currentMethod={currentMethod}

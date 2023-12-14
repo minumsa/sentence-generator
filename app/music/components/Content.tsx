@@ -10,7 +10,6 @@ import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
-import { Loading } from "./Loading";
 
 interface PageProps {
   pathName: string;
@@ -25,7 +24,6 @@ export default function Content({ pathName, currentPage }: PageProps) {
   const [perPageCount, setPerPageCount] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [keyword, setKeyword] = useState<string>("");
-  const isLoading = data.length === 0;
 
   useEffect(() => {
     async function loadData() {
@@ -45,24 +43,19 @@ export default function Content({ pathName, currentPage }: PageProps) {
   }, [pathName, currentPage, currentMethod, currentCriteria, perPageCount]);
 
   return (
-    <>
-      {isLoading ? (
-        <Loading dataLength={undefined} />
-      ) : (
-        <ContentLayout
-          keyword={keyword}
-          setKeyword={setKeyword}
-          currentMethod={currentMethod}
-          setCurrentMethod={setCurrentMethod}
-          currentCriteria={currentCriteria}
-          setCurrentCriteria={setCurrentCriteria}
-          currentPage={currentPage}
-          perPageCount={perPageCount}
-          totalDataLength={totalDataLength}
-        >
-          <AlbumContents data={data} perPageCount={perPageCount} />
-        </ContentLayout>
-      )}
-    </>
+    <ContentLayout
+      data={data}
+      keyword={keyword}
+      setKeyword={setKeyword}
+      currentMethod={currentMethod}
+      setCurrentMethod={setCurrentMethod}
+      currentCriteria={currentCriteria}
+      setCurrentCriteria={setCurrentCriteria}
+      currentPage={currentPage}
+      perPageCount={perPageCount}
+      totalDataLength={totalDataLength}
+    >
+      <AlbumContents data={data} perPageCount={perPageCount} />
+    </ContentLayout>
   );
 }

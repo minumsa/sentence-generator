@@ -32,8 +32,11 @@ export const Loading = ({ dataLength }: LoadingProps) => {
   const currentText = daysLeft && daysLeft >= 0 && daysLeft < 31 ? christmasText : loadingText;
 
   const noDataText = "일치하는 데이터가 없습니다...";
+  const hasNoData = dataLength === 0;
 
-  return (
-    <div className={styles["loading"]}>{dataLength === undefined ? currentText : noDataText}</div>
+  return hasNoData ? (
+    <div className={styles["loading"]}>{noDataText}</div>
+  ) : (
+    <div className={styles["loading"]}>{currentText}</div>
   );
 };

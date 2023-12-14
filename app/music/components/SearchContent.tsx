@@ -47,6 +47,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
 
   return (
     <ContentLayout
+      data={data}
       keyword={keyword}
       setKeyword={setKeyword}
       currentMethod={currentMethod}

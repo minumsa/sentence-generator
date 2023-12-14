@@ -1,8 +1,10 @@
 import { PageNumbers } from "./PageNumbers";
 import { TopNav } from "./TopNav";
-import { CriteriaType, MethodType } from "../modules/data";
+import { AlbumInfo, CriteriaType, MethodType } from "../modules/data";
+import { Loading } from "./Loading";
 
 interface ContentLayoutProps {
+  data: AlbumInfo[];
   children: React.ReactNode;
   keyword: string;
   setKeyword: React.Dispatch<React.SetStateAction<string>>;
@@ -16,6 +18,7 @@ interface ContentLayoutProps {
 }
 
 export const ContentLayout = ({
+  data,
   children,
   keyword,
   setKeyword,
@@ -27,22 +30,30 @@ export const ContentLayout = ({
   perPageCount,
   totalDataLength,
 }: ContentLayoutProps) => {
+  const isLoading = data.length === 0;
+
   return (
     <>
-      <TopNav
-        keyword={keyword}
-        setKeyword={setKeyword}
-        currentMethod={currentMethod}
-        setCurrentMethod={setCurrentMethod}
-        currentCriteria={currentCriteria}
-        setCurrentCriteria={setCurrentCriteria}
-      />
-      {children}
-      <PageNumbers
-        currentPage={currentPage}
-        perPageCount={perPageCount}
-        totalDataLength={totalDataLength}
-      />
+      {isLoading ? (
+        <Loading dataLength={totalDataLength} />
+      ) : (
+        <>
+          <TopNav
+            keyword={keyword}
+            setKeyword={setKeyword}
+            currentMethod={currentMethod}
+            setCurrentMethod={setCurrentMethod}
+            currentCriteria={currentCriteria}
+            setCurrentCriteria={setCurrentCriteria}
+          />
+          {children}
+          <PageNumbers
+            currentPage={currentPage}
+            perPageCount={perPageCount}
+            totalDataLength={totalDataLength}
+          />
+        </>
+      )}
     </>
   );
 };
