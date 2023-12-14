@@ -4,6 +4,8 @@ import styles from "../music.module.css";
 import { formatDuration } from "../modules/utils";
 import { useEffect, useState } from "react";
 import { deleteData } from "../modules/api";
+import { DataDeleteButton } from "./DataDeleteButton";
+import { DataEditButton } from "./DataEditButton";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -78,22 +80,8 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         </div>
         {isAdminPage && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
-            <div
-              className={styles["admin-button"]}
-              onClick={async () => {
-                albumData && deleteData(albumData.id);
-              }}
-            >
-              삭제
-            </div>
-            <div
-              className={styles["admin-button"]}
-              onClick={() => {
-                router.push(`/music/admin/upload/${albumData.id}`);
-              }}
-            >
-              수정
-            </div>
+            <DataDeleteButton data={albumData} />
+            <DataEditButton data={albumData} />
           </div>
         )}
       </div>

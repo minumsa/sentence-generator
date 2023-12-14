@@ -2,9 +2,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
-import { deleteData } from "../modules/api";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
+import { DataDeleteButton } from "./DataDeleteButton";
+import { DataEditButton } from "./DataEditButton";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -116,22 +117,8 @@ export const Album = ({ data }: AlbumProps) => {
                   {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                   {isAdminPage && (
                     <div className={styles["admin-button-container"]}>
-                      <div
-                        className={styles["admin-button"]}
-                        onClick={async () => {
-                          deleteData(data.id);
-                        }}
-                      >
-                        삭제
-                      </div>
-                      <div
-                        className={styles["admin-button"]}
-                        onClick={() => {
-                          router.push(`/music/admin/upload/${data.id}`);
-                        }}
-                      >
-                        수정
-                      </div>
+                      <DataDeleteButton data={data} />
+                      <DataEditButton data={data} />
                     </div>
                   )}
                 </div>
