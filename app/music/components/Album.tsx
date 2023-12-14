@@ -4,8 +4,8 @@ import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
-import { DataDeleteButton } from "./DataDeleteButton";
-import { DataEditButton } from "./DataEditButton";
+import { DeleteButton } from "./DeleteButton";
+import { EditButton } from "./EditButton";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -102,7 +102,7 @@ export const Album = ({ data }: AlbumProps) => {
                       {isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : text}
                     </p>
                     {isLongText && (
-                      <span
+                      <div
                         className={styles["more-button"]}
                         onClick={() => {
                           isAdminPage
@@ -111,14 +111,14 @@ export const Album = ({ data }: AlbumProps) => {
                         }}
                       >
                         더 보기
-                      </span>
+                      </div>
                     )}
                   </div>
                   {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                   {isAdminPage && (
                     <div className={styles["admin-button-container"]}>
-                      <DataDeleteButton data={data} />
-                      <DataEditButton data={data} />
+                      <DeleteButton data={data} />
+                      <EditButton data={data} />
                     </div>
                   )}
                 </div>

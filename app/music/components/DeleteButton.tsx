@@ -2,11 +2,11 @@ import { deleteData } from "../modules/api";
 import { AlbumInfo } from "../modules/data";
 import styles from "../music.module.css";
 
-interface DataDeleteButtonProps {
+interface DeleteButtonProps {
   data: AlbumInfo;
 }
 
-export const DataDeleteButton = ({ data }: DataDeleteButtonProps) => {
+export const DeleteButton = ({ data }: DeleteButtonProps) => {
   return (
     <div
       className={styles["admin-button"]}

@@ -2,11 +2,11 @@ import { useRouter } from "next/navigation";
 import { AlbumInfo } from "../modules/data";
 import styles from "../music.module.css";
 
-interface DataEditButtonProps {
+interface EditButtonProps {
   data: AlbumInfo;
 }
 
-export const DataEditButton = ({ data }: DataEditButtonProps) => {
+export const EditButton = ({ data }: EditButtonProps) => {
   const router = useRouter();
 
   return (

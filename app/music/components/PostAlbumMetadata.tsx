@@ -4,8 +4,8 @@ import styles from "../music.module.css";
 import { formatDuration } from "../modules/utils";
 import { useEffect, useState } from "react";
 import { deleteData } from "../modules/api";
-import { DataDeleteButton } from "./DataDeleteButton";
-import { DataEditButton } from "./DataEditButton";
+import { DeleteButton } from "./DeleteButton";
+import { EditButton } from "./EditButton";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -80,8 +80,8 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         </div>
         {isAdminPage && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
-            <DataDeleteButton data={albumData} />
-            <DataEditButton data={albumData} />
+            <DeleteButton data={albumData} />
+            <EditButton data={albumData} />
           </div>
         )}
       </div>
