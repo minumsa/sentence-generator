@@ -52,19 +52,14 @@ export const Grid = () => {
         currentCriteria,
       });
 
-      if (data.length > 1) {
-        setData(prevData => [...prevData, ...result?.slicedData]);
-      } else {
-        setData(result?.slicedData);
-      }
-
+      setData(prevData => [...prevData, ...result?.slicedData]);
       const dataLength = result?.genreDataLength;
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
       setIsLoading(false);
     }
 
     loadData();
-  }, [fullPathName, currentMethod, currentCriteria, currentPage]);
+  }, [fullPathName, currentMethod, currentCriteria, currentPage, perPageCount]);
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
