@@ -10,7 +10,6 @@ import {
   MethodType,
   initialCriteria,
   initialMethod,
-  isAdminPage,
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
@@ -20,7 +19,8 @@ import Aos from "aos";
 
 export const Grid = () => {
   const router = useRouter();
-  const pathName = usePathname();
+  const fullPathName = usePathname();
+  const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalPage, setTotalPage] = useState(1);
   const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 42);
@@ -64,7 +64,7 @@ export const Grid = () => {
     }
 
     loadData();
-  }, [pathName, currentMethod, currentCriteria, currentPage]);
+  }, [fullPathName, currentMethod, currentCriteria, currentPage]);
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -102,7 +102,7 @@ export const Grid = () => {
                 style={{ position: "relative", width: "100%" }}
                 onClick={() => {
                   setIsLoading(true);
-                  isAdminPage(pathName)
+                  isAdminPage
                     ? router.push(`/music/admin/post/${item.id}`)
                     : router.push(`/music/post/${item.id}`);
                 }}
@@ -126,12 +126,14 @@ export const Grid = () => {
                 className={styles["grid-album-title"]}
                 onClick={() => {
                   setIsLoading(true);
-                  isAdminPage(pathName)
+                  isAdminPage
                     ? router.push(`/music/admin/post/${item.id}`)
                     : router.push(`/music/post/${item.id}`);
                 }}
               >
-                <span className={styles["black-masking"]}>{`${item.artist} [${item.album}]`}</span>
+                <span className={styles["black-masking"]}>{`${item.artist} [${
+                  item.album
+                }] - ${item.releaseDate.substring(0, 4)}`}</span>
               </div>
             </div>
           );
