@@ -126,9 +126,10 @@ export const Grid = () => {
                     : router.push(`/music/post/${item.id}`);
                 }}
               >
-                <span className={styles["black-masking"]}>{`${item.artist} [${item.album}] ${
-                  isAdminPage && `- ${item.releaseDate.substring(0, 4)}`
-                }`}</span>
+                <span className={styles["black-masking"]}>
+                  {`${item.artist} [${item.album}]`}
+                  {isAdminPage && ` - ${item.releaseDate.substring(0, 4)}`}
+                </span>
               </div>
             </div>
           );
