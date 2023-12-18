@@ -1189,6 +1189,17 @@
   .album-metadata {
     z-index: 1;
   }
+
+  .artist-page-image-container {
+    display: flex;
+    margin-top: 70px;
+    margin-bottom: 0;
+  }
+
+  .artist-page-image {
+    width: 130px;
+    height: 130px;
+  }
 }
 
 @media (max-width: 499px) {
