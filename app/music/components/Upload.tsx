@@ -78,7 +78,7 @@ export default function Upload() {
         </div>
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
         <textarea
-          className={styles["input"]}
+          className={`${styles["input"]} ${styles["input-link"]}`}
           value={link}
           onChange={e => {
             setLink(e.target.value);
