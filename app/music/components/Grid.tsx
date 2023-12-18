@@ -52,13 +52,19 @@ export const Grid = () => {
         currentCriteria,
       });
 
-      setData(prevData => [...prevData, ...result?.slicedData]);
+      if (currentPage === 1) {
+        setData(result?.slicedData);
+      } else {
+        // 페이지가 2 이상일 때부터만 기존 데이터 배열에 새로운 데이터 추가
+        setData(prevData => [...prevData, ...result?.slicedData]);
+      }
+
       const dataLength = result?.genreDataLength;
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
     }
 
     loadData();
-  }, [fullPathName, currentMethod, currentCriteria, currentPage, perPageCount]);
+  }, [currentMethod, currentCriteria, currentPage, perPageCount]);
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
