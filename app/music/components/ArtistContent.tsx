@@ -28,7 +28,6 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
-  const [keyword, setKeyword] = useState<string>("");
 
   useEffect(() => {
     async function loadData() {
@@ -52,8 +51,6 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
   return (
     <ContentLayout
       data={data}
-      keyword={keyword}
-      setKeyword={setKeyword}
       currentMethod={currentMethod}
       setCurrentMethod={setCurrentMethod}
       currentCriteria={currentCriteria}

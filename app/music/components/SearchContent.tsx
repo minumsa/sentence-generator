@@ -24,7 +24,6 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
-  const [keyword, setKeyword] = useState<string>("");
 
   useEffect(() => {
     async function loadData() {
@@ -48,8 +47,6 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
   return (
     <ContentLayout
       data={data}
-      keyword={keyword}
-      setKeyword={setKeyword}
       currentMethod={currentMethod}
       setCurrentMethod={setCurrentMethod}
       currentCriteria={currentCriteria}

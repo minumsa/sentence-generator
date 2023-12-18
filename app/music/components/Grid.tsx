@@ -16,6 +16,7 @@ import { useInView } from "react-intersection-observer";
 import { Loading } from "./Loading";
 import "aos/dist/aos.css";
 import Aos from "aos";
+import { ContentLayout } from "./ContentLayout";
 
 export const Grid = () => {
   const router = useRouter();
@@ -31,8 +32,7 @@ export const Grid = () => {
     threshold: 0,
     triggerOnce: false,
   });
-  const isLoading = data.length === 0;
-  // const [isLoading, setIsLoading] = useState(true);
+  const [dataLength, setDataLength] = useState(undefined);
 
   useEffect(() => {
     Aos.init();
@@ -60,6 +60,7 @@ export const Grid = () => {
       }
 
       const dataLength = result?.genreDataLength;
+      setDataLength(result?.genreDataLength);
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
     }
 
@@ -73,11 +74,18 @@ export const Grid = () => {
   };
 
   return (
-    <div className={styles["grid-div"]}>
-      {isLoading ? (
-        <Loading dataLength={undefined} />
-      ) : (
-        data.map((item, index) => {
+    <ContentLayout
+      data={data}
+      currentMethod={currentMethod}
+      setCurrentMethod={setCurrentMethod}
+      currentCriteria={currentCriteria}
+      setCurrentCriteria={setCurrentCriteria}
+      currentPage={currentPage}
+      perPageCount={perPageCount}
+      totalDataLength={undefined}
+    >
+      <div className={styles["grid-div"]}>
+        {data.map((item, index) => {
           const firstLineMobile = isMobile && index < 2;
           const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
           const isLastItem = index + 1 === data.length;
@@ -136,8 +144,8 @@ export const Grid = () => {
               </div>
             </div>
           );
-        })
-      )}
-    </div>
+        })}
+      </div>
+    </ContentLayout>
   );
 };

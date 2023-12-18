@@ -42,6 +42,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
       {pageNumberToArray.map((page, index) => {
         const minPageNumber = maxPageNumber - perPageCount + 1;
         const pageButtonNumber = index + 1;
+
         if (pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber)
           return (
             <div
@@ -50,7 +51,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
               onClick={() => {
                 router.push(`${pathNameWithoutPageNumber}/${pageButtonNumber}`);
               }}
-              style={currentPage === pageButtonNumber ? { color: "#cfcfcf" } : undefined}
+              style={currentPage == pageButtonNumber ? { color: "#cfcfcf" } : undefined}
             >
               {page}
             </div>

@@ -27,9 +27,9 @@ export async function GET(request: Request) {
       sortKey = { album: currentCriteria };
     }
 
-    if (pathName === "") {
-      sortKey = { releaseDate: 1 };
-    }
+    // if (pathName === "") {
+    //   sortKey = { releaseDate: 1 };
+    // }
 
     // pathName이 장르(pop, kpop...)인 경우 해당 장르로 필터링
     // 그렇지 않으면 모든 데이터 가져오기(query === {})

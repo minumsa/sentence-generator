@@ -17,9 +17,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
       {/* <TopNav
             pathName={pathName}
             isAdminPage={isAdminPage}
-            keyword={keyword}
             currentKeyword={undefined}
-            setKeyword={setKeyword}
             currentMethod={currentMethod}
             setCurrentMethod={setCurrentMethod}
             currentCriteria={currentCriteria}

@@ -6,8 +6,6 @@ import { Loading } from "./Loading";
 interface ContentLayoutProps {
   data: AlbumInfo[];
   children: React.ReactNode;
-  keyword: string;
-  setKeyword: React.Dispatch<React.SetStateAction<string>>;
   currentMethod: MethodType;
   setCurrentMethod: React.Dispatch<React.SetStateAction<MethodType | CriteriaType>>;
   currentCriteria: CriteriaType;
@@ -20,8 +18,6 @@ interface ContentLayoutProps {
 export const ContentLayout = ({
   data,
   children,
-  keyword,
-  setKeyword,
   currentMethod,
   setCurrentMethod,
   currentCriteria,
@@ -39,19 +35,19 @@ export const ContentLayout = ({
       ) : (
         <>
           <TopNav
-            keyword={keyword}
-            setKeyword={setKeyword}
             currentMethod={currentMethod}
             setCurrentMethod={setCurrentMethod}
             currentCriteria={currentCriteria}
             setCurrentCriteria={setCurrentCriteria}
           />
           {children}
-          <PageNumbers
-            currentPage={currentPage}
-            perPageCount={perPageCount}
-            totalDataLength={totalDataLength}
-          />
+          {totalDataLength && (
+            <PageNumbers
+              currentPage={currentPage}
+              perPageCount={perPageCount}
+              totalDataLength={totalDataLength}
+            />
+          )}
         </>
       )}
     </>

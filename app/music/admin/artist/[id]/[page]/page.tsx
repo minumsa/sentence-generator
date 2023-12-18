@@ -6,7 +6,7 @@ import { MusicLayout } from "@/app/music/components/MusicLayout";
 
 export default function Page({ params }: PageProps) {
   const artistId = params.id;
-  const currentPage = params.page;
+  const currentPage = Number(params.page);
 
   return (
     <MusicLayout>

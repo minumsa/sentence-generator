@@ -23,7 +23,6 @@ export default function Content({ pathName, currentPage }: PageProps) {
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const [perPageCount, setPerPageCount] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
-  const [keyword, setKeyword] = useState<string>("");
 
   useEffect(() => {
     async function loadData() {
@@ -45,8 +44,6 @@ export default function Content({ pathName, currentPage }: PageProps) {
   return (
     <ContentLayout
       data={data}
-      keyword={keyword}
-      setKeyword={setKeyword}
       currentMethod={currentMethod}
       setCurrentMethod={setCurrentMethod}
       currentCriteria={currentCriteria}

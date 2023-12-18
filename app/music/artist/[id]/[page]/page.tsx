@@ -16,7 +16,7 @@ export default function Page({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const artistId = params.id;
-  const currentPage = params.page;
+  const currentPage = Number(params.page);
 
   const queryString = `?perPageCount=${5}&currentPage=${currentPage}&artistId=${artistId}&pathName=${""}&currentMethod=${"발매일"}&currentCriteria=${"내림차순"}`;
   const url = `https://divdivdiv.com/music/api/artist${queryString}`;

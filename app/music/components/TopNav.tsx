@@ -4,8 +4,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { CriteriaType, MethodType, OrderType, sortItems } from "../modules/data";
 
 interface TopNavProps {
-  keyword: string;
-  setKeyword: React.Dispatch<React.SetStateAction<string>>;
   currentMethod: MethodType;
   setCurrentMethod: React.Dispatch<React.SetStateAction<CriteriaType | MethodType>>;
   currentCriteria: CriteriaType;
@@ -13,8 +11,6 @@ interface TopNavProps {
 }
 
 export const TopNav = ({
-  keyword,
-  setKeyword,
   currentMethod,
   setCurrentMethod,
   currentCriteria,
@@ -29,6 +25,7 @@ export const TopNav = ({
   const [isAdminPage, setIsAdminPage] = useState(false);
   // TODO: 나중에 정규식 표현 블로그 정리
   const pathNameWithoutPageNumber = fullPathName.replace(/\/\d+$/, "");
+  const [keyword, setKeyword] = useState("");
 
   // const slicedPathName = fullPathName
   //   .split("/")
@@ -114,7 +111,7 @@ export const TopNav = ({
                     // const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     // const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    router.push(`${pathNameWithoutPageNumber}/1`);
+                    router.push(`${pathNameWithoutPageNumber}`);
                   }}
                 >
                   {item}
