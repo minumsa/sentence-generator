@@ -17,6 +17,12 @@ export const ArtistPageImage = ({ data }: ArtistPageImageProps) => {
             loading="lazy"
           />
         </div>
+        <div
+          className={styles["category-meta-title"]}
+          style={{ marginTop: "10px", cursor: "default" }}
+        >
+          {data[0].artist}
+        </div>
       </div>
     )
   );

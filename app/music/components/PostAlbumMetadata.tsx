@@ -52,14 +52,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
       </div>
       <div className={styles["album-metadata"]}>
         <div className={styles["post-date"]}>아티스트</div>
-        <div
-          onClick={() => {
-            router.push(`/music/artist/${albumData.artistId}/1`);
-          }}
-          style={{ cursor: "pointer" }}
-        >
-          <span className={styles["black-masking"]}>{albumData.artist}</span>
-        </div>
+        <span className={styles["black-masking"]}>{albumData.artist}</span>
         <div className={styles["post-date"]}>앨범</div>
         <div>
           <span className={styles["black-masking"]}>{albumData.album}</span>

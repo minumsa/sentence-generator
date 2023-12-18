@@ -386,9 +386,10 @@
 .artist-page-image-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 45px;
-  margin-bottom: 80px;
+  margin-bottom: 70px;
 }
 
 .artist-page-image {
@@ -726,6 +727,7 @@
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  object-position: center;
 }
 
 .last-updated {
