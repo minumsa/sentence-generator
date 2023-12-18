@@ -50,9 +50,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
               onClick={() => {
                 router.push(`${pathNameWithoutPageNumber}/${pageButtonNumber}`);
               }}
-              style={
-                currentPage === pageButtonNumber ? { fontWeight: 500, opacity: "70%" } : undefined
-              }
+              style={currentPage === pageButtonNumber ? { color: "#cfcfcf" } : undefined}
             >
               {page}
             </div>
