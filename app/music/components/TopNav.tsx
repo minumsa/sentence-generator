@@ -109,7 +109,7 @@ export const TopNav = () => {
                     // const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
                     // const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    router.push(`${pathNameWithoutPageNumber}`);
+                    // router.push(`${pathNameWithoutPageNumber}`);
                   }}
                 >
                   {item}
