@@ -44,10 +44,6 @@ export default function Content({ pathName, currentPage }: PageProps) {
   return (
     <ContentLayout
       data={data}
-      currentMethod={currentMethod}
-      setCurrentMethod={setCurrentMethod}
-      currentCriteria={currentCriteria}
-      setCurrentCriteria={setCurrentCriteria}
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}

@@ -6,10 +6,6 @@ import { Loading } from "./Loading";
 interface ContentLayoutProps {
   data: AlbumInfo[];
   children: React.ReactNode;
-  currentMethod: MethodType;
-  setCurrentMethod: React.Dispatch<React.SetStateAction<MethodType | CriteriaType>>;
-  currentCriteria: CriteriaType;
-  setCurrentCriteria: React.Dispatch<React.SetStateAction<MethodType | CriteriaType>>;
   currentPage: number;
   perPageCount: number;
   totalDataLength: number | undefined;
@@ -18,10 +14,6 @@ interface ContentLayoutProps {
 export const ContentLayout = ({
   data,
   children,
-  currentMethod,
-  setCurrentMethod,
-  currentCriteria,
-  setCurrentCriteria,
   currentPage,
   perPageCount,
   totalDataLength,
@@ -34,12 +26,7 @@ export const ContentLayout = ({
         <Loading dataLength={totalDataLength} />
       ) : (
         <>
-          <TopNav
-            currentMethod={currentMethod}
-            setCurrentMethod={setCurrentMethod}
-            currentCriteria={currentCriteria}
-            setCurrentCriteria={setCurrentCriteria}
-          />
+          <TopNav />
           {children}
           {totalDataLength && (
             <PageNumbers

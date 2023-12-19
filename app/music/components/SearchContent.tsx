@@ -47,10 +47,6 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
   return (
     <ContentLayout
       data={data}
-      currentMethod={currentMethod}
-      setCurrentMethod={setCurrentMethod}
-      currentCriteria={currentCriteria}
-      setCurrentCriteria={setCurrentCriteria}
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}

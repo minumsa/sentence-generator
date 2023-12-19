@@ -13,7 +13,6 @@ import {
 } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
-import { Loading } from "./Loading";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
@@ -24,15 +23,15 @@ export const Grid = () => {
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalPage, setTotalPage] = useState(1);
-  const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 42);
+  const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 50);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: false,
   });
   const [dataLength, setDataLength] = useState(undefined);
+  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
+  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
 
   useEffect(() => {
     Aos.init();
@@ -76,10 +75,6 @@ export const Grid = () => {
   return (
     <ContentLayout
       data={data}
-      currentMethod={currentMethod}
-      setCurrentMethod={setCurrentMethod}
-      currentCriteria={currentCriteria}
-      setCurrentCriteria={setCurrentCriteria}
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={undefined}

@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { usePathname, useRouter } from "next/navigation";
-import { CriteriaType, MethodType, OrderType, sortItems } from "../modules/data";
+import {
+  CriteriaType,
+  MethodType,
+  OrderType,
+  initialCriteria,
+  initialMethod,
+  sortItems,
+} from "../modules/data";
+import { useAtom } from "jotai";
 
-interface TopNavProps {
-  currentMethod: MethodType;
-  setCurrentMethod: React.Dispatch<React.SetStateAction<CriteriaType | MethodType>>;
-  currentCriteria: CriteriaType;
-  setCurrentCriteria: React.Dispatch<React.SetStateAction<CriteriaType | MethodType>>;
-}
-
-export const TopNav = ({
-  currentMethod,
-  setCurrentMethod,
-  currentCriteria,
-  setCurrentCriteria,
-}: TopNavProps) => {
+export const TopNav = () => {
   const router = useRouter();
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -26,6 +22,8 @@ export const TopNav = ({
   // TODO: 나중에 정규식 표현 블로그 정리
   const pathNameWithoutPageNumber = fullPathName.replace(/\/\d+$/, "");
   const [keyword, setKeyword] = useState("");
+  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
+  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
 
   // const slicedPathName = fullPathName
   //   .split("/")

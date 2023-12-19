@@ -51,10 +51,6 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
   return (
     <ContentLayout
       data={data}
-      currentMethod={currentMethod}
-      setCurrentMethod={setCurrentMethod}
-      currentCriteria={currentCriteria}
-      setCurrentCriteria={setCurrentCriteria}
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
