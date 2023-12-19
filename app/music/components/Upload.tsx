@@ -133,7 +133,7 @@ export default function Upload() {
             onClick={() => {
               handleUpload();
             }}
-            style={{ boxShadow: "0 0 0 1px #242424 inset" }}
+            // style={{ boxShadow: "0 0 0 1px #242424 inset" }}
           >
             제출하기
           </div>
