@@ -145,7 +145,7 @@
 }
 
 .loading {
-  width: 100%;
+  width: calc(100% - 250px);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -157,7 +157,7 @@
   user-select: none;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
 }
 
 @keyframes fadeInUp {
@@ -814,6 +814,10 @@
 }
 
 @media (max-width: 525px) {
+  .loading {
+    width: 100%;
+  }
+
   .body {
     background-color: #1c1c1c;
   }
