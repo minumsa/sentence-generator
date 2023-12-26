@@ -9,6 +9,7 @@ https://divdivdiv.com
 개인 프로젝트를 업로드하는 포트폴리오 페이지입니다.
 
 ## 기술 스텍
+
 ![Next][Next.js] ![React][React.js] ![TypeScript][TypeScript]
 
 ## 동작 방법
@@ -57,63 +58,32 @@ npm run dev
 `useEffect`를 사용해 상태를 관리합니다. 컴포넌트가 마운트되면 OpenWeatherMap API를 호출합니다. 서울의 날씨 정보를 가져와 `weatherData`라는 상태 변수에 담고, 만약 데이터를 가져오는 동안 에러가 발생하면 콘솔에 에러를 출력합니다.
 
 ```typescript
-// Index.tsx
+// data.ts
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const apiKey = "a363f14d94f369a4d926a27d5d44fc60";
-      const seoulWeatherResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${apiKey}&lang=kr`
-      );
-      if (!seoulWeatherResponse.ok) {
-        throw "weather fetch failed";
-      }
-      const data = await seoulWeatherResponse.json();
-      setWeatherData(data);
-    } catch (error) {
-      console.error("Error fetching city data:", error);
+export const fetchWeather = async (setWeather: React.Dispatch<React.SetStateAction<Weather>>) => {
+  try {
+    const apiKey = "a363f...";
+    const seoulWeatherResponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${apiKey}&lang=kr`
+    );
+    if (!seoulWeatherResponse.ok) {
+      throw "weather fetch failed";
     }
-  };
-
-  fetchData();
-}, []);
-```
-
-### 상태 변경과 이벤트 처리 부분
-
-세 가지의 상태 변수(`showMain`, `showAbout`, `showContact`)를 사용해 현재 표시되는 컨텐츠를 제어합니다. `onClick` 이벤트 핸들러를 통해 사용자가 메뉴를 클릭하면 해당 콘텐츠를 보여주고 나머지 콘텐츠는 숨깁니다.
-
-```typescript
-// Index.tsx
-
-const [showMain, setShowMain] = useState<boolean>(true);
-const [showAbout, setShowAbout] = useState<boolean>(false);
-const [showContact, setShowContact] = useState<boolean>(false);
-
-// ...
-
-<div
-  className={styles["menu-text"]}
-  style={{
-    marginLeft: "10px",
-    fontWeight: showMain ? "600" : "400",
-  }}
-  onClick={() => {
-    setShowMain(true);
-    setShowAbout(false);
-    setShowContact(false);
-  }}
->
-  divdivdiv
-</div>;
+    const data = await seoulWeatherResponse.json();
+    setWeather({ icon: data.weather[0].icon, temp: data.main.temp });
+  } catch (error) {
+    console.error("Error fetching city data:", error);
+  }
+};
 ```
 
 ### ImageModal 컴포넌트 부분
 
-이미지를 더블 클릭하면 해당 이미지 URL과 텍스트가 상태 변수에 입력됩니다. `ImageModal` 컴포넌트는 이미지를 확대해서 보여주거나 프로젝트에 대한 설명을 적은 메모를 보여주는 역할을 합니다.
+이미지를 더블 클릭하면 해당 이미지 URL이나 텍스트가 상태 변수에 입력됩니다. `DraggableIcons` 컴포넌트는 이미지를 확대해서 보여주거나 프로젝트에 대한 설명을 적은 메모를 보여주는 역할을 합니다.
 
 ```typescript
+// DraggableIcons.tsx
+
 const handleDoubleClick = (index: number) => {
   if (index === 6) {
     setImgSrc("/divdivdiv/cat.webp");
