@@ -1,6 +1,6 @@
 ## 📁 divdivdiv
 
-<a href="https://divdivdiv.com" target="_blank">divdivdiv</a>는 제가 작업한 프로젝트를 업로드하는 포트폴리오 사이트입니다.
+<a href="https://divdivdiv.com" target="_blank">divdivdiv</a>는 제가 작업한 개인 프로젝트들을 업로드하는 포트폴리오 사이트입니다.
 
 ## 🧚‍♂️ Overview
 
