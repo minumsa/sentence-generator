@@ -1,4 +1,4 @@
-## 🪄 divdivdiv
+## 🪄 Words
 
 <a href="https://divdivdiv.com/words" target="_blank">직유법 생성기</a>는 데이터베이스에 저장되어 있는 약 100개의 단어들이 경우의 수에 따라 랜덤하게 조합되며 화면에 다양한 직유법을 만들어내는 사이트입니다.
 
