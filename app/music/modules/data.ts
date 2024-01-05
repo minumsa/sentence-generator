@@ -84,14 +84,14 @@ export const activeStyle = {
   color: "#949494",
 };
 
-export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범";
+export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범" | "평점";
 export type CriteriaType = "오름차순" | "내림차순";
 
 export const sortItems: {
   method: MethodType[];
   criteria: CriteriaType[];
 } = {
-  method: ["작성일", "발매일", "아티스트", "앨범"],
+  method: ["작성일", "발매일", "아티스트", "앨범", "평점"],
   criteria: ["오름차순", "내림차순"],
 };
 

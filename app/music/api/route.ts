@@ -25,6 +25,8 @@ export async function GET(request: Request) {
       sortKey = { artist: currentCriteria };
     } else if (currentMethod === "앨범") {
       sortKey = { album: currentCriteria };
+    } else if (currentMethod === "평점") {
+      sortKey = { score: currentCriteria };
     }
 
     // if (pathName === "") {

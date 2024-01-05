@@ -101,15 +101,14 @@ export const TopNav = () => {
             }}
           >
             {sortItem.map((item: MethodType | CriteriaType) => {
+              // 평점은 관리자 페이지에서만 표시
+              if (!isAdminPage && item === "평점") return null;
               return (
                 <div
                   className={styles["criteria"]}
                   key={item}
                   onClick={() => {
-                    // const hasNoPageNumber = isNaN(Number(fullPathName.split("").at(-1)));
-                    // const variablePathByNumber = hasNoPageNumber ? 1 : "/";
                     setCurrentOrder(item);
-                    // router.push(`${pathNameWithoutPageNumber}`);
                   }}
                 >
                   {item}
