@@ -11,6 +11,8 @@ export default function Upload() {
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
+  const [score, setScore] = useState<number>(0);
+  const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [password, setPassword] = useState<string>("");
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
   const [uploadDate, setUploadDate] = useState(new Date());
@@ -94,6 +96,21 @@ export default function Upload() {
             setAlbumId(e.target.value);
           }}
         />
+        <div className={styles["upload-item-title"]}>평점</div>
+        <div className={styles["select-container"]}>
+          <select
+            className={styles["select"]}
+            value={score}
+            onChange={e => {
+              setScore(Number(e.target.value));
+            }}
+          >
+            <option value="">--스코어를 선택해주세요--</option>
+            {scoreArray.map((item, index) => {
+              return <option key={index}>{item}</option>;
+            })}
+          </select>
+        </div>
         <div className={styles["upload-item-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}

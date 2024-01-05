@@ -5,7 +5,6 @@ import { fetchDataById, fetchSpotify, updateData } from "../modules/api";
 import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useRouter } from "next/navigation";
 
 interface UpdateProps {
   currentId: string;
@@ -132,6 +131,14 @@ export default function Update({ currentId }: UpdateProps) {
             setArtistId(e.target.value);
           }}
         />
+        {/* FIXME: 점수 넣을 곳 */}
+        {/* <div className={styles["upload-item-title"]}>점수</div>
+        <input
+          className={styles["input"]}
+          onChange={e => {
+            setArtistId(e.target.value);
+          }}
+        /> */}
         <div className={styles["upload-item-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}
@@ -171,7 +178,6 @@ export default function Update({ currentId }: UpdateProps) {
             onClick={() => {
               handleUpdate();
             }}
-            // style={{ boxShadow: "0 0 0 1px #242424 inset" }}
           >
             제출하기
           </div>
