@@ -3,9 +3,10 @@ import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
 import { isMobile } from "react-device-detect";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
+import { updateData } from "../modules/api";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -17,6 +18,21 @@ export const Album = ({ data }: AlbumProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
+
+  // FIXME: 임시 코드 - 평점 매기고 나면 삭제 예정
+  const [score, setScore] = useState<number>(0);
+  const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
+  const [password, setPassword] = useState<string>("");
+
+  const handleUpdate = async () => {
+    updateData(data.id, data, score, password);
+  };
+
+  const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleUpdate();
+    }
+  };
 
   return (
     <div className={styles["album-container"]}>
@@ -114,6 +130,33 @@ export const Album = ({ data }: AlbumProps) => {
                       </div>
                     )}
                   </div>
+                  {/* FIXME: 평점 다 매기면 삭제 */}
+                  <div className={styles["upload-item-title"]}>평점 {data.score}</div>
+                  <div className={styles["select-container"]}>
+                    <select
+                      className={styles["select"]}
+                      value={score}
+                      onChange={e => {
+                        setScore(Number(e.target.value));
+                      }}
+                    >
+                      <option value="">--스코어를 선택해주세요--</option>
+                      {scoreArray.map((item, index) => {
+                        return <option key={index}>{item}</option>;
+                      })}
+                    </select>
+                  </div>
+                  <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
+                    관리자 비밀번호
+                  </div>
+                  <input
+                    className={styles["input"]}
+                    value={password}
+                    onChange={e => {
+                      setPassword(e.target.value);
+                    }}
+                    onKeyDown={handlePasswordEnter}
+                  />
                   {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                   {isAdminPage && (
                     <div className={styles["admin-button-container"]}>
