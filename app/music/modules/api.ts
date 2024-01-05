@@ -140,7 +140,7 @@ export async function fetchDataById(id: string) {
   }
 }
 
-export async function uploadData(uploadData: AlbumInfo, password: string) {
+export async function uploadData(uploadData: AlbumInfo, score: number, password: string) {
   if (uploadData !== null) {
     try {
       const response = await fetch("/music/api", {
@@ -150,6 +150,7 @@ export async function uploadData(uploadData: AlbumInfo, password: string) {
         },
         body: JSON.stringify({
           data: uploadData,
+          score: score,
           password: password,
         }),
       });
@@ -172,7 +173,12 @@ export async function uploadData(uploadData: AlbumInfo, password: string) {
   }
 }
 
-export const updateData = async (currentId: string, data: Partial<AlbumInfo>, password: string) => {
+export const updateData = async (
+  currentId: string,
+  data: Partial<AlbumInfo>,
+  score: number,
+  password: string
+) => {
   if (data !== null) {
     try {
       const response = await fetch("/music/api", {
@@ -183,6 +189,7 @@ export const updateData = async (currentId: string, data: Partial<AlbumInfo>, pa
         body: JSON.stringify({
           currentId,
           data,
+          score,
           password,
         }),
       });

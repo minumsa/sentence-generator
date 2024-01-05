@@ -27,7 +27,7 @@ export default function Upload() {
     });
 
     if (newAlbumData) {
-      await uploadData(newAlbumData, password);
+      await uploadData(newAlbumData, score, password);
     }
   };
 

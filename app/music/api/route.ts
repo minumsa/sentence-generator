@@ -60,7 +60,7 @@ export async function POST(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { data, password } = await request.json();
+    const { data, score, password } = await request.json();
     const {
       id,
       imgUrl,
@@ -102,6 +102,7 @@ export async function POST(request: Request) {
       uploadDate,
       duration,
       tracks,
+      score,
     });
     await newData.save();
     return NextResponse.json(newData.toJSON());
@@ -141,7 +142,7 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { currentId, data, password } = await request.json();
+    const { currentId, data, score, password } = await request.json();
     const {
       id,
       imgUrl,
@@ -185,6 +186,7 @@ export async function PUT(request: Request) {
       uploadDate,
       duration,
       tracks,
+      score,
     });
 
     await originalData.save();

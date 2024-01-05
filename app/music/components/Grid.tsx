@@ -72,6 +72,8 @@ export const Grid = () => {
     setImageLoaded(true);
   };
 
+  console.log(data);
+
   return (
     <ContentLayout
       data={data}
@@ -134,7 +136,13 @@ export const Grid = () => {
               >
                 <span className={styles["black-masking"]}>
                   {`${item.artist} [${item.album}]`}
-                  {isAdminPage && ` - ${item.releaseDate.substring(0, 4)}`}
+                  {/* 관리자 페이지일 때만 표시할 부분 */}
+                  {isAdminPage &&
+                    ` - ${item.releaseDate.substring(0, 4)} ${
+                      item.score
+                        ? "… " + (item.score / 0.5 == 0 ? item.score + ".0" : item.score)
+                        : ""
+                    }`}
                 </span>
               </div>
             </div>

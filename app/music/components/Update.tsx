@@ -10,6 +10,7 @@ interface UpdateProps {
   currentId: string;
 }
 
+// FIXME: Upload 컴포넌트와 겹치는 부분 리팩토링
 export default function Update({ currentId }: UpdateProps) {
   const [data, setData] = useState<any>();
   const [albumId, setAlbumId] = useState("");
@@ -18,6 +19,8 @@ export default function Update({ currentId }: UpdateProps) {
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [score, setScore] = useState<number>(0);
+  const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
   const [uploadDate, setUploadDate] = useState(new Date());
   // const router= useRouter()
@@ -33,7 +36,7 @@ export default function Update({ currentId }: UpdateProps) {
     });
 
     if (newAlbumData) {
-      updateData(currentId, newAlbumData, password);
+      updateData(currentId, newAlbumData, score, password);
     }
   };
 
@@ -47,13 +50,14 @@ export default function Update({ currentId }: UpdateProps) {
     async function getData() {
       const fetchData = await fetchDataById(currentId);
       setData(fetchData);
-      const { id, artistId, genre, link, text, uploadDate } = fetchData;
+      const { id, artistId, genre, link, text, uploadDate, score } = fetchData;
 
       setAlbumId(id);
       setArtistId(artistId);
       setGenre(genre);
       setLink(link);
       setText(text);
+      setScore(score);
       setUploadDate(new Date(uploadDate));
     }
 
@@ -131,14 +135,21 @@ export default function Update({ currentId }: UpdateProps) {
             setArtistId(e.target.value);
           }}
         />
-        {/* FIXME: 점수 넣을 곳 */}
-        {/* <div className={styles["upload-item-title"]}>점수</div>
-        <input
-          className={styles["input"]}
-          onChange={e => {
-            setArtistId(e.target.value);
-          }}
-        /> */}
+        <div className={styles["upload-item-title"]}>평점</div>
+        <div className={styles["select-container"]}>
+          <select
+            className={styles["select"]}
+            value={score}
+            onChange={e => {
+              setScore(Number(e.target.value));
+            }}
+          >
+            <option value="">--스코어를 선택해주세요--</option>
+            {scoreArray.map((item, index) => {
+              return <option key={index}>{item}</option>;
+            })}
+          </select>
+        </div>
         <div className={styles["upload-item-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}
