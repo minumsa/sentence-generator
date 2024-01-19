@@ -131,32 +131,36 @@ export const Album = ({ data }: AlbumProps) => {
                     )}
                   </div>
                   {/* FIXME: 평점 다 매기면 삭제 */}
-                  <div className={styles["upload-item-title"]}>평점 {data.score}</div>
-                  <div className={styles["select-container"]}>
-                    <select
-                      className={styles["select"]}
-                      value={score}
-                      onChange={e => {
-                        setScore(Number(e.target.value));
-                      }}
-                    >
-                      <option value="">--스코어를 선택해주세요--</option>
-                      {scoreArray.map((item, index) => {
-                        return <option key={index}>{item}</option>;
-                      })}
-                    </select>
-                  </div>
-                  <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
-                    관리자 비밀번호
-                  </div>
-                  <input
-                    className={styles["input"]}
-                    value={password}
-                    onChange={e => {
-                      setPassword(e.target.value);
-                    }}
-                    onKeyDown={handlePasswordEnter}
-                  />
+                  {isAdminPage && (
+                    <div>
+                      <div className={styles["upload-item-title"]}>평점 {data.score}di</div>
+                      <div className={styles["select-container"]}>
+                        <select
+                          className={styles["select"]}
+                          value={score}
+                          onChange={e => {
+                            setScore(Number(e.target.value));
+                          }}
+                        >
+                          <option value="">--스코어를 선택해주세요--</option>
+                          {scoreArray.map((item, index) => {
+                            return <option key={index}>{item}</option>;
+                          })}
+                        </select>
+                      </div>
+                      <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
+                        관리자 비밀번호
+                      </div>
+                      <input
+                        className={styles["input"]}
+                        value={password}
+                        onChange={e => {
+                          setPassword(e.target.value);
+                        }}
+                        onKeyDown={handlePasswordEnter}
+                      />
+                    </div>
+                  )}
                   {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                   {isAdminPage && (
                     <div className={styles["admin-button-container"]}>
