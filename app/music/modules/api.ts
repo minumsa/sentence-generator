@@ -335,3 +335,33 @@ export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: U
     console.error(error);
   }
 };
+
+interface SearchSpotify {
+  albumKeyword: string;
+}
+
+export const searchSpotify = async (albumKeyword: string) => {
+  try {
+    const accessToken = await fetchSpotifyAccessToken();
+    if (!accessToken) {
+      console.error("Error: Access token is not available");
+    }
+
+    const searchUrl = `https://api.spotify.com/v1/search?q=${albumKeyword}&type=album`;
+
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+    const searchDataResponse = await fetch(searchUrl, { headers });
+
+    if (!searchDataResponse.ok) {
+      console.error("Error: albumData fetch failed");
+    }
+
+    const fetchedData = await searchDataResponse.json();
+
+    return fetchedData;
+  } catch (error) {
+    console.error(error);
+  }
+};

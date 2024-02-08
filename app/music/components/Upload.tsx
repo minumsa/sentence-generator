@@ -1,13 +1,17 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import styles from "../music.module.css";
 import React from "react";
-import { fetchSpotify, uploadData } from "../modules/api";
+import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
 import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Upload() {
-  const [albumId, setAlbumId] = useState("");
+  const [albumKeyword, setAlbumKeyword] = useState<string>("");
+  // FIXME: albumKeyword로 가져온 정보에서 albumId 넘겨줘야 함
+  const [albumId, setAlbumId] = useState<string>("");
+  const [searchData, setSearchData] = useState();
+
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
@@ -16,6 +20,18 @@ export default function Upload() {
   const [password, setPassword] = useState<string>("");
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
   const [uploadDate, setUploadDate] = useState(new Date());
+
+  const handleSearch = async () => {
+    const result = await searchSpotify(albumKeyword);
+    setSearchData(result);
+    console.log(searchData);
+  };
+
+  useEffect(() => {
+    if (albumKeyword.length > 0) {
+      handleSearch();
+    }
+  }, [albumKeyword]);
 
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
@@ -78,22 +94,20 @@ export default function Upload() {
             })}
           </select>
         </div>
+        <div className={styles["upload-item-title"]}>앨범 제목</div>
+        <textarea
+          className={styles["input"]}
+          value={albumId}
+          onChange={e => {
+            setAlbumKeyword(e.target.value);
+          }}
+        />
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
         <textarea
           className={`${styles["input"]} ${styles["input-link"]}`}
           value={link}
           onChange={e => {
             setLink(e.target.value);
-          }}
-        />
-        <a href={spotifyLink} target="_blank" style={{ textDecoration: "none", color: "#cfcfcf" }}>
-          <div className={styles["upload-item-title"]}>앨범 ID(Spotify)</div>
-        </a>
-        <textarea
-          className={styles["input"]}
-          value={albumId}
-          onChange={e => {
-            setAlbumId(e.target.value);
           }}
         />
         <div className={styles["upload-item-title"]}>평점</div>
