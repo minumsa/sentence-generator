@@ -608,6 +608,20 @@
   user-select: none;
 }
 
+.search-album-modal-container {
+  position: absolute;
+  display: flex;
+  width: 500px;
+  height: 300px;
+  background-color: #fff;
+  margin-top: -50px;
+  border-radius: 6px;
+  padding: 30px;
+}
+
+.search-album-modal {
+}
+
 .page-container {
   display: flex;
   justify-content: center;
