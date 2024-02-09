@@ -14,6 +14,7 @@ interface SearchData {
   name: string;
   release_date: string;
   images: any[];
+  id: string;
 }
 
 export default function Upload() {
@@ -64,20 +65,12 @@ export default function Upload() {
     }
   };
 
-  interface ExampleCustomInputProps {
-    value: string;
-    onClick: () => void;
-  }
+  const handleModal = (data: SearchData) => {
+    setAlbumId(data.id);
+    setSearchData(undefined);
+  };
 
-  const ExampleCustomInput = forwardRef<HTMLButtonElement, ExampleCustomInputProps>(
-    ({ value, onClick }, ref) => (
-      <button className={styles["calendar-input"]} onClick={onClick} ref={ref}>
-        {value}
-      </button>
-    )
-  );
-
-  ExampleCustomInput.displayName = "ExampleCustomInput";
+  console.log("albumId", albumId);
 
   return (
     <>
@@ -124,7 +117,13 @@ export default function Upload() {
               const releaseYear = data.release_date.slice(0, 4);
               const imageUrl = data.images[2].url;
               return (
-                <div className={styles["search-album-modal"]} key={index}>
+                <div
+                  className={styles["search-album-modal"]}
+                  key={index}
+                  onClick={() => {
+                    handleModal(data);
+                  }}
+                >
                   <div className={styles["search-album-image-container"]}>
                     <img
                       className={styles["search-album-image"]}
@@ -180,14 +179,7 @@ export default function Upload() {
           selected={uploadDate}
           onChange={date => date && setUploadDate(date)}
           dateFormat={"yyyy/MM/dd"}
-          customInput={
-            <ExampleCustomInput
-              value={""}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
-          }
+          className={styles["date-input"]}
         />
         <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
           관리자 비밀번호
