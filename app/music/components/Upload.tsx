@@ -43,8 +43,6 @@ export default function Upload() {
     }
   }, [albumKeyword]);
 
-  console.log(searchData);
-
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
       albumId,
@@ -69,8 +67,6 @@ export default function Upload() {
     setAlbumId(data.id);
     setSearchData(undefined);
   };
-
-  console.log("albumId", albumId);
 
   return (
     <>

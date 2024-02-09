@@ -1,6 +1,6 @@
 import { PageNumbers } from "./PageNumbers";
 import { TopNav } from "./TopNav";
-import { AlbumInfo, CriteriaType, MethodType } from "../modules/data";
+import { AlbumInfo } from "../modules/data";
 import { Loading } from "./Loading";
 
 interface ContentLayoutProps {
@@ -18,7 +18,7 @@ export const ContentLayout = ({
   perPageCount,
   totalDataLength,
 }: ContentLayoutProps) => {
-  const isLoading = data.length === 0;
+  const isLoading = data?.length === 0;
 
   return (
     <>

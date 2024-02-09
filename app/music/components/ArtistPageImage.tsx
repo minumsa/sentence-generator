@@ -7,7 +7,7 @@ interface ArtistPageImageProps {
 
 export const ArtistPageImage = ({ data }: ArtistPageImageProps) => {
   return (
-    data.length > 0 && (
+    data?.length > 0 && (
       <div className={styles["artist-page-image-container"]}>
         <div className={styles["artist-page-image"]}>
           <img
