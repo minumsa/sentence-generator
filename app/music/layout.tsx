@@ -3,26 +3,19 @@ import React from "react";
 import styles from "./music.module.css";
 
 export const metadata = {
-  // title: "카버 차트",
+  title: "카버 차트",
   description: "",
   openGraph: {
-    images: [
-      {
-        url: "",
-        // width: 1800, height: 945
-      },
-    ],
     locale: "ko_KR",
     siteName: "divdivdiv",
-    title: "카버 레코드",
+    title: "카버 차트",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     creator: "@dev_carver",
-    description: "카버 레코드",
-    // images: ["https://divdivdiv.com/lunch_thumbnail"],
-    title: "카버 레코드",
+    description: "카버 차트",
+    title: "카버 차트",
   },
 };
 

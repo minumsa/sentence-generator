@@ -336,10 +336,6 @@ export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: U
   }
 };
 
-interface SearchSpotify {
-  albumKeyword: string;
-}
-
 export const searchSpotify = async (albumKeyword: string) => {
   try {
     const accessToken = await fetchSpotifyAccessToken();
@@ -358,9 +354,11 @@ export const searchSpotify = async (albumKeyword: string) => {
       console.error("Error: albumData fetch failed");
     }
 
-    const fetchedData = await searchDataResponse.json();
+    const searchData = await searchDataResponse.json();
+    // 전체 검색 데이터에서 상위 5개만 가져오기
+    const data = searchData.albums.items.slice(0, 5);
 
-    return fetchedData;
+    return data;
   } catch (error) {
     console.error(error);
   }

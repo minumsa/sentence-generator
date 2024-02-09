@@ -1,35 +1,30 @@
-import connectMongoDB from "@/app/music/modules/mongodb";
-import Music from "@/models/music";
-import { NextResponse } from "next/server";
+function solution(n, words) {
+  let nArr = Array(n)
+    .fill(1)
+    .map((a, b) => a + b);
+  let wordsArr = [];
+  let currentN;
+  let loserIndex;
 
-export async function GET(request: Request) {
-  try {
-    require("dotenv").config();
-    await connectMongoDB();
+  for (let i = 0; i < words.length; i++) {
+    const currentWord = words[i].split("");
+    const currentFirstAlphabet = currentWord[0];
+    const prevWord = words[i - 1] ? words[i - 1].split("") : "";
+    const prevLastAlphabet = prevWord[prevWord.length - 1];
+    currentN = nArr[i % n];
 
-    // 몽고DB에서 데이터 가져오기
-    const url = new URL(request.url);
-    const artistId = url.searchParams.get("artistId");
-    const currentMethod = url.searchParams.get("currentMethod");
-    const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
-
-    let sortKey = {};
-    if (currentMethod === "발매일") {
-      sortKey = { releaseDate: currentCriteria };
-    } else if (currentMethod === "작성일") {
-      sortKey = { uploadDate: currentCriteria };
-    } else if (currentMethod === "아티스트") {
-      sortKey = { artist: currentCriteria };
-    } else if (currentMethod === "앨범") {
-      sortKey = { album: currentCriteria };
+    if (wordsArr.includes(words[i]) || currentWord.length < 2) {
+      loserIndex = i;
+      break;
+    } else if (currentFirstAlphabet !== prevLastAlphabet) {
+      if (i > 0) {
+        loserIndex = i;
+        break;
+      }
     }
 
-    const genreDataLength = await Music.find({ artistId: artistId }).count();
-    const slicedData = await Music.find({ artistId: artistId });
-
-    return NextResponse.json({ slicedData, genreDataLength });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Server Error" }, { status: 500 });
+    wordsArr.push(words[i]);
   }
+
+  return loserIndex ? [currentN, Math.floor(loserIndex / (currentN + 1)) + 1] : [0, 0];
 }
