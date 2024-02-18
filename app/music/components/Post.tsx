@@ -25,16 +25,12 @@ export const Post = ({ currentId }: PostProps) => {
 
   return (
     <>
-      <section>
-        <Suspense fallback={<Loading />}>
-          {albumData && (
-            <>
-              <PostCloseButton albumData={albumData} />
-              <PostAlbum albumData={albumData} />
-            </>
-          )}
-        </Suspense>
-      </section>
+      {albumData && (
+        <>
+          <PostCloseButton albumData={albumData} />
+          <PostAlbum albumData={albumData} />
+        </>
+      )}
     </>
   );
 };

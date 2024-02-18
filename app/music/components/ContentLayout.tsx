@@ -23,7 +23,7 @@ export const ContentLayout = ({
   return (
     <>
       {isLoading ? (
-        <Loading dataLength={totalDataLength} />
+        <Loading />
       ) : (
         <>
           <TopNav />

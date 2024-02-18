@@ -22,6 +22,7 @@ export default function Upload() {
   // FIXME: albumKeyword로 가져온 정보에서 albumId 넘겨줘야 함
   const [albumId, setAlbumId] = useState<string>("");
   const [searchData, setSearchData] = useState<SearchData[]>();
+  const [isTyping, setIsTyping] = useState(false);
 
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
@@ -29,7 +30,6 @@ export default function Upload() {
   const [score, setScore] = useState<number>(0);
   const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [password, setPassword] = useState<string>("");
-  const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
   const [uploadDate, setUploadDate] = useState(new Date());
 
   const handleSearch = async () => {
@@ -38,10 +38,14 @@ export default function Upload() {
   };
 
   useEffect(() => {
-    if (albumKeyword.length > 0) {
-      handleSearch();
+    if (isTyping && albumKeyword.length > 0) {
+      const typingTimer = setTimeout(() => {
+        handleSearch();
+      }, 1000);
+
+      return () => clearTimeout(typingTimer);
     }
-  }, [albumKeyword]);
+  }, [albumKeyword, isTyping]);
 
   const handleUpload = async () => {
     const newAlbumData = await fetchSpotify({
@@ -64,8 +68,10 @@ export default function Upload() {
   };
 
   const handleModal = (data: SearchData) => {
+    setAlbumKeyword(data.name);
     setAlbumId(data.id);
     setSearchData(undefined);
+    setIsTyping(false);
   };
 
   return (
@@ -101,7 +107,9 @@ export default function Upload() {
             value={albumKeyword}
             onChange={e => {
               setAlbumKeyword(e.target.value);
+              setIsTyping(true);
             }}
+            placeholder="검색어를 입력해주세요"
           />
           <div
             className={styles["search-album-modal-container"]}
@@ -125,6 +133,7 @@ export default function Upload() {
                       className={styles["search-album-image"]}
                       src={imageUrl}
                       alt="search-album-image"
+                      loading="lazy"
                     />
                   </div>
                   <div className={styles["search-album-text"]}>
@@ -139,10 +148,12 @@ export default function Upload() {
             })}
           </div>
         </div>
+        <div className={styles["upload-item-title"]}>앨범 ID</div>
+        <textarea className={`${styles["input"]} ${styles["input-link"]}`} defaultValue={albumId} />
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
         <textarea
           className={`${styles["input"]} ${styles["input-link"]}`}
-          value={link}
+          defaultValue={link}
           onChange={e => {
             setLink(e.target.value);
           }}
@@ -194,7 +205,6 @@ export default function Upload() {
             onClick={() => {
               handleUpload();
             }}
-            // style={{ boxShadow: "0 0 0 1px #242424 inset" }}
           >
             제출하기
           </div>
