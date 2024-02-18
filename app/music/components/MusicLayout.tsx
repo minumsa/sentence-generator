@@ -6,6 +6,7 @@ import { Hamburger } from "./Hamburger";
 import { MobileTitle } from "./MobileTitle";
 import { Snow } from "./Snow";
 import styles from "../music.module.css";
+import { Loading } from "./Loading";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();

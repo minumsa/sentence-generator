@@ -21,13 +21,11 @@ export const Post = ({ currentId }: PostProps) => {
       setAlbumData(result);
     }
     getData();
-  }, []);
+  }, [currentId]);
 
   return (
     <>
-      {isLoading ? (
-        <Loading dataLength={undefined} />
-      ) : (
+      {albumData && (
         <>
           <PostCloseButton albumData={albumData} />
           <PostAlbum albumData={albumData} />
