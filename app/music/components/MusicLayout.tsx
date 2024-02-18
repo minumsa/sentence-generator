@@ -24,7 +24,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
             currentCriteria={currentCriteria}
             setCurrentCriteria={setCurrentCriteria}
           /> */}
-      <Snow />
+      {/* <Snow /> */}
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />

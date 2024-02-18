@@ -4,10 +4,10 @@ interface LoadingProps {
   dataLength: number | undefined;
 }
 
-export const Loading = ({ dataLength }: LoadingProps) => {
+export const Loading = () => {
   const loadingText = "데이터 로딩 중입니다...";
   const noDataText = "일치하는 데이터가 없습니다...";
-  const hasNoData = dataLength === 0;
+  // const hasNoData = dataLength === 0;
 
-  return <div className={styles["loading"]}>{hasNoData ? noDataText : loadingText}</div>;
+  return <div className={styles["loading"]}>{loadingText}</div>;
 };

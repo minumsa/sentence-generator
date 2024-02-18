@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { fetchDataById } from "../modules/api";
 import { AlbumInfo } from "../modules/data";
 import { PostCloseButton } from "./PostCloseButton";
@@ -25,12 +25,16 @@ export const Post = ({ currentId }: PostProps) => {
 
   return (
     <>
-      {albumData && (
-        <>
-          <PostCloseButton albumData={albumData} />
-          <PostAlbum albumData={albumData} />
-        </>
-      )}
+      <section>
+        <Suspense fallback={<Loading />}>
+          {albumData && (
+            <>
+              <PostCloseButton albumData={albumData} />
+              <PostAlbum albumData={albumData} />
+            </>
+          )}
+        </Suspense>
+      </section>
     </>
   );
 };
