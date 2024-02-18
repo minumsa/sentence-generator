@@ -13,31 +13,33 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
 
   return (
     <div className={styles["desktop-category"]}>
-      <div
+      <a
         className={styles["category"]}
-        onClick={() => {
-          router.push(isAdminPage(fullPathName) ? `/music/admin` : `/music`);
-        }}
+        href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
+        // onClick={() => {
+        //   router.push(isAdminPage(fullPathName) ? `/music/admin` : `/music`);
+        // }}
         style={pathName === "/music/admin" || pathName === "/music" ? activeStyle : {}}
       >
         divdivdiv
-      </div>
+      </a>
       {Object.keys(contents).map(category => {
         const isActiveCategory = pathNameToArray.includes(category);
 
         return (
-          <div
+          <a
             key={category}
             className={styles["category"]}
-            onClick={() => {
-              router.push(
-                isAdminPage(fullPathName) ? `/music/admin/${category}` : `/music/${category}`
-              );
-            }}
+            href={isAdminPage(fullPathName) ? `/music/admin/${category}` : `/music/${category}`}
+            // onClick={() => {
+            //   router.push(
+            //     isAdminPage(fullPathName) ? `/music/admin/${category}` : `/music/${category}`
+            //   );
+            // }}
             style={isActiveCategory ? activeStyle : {}}
           >
             {contents[category]}
-          </div>
+          </a>
         );
       })}
     </div>
