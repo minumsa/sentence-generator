@@ -56,16 +56,18 @@ export const Grid = () => {
 
       if (currentPage === 1) {
         setData(result?.slicedData);
+        setIsLoading(false);
       } else {
         // 페이지가 2 이상일 때부터만 기존 데이터 배열에 새로운 데이터 추가
         setData(prevData => [...prevData, ...result?.slicedData]);
+        setIsLoading(false);
       }
 
       const dataLength = result?.genreDataLength;
       setDataLength(result?.genreDataLength);
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
     }
-
+    setIsLoading(true);
     loadData();
   }, [currentMethod, currentCriteria, currentPage, perPageCount]);
 
@@ -97,7 +99,7 @@ export const Grid = () => {
             return (
               <div
                 data-aos="fade-up"
-                data-aos-duration="2500"
+                data-aos-duration="1500"
                 data-aos-offset={isMobile ? "50" : "100"}
                 data-aos-once="false"
                 key={index}
