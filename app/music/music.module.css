@@ -108,13 +108,13 @@
 .body {
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: #242424;
 }
 
 .container {
   padding-left: 250px;
   font-family: "Lato", "Noto Sans KR", sans-serif;
   font-weight: 400;
-
   color: #cfcfcf;
   font-size: 1.2rem;
 }
@@ -139,9 +139,9 @@
   -ms-use-select: none;
   user-select: none;
   z-index: -1;
-  background-image: linear-gradient(90deg, #000, #242424, #1c1c1c, #242424, #000);
+  /* background-image: linear-gradient(90deg, #000, #242424, #1c1c1c, #242424, #000);
   background-size: 2000% 100%;
-  animation: animateBg 20s linear infinite;
+  animation: animateBg 20s linear infinite; */
 }
 
 .loading {
