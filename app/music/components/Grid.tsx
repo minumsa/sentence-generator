@@ -16,6 +16,7 @@ import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
+import { Loading } from "./Loading";
 import Link from "next/link";
 
 export const Grid = () => {
@@ -33,6 +34,7 @@ export const Grid = () => {
   const [dataLength, setDataLength] = useState(undefined);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     Aos.init();
@@ -74,78 +76,91 @@ export const Grid = () => {
   };
 
   return (
-    <ContentLayout
-      data={data}
-      currentPage={currentPage}
-      perPageCount={perPageCount}
-      totalDataLength={undefined}
-    >
-      <div className={styles["grid-div"]}>
-        {data.map((item, index) => {
-          const firstLineMobile = isMobile && index < 2;
-          const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
-          const isLastItem = index + 1 === data.length;
+    <>
+      {isLoading && <Loading />}
+      <ContentLayout
+        data={data}
+        currentPage={currentPage}
+        perPageCount={perPageCount}
+        totalDataLength={undefined}
+      >
+        <div className={styles["grid-div"]}>
+          {data.map((item, index) => {
+            const firstLineMobile = isMobile && index < 2;
+            const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
+            const isLastItem = index + 1 === data.length;
 
-          const mobileStyle = {
-            borderTop: firstLineMobile ? "none" : undefined,
-            borderRight: evenIndexMobile ? "none" : undefined,
-          };
-          return (
-            <div
-              data-aos="fade-up"
-              data-aos-duration="2500"
-              data-aos-offset={isMobile ? "50" : "100"}
-              data-aos-once="false"
-              key={index}
-              className={`${styles["grid-item-container"]}`}
-              style={mobileStyle}
-              ref={isLastItem ? ref : undefined}
-            >
-              <Link
-                className={styles["grid-album-container"]}
-                style={{ position: "relative", width: "100%" }}
-                href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
-                // onClick={() => {
-                //   isAdminPage
-                //     ? router.push(`/music/admin/post/${item.id}`)
-                //     : router.push(`/music/post/${item.id}`);
-                // }}
+            const mobileStyle = {
+              borderTop: firstLineMobile ? "none" : undefined,
+              borderRight: evenIndexMobile ? "none" : undefined,
+            };
+            return (
+              <div
+                data-aos="fade-up"
+                data-aos-duration="2500"
+                data-aos-offset={isMobile ? "50" : "100"}
+                data-aos-once="false"
+                key={index}
+                className={`${styles["grid-item-container"]}`}
+                style={mobileStyle}
+                ref={isLastItem ? ref : undefined}
               >
-                <div
-                  className={styles["grid-album-image"]}
-                  style={
-                    imageLoaded
-                      ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
-                      : undefined
-                  }
-                />
-                <img
-                  src={item.imgUrl}
-                  alt={item.album}
-                  style={{ display: "none" }}
-                  onLoad={handleImageLoad}
-                />
-              </Link>
-              <Link
-                className={styles["grid-album-title"]}
-                href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
-                // onClick={() => {
-                //   isAdminPage
-                //     ? router.push(`/music/admin/post/${item.id}`)
-                //     : router.push(`/music/post/${item.id}`);
-                // }}
-              >
-                <span className={styles["black-masking"]}>
-                  {`${item.artist} [${item.album}]`}
-                  {/* 관리자 페이지일 때만 표시할 부분 */}
-                  {isAdminPage &&
-                    ` - ${item.releaseDate.substring(0, 4)} ${item.score ? "… " + item.score : ""}`}
-                </span>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
-    </ContentLayout>
+                <Link
+                  className={styles["grid-album-container"]}
+                  style={{ position: "relative", width: "100%" }}
+                  href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                  onClick={() => {
+                    setIsLoading(true);
+                  }}
+                  // onClick={() => {
+                  //   setIsLoading(true);
+                  //   isAdminPage
+                  //     ? router.push(`/music/admin/post/${item.id}`)
+                  //     : router.push(`/music/post/${item.id}`);
+                  // }}
+                >
+                  <div
+                    className={styles["grid-album-image"]}
+                    style={
+                      imageLoaded
+                        ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
+                        : undefined
+                    }
+                  />
+                  <img
+                    src={item.imgUrl}
+                    alt={item.album}
+                    style={{ display: "none" }}
+                    onLoad={handleImageLoad}
+                  />
+                </Link>
+                <Link
+                  className={styles["grid-album-title"]}
+                  href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                  onClick={() => {
+                    setIsLoading(true);
+                  }}
+                  // onClick={() => {
+                  //   setIsLoading(true);
+                  //   isAdminPage
+                  //     ? router.push(`/music/admin/post/${item.id}`)
+                  //     : router.push(`/music/post/${item.id}`);
+                  // }}
+                >
+                  <span className={styles["black-masking"]}>
+                    {`${item.artist} [${item.album}]`}
+                    {/* 관리자 페이지일 때만 표시할 부분 */}
+                    {isAdminPage &&
+                      ` - ${item.releaseDate.substring(0, 4)} ${
+                        item.score ? "… " + item.score : ""
+                      }`}
+                  </span>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </ContentLayout>
+    </>
   );
 };

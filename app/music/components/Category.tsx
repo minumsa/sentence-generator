@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents, isAdminPage } from "../modules/data";
 import Link from "next/link";
+import { useState } from "react";
 
 interface CategoryProps {
   pathName: string;
@@ -9,7 +10,6 @@ interface CategoryProps {
 }
 
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
-  const router = useRouter();
   const pathNameToArray = pathName.split("/");
 
   return (

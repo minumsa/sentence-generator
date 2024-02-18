@@ -9,5 +9,10 @@ export const Loading = () => {
   const noDataText = "일치하는 데이터가 없습니다...";
   // const hasNoData = dataLength === 0;
 
-  return <div className={styles["loading"]}>{loadingText}</div>;
+  return (
+    <div className={styles["loading-container"]}>
+      <div className={styles["loading-circle"]}></div>
+    </div>
+  );
+  // return <div className={styles["loading"]}>{loadingText}</div>;
 };

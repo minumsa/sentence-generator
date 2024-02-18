@@ -22,9 +22,8 @@ export const ContentLayout = ({
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
+      {isLoading && <Loading />}
+      {
         <>
           <TopNav />
           {children}
@@ -36,7 +35,7 @@ export const ContentLayout = ({
             />
           )}
         </>
-      )}
+      }
     </>
   );
 };

@@ -13,18 +13,22 @@ interface PostProps {
 
 export const Post = ({ currentId }: PostProps) => {
   const [albumData, setAlbumData] = useState<AlbumInfo | undefined>();
-  const isLoading = albumData === undefined;
+  const [isLoading, setIsLoading] = useState(true);
+
+  console.log(isLoading);
 
   useEffect(() => {
     async function getData() {
       const result = await fetchDataById(currentId);
       setAlbumData(result);
+      setIsLoading(false);
     }
     getData();
   }, [currentId]);
 
   return (
     <>
+      {isLoading && <Loading />}
       {albumData && (
         <>
           <PostCloseButton albumData={albumData} />
