@@ -16,6 +16,7 @@ import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
+import Link from "next/link";
 
 export const Grid = () => {
   const router = useRouter();
@@ -100,14 +101,15 @@ export const Grid = () => {
               style={mobileStyle}
               ref={isLastItem ? ref : undefined}
             >
-              <div
+              <Link
                 className={styles["grid-album-container"]}
                 style={{ position: "relative", width: "100%" }}
-                onClick={() => {
-                  isAdminPage
-                    ? router.push(`/music/admin/post/${item.id}`)
-                    : router.push(`/music/post/${item.id}`);
-                }}
+                href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                // onClick={() => {
+                //   isAdminPage
+                //     ? router.push(`/music/admin/post/${item.id}`)
+                //     : router.push(`/music/post/${item.id}`);
+                // }}
               >
                 <div
                   className={styles["grid-album-image"]}
@@ -123,14 +125,15 @@ export const Grid = () => {
                   style={{ display: "none" }}
                   onLoad={handleImageLoad}
                 />
-              </div>
-              <div
+              </Link>
+              <Link
                 className={styles["grid-album-title"]}
-                onClick={() => {
-                  isAdminPage
-                    ? router.push(`/music/admin/post/${item.id}`)
-                    : router.push(`/music/post/${item.id}`);
-                }}
+                href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                // onClick={() => {
+                //   isAdminPage
+                //     ? router.push(`/music/admin/post/${item.id}`)
+                //     : router.push(`/music/post/${item.id}`);
+                // }}
               >
                 <span className={styles["black-masking"]}>
                   {`${item.artist} [${item.album}]`}
@@ -138,7 +141,7 @@ export const Grid = () => {
                   {isAdminPage &&
                     ` - ${item.releaseDate.substring(0, 4)} ${item.score ? "… " + item.score : ""}`}
                 </span>
-              </div>
+              </Link>
             </div>
           );
         })}

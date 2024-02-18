@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents, isAdminPage } from "../modules/data";
+import Link from "next/link";
 
 interface CategoryProps {
   pathName: string;
@@ -13,7 +14,7 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
 
   return (
     <div className={styles["desktop-category"]}>
-      <a
+      <Link
         className={styles["category"]}
         href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
         // onClick={() => {
@@ -22,12 +23,12 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
         style={pathName === "/music/admin" || pathName === "/music" ? activeStyle : {}}
       >
         divdivdiv
-      </a>
+      </Link>
       {Object.keys(contents).map(category => {
         const isActiveCategory = pathNameToArray.includes(category);
 
         return (
-          <a
+          <Link
             key={category}
             className={styles["category"]}
             href={isAdminPage(fullPathName) ? `/music/admin/${category}` : `/music/${category}`}
@@ -39,7 +40,7 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
             style={isActiveCategory ? activeStyle : {}}
           >
             {contents[category]}
-          </a>
+          </Link>
         );
       })}
     </div>
