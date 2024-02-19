@@ -105,7 +105,7 @@ export const Grid = () => {
             return (
               <div
                 data-aos="fade-up"
-                data-aos-duration="1500"
+                data-aos-duration="1000"
                 data-aos-offset={isMobile ? "50" : "100"}
                 data-aos-once="false"
                 key={index}
@@ -158,10 +158,7 @@ export const Grid = () => {
                   <span className={styles["black-masking"]}>
                     {`${item.artist} [${item.album}]`}
                     {/* 관리자 페이지일 때만 표시할 부분 */}
-                    {isAdminPage &&
-                      ` - ${item.releaseDate.substring(0, 4)} ${
-                        item.score ? "… " + item.score : ""
-                      }`}
+                    {isAdminPage && ` … ${item.score}`}
                   </span>
                 </Link>
               </div>

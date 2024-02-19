@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     } else if (currentMethod === "앨범") {
       sortKey = { album: currentCriteria };
     } else if (currentMethod === "평점") {
-      sortKey = { score: currentCriteria };
+      sortKey = { score: currentCriteria, artist: 1 };
     }
 
     // pathName이 장르(pop, kpop...)인 경우 해당 장르로 필터링
