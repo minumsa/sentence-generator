@@ -37,7 +37,7 @@ export const Album = ({ data }: AlbumProps) => {
 
   return (
     <>
-      <TopNav isEmptyGrid={true} />
+      {/* <TopNav isEmptyGrid={true} /> */}
       <div className={styles["album-container"]}>
         <div className={styles["album-information-container"]}>
           <div>

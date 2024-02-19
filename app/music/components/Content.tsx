@@ -45,16 +45,14 @@ export default function Content({ pathName, currentPage }: PageProps) {
   }, [pathName, currentPage, currentMethod, currentCriteria, perPageCount]);
 
   return (
-    <>
-      <TopNav isEmptyGrid={isLoading} />
-      <ContentLayout
-        data={data}
-        currentPage={currentPage}
-        perPageCount={perPageCount}
-        totalDataLength={totalDataLength}
-      >
-        <AlbumContents data={data} perPageCount={perPageCount} />
-      </ContentLayout>
-    </>
+    <ContentLayout
+      data={data}
+      currentPage={currentPage}
+      perPageCount={perPageCount}
+      totalDataLength={totalDataLength}
+      isLoading={isLoading}
+    >
+      <AlbumContents data={data} perPageCount={perPageCount} />
+    </ContentLayout>
   );
 }

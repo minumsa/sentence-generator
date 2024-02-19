@@ -24,6 +24,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
@@ -39,6 +40,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
       const genreDataLength = result?.genreDataLength;
       setTotalDataLength(genreDataLength);
       setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
+      setIsLoading(false);
     }
 
     loadData();
@@ -50,6 +52,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
+      isLoading={isLoading}
     >
       <AlbumContents data={data} perPageCount={perPageCount} />
     </ContentLayout>

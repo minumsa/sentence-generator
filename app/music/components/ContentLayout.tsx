@@ -1,7 +1,8 @@
 import { PageNumbers } from "./PageNumbers";
-import { TopNav } from "./TopNav";
 import { AlbumInfo } from "../modules/data";
 import { Loading } from "./Loading";
+import { TopNav } from "./TopNav";
+import { useEffect, useState } from "react";
 
 interface ContentLayoutProps {
   data: AlbumInfo[];
@@ -10,6 +11,7 @@ interface ContentLayoutProps {
   perPageCount: number;
   totalDataLength: number | undefined;
   isEmptyGrid?: boolean;
+  isLoading?: boolean;
 }
 
 export const ContentLayout = ({
@@ -19,15 +21,16 @@ export const ContentLayout = ({
   perPageCount,
   totalDataLength,
   isEmptyGrid,
+  isLoading,
 }: ContentLayoutProps) => {
-  const isLoading = data?.length === 0;
+  console.log();
 
   return (
     <>
       {isLoading && <Loading isScrolling={false} />}
+      <TopNav isEmptyGrid={isLoading} />
       {
         <>
-          {/* <TopNav isEmptyGrid={isEmptyGrid} /> */}
           {children}
           {totalDataLength && (
             <PageNumbers
