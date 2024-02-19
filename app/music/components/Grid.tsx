@@ -35,6 +35,7 @@ export const Grid = () => {
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const [isLoading, setIsLoading] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     Aos.init();
@@ -61,6 +62,7 @@ export const Grid = () => {
         // 페이지가 2 이상일 때부터만 기존 데이터 배열에 새로운 데이터 추가
         setData(prevData => [...prevData, ...result?.slicedData]);
         setIsLoading(false);
+        setIsScrolling(false);
       }
 
       const dataLength = result?.genreDataLength;
@@ -68,6 +70,7 @@ export const Grid = () => {
       setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
     }
     setIsLoading(true);
+    setIsScrolling(true);
     loadData();
   }, [currentMethod, currentCriteria, currentPage, perPageCount]);
 
@@ -79,7 +82,7 @@ export const Grid = () => {
 
   return (
     <>
-      {isLoading && <Loading />}
+      {isLoading && <Loading isScrolling={isScrolling} />}
       <ContentLayout
         data={data}
         currentPage={currentPage}

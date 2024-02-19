@@ -144,7 +144,7 @@
   animation: animateBg 20s linear infinite; */
 }
 
-.loading {
+.loading-background {
   width: calc(100% - 250px);
   height: 100vh;
   display: flex;
@@ -158,6 +158,25 @@
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 1000;
+  background-color: #242424;
+}
+
+.loading-text {
+  width: calc(100% - 250px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1001;
 }
 
 @keyframes fadeInUp {

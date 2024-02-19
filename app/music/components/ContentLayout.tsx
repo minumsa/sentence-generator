@@ -22,7 +22,7 @@ export const ContentLayout = ({
 
   return (
     <>
-      {isLoading && <Loading />}
+      {isLoading && <Loading isScrolling={false} />}
       {
         <>
           <TopNav />
