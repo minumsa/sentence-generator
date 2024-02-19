@@ -10,6 +10,7 @@ import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
+import { TopNav } from "./TopNav";
 
 interface PageProps {
   pathName: string;
@@ -23,6 +24,7 @@ export default function Content({ pathName, currentPage }: PageProps) {
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const [perPageCount, setPerPageCount] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
@@ -36,19 +38,23 @@ export default function Content({ pathName, currentPage }: PageProps) {
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
       setTotalDataLength(genreDataLength);
+      setIsLoading(false);
     }
 
     loadData();
   }, [pathName, currentPage, currentMethod, currentCriteria, perPageCount]);
 
   return (
-    <ContentLayout
-      data={data}
-      currentPage={currentPage}
-      perPageCount={perPageCount}
-      totalDataLength={totalDataLength}
-    >
-      <AlbumContents data={data} perPageCount={perPageCount} />
-    </ContentLayout>
+    <>
+      <TopNav isEmptyGrid={isLoading} />
+      <ContentLayout
+        data={data}
+        currentPage={currentPage}
+        perPageCount={perPageCount}
+        totalDataLength={totalDataLength}
+      >
+        <AlbumContents data={data} perPageCount={perPageCount} />
+      </ContentLayout>
+    </>
   );
 }

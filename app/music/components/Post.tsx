@@ -6,6 +6,7 @@ import { AlbumInfo } from "../modules/data";
 import { PostCloseButton } from "./PostCloseButton";
 import { PostAlbum } from "./PostAlbum";
 import { Loading } from "./Loading";
+import { TopNav } from "./TopNav";
 
 interface PostProps {
   currentId: string;
