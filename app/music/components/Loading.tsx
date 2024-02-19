@@ -2,11 +2,11 @@ import styles from "../music.module.css";
 
 interface LoadingProps {
   // dataLength: number | undefined;
-  isLoading: boolean;
-  isEmptyResult?: boolean;
+  isEmpty: boolean;
+  hasNoResult?: boolean;
 }
 
-export const Loading = ({ isLoading, isEmptyResult }: LoadingProps) => {
+export const Loading = ({ isEmpty, hasNoResult }: LoadingProps) => {
   const loadingText = "데이터 로딩 중입니다...";
   const noDataText = "일치하는 데이터가 없습니다...";
   // const hasNoData = dataLength === 0;
@@ -20,9 +20,9 @@ export const Loading = ({ isLoading, isEmptyResult }: LoadingProps) => {
     <>
       <div
         className={styles["loading-background"]}
-        style={{ opacity: isLoading ? "80%" : undefined }}
+        style={{ opacity: isEmpty ? undefined : "80%" }}
       ></div>
-      <div className={styles["loading-text"]}>{isEmptyResult ? noDataText : loadingText}</div>
+      <div className={styles["loading-text"]}>{hasNoResult ? noDataText : loadingText}</div>
     </>
   );
 };

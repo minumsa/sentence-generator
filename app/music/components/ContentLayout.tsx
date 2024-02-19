@@ -21,8 +21,8 @@ export const ContentLayout = ({
 }: ContentLayoutProps) => {
   return (
     <>
-      {isLoading && <Loading isLoading={isScrolling ? isScrolling : false} />}
-      <TopNav isVisible={isLoading} />
+      {isLoading && <Loading isEmpty={isScrolling ? false : true} />}
+      <TopNav isVisible={true} />
       {
         <>
           {children}

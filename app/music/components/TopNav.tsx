@@ -128,7 +128,7 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
   return (
     <div
       className={styles["top-menu-container"]}
-      style={{ display: isVisible ? "none" : undefined }}
+      style={{ display: isVisible ? undefined : "none" }}
     >
       <div className={styles["top-search-container"]}>
         {isSearching && (

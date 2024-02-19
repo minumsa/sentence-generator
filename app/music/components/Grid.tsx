@@ -16,9 +16,7 @@ import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
-import { Loading } from "./Loading";
 import Link from "next/link";
-import { TopNav } from "./TopNav";
 
 export const Grid = () => {
   const fullPathName = usePathname();
@@ -84,9 +82,10 @@ export const Grid = () => {
     setImageLoaded(true);
   };
 
+  console.log("isScrolling", isScrolling);
+
   return (
     <>
-      {/* {isLoading && <Loading isLoading={isScrolling} />} */}
       <ContentLayout
         currentPage={scrollCount}
         perPageCount={perPageCount}
