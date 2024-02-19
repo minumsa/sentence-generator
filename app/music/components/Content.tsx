@@ -50,6 +50,7 @@ export default function Content({ pathName, currentPage }: PageProps) {
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
       isLoading={isLoading}
+      isGridPage={false}
     >
       <AlbumContents data={data} perPageCount={perPageCount} />
     </ContentLayout>

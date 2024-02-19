@@ -8,7 +8,6 @@ import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import { updateData } from "../modules/api";
 import Link from "next/link";
-import { TopNav } from "./TopNav";
 
 interface AlbumProps {
   data: AlbumInfo;

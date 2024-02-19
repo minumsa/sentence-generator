@@ -9,6 +9,7 @@ interface ContentLayoutProps {
   totalDataLength: number | undefined;
   isLoading?: boolean;
   isScrolling?: boolean;
+  isGridPage?: boolean;
 }
 
 export const ContentLayout = ({
@@ -18,10 +19,11 @@ export const ContentLayout = ({
   totalDataLength,
   isLoading,
   isScrolling,
+  isGridPage,
 }: ContentLayoutProps) => {
   return (
     <>
-      {isLoading && <Loading isEmpty={isScrolling ? false : true} />}
+      {isLoading && <Loading isEmpty={isScrolling ? false : true} isGridPage={isGridPage} />}
       <TopNav isVisible={true} />
       {
         <>
