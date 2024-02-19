@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import { updateData } from "../modules/api";
+import Link from "next/link";
 
 interface AlbumProps {
   data: AlbumInfo;
@@ -67,41 +68,54 @@ export const Album = ({ data }: AlbumProps) => {
               return (
                 <div key={index}>
                   <div className={styles["paragraph-container"]}>
-                    <div
-                      className={styles["category-meta-title"]}
-                      onClick={() => {
-                        isAdminPage
-                          ? router.push(`/music/admin/post/${data.id}`)
-                          : router.push(`/music/post/${data.id}`);
-                      }}
+                    <Link
+                      href={isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`}
+                      style={{ textDecoration: "none" }}
+                      // onClick={() => {
+                      //   isAdminPage
+                      //     ? router.push(`/music/admin/post/${data.id}`)
+                      //     : router.push(`/music/post/${data.id}`);
+                      // }}
                     >
-                      {data.album}
-                    </div>
+                      <div className={styles["category-meta-title"]}>{data.album}</div>
+                    </Link>
                     <div className={styles["category-meta"]}>
-                      <div className={styles["category-meta-image-container"]}>
+                      <Link
+                        className={styles["category-meta-image-container"]}
+                        href={
+                          isAdminPage
+                            ? `/music/admin/artist/${data.artistId}/1`
+                            : `/music/artist/${data.artistId}/1`
+                        }
+                      >
                         <img
                           src={data.artistImgUrl}
                           alt="test"
                           className={styles["category-meta-image"]}
                           loading="lazy"
-                          onClick={() => {
-                            isAdminPage
-                              ? router.push(`/music/admin/artist/${data.artistId}/1`)
-                              : router.push(`/music/artist/${data.artistId}/1`);
-                          }}
+                          // onClick={() => {
+                          //   isAdminPage
+                          //     ? router.push(`/music/admin/artist/${data.artistId}/1`)
+                          //     : router.push(`/music/artist/${data.artistId}/1`);
+                          // }}
                         />
-                      </div>
+                      </Link>
                       <div>
-                        <span
-                          onClick={() => {
+                        <Link
+                          style={{ textDecoration: "none", color: "#cfcfcf" }}
+                          href={
                             isAdminPage
-                              ? router.push(`/music/admin/artist/${data.artistId}/1`)
-                              : router.push(`/music/artist/${data.artistId}/1`);
-                          }}
-                          style={{ cursor: "pointer" }}
+                              ? `/music/admin/artist/${data.artistId}/1`
+                              : `/music/artist/${data.artistId}/1`
+                          }
+                          // onClick={() => {
+                          //   isAdminPage
+                          //     ? router.push(`/music/admin/artist/${data.artistId}/1`)
+                          //     : router.push(`/music/artist/${data.artistId}/1`);
+                          // }}
                         >
                           {data.artist}
-                        </span>
+                        </Link>
                         <span>
                           {` • ${data.releaseDate.slice(0, 4)} • ${
                             data.tracks
@@ -118,16 +132,23 @@ export const Album = ({ data }: AlbumProps) => {
                       {isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : text}
                     </p>
                     {isLongText && (
-                      <div
-                        className={styles["more-button"]}
-                        onClick={() => {
-                          isAdminPage
-                            ? router.push(`/music/admin/post/${data.id}`)
-                            : router.push(`/music/post/${data.id}`);
-                        }}
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        href={
+                          isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`
+                        }
                       >
-                        더 보기
-                      </div>
+                        <div
+                          className={styles["more-button"]}
+                          // onClick={() => {
+                          //   isAdminPage
+                          //     ? router.push(`/music/admin/post/${data.id}`)
+                          //     : router.push(`/music/post/${data.id}`);
+                          // }}
+                        >
+                          더 보기
+                        </div>
+                      </Link>
                     )}
                   </div>
                   {/* FIXME: 평점 다 매기면 삭제 */}
