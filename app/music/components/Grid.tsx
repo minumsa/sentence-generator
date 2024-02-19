@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
 import { usePathname } from "next/navigation";
@@ -106,7 +106,7 @@ export const Grid = () => {
               <div
                 data-aos="fade-up"
                 data-aos-duration="1000"
-                data-aos-offset={isMobile ? "50" : "100"}
+                data-aos-offset={isMobile ? "50" : "65"}
                 data-aos-once="false"
                 key={index}
                 className={`${styles["grid-item-container"]}`}
