@@ -9,6 +9,7 @@ interface ContentLayoutProps {
   currentPage: number;
   perPageCount: number;
   totalDataLength: number | undefined;
+  isEmptyGrid?: boolean;
 }
 
 export const ContentLayout = ({
@@ -17,6 +18,7 @@ export const ContentLayout = ({
   currentPage,
   perPageCount,
   totalDataLength,
+  isEmptyGrid,
 }: ContentLayoutProps) => {
   const isLoading = data?.length === 0;
 
@@ -25,7 +27,7 @@ export const ContentLayout = ({
       {isLoading && <Loading isScrolling={false} />}
       {
         <>
-          <TopNav />
+          {/* <TopNav isEmptyGrid={isEmptyGrid} /> */}
           {children}
           {totalDataLength && (
             <PageNumbers

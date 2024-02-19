@@ -919,7 +919,8 @@
 }
 
 @media (max-width: 525px) {
-  .loading {
+  .loading-background,
+  .loading-text {
     width: 100%;
   }
 

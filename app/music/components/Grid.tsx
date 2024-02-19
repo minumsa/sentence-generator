@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAtom } from "jotai";
 import React from "react";
 import {
@@ -18,6 +18,7 @@ import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
 import { Loading } from "./Loading";
 import Link from "next/link";
+import { TopNav } from "./TopNav";
 
 export const Grid = () => {
   const fullPathName = usePathname();
@@ -83,6 +84,7 @@ export const Grid = () => {
   return (
     <>
       {isLoading && <Loading isScrolling={isScrolling} />}
+      <TopNav isEmptyGrid={isLoading && scrollCount === 1} />
       <ContentLayout
         data={data}
         currentPage={scrollCount}

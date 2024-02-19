@@ -20,9 +20,7 @@ export const Loading = ({ isScrolling }: LoadingProps) => {
       <div
         className={styles["loading-background"]}
         style={{ opacity: isScrolling ? "80%" : undefined }}
-      >
-        {loadingText}
-      </div>
+      ></div>
       <div className={styles["loading-text"]}>{loadingText}</div>
     </>
   );
