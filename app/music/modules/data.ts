@@ -51,7 +51,7 @@ export interface AlbumInfo {
   uploadDate: Date;
   duration: number;
   tracks: number;
-  score?: number;
+  score: number;
 }
 
 export interface PageProps {

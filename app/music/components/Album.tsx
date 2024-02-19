@@ -19,21 +19,6 @@ export const Album = ({ data }: AlbumProps) => {
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
 
-  // FIXME: 임시 코드 - 평점 매기고 나면 삭제 예정
-  const [score, setScore] = useState<number>(0);
-  const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
-  const [password, setPassword] = useState<string>("");
-
-  const handleUpdate = async () => {
-    updateData(data.id, data, score, password);
-  };
-
-  const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleUpdate();
-    }
-  };
-
   return (
     <>
       <div className={styles["album-container"]}>
@@ -153,35 +138,25 @@ export const Album = ({ data }: AlbumProps) => {
                         </Link>
                       )}
                     </div>
-                    {/* FIXME: 평점 다 매기면 삭제 */}
                     {isAdminPage && (
-                      <div>
-                        <div className={styles["upload-item-title"]}>평점 {data.score}di</div>
-                        <div className={styles["select-container"]}>
-                          <select
-                            className={styles["select"]}
-                            value={score}
-                            onChange={e => {
-                              setScore(Number(e.target.value));
+                      <div className={styles["upload-item-title"]}>
+                        <div className={styles["star-container"]}>
+                          <img
+                            className={styles["star-color"]}
+                            src="/cinephile/star-color.webp"
+                            alt="star-color"
+                            style={{
+                              clipPath: `inset(0 ${100 - data.score * 20}% 0 0)`,
                             }}
-                          >
-                            <option value="">--스코어를 선택해주세요--</option>
-                            {scoreArray.map((item, index) => {
-                              return <option key={index}>{item}</option>;
-                            })}
-                          </select>
+                            loading="lazy"
+                          />
+                          <img
+                            className={styles["star-mono"]}
+                            src="/cinephile/star-mono.webp"
+                            alt="star-mono"
+                            loading="lazy"
+                          />
                         </div>
-                        <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
-                          관리자 비밀번호
-                        </div>
-                        <input
-                          className={styles["input"]}
-                          value={password}
-                          onChange={e => {
-                            setPassword(e.target.value);
-                          }}
-                          onKeyDown={handlePasswordEnter}
-                        />
                       </div>
                     )}
                     {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}

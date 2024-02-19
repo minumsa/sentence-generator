@@ -851,6 +851,29 @@
   }
 }
 
+.star-container {
+  position: relative;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.star-color {
+  display: absolute;
+  margin-top: 10px;
+  z-index: 2;
+  width: 200px;
+  height: 40px;
+}
+
+.star-mono {
+  position: absolute;
+  margin-top: 10px;
+  z-index: 1;
+  width: 200px;
+  height: 40px;
+}
+
 @media (max-width: 1850px) {
   .grid-item-container {
     --width-large: calc(100% / 9 - 1px);

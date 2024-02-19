@@ -5,6 +5,7 @@ import { Category } from "./Category";
 import { Hamburger } from "./Hamburger";
 import { MobileTitle } from "./MobileTitle";
 import styles from "../music.module.css";
+import { Snow } from "./Snow";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
