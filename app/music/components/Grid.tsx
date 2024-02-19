@@ -20,18 +20,16 @@ import { Loading } from "./Loading";
 import Link from "next/link";
 
 export const Grid = () => {
-  const router = useRouter();
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);
-  const [totalPage, setTotalPage] = useState(1);
+  const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
   const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 50);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [scrollCount, setScrollCount] = useState(1);
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: false,
   });
-  const [dataLength, setDataLength] = useState(undefined);
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +40,7 @@ export const Grid = () => {
   }, []);
 
   useEffect(() => {
-    if (inView) setCurrentPage(prevPage => prevPage + 1);
+    if (inView) setScrollCount(prevCount => prevCount + 1);
   }, [inView]);
 
   useEffect(() => {
@@ -50,29 +48,31 @@ export const Grid = () => {
       const result = await fetchData({
         pathName: "",
         perPageCount,
-        currentPage,
+        currentPage: scrollCount,
         currentMethod,
         currentCriteria,
       });
 
-      if (currentPage === 1) {
+      if (scrollCount === 1) {
         setData(result?.slicedData);
         setIsLoading(false);
       } else {
-        // 페이지가 2 이상일 때부터만 기존 데이터 배열에 새로운 데이터 추가
+        // 페이지가 2 이상이면 기존 데이터 배열에 새로운 데이터 추가
         setData(prevData => [...prevData, ...result?.slicedData]);
         setIsLoading(false);
         setIsScrolling(false);
       }
 
       const dataLength = result?.genreDataLength;
-      setDataLength(result?.genreDataLength);
-      setTotalPage(Math.max(1, Math.ceil(dataLength / 5)));
+      setTotalScrollCount(Math.max(1, Math.ceil(dataLength / perPageCount)) + 1);
     }
-    setIsLoading(true);
-    setIsScrolling(true);
-    loadData();
-  }, [currentMethod, currentCriteria, currentPage, perPageCount]);
+
+    if (scrollCount < totalScrollCount) {
+      setIsLoading(true);
+      setIsScrolling(true);
+      loadData();
+    }
+  }, [currentMethod, currentCriteria, scrollCount, totalScrollCount, perPageCount]);
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -85,7 +85,7 @@ export const Grid = () => {
       {isLoading && <Loading isScrolling={isScrolling} />}
       <ContentLayout
         data={data}
-        currentPage={currentPage}
+        currentPage={scrollCount}
         perPageCount={perPageCount}
         totalDataLength={undefined}
       >
