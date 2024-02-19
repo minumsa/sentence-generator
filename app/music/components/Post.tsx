@@ -27,7 +27,7 @@ export const Post = ({ currentId }: PostProps) => {
 
   return (
     <>
-      {isLoading && <Loading isScrolling={false} />}
+      {isLoading && <Loading isLoading={false} />}
       {albumData && (
         <>
           <PostCloseButton albumData={albumData} />

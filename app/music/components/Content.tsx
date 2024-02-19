@@ -46,7 +46,6 @@ export default function Content({ pathName, currentPage }: PageProps) {
 
   return (
     <ContentLayout
-      data={data}
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}

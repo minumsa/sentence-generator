@@ -50,7 +50,6 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
 
   return (
     <ContentLayout
-      data={data}
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}

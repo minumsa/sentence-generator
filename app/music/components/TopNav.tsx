@@ -12,10 +12,10 @@ import {
 import { useAtom } from "jotai";
 
 interface TopNavProps {
-  isEmptyGrid?: boolean;
+  isVisible?: boolean;
 }
 
-export const TopNav = ({ isEmptyGrid }: TopNavProps) => {
+export const TopNav = ({ isVisible }: TopNavProps) => {
   const router = useRouter();
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
@@ -128,7 +128,7 @@ export const TopNav = ({ isEmptyGrid }: TopNavProps) => {
   return (
     <div
       className={styles["top-menu-container"]}
-      style={{ display: isEmptyGrid ? "none" : undefined }}
+      style={{ display: isVisible ? "none" : undefined }}
     >
       <div className={styles["top-search-container"]}>
         {isSearching && (

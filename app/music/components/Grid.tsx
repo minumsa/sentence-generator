@@ -83,10 +83,9 @@ export const Grid = () => {
 
   return (
     <>
-      {isLoading && <Loading isScrolling={isScrolling} />}
-      <TopNav isEmptyGrid={isLoading && scrollCount === 1} />
+      {isLoading && <Loading isLoading={isScrolling} />}
+      <TopNav isVisible={isLoading && scrollCount === 1} />
       <ContentLayout
-        data={data}
         currentPage={scrollCount}
         perPageCount={perPageCount}
         totalDataLength={undefined}
