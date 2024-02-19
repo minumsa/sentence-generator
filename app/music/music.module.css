@@ -158,7 +158,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 9999;
   background-color: #242424;
 }
 
@@ -176,7 +176,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1001;
+  z-index: 10000;
 }
 
 @keyframes fadeInUp {
@@ -306,7 +306,7 @@
   position: fixed;
   top: 0;
   right: 15px;
-  z-index: 10000;
+  z-index: 9998;
 }
 
 .top-search-container {

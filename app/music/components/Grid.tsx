@@ -33,7 +33,7 @@ export const Grid = () => {
   });
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
@@ -70,8 +70,11 @@ export const Grid = () => {
 
     if (scrollCount < totalScrollCount) {
       setIsLoading(true);
-      setIsScrolling(true);
       loadData();
+
+      if (scrollCount > 1) {
+        setIsScrolling(true);
+      }
     }
   }, [currentMethod, currentCriteria, scrollCount, totalScrollCount, perPageCount]);
 
@@ -84,11 +87,11 @@ export const Grid = () => {
   return (
     <>
       {isLoading && <Loading isLoading={isScrolling} />}
-      <TopNav isVisible={isLoading && scrollCount === 1} />
       <ContentLayout
         currentPage={scrollCount}
         perPageCount={perPageCount}
         totalDataLength={undefined}
+        isLoading={isLoading && scrollCount === 1}
       >
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {
