@@ -271,7 +271,8 @@
   min-width: 950px;
   display: flex;
   flex-direction: row;
-  padding: 45px 100px 80px 100px;
+  padding: 45px 100px;
+  /* padding: 45px 100px 80px 100px; */
 }
 
 .album-metadata-container {
@@ -856,22 +857,21 @@
   display: flex;
   /* justify-content: center; */
   align-items: center;
+  margin-left: 10px;
 }
 
 .star-color {
   display: absolute;
-  margin-top: 10px;
   z-index: 2;
-  width: 200px;
-  height: 40px;
+  width: 100px;
+  height: 20px;
 }
 
 .star-mono {
   position: absolute;
-  margin-top: 10px;
   z-index: 1;
-  width: 200px;
-  height: 40px;
+  width: 100px;
+  height: 20px;
 }
 
 @media (max-width: 1850px) {

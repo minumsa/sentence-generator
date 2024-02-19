@@ -53,19 +53,47 @@ export const Album = ({ data }: AlbumProps) => {
                 return (
                   <div key={index}>
                     <div className={styles["paragraph-container"]}>
-                      <Link
-                        href={
-                          isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`
-                        }
-                        style={{ textDecoration: "none" }}
-                        // onClick={() => {
-                        //   isAdminPage
-                        //     ? router.push(`/music/admin/post/${data.id}`)
-                        //     : router.push(`/music/post/${data.id}`);
-                        // }}
-                      >
-                        <div className={styles["category-meta-title"]}>{data.album}</div>
-                      </Link>
+                      <div style={{ display: "flex", alignItems: "center", paddingBottom: "10px" }}>
+                        <Link
+                          href={
+                            isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`
+                          }
+                          style={{ textDecoration: "none" }}
+                          // onClick={() => {
+                          //   isAdminPage
+                          //     ? router.push(`/music/admin/post/${data.id}`)
+                          //     : router.push(`/music/post/${data.id}`);
+                          // }}
+                        >
+                          <div
+                            className={styles["category-meta-title"]}
+                            style={{ padding: isAdminPage ? 0 : undefined }}
+                          >
+                            {data.album}
+                          </div>
+                        </Link>
+                        {isAdminPage && (
+                          <div className={styles["upload-item-title"]}>
+                            <div className={styles["star-container"]}>
+                              <img
+                                className={styles["star-color"]}
+                                src="/cinephile/star-color.webp"
+                                alt="star-color"
+                                style={{
+                                  clipPath: `inset(0 ${100 - data.score * 20}% 0 0)`,
+                                }}
+                                loading="lazy"
+                              />
+                              <img
+                                className={styles["star-mono"]}
+                                src="/cinephile/star-mono.webp"
+                                alt="star-mono"
+                                loading="lazy"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
                       <div className={styles["category-meta"]}>
                         <Link
                           className={styles["category-meta-image-container"]}
@@ -138,27 +166,6 @@ export const Album = ({ data }: AlbumProps) => {
                         </Link>
                       )}
                     </div>
-                    {isAdminPage && (
-                      <div className={styles["upload-item-title"]}>
-                        <div className={styles["star-container"]}>
-                          <img
-                            className={styles["star-color"]}
-                            src="/cinephile/star-color.webp"
-                            alt="star-color"
-                            style={{
-                              clipPath: `inset(0 ${100 - data.score * 20}% 0 0)`,
-                            }}
-                            loading="lazy"
-                          />
-                          <img
-                            className={styles["star-mono"]}
-                            src="/cinephile/star-mono.webp"
-                            alt="star-mono"
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                    )}
                     {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                     {isAdminPage && (
                       <div className={styles["admin-button-container"]}>
