@@ -27,7 +27,7 @@ export const Grid = () => {
   const [scrollCount, setScrollCount] = useState(1);
   const { ref, inView } = useInView({
     threshold: 0,
-    triggerOnce: false,
+    triggerOnce: true,
   });
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
@@ -81,8 +81,6 @@ export const Grid = () => {
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
-
-  console.log("isScrolling", isScrolling);
 
   return (
     <>
