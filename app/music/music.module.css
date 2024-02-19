@@ -286,10 +286,6 @@
   column-span: all;
 }
 
-.p::selection {
-  color: #000;
-}
-
 .line-break {
   margin-bottom: 50px;
 }

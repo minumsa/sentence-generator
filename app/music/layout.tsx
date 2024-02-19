@@ -1,6 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import React from "react";
 import styles from "./music.module.css";
+import "./globals.css";
 
 export const metadata = {
   title: "카버 차트",
