@@ -77,7 +77,6 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
           perPageCount={perPageCount}
           totalDataLength={totalDataLength}
           isLoading={isLoading}
-          isGridPage={false}
         >
           <AlbumContents data={data} perPageCount={perPageCount} />
         </ContentLayout>

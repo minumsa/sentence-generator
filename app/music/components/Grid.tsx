@@ -93,7 +93,6 @@ export const Grid = () => {
         // isLoading={isLoading && scrollCount === 1}
         isLoading={isLoading}
         isScrolling={isScrolling}
-        isGridPage={true}
       >
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {

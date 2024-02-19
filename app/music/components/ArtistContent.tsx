@@ -53,7 +53,6 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
-      isGridPage={false}
     >
       <ArtistPageImage data={data} />
       <AlbumContents data={data} perPageCount={perPageCount} />
