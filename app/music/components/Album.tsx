@@ -79,9 +79,13 @@ export const Album = ({ data }: AlbumProps) => {
                                 className={styles["star-color"]}
                                 src="/cinephile/star-color.webp"
                                 alt="star-color"
-                                style={{
-                                  clipPath: `inset(0 ${100 - data.score * 20}% 0 0)`,
-                                }}
+                                style={
+                                  data.score
+                                    ? {
+                                        clipPath: `inset(0 ${100 - data.score * 20}% 0 0)`,
+                                      }
+                                    : undefined
+                                }
                                 loading="lazy"
                               />
                               <img
