@@ -86,12 +86,14 @@ export const Grid = () => {
 
   return (
     <>
-      {isLoading && <Loading isLoading={isScrolling} />}
+      {/* {isLoading && <Loading isLoading={isScrolling} />} */}
       <ContentLayout
         currentPage={scrollCount}
         perPageCount={perPageCount}
         totalDataLength={undefined}
-        isLoading={isLoading && scrollCount === 1}
+        // isLoading={isLoading && scrollCount === 1}
+        isLoading={isLoading}
+        isScrolling={isScrolling}
       >
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {

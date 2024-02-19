@@ -8,6 +8,7 @@ interface ContentLayoutProps {
   perPageCount: number;
   totalDataLength: number | undefined;
   isLoading?: boolean;
+  isScrolling?: boolean;
 }
 
 export const ContentLayout = ({
@@ -16,10 +17,11 @@ export const ContentLayout = ({
   perPageCount,
   totalDataLength,
   isLoading,
+  isScrolling,
 }: ContentLayoutProps) => {
   return (
     <>
-      {isLoading && <Loading isLoading={false} />}
+      {isLoading && <Loading isLoading={isScrolling ? isScrolling : false} />}
       <TopNav isVisible={isLoading} />
       {
         <>
