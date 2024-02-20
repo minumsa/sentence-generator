@@ -52,7 +52,8 @@ export default function Update({ currentId }: UpdateProps) {
     async function getData() {
       const fetchData = await fetchDataById(currentId);
       setData(fetchData);
-      const { id, artistId, genre, link, text, uploadDate, score } = fetchData;
+      const { id, artistId, genre, link, text, uploadDate, score, musicVideoTitle, musicVideoUrl } =
+        fetchData;
 
       setAlbumId(id);
       setArtistId(artistId);
@@ -61,6 +62,8 @@ export default function Update({ currentId }: UpdateProps) {
       setText(text);
       setScore(score);
       setUploadDate(new Date(uploadDate));
+      setMusicVideoTitle(musicVideoTitle);
+      setMusicVideoUrl(musicVideoUrl);
     }
 
     getData();
@@ -71,11 +74,16 @@ export default function Update({ currentId }: UpdateProps) {
   }, [albumId, genre, link, text]);
 
   return (
-    <>
-      <div
-        className={`${styles["album-container"]} ${styles["upload-container"]}`}
-        style={{ flexDirection: "column", paddingTop: "50px" }}
-      >
+    <div
+      className={styles["album-container"]}
+      style={{
+        minWidth: 0,
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: "50px",
+      }}
+    >
+      <div className={styles["upload-container"]}>
         <div className={styles["title"]}>수정 페이지</div>
         <div className={styles["upload-item-title"]}>장르</div>
         <div className={styles["select-container"]}>
@@ -178,6 +186,7 @@ export default function Update({ currentId }: UpdateProps) {
             setPassword(e.target.value);
           }}
           onKeyDown={handlePasswordEnter}
+          style={{ width: "245px" }}
         />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div
@@ -190,6 +199,6 @@ export default function Update({ currentId }: UpdateProps) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

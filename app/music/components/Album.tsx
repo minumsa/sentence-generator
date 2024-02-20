@@ -23,14 +23,19 @@ export const Album = ({ data }: AlbumProps) => {
       <div className={styles["album-container"]}>
         <div className={styles["album-information-container"]}>
           <div>
-            <a className={styles["link"]} href={data.link} target="_blank">
+            <Link
+              style={{ textDecoration: "none" }}
+              href={isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`}
+            >
+              {/* <a className={styles["link"]} href={data.link} target="_blank"> */}
               <img
                 className={styles["album-art"]}
                 src={data.imgUrl}
                 alt={data.album}
                 loading="lazy"
               />
-            </a>
+              {/* </a> */}
+            </Link>
           </div>
         </div>
         <div style={{ display: "flex", width: "100%", alignItems: "center" }}>

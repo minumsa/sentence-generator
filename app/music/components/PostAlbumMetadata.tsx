@@ -88,7 +88,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         <LinkIcon /> */}
         {albumData.musicVideoTitle && (
           <>
-            <div className={styles["post-date"]}>뮤직비디오</div>
+            <div className={styles["post-date"]}>비디오</div>
             <a href={albumData.musicVideoUrl} target="_blank" style={{ textDecoration: "none" }}>
               <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
                 {albumData.musicVideoTitle}
@@ -97,6 +97,28 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             <LinkIcon />
           </>
         )}
+        <div className={styles["post-date"]}>스트리밍</div>
+        <div style={{ height: "30px" }}>
+          <a href={albumData.link} target="_blank">
+            <img
+              src="/music/apple.svg"
+              alt="link-icon"
+              style={{ position: "absolute", marginTop: "6px", height: "20px" }}
+            ></img>
+          </a>
+          <a href={`https://open.spotify.com/album/${albumData.id}`} target="_blank">
+            <img
+              src="/music/spotify.svg"
+              alt="link-icon"
+              style={{
+                position: "absolute",
+                marginLeft: "29px",
+                marginTop: "7px",
+                height: "20px",
+              }}
+            ></img>
+          </a>
+        </div>
         {isAdminPage && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
             <DeleteButton data={albumData} />
