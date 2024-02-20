@@ -16,9 +16,12 @@ export const Loading = ({ isEmpty, hasNoResult, keyword }: LoadingProps) => {
     <>
       <div
         className={styles["loading-background"]}
-        style={{ opacity: isEmpty ? 0 : "80%", zIndex: keyword ? 9997 : undefined }}
+        style={{ opacity: isEmpty ? 0 : "80%", zIndex: keyword ? 3 : undefined }}
       ></div>
-      <div className={styles["loading-text"]} style={{ fontStyle: keyword ? "italic" : undefined }}>
+      <div
+        className={styles["loading-text"]}
+        style={{ fontStyle: keyword ? "italic" : undefined, zIndex: keyword ? 3 : undefined }}
+      >
         {hasNoResult ? noDataText : loadingText}
       </div>
     </>
