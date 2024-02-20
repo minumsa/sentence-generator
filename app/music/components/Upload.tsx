@@ -27,7 +27,7 @@ export default function Upload() {
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [musicVideoTitle, setMusicVideoTitle] = useState("");
-  const [musicVideoUrl, setMusicVideoLink] = useState("");
+  const [musicVideoUrl, setMusicVideoUrl] = useState("");
   const [score, setScore] = useState<number>(0);
   const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [password, setPassword] = useState<string>("");
@@ -195,7 +195,7 @@ export default function Upload() {
           className={`${styles["input"]} ${styles["input-link"]}`}
           value={musicVideoUrl}
           onChange={e => {
-            setMusicVideoLink(e.target.value);
+            setMusicVideoUrl(e.target.value);
           }}
         />
         <div className={styles["upload-item-title"]}>작성일</div>

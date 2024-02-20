@@ -89,10 +89,9 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         {albumData.musicVideoTitle && (
           <>
             <div className={styles["post-date"]}>뮤직비디오</div>
-            <a href={albumData.musicVideoUrl}>
+            <a href={albumData.musicVideoUrl} target="_blank" style={{ textDecoration: "none" }}>
               <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
                 {albumData.musicVideoTitle}
-                Beyoncé - CUFF IT (Music Video)
               </span>
             </a>
             <LinkIcon />
