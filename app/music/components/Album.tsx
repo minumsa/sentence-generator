@@ -1,12 +1,11 @@
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
 import { isMobile } from "react-device-detect";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
-import { updateData } from "../modules/api";
 import Link from "next/link";
 
 interface AlbumProps {
@@ -53,7 +52,13 @@ export const Album = ({ data }: AlbumProps) => {
                 return (
                   <div key={index}>
                     <div className={styles["paragraph-container"]}>
-                      <div style={{ display: "flex", alignItems: "center", paddingBottom: "10px" }}>
+                      <div
+                        style={
+                          isMobile
+                            ? undefined
+                            : { display: "flex", alignItems: "center", paddingBottom: "10px" }
+                        }
+                      >
                         <Link
                           href={
                             isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`
