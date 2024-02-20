@@ -17,7 +17,7 @@ export const Grid = () => {
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
-  const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 50);
+  const [perPageCount, setPerPageCount] = useState(isMobile ? 20 : 60);
   const [scrollCount, setScrollCount] = useState(1);
   const { ref, inView } = useInView({
     threshold: 0,
