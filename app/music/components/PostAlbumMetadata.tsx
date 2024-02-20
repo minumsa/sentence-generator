@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { deleteData } from "../modules/api";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
+import { LinkIcon } from "./LinkIcon";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -61,6 +62,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         >
           {albumData.artist}
         </span>
+        <LinkIcon />
         <div className={styles["post-date"]}>앨범</div>
         <div>
           <span className={styles["black-masking"]}>{albumData.album}</span>
@@ -79,6 +81,16 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             {albumDuration}, {albumData.tracks}곡
           </span>
         </div>
+        <div className={styles["post-date"]}>티저</div>
+        <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
+          Beyoncé - I’M THAT GIRL (Official Teaser)
+        </span>
+        <LinkIcon />
+        <div className={styles["post-date"]}>뮤직비디오</div>
+        <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
+          Beyoncé - CUFF IT (Music Video)
+        </span>
+        <LinkIcon />
         {isAdminPage && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
             <DeleteButton data={albumData} />
