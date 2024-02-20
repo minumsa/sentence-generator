@@ -31,26 +31,13 @@ export async function GET(request: Request) {
 
     // pathName이 장르(pop, kpop...)인 경우 해당 장르로 필터링
     // 그렇지 않으면 모든 데이터 가져오기(query === {})
-    let query = undefined;
-
-    if (pathName === "") {
-      query = {};
-    } else {
-      query = { genre: pathName };
-    }
-
-    let genreDataLength = await Music.find(query).count();
+    const query = pathName === "" ? {} : { genre: pathName };
+    const genreDataLength = await Music.find(query).count();
 
     // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
     // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
     const startIndex = perPageCount * currentPage - perPageCount;
-    let slicedData = undefined;
-
-    if (pathName === "") {
-      slicedData = await Music.find().sort(sortKey).skip(startIndex).limit(perPageCount);
-    } else {
-      slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
-    }
+    const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {

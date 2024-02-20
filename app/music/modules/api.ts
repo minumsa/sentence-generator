@@ -45,7 +45,7 @@ export async function fetchData({
     });
 
     if (!response.ok) {
-      throw new Error("Failed to upload music data");
+      throw new Error("Failed to fetch music data");
     }
 
     let { slicedData, genreDataLength } = await response.json();
@@ -76,7 +76,7 @@ export async function FetchArtistData({
     });
 
     if (!response.ok) {
-      throw new Error("Failed to upload music data");
+      throw new Error("Failed to fetch artist data");
     }
 
     let { slicedData, genreDataLength } = await response.json();
@@ -107,7 +107,7 @@ export async function SearchData({
     });
 
     if (!response.ok) {
-      throw new Error("Failed to upload music data");
+      throw new Error("Failed to search music data");
     }
 
     let { slicedData, genreDataLength } = await response.json();
@@ -226,7 +226,7 @@ export const deleteData = async (id: string) => {
     } else if (response.status === 404) {
       alert("존재하지 않는 앨범입니다.");
     } else if (!response.ok) {
-      throw new Error("Failed to upload music data");
+      throw new Error("Failed to delete music data");
     } else {
       alert("데이터가 성공적으로 삭제되었습니다.");
     }
