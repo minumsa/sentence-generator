@@ -24,14 +24,12 @@ export const Grid = () => {
     triggerOnce: true,
   });
   const method = useAtomValue(methodAtom);
-  const setMethod = useSetAtom(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     Aos.init();
-    isAdminPage && setMethod("평점");
   }, []);
 
   useEffect(() => {
@@ -44,7 +42,7 @@ export const Grid = () => {
         pathName: "",
         perPageCount,
         currentPage: scrollCount,
-        currentMethod: method,
+        currentMethod: "평점",
         currentCriteria: criteria,
       });
 

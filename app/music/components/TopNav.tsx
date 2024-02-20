@@ -25,6 +25,9 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
   const [keyword, setKeyword] = useState("");
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
+  const isMainPage = pathName === "/music" || pathName === "/music/admin";
+
+  console.log(isMainPage);
 
   useEffect(() => {
     pathName.includes("admin") && setIsAdminPage(true);
@@ -134,20 +137,24 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
           setIsSearching(!isSearching);
         }}
       ></div>
-      <SortButton
-        type="method"
-        sortItem={sortItems.method}
-        currentOrder={currentMethod}
-        setCurrentOrder={setCurrentMethod}
-        sortWay={sortMethod}
-      />
-      <SortButton
-        type="criteria"
-        sortItem={sortItems.criteria}
-        currentOrder={currentCriteria}
-        setCurrentOrder={setCurrentCriteria}
-        sortWay={sortCriteria}
-      />
+      {isMainPage ? undefined : (
+        <>
+          <SortButton
+            type="method"
+            sortItem={sortItems.method}
+            currentOrder={currentMethod}
+            setCurrentOrder={setCurrentMethod}
+            sortWay={sortMethod}
+          />
+          <SortButton
+            type="criteria"
+            sortItem={sortItems.criteria}
+            currentOrder={currentCriteria}
+            setCurrentOrder={setCurrentCriteria}
+            sortWay={sortCriteria}
+          />
+        </>
+      )}
     </div>
   );
 };
