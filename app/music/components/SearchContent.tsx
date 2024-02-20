@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
+import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
 import { SearchData } from "../modules/api";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { Loading } from "./Loading";
-import { TopNav } from "./TopNav";
+import styles from "../music.module.css";
 
 interface PageProps {
   pathName: string;
@@ -22,6 +22,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
   const [totalPage, setTotalPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [isEmptyResult, setIsEmptyResult] = useState(false);
+  const decodedKeyword = decodeURIComponent(currentKeyword);
 
   useEffect(() => {
     async function loadData() {
@@ -54,7 +55,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
     <>
       {isEmptyResult ? (
         <>
-          <Loading isEmpty={isLoading} hasNoResult={isEmptyResult} />
+          <Loading isEmpty={true} hasNoResult={isEmptyResult} keyword={decodedKeyword} />
         </>
       ) : (
         <ContentLayout
@@ -63,6 +64,12 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
           totalDataLength={totalDataLength}
           isLoading={isLoading}
         >
+          <div
+            className={styles["search-result-container"]}
+            style={{ display: isLoading ? "none" : undefined }}
+          >
+            <div>{`"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`}</div>
+          </div>
           <AlbumContents data={data} perPageCount={perPageCount} />
         </ContentLayout>
       )}

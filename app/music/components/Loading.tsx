@@ -4,20 +4,23 @@ interface LoadingProps {
   // dataLength: number | undefined;
   isEmpty: boolean;
   hasNoResult?: boolean;
+  keyword?: string;
 }
 
-export const Loading = ({ isEmpty, hasNoResult }: LoadingProps) => {
+export const Loading = ({ isEmpty, hasNoResult, keyword }: LoadingProps) => {
   const loadingText = "데이터 로딩 중입니다...";
-  const noDataText = "일치하는 데이터가 없습니다...";
+  const noDataText = `"${keyword}"에 대한 검색 결과가 없습니다.`;
 
   return (
     // <div className={styles["loading-circle"]}></div>
     <>
       <div
         className={styles["loading-background"]}
-        style={{ opacity: isEmpty ? undefined : "80%" }}
+        style={{ opacity: isEmpty ? 0 : "80%", zIndex: keyword ? 9997 : undefined }}
       ></div>
-      <div className={styles["loading-text"]}>{hasNoResult ? noDataText : loadingText}</div>
+      <div className={styles["loading-text"]} style={{ fontStyle: keyword ? "italic" : undefined }}>
+        {hasNoResult ? noDataText : loadingText}
+      </div>
     </>
   );
 };
