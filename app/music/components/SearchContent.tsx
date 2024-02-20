@@ -62,7 +62,6 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
     <>
       {isEmptyResult ? (
         <>
-          <TopNav isVisible={false} />
           <Loading isEmpty={isLoading} hasNoResult={isEmptyResult} />
         </>
       ) : (

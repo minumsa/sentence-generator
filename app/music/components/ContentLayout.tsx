@@ -22,7 +22,6 @@ export const ContentLayout = ({
   return (
     <>
       {isLoading && <Loading isEmpty={false} />}
-      <TopNav isVisible={true} />
       {
         <>
           {children}

@@ -101,7 +101,7 @@ export const methodAtom = atom<MethodType>("발매일");
 export const criteriaAtom = atom<CriteriaType>("내림차순");
 
 export const isUploadPage = (pathName: string) => {
-  return pathName === "upload" || pathName.length > 20;
+  return pathName.includes("upload") || pathName.length > 30;
 };
 export const isMainPage = (pathName: string) => {
   return Number(pathName) > 0;

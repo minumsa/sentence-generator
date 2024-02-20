@@ -6,15 +6,18 @@ import { Hamburger } from "./Hamburger";
 import { MobileTitle } from "./MobileTitle";
 import styles from "../music.module.css";
 import { Snow } from "./Snow";
-import { Provider, atom, createStore } from "jotai";
+import { TopNav } from "./TopNav";
+import { isAdminPage, isUploadPage } from "../modules/data";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
   const fullPathName = usePathname();
 
+  console.log(pathName);
+
   return (
     <div className={styles["container"]}>
-      {/* TODO: TopNav도 MusicLayout에 추가 */}
+      <TopNav isVisible={isUploadPage(pathName) ? false : true} />
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />
