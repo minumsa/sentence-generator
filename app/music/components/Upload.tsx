@@ -194,7 +194,6 @@ export default function Upload() {
             setText(e.target.value);
           }}
         />
-
         {new Array(videoCount).fill(null).map((_, index) => {
           const tmpVideos = [...videos];
 

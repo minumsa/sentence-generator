@@ -10,6 +10,11 @@ interface UpdateProps {
   currentId: string;
 }
 
+interface Video {
+  title: string;
+  url: string;
+}
+
 // FIXME: Upload 컴포넌트와 겹치는 부분 리팩토링
 export default function Update({ currentId }: UpdateProps) {
   const [data, setData] = useState<any>();
@@ -25,7 +30,10 @@ export default function Update({ currentId }: UpdateProps) {
   const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const spotifyLink = `https://open.spotify.com/search/${link.length > 1 && link.split("/")[5]}`;
   const [uploadDate, setUploadDate] = useState(new Date());
-  // const router= useRouter()
+  const [videoCount, setVideoCount] = useState(1);
+  const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
+
+  console.log(videos);
 
   // 수정 API
   const handleUpdate = async () => {
@@ -38,7 +46,7 @@ export default function Update({ currentId }: UpdateProps) {
     });
 
     if (newAlbumData) {
-      updateData(currentId, newAlbumData, score, musicVideoTitle, musicVideoUrl, password);
+      updateData(currentId, newAlbumData, score, videos, password);
     }
   };
 
@@ -52,8 +60,7 @@ export default function Update({ currentId }: UpdateProps) {
     async function getData() {
       const fetchData = await fetchDataById(currentId);
       setData(fetchData);
-      const { id, artistId, genre, link, text, uploadDate, score, musicVideoTitle, musicVideoUrl } =
-        fetchData;
+      const { id, artistId, genre, link, text, uploadDate, score, videos } = fetchData;
 
       setAlbumId(id);
       setArtistId(artistId);
@@ -62,8 +69,7 @@ export default function Update({ currentId }: UpdateProps) {
       setText(text);
       setScore(score);
       setUploadDate(new Date(uploadDate));
-      setMusicVideoTitle(musicVideoTitle);
-      setMusicVideoUrl(musicVideoUrl);
+      setVideos(videos);
     }
 
     getData();
@@ -153,7 +159,58 @@ export default function Update({ currentId }: UpdateProps) {
             setText(e.target.value);
           }}
         />
-        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 제목</div>
+        {new Array(videoCount).fill(null).map((_, index) => {
+          const tmpVideos = [...videos];
+
+          return (
+            <div key={index}>
+              <div className={styles["upload-item-title"]}>
+                <span>영상 제목</span>
+                {index === 0 && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      marginLeft: "10px",
+                      backgroundColor: "#eee",
+                      color: "#333",
+                      padding: "0 5px",
+                      borderRadius: "10px",
+                      fontWeight: 500,
+                      fontSize: "1rem",
+                      marginTop: "5.5px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      setVideoCount(prev => prev + 1);
+                      setVideos([...videos, { title: "", url: "" }]);
+                    }}
+                  >
+                    +
+                  </span>
+                )}
+              </div>
+              <input
+                className={`${styles["input"]} ${styles["input-link"]}`}
+                value={videos[index].title}
+                onChange={e => {
+                  // setMusicVideoTitle(e.target.value);
+                  tmpVideos[index] = { ...tmpVideos[index], title: e.target.value };
+                  setVideos(tmpVideos);
+                }}
+              />
+              <div className={styles["upload-item-title"]}>영상 링크</div>
+              <input
+                className={`${styles["input"]} ${styles["input-link"]}`}
+                value={videos[index].url}
+                onChange={e => {
+                  tmpVideos[index] = { ...tmpVideos[index], url: e.target.value };
+                  setVideos(tmpVideos);
+                }}
+              />
+            </div>
+          );
+        })}
+        {/* <div className={styles["upload-item-title"]}>영상 제목</div>
         <input
           className={`${styles["input"]} ${styles["input-link"]}`}
           value={musicVideoTitle}
@@ -161,14 +218,14 @@ export default function Update({ currentId }: UpdateProps) {
             setMusicVideoTitle(e.target.value);
           }}
         />
-        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 링크</div>
+        <div className={styles["upload-item-title"]}>영상 링크</div>
         <input
           className={`${styles["input"]} ${styles["input-link"]}`}
           value={musicVideoUrl}
           onChange={e => {
             setMusicVideoUrl(e.target.value);
           }}
-        />
+        /> */}
         <div className={styles["upload-item-title"]}>작성일</div>
         <DatePicker
           selected={uploadDate}

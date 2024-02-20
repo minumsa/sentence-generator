@@ -134,8 +134,7 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { currentId, data, score, musicVideoTitle, musicVideoUrl, password } =
-      await request.json();
+    const { currentId, data, score, videos, password } = await request.json();
     const {
       id,
       imgUrl,
@@ -180,8 +179,7 @@ export async function PUT(request: Request) {
       duration,
       tracks,
       score,
-      musicVideoTitle,
-      musicVideoUrl,
+      videos,
     });
 
     await originalData.save();
