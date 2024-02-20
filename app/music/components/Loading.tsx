@@ -20,7 +20,10 @@ export const Loading = ({ isEmpty, hasNoResult, keyword }: LoadingProps) => {
       ></div>
       <div
         className={styles["loading-text"]}
-        style={{ fontStyle: keyword ? "italic" : undefined, zIndex: keyword ? 3 : undefined }}
+        style={{
+          fontStyle: keyword ? "italic" : undefined,
+          zIndex: keyword ? 3 : undefined,
+        }}
       >
         {hasNoResult ? noDataText : loadingText}
       </div>

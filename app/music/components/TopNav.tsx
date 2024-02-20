@@ -27,8 +27,6 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
   const isMainPage = pathName === "/music" || pathName === "/music/admin";
 
-  console.log(isMainPage);
-
   useEffect(() => {
     pathName.includes("admin") && setIsAdminPage(true);
   }, [pathName]);

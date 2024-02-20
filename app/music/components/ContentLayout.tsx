@@ -21,7 +21,7 @@ export const ContentLayout = ({
 }: ContentLayoutProps) => {
   return (
     <>
-      {isLoading && <Loading isEmpty={false} />}
+      {isLoading && <Loading isEmpty={isScrolling ? !isScrolling : false} />}
       {
         <>
           {children}

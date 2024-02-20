@@ -48,7 +48,7 @@ export const Grid = () => {
 
       if (scrollCount === 1) {
         setData(result?.slicedData);
-        setIsLoading(false);
+        data && setIsLoading(false);
       } else {
         // 페이지가 2 이상이면 기존 데이터 배열에 새로운 데이터 추가
         setData(prevData => [...prevData, ...result?.slicedData]);
