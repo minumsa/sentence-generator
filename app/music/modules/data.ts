@@ -103,6 +103,11 @@ export const criteriaAtom = atom<CriteriaType>("내림차순");
 export const isUploadPage = (pathName: string) => {
   return pathName.includes("upload");
 };
+
+export const isPostPage = (pathName: string) => {
+  return pathName.includes("post");
+};
+
 export const isMainPage = (pathName: string) => {
   return Number(pathName) > 0;
 };

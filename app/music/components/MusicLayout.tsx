@@ -7,7 +7,7 @@ import { MobileTitle } from "./MobileTitle";
 import styles from "../music.module.css";
 import { Snow } from "./Snow";
 import { TopNav } from "./TopNav";
-import { isUploadPage } from "../modules/data";
+import { isPostPage, isUploadPage } from "../modules/data";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
@@ -15,7 +15,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={styles["container"]}>
-      <TopNav isVisible={isUploadPage(pathName) ? false : true} />
+      <TopNav isVisible={isUploadPage(pathName) || isPostPage(pathName) ? false : true} />
       <div className={styles["category-container"]}>
         <MobileTitle />
         <Hamburger pathName={pathName} />
