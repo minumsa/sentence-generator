@@ -3,7 +3,6 @@ import { AlbumInfo } from "../modules/data";
 import styles from "../music.module.css";
 import { formatDuration } from "../modules/utils";
 import { useEffect, useState } from "react";
-import { deleteData } from "../modules/api";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import { LinkIcon } from "./LinkIcon";
@@ -86,7 +85,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
           Beyoncé - I’M THAT GIRL (Official Teaser)
         </span>
         <LinkIcon /> */}
-        <div className={styles["post-date"]}>비디오</div>
+        {albumData.videos && <div className={styles["post-date"]}>비디오</div>}
         {albumData.videos &&
           albumData.videos.map((videoData, index) => {
             return (

@@ -117,7 +117,7 @@ export default function Upload() {
         <div>
           <input
             className={styles["input"]}
-            defaultValue={albumKeyword}
+            value={albumKeyword}
             onChange={e => {
               setAlbumKeyword(e.target.value);
               setIsTyping(true);
