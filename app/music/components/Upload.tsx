@@ -26,13 +26,13 @@ export default function Upload() {
   const [albumKeyword, setAlbumKeyword] = useState<string>("");
   // FIXME: albumKeyword로 가져온 정보에서 albumId 넘겨줘야 함
   const [albumId, setAlbumId] = useState<string>("");
+  const [album, setAlbum] = useState("");
   const [searchData, setSearchData] = useState<SearchData[]>();
   const [isTyping, setIsTyping] = useState(false);
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
-  const [musicVideoTitle, setMusicVideoTitle] = useState("");
-  const [musicVideoUrl, setMusicVideoUrl] = useState("");
+  const [artist, setArtist] = useState("");
   const [score, setScore] = useState<number>(0);
   const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [password, setPassword] = useState<string>("");
@@ -78,6 +78,8 @@ export default function Upload() {
   const handleModal = (data: SearchData) => {
     setAlbumKeyword(data.name);
     setAlbumId(data.id);
+    setArtist(data.artists[0].name);
+    setAlbum(data.name);
     setSearchData(undefined);
     setIsTyping(false);
   };
@@ -196,11 +198,22 @@ export default function Upload() {
         />
         {new Array(videoCount).fill(null).map((_, index) => {
           const tmpVideos = [...videos];
+          const videoNumber = index + 1;
 
           return (
             <div key={index}>
               <div className={styles["upload-item-title"]}>
-                <span>영상 제목</span>
+                {index === 0 ? (
+                  <a
+                    href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
+                    target="_blank"
+                    style={{ color: "#cfcfcf" }}
+                  >
+                    <span>{`영상 제목 ${videoNumber}`}</span>
+                  </a>
+                ) : (
+                  <span>{`영상 제목 ${videoNumber}`}</span>
+                )}
                 {index === 0 && (
                   <span
                     style={{
