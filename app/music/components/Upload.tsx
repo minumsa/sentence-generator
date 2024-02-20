@@ -76,11 +76,16 @@ export default function Upload() {
   };
 
   return (
-    <>
-      <div
-        className={`${styles["album-container"]} ${styles["upload-container"]}`}
-        style={{ flexDirection: "column", paddingTop: "50px" }}
-      >
+    <div
+      className={styles["album-container"]}
+      style={{
+        minWidth: 0,
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: "50px",
+      }}
+    >
+      <div className={styles["upload-container"]}>
         <div className={styles["title"]}>업로드 페이지</div>
         <div className={styles["upload-item-title"]}>장르</div>
         <div className={styles["select-container"]}>
@@ -105,7 +110,7 @@ export default function Upload() {
         <div>
           <input
             className={styles["input"]}
-            value={albumKeyword}
+            defaultValue={albumKeyword}
             onChange={e => {
               setAlbumKeyword(e.target.value);
               setIsTyping(true);
@@ -150,16 +155,16 @@ export default function Upload() {
           </div>
         </div>
         <div className={styles["upload-item-title"]}>앨범 ID</div>
-        <input className={`${styles["input"]} ${styles["input-link"]}`} value={albumId} />
+        <input className={`${styles["input"]} ${styles["input-link"]}`} defaultValue={albumId} />
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
         <input
           className={`${styles["input"]} ${styles["input-link"]}`}
-          value={link}
+          defaultValue={link}
           onChange={e => {
             setLink(e.target.value);
           }}
         />
-        <div className={styles["upload-item-title"]}>평점</div>
+        <div className={styles["upload-item-title"]}>별점</div>
         <div className={styles["select-container"]}>
           <select
             className={styles["select"]}
@@ -168,7 +173,7 @@ export default function Upload() {
               setScore(Number(e.target.value));
             }}
           >
-            <option value="">--스코어를 선택해주세요--</option>
+            <option value="">--별점을 선택해주세요--</option>
             {scoreArray.map((item, index) => {
               return <option key={index}>{item}</option>;
             })}
@@ -177,7 +182,7 @@ export default function Upload() {
         <div className={styles["upload-item-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}
-          value={text}
+          defaultValue={text}
           onChange={e => {
             setText(e.target.value);
           }}
@@ -215,6 +220,7 @@ export default function Upload() {
             setPassword(e.target.value);
           }}
           onKeyDown={handlePasswordEnter}
+          style={{ width: "245px" }}
         />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div
@@ -227,6 +233,6 @@ export default function Upload() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

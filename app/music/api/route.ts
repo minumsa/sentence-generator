@@ -25,7 +25,7 @@ export async function GET(request: Request) {
       sortKey = { artist: currentCriteria };
     } else if (currentMethod === "앨범") {
       sortKey = { album: currentCriteria };
-    } else if (currentMethod === "평점") {
+    } else if (currentMethod === "별점") {
       sortKey = { score: currentCriteria, artist: 1 };
     }
 
@@ -135,7 +135,8 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { currentId, data, score, password } = await request.json();
+    const { currentId, data, score, musicVideoTitle, musicVideoUrl, password } =
+      await request.json();
     const {
       id,
       imgUrl,
@@ -180,6 +181,8 @@ export async function PUT(request: Request) {
       duration,
       tracks,
       score,
+      musicVideoTitle,
+      musicVideoUrl,
     });
 
     await originalData.save();

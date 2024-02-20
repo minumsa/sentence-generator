@@ -18,6 +18,8 @@ export default function Update({ currentId }: UpdateProps) {
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
+  const [musicVideoTitle, setMusicVideoTitle] = useState("");
+  const [musicVideoUrl, setMusicVideoUrl] = useState("");
   const [password, setPassword] = useState<string>("");
   const [score, setScore] = useState<number>(0);
   const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
@@ -36,7 +38,7 @@ export default function Update({ currentId }: UpdateProps) {
     });
 
     if (newAlbumData) {
-      updateData(currentId, newAlbumData, score, password);
+      updateData(currentId, newAlbumData, score, musicVideoTitle, musicVideoUrl, password);
     }
   };
 
@@ -67,21 +69,6 @@ export default function Update({ currentId }: UpdateProps) {
   useEffect(() => {
     setData({ ...data, id: albumId, genre: genre, link: link, text: text });
   }, [albumId, genre, link, text]);
-
-  interface ExampleCustomInputProps {
-    value: string;
-    onClick: () => void;
-  }
-
-  const ExampleCustomInput = forwardRef<HTMLButtonElement, ExampleCustomInputProps>(
-    ({ value, onClick }, ref) => (
-      <button className={styles["calendar-input"]} onClick={onClick} ref={ref}>
-        {value}
-      </button>
-    )
-  );
-
-  ExampleCustomInput.displayName = "ExampleCustomInput";
 
   return (
     <>
@@ -135,7 +122,7 @@ export default function Update({ currentId }: UpdateProps) {
             setArtistId(e.target.value);
           }}
         />
-        <div className={styles["upload-item-title"]}>평점</div>
+        <div className={styles["upload-item-title"]}>별점</div>
         <div className={styles["select-container"]}>
           <select
             className={styles["select"]}
@@ -158,19 +145,28 @@ export default function Update({ currentId }: UpdateProps) {
             setText(e.target.value);
           }}
         />
+        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 제목</div>
+        <input
+          className={`${styles["input"]} ${styles["input-link"]}`}
+          value={musicVideoTitle}
+          onChange={e => {
+            setMusicVideoTitle(e.target.value);
+          }}
+        />
+        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 링크</div>
+        <input
+          className={`${styles["input"]} ${styles["input-link"]}`}
+          value={musicVideoUrl}
+          onChange={e => {
+            setMusicVideoUrl(e.target.value);
+          }}
+        />
         <div className={styles["upload-item-title"]}>작성일</div>
         <DatePicker
           selected={uploadDate}
           onChange={date => date && setUploadDate(date)}
           dateFormat={"yyyy/MM/dd"}
-          customInput={
-            <ExampleCustomInput
-              value={""}
-              onClick={function (): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
-          }
+          className={styles["date-input"]}
         />
         <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
           관리자 비밀번호

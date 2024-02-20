@@ -42,7 +42,7 @@ export const Grid = () => {
         pathName: "",
         perPageCount,
         currentPage: scrollCount,
-        currentMethod: "평점",
+        currentMethod: "별점",
         currentCriteria: criteria,
       });
 

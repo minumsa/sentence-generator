@@ -92,8 +92,8 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
             }}
           >
             {sortItem.map((item: MethodType | CriteriaType) => {
-              // 평점은 관리자 페이지에서만 표시
-              if (!isAdminPage && item === "평점") return null;
+              // 별점은 관리자 페이지에서만 표시
+              if (!isAdminPage && item === "별점") return null;
               return (
                 <div
                   className={styles["criteria"]}

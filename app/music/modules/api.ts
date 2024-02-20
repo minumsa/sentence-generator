@@ -185,6 +185,8 @@ export const updateData = async (
   currentId: string,
   data: Partial<AlbumInfo>,
   score: number,
+  musicVideoTitle: string,
+  musicVideoUrl: string,
   password: string
 ) => {
   if (data !== null) {
@@ -198,6 +200,8 @@ export const updateData = async (
           currentId,
           data,
           score,
+          musicVideoTitle,
+          musicVideoUrl,
           password,
         }),
       });
