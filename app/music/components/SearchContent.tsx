@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  AlbumInfo,
-  CriteriaType,
-  MethodType,
-  initialCriteria,
-  initialMethod,
-} from "../modules/data";
+import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
 import { SearchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { AlbumContents } from "./AlbumContents";
@@ -21,8 +15,8 @@ interface PageProps {
 
 export default function SearchContent({ pathName, currentKeyword, currentPage }: PageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
+  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
+  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);

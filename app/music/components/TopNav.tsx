@@ -5,11 +5,11 @@ import {
   CriteriaType,
   MethodType,
   OrderType,
-  initialCriteria,
-  initialMethod,
+  criteriaAtom,
+  methodAtom,
   sortItems,
 } from "../modules/data";
-import { useAtom } from "jotai";
+import { Provider, createStore, useAtom, useSetAtom } from "jotai";
 
 interface TopNavProps {
   isVisible?: boolean;
@@ -20,29 +20,17 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [sortCriteria, setSortCriteria] = useState<boolean>(false);
   const [sortMethod, setSortMethod] = useState<boolean>(false);
-  const fullPathName = usePathname();
-  const [isSearchPage, setIsSearchPage] = useState(false);
+  const pathName = usePathname();
   const [isAdminPage, setIsAdminPage] = useState(false);
-  // TODO: 나중에 정규식 표현 블로그 정리
-  const pathNameWithoutPageNumber = fullPathName.replace(/\/\d+$/, "");
   const [keyword, setKeyword] = useState("");
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
+  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
+  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
 
-  // const slicedPathName = fullPathName
-  //   .split("/")
-  //   .map((path, index) => {
-  //     const firstOrlastIndex =
-  //       index > fullPathName.split("/").length - 2 && isNaN(Number(path)) === false;
-  //     if (!firstOrlastIndex) return `${path}/`;
-  //   })
-  //   .join("");
-  // console.log(slicedPathName);
+  const myStore = createStore();
 
   useEffect(() => {
-    fullPathName.includes("search") && setIsSearchPage(true);
-    fullPathName.includes("admin") && setIsAdminPage(true);
-  }, []);
+    pathName.includes("admin") && setIsAdminPage(true);
+  }, [pathName]);
 
   async function handleSearch() {
     isAdminPage

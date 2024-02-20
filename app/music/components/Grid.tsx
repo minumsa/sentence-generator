@@ -2,15 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
 import { usePathname } from "next/navigation";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import React from "react";
-import {
-  AlbumInfo,
-  CriteriaType,
-  MethodType,
-  initialCriteria,
-  initialMethod,
-} from "../modules/data";
+import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
@@ -29,13 +23,15 @@ export const Grid = () => {
     threshold: 0,
     triggerOnce: true,
   });
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
+  const [currentMethod, setCurrentMethod] = useAtom(methodAtom);
+  const setMethod = useSetAtom(methodAtom);
+  const [currentCriteria, setCurrentCriteria] = useAtom(criteriaAtom);
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     Aos.init();
+    isAdminPage && setMethod("평점");
   }, []);
 
   useEffect(() => {

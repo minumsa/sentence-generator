@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  AlbumInfo,
-  CriteriaType,
-  MethodType,
-  initialCriteria,
-  initialMethod,
-} from "../modules/data";
+import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
 import { fetchData } from "../modules/api";
 import { useAtom } from "jotai";
 import { AlbumContents } from "./AlbumContents";
@@ -20,8 +14,8 @@ interface PageProps {
 export default function Content({ pathName, currentPage }: PageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(initialMethod);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(initialCriteria);
+  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
+  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
   const [perPageCount, setPerPageCount] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
