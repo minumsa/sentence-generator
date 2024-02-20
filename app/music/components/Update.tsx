@@ -251,7 +251,7 @@ export default function Update({ currentId }: UpdateProps) {
                 <div className={styles["upload-item-title"]}>
                   {index === 0 ? (
                     <a
-                      href={`https://www.youtube.com/results?search_query=${artist} ${album} MV`}
+                      href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
                       target="_blank"
                       style={{ color: "#cfcfcf" }}
                     >
