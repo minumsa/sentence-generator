@@ -21,7 +21,7 @@ export const ContentLayout = ({
 }: ContentLayoutProps) => {
   return (
     <>
-      {isLoading && <Loading isEmpty={isScrolling ? false : true} />}
+      {isLoading && <Loading isEmpty={false} />}
       <TopNav isVisible={true} />
       {
         <>

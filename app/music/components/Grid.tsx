@@ -67,8 +67,8 @@ export const Grid = () => {
     }
 
     if (scrollCount < totalScrollCount) {
-      setIsLoading(true);
       loadData();
+      setIsLoading(true);
 
       if (scrollCount > 1) {
         setIsScrolling(true);
