@@ -140,11 +140,15 @@ export async function fetchDataById(id: string) {
   }
 }
 
+interface Video {
+  title: string;
+  url: string;
+}
+
 export async function uploadData(
   uploadData: AlbumInfo,
   score: number,
-  musicVideoTitle: string,
-  musicVideoUrl: string,
+  videos: Video[],
   password: string
 ) {
   if (uploadData !== null) {
@@ -157,8 +161,7 @@ export async function uploadData(
         body: JSON.stringify({
           data: uploadData,
           score: score,
-          musicVideoTitle: musicVideoTitle,
-          musicVideoUrl: musicVideoUrl,
+          videos: videos,
           password: password,
         }),
       });

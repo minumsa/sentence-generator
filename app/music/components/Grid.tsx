@@ -28,8 +28,6 @@ export const Grid = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
 
-  console.log(data);
-
   useEffect(() => {
     Aos.init();
   }, []);

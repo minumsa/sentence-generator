@@ -17,6 +17,11 @@ interface SearchData {
   id: string;
 }
 
+interface Video {
+  title: string;
+  url: string;
+}
+
 export default function Upload() {
   const [albumKeyword, setAlbumKeyword] = useState<string>("");
   // FIXME: albumKeyword로 가져온 정보에서 albumId 넘겨줘야 함
@@ -32,6 +37,8 @@ export default function Upload() {
   const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [password, setPassword] = useState<string>("");
   const [uploadDate, setUploadDate] = useState(new Date());
+  const [videoCount, setVideoCount] = useState(1);
+  const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
 
   const handleSearch = async () => {
     const result = await searchSpotify(albumKeyword);
@@ -58,7 +65,7 @@ export default function Upload() {
     });
 
     if (newAlbumData) {
-      await uploadData(newAlbumData, score, musicVideoTitle, musicVideoUrl, password);
+      await uploadData(newAlbumData, score, videos, password);
     }
   };
 
@@ -187,22 +194,58 @@ export default function Upload() {
             setText(e.target.value);
           }}
         />
-        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 제목</div>
-        <input
-          className={`${styles["input"]} ${styles["input-link"]}`}
-          value={musicVideoTitle}
-          onChange={e => {
-            setMusicVideoTitle(e.target.value);
-          }}
-        />
-        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 링크</div>
-        <input
-          className={`${styles["input"]} ${styles["input-link"]}`}
-          value={musicVideoUrl}
-          onChange={e => {
-            setMusicVideoUrl(e.target.value);
-          }}
-        />
+
+        {new Array(videoCount).fill(null).map((_, index) => {
+          const tmpVideos = [...videos];
+
+          return (
+            <div key={index}>
+              <div className={styles["upload-item-title"]}>
+                <span>영상 제목</span>
+                {index === 0 && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      marginLeft: "10px",
+                      backgroundColor: "#eee",
+                      color: "#333",
+                      padding: "0 5px",
+                      borderRadius: "10px",
+                      fontWeight: 500,
+                      fontSize: "1rem",
+                      marginTop: "5.5px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      setVideoCount(prev => prev + 1);
+                      setVideos([...videos, { title: "", url: "" }]);
+                    }}
+                  >
+                    +
+                  </span>
+                )}
+              </div>
+              <input
+                className={`${styles["input"]} ${styles["input-link"]}`}
+                value={videos[index].title}
+                onChange={e => {
+                  // setMusicVideoTitle(e.target.value);
+                  tmpVideos[index] = { ...tmpVideos[index], title: e.target.value };
+                  setVideos(tmpVideos);
+                }}
+              />
+              <div className={styles["upload-item-title"]}>영상 링크</div>
+              <input
+                className={`${styles["input"]} ${styles["input-link"]}`}
+                value={videos[index].url}
+                onChange={e => {
+                  tmpVideos[index] = { ...tmpVideos[index], url: e.target.value };
+                  setVideos(tmpVideos);
+                }}
+              />
+            </div>
+          );
+        })}
         <div className={styles["upload-item-title"]}>작성일</div>
         <DatePicker
           selected={uploadDate}

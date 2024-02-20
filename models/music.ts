@@ -1,5 +1,10 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
+interface Video extends Document {
+  title: string;
+  url: string;
+}
+
 interface MusicData extends Document {
   id: string;
   imgUrl: string;
@@ -18,7 +23,13 @@ interface MusicData extends Document {
   score: number;
   musicVideoTitle: string;
   musicVideoUrl: string;
+  videos: Video[];
 }
+
+const videoSchema = new mongoose.Schema({
+  title: String,
+  url: String,
+});
 
 const musicSchema = new mongoose.Schema({
   id: String,
@@ -38,6 +49,7 @@ const musicSchema = new mongoose.Schema({
   score: Number,
   musicVideoTitle: String,
   musicVideoUrl: String,
+  videos: [videoSchema],
 });
 
 const Music: Model<MusicData> =

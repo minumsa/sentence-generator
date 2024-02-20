@@ -86,17 +86,20 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
           Beyoncé - I’M THAT GIRL (Official Teaser)
         </span>
         <LinkIcon /> */}
-        {albumData.musicVideoTitle && (
-          <>
-            <div className={styles["post-date"]}>비디오</div>
-            <a href={albumData.musicVideoUrl} target="_blank" style={{ textDecoration: "none" }}>
-              <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
-                {albumData.musicVideoTitle}
-              </span>
-            </a>
-            <LinkIcon />
-          </>
-        )}
+        {albumData.videos &&
+          albumData.videos.map((videoData, index) => {
+            return (
+              <div key={videoData.title}>
+                <div className={styles["post-date"]}>비디오</div>
+                <a href={videoData.url} target="_blank" style={{ textDecoration: "none" }}>
+                  <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
+                    {videoData.title}
+                  </span>
+                </a>
+                <LinkIcon />
+              </div>
+            );
+          })}
         <div className={styles["post-date"]}>스트리밍</div>
         <div style={{ height: "30px" }}>
           <a href={albumData.link} target="_blank">

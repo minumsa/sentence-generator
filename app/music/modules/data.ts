@@ -36,6 +36,11 @@ export const contents: ContentsType = {
   soundtrack: "사운드트랙",
 };
 
+interface Video {
+  title: string;
+  url: string;
+}
+
 export interface AlbumInfo {
   id: string;
   artistId: string;
@@ -52,8 +57,7 @@ export interface AlbumInfo {
   duration: number;
   tracks: number;
   score?: number;
-  musicVideoTitle?: string;
-  musicVideoUrl?: string;
+  videos?: Video[];
 }
 
 export interface PageProps {
