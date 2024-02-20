@@ -70,7 +70,7 @@ export const Grid = () => {
         setIsScrolling(true);
       }
     }
-  }, [method, criteria, scrollCount, totalScrollCount, perPageCount]);
+  }, [method, criteria, scrollCount, perPageCount]);
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
