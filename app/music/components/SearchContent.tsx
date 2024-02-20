@@ -66,9 +66,13 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
         >
           <div
             className={styles["search-result-container"]}
-            style={{ display: isLoading ? "none" : undefined }}
+            // style={{ display: isLoading ? "none" : undefined }}
           >
-            <div>{`"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`}</div>
+            <div>
+              {totalDataLength
+                ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
+                : ""}
+            </div>
           </div>
           <AlbumContents data={data} perPageCount={perPageCount} />
         </ContentLayout>
