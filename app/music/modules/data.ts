@@ -52,6 +52,8 @@ export interface AlbumInfo {
   duration: number;
   tracks: number;
   score?: number;
+  musicVideoTitle?: string;
+  musicVideoUrl?: string;
 }
 
 export interface PageProps {
@@ -68,6 +70,8 @@ export interface UpdateInfo {
   genre: string;
   link: string;
   text: string;
+  musicVideoTitle?: string;
+  musicVideoUrl?: string;
   uploadDate: Date;
 }
 

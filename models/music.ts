@@ -16,6 +16,8 @@ interface MusicData extends Document {
   duration: number;
   tracks: number;
   score: number;
+  musicVideoTitle: string;
+  musicVideoUrl: string;
 }
 
 const musicSchema = new mongoose.Schema({
@@ -34,6 +36,8 @@ const musicSchema = new mongoose.Schema({
   duration: Number,
   tracks: Number,
   score: Number,
+  musicVideoTitle: String,
+  musicVideoUrl: String,
 });
 
 const Music: Model<MusicData> =

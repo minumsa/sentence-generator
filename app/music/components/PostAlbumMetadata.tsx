@@ -81,16 +81,23 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             {albumDuration}, {albumData.tracks}곡
           </span>
         </div>
-        <div className={styles["post-date"]}>티저</div>
+        {/* <div className={styles["post-date"]}>티저</div>
         <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
           Beyoncé - I’M THAT GIRL (Official Teaser)
         </span>
-        <LinkIcon />
-        <div className={styles["post-date"]}>뮤직비디오</div>
-        <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
-          Beyoncé - CUFF IT (Music Video)
-        </span>
-        <LinkIcon />
+        <LinkIcon /> */}
+        {albumData.musicVideoTitle && (
+          <>
+            <div className={styles["post-date"]}>뮤직비디오</div>
+            <a href={albumData.musicVideoUrl}>
+              <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
+                {albumData.musicVideoTitle}
+                Beyoncé - CUFF IT (Music Video)
+              </span>
+            </a>
+            <LinkIcon />
+          </>
+        )}
         {isAdminPage && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
             <DeleteButton data={albumData} />

@@ -23,10 +23,11 @@ export default function Upload() {
   const [albumId, setAlbumId] = useState<string>("");
   const [searchData, setSearchData] = useState<SearchData[]>();
   const [isTyping, setIsTyping] = useState(false);
-
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
+  const [musicVideoTitle, setMusicVideoTitle] = useState("");
+  const [musicVideoUrl, setMusicVideoLink] = useState("");
   const [score, setScore] = useState<number>(0);
   const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [password, setPassword] = useState<string>("");
@@ -57,7 +58,7 @@ export default function Upload() {
     });
 
     if (newAlbumData) {
-      await uploadData(newAlbumData, score, password);
+      await uploadData(newAlbumData, score, musicVideoTitle, musicVideoUrl, password);
     }
   };
 
@@ -102,7 +103,7 @@ export default function Upload() {
         </div>
         <div className={styles["upload-item-title"]}>앨범 제목</div>
         <div>
-          <textarea
+          <input
             className={styles["input"]}
             value={albumKeyword}
             onChange={e => {
@@ -149,11 +150,11 @@ export default function Upload() {
           </div>
         </div>
         <div className={styles["upload-item-title"]}>앨범 ID</div>
-        <textarea className={`${styles["input"]} ${styles["input-link"]}`} defaultValue={albumId} />
+        <input className={`${styles["input"]} ${styles["input-link"]}`} value={albumId} />
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
-        <textarea
+        <input
           className={`${styles["input"]} ${styles["input-link"]}`}
-          defaultValue={link}
+          value={link}
           onChange={e => {
             setLink(e.target.value);
           }}
@@ -179,6 +180,22 @@ export default function Upload() {
           value={text}
           onChange={e => {
             setText(e.target.value);
+          }}
+        />
+        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 제목</div>
+        <input
+          className={`${styles["input"]} ${styles["input-link"]}`}
+          value={musicVideoTitle}
+          onChange={e => {
+            setMusicVideoTitle(e.target.value);
+          }}
+        />
+        <div className={styles["upload-item-title"]}>뮤직비디오(MV) 링크</div>
+        <input
+          className={`${styles["input"]} ${styles["input-link"]}`}
+          value={musicVideoUrl}
+          onChange={e => {
+            setMusicVideoLink(e.target.value);
           }}
         />
         <div className={styles["upload-item-title"]}>작성일</div>

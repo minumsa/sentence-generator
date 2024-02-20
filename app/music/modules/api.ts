@@ -140,7 +140,13 @@ export async function fetchDataById(id: string) {
   }
 }
 
-export async function uploadData(uploadData: AlbumInfo, score: number, password: string) {
+export async function uploadData(
+  uploadData: AlbumInfo,
+  score: number,
+  musicVideoTitle: string,
+  musicVideoUrl: string,
+  password: string
+) {
   if (uploadData !== null) {
     try {
       const response = await fetch("/music/api", {
@@ -151,6 +157,8 @@ export async function uploadData(uploadData: AlbumInfo, score: number, password:
         body: JSON.stringify({
           data: uploadData,
           score: score,
+          musicVideoTitle: musicVideoTitle,
+          musicVideoUrl: musicVideoUrl,
           password: password,
         }),
       });
