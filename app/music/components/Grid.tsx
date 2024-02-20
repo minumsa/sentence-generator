@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
 import { usePathname } from "next/navigation";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import React from "react";
 import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
 import { isMobile } from "react-device-detect";
@@ -23,9 +23,9 @@ export const Grid = () => {
     threshold: 0,
     triggerOnce: true,
   });
-  const [currentMethod, setCurrentMethod] = useAtom(methodAtom);
+  const method = useAtomValue(methodAtom);
   const setMethod = useSetAtom(methodAtom);
-  const [currentCriteria, setCurrentCriteria] = useAtom(criteriaAtom);
+  const criteria = useAtomValue(criteriaAtom);
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -44,8 +44,8 @@ export const Grid = () => {
         pathName: "",
         perPageCount,
         currentPage: scrollCount,
-        currentMethod,
-        currentCriteria,
+        currentMethod: method,
+        currentCriteria: criteria,
       });
 
       if (scrollCount === 1) {
@@ -70,7 +70,7 @@ export const Grid = () => {
         setIsScrolling(true);
       }
     }
-  }, [currentMethod, currentCriteria, scrollCount, totalScrollCount, perPageCount]);
+  }, [method, criteria, scrollCount, totalScrollCount, perPageCount]);
 
   const [imageLoaded, setImageLoaded] = useState(false);
 

@@ -9,7 +9,7 @@ import {
   methodAtom,
   sortItems,
 } from "../modules/data";
-import { Provider, createStore, useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 
 interface TopNavProps {
   isVisible?: boolean;
@@ -25,8 +25,6 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
   const [keyword, setKeyword] = useState("");
   const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
   const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
-
-  const myStore = createStore();
 
   useEffect(() => {
     pathName.includes("admin") && setIsAdminPage(true);

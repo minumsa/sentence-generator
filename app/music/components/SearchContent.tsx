@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
 import { SearchData } from "../modules/api";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { Loading } from "./Loading";
@@ -15,8 +15,8 @@ interface PageProps {
 
 export default function SearchContent({ pathName, currentKeyword, currentPage }: PageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
+  const method = useAtomValue(methodAtom);
+  const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
@@ -30,8 +30,8 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
         perPageCount,
         currentPage,
         currentKeyword,
-        currentMethod,
-        currentCriteria,
+        currentMethod: method,
+        currentCriteria: criteria,
       });
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
@@ -48,15 +48,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
 
     setIsLoading(true);
     loadData();
-  }, [
-    pathName,
-    currentKeyword,
-    currentMethod,
-    currentCriteria,
-    perPageCount,
-    currentPage,
-    data.length,
-  ]);
+  }, [pathName, currentKeyword, method, criteria, perPageCount, currentPage, data.length]);
 
   return (
     <>

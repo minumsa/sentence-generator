@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
 import { fetchData } from "../modules/api";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { TopNav } from "./TopNav";
@@ -14,8 +14,8 @@ interface PageProps {
 export default function Content({ pathName, currentPage }: PageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
+  const method = useAtomValue(methodAtom);
+  const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setPerPageCount] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,8 +26,8 @@ export default function Content({ pathName, currentPage }: PageProps) {
         pathName,
         perPageCount,
         currentPage,
-        currentMethod,
-        currentCriteria,
+        currentMethod: method,
+        currentCriteria: criteria,
       });
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
@@ -36,7 +36,7 @@ export default function Content({ pathName, currentPage }: PageProps) {
     }
 
     loadData();
-  }, [pathName, currentPage, currentMethod, currentCriteria, perPageCount]);
+  }, [pathName, currentPage, method, criteria, perPageCount]);
 
   return (
     <ContentLayout

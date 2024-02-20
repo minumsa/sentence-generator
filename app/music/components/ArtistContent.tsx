@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
 import { FetchArtistData } from "../modules/api";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
@@ -17,8 +17,8 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
   // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
   // FIXME: jotai 타입 오류 해결해야 함 MethodType 또는 Criteria 타입으로
-  const [currentMethod, setCurrentMethod] = useAtom<MethodType>(methodAtom);
-  const [currentCriteria, setCurrentCriteria] = useAtom<CriteriaType>(criteriaAtom);
+  const method = useAtomValue(methodAtom);
+  const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(undefined);
   const [totalPage, setTotalPage] = useState(1);
@@ -30,8 +30,8 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
         perPageCount,
         currentPage,
         artistId,
-        currentMethod,
-        currentCriteria,
+        currentMethod: method,
+        currentCriteria: criteria,
       });
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
@@ -40,7 +40,7 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
     }
 
     loadData();
-  }, [artistId, currentMethod, currentCriteria, currentPage, perPageCount]);
+  }, [artistId, method, criteria, currentPage, perPageCount]);
 
   return (
     <ContentLayout

@@ -7,13 +7,11 @@ import { MobileTitle } from "./MobileTitle";
 import styles from "../music.module.css";
 import { Snow } from "./Snow";
 import { TopNav } from "./TopNav";
-import { isAdminPage, isUploadPage } from "../modules/data";
+import { isUploadPage } from "../modules/data";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
   const fullPathName = usePathname();
-
-  console.log(pathName);
 
   return (
     <div className={styles["container"]}>
