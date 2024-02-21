@@ -60,8 +60,8 @@ export const Album = ({ data }: AlbumProps) => {
                       <div
                         style={
                           isMobile
-                            ? undefined
-                            : { display: "flex", alignItems: "center", paddingBottom: "10px" }
+                            ? { display: "flex", alignItems: "center", paddingBottom: "10px" }
+                            : undefined
                         }
                       >
                         <Link

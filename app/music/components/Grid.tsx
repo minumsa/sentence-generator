@@ -141,7 +141,6 @@ export const Grid = () => {
                 </div>
                 <div
                   className={styles["grid-album-title"]}
-
                   // onClick={() => {
                   //   setIsLoading(true);
                   //   isAdminPage
@@ -154,10 +153,12 @@ export const Grid = () => {
                     onClick={() => {
                       setIsLoading(true);
                     }}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", cursor: "unset" }}
                   >
                     <div>
-                      <span className={styles["black-masking"]}>
+                      <span
+                        className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                      >
                         {`${item.artist} [${item.album}]`}
                         {/* 관리자 페이지일 때만 표시할 부분 */}
                         {isAdminPage && ` … ${item.score}`}
