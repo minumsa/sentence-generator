@@ -171,11 +171,11 @@ export default function Upload() {
           </div>
         </div>
         <div className={styles["upload-item-title"]}>앨범 ID</div>
-        <input className={`${styles["input"]} ${styles["input-link"]}`} defaultValue={albumId} />
+        <input className={`${styles["input"]} ${styles["input-link"]}`} value={albumId} />
         <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
         <input
           className={`${styles["input"]} ${styles["input-link"]}`}
-          defaultValue={link}
+          value={link}
           onChange={e => {
             setLink(e.target.value);
           }}
@@ -198,7 +198,7 @@ export default function Upload() {
         <div className={styles["upload-item-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}
-          defaultValue={text}
+          value={text}
           onChange={e => {
             setText(e.target.value);
           }}

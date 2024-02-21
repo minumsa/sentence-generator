@@ -119,14 +119,20 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
     >
       <div className={styles["top-search-container"]}>
         {isSearching && (
-          <input
-            className={styles["top-search-input"]}
-            placeholder="검색어를 입력해주세요"
-            onChange={e => {
-              setKeyword(e.target.value);
-            }}
-            onKeyDown={handleEnter}
-          />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input
+              type="search"
+              className={styles["top-search-input"]}
+              placeholder="검색어 입력 후 ENTER"
+              onChange={e => {
+                setKeyword(e.target.value);
+              }}
+              onKeyDown={handleEnter}
+            />
+            {/* <div className={styles["top-search-button"]}>
+              <div>검색</div>
+            </div> */}
+          </div>
         )}
       </div>
       <div
