@@ -107,13 +107,9 @@ export const Grid = () => {
                 style={mobileStyle}
                 ref={isLastItem ? ref : undefined}
               >
-                <Link
+                <div
                   className={styles["grid-album-container"]}
                   style={{ position: "relative", width: "100%" }}
-                  href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
-                  onClick={() => {
-                    setIsLoading(true);
-                  }}
                   // onClick={() => {
                   //   setIsLoading(true);
                   //   isAdminPage
@@ -121,27 +117,31 @@ export const Grid = () => {
                   //     : router.push(`/music/post/${item.id}`);
                   // }}
                 >
-                  <div
-                    className={styles["grid-album-image"]}
-                    style={
-                      imageLoaded
-                        ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
-                        : undefined
-                    }
-                  />
-                  <img
-                    src={item.imgUrl}
-                    alt={item.album}
-                    style={{ display: "none" }}
-                    onLoad={handleImageLoad}
-                  />
-                </Link>
-                <Link
+                  <Link
+                    href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                    onClick={() => {
+                      setIsLoading(true);
+                    }}
+                  >
+                    <div
+                      className={styles["grid-album-image"]}
+                      style={
+                        imageLoaded
+                          ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
+                          : undefined
+                      }
+                    />
+                    <img
+                      src={item.imgUrl}
+                      alt={item.album}
+                      style={{ display: "none" }}
+                      onLoad={handleImageLoad}
+                    />
+                  </Link>
+                </div>
+                <div
                   className={styles["grid-album-title"]}
-                  href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
-                  onClick={() => {
-                    setIsLoading(true);
-                  }}
+
                   // onClick={() => {
                   //   setIsLoading(true);
                   //   isAdminPage
@@ -149,12 +149,22 @@ export const Grid = () => {
                   //     : router.push(`/music/post/${item.id}`);
                   // }}
                 >
-                  <span className={styles["black-masking"]}>
-                    {`${item.artist} [${item.album}]`}
-                    {/* 관리자 페이지일 때만 표시할 부분 */}
-                    {isAdminPage && ` … ${item.score}`}
-                  </span>
-                </Link>
+                  <Link
+                    href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                    onClick={() => {
+                      setIsLoading(true);
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div>
+                      <span className={styles["black-masking"]}>
+                        {`${item.artist} [${item.album}]`}
+                        {/* 관리자 페이지일 때만 표시할 부분 */}
+                        {isAdminPage && ` … ${item.score}`}
+                      </span>
+                    </div>
+                  </Link>
+                </div>
               </div>
             );
           })}

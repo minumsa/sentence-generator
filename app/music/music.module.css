@@ -777,7 +777,6 @@
   padding: 0 20px 20px 20px;
   /* FIXME: 향후에 바꿀 수 있음 */
   margin-top: 1px;
-  cursor: pointer;
   z-index: 100;
 
   text-decoration: none;
