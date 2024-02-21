@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import Rate from "rc-rate";
+import "rc-rate/assets/index.css";
 
 interface UpdateProps {
   currentId: string;
