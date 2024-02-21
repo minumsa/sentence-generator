@@ -450,7 +450,7 @@
   /* FIXME: vertical align 방법 알아내기. 지금은 height, padding으로 임시로 맞춰놓음. */
   width: 100%;
   margin: 15px 0 50px 0;
-  /* background-color: #fff; */
+  background-color: #fff;
   font-size: 1.2rem;
   font-family: "Lato", "Noto Sans KR", sans-serif;
 }
@@ -463,8 +463,10 @@
   box-shadow: none;
   border: 1px solid #cfcfcf;
   border-radius: 30px;
-  padding: 10px 15px;
+  padding: 30px 15px;
   height: 40px;
+  /* padding으로 인한 width 증가 현상 억제 */
+  box-sizing: border-box;
 }
 
 .input-text {
@@ -511,6 +513,7 @@
 
 .submit {
   padding: 10px 30px;
+  border-color: #cfcfcf;
 }
 
 .title {
@@ -902,6 +905,11 @@
 .upload-container {
   max-width: 880px;
   width: 100%;
+}
+
+.upload-item-container {
+  border-bottom: 1px dashed #cfcfcf;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 1850px) {
