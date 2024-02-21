@@ -47,6 +47,8 @@ export default function Update({ currentId }: UpdateProps) {
   const [isTyping, setIsTyping] = useState(false);
   const router = useRouter();
 
+  console.log(videos);
+
   // 수정 API
   const handleUpdate = async () => {
     const newAlbumData = await fetchSpotify({
@@ -255,39 +257,121 @@ export default function Update({ currentId }: UpdateProps) {
 
             return (
               <div key={index}>
-                <div className={styles["upload-item-title"]}>
+                <div
+                  className={styles["upload-item-title"]}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
                   {index === 0 ? (
                     <a
                       href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
                       target="_blank"
                       style={{ color: "#cfcfcf" }}
                     >
-                      <span>{`영상 제목 ${videoNumber}`}</span>
+                      <div>{`영상 제목 ${videoNumber}`}</div>
                     </a>
                   ) : (
-                    <span>{`영상 제목 ${videoNumber}`}</span>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <div>{`영상 제목 ${videoNumber}`}</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          alignItems: "center",
+                          backgroundColor: "#eee",
+                          width: "20px",
+                          height: "20px",
+                          borderRadius: "50%",
+                          marginLeft: "5px",
+                          marginTop: "2px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            color: "#333",
+                            fontWeight: 500,
+                            fontSize: "1rem",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            setVideoCount(prev => prev - 1);
+                            const tmpVideos = [...videos];
+                            tmpVideos.splice(index, 1);
+                            setVideos(tmpVideos);
+                            // setVideoCount(prev => prev + 1);
+                            // setVideos([...videos, { title: "", url: "" }]);
+                          }}
+                        >
+                          −
+                        </div>
+                      </div>
+                    </div>
                   )}
                   {index === 0 && (
-                    <span
-                      style={{
-                        position: "absolute",
-                        marginLeft: "10px",
-                        backgroundColor: "#eee",
-                        color: "#333",
-                        padding: "0 5px",
-                        borderRadius: "10px",
-                        fontWeight: 500,
-                        fontSize: "1rem",
-                        marginTop: "5.5px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        setVideoCount(prev => prev + 1);
-                        setVideos([...videos, { title: "", url: "" }]);
-                      }}
-                    >
-                      +
-                    </span>
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          alignItems: "center",
+                          backgroundColor: "#eee",
+                          width: "20px",
+                          height: "20px",
+                          borderRadius: "50%",
+                          marginLeft: "5px",
+                          marginTop: "2px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            color: "#333",
+                            fontWeight: 500,
+                            fontSize: "1rem",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            setVideoCount(prev => prev + 1);
+                            setVideos([...videos, { title: "", url: "" }]);
+                          }}
+                        >
+                          +
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          alignItems: "center",
+                          backgroundColor: "#eee",
+                          width: "20px",
+                          height: "20px",
+                          borderRadius: "50%",
+                          marginLeft: "5px",
+                          marginTop: "2px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            color: "#333",
+                            fontWeight: 500,
+                            fontSize: "1rem",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            setVideoCount(prev => prev - 1);
+                            const tmpVideos = [...videos];
+                            tmpVideos.splice(index, 1);
+                            setVideos(tmpVideos);
+                            // setVideoCount(prev => prev + 1);
+                            // setVideos([...videos, { title: "", url: "" }]);
+                          }}
+                        >
+                          −
+                        </div>
+                      </div>
+                    </>
                   )}
                 </div>
                 <input
