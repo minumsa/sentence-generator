@@ -5,6 +5,7 @@ import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
 import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/navigation";
 
 // FIXME: 타입 any 없애기
 interface SearchData {
@@ -39,6 +40,7 @@ export default function Upload() {
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
+  const router = useRouter();
 
   const handleSearch = async () => {
     const result = await searchSpotify(albumKeyword);
@@ -65,7 +67,12 @@ export default function Upload() {
     });
 
     if (newAlbumData) {
-      await uploadData(newAlbumData, score, videos, password);
+      try {
+        await uploadData(newAlbumData, score, videos, password);
+        router.back();
+      } catch (error) {
+        console.error("uploadData 호출에 실패했습니다:", error);
+      }
     }
   };
 

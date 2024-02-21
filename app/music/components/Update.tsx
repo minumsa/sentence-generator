@@ -5,6 +5,7 @@ import { fetchDataById, fetchSpotify, searchSpotify, updateData } from "../modul
 import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/navigation";
 
 interface UpdateProps {
   currentId: string;
@@ -44,6 +45,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [albumKeyword, setAlbumKeyword] = useState<string>("");
   const [searchData, setSearchData] = useState<SearchData[]>();
   const [isTyping, setIsTyping] = useState(false);
+  const router = useRouter();
 
   // 수정 API
   const handleUpdate = async () => {
@@ -56,7 +58,12 @@ export default function Update({ currentId }: UpdateProps) {
     });
 
     if (newAlbumData) {
-      updateData(currentId, newAlbumData, score, videos, password);
+      try {
+        await updateData(currentId, newAlbumData, score, videos, password);
+        router.back();
+      } catch (error) {
+        console.error("updateData 호출에 실패했습니다:", error);
+      }
     }
   };
 
