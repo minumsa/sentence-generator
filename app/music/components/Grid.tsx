@@ -82,29 +82,29 @@ export const Grid = () => {
         currentPage={scrollCount}
         perPageCount={perPageCount}
         totalDataLength={undefined}
-        // isLoading={isLoading && scrollCount === 1}
         isLoading={isLoading}
         isScrolling={isScrolling}
       >
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {
-            const firstLineMobile = isMobile && index < 2;
-            const evenIndexMobile = isMobile && (index + 1) % 2 == 0;
+            // FIXME: 코드 전체적으로 이런 식으로 정리하기
+            const isFirstLine = index < 2;
+            const isEvenIndex = (index + 1) % 2 == 0;
             const isLastItem = index + 1 === data.length;
 
             const mobileStyle = {
-              borderTop: firstLineMobile ? "none" : undefined,
-              borderRight: evenIndexMobile ? "none" : undefined,
+              borderTop: isFirstLine ? "none" : undefined,
+              borderRight: isEvenIndex ? "none" : undefined,
             };
             return (
               <div
                 data-aos="fade-up"
                 data-aos-duration="1000"
-                data-aos-offset={isMobile ? "50" : "65"}
+                data-aos-offset={isMobile ? 50 : 65}
                 data-aos-once="false"
                 key={index}
                 className={`${styles["grid-item-container"]}`}
-                style={mobileStyle}
+                style={isMobile ? mobileStyle : undefined}
                 ref={isLastItem ? ref : undefined}
               >
                 <div
