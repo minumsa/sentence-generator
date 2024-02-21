@@ -277,7 +277,8 @@
 
 .album-metadata-container {
   line-height: 190%;
-  word-break: keep-all;
+  word-break: break-word;
+  /* word-break: keep-all; */
   width: 100%;
   max-width: 1050px;
 }

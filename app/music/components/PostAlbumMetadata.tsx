@@ -85,7 +85,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
           Beyoncé - I’M THAT GIRL (Official Teaser)
         </span>
         <LinkIcon /> */}
-        {albumData.videos && <div className={styles["post-date"]}>비디오</div>}
+        {albumData?.videos?.[0]?.title && <div className={styles["post-date"]}>비디오</div>}
         {albumData.videos &&
           albumData.videos.map((videoData, index) => {
             return (
