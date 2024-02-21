@@ -6,6 +6,7 @@ import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
+import Rate from "rc-rate";
 
 interface UpdateProps {
   currentId: string;
@@ -235,20 +236,16 @@ export default function Update({ currentId }: UpdateProps) {
         </div>
         <div className={styles["upload-item-container"]}>
           <div className={styles["upload-item-title"]}>별점</div>
-          <div className={styles["select-container"]}>
-            <select
-              className={styles["select"]}
-              value={score}
-              onChange={e => {
-                setScore(Number(e.target.value));
-              }}
-            >
-              <option value="">--스코어를 선택해주세요--</option>
-              {scoreArray.map((item, index) => {
-                return <option key={index}>{item}</option>;
-              })}
-            </select>
-          </div>
+          <Rate
+            defaultValue={3}
+            value={score}
+            count={5}
+            allowHalf={true}
+            style={{ fontSize: "30px", marginTop: "5px", marginBottom: "30px" }}
+            onChange={value => {
+              setScore(value);
+            }}
+          />
         </div>
         <div className={styles["upload-item-container"]}>
           <div className={styles["upload-item-title"]}>글</div>

@@ -6,6 +6,8 @@ import { contents } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
+import Rate from "rc-rate";
+import "rc-rate/assets/index.css";
 
 // FIXME: 타입 any 없애기
 interface SearchData {
@@ -182,7 +184,17 @@ export default function Upload() {
         />
         <div className={styles["upload-item-title"]}>별점</div>
         <div className={styles["select-container"]}>
-          <select
+          <Rate
+            defaultValue={3}
+            count={5}
+            allowHalf={true}
+            style={{ fontSize: "30px" }}
+            onChange={value => {
+              setScore(value);
+            }}
+          />
+          {/* TODO: 별점 기능 넣기 */}
+          {/* <select
             className={styles["select"]}
             value={score}
             onChange={e => {
@@ -193,7 +205,7 @@ export default function Upload() {
             {scoreArray.map((item, index) => {
               return <option key={index}>{item}</option>;
             })}
-          </select>
+          </select> */}
         </div>
         <div className={styles["upload-item-title"]}>글</div>
         <textarea

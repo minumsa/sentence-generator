@@ -128,6 +128,8 @@
   }
 }
 
+/* TODO: var(--primary)처럼 주요 색상에 변수 이름 주기 */
+
 .snowfall-container {
   position: fixed;
   top: 0;

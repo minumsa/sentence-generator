@@ -86,7 +86,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         </span>
         <LinkIcon /> */}
         {albumData?.videos?.[0]?.title && <div className={styles["post-date"]}>비디오</div>}
-        {albumData.videos &&
+        {albumData?.videos?.[0]?.title &&
           albumData.videos.map((videoData, index) => {
             return (
               <div key={videoData.title}>
