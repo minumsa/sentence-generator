@@ -463,10 +463,16 @@
   box-shadow: none;
   border: 1px solid #cfcfcf;
   border-radius: 30px;
-  padding: 30px 15px;
   height: 40px;
   /* padding으로 인한 width 증가 현상 억제 */
   box-sizing: border-box;
+  padding: 30px 15px;
+}
+
+.select {
+  max-width: 208px;
+  box-sizing: unset;
+  padding: 0 15px;
 }
 
 .input-text {
@@ -479,10 +485,6 @@
   font-size: 1.2rem;
   font-family: "Lato", "Noto Sans KR", sans-serif;
   margin-top: 15px;
-}
-
-.select {
-  padding-right: 50px;
 }
 
 .date-input {

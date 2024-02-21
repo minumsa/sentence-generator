@@ -126,7 +126,7 @@ export default function Update({ currentId }: UpdateProps) {
     <div
       className={styles["album-container"]}
       style={{
-        minWidth: 0,
+        minWidth: "fit-content",
         flexDirection: "column",
         alignItems: "center",
         paddingTop: "50px",

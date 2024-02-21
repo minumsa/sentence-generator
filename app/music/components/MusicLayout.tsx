@@ -21,7 +21,12 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
         <Hamburger pathName={pathName} />
         <Category pathName={pathName} fullPathName={fullPathName} />
       </div>
-      <div className={styles["content-container"]}>{children}</div>
+      <div
+        className={styles["content-container"]}
+        style={{ alignItems: isUploadPage(pathName) ? "center" : undefined }}
+      >
+        {children}
+      </div>
     </div>
   );
 };
