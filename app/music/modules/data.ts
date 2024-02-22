@@ -56,8 +56,8 @@ export interface AlbumInfo {
   uploadDate: Date;
   duration: number;
   tracks: number;
-  score?: number;
-  videos?: Video[];
+  score: number;
+  videos: Video[];
 }
 
 export interface PageProps {

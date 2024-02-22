@@ -1,26 +1,22 @@
-import { usePathname, useRouter } from "next/navigation";
-import { AlbumInfo } from "../modules/data";
+import { usePathname } from "next/navigation";
+import { AlbumInfo, isAdminPage } from "../modules/data";
 import styles from "../music.module.css";
 import { formatDuration } from "../modules/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import { LinkIcon } from "./LinkIcon";
+import Link from "next/link";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
 }
 
 export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
-  const router = useRouter();
-  const albumDuration = albumData && formatDuration(albumData.duration);
+  const albumDuration = formatDuration(albumData.duration);
   const [imageLoaded, setImageLoaded] = useState(false);
   const pathName = usePathname();
-  const [isAdminPage, setIsAdminPage] = useState(false);
-
-  useEffect(() => {
-    pathName.includes("admin") ? setIsAdminPage(true) : setIsAdminPage(false);
-  }, []);
+  const hasVideo = albumData.videos[0]?.title.length > 0;
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -52,13 +48,14 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
       </div>
       <div className={styles["album-metadata"]}>
         <div className={styles["post-date"]}>아티스트</div>
-        <span
-          className={styles["black-masking"]}
-          onClick={() => {
-            router.push(`/music/artist/${albumData.artistId}/1`);
-          }}
-          style={{ cursor: "pointer" }}
-        >
+        <Link
+          href={
+            isAdminPage(pathName)
+              ? `/music/admin/artist/${albumData.artistId}/1`
+              : `/music/artist/${albumData.artistId}/1`
+          }
+        ></Link>
+        <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
           {albumData.artist}
         </span>
         <LinkIcon />
@@ -80,25 +77,23 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             {albumDuration}, {albumData.tracks}곡
           </span>
         </div>
-        {/* <div className={styles["post-date"]}>티저</div>
-        <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
-          Beyoncé - I’M THAT GIRL (Official Teaser)
-        </span>
-        <LinkIcon /> */}
-        {albumData?.videos?.[0]?.title && <div className={styles["post-date"]}>비디오</div>}
-        {albumData?.videos?.[0]?.title &&
-          albumData.videos.map((videoData, index) => {
-            return (
-              <div key={videoData.title}>
-                <a href={videoData.url} target="_blank" style={{ textDecoration: "none" }}>
-                  <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
-                    {videoData.title}
-                  </span>
-                </a>
-                <LinkIcon />
-              </div>
-            );
-          })}
+        {hasVideo && (
+          <>
+            <div className={styles["post-date"]}>비디오</div>
+            {albumData.videos.map(videoData => {
+              return (
+                <div key={videoData.title}>
+                  <a href={videoData.url} target="_blank" style={{ textDecoration: "none" }}>
+                    <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
+                      {videoData.title}
+                    </span>
+                  </a>
+                  <LinkIcon />
+                </div>
+              );
+            })}
+          </>
+        )}
         <div className={styles["post-date"]}>스트리밍</div>
         <div style={{ height: "30px" }}>
           <a href={albumData.link} target="_blank">
@@ -121,7 +116,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             ></img>
           </a>
         </div>
-        {isAdminPage && (
+        {isAdminPage(pathName) && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
             <DeleteButton data={albumData} />
             <EditButton data={albumData} />
