@@ -374,11 +374,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 85px;
+  width: 70px;
   height: 40px;
-  border: 1px solid var(--border-color);
-  border-radius: 100px;
-  margin-right: 10px;
+  border: 1px solid var(--text-color);
+  margin-right: 20px;
 }
 
 .button:hover {
@@ -882,7 +881,6 @@
 .star-container {
   position: relative;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   margin-left: 10px;
 }
@@ -990,6 +988,18 @@
 }
 
 @media (max-width: 525px) {
+  .admin-button-container {
+    justify-content: center;
+  }
+
+  .star-container {
+    display: none;
+  }
+
+  .post-album-title {
+    justify-content: center;
+  }
+
   .loading-background,
   .loading-text {
     width: 100%;
@@ -1323,9 +1333,9 @@
 
   .blur-end {
     --lines-count: 3;
-    --blur-height: 30;
-    --blur-length: 8;
-    --fade-length: 8;
+    --fade-length: 5;
+    --blur-height: 40px;
+    --blur-length: 5px;
   }
 
   .more-button {

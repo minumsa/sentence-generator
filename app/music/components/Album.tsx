@@ -60,20 +60,16 @@ export const Album = ({ data }: AlbumProps) => {
                       <div
                         style={
                           isMobile
-                            ? { display: "flex", alignItems: "center", paddingBottom: "10px" }
-                            : undefined
+                            ? undefined
+                            : { display: "flex", alignItems: "center", paddingBottom: "10px" }
                         }
+                        className={styles["post-album-title"]}
                       >
                         <Link
                           href={
                             isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`
                           }
                           style={{ textDecoration: "none" }}
-                          // onClick={() => {
-                          //   isAdminPage
-                          //     ? router.push(`/music/admin/post/${data.id}`)
-                          //     : router.push(`/music/post/${data.id}`);
-                          // }}
                         >
                           <div
                             className={styles["category-meta-title"]}
@@ -82,7 +78,7 @@ export const Album = ({ data }: AlbumProps) => {
                             {data.album}
                           </div>
                         </Link>
-                        {isAdminPage && (
+                        {
                           <div className={styles["upload-item-title"]}>
                             <div className={styles["star-container"]}>
                               <img
@@ -106,7 +102,7 @@ export const Album = ({ data }: AlbumProps) => {
                               />
                             </div>
                           </div>
-                        )}
+                        }
                       </div>
                       <div className={styles["category-meta"]}>
                         <Link
@@ -122,11 +118,6 @@ export const Album = ({ data }: AlbumProps) => {
                             alt="test"
                             className={styles["category-meta-image"]}
                             loading="lazy"
-                            // onClick={() => {
-                            //   isAdminPage
-                            //     ? router.push(`/music/admin/artist/${data.artistId}/1`)
-                            //     : router.push(`/music/artist/${data.artistId}/1`);
-                            // }}
                           />
                         </Link>
                         <div>
@@ -137,11 +128,6 @@ export const Album = ({ data }: AlbumProps) => {
                                 ? `/music/admin/artist/${data.artistId}/1`
                                 : `/music/artist/${data.artistId}/1`
                             }
-                            // onClick={() => {
-                            //   isAdminPage
-                            //     ? router.push(`/music/admin/artist/${data.artistId}/1`)
-                            //     : router.push(`/music/artist/${data.artistId}/1`);
-                            // }}
                           >
                             {data.artist}
                           </Link>
@@ -167,24 +153,15 @@ export const Album = ({ data }: AlbumProps) => {
                             isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`
                           }
                         >
-                          <div
-                            className={styles["more-button"]}
-                            // onClick={() => {
-                            //   isAdminPage
-                            //     ? router.push(`/music/admin/post/${data.id}`)
-                            //     : router.push(`/music/post/${data.id}`);
-                            // }}
-                          >
-                            더 보기
-                          </div>
+                          <div className={styles["more-button"]}>더 보기</div>
                         </Link>
                       )}
                     </div>
                     {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                     {isAdminPage && (
                       <div className={styles["admin-button-container"]}>
-                        <DeleteButton data={data} />
                         <EditButton data={data} />
+                        <DeleteButton data={data} />
                       </div>
                     )}
                   </div>
