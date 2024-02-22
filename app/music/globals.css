@@ -84,3 +84,13 @@ input[type="search"]::-webkit-search-cancel-button {
 .rc-rate-star-full:hover .rc-rate-star-second {
   color: #f2cf63;
 }
+
+:root {
+  --primary-color: #007bff; /* 주로 사용하는 주 색상 코드 */
+  --secondary-color: #6c757d; /* 보조 색상 코드 */
+
+  --background-color: #242424;
+  --text-color: #cfcfcf; /* 텍스트 색상 코드 */
+  --text-hover-color: #949494;
+  --border-color: #000;
+}

@@ -108,14 +108,14 @@
 .body {
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #242424;
+  background-color: var(--background-color);
 }
 
 .container {
   padding-left: 250px;
   font-family: "Lato", "Noto Sans KR", sans-serif;
   font-weight: 400;
-  color: #cfcfcf;
+  color: var(--text-color);
   font-size: 1.2rem;
 }
 
@@ -127,8 +127,6 @@
     background-position: 100% 50%;
   }
 }
-
-/* TODO: var(--primary)처럼 주요 색상에 변수 이름 주기 */
 
 .snowfall-container {
   position: fixed;
@@ -161,7 +159,7 @@
   top: 0;
   right: 0;
   z-index: 9999;
-  background-color: #242424;
+  background-color: var(--background-color);
 }
 
 .loading-text {
@@ -233,20 +231,20 @@
 
   /* top-menu-container와 영역 겹쳐서 지정 */
   z-index: 10000;
-  border-right: 1px solid #000;
+  border-right: 1px solid var(--border-color);
 }
 
 .category {
   cursor: pointer;
   display: flex;
   padding: 10px 20px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--border-color);
   text-decoration: none;
-  color: #cfcfcf;
+  color: var(--text-color);
 }
 
 .category:hover {
-  color: #949494;
+  color: var(--text-hover-color);
   border-radius: 0px;
 }
 
@@ -294,7 +292,7 @@
 }
 
 .divider {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .album-title {
@@ -361,7 +359,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid #000;
+  border: 1px solid var(--border-color);
   /* box-shadow: 0 0 0 1px #000 inset; */
 }
 
@@ -378,7 +376,7 @@
   align-items: center;
   width: 85px;
   height: 40px;
-  border: 1px solid #000;
+  border: 1px solid var(--border-color);
   border-radius: 100px;
   margin-right: 10px;
 }
@@ -406,9 +404,6 @@
 
 .album-information {
   display: none;
-  /* FIXME: 임시 수정 */
-  /* display: flex; */
-  /* FIXME: 임시 수정 */
   flex-direction: column;
   justify-content: center;
   margin-left: 60px;
@@ -471,11 +466,11 @@
 .date-input,
 .select {
   background-color: #333;
-  color: #cfcfcf;
+  color: var(--text-color);
   box-shadow: none;
-  border: 1px solid #cfcfcf;
+  border: 1px solid var(--text-color);
   height: 40px;
-  /* padding으로 인한 width 증가 현상 억제 */
+  /* box-sizing: padding으로 인한 width 증가 현상 억제 */
   box-sizing: border-box;
   padding: 30px 15px;
 }
@@ -526,7 +521,7 @@
 
 .submit {
   padding: 10px 30px;
-  border-color: #cfcfcf;
+  border-color: var(--text-color);
 }
 
 .title {
@@ -540,7 +535,6 @@
 }
 
 .paragraph {
-  /* text-indent: 10%; */
   margin: 0;
 }
 
@@ -555,32 +549,22 @@
 .blur-end {
   word-break: normal;
   text-align: justify;
-  /* 마스킹 줄 수  */
-  --lines: 3;
-  /* 마스킹 높이 */
-  --line-height: 40;
-  /* 마스킹 길이 */
-  --link-length: 10;
-  /* 페이드 길이 */
-  --one-ch: 5;
+  --lines-count: 3;
+  --blur-height: 40px;
+  --blur-length: 5px;
+  --fade-length: 5;
   --fade-direction: 270deg;
   overflow: hidden;
-  text-overflow: clip;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: var(--lines);
+  -webkit-line-clamp: var(--lines-count);
 
-  mask: linear-gradient(
-      0deg,
-      transparent 0,
-      transparent calc(var(--line-height) * 1px),
-      #000 calc(var(--line-height) * 1px)
-    ),
+  mask: linear-gradient(0deg, transparent, transparent var(--blur-height), #000 var(--blur-height)),
     linear-gradient(
       270deg,
-      transparent 0,
-      transparent calc((var(--link-length) * var(--one-ch)) * 1px),
-      #000 calc((var(--link-length) * var(--one-ch) + var(--line-height) * 2) * 1px)
+      transparent,
+      transparent calc((var(--blur-length) * var(--fade-length)) + var(--blur-height)),
+      #000 calc((var(--blur-length) * var(--fade-length)) + (var(--blur-height) * 2))
     );
 }
 
@@ -591,7 +575,7 @@
   font-weight: 450;
   font-size: 1.2rem;
   cursor: pointer;
-  color: #cfcfcf;
+  color: var(--text-color);
 }
 
 .paragraph-blank {
@@ -633,8 +617,8 @@
 }
 
 .sort-criteria {
-  border-left: 1px solid #000;
-  border-bottom: 1px solid #000;
+  border-left: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   padding: 5px 10px 10px 10px;
   background-color: #fff;
   color: #000;
@@ -811,7 +795,7 @@
 
 .black-masking {
   background-color: #000;
-  color: #cfcfcf;
+  color: var(--text-color);
   padding: 3px 0;
   line-height: 155%;
   text-indent: 0;
@@ -825,7 +809,7 @@
   padding-bottom: 15px;
   cursor: pointer;
   text-decoration: none;
-  color: #cfcfcf;
+  color: var(--text-color);
 }
 
 .category-meta {
@@ -878,7 +862,7 @@
   margin: -25px 0 0 -25px;
 
   border: 10px solid #e3e3e3;
-  border-bottom: 10px solid #000000;
+  border-bottom: 10px solid var(--border-color);
   border-radius: 50%;
 
   animation: load 1.5s linear infinite;
@@ -923,7 +907,7 @@
 }
 
 .upload-item-container {
-  border-bottom: 1px dashed #cfcfcf;
+  border-bottom: 1px dashed var(--text-color);
   margin-bottom: 30px;
 }
 
@@ -1126,7 +1110,7 @@
     left: 0;
     bottom: 0;
     background-color: #fff;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--border-color);
   }
 
   .content-container {
@@ -1144,7 +1128,7 @@
   }
 
   .sort-criteria-container:first-child {
-    border-right: 1px solid #000;
+    border-right: 1px solid var(--border-color);
   }
 
   .sort-criteria {
@@ -1270,7 +1254,7 @@
     font-size: 0.9rem;
     width: 100%;
     height: 33px;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--border-color);
     background-color: #fff;
   }
 
@@ -1286,7 +1270,7 @@
     height: fit-content;
     left: 0;
     bottom: 33px;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--border-color);
     background-color: #fff;
   }
 
@@ -1296,7 +1280,7 @@
     height: fit-content;
     right: 0;
     bottom: 33px;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--border-color);
     background-color: #fff;
   }
 
@@ -1338,10 +1322,10 @@
   }
 
   .blur-end {
-    --lines: 3;
-    --line-height: 30;
-    --link-length: 8;
-    --one-ch: 8;
+    --lines-count: 3;
+    --blur-height: 30;
+    --blur-length: 8;
+    --fade-length: 8;
   }
 
   .more-button {
@@ -1427,7 +1411,7 @@
     margin: 10px auto;
 
     border: 10px solid #e3e3e3;
-    border-bottom: 10px solid #000000;
+    border-bottom: 10px solid var(--border-color);
     border-radius: 50%;
 
     animation: load 1.5s linear infinite;
