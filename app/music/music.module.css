@@ -474,7 +474,6 @@
   color: #cfcfcf;
   box-shadow: none;
   border: 1px solid #cfcfcf;
-  border-radius: 30px;
   height: 40px;
   /* padding으로 인한 width 증가 현상 억제 */
   box-sizing: border-box;
@@ -925,6 +924,11 @@
 
 .upload-item-container {
   border-bottom: 1px dashed #cfcfcf;
+  margin-bottom: 30px;
+}
+
+.rc-rate {
+  font-size: 45px;
   margin-bottom: 30px;
 }
 

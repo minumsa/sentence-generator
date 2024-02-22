@@ -242,10 +242,10 @@ export default function Update({ currentId }: UpdateProps) {
             value={score}
             count={5}
             allowHalf={true}
-            style={{ fontSize: "30px", marginTop: "5px", marginBottom: "30px" }}
-            onChange={value => {
+            onChange={(value: number) => {
               setScore(value);
             }}
+            className={styles["rc-rate"]}
           />
         </div>
         <div className={styles["upload-item-container"]}>

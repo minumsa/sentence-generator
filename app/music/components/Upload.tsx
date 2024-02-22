@@ -183,30 +183,15 @@ export default function Upload() {
           }}
         />
         <div className={styles["upload-item-title"]}>별점</div>
-        <div className={styles["select-container"]}>
-          <Rate
-            defaultValue={3}
-            count={5}
-            allowHalf={true}
-            style={{ fontSize: "30px" }}
-            onChange={value => {
-              setScore(value);
-            }}
-          />
-          {/* TODO: 별점 기능 넣기 */}
-          {/* <select
-            className={styles["select"]}
-            value={score}
-            onChange={e => {
-              setScore(Number(e.target.value));
-            }}
-          >
-            <option value="">--별점을 선택해주세요--</option>
-            {scoreArray.map((item, index) => {
-              return <option key={index}>{item}</option>;
-            })}
-          </select> */}
-        </div>
+        <Rate
+          defaultValue={3}
+          count={5}
+          allowHalf={true}
+          onChange={(value: number) => {
+            setScore(value);
+          }}
+          className={styles["rc-rate"]}
+        />
         <div className={styles["upload-item-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}
@@ -294,7 +279,7 @@ export default function Upload() {
             setPassword(e.target.value);
           }}
           onKeyDown={handlePasswordEnter}
-          style={{ width: "245px" }}
+          style={{ width: "240px" }}
         />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div
