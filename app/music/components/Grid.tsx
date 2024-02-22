@@ -159,7 +159,7 @@ export const Grid = () => {
                     >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        style={{ fontWeight: "500", fontSize: "0.9rem" }}
+                        style={{ fontWeight: "500" }}
                       >
                         {`${item.album}`}
                       </span>
@@ -178,7 +178,7 @@ export const Grid = () => {
                     >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        style={{ fontSize: "0.85rem", color: "#a7a7a7" }}
+                        style={{ color: "#a7a7a7" }}
                       >
                         {`${item.artist}`}
                         {/* 관리자 페이지일 때만 표시할 부분 */}

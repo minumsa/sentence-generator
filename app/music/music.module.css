@@ -1152,6 +1152,7 @@
     overflow: hidden;
     border-left: none;
     z-index: 1;
+    margin-top: 40px;
   }
 
   .sort-criteria-container {
