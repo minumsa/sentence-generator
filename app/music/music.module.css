@@ -727,6 +727,10 @@
   padding-bottom: 100%;
 }
 
+.post-album-image {
+  box-shadow: 0 10px 20px 0 #0000005e;
+}
+
 .grid-album-title {
   font-size: 0.95rem;
   font-weight: 500;

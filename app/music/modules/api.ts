@@ -1,4 +1,4 @@
-import { AlbumInfo, CriteriaType, MethodType, UpdateInfo } from "./data";
+import { AlbumInfo, CriteriaType, FetchSpotifyAlbumInfo, MethodType, UpdateInfo } from "./data";
 
 interface FetchData {
   pathName: string;
@@ -322,7 +322,7 @@ export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: U
 
     const artistData = await artistDataResponse.json();
 
-    const fetchedData: AlbumInfo = {
+    const fetchedData: FetchSpotifyAlbumInfo = {
       id: albumData.id,
       artistId: albumData.artists[0].id,
       imgUrl: albumData.images[0].url,

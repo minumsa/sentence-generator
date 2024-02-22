@@ -27,7 +27,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
       <div className={styles["grid-album-image-container"]}>
         <a href={albumData.link} target="_blank">
           <div
-            className={styles["grid-album-image"]}
+            className={`${styles["grid-album-image"]} ${styles["post-album-image"]}`}
             style={
               imageLoaded
                 ? {

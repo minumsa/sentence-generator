@@ -40,6 +40,22 @@ interface Video {
   title: string;
   url: string;
 }
+export interface FetchSpotifyAlbumInfo {
+  id: string;
+  artistId: string;
+  imgUrl: string;
+  artistImgUrl: string;
+  artist: string;
+  album: string;
+  label: string;
+  releaseDate: string;
+  genre: string;
+  link: string;
+  text: string;
+  uploadDate: Date;
+  duration: number;
+  tracks: number;
+}
 
 export interface AlbumInfo {
   id: string;
