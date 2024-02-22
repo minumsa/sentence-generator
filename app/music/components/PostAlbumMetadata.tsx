@@ -54,10 +54,12 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
               ? `/music/admin/artist/${albumData.artistId}/1`
               : `/music/artist/${albumData.artistId}/1`
           }
-        ></Link>
-        <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
-          {albumData.artist}
-        </span>
+          style={{ textDecoration: "none" }}
+        >
+          <span className={styles["black-masking"]} style={{ cursor: "pointer" }}>
+            {albumData.artist}
+          </span>
+        </Link>
         <LinkIcon />
         <div className={styles["post-date"]}>앨범</div>
         <div>

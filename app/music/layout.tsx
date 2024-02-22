@@ -27,7 +27,7 @@ type Props = {
 const Layout = ({ children }: Props) => {
   return (
     <html>
-      <body className={styles["body"]}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 };

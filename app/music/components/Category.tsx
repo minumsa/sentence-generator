@@ -1,8 +1,6 @@
-import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents, isAdminPage } from "../modules/data";
 import Link from "next/link";
-import { useState } from "react";
 
 interface CategoryProps {
   pathName: string;
@@ -12,10 +10,12 @@ interface CategoryProps {
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
   const pathNameToArray = pathName.split("/");
 
+  console.log(pathName);
+
   return (
     <div className={styles["desktop-category"]}>
       <Link
-        className={styles["category"]}
+        className={`${styles["category"]} ${styles["site-title"]}`}
         href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
         // onClick={() => {
         //   router.push(isAdminPage(fullPathName) ? `/music/admin` : `/music`);
