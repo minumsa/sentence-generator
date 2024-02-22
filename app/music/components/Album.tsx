@@ -57,14 +57,7 @@ export const Album = ({ data }: AlbumProps) => {
                 return (
                   <div key={index}>
                     <div className={styles["paragraph-container"]}>
-                      <div
-                        style={
-                          isMobile
-                            ? undefined
-                            : { display: "flex", alignItems: "center", paddingBottom: "10px" }
-                        }
-                        className={styles["post-album-title"]}
-                      >
+                      <div className={styles["post-album-title"]}>
                         <Link
                           href={
                             isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`

@@ -65,46 +65,6 @@
   unicode-range: U+0020-002F, U+003A-0040, U+005B-0060, U+007B-007E;
 }
 
-@font-face {
-  font-family: "GothicA1";
-  src: url("/fonts/GothicA1-ExtraLight.ttf");
-  font-style: normal;
-  font-weight: 300;
-  unicode-range: U+AC00-D7A3;
-}
-
-@font-face {
-  font-family: "GothicA1";
-  src: url("/fonts/GothicA1-Light.ttf");
-  font-style: normal;
-  font-weight: 400;
-  unicode-range: U+AC00-D7A3;
-}
-
-@font-face {
-  font-family: "GothicA1";
-  src: url("/fonts/GothicA1-Regular.ttf");
-  font-style: normal;
-  font-weight: 500;
-  unicode-range: U+AC00-D7A3;
-}
-
-@font-face {
-  font-family: "GothicA1";
-  src: url("/fonts/GothicA1-Medium.ttf");
-  font-style: normal;
-  font-weight: 600;
-  unicode-range: U+AC00-D7A3;
-}
-
-@font-face {
-  font-family: "GothicA1";
-  src: url("/fonts/GothicA1-SemiBold.ttf");
-  font-style: normal;
-  font-weight: 700;
-  unicode-range: U+AC00-D7A3;
-}
-
 .body {
   overflow-x: hidden;
   overflow-y: auto;
@@ -222,7 +182,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 240px;
   height: 100vh;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -231,21 +191,24 @@
 
   /* top-menu-container와 영역 겹쳐서 지정 */
   z-index: 10000;
-  border-right: 1px solid var(--border-color);
+  /* border-right: 1px solid var(--border-color); */
+  font-size: 1rem;
 }
 
 .category {
   cursor: pointer;
   display: flex;
   padding: 10px 20px;
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
   text-decoration: none;
   color: var(--text-color);
 }
 
 .category:hover {
-  color: var(--text-hover-color);
-  border-radius: 0px;
+  background-color: #333;
+  /* border-radius: 10px; */
+  /* color: var(--text-hover-color);
+  border-radius: 0px; */
 }
 
 .sup {
@@ -310,7 +273,7 @@
 .top-search-container {
   display: flex;
   align-items: center;
-  height: 44.5px;
+  height: 49.5px;
   margin-right: 5px;
 }
 
@@ -319,10 +282,11 @@
   font-size: 1rem;
   width: 200px;
   height: 30px;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: #272727;
   color: #000;
   box-shadow: none;
-  border: none;
+  border: 1px solid #454545;
   padding: 0 10px;
   margin-top: 1px;
 }
@@ -340,7 +304,7 @@
 .top-magnifying-glass {
   width: 20px;
   height: 24.5px;
-  padding: 10px;
+  padding: 15px 10px 10px 10px;
   background-image: url(/music/magnifying-glass.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -612,7 +576,6 @@
   align-items: center;
   cursor: pointer;
   padding: 10px 0;
-  font-family: "Montserrat";
 }
 
 .sort-criteria {
@@ -805,7 +768,6 @@
 .category-meta-title {
   font-weight: 600;
   font-size: 2.2rem;
-  padding-bottom: 15px;
   cursor: pointer;
   text-decoration: none;
   color: var(--text-color);
@@ -912,6 +874,12 @@
 .rc-rate {
   font-size: 45px;
   margin-bottom: 30px;
+}
+
+.post-album-title {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
 }
 
 @media (max-width: 1850px) {

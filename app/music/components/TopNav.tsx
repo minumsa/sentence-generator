@@ -123,7 +123,7 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
             <input
               type="search"
               className={styles["top-search-input"]}
-              placeholder="검색어 입력 후 ENTER"
+              placeholder="검색"
               onChange={e => {
                 setKeyword(e.target.value);
               }}
