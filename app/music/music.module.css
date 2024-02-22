@@ -972,6 +972,56 @@
   }
 } */
 
+@media (max-width: 800px) {
+  .album-container {
+    width: 100%;
+    min-width: 0;
+    padding: 41px 0;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .album-metadata-container {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    line-height: 200%;
+    z-index: 1;
+  }
+
+  .album-metadata {
+    max-width: 400px;
+  }
+
+  .album-information-container {
+    width: 95%;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+
+  .album-information {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0 0 0;
+  }
+
+  .post-album-title {
+    justify-content: center;
+  }
+
+  .category-meta {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 525px) {
   .admin-button-container {
     justify-content: center;
@@ -979,10 +1029,6 @@
 
   .star-container {
     display: none;
-  }
-
-  .post-album-title {
-    justify-content: center;
   }
 
   .loading-background,
@@ -1001,10 +1047,6 @@
     font-size: 1.4rem;
     padding-bottom: 5px;
     text-align: center;
-  }
-
-  .category-meta {
-    justify-content: center;
   }
 
   .loading {
@@ -1125,41 +1167,6 @@
   .sort-criteria {
     border-left: none;
     border-bottom: none;
-  }
-
-  .album-container {
-    width: 100%;
-    min-width: 0;
-    padding: 41px 0;
-    align-items: center;
-
-    display: flex;
-    flex-direction: column;
-  }
-
-  .album-information-container {
-    width: 280px;
-    flex-direction: column;
-    height: fit-content;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-right: 0;
-  }
-
-  .album-information {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0 0 0;
-  }
-
-  .album-metadata-container {
-    width: 100%;
-    height: fit-content;
-    margin-bottom: 10px;
-    padding: 0 15px;
-    box-sizing: border-box;
-    line-height: 200%;
-    z-index: 1;
   }
 
   .paragraph-blank {

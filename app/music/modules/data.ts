@@ -105,7 +105,8 @@ export const album = {
 };
 
 export const activeStyle = {
-  color: "#949494",
+  // color: "#949494",
+  backgroundColor: "#333",
 };
 
 export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범" | "별점";
