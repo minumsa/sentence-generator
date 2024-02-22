@@ -716,13 +716,14 @@
   margin: -1px 0 0 -1px;
   --width-large: calc(100% / 10 - 1px);
   /* width: var(--width-large); */
-  width: 200px;
+  width: 145px;
+  margin: 15px;
 }
 
 .grid-album-container {
   width: 100%;
   box-sizing: border-box;
-  padding: 20px 20px 0 20px;
+  /* padding: 20px 20px 0 20px; */
   z-index: 500;
 }
 
@@ -752,7 +753,7 @@
 .grid-album-title {
   font-size: 0.95rem;
   font-weight: 500;
-  padding: 0 20px 20px 20px;
+  /* padding: 0 20px 20px 20px; */
   /* FIXME: 향후에 바꿀 수 있음 */
   margin-top: 1px;
   z-index: 100;
