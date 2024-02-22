@@ -37,7 +37,6 @@ export default function Upload() {
   const [text, setText] = useState<string>("");
   const [artist, setArtist] = useState("");
   const [score, setScore] = useState<number>(0);
-  const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [password, setPassword] = useState<string>("");
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
@@ -60,7 +59,7 @@ export default function Upload() {
   }, [albumKeyword, isTyping]);
 
   const handleUpload = async () => {
-    const newAlbumData = await fetchSpotify({
+    const newSpotifyAlbumData = await fetchSpotify({
       albumId,
       genre,
       link,
@@ -68,9 +67,9 @@ export default function Upload() {
       uploadDate,
     });
 
-    if (newAlbumData) {
+    if (newSpotifyAlbumData) {
       try {
-        await uploadData(newAlbumData, score, videos, password);
+        await uploadData(newSpotifyAlbumData, score, videos, password);
         router.back();
       } catch (error) {
         console.error("uploadData 호출에 실패했습니다:", error);

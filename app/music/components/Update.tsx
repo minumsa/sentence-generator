@@ -40,7 +40,6 @@ export default function Update({ currentId }: UpdateProps) {
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [score, setScore] = useState<number>(0);
-  const scoreArray: number[] = [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5];
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
@@ -51,7 +50,7 @@ export default function Update({ currentId }: UpdateProps) {
 
   // 수정 API
   const handleUpdate = async () => {
-    const newAlbumData = await fetchSpotify({
+    const newSpotifyAlbumData = await fetchSpotify({
       albumId,
       genre,
       link,
@@ -59,9 +58,9 @@ export default function Update({ currentId }: UpdateProps) {
       uploadDate,
     });
 
-    if (newAlbumData) {
+    if (newSpotifyAlbumData) {
       try {
-        await updateData(currentId, newAlbumData, score, videos, password);
+        await updateData(currentId, newSpotifyAlbumData, score, videos, password);
         router.back();
       } catch (error) {
         console.error("updateData 호출에 실패했습니다:", error);

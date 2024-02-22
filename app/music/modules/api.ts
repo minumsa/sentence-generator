@@ -1,4 +1,4 @@
-import { AlbumInfo, CriteriaType, FetchSpotifyAlbumInfo, MethodType, UpdateInfo } from "./data";
+import { AlbumInfo, CriteriaType, SpotifyAlbumData, MethodType, UpdateInfo } from "./data";
 
 interface FetchData {
   pathName: string;
@@ -146,12 +146,12 @@ interface Video {
 }
 
 export async function uploadData(
-  uploadData: AlbumInfo,
+  newSpotifyAlbumData: SpotifyAlbumData,
   score: number,
   videos: Video[],
   password: string
 ) {
-  if (uploadData !== null) {
+  if (newSpotifyAlbumData !== null) {
     try {
       const response = await fetch("/music/api", {
         method: "POST",
@@ -159,7 +159,7 @@ export async function uploadData(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          data: uploadData,
+          data: newSpotifyAlbumData,
           score: score,
           videos: videos,
           password: password,
@@ -186,12 +186,12 @@ export async function uploadData(
 
 export const updateData = async (
   currentId: string,
-  data: Partial<AlbumInfo>,
+  newSpotifyAlbumData: SpotifyAlbumData,
   score: number,
   videos: Video[],
   password: string
 ) => {
-  if (data !== null) {
+  if (newSpotifyAlbumData !== null) {
     try {
       const response = await fetch("/music/api", {
         method: "PUT",
@@ -200,7 +200,7 @@ export const updateData = async (
         },
         body: JSON.stringify({
           currentId,
-          data,
+          newSpotifyAlbumData,
           score,
           videos,
           password,
@@ -322,7 +322,7 @@ export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: U
 
     const artistData = await artistDataResponse.json();
 
-    const fetchedData: FetchSpotifyAlbumInfo = {
+    const fetchedData: SpotifyAlbumData = {
       id: albumData.id,
       artistId: albumData.artists[0].id,
       imgUrl: albumData.images[0].url,

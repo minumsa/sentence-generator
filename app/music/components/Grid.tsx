@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
-import { usePathname } from "next/navigation";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { usePathname, useRouter } from "next/navigation";
+import { useAtomValue } from "jotai";
 import React from "react";
-import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
+import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
@@ -13,6 +13,7 @@ import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
 
 export const Grid = () => {
+  const router = useRouter();
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);
@@ -148,31 +149,43 @@ export const Grid = () => {
                   //     : router.push(`/music/post/${item.id}`);
                   // }}
                 >
-                  <Link
-                    href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
-                    onClick={() => {
-                      setIsLoading(true);
-                    }}
-                    style={{ textDecoration: "none", cursor: "unset" }}
-                  >
-                    <div>
+                  <div>
+                    <Link
+                      href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                      onClick={() => {
+                        setIsLoading(true);
+                      }}
+                      style={{ textDecoration: "none", cursor: "unset" }}
+                    >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        style={{ fontWeight: "500" }}
+                        style={{ fontWeight: "500", fontSize: "0.9rem" }}
                       >
                         {`${item.album}`}
                       </span>
-                      <br />
+                    </Link>
+                    <br />
+                    <Link
+                      href={
+                        isAdminPage
+                          ? `/music/admin/artist/${item.artistId}/1`
+                          : `/music/artist/${item.artistId}/1`
+                      }
+                      onClick={() => {
+                        setIsLoading(true);
+                      }}
+                      style={{ textDecoration: "none", cursor: "unset" }}
+                    >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        style={{ fontSize: "0.9rem", color: "#919191" }}
+                        style={{ fontSize: "0.85rem", color: "#a7a7a7" }}
                       >
                         {`${item.artist}`}
                         {/* 관리자 페이지일 때만 표시할 부분 */}
                         {isAdminPage && ` … ${item.score}`}
                       </span>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               </div>
             );

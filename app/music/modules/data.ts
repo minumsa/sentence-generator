@@ -40,7 +40,7 @@ interface Video {
   title: string;
   url: string;
 }
-export interface FetchSpotifyAlbumInfo {
+export interface SpotifyAlbumData {
   id: string;
   artistId: string;
   imgUrl: string;
