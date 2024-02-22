@@ -10,10 +10,14 @@ interface CategoryProps {
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
   const pathNameToArray = pathName.split("/");
 
-  console.log(pathName);
+  console.log(
+    Object.keys(contents).map(x => {
+      console.log(x);
+    })
+  );
 
   return (
-    <div className={styles["desktop-category"]}>
+    <div className={styles["desktop-category"]} style={{ fontSize: "1rem" }}>
       <Link
         className={`${styles["category"]} ${styles["site-title"]}`}
         href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
@@ -22,9 +26,19 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
         // }}
         style={pathName === "/music/admin" || pathName === "/music" ? activeStyle : {}}
       >
-        divdivdiv
+        {/* divdivdiv */}
+        DIVDIVDIV
       </Link>
-      {Object.keys(contents).map(category => {
+      <div className={styles["category"]}>GENRE</div>
+      <div className={styles["category"]}>BOARD</div>
+      <div style={{ flexGrow: 1 }}></div>
+      <div
+        className={styles["top-magnifying-glass"]}
+        // onClick={() => {
+        //   setIsSearching(!isSearching);
+        // }}
+      ></div>
+      {/* {Object.keys(contents).map(category => {
         const isActiveCategory = pathNameToArray.includes(category);
 
         return (
@@ -39,10 +53,10 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
             // }}
             style={isActiveCategory ? activeStyle : {}}
           >
-            {contents[category]}
+            {category.toUpperCase()}
           </Link>
         );
-      })}
+      })} */}
     </div>
   );
 };

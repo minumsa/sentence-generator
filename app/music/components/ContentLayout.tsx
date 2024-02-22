@@ -1,6 +1,5 @@
 import { PageNumbers } from "./PageNumbers";
 import { Loading } from "./Loading";
-import { TopNav } from "./TopNav";
 
 interface ContentLayoutProps {
   children: React.ReactNode;
