@@ -61,7 +61,7 @@ export default function Update({ currentId }: UpdateProps) {
     if (newSpotifyAlbumData) {
       try {
         await updateData(currentId, newSpotifyAlbumData, score, videos, password);
-        router.back();
+        // router.back();
       } catch (error) {
         console.error("updateData 호출에 실패했습니다:", error);
       }

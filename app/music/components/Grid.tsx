@@ -209,7 +209,7 @@ export const Grid = () => {
                       >
                         {`${item.artist}`}
                         {/* 관리자 페이지일 때만 표시할 부분 */}
-                        {isAdminPage && ` … ${item.score}`}
+                        {/* {isAdminPage && ` … ${item.score}`} */}
                       </span>
                     </Link>
                   </div>

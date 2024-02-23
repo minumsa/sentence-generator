@@ -50,7 +50,8 @@ export const PostAlbumText = ({ albumData }: PostAlbumTextProps) => {
         )}
         {albumData.text.split("\n").map((text, index) => {
           const isLineBreak = text === "";
-          const isParagraphTitle = text.length < 50;
+          const isParagraphTitle =
+            (text.length < 50 && !text.includes(".")) || text.includes("feat.");
           const isHTMLText = text.includes("<div>");
           return isLineBreak ? (
             <p key={index}></p>
