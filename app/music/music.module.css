@@ -99,13 +99,12 @@
   cursor: pointer;
 }
 
-.hamburger-category {
+.desktop-genre-category {
   position: absolute;
-
   display: flex;
   flex-direction: column;
   top: 44.5px;
-  left: -25px;
+  left: -31px;
   height: -moz-fit-content;
   height: fit-content;
   background-color: #000;
@@ -118,13 +117,13 @@
   cursor: default;
 }
 
-.hamburger-category-2 {
+.desktop-introduction-category {
   position: absolute;
 
   display: flex;
   flex-direction: column;
   top: 44.5px;
-  left: 176px;
+  left: 170px;
   height: -moz-fit-content;
   height: fit-content;
   background-color: #000;
@@ -136,24 +135,24 @@
   cursor: default;
 }
 
-.hamburger-content {
+.hamburger-item {
   z-index: 3;
   padding: 7px 0;
   cursor: pointer;
 }
 
-.hamburger-content:hover {
+.hamburger-item:hover {
   text-decoration: underline;
 }
 
-.hamburger-content-title {
+.hamburger-item-title {
   z-index: 3;
   padding: 7px 0;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.hamburger-content-title:hover {
+.hamburger-item-title:hover {
   text-decoration: none;
 }
 
@@ -1385,7 +1384,7 @@
     z-index: 100;
   }
 
-  .hamburger-content {
+  .hamburger-item {
     z-index: 3;
   }
 
@@ -1393,8 +1392,8 @@
     width: 20px;
     height: 1px;
     margin-top: 3px;
-    background-color: #fff;
-    box-shadow: 0 7px 0 #fff, 0 14px 0 #fff;
+    background-color: var(--text-color);
+    box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
   }
 
   .close-icon {
@@ -1457,6 +1456,12 @@
   }
 
   .hamburger-category {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    background-color: #000;
+    width: 150px;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -1465,13 +1470,23 @@
     height: fit-content;
     background-color: #000;
     width: 120px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding-top: 7px;
     padding-bottom: 10px;
     z-index: 1;
   }
 
-  .hamburger-content {
+  .close-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    font-weight: 100;
+    margin-left: 4px;
+    margin-bottom: 6px;
+  }
+
+  .hamburger-item {
     text-align: right;
     padding: 5px 16px;
   }

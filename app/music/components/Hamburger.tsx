@@ -39,7 +39,7 @@ export const Hamburger = ({ pathName }: HamburgerProps) => {
             return (
               <div
                 key={category}
-                className={styles["hamburger-content"]}
+                className={styles["hamburger-item"]}
                 onClick={() => {
                   router.push(`/music/${category}/1`);
                 }}

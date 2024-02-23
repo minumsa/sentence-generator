@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents } from "../modules/data";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface HamburgerProps {
   pathName: string;
@@ -13,10 +13,6 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
   const router = useRouter();
   const isMainPage = Number(pathName) > 0;
   const [showCategory, setShowCategory] = useState<boolean>(false);
-
-  useEffect(() => {
-    setShowCategory(false);
-  }, []);
 
   return (
     <div
@@ -33,21 +29,21 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
         <div>×</div>
       </div>
       {showCategory ? (
-        <div className={styles["hamburger-category"]}>
+        <div className={styles["desktop-genre-category"]}>
           <div
-            className={styles["hamburger-content-title"]}
+            className={styles["hamburger-item-title"]}
             onClick={() => {
               // router.push(`/music/${category}/1`);
             }}
           >
             장르
           </div>
-          {Object.keys(contents).map((category, index) => {
+          {Object.keys(contents).map(category => {
             const isActiveCategory = pathName === category || (isMainPage && category === "");
             return (
               <div
                 key={category}
-                className={styles["hamburger-content"]}
+                className={styles["hamburger-item"]}
                 onClick={() => {
                   router.push(`/music/${category}/1`);
                 }}
@@ -60,18 +56,11 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
         </div>
       ) : null}
       {showCategory && (
-        <div className={styles["hamburger-category-2"]}>
-          <div
-            className={styles["hamburger-content-title"]}
-            onClick={() => {
-              // router.push(`/music/${category}/1`);
-            }}
-          >
-            소개
-          </div>
-          <div className={styles["hamburger-content"]}>카버</div>
-          <div className={styles["hamburger-content"]}>카버차트</div>
-          <div className={styles["hamburger-content"]}>연락처</div>
+        <div className={styles["desktop-introduction-category"]}>
+          <div className={styles["hamburger-item-title"]}>소개</div>
+          <div className={styles["hamburger-item"]}>카버</div>
+          <div className={styles["hamburger-item"]}>카버차트</div>
+          <div className={styles["hamburger-item"]}>연락처</div>
         </div>
       )}
     </div>

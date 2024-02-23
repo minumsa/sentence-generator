@@ -51,7 +51,9 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
       {/* <div style={{ flexGrow: 1 }}></div> */}
       <div
         className={styles["top-magnifying-glass"]}
+        // FIXME: input 클릭하면 사라지는 이슈 해결
         onClick={() => {
+          // setIsSearching(!isSearching);
           setIsSearching(true);
         }}
       >
