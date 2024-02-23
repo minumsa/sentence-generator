@@ -732,9 +732,11 @@
   display: flex;
   flex-direction: column;
   margin: -1px 0 0 -1px;
-  --grid-item-width: calc(100% / 10);
+  /* FIXME: 계산 제대로 해서 수정하기 */
+  --grid-item-width: calc(100% / 8);
   width: var(--grid-item-width);
-  margin: 15px;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .grid-album-container {
@@ -921,6 +923,20 @@
   align-items: center;
   padding-bottom: 10px;
 }
+
+/* TODO: 미디어쿼리로 앨범 개수 변경될 때 크기 변화 최대한 없게 맞추기 */
+@media (max-width: 1260px) {
+  .grid-item-container {
+    --grid-item-width: calc(100% / 7);
+  }
+}
+
+@media (max-width: 1110px) {
+  .grid-item-container {
+    --grid-item-width: calc(100% / 6);
+  }
+}
+
 /* 
 @media (max-width: 1850px) {
   .grid-item-container {
