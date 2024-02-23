@@ -128,6 +128,7 @@ export default function Update({ currentId }: UpdateProps) {
       className={styles["album-container"]}
       style={{
         minWidth: "fit-content",
+        width: "100%",
         flexDirection: "column",
         alignItems: "center",
         paddingTop: "50px",
@@ -245,6 +246,7 @@ export default function Update({ currentId }: UpdateProps) {
               setScore(value);
             }}
             className={styles["rc-rate"]}
+            style={{ fontSize: "45px", marginBottom: "30px" }}
           />
         </div>
         <div className={styles["upload-item-container"]}>
@@ -255,7 +257,12 @@ export default function Update({ currentId }: UpdateProps) {
             onChange={e => {
               setText(e.target.value);
             }}
-            style={{ textAlign: "start" }}
+            style={{
+              padding: "10px 15px",
+              lineHeight: "210%",
+              textAlign: "justify",
+              wordBreak: "keep-all",
+            }}
           />
         </div>
         {data &&

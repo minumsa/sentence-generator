@@ -97,6 +97,7 @@ export default function Upload() {
       className={styles["album-container"]}
       style={{
         minWidth: 0,
+        width: "100%",
         flexDirection: "column",
         alignItems: "center",
         paddingTop: "50px",
@@ -190,6 +191,7 @@ export default function Upload() {
             setScore(value);
           }}
           className={styles["rc-rate"]}
+          style={{ fontSize: "45px", marginBottom: "30px" }}
         />
         <div className={styles["upload-item-title"]}>글</div>
         <textarea

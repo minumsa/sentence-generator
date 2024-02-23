@@ -58,7 +58,7 @@ div::selection,
 span::selection,
 a::selection {
   color: #242424;
-  background-color: #cfcfcf;
+  background-color: var(--text-color);
 }
 
 input:focus {
@@ -94,7 +94,8 @@ input[type="search"]::-webkit-search-cancel-button {
   /* --background-color: #242424; */
   /* --background-color: rgb(30, 30, 30); */
   --background-color: #000;
-  --text-color: #cfcfcf; /* 텍스트 색상 코드 */
+  /* --text-color: #cfcfcf;  */
+  --text-color: #ababab;
   --text-hover-color: #949494;
   --border-color: #000;
   --site-max-width: 1600px;

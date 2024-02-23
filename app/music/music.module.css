@@ -362,6 +362,7 @@
 
 .admin-button-container {
   display: flex;
+  justify-content: flex-end;
   margin-top: 20px;
 }
 
@@ -374,7 +375,6 @@
   width: 70px;
   height: 40px;
   border: 1px solid var(--text-color);
-  margin-right: 20px;
 }
 
 .button:hover {
@@ -909,12 +909,7 @@
 }
 
 .upload-item-container {
-  border-bottom: 1px dashed var(--text-color);
-  margin-bottom: 30px;
-}
-
-.rc-rate {
-  font-size: 45px;
+  border-bottom: 1px dashed var(--border-light-color);
   margin-bottom: 30px;
 }
 
@@ -1011,22 +1006,31 @@
   }
 } */
 
+@media (max-width: 1280px) {
+  .desktop-category {
+    padding: 0 30px;
+  }
+  .album-container {
+    margin: 0 30px;
+  }
+}
+
 @media (max-width: 800px) {
   .album-container {
     width: 100%;
-    min-width: 0;
-    padding: 41px 0;
     align-items: center;
-
+    padding: 70px 30px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    margin: 0;
   }
 
   .album-metadata-container {
     width: 100%;
     height: fit-content;
     margin-bottom: 10px;
-    padding: 0 15px;
+    padding: 0;
     box-sizing: border-box;
     line-height: 200%;
     z-index: 1;
@@ -1037,11 +1041,9 @@
   }
 
   .album-information-container {
-    width: 95%;
     flex-direction: column;
     align-items: center;
     height: fit-content;
-    margin-top: 20px;
     margin-bottom: 20px;
     margin-right: 0;
   }
@@ -1062,6 +1064,10 @@
 }
 
 @media (max-width: 525px) {
+  .album-container {
+    padding: 40px 10px;
+  }
+
   .admin-button-container {
     justify-content: center;
   }
@@ -1130,7 +1136,7 @@
   }
 
   .grid-div {
-    padding-top: 10px;
+    padding-top: 5px;
     margin-top: 0;
   }
 
@@ -1242,6 +1248,7 @@
     height: 100%;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   .mobile-title {
@@ -1427,9 +1434,7 @@
     width: 130px;
     height: 130px;
   }
-}
 
-@media (max-width: 499px) {
   .grid-album-image-container {
     width: 280px;
     height: 280px;
@@ -1440,11 +1445,14 @@
   }
 
   .grid-item-container {
-    --grid-item-width: calc(100vw / 2 - 30px);
+    --grid-item-width: calc(100vw / 2 - 40px);
     width: var(--grid-item-width);
     margin: 15px 0;
+    padding: 0;
   }
+}
 
+@media (max-width: 499px) {
   .last-updated {
     margin: 10px 0 0 0;
   }

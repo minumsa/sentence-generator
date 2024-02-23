@@ -13,7 +13,7 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
   return (
     <div
       className={styles["desktop-category"]}
-      style={{ fontSize: "1.1rem", alignItems: "center" }}
+      style={{ fontSize: "1.2rem", alignItems: "center" }}
     >
       <HamburgerDesktop pathName={pathName} />
       <Link
