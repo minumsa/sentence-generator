@@ -14,7 +14,7 @@ export const AlbumContents = ({ data, perPageCount }: AlbumContentsProps) => {
     const isLastDataPerPage = dataIndex % perPageCount === 0;
 
     return (
-      <div key={index}>
+      <div key={index} style={{ display: "flex", width: "100%" }}>
         <Album data={item} />
         {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
       </div>

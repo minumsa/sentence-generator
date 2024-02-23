@@ -87,7 +87,7 @@
   }
 }
 
-.hamburger-container2 {
+.desktop-hamburger-container {
   position: relative;
   display: flex;
   justify-content: center;
@@ -95,8 +95,8 @@
   width: 24px;
   margin-right: 2px;
   margin-top: 4px;
-  cursor: pointer;
   z-index: 100;
+  cursor: pointer;
 }
 
 .hamburger-category {
@@ -109,17 +109,52 @@
   height: -moz-fit-content;
   height: fit-content;
   background-color: #000;
-  width: 120px;
+  width: 150px;
   font-size: 1.1rem;
-  padding: 5px 20px 15px 30px;
+  padding: 5px 20px 20px 30px;
   z-index: 1;
   border-left: 1px solid var(--border-light-color);
   border-bottom: 1px solid var(--border-light-color);
+  cursor: default;
+}
+
+.hamburger-category-2 {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  top: 44.5px;
+  left: 176px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #000;
+  width: 150px;
+  font-size: 1.1rem;
+  padding: 5px 20px 20px 30px;
+  z-index: 1;
+  border-bottom: 1px solid var(--border-light-color);
+  cursor: default;
 }
 
 .hamburger-content {
   z-index: 3;
   padding: 7px 0;
+  cursor: pointer;
+}
+
+.hamburger-content:hover {
+  text-decoration: underline;
+}
+
+.hamburger-content-title {
+  z-index: 3;
+  padding: 7px 0;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.hamburger-content-title:hover {
+  text-decoration: none;
 }
 
 .hamburger-icon {
@@ -297,6 +332,7 @@
   flex-direction: row;
   padding: 50px 0;
   margin: 0 15px;
+
   /* padding: 45px 100px 80px 100px; */
 }
 
@@ -847,6 +883,24 @@
   cursor: pointer;
   text-decoration: none;
   color: var(--text-color);
+
+  text-align: start;
+  word-break: break-all;
+
+  width: 100%;
+  height: 42px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+}
+
+.artist-page-title {
+  font-weight: 600;
+  font-size: 2.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-color);
 }
 
 .category-meta {
@@ -921,6 +975,7 @@
   display: flex;
   align-items: center;
   margin-left: 10px;
+  margin-top: 2px;
 }
 
 .star-color {
@@ -957,6 +1012,10 @@
 @media (max-width: 1260px) {
   .grid-item-container {
     --grid-item-width: calc(100% / 7);
+  }
+
+  .category-meta-title {
+    font-size: 1.8rem;
   }
 }
 
@@ -1098,6 +1157,27 @@
 }
 
 @media (max-width: 525px) {
+  .album-information-container {
+    margin-bottom: 10px;
+  }
+
+  .category-meta-title {
+    font-size: 2.2rem;
+    height: fit-content;
+  }
+
+  .post-album-title {
+    padding-bottom: 0;
+  }
+
+  /* .category-meta-title {
+    display: flex;
+    justify-content: center;
+    font-size: 1.4rem;
+    padding-bottom: 5px;
+    text-align: center;
+  } */
+
   .album-container {
     padding: 40px 10px;
   }

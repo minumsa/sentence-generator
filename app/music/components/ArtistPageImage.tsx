@@ -18,7 +18,7 @@ export const ArtistPageImage = ({ data }: ArtistPageImageProps) => {
           />
         </div>
         <div
-          className={styles["category-meta-title"]}
+          className={styles["artist-page-title"]}
           style={{ marginTop: "10px", cursor: "default" }}
         >
           {data[0].artist}

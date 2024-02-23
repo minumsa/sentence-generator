@@ -62,7 +62,7 @@ export const Album = ({ data }: AlbumProps) => {
                           href={
                             isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`
                           }
-                          style={{ textDecoration: "none" }}
+                          style={{ textDecoration: "none", display: "flex" }}
                         >
                           <div
                             className={styles["category-meta-title"]}

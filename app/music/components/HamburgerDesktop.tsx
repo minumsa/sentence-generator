@@ -20,7 +20,7 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
 
   return (
     <div
-      className={styles["hamburger-container2"]}
+      className={styles["desktop-hamburger-container"]}
       onClick={() => {
         setShowCategory(!showCategory);
       }}
@@ -35,11 +35,10 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
       {showCategory ? (
         <div className={styles["hamburger-category"]}>
           <div
-            className={styles["hamburger-content"]}
+            className={styles["hamburger-content-title"]}
             onClick={() => {
               // router.push(`/music/${category}/1`);
             }}
-            style={{ fontWeight: 600, marginBottom: "10px" }}
           >
             장르
           </div>
@@ -60,6 +59,21 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
           })}
         </div>
       ) : null}
+      {showCategory && (
+        <div className={styles["hamburger-category-2"]}>
+          <div
+            className={styles["hamburger-content-title"]}
+            onClick={() => {
+              // router.push(`/music/${category}/1`);
+            }}
+          >
+            소개
+          </div>
+          <div className={styles["hamburger-content"]}>카버</div>
+          <div className={styles["hamburger-content"]}>카버차트</div>
+          <div className={styles["hamburger-content"]}>연락처</div>
+        </div>
+      )}
     </div>
   );
 };
