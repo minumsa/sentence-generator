@@ -1440,9 +1440,9 @@
   }
 
   .grid-item-container {
-    --grid-item-width: calc(100vw / 2 - 40px);
+    --grid-item-width: calc(100vw / 2 - 30px);
     width: var(--grid-item-width);
-    margin: 20px 0;
+    margin: 15px 0;
   }
 
   .last-updated {
