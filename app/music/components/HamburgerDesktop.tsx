@@ -34,6 +34,15 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
       </div>
       {showCategory ? (
         <div className={styles["hamburger-category"]}>
+          <div
+            className={styles["hamburger-content"]}
+            onClick={() => {
+              // router.push(`/music/${category}/1`);
+            }}
+            style={{ fontWeight: 600, marginBottom: "10px" }}
+          >
+            장르
+          </div>
           {Object.keys(contents).map((category, index) => {
             const isActiveCategory = pathName === category || (isMainPage && category === "");
             return (

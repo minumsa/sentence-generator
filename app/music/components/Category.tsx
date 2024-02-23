@@ -3,6 +3,8 @@ import { activeStyle, contents, isAdminPage } from "../modules/data";
 import Link from "next/link";
 import { Hamburger } from "./Hamburger";
 import { HamburgerDesktop } from "./HamburgerDesktop";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface CategoryProps {
   pathName: string;
@@ -10,6 +12,21 @@ interface CategoryProps {
 }
 
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
+  const router = useRouter();
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [keyword, setKeyword] = useState("");
+  async function handleSearch() {
+    isAdminPage(pathName)
+      ? router.push(`/music/admin/search/${keyword}/1`)
+      : router.push(`/music/search/${keyword}/1`);
+  }
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div
       className={styles["desktop-category"]}
@@ -19,7 +36,6 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
       <Link
         className={`${styles["category"]} ${styles["site-title"]}`}
         href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
-
         // onClick={() => {
         //   router.push(isAdminPage(fullPathName) ? `/music/admin` : `/music`);
         // }}
@@ -35,10 +51,30 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
       {/* <div style={{ flexGrow: 1 }}></div> */}
       <div
         className={styles["top-magnifying-glass"]}
-        // onClick={() => {
-        //   setIsSearching(!isSearching);
-        // }}
-      ></div>
+        onClick={() => {
+          setIsSearching(true);
+        }}
+      >
+        {isSearching && (
+          <div className={styles["top-search-container"]}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <input
+                type="search"
+                className={styles["top-search-input"]}
+                placeholder="검색"
+                onChange={e => {
+                  setKeyword(e.target.value);
+                }}
+                onKeyDown={handleEnter}
+              />
+              {/* <div className={styles["top-search-button"]}>
+              <div>검색</div>
+            </div> */}
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* {Object.keys(contents).map(category => {
         const isActiveCategory = pathNameToArray.includes(category);
 
