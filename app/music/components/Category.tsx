@@ -1,6 +1,8 @@
 import styles from "../music.module.css";
 import { activeStyle, contents, isAdminPage } from "../modules/data";
 import Link from "next/link";
+import { Hamburger } from "./Hamburger";
+import { HamburgerDesktop } from "./HamburgerDesktop";
 
 interface CategoryProps {
   pathName: string;
@@ -8,30 +10,29 @@ interface CategoryProps {
 }
 
 export const Category = ({ pathName, fullPathName }: CategoryProps) => {
-  const pathNameToArray = pathName.split("/");
-
-  console.log(
-    Object.keys(contents).map(x => {
-      console.log(x);
-    })
-  );
-
   return (
-    <div className={styles["desktop-category"]} style={{ fontSize: "1rem" }}>
+    <div
+      className={styles["desktop-category"]}
+      style={{ fontSize: "1.1rem", alignItems: "center" }}
+    >
+      <HamburgerDesktop pathName={pathName} />
       <Link
         className={`${styles["category"]} ${styles["site-title"]}`}
         href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
+
         // onClick={() => {
         //   router.push(isAdminPage(fullPathName) ? `/music/admin` : `/music`);
         // }}
-        style={pathName === "/music/admin" || pathName === "/music" ? activeStyle : {}}
+        // style={pathName === "/music/admin" || pathName === "/music" ? activeStyle : {}}
       >
         {/* divdivdiv */}
-        DIVDIVDIV
+        카버차트
       </Link>
-      <div className={styles["category"]}>GENRE</div>
-      <div className={styles["category"]}>BOARD</div>
-      <div style={{ flexGrow: 1 }}></div>
+      {/* <div className={styles["category"]} style={{ margin: "0 50px" }}>
+        GENRE
+      </div>
+      <div className={styles["category"]}>BOARD</div> */}
+      {/* <div style={{ flexGrow: 1 }}></div> */}
       <div
         className={styles["top-magnifying-glass"]}
         // onClick={() => {

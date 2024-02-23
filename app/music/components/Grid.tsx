@@ -100,8 +100,9 @@ export const Grid = () => {
             return (
               <div
                 data-aos="fade-up"
-                data-aos-duration="1000"
-                data-aos-offset={isMobile ? 50 : 130}
+                data-aos-duration={800}
+                // data-aos-easing="linear"
+                data-aos-offset={isMobile ? 50 : 90}
                 data-aos-once="true"
                 key={index}
                 className={`${styles["grid-item-container"]}`}
@@ -159,7 +160,7 @@ export const Grid = () => {
                     >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        style={{ fontWeight: "500" }}
+                        // style={{ fontWeight: "500" }}
                       >
                         {`${item.album}`}
                       </span>
@@ -178,7 +179,7 @@ export const Grid = () => {
                     >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        style={{ color: "#a7a7a7" }}
+                        // style={{ color: "#a7a7a7" }}
                       >
                         {`${item.artist}`}
                         {/* 관리자 페이지일 때만 표시할 부분 */}

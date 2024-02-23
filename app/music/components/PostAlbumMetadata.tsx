@@ -17,6 +17,10 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const pathName = usePathname();
   const hasVideo = albumData.videos[0]?.title.length > 0;
+  const releaseDate = albumData.releaseDate;
+  const dateObj = new Date(releaseDate);
+  const formattedDate =
+    dateObj.getFullYear() + "년 " + (dateObj.getMonth() + 1) + "월 " + dateObj.getDate() + "일";
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -71,7 +75,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         </div>
         <div className={styles["post-date"]}>발매일</div>
         <div>
-          <span className={styles["black-masking"]}>{albumData.releaseDate}</span>
+          <span className={styles["black-masking"]}>{formattedDate}</span>
         </div>
         <div className={styles["post-date"]}>러닝타임</div>
         <div>

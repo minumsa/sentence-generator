@@ -58,14 +58,14 @@ export const PostAlbumText = ({ albumData }: PostAlbumTextProps) => {
             <p
               key={index}
               className={styles["paragraph"]}
-              style={isParagraphTitle ? { fontWeight: 600, marginBottom: "10px" } : undefined}
+              style={isParagraphTitle ? { fontWeight: 600, marginTop: "40px" } : undefined}
             >
               {text}
             </p>
           );
         })}
         <div className={styles["paragraph-division-line"]}></div>
-        <div className={styles["post-date"]} style={{ marginBottom: "10px" }}>
+        <div className={styles["post-date"]} style={{ marginBottom: "5px" }}>
           작성일
         </div>
         <div>{formatDate(albumData.uploadDate.toString())}</div>
