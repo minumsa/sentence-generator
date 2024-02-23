@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
 import { usePathname, useRouter } from "next/navigation";
@@ -76,6 +76,32 @@ export const Grid = () => {
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
+
+  const [divWidth, setDivWidth] = useState(0);
+  const myDivRef = useRef<any>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // 특정 div의 너비를 가져오기 위한 작업
+      if (myDivRef.current) {
+        const width = myDivRef.current.offsetWidth;
+        setDivWidth(width);
+        console.log(divWidth);
+      }
+    };
+
+    handleResize(); // 초기 렌더링 시 한 번 호출하여 너비를 설정합니다.
+
+    // 컴포넌트가 마운트될 때와 창 크기가 변경될 때마다 resize 이벤트 리스너 추가
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 resize 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+
+    // myDivRef.current.offsetWidth
+  }, []); // useEffect의 두 번째 매개변수로 빈 배열을 전달하여 한 번만 실행되도록 설정
 
   return (
     <>
