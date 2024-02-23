@@ -86,7 +86,6 @@ export const Grid = () => {
       if (myDivRef.current) {
         const width = myDivRef.current.offsetWidth;
         setDivWidth(width);
-        console.log(divWidth);
       }
     };
 

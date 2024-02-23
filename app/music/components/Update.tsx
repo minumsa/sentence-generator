@@ -261,7 +261,7 @@ export default function Update({ currentId }: UpdateProps) {
               padding: "10px 15px",
               lineHeight: "210%",
               textAlign: "justify",
-              wordBreak: "keep-all",
+              wordBreak: "normal",
             }}
           />
         </div>
