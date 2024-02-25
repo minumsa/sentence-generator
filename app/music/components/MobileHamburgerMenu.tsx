@@ -9,7 +9,7 @@ interface HamburgerProps {
 
 // FIXME: 컴포넌트화 시킬 수 있는 부분 전부 작업
 // FIXME: 컴포넌트화 시키면서 안 쓰게 된 코드들 모두 삭제
-export const Hamburger = ({ pathName }: HamburgerProps) => {
+export const MobileHamburgerMenu = ({ pathName }: HamburgerProps) => {
   const router = useRouter();
   const isMainPage = Number(pathName) > 0;
   const [showCategory, setShowCategory] = useState<boolean>(false);

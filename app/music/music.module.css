@@ -68,8 +68,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  /* padding-left: 250px; */
-  /* font-family: "Lato", "Noto Sans KR", sans-serif; */
   font-family: "Lato", "Pretendard Variable", Pretendard;
   font-weight: 400;
   color: var(--text-color);
@@ -331,13 +329,24 @@
   flex-direction: row;
   padding: 50px 0;
   margin: 0 15px;
-
-  /* padding: 45px 100px 80px 100px; */
 }
 
 .album-metadata-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
   line-height: 210%;
-  /* word-break: break-word; */
+  word-break: normal;
+  text-align: justify;
+  width: 100%;
+  max-width: 1050px;
+}
+
+.post-content-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  line-height: 210%;
   word-break: normal;
   text-align: justify;
   width: 100%;
@@ -383,7 +392,6 @@
   font-size: 1rem;
   width: 200px;
   height: 30px;
-  /* background-color: #fff; */
   background-color: #272727;
   box-shadow: none;
   border: 1px solid #454545;
@@ -406,7 +414,6 @@
   position: relative;
   width: 20px;
   height: 24.5px;
-  /* padding: 15px 10px 10px 10px; */
   background-image: url(/music/magnifying-glass.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -426,7 +433,6 @@
   justify-content: center;
   align-items: center;
   border: 1px solid var(--border-color);
-  /* box-shadow: 0 0 0 1px #000 inset; */
 }
 
 .admin-button-container {
@@ -811,7 +817,6 @@
 .grid-album-container {
   width: 100%;
   box-sizing: border-box;
-  /* padding: 20px 20px 0 20px; */
   z-index: 500;
 }
 
@@ -841,7 +846,6 @@
 .grid-album-title {
   font-size: 0.95rem;
   font-weight: 500;
-  /* padding: 0 20px 20px 20px; */
   /* FIXME: 향후에 바꿀 수 있음 */
   margin-top: 1px;
   z-index: 100;
@@ -1024,80 +1028,6 @@
   }
 }
 
-/* 
-@media (max-width: 1850px) {
-  .grid-item-container {
-    --width-large: calc(100% / 9 - 1px);
-    width: var(--width-large);
-  }
-}
-
-@media (max-width: 1700px) {
-  .grid-item-container {
-    --width-large: calc(100% / 8 - 1px);
-    width: var(--width-large);
-  }
-}
-
-@media (max-width: 1550px) {
-  .grid-item-container {
-    box-sizing: border-box;
-    padding: 15px 15px 0 15px;
-    --width-large: calc(100% / 7 - 1.5px);
-    width: var(--width-large);
-  }
-}
-
-@media (max-width: 1400px) {
-  .grid-item-container {
-    --width-large: calc(100% / 6 - 2px);
-    width: var(--width-large);
-  }
-
-  .close-button {
-    display: none;
-  }
-}
-
-@media (max-width: 1200px) {
-  .grid-item-container {
-    --width-large: calc(100% / 5 - 2.5px);
-    width: var(--width-large);
-  }
-
-  .artist-page-image-container {
-    display: none;
-  }
-}
-
-@media (max-width: 1050px) {
-  .grid-item-container {
-    --width-large: calc(100% / 4 - 3px);
-    width: var(--width-large);
-  }
-}
-
-@media (max-width: 950px) {
-  .grid-item-container {
-    --width-large: calc(100% / 3 - 4.5px);
-    width: var(--width-large);
-  }
-}
-
-@media (max-width: 800px) {
-  .grid-item-container {
-    --width-large: calc(100% / 2 - 7px);
-    width: var(--width-large);
-  }
-}
-
-@media (max-width: 650px) {
-  .grid-item-container {
-    --width-large: 100%;
-    width: calc(var(--width-large));
-  }
-} */
-
 @media (max-width: 1280px) {
   .desktop-category {
     padding: 0 30px;
@@ -1119,13 +1049,14 @@
   }
 
   .album-metadata-container {
-    width: 100%;
     height: fit-content;
-    margin-bottom: 10px;
     padding: 0;
     box-sizing: border-box;
     line-height: 200%;
-    z-index: 1;
+  }
+
+  .post-content-container {
+    line-height: 200%;
   }
 
   .album-metadata {
@@ -1168,14 +1099,6 @@
   .post-album-title {
     padding-bottom: 0;
   }
-
-  /* .category-meta-title {
-    display: flex;
-    justify-content: center;
-    font-size: 1.4rem;
-    padding-bottom: 5px;
-    text-align: center;
-  } */
 
   .album-container {
     padding: 40px 15px;

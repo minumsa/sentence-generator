@@ -1,15 +1,11 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { activeStyle, contents, isAdminPage } from "../modules/data";
+import { contents, isAdminPage } from "../modules/data";
 import { useState } from "react";
 
-interface HamburgerProps {
-  pathName: string;
-}
-
-export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
+export const DesktopHamburgerMenu = () => {
+  const pathName = usePathname();
   const router = useRouter();
-  const isMainPage = Number(pathName) > 0;
   const [showCategory, setShowCategory] = useState<boolean>(false);
 
   return (
@@ -30,7 +26,6 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
         <div className={styles["desktop-genre-category"]}>
           <div className={styles["hamburger-item-title"]}>장르</div>
           {Object.keys(contents).map(category => {
-            const isActiveCategory = pathName === category || (isMainPage && category === "");
             return (
               <div
                 key={category}
@@ -40,7 +35,6 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
                     ? router.push(`/music/admin/${category}/1`)
                     : router.push(`/music/${category}/1`);
                 }}
-                style={isActiveCategory ? activeStyle : {}}
               >
                 {contents[category]}
               </div>

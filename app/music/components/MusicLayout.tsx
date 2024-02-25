@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Category } from "./Category";
-import { Hamburger } from "./Hamburger";
+import { MobileHamburgerMenu } from "./MobileHamburgerMenu";
 import { MobileTitle } from "./MobileTitle";
 import styles from "../music.module.css";
 import { isUploadPage } from "../modules/data";
@@ -18,7 +18,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
         {/* <TopNav isVisible={isUploadPage(pathName) || isPostPage(pathName) ? false : true} /> */}
         <div className={styles["category-container"]}>
           <MobileTitle />
-          <Hamburger pathName={pathName} />
+          <MobileHamburgerMenu pathName={pathName} />
           <Category pathName={pathName} fullPathName={fullPathName} />
         </div>
         <div
