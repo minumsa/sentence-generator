@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAtomValue } from "jotai";
 import React from "react";
 import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
@@ -11,6 +11,7 @@ import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
+import { TagDisplay } from "./TagDisplay";
 
 export const Grid = () => {
   const fullPathName = usePathname();
@@ -110,6 +111,7 @@ export const Grid = () => {
         isLoading={isLoading}
         isScrolling={isScrolling}
       >
+        <TagDisplay />
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {
             // FIXME: 코드 전체적으로 이런 식으로 정리하기

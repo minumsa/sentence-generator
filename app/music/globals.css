@@ -110,3 +110,9 @@ body {
   overflow-y: auto;
   background-color: var(--background-color);
 }
+
+@media (max-width: 525px) {
+  :root {
+    --text-color: #ededed;
+  }
+}
