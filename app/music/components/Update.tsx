@@ -260,7 +260,7 @@ export default function Update({ currentId }: UpdateProps) {
                   <a
                     href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
                     target="_blank"
-                    style={{ color: "#cfcfcf" }}
+                    className={styles["block-title"]}
                   >
                     <div>{`영상 제목 ${videoNumber}`}</div>
                   </a>
@@ -354,7 +354,7 @@ export default function Update({ currentId }: UpdateProps) {
           style={{ width: "208px" }}
         />
       </div>
-      <div style={{ display: "flex", justifyContent: "center", padding: "30px 0" }}>
+      <div className={styles["submit-container"]}>
         <div
           className={`${styles["button"]} ${styles["submit"]}`}
           onClick={() => {
