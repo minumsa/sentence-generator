@@ -1,39 +1,32 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchDataById } from "../modules/api";
 import { AlbumInfo } from "../modules/data";
-import { PostCloseButton } from "./PostCloseButton";
 import { PostAlbum } from "./PostAlbum";
 import { Loading } from "./Loading";
-import { TopNav } from "./TopNav";
 
 interface PostProps {
-  currentId: string;
+  albumId: string;
 }
 
-export const Post = ({ currentId }: PostProps) => {
+export const Post = ({ albumId }: PostProps) => {
   const [albumData, setAlbumData] = useState<AlbumInfo | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
-      const result = await fetchDataById(currentId);
+      const result = await fetchDataById(albumId);
       setAlbumData(result);
       setIsLoading(false);
     }
     getData();
-  }, [currentId]);
+  }, [albumId]);
 
   return (
     <>
       {isLoading && <Loading isEmpty={false} />}
-      {albumData && (
-        <>
-          <PostCloseButton albumData={albumData} />
-          <PostAlbum albumData={albumData} />
-        </>
-      )}
+      {albumData && <PostAlbum albumData={albumData} />}
     </>
   );
 };

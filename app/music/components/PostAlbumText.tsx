@@ -6,11 +6,11 @@ import { usePathname } from "next/navigation";
 import { useRef } from "react";
 // import DOMPurify from "isomorphic-dompurify";
 
-interface PostAlbumTextProps {
+interface PostTextProps {
   albumData: AlbumInfo;
 }
 
-export const PostAlbumText = ({ albumData }: PostAlbumTextProps) => {
+export const PostText = ({ albumData }: PostTextProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const pathName = usePathname();
   // const sanitizer = DOMPurify.sanitize;
@@ -51,7 +51,8 @@ export const PostAlbumText = ({ albumData }: PostAlbumTextProps) => {
         {albumData.text.split("\n").map((text, index) => {
           const isLineBreak = text === "";
           const isParagraphTitle =
-            (text.length < 50 && !text.includes(".")) || text.includes("feat.");
+            (text.length < 50 && !text.includes(".") && !text.includes("[")) ||
+            text.includes("feat.");
           const isHTMLText = text.includes("<div>");
           return isLineBreak ? (
             <p key={index}></p>
@@ -66,9 +67,7 @@ export const PostAlbumText = ({ albumData }: PostAlbumTextProps) => {
           );
         })}
         <div className={styles["paragraph-division-line"]}></div>
-        <div className={styles["post-date"]} style={{ marginBottom: "5px" }}>
-          작성일
-        </div>
+        <div className={styles["post-date"]}>작성일</div>
         <div>{formatDate(albumData.uploadDate.toString())}</div>
       </div>
     </div>

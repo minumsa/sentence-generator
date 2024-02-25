@@ -8,7 +8,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <MusicLayout>
-      <Post currentId={currentId} />
+      <Post albumId={currentId} />
     </MusicLayout>
   );
 }
