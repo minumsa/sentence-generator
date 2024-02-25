@@ -1,5 +1,5 @@
 import { AlbumInfo } from "../modules/data";
-import { Album } from "./Album";
+import { AlbumPanel } from "./Album";
 import styles from "../music.module.css";
 
 interface AlbumContentsProps {
@@ -15,7 +15,7 @@ export const AlbumContents = ({ data, perPageCount }: AlbumContentsProps) => {
 
     return (
       <div key={index}>
-        <Album data={item} />
+        <AlbumPanel albumData={item} />
         {isLastDataPerPage || isLastData ? undefined : <div className={styles["divider"]} />}
       </div>
     );

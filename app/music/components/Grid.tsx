@@ -13,7 +13,6 @@ import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
 
 export const Grid = () => {
-  const router = useRouter();
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { AlbumInfo, CriteriaType, MethodType, criteriaAtom, methodAtom } from "../modules/data";
+import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
 import { fetchData } from "../modules/api";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
-import { TopNav } from "./TopNav";
 
 interface PageProps {
   pathName: string;

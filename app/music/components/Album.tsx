@@ -9,11 +9,11 @@ import { EditButton } from "./EditButton";
 import Link from "next/link";
 
 interface AlbumProps {
-  data: AlbumInfo;
+  albumData: AlbumInfo;
 }
 
-export const Album = ({ data }: AlbumProps) => {
-  const albumDuration = formatDuration(data.duration);
+export const AlbumPanel = ({ albumData }: AlbumProps) => {
+  const albumDuration = formatDuration(albumData.duration);
   const divRef = useRef<HTMLDivElement>(null);
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
@@ -23,19 +23,24 @@ export const Album = ({ data }: AlbumProps) => {
       <Link
         className={styles["album-information-container"]}
         style={{ textDecoration: "none" }}
-        href={isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`}
+        href={isAdminPage ? `/music/admin/post/${albumData.id}` : `/music/post/${albumData.id}`}
       >
-        <img className={styles["album-art"]} src={data.imgUrl} alt={data.album} loading="lazy" />
+        <img
+          className={styles["album-art"]}
+          src={albumData.imgUrl}
+          alt={albumData.album}
+          loading="lazy"
+        />
       </Link>
-      <div className={styles["album-metadata-container"]}>
+      <div className={styles["album-panel-metadata-container"]}>
         {/* FIXME: 안전하게 바꾸기 */}
-        {data.text.split("\n").map((text, index) => {
+        {albumData.text.split("\n").map((text, index) => {
           const longTextStandard = isMobile ? 100 : 180;
           const isFirstParagraph = index === 0;
           const isFirstParagraphInHTML = text.match(/<p class="music_paragraph__z0WKJ">(.*?)<\/p>/);
           const isLongText = isFirstParagraphInHTML
             ? isFirstParagraphInHTML[1].length > longTextStandard
-            : data.text.length > longTextStandard;
+            : albumData.text.length > longTextStandard;
 
           // 카테고리 페이지일 때 표시할 앨범 메타데이터
           if (isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : isFirstParagraph)
@@ -44,14 +49,18 @@ export const Album = ({ data }: AlbumProps) => {
                 <div className={styles["paragraph-container"]}>
                   <div className={styles["post-album-title"]}>
                     <Link
-                      href={isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`}
+                      href={
+                        isAdminPage
+                          ? `/music/admin/post/${albumData.id}`
+                          : `/music/post/${albumData.id}`
+                      }
                       style={{ textDecoration: "none", display: "flex" }}
                     >
                       <div
                         className={styles["category-meta-title"]}
                         style={{ padding: isAdminPage ? 0 : undefined }}
                       >
-                        {data.album}
+                        {albumData.album}
                       </div>
                     </Link>
                     <div className={styles["star-container"]}>
@@ -60,9 +69,9 @@ export const Album = ({ data }: AlbumProps) => {
                         src="/cinephile/star-color.webp"
                         alt="star-color"
                         style={
-                          data.score
+                          albumData.score
                             ? {
-                                clipPath: `inset(0 ${100 - data.score * 20}% 0 0)`,
+                                clipPath: `inset(0 ${100 - albumData.score * 20}% 0 0)`,
                               }
                             : undefined
                         }
@@ -81,12 +90,12 @@ export const Album = ({ data }: AlbumProps) => {
                       className={styles["category-meta-image-container"]}
                       href={
                         isAdminPage
-                          ? `/music/admin/artist/${data.artistId}/1`
-                          : `/music/artist/${data.artistId}/1`
+                          ? `/music/admin/artist/${albumData.artistId}/1`
+                          : `/music/artist/${albumData.artistId}/1`
                       }
                     >
                       <img
-                        src={data.artistImgUrl}
+                        src={albumData.artistImgUrl}
                         alt="test"
                         className={styles["category-meta-image"]}
                         loading="lazy"
@@ -97,14 +106,16 @@ export const Album = ({ data }: AlbumProps) => {
                         style={{ textDecoration: "none", color: "#cfcfcf" }}
                         href={
                           isAdminPage
-                            ? `/music/admin/artist/${data.artistId}/1`
-                            : `/music/artist/${data.artistId}/1`
+                            ? `/music/admin/artist/${albumData.artistId}/1`
+                            : `/music/artist/${albumData.artistId}/1`
                         }
                       >
-                        {data.artist}
+                        {albumData.artist}
                       </Link>
                       <span>
-                        {` • ${data.releaseDate.slice(0, 4)} • ${data.tracks}곡, ${albumDuration}`}
+                        {` • ${albumData.releaseDate.slice(0, 4)} • ${
+                          albumData.tracks
+                        }곡, ${albumDuration}`}
                       </span>
                     </div>
                   </div>
@@ -119,7 +130,11 @@ export const Album = ({ data }: AlbumProps) => {
                   {isLongText && (
                     <Link
                       style={{ textDecoration: "none" }}
-                      href={isAdminPage ? `/music/admin/post/${data.id}` : `/music/post/${data.id}`}
+                      href={
+                        isAdminPage
+                          ? `/music/admin/post/${albumData.id}`
+                          : `/music/post/${albumData.id}`
+                      }
                     >
                       <div className={styles["more-button"]}>더 보기</div>
                     </Link>
@@ -128,8 +143,8 @@ export const Album = ({ data }: AlbumProps) => {
                 {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                 {isAdminPage && (
                   <div className={styles["admin-button-container"]}>
-                    <EditButton data={data} />
-                    <DeleteButton data={data} />
+                    <EditButton data={albumData} />
+                    <DeleteButton data={albumData} />
                   </div>
                 )}
               </div>

@@ -8,9 +8,9 @@ export const Snow = () => {
     <NoSSR>
       <div className={styles["snowfall-container"]}>
         <Snowfall
-          snowflakeCount={isMobile ? 90 : 110}
-          speed={isMobile ? [0, 2] : [0, 2.5]}
-          radius={isMobile ? [0.1, 1.2] : undefined}
+          snowflakeCount={100}
+          speed={[0, 2.5]}
+          // radius={isMobile ? [0.1, 1.2] : undefined}
         />
       </div>
     </NoSSR>

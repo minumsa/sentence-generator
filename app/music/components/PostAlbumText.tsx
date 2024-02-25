@@ -37,39 +37,38 @@ export const PostText = ({ albumData }: PostTextProps) => {
   };
 
   return (
-    <div style={{ display: "flex", width: "100%", alignItems: undefined }}>
-      <div className={styles["post-content-container"]}>
-        {/* FIXME: 안전하게 바꾸기 */}
-        {albumData.text.includes("div") && (
-          <div
-            style={{ width: "100%" }}
-            // dangerouslySetInnerHTML={{
-            //   __html: sanitizer(data.text),
-            // }}
-          />
-        )}
-        {albumData.text.split("\n").map((text, index) => {
-          const isLineBreak = text === "";
-          const isParagraphTitle =
-            (text.length < 50 && !text.includes(".") && !text.includes("[")) ||
-            text.includes("feat.");
-          const isHTMLText = text.includes("<div>");
-          return isLineBreak ? (
-            <p key={index}></p>
-          ) : isHTMLText ? undefined : (
-            <p
-              key={index}
-              className={styles["paragraph"]}
-              style={isParagraphTitle ? { fontWeight: 600, marginTop: "40px" } : undefined}
-            >
-              {text}
-            </p>
-          );
-        })}
-        <div className={styles["paragraph-division-line"]}></div>
-        <div className={styles["post-date"]}>작성일</div>
-        <div>{formatDate(albumData.uploadDate.toString())}</div>
-      </div>
+    <div className={styles["post-content-container"]}>
+      {/* FIXME: 안전하게 바꾸기 */}
+      {albumData.text.includes("div") && (
+        <div
+          style={{ width: "100%" }}
+          // dangerouslySetInnerHTML={{
+          //   __html: sanitizer(data.text),
+          // }}
+        />
+      )}
+      {albumData.text.split("\n").map((text, index) => {
+        const isLineBreak = text === "";
+        const isParagraphTitle =
+          (text.length < 50 && !text.includes(".") && !text.includes("[")) ||
+          text.includes("feat.");
+        const isHTMLText = text.includes("<div>");
+
+        return isLineBreak ? (
+          <p key={index}></p>
+        ) : isHTMLText ? undefined : (
+          <p
+            key={index}
+            className={styles["paragraph"]}
+            style={isParagraphTitle ? { fontWeight: 600, marginTop: "40px" } : undefined}
+          >
+            {text}
+          </p>
+        );
+      })}
+      <div className={styles["post-divider"]}></div>
+      <div className={styles["post-date"]}>작성일</div>
+      <div>{formatDate(albumData.uploadDate.toString())}</div>
     </div>
   );
 };
