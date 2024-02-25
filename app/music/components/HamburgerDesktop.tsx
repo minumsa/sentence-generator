@@ -1,14 +1,12 @@
 import { useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { activeStyle, contents } from "../modules/data";
+import { activeStyle, contents, isAdminPage } from "../modules/data";
 import { useState } from "react";
 
 interface HamburgerProps {
   pathName: string;
 }
 
-// FIXME: 컴포넌트화 시킬 수 있는 부분 전부 작업
-// FIXME: 컴포넌트화 시키면서 안 쓰게 된 코드들 모두 삭제
 export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
   const router = useRouter();
   const isMainPage = Number(pathName) > 0;
@@ -30,14 +28,7 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
       </div>
       {showCategory ? (
         <div className={styles["desktop-genre-category"]}>
-          <div
-            className={styles["hamburger-item-title"]}
-            onClick={() => {
-              // router.push(`/music/${category}/1`);
-            }}
-          >
-            장르
-          </div>
+          <div className={styles["hamburger-item-title"]}>장르</div>
           {Object.keys(contents).map(category => {
             const isActiveCategory = pathName === category || (isMainPage && category === "");
             return (
@@ -45,7 +36,9 @@ export const HamburgerDesktop = ({ pathName }: HamburgerProps) => {
                 key={category}
                 className={styles["hamburger-item"]}
                 onClick={() => {
-                  router.push(`/music/${category}/1`);
+                  isAdminPage(pathName)
+                    ? router.push(`/music/admin/${category}/1`)
+                    : router.push(`/music/${category}/1`);
                 }}
                 style={isActiveCategory ? activeStyle : {}}
               >
