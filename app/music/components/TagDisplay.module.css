@@ -23,6 +23,7 @@
 @media (max-width: 525px) {
   .container {
     /* display: inline-block; */
+
     display: flex;
     flex-wrap: wrap;
     width: 100%;
