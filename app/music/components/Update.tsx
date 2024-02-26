@@ -49,6 +49,8 @@ export default function Update({ currentId }: UpdateProps) {
   const [tagNames, setTagNames] = useState<string[]>([]);
   const [showTagListModal, setShowTagListModal] = useState(false);
 
+  console.log(tagNames);
+
   // 수정 API
   const handleUpdate = async () => {
     const newSpotifyAlbumData = await fetchSpotify({
@@ -149,6 +151,11 @@ export default function Update({ currentId }: UpdateProps) {
       "#롤링스톤즈 500대 명반 👅",
     ]);
   }, []);
+
+  const handleTagItemDelete = (deleteIndex: number) => {
+    setTagNames(prevState => prevState.filter((_, index) => index !== deleteIndex));
+    tagNames.splice(deleteIndex, 1);
+  };
 
   return (
     <div className={styles["container"]}>
@@ -370,15 +377,22 @@ export default function Update({ currentId }: UpdateProps) {
         className={styles["block-container"]}
         style={{ cursor: "pointer" }}
         onClick={() => {
-          setShowTagListModal(!showTagListModal);
+          // setShowTagListModal(!showTagListModal);
         }}
       >
         <div className={styles["block-title"]}>태그</div>
         <div className={styles["tag-list-container"]}>
           {tagNames.map((tagName, index) => {
             return (
-              <div className={styles["tag-item"]} key={index}>
-                {tagName}
+              <div
+                className={styles["tag-item"]}
+                key={index}
+                onClick={() => {
+                  handleTagItemDelete(index);
+                }}
+              >
+                <span>{tagName}</span>
+                <button className={styles["tag-item-delete-button"]}>×</button>
               </div>
             );
           })}
