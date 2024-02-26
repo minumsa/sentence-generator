@@ -71,12 +71,6 @@ export const Grid = () => {
     }
   }, [method, criteria, scrollCount, perPageCount]);
 
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
   const [divWidth, setDivWidth] = useState(0);
   const myDivRef = useRef<any>(null);
 
@@ -126,7 +120,7 @@ export const Grid = () => {
               <div
                 data-aos="fade-up"
                 data-aos-duration={800}
-                data-aos-offset={isMobile ? 50 : 90}
+                data-aos-offset={isMobile ? 40 : 90}
                 data-aos-once="true"
                 key={index}
                 className={`${styles["grid-item-container"]}`}

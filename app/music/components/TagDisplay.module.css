@@ -15,9 +15,10 @@
   background-color: var(--border-light-color);
   border-radius: 20px;
   padding: 7px 11px;
-  margin-right: 3px;
-  margin-bottom: 4px;
+  margin: 0 3px 0 0;
   word-break: normal;
+
+  cursor: pointer;
 }
 
 @media (max-width: 525px) {
@@ -25,11 +26,18 @@
     /* display: inline-block; */
 
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+
+    /* flex-wrap: wrap; */
+
     width: 100%;
-    height: fit-content;
-    padding: 25px 10px;
+    height: auto;
+    padding: 15px 10px;
     border-bottom: 1px solid var(--border-light-color);
     box-sizing: border-box;
+
+    /* 가로 스크롤 */
+    overflow-x: scroll;
+    white-space: nowrap;
   }
 }
