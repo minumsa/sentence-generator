@@ -48,8 +48,7 @@ export default function Update({ currentId }: UpdateProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [tagNames, setTagNames] = useState<string[]>([]);
   const [showTagListModal, setShowTagListModal] = useState(false);
-
-  console.log(tagNames);
+  const [newTagName, setNewTagName] = useState("");
 
   // 수정 API
   const handleUpdate = async () => {
@@ -80,8 +79,21 @@ export default function Update({ currentId }: UpdateProps) {
     async function getData() {
       const fetchData = await fetchDataById(currentId);
       setAlbumData(fetchData);
-      const { id, artist, artistId, genre, link, text, uploadDate, score, videos, album } =
-        fetchData;
+      console.log(fetchData);
+
+      const {
+        id,
+        artist,
+        artistId,
+        genre,
+        link,
+        text,
+        uploadDate,
+        score,
+        videos,
+        album,
+        releaseDate,
+      } = fetchData;
       setAlbum(album);
       setAlbumId(id);
       setArtist(artist);
@@ -92,6 +104,18 @@ export default function Update({ currentId }: UpdateProps) {
       setScore(score);
       setUploadDate(new Date(uploadDate));
       setAlbumKeyword(album);
+
+      const albumReleaseYear =
+        "#" + Math.floor(Number(releaseDate.substring(0, 4)) / 10) * 10 + "년대";
+
+      if (!tagNames.includes(albumReleaseYear)) {
+        setTagNames(prevTagNames => [...prevTagNames, albumReleaseYear]);
+      }
+
+      if (!tagNames.includes("#가사 없는 음악 🎻")) {
+        if (genre === "classic")
+          setTagNames(prevTagNames => [...prevTagNames, "#가사 없는 음악 🎻"]);
+      }
 
       if (videos.length > 0) {
         setVideos(videos);
@@ -131,6 +155,7 @@ export default function Update({ currentId }: UpdateProps) {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         setShowAlbumListModal(false);
         setShowTagListModal(false);
+        setNewTagName("");
       }
     };
 
@@ -141,6 +166,7 @@ export default function Update({ currentId }: UpdateProps) {
   }, [modalRef]);
 
   useEffect(() => {
+    // setTagNames()
     setTagNames([
       "#한국대중음악상 🏆",
       "#한국대중음악 100대 명반 🏆",
@@ -157,6 +183,14 @@ export default function Update({ currentId }: UpdateProps) {
 
   const handleTagItemAdd = (tag: string) => {
     setTagNames(prevState => [...prevState, tag]);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const isExisingTag = tagNames.includes(newTagName);
+
+    if (e.key === "Enter") {
+      if (!isExisingTag) setTagNames(prevTagNames => [...prevTagNames, newTagName]);
+    }
   };
 
   return (
@@ -418,11 +452,24 @@ export default function Update({ currentId }: UpdateProps) {
             </div>
           )}
           <input
+            value={newTagName}
             className={styles["tag-item-input"]}
             placeholder="태그 생성"
             onClick={() => {
               setShowTagListModal(true);
             }}
+            onChange={e => {
+              const tmp = e.target.value;
+              if (tmp.startsWith("#")) {
+                setNewTagName(tmp);
+              } else {
+                setNewTagName("#" + tmp);
+              }
+            }}
+            onKeyDown={handleKeyPress}
+            // onMouseEnter={() => {
+            //   setTagNames(prevTagNames => [...prevTagNames, newTagName]);
+            // }}
           />
         </div>
       </div>

@@ -172,6 +172,7 @@
   flex-wrap: wrap;
   width: 100%;
   min-height: 40px;
+  max-width: 880px;
   height: auto;
   background-color: var(--input-background-color);
   padding: 15px;
@@ -238,6 +239,7 @@
   background-color: #ffffff1a;
   min-width: 200px;
   padding: 7px 11px;
+  margin: 5px 5px 5px 0px;
   font-size: 1rem;
   border-radius: 20px;
 }
