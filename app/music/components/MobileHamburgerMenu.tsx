@@ -1,15 +1,12 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
 import { activeStyle, contents } from "../modules/data";
 import { useEffect, useState } from "react";
 
-interface HamburgerProps {
-  pathName: string;
-}
-
 // FIXME: 컴포넌트화 시킬 수 있는 부분 전부 작업
 // FIXME: 컴포넌트화 시키면서 안 쓰게 된 코드들 모두 삭제
-export const MobileHamburgerMenu = ({ pathName }: HamburgerProps) => {
+export const MobileHamburgerMenu = () => {
+  const pathName = usePathname();
   const router = useRouter();
   const isMainPage = Number(pathName) > 0;
   const [showCategory, setShowCategory] = useState<boolean>(false);

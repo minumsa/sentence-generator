@@ -8,7 +8,6 @@ import styles from "../music.module.css";
 import { isUploadPage } from "../modules/data";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
-  const pathName = usePathname();
   const fullPathName = usePathname();
 
   return (
@@ -18,7 +17,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
         {/* <TopNav isVisible={isUploadPage(pathName) || isPostPage(pathName) ? false : true} /> */}
         <div className={styles["category-container"]}>
           <MobileTitle />
-          <MobileHamburgerMenu pathName={pathName} />
+          <MobileHamburgerMenu />
           <Category pathName={pathName} fullPathName={fullPathName} />
         </div>
         <div

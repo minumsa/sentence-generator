@@ -11,7 +11,7 @@ export const MobileTitle = () => {
         router.push("/music");
       }}
     >
-      <div>divdivdiv</div>
+      <div>카버차트</div>
     </div>
   );
 };

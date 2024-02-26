@@ -31,12 +31,11 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
       className={styles["desktop-category"]}
       style={{ fontSize: "1.15rem", alignItems: "center" }}
     >
-      <DesktopHamburgerMenu pathName={pathName} />
+      <DesktopHamburgerMenu />
       <Link
         className={`${styles["category"]} ${styles["site-title"]}`}
         href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
       >
-        {/* divdivdiv */}
         카버차트
       </Link>
       <div
