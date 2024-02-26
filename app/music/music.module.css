@@ -1061,6 +1061,7 @@
   .loading-background,
   .loading-text {
     width: 100%;
+    font-size: 1.05rem;
   }
 
   .category-meta-image-container {
@@ -1149,7 +1150,7 @@
     width: calc(100% - 20px);
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 2px 20px 0 20px;
     border-right: none;
     z-index: 2;
   }
@@ -1178,7 +1179,7 @@
     overflow: hidden;
     border-left: none;
     z-index: 1;
-    margin-top: 40px;
+    margin-top: 42px;
   }
 
   .sort-criteria-container {
