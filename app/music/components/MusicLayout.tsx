@@ -15,17 +15,17 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
       <div className={styles["container"]}>
         {/* FIXME: 나중에 TopNav 살리기 */}
         {/* <TopNav isVisible={isUploadPage(pathName) || isPostPage(pathName) ? false : true} /> */}
-        <div className={styles["category-container"]}>
+        <header className={styles["category-container"]}>
           <MobileTitle />
           <MobileHamburgerMenu />
           <Category />
-        </div>
-        <div
+        </header>
+        <main
           className={styles["content-container"]}
           style={{ alignItems: isUploadPage(pathName) ? "center" : undefined }}
         >
           {children}
-        </div>
+        </main>
       </div>
     </div>
   );

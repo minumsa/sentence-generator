@@ -16,7 +16,7 @@ export const MobileHamburgerMenu = () => {
   }, []);
 
   return (
-    <div
+    <nav
       className={styles["hamburger-container"]}
       onClick={() => {
         setShowCategory(!showCategory);
@@ -48,6 +48,6 @@ export const MobileHamburgerMenu = () => {
           })}
         </div>
       ) : null}
-    </div>
+    </nav>
   );
 };

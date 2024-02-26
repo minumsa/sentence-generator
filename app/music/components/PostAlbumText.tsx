@@ -37,7 +37,7 @@ export const PostText = ({ albumData }: PostTextProps) => {
   };
 
   return (
-    <div className={styles["post-content-container"]}>
+    <article className={styles["post-content-container"]}>
       {/* FIXME: 안전하게 바꾸기 */}
       {albumData.text.includes("div") && (
         <div
@@ -69,6 +69,6 @@ export const PostText = ({ albumData }: PostTextProps) => {
       <div className={styles["post-divider"]}></div>
       <div className={styles["post-date"]}>작성일</div>
       <div>{formatDate(albumData.uploadDate.toString())}</div>
-    </div>
+    </article>
   );
 };

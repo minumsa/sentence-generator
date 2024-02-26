@@ -10,9 +10,9 @@ interface AlbumProps {
 
 export const PostAlbum = ({ albumData }: AlbumProps) => {
   return (
-    <div className={styles["album-container"]}>
+    <section className={styles["album-container"]}>
       <PostAlbumMetadata albumData={albumData} />
       <PostText albumData={albumData} />
-    </div>
+    </section>
   );
 };

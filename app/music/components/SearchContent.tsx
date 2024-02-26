@@ -74,7 +74,7 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
                 : ""}
             </div>
           </div>
-          <AlbumContents data={data} perPageCount={perPageCount} />
+          <AlbumContents albumData={data} perPageCount={perPageCount} />
         </ContentLayout>
       )}
     </>

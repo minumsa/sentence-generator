@@ -23,7 +23,7 @@ export const Category = () => {
   };
 
   return (
-    <div
+    <header
       className={styles["desktop-category"]}
       style={{ fontSize: "1.15rem", alignItems: "center" }}
     >
@@ -34,7 +34,7 @@ export const Category = () => {
       >
         카버차트
       </Link>
-      <div
+      <nav
         className={styles["top-magnifying-glass"]}
         // FIXME: input 클릭하면 사라지는 이슈 해결
         onClick={() => {
@@ -56,7 +56,7 @@ export const Category = () => {
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 };

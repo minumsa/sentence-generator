@@ -49,7 +49,7 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
       totalDataLength={totalDataLength}
     >
       <ArtistPageImage data={data} />
-      <AlbumContents data={data} perPageCount={perPageCount} />
+      <AlbumContents albumData={data} perPageCount={perPageCount} />
     </ContentLayout>
   );
 }

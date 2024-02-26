@@ -25,7 +25,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
   }, [totalDataLength]);
 
   return (
-    <div className={styles["page-container"]}>
+    <footer className={styles["page-container"]}>
       {currentPage > 5 && (
         <div
           className={styles["page"]}
@@ -68,6 +68,6 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
           〉
         </div>
       )}
-    </div>
+    </footer>
   );
 };

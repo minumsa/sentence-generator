@@ -9,25 +9,25 @@ export const DesktopHamburgerMenu = () => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
 
   return (
-    <div
+    <nav
       className={styles["desktop-hamburger-container"]}
       onClick={() => {
         setShowCategory(!showCategory);
       }}
     >
-      <div
+      <button
         className={styles["hamburger-icon"]}
         style={{ display: showCategory ? "none" : "flex" }}
-      ></div>
-      <div className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
-        <div>×</div>
-      </div>
+      ></button>
+      <button className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
+        <div style={{ fontWeight: 100 }}>×</div>
+      </button>
       {showCategory ? (
-        <div className={styles["desktop-genre-category"]}>
-          <div className={styles["hamburger-item-title"]}>장르</div>
+        <ul className={styles["desktop-genre-category"]}>
+          <li className={styles["hamburger-item-title"]}>장르</li>
           {Object.keys(contents).map(category => {
             return (
-              <div
+              <li
                 key={category}
                 className={styles["hamburger-item"]}
                 onClick={() => {
@@ -37,10 +37,10 @@ export const DesktopHamburgerMenu = () => {
                 }}
               >
                 {contents[category]}
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       ) : null}
       {showCategory && (
         <div className={styles["desktop-introduction-category"]}>
@@ -50,6 +50,6 @@ export const DesktopHamburgerMenu = () => {
           <div className={styles["hamburger-item"]}>연락처</div>
         </div>
       )}
-    </div>
+    </nav>
   );
 };

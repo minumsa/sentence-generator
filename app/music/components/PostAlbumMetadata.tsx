@@ -27,7 +27,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
   };
 
   return (
-    <div className={styles["album-information-container"]}>
+    <header className={styles["album-information-container"]}>
       <div className={styles["grid-album-image-container"]}>
         <a href={albumData.link} target="_blank">
           <div
@@ -129,6 +129,6 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 };

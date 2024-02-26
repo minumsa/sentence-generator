@@ -82,25 +82,20 @@ export const Grid = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      // 특정 div의 너비를 가져오기 위한 작업
       if (myDivRef.current) {
         const width = myDivRef.current.offsetWidth;
         setDivWidth(width);
       }
     };
 
-    handleResize(); // 초기 렌더링 시 한 번 호출하여 너비를 설정합니다.
+    handleResize();
 
-    // 컴포넌트가 마운트될 때와 창 크기가 변경될 때마다 resize 이벤트 리스너 추가
     window.addEventListener("resize", handleResize);
 
-    // 컴포넌트가 언마운트될 때 resize 이벤트 리스너 제거
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-
-    // myDivRef.current.offsetWidth
-  }, []); // useEffect의 두 번째 매개변수로 빈 배열을 전달하여 한 번만 실행되도록 설정
+  }, []);
 
   return (
     <>
@@ -138,12 +133,6 @@ export const Grid = () => {
                 <div
                   className={styles["grid-album-container"]}
                   style={{ position: "relative", width: "100%" }}
-                  // onClick={() => {
-                  //   setIsLoading(true);
-                  //   isAdminPage
-                  //     ? router.push(`/music/admin/post/${item.id}`)
-                  //     : router.push(`/music/post/${item.id}`);
-                  // }}
                 >
                   <Link
                     href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
@@ -151,31 +140,33 @@ export const Grid = () => {
                       setIsLoading(true);
                     }}
                   >
-                    <div
+                    <img
+                      className={styles["grid-album-image"]}
+                      src={item.imgUrl}
+                      alt={item.album}
+                      // style={
+                      //   imageLoaded
+                      //     ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
+                      //     : undefined
+                      // }
+                    />
+                    {/* <div
                       className={styles["grid-album-image"]}
                       style={
                         imageLoaded
                           ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
                           : undefined
                       }
-                    />
-                    <img
+                    /> */}
+                    {/* <img
                       src={item.imgUrl}
                       alt={item.album}
                       style={{ display: "none" }}
                       onLoad={handleImageLoad}
-                    />
+                    /> */}
                   </Link>
                 </div>
-                <div
-                  className={styles["grid-album-title"]}
-                  // onClick={() => {
-                  //   setIsLoading(true);
-                  //   isAdminPage
-                  //     ? router.push(`/music/admin/post/${item.id}`)
-                  //     : router.push(`/music/post/${item.id}`);
-                  // }}
-                >
+                <div className={styles["grid-album-title"]}>
                   <div>
                     <Link
                       href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
@@ -186,7 +177,6 @@ export const Grid = () => {
                     >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        // style={{ fontWeight: "500" }}
                       >
                         {`${item.album}`}
                       </span>
@@ -205,11 +195,8 @@ export const Grid = () => {
                     >
                       <span
                         className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        // style={{ color: "#a7a7a7" }}
                       >
                         {`${item.artist}`}
-                        {/* 관리자 페이지일 때만 표시할 부분 */}
-                        {/* {isAdminPage && ` … ${item.score}`} */}
                       </span>
                     </Link>
                   </div>

@@ -5,13 +5,13 @@ export const MobileTitle = () => {
   const router = useRouter();
 
   return (
-    <div
+    <nav
       className={styles["mobile-title"]}
       onClick={() => {
         router.push("/music");
       }}
     >
       <div>카버차트</div>
-    </div>
+    </nav>
   );
 };
