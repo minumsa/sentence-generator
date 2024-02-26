@@ -62,7 +62,7 @@ export default function Update({ currentId }: UpdateProps) {
 
     if (newSpotifyAlbumData) {
       try {
-        await updateData(currentId, newSpotifyAlbumData, score, videos, password);
+        await updateData(currentId, newSpotifyAlbumData, score, videos, tagNames, password);
       } catch (error) {
         console.error("updateData 호출에 실패했습니다:", error);
       }
@@ -79,7 +79,6 @@ export default function Update({ currentId }: UpdateProps) {
     async function getData() {
       const fetchData = await fetchDataById(currentId);
       setAlbumData(fetchData);
-      console.log(fetchData);
 
       const {
         id,
@@ -165,16 +164,15 @@ export default function Update({ currentId }: UpdateProps) {
     };
   }, [modalRef]);
 
-  useEffect(() => {
-    // setTagNames()
-    setTagNames([
-      "#한국대중음악상 🏆",
-      "#한국대중음악 100대 명반 🏆",
-      "#롤링스톤즈 500대 명반 👅",
-      "#크리스마스 🎅",
-      "#노동요 👨‍💻",
-    ]);
-  }, []);
+  // useEffect(() => {
+  //   setTagNames([
+  //     "#한국대중음악상 🏆",
+  //     "#한국대중음악 100대 명반 🏆",
+  //     "#롤링스톤즈 500대 명반 👅",
+  //     "#크리스마스 🎅",
+  //     "#노동요 👨‍💻",
+  //   ]);
+  // }, []);
 
   const handleTagItemDelete = (deleteIndex: number) => {
     setTagNames(prevState => prevState.filter((_, index) => index !== deleteIndex));
