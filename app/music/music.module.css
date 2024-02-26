@@ -510,10 +510,9 @@
 }
 
 .select {
-  max-width: 208px;
   font-size: 1.2rem;
   padding: 0 15px;
-  width: 277px;
+  width: auto;
   height: 100%;
   height: 60px;
 }
@@ -575,6 +574,7 @@
   font-size: 1.2rem;
   cursor: pointer;
   color: var(--text-color);
+  z-index: 200;
 }
 
 .paragraph-blank {
@@ -930,13 +930,38 @@
 
 .upload-item-container {
   border-bottom: 1px dashed var(--border-light-color);
-  margin-bottom: 30px;
+  margin: 0 0 30px 0;
 }
 
 .post-album-title {
   display: flex;
   align-items: center;
-  padding-bottom: 15px;
+  margin: 0 0 10px 0;
+}
+
+.album-tag-container {
+  display: flex;
+  margin: 13px 0 0 0;
+}
+
+.tag-item {
+  /* display: inline; */
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  line-height: 250%;
+  font-size: 0.95rem;
+  width: fit-content;
+  height: 20px;
+  /* border: 1px solid var(--border-light-color); */
+  /* background-color: var(--border-light-color); */
+  background-color: #ffffff1a;
+  /* border-radius: 20px; */
+  padding: 7px 11px;
+  margin: 0 3px 0 0;
+  word-break: normal;
+
+  cursor: pointer;
 }
 
 /* TODO: 미디어쿼리로 앨범 개수 변경될 때 크기 변화 최대한 없게 맞추기 */
@@ -996,8 +1021,7 @@
     flex-direction: column;
     align-items: center;
     height: fit-content;
-    margin-bottom: 20px;
-    margin-right: 0;
+    margin: 0 0 20px 0;
   }
 
   .album-information {

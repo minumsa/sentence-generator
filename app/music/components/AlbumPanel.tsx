@@ -32,7 +32,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
           loading="lazy"
         />
       </Link>
-      <section className={styles["album-panel-metadata-container"]}>
+      <div className={styles["album-panel-metadata-container"]}>
         {/* FIXME: 안전하게 바꾸기 */}
         {albumData.text.split("\n").map((text, index) => {
           const longTextStandard = isMobile ? 100 : 180;
@@ -112,26 +112,32 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                     </span>
                   </div>
                 </div>
-                <p
-                  ref={divRef}
-                  className={`${styles["paragraph"]} ${styles["paragraph-category"]} ${
-                    isLongText ? styles["blur-end"] : undefined
-                  }`}
-                >
-                  {isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : text}
-                </p>
-                {isLongText && (
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    href={
-                      isAdminPage
-                        ? `/music/admin/post/${albumData.id}`
-                        : `/music/post/${albumData.id}`
-                    }
+                <div style={{ position: "relative" }}>
+                  <p
+                    ref={divRef}
+                    className={`${styles["paragraph"]} ${styles["paragraph-category"]} ${
+                      isLongText ? styles["blur-end"] : undefined
+                    }`}
                   >
-                    <div className={styles["more-button"]}>더 보기</div>
-                  </Link>
-                )}
+                    {isFirstParagraphInHTML ? isFirstParagraphInHTML[1] : text}
+                  </p>
+                  {isLongText && (
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      href={
+                        isAdminPage
+                          ? `/music/admin/post/${albumData.id}`
+                          : `/music/post/${albumData.id}`
+                      }
+                    >
+                      <div className={styles["more-button"]}>더 보기</div>
+                    </Link>
+                  )}
+                </div>
+                <div className={styles["album-tag-container"]}>
+                  <div className={styles["tag-item"]}>#청소하면서 듣는 음악 🧹</div>
+                  <div className={styles["tag-item"]}>#춤추면서 듣는 음악 🕺</div>
+                </div>
                 {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                 {isAdminPage && (
                   <div className={styles["admin-button-container"]}>
@@ -142,7 +148,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
               </div>
             );
         })}
-      </section>
+      </div>
     </>
   );
 };
