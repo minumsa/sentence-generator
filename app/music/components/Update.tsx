@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
 import { fetchDataById, fetchSpotify, searchSpotify, updateData } from "../modules/api";
-import { contents } from "../modules/data";
+import { contents, tags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
@@ -44,7 +44,10 @@ export default function Update({ currentId }: UpdateProps) {
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
   const [albumKeyword, setAlbumKeyword] = useState<string>("");
   const [searchData, setSearchData] = useState<SearchData[]>();
-  const [isTyping, setIsTyping] = useState(false);
+  const [showAlbumListModal, setShowAlbumListModal] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [tagNames, setTagNames] = useState<string[]>([]);
+  const [showTagListModal, setShowTagListModal] = useState(false);
 
   // 수정 API
   const handleUpdate = async () => {
@@ -103,14 +106,14 @@ export default function Update({ currentId }: UpdateProps) {
   };
 
   useEffect(() => {
-    if (isTyping && albumKeyword.length > 0) {
+    if (showAlbumListModal && albumKeyword.length > 0) {
       const typingTimer = setTimeout(() => {
         handleSearch();
       }, 1000);
 
       return () => clearTimeout(typingTimer);
     }
-  }, [albumKeyword, isTyping]);
+  }, [albumKeyword, showAlbumListModal]);
 
   const handleModal = (data: SearchData) => {
     setArtist(data.artists[0].name);
@@ -118,8 +121,34 @@ export default function Update({ currentId }: UpdateProps) {
     setAlbumId(data.id);
     setAlbumKeyword(data.name);
     setSearchData(undefined);
-    setIsTyping(false);
+    setShowAlbumListModal(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        setShowAlbumListModal(false);
+        setShowTagListModal(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalRef]);
+
+  useEffect(() => {
+    setTagNames([
+      "#한국대중음악상 🏆",
+      "#한국대중음악 100대 명반 🏆",
+      "#롤링스톤즈 500대 명반 👅",
+      "#한국대중음악 100대 명반 🏆",
+      "#롤링스톤즈 500대 명반 👅",
+      "#한국대중음악 100대 명반 🏆",
+      "#롤링스톤즈 500대 명반 👅",
+    ]);
+  }, []);
 
   return (
     <div className={styles["container"]}>
@@ -163,46 +192,51 @@ export default function Update({ currentId }: UpdateProps) {
             value={albumKeyword}
             onChange={e => {
               setAlbumKeyword(e.target.value);
-              setIsTyping(true);
+              setShowAlbumListModal(true);
             }}
             placeholder="검색어를 입력해주세요"
           />
-          <div
-            className={styles["album-search-result-modal"]}
-            style={{ display: albumKeyword && searchData ? "flex" : "none" }}
-          >
-            {searchData?.map((data, index) => {
-              const artist = data.artists[0].name;
-              const album = data.name;
-              const releaseYear = data.release_date.slice(0, 4);
-              const imageUrl = data.images[2].url;
-              return (
-                <div
-                  className={styles["search-album-modal"]}
-                  key={index}
-                  onClick={() => {
-                    handleModal(data);
-                  }}
-                >
-                  <div className={styles["search-album-image-container"]}>
-                    <img
-                      className={styles["search-album-image"]}
-                      src={imageUrl}
-                      alt="search-album-image"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className={styles["search-album-text"]}>
-                    <div>
-                      <span>{album}</span>
-                      <span style={{ paddingLeft: "5px", color: "#757A84" }}>({releaseYear})</span>
+          {showAlbumListModal && (
+            <div
+              ref={modalRef}
+              className={styles["album-search-result-modal"]}
+              style={{ display: albumKeyword && searchData ? "flex" : "none" }}
+            >
+              {searchData?.map((data, index) => {
+                const artist = data.artists[0].name;
+                const album = data.name;
+                const releaseYear = data.release_date.slice(0, 4);
+                const imageUrl = data.images[2].url;
+                return (
+                  <div
+                    className={styles["search-album-modal"]}
+                    key={index}
+                    onClick={() => {
+                      handleModal(data);
+                    }}
+                  >
+                    <div className={styles["search-album-image-container"]}>
+                      <img
+                        className={styles["search-album-image"]}
+                        src={imageUrl}
+                        alt="search-album-image"
+                        loading="lazy"
+                      />
                     </div>
-                    <div style={{ fontWeight: 400 }}>{artist}</div>
+                    <div className={styles["search-album-text"]}>
+                      <div>
+                        <span>{album}</span>
+                        <span style={{ paddingLeft: "5px", color: "#757A84" }}>
+                          ({releaseYear})
+                        </span>
+                      </div>
+                      <div style={{ fontWeight: 400 }}>{artist}</div>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
         <div className={styles["block-title"]}>앨범 ID(Spotify)</div>
         <input
@@ -319,20 +353,54 @@ export default function Update({ currentId }: UpdateProps) {
                   setVideos(tmpVideos);
                 }}
               />
-              <div>
-                <div className={styles["block-title"]}>{`영상 링크 ${videoNumber}`}</div>
-                <input
-                  className={`${styles["input"]} ${styles["input-link"]}`}
-                  value={videos[index].url}
-                  onChange={e => {
-                    tmpVideos[index] = { ...tmpVideos[index], url: e.target.value };
-                    setVideos(tmpVideos);
-                  }}
-                />
-              </div>
+              <div className={styles["block-title"]}>{`영상 링크 ${videoNumber}`}</div>
+              <input
+                className={`${styles["input"]} ${styles["input-link"]}`}
+                value={videos[index].url}
+                onChange={e => {
+                  tmpVideos[index] = { ...tmpVideos[index], url: e.target.value };
+                  setVideos(tmpVideos);
+                }}
+              />
             </div>
           );
         })}
+      <div
+        ref={modalRef}
+        className={styles["block-container"]}
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setShowTagListModal(!showTagListModal);
+        }}
+      >
+        <div className={styles["block-title"]}>태그</div>
+        <div className={styles["tag-list-container"]}>
+          {tagNames.map((tagName, index) => {
+            return (
+              <div className={styles["tag-item"]} key={index}>
+                {tagName}
+              </div>
+            );
+          })}
+          {showTagListModal && (
+            <div className={styles["tag-list-modal-container"]}>
+              <div className={styles["tag-list-modal"]}>
+                <div className={styles["tag-list-comment"]}>태그 선택해서 추가</div>
+                <div className={styles["tag-item-container"]}>
+                  {tags.map((tag, index) => {
+                    return (
+                      <div className={styles["tag-item"]} key={index}>
+                        {tag}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+          <input className={styles["tag-item-input"]} placeholder="태그 생성" />
+        </div>
+      </div>
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>작성일</div>
         <DatePicker
@@ -351,7 +419,7 @@ export default function Update({ currentId }: UpdateProps) {
             setPassword(e.target.value);
           }}
           onKeyDown={handlePasswordEnter}
-          style={{ width: "208px" }}
+          style={{ width: "300px" }}
         />
       </div>
       <div className={styles["submit-container"]}>

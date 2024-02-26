@@ -20,7 +20,7 @@ export const AlbumContents = ({ albumData, perPageCount }: AlbumContentsProps) =
         style={
           isLastDataPerPage || isLastData
             ? undefined
-            : { borderBottom: "1px solid var(--border-light-color)" }
+            : { borderBottom: "1px solid var(--border-color)" }
         }
       >
         <AlbumPanel albumData={item} />
