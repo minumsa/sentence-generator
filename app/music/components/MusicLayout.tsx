@@ -8,7 +8,7 @@ import styles from "../music.module.css";
 import { isUploadPage } from "../modules/data";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
-  const fullPathName = usePathname();
+  const pathName = usePathname();
 
   return (
     <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center" }}>
@@ -18,7 +18,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
         <div className={styles["category-container"]}>
           <MobileTitle />
           <MobileHamburgerMenu />
-          <Category pathName={pathName} fullPathName={fullPathName} />
+          <Category />
         </div>
         <div
           className={styles["content-container"]}

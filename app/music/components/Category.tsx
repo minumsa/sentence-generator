@@ -3,15 +3,11 @@ import { isAdminPage } from "../modules/data";
 import Link from "next/link";
 import { DesktopHamburgerMenu } from "./DesktopHamburgerMenu";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-interface CategoryProps {
-  pathName: string;
-  fullPathName: string;
-}
-
-export const Category = ({ pathName, fullPathName }: CategoryProps) => {
+export const Category = () => {
   const router = useRouter();
+  const pathName = usePathname();
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [keyword, setKeyword] = useState("");
   async function handleSearch() {
@@ -34,7 +30,7 @@ export const Category = ({ pathName, fullPathName }: CategoryProps) => {
       <DesktopHamburgerMenu />
       <Link
         className={`${styles["category"]} ${styles["site-title"]}`}
-        href={isAdminPage(fullPathName) ? "/music/admin" : "/music"}
+        href={isAdminPage(pathName) ? "/music/admin" : "/music"}
       >
         카버차트
       </Link>
