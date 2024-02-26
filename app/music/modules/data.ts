@@ -74,6 +74,7 @@ export interface AlbumInfo {
   tracks: number;
   score: number;
   videos: Video[];
+  tagNames: string[];
 }
 
 export interface PageProps {
@@ -147,7 +148,7 @@ export const tags = [
   "#글 쓰면서 듣는 음악 ✍🏻",
   "#자기 전에 듣는 음악 😴",
   "#산책하면서 듣는 음악 🚶",
-  "#춤추면서 듣는 음악 🕺",
+  "#춤추고 싶을 때 듣는 음악 🕺",
   "#가사 없는 음악 🎻",
   "#코딩하면서 듣는 음악 👨‍💻",
   "#샤워하면서 듣는 음악 🛀",
@@ -155,6 +156,7 @@ export const tags = [
   "#한국대중음악상 🏆",
   "#한국대중음악 100대 명반 🏆",
   "#롤링스톤즈 500대 명반 👅",
+  "#그래미 어워드 수상 🏆",
   "#크리스마스 🎅",
   "#디바 🫅",
   "#노동요 👷",

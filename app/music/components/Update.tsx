@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
+import { useRouter } from "next/navigation";
 
 interface UpdateProps {
   currentId: string;
@@ -49,6 +50,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [tagNames, setTagNames] = useState<string[]>([]);
   const [showTagListModal, setShowTagListModal] = useState(false);
   const [newTagName, setNewTagName] = useState("");
+  const router = useRouter();
 
   // 수정 API
   const handleUpdate = async () => {
@@ -63,6 +65,7 @@ export default function Update({ currentId }: UpdateProps) {
     if (newSpotifyAlbumData) {
       try {
         await updateData(currentId, newSpotifyAlbumData, score, videos, tagNames, password);
+        router.back();
       } catch (error) {
         console.error("updateData 호출에 실패했습니다:", error);
       }
@@ -90,6 +93,7 @@ export default function Update({ currentId }: UpdateProps) {
         uploadDate,
         score,
         videos,
+        tagNames,
         album,
         releaseDate,
       } = fetchData;
@@ -103,6 +107,7 @@ export default function Update({ currentId }: UpdateProps) {
       setScore(score);
       setUploadDate(new Date(uploadDate));
       setAlbumKeyword(album);
+      setTagNames(tagNames);
 
       const albumReleaseYear =
         "#" + Math.floor(Number(releaseDate.substring(0, 4)) / 10) * 10 + "년대";

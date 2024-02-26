@@ -204,6 +204,7 @@ export const updateData = async (
           newSpotifyAlbumData,
           score,
           videos,
+          tagNames,
           password,
         }),
       });

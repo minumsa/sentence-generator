@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
-import { AlbumInfo } from "../modules/data";
+import { AlbumInfo, album } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
 import { DeleteButton } from "./DeleteButton";
@@ -17,6 +17,8 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
+
+  console.log(albumData);
 
   return (
     <>
@@ -135,8 +137,13 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   )}
                 </div>
                 <div className={styles["album-tag-container"]}>
-                  <div className={styles["tag-item"]}>#청소하면서 듣는 음악 🧹</div>
-                  <div className={styles["tag-item"]}>#춤추면서 듣는 음악 🕺</div>
+                  {albumData.tagNames.map((tagName: string, index: number) => {
+                    return (
+                      <div key={index} className={styles["tag-item"]}>
+                        {tagName}
+                      </div>
+                    );
+                  })}
                 </div>
                 {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
                 {isAdminPage && (
