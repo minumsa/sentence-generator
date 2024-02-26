@@ -23,7 +23,7 @@ export const TagDisplay = () => {
         <div
           key={index}
           className={styles["tag-item"]}
-          style={{ backgroundColor: colors[index % colors.length] }}
+          // style={{ backgroundColor: colors[index % colors.length] }}
           onClick={() => {
             router.push("/music/pop");
           }}
