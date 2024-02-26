@@ -145,16 +145,18 @@ export default function Update({ currentId }: UpdateProps) {
       "#한국대중음악상 🏆",
       "#한국대중음악 100대 명반 🏆",
       "#롤링스톤즈 500대 명반 👅",
-      "#한국대중음악 100대 명반 🏆",
-      "#롤링스톤즈 500대 명반 👅",
-      "#한국대중음악 100대 명반 🏆",
-      "#롤링스톤즈 500대 명반 👅",
+      "#크리스마스 🎅",
+      "#노동요 👨‍💻",
     ]);
   }, []);
 
   const handleTagItemDelete = (deleteIndex: number) => {
     setTagNames(prevState => prevState.filter((_, index) => index !== deleteIndex));
     tagNames.splice(deleteIndex, 1);
+  };
+
+  const handleTagItemAdd = (tag: string) => {
+    setTagNames(prevState => [...prevState, tag]);
   };
 
   return (
@@ -372,14 +374,7 @@ export default function Update({ currentId }: UpdateProps) {
             </div>
           );
         })}
-      <div
-        ref={modalRef}
-        className={styles["block-container"]}
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          // setShowTagListModal(!showTagListModal);
-        }}
-      >
+      <div ref={modalRef} className={styles["block-container"]}>
         <div className={styles["block-title"]}>태그</div>
         <div className={styles["tag-list-container"]}>
           {tagNames.map((tagName, index) => {
@@ -402,17 +397,33 @@ export default function Update({ currentId }: UpdateProps) {
                 <div className={styles["tag-list-comment"]}>태그 선택해서 추가</div>
                 <div className={styles["tag-item-container"]}>
                   {tags.map((tag, index) => {
+                    const isExisingTag = tagNames.includes(tag);
                     return (
-                      <div className={styles["tag-item"]} key={index}>
-                        {tag}
-                      </div>
+                      !isExisingTag && (
+                        <div
+                          className={styles["tag-item"]}
+                          key={index}
+                          onClick={() => {
+                            handleTagItemAdd(tag);
+                          }}
+                        >
+                          {tag}
+                          <button className={styles["tag-item-delete-button"]}>+</button>
+                        </div>
+                      )
                     );
                   })}
                 </div>
               </div>
             </div>
           )}
-          <input className={styles["tag-item-input"]} placeholder="태그 생성" />
+          <input
+            className={styles["tag-item-input"]}
+            placeholder="태그 생성"
+            onClick={() => {
+              setShowTagListModal(true);
+            }}
+          />
         </div>
       </div>
       <div className={styles["block-container"]}>
