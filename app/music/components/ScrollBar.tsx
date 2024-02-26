@@ -13,7 +13,7 @@ const ScrollBar = () => {
     setScrollPercentage(currentScrollPercentage);
   }, [pageYOffset]);
 
-  return <div className={styles.progressBar} style={{ width: `${scrollPercentage}%` }} />;
+  return <div className={styles["progress-bar"]} style={{ width: `${scrollPercentage}%` }} />;
 };
 
 export default ScrollBar;

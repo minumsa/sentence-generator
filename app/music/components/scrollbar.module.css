@@ -1,9 +1,10 @@
-.progressBar {
+.progress-bar {
   display: none;
 }
 
 @media (max-width: 525px) {
-  .progressBar {
+  .progress-bar {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
