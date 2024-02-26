@@ -52,7 +52,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Lato", "Pretendard Variable", Pretendard;
-
   overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--background-color);
@@ -112,6 +111,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 a {
   color: var(--text-color);
+  text-decoration: none;
 }
 
 h1,
@@ -127,16 +127,20 @@ li {
 }
 
 button {
+  padding: 0;
+  margin: 0;
+  text-align: unset;
   border: none;
   outline: none;
   background-color: inherit;
   cursor: pointer;
   color: var(--text-color);
-  font-family: "Pretendard Variable", Pretendard;
+  box-sizing: unset;
+  font-size: inherit;
 }
 
 @media (max-width: 525px) {
   :root {
-    --text-color: #ededed;
+    --text-color: #dddddd;
   }
 }

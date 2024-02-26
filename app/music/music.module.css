@@ -743,11 +743,11 @@
   box-sizing: border-box;
 }
 
-.grid-album-container {
+/* .grid-album-container {
   width: 100%;
   box-sizing: border-box;
   z-index: 500;
-}
+} */
 
 .grid-album-image-container {
   position: relative;
@@ -802,7 +802,7 @@
 .black-masking {
   background-color: #000;
   color: var(--text-color);
-  padding: 3px 0;
+  /* padding: 3px 0; */
   line-height: 155%;
   text-indent: 0;
   font-weight: 400;
@@ -1111,9 +1111,9 @@
     margin-top: 1px;
   }
 
-  .grid-album-container:hover {
+  /* .grid-album-container:hover {
     opacity: 1;
-  }
+  } */
 
   .grid-album-title:hover {
     opacity: 1;
@@ -1210,6 +1210,7 @@
   .mobile-title,
   .mobile-category {
     display: flex;
+    font-size: 1.05rem;
     width: 25%;
     height: 100%;
     justify-content: center;

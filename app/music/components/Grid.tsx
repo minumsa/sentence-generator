@@ -113,6 +113,10 @@ export const Grid = () => {
             const isFirstLine = index < 2;
             const isEvenIndex = (index + 1) % 2 == 0;
             const isLastItem = index + 1 === data.length;
+            const postPath = isAdminPage ? `/music/admin/post` : `/music/post`;
+            const postHref = `${postPath}/${item.id}`;
+            const artistPath = isAdminPage ? "/music/admin/artist" : "/music/artist";
+            const artistHref = `${artistPath}/${item.artistId}/1`;
 
             const mobileStyle = {
               borderTop: isFirstLine ? "none" : undefined,
@@ -122,7 +126,6 @@ export const Grid = () => {
               <div
                 data-aos="fade-up"
                 data-aos-duration={800}
-                // data-aos-easing="linear"
                 data-aos-offset={isMobile ? 50 : 90}
                 data-aos-once="true"
                 key={index}
@@ -130,76 +133,40 @@ export const Grid = () => {
                 style={isMobile ? mobileStyle : undefined}
                 ref={isLastItem ? ref : undefined}
               >
-                <div
-                  className={styles["grid-album-container"]}
-                  style={{ position: "relative", width: "100%" }}
+                <Link
+                  href={postHref}
+                  onClick={() => {
+                    setIsLoading(true);
+                  }}
                 >
+                  <img className={styles["grid-album-image"]} src={item.imgUrl} alt={item.album} />
+                </Link>
+                <div className={styles["grid-album-title"]}>
                   <Link
-                    href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
+                    href={postHref}
                     onClick={() => {
                       setIsLoading(true);
                     }}
                   >
-                    <img
-                      className={styles["grid-album-image"]}
-                      src={item.imgUrl}
-                      alt={item.album}
-                      // style={
-                      //   imageLoaded
-                      //     ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
-                      //     : undefined
-                      // }
-                    />
-                    {/* <div
-                      className={styles["grid-album-image"]}
-                      style={
-                        imageLoaded
-                          ? { backgroundImage: `url(${item.imgUrl})`, backgroundSize: "cover" }
-                          : undefined
-                      }
-                    /> */}
-                    {/* <img
-                      src={item.imgUrl}
-                      alt={item.album}
-                      style={{ display: "none" }}
-                      onLoad={handleImageLoad}
-                    /> */}
+                    <button
+                      className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                    >
+                      {`${item.album}`}
+                    </button>
                   </Link>
-                </div>
-                <div className={styles["grid-album-title"]}>
-                  <div>
-                    <Link
-                      href={isAdminPage ? `/music/admin/post/${item.id}` : `/music/post/${item.id}`}
-                      onClick={() => {
-                        setIsLoading(true);
-                      }}
-                      style={{ textDecoration: "none", cursor: "unset" }}
+                  <br />
+                  <Link
+                    href={artistHref}
+                    onClick={() => {
+                      setIsLoading(true);
+                    }}
+                  >
+                    <button
+                      className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
                     >
-                      <span
-                        className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                      >
-                        {`${item.album}`}
-                      </span>
-                    </Link>
-                    <br />
-                    <Link
-                      href={
-                        isAdminPage
-                          ? `/music/admin/artist/${item.artistId}/1`
-                          : `/music/artist/${item.artistId}/1`
-                      }
-                      onClick={() => {
-                        setIsLoading(true);
-                      }}
-                      style={{ textDecoration: "none", cursor: "unset" }}
-                    >
-                      <span
-                        className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                      >
-                        {`${item.artist}`}
-                      </span>
-                    </Link>
-                  </div>
+                      {`${item.artist}`}
+                    </button>
+                  </Link>
                 </div>
               </div>
             );
