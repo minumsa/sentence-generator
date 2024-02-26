@@ -1,0 +1,15 @@
+.progressBar {
+  display: none;
+}
+
+@media (max-width: 525px) {
+  .progressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px; /* 변경 가능한 높이 */
+    background-color: var(--border-color); /* 변경 가능한 색상 */
+    z-index: 9999;
+    transition: width 0.2s ease;
+  }
+}

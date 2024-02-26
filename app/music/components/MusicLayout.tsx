@@ -6,6 +6,7 @@ import { MobileHamburgerMenu } from "./MobileHamburgerMenu";
 import { MobileTitle } from "./MobileTitle";
 import styles from "../music.module.css";
 import { isUploadPage } from "../modules/data";
+import ScrollBar from "./ScrollBar";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
@@ -26,6 +27,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
         >
           {children}
         </main>
+        <ScrollBar /> {/* 스크롤 바 추가 */}
       </div>
     </div>
   );
