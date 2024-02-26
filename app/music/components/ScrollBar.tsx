@@ -7,10 +7,20 @@ const ScrollBar = () => {
   const [scrollPercentage, setScrollPercentage] = useState(0);
 
   useEffect(() => {
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
-    const currentScrollPercentage = (pageYOffset / (scrollHeight - clientHeight)) * 100;
-    setScrollPercentage(currentScrollPercentage);
+    const handleScroll = () => {
+      requestAnimationFrame(() => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight;
+        const currentScrollPercentage = (pageYOffset / (scrollHeight - clientHeight)) * 100;
+        setScrollPercentage(currentScrollPercentage);
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [pageYOffset]);
 
   return <div className={styles["progress-bar"]} style={{ width: `${scrollPercentage}%` }} />;
