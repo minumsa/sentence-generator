@@ -27,6 +27,7 @@ export default function Content({ pathName, currentPage }: PageProps) {
         currentPage,
         currentMethod: method,
         currentCriteria: criteria,
+        currentTagKey: "",
       });
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
