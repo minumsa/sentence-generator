@@ -153,7 +153,7 @@ export default function Upload() {
       </div>
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>앨범 제목</div>
-        <div>
+        <div style={{ position: "relative" }}>
           <input
             className={styles["input"]}
             value={albumKeyword}
@@ -191,9 +191,9 @@ export default function Upload() {
                   <div className={styles["search-album-text"]}>
                     <div>
                       <span>{album}</span>
-                      <span style={{ paddingLeft: "5px", color: "#757A84" }}>({releaseYear})</span>
+                      <span style={{ paddingLeft: "5px" }}>({releaseYear})</span>
                     </div>
-                    <div style={{ fontWeight: 400 }}>{artist}</div>
+                    <div style={{ fontWeight: 400, marginTop: "3px" }}>{artist}</div>
                   </div>
                 </div>
               );
