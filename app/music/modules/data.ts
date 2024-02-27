@@ -176,6 +176,7 @@ export const defaultTags: Tags = {
   love: "#사랑 ❤️‍🔥",
   happy: "#행복 😄",
   relaxing: "#휴식 😌",
+  drink: "#술 🥃",
   laborSongs: "#노동요 👷",
   decade2020s: "#2020년대",
   decade2010s: "#2010년대",
@@ -185,5 +186,6 @@ export const defaultTags: Tags = {
   decade1970s: "#1970년대",
   decade1960s: "#1960년대",
   decade1950s: "#1950년대",
+  decade1940s: "#1940년대",
   "": "모두 보기",
 };

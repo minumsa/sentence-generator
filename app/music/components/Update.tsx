@@ -40,7 +40,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [score, setScore] = useState<number>(0);
-  const [albumReleaseDate, setAlbumReleaseDate] = useState("");
+  const [albumReleaseDate, setAlbumReleaseDate] = useState<any>();
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
@@ -80,6 +80,16 @@ export default function Update({ currentId }: UpdateProps) {
     }
   };
 
+  // const autoFillData = () => {
+  //   console.log(albumReleaseDate);
+
+  //   const releaseYear = "decade" + albumReleaseDate?.substring(0, 4) + "s";
+
+  //   if (currentTagKeys.length === 0) {
+  //     setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
+  //   }
+  // };
+
   useEffect(() => {
     async function getData() {
       const fetchData = await fetchDataById(currentId);
@@ -110,6 +120,7 @@ export default function Update({ currentId }: UpdateProps) {
       setUploadDate(new Date(uploadDate));
       setAlbumKeyword(album);
       setCurrentTagKeys(tagKeys);
+      setAlbumReleaseDate(new Date(releaseDate).toString());
 
       if (videos.length > 0) {
         setVideos(videos);
@@ -117,16 +128,11 @@ export default function Update({ currentId }: UpdateProps) {
       }
 
       // FIXME: 중복으로 입력되는 문제 때문에 지워놓음. 추후에 손보기.
-      // const releaseYear =
-      //   "decade" + Math.floor(Number(releaseDate.substring(0, 4)) / 10) * 10 + "s";
-
-      // if (!currentTagKeys.includes(releaseYear)) {
-      //   setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
-      // }
 
       // if (!currentTagKeys.includes("instrumental")) {
       //   if (genre === "classic") setCurrentTagKeys(prevTagKeys => [...prevTagKeys, "instrumental"]);
       // }
+      // currentTagKeys에 releaseYear이 없으면 추가
     }
 
     getData();
@@ -278,13 +284,9 @@ export default function Update({ currentId }: UpdateProps) {
         <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>
           앨범 ID(Spotify)
         </div>
-        <input
-          className={styles["input"]}
-          value={albumId}
-          onChange={e => {
-            setAlbumId(e.target.value);
-          }}
-        />
+        <div className={styles["input"]}>{albumId}</div>
+        <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>발매일</div>
+        <div className={styles["input"]}>{albumReleaseDate}</div>
         <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>
           아티스트 ID(Spotify)
         </div>

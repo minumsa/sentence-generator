@@ -32,6 +32,10 @@
   margin: 30px 0 20px 0;
 }
 
+.input {
+  line-height: 180%;
+}
+
 /* Form Styles */
 .select,
 .input,
