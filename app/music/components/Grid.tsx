@@ -104,42 +104,44 @@ export const Grid = () => {
         isScrolling={isScrolling}
       >
         {/* <TagDisplay /> */}
-        <div
-          className={styles["tag-display-container"]}
-          style={
-            showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
-          }
-        >
-          {Object.keys(defaultTags).map((key, index) => (
-            <div
-              key={index}
-              className={styles["tag-display-item"]}
-              onClick={() => {
-                setCurrentTagKey(key);
-                setScrollCount(1);
-              }}
-              style={
-                currentTagKey === key || (currentTagKey === "" && key === "all")
-                  ? { border: "1px solid var(--text-color)" }
-                  : undefined
-              }
-            >
-              {defaultTags[key]}
-            </div>
-          ))}
+        {!isLoading && (
           <div
-            className={styles["arrow-down-container"]}
-            onClick={() => {
-              setShowAllTagItems(!showAllTagItems);
-            }}
+            className={styles["tag-display-container"]}
+            style={
+              showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
+            }
           >
-            <img
-              className={styles["arrow-down"]}
-              src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
-              alt="arrow-down"
-            />
+            {Object.keys(defaultTags).map((key, index) => (
+              <div
+                key={index}
+                className={styles["tag-display-item"]}
+                onClick={() => {
+                  setCurrentTagKey(key);
+                  setScrollCount(1);
+                }}
+                style={
+                  currentTagKey === key || (currentTagKey === "" && key === "all")
+                    ? { border: "1px solid var(--text-color)" }
+                    : undefined
+                }
+              >
+                {defaultTags[key]}
+              </div>
+            ))}
+            <div
+              className={styles["arrow-down-container"]}
+              onClick={() => {
+                setShowAllTagItems(!showAllTagItems);
+              }}
+            >
+              <img
+                className={styles["arrow-down"]}
+                src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
+                alt="arrow-down"
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {
             // FIXME: 코드 전체적으로 이런 식으로 정리하기
