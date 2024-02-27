@@ -110,26 +110,26 @@ export default function Update({ currentId }: UpdateProps) {
       setUploadDate(new Date(uploadDate));
       setAlbumKeyword(album);
       setCurrentTagKeys(tagKeys);
-      setAlbumReleaseDate(releaseDate);
 
       if (videos.length > 0) {
         setVideos(videos);
         setVideoCount(videos.length);
       }
+
+      // FIXME: 중복으로 입력되는 문제 때문에 지워놓음. 추후에 손보기.
+      // const releaseYear =
+      //   "decade" + Math.floor(Number(releaseDate.substring(0, 4)) / 10) * 10 + "s";
+
+      // if (!currentTagKeys.includes(releaseYear)) {
+      //   setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
+      // }
+
+      // if (!currentTagKeys.includes("instrumental")) {
+      //   if (genre === "classic") setCurrentTagKeys(prevTagKeys => [...prevTagKeys, "instrumental"]);
+      // }
     }
 
     getData();
-
-    const releaseYear =
-      "decade" + Math.floor(Number(albumReleaseDate.substring(0, 4)) / 10) * 10 + "s";
-
-    if (!currentTagKeys.includes(releaseYear)) {
-      setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
-    }
-
-    if (!currentTagKeys.includes("instrumental")) {
-      if (genre === "classic") setCurrentTagKeys(prevTagKeys => [...prevTagKeys, "instrumental"]);
-    }
   }, [currentId]);
 
   const handleSearch = async () => {

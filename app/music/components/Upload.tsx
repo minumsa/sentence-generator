@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
 import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
-import { contents } from "../modules/data";
+import { contents, defaultTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
@@ -43,6 +43,12 @@ export default function Upload() {
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
   const router = useRouter();
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [showTagListModal, setShowTagListModal] = useState(false);
+  const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
+  const defaultTagKeys: string[] = Object.keys(defaultTags);
+  const [newTagKey, setNewTagKey] = useState("");
+
   const handleSearch = async () => {
     const result = await searchSpotify(albumKeyword);
     setSearchData(result);
@@ -67,10 +73,11 @@ export default function Upload() {
       uploadDate,
     });
 
+    console.log("newSpotifyAlbumData", newSpotifyAlbumData);
+
     if (newSpotifyAlbumData) {
       try {
-        await uploadData(newSpotifyAlbumData, score, videos, password);
-        router.back();
+        await uploadData(newSpotifyAlbumData, score, videos, currentTagKeys, password);
       } catch (error) {
         console.error("uploadData 호출에 실패했습니다:", error);
       }
@@ -90,6 +97,36 @@ export default function Upload() {
     setAlbum(data.name);
     setSearchData(undefined);
     setIsTyping(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        setShowTagListModal(false);
+        setNewTagKey("");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalRef]);
+
+  const handleTagItemDelete = (selectedKey: string) => {
+    setCurrentTagKeys(prevTagKeys => prevTagKeys.filter(prevTagKey => prevTagKey !== selectedKey));
+  };
+
+  const handleTagItemAdd = (selectedKey: string) => {
+    setCurrentTagKeys(prevTagKeys => [...prevTagKeys, selectedKey]);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const isExisingTag = currentTagKeys.includes(newTagKey);
+
+    if (e.key === "Enter") {
+      if (!isExisingTag) setCurrentTagKeys(prevTagKeys => [...prevTagKeys, newTagKey]);
+    }
   };
 
   return (
@@ -166,7 +203,10 @@ export default function Upload() {
       </div>
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>앨범 ID</div>
-        <input className={`${styles["input"]} ${styles["input-link"]}`} value={albumId} />
+        <input
+          className={`${styles["input"]} ${styles["input-link"]}`}
+          defaultValue={albumId}
+        ></input>
       </div>
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>링크(Apple Music)</div>
@@ -287,6 +327,68 @@ export default function Upload() {
           </div>
         );
       })}
+      <div ref={modalRef} className={styles["block-container"]}>
+        <div className={styles["block-title"]}>태그</div>
+        <div className={styles["tag-list-container"]}>
+          {currentTagKeys.map((key, index) => {
+            return (
+              <div
+                className={styles["tag-item"]}
+                key={index}
+                onClick={() => {
+                  handleTagItemDelete(key);
+                }}
+              >
+                <span>{defaultTags[key]}</span>
+                <button className={styles["tag-item-delete-button"]}>×</button>
+              </div>
+            );
+          })}
+          {showTagListModal && (
+            <div className={styles["tag-list-modal-container"]}>
+              <div className={styles["tag-list-modal"]}>
+                <div className={styles["tag-list-comment"]}>태그 선택해서 추가</div>
+                <div className={styles["tag-item-container"]}>
+                  {defaultTagKeys.map((defaultTagKey, index) => {
+                    const isExisingTag = currentTagKeys.includes(defaultTagKey);
+                    return (
+                      !isExisingTag && (
+                        <div
+                          className={styles["tag-item"]}
+                          key={index}
+                          onClick={() => {
+                            handleTagItemAdd(defaultTagKey);
+                          }}
+                        >
+                          {defaultTags[defaultTagKey]}
+                          <button className={styles["tag-item-delete-button"]}>+</button>
+                        </div>
+                      )
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+          <input
+            value={newTagKey}
+            className={styles["tag-item-input"]}
+            placeholder="태그 생성"
+            onClick={() => {
+              setShowTagListModal(true);
+            }}
+            onChange={e => {
+              const tmp = e.target.value;
+              if (tmp.startsWith("#")) {
+                setNewTagKey(tmp);
+              } else {
+                setNewTagKey("#" + tmp);
+              }
+            }}
+            onKeyDown={handleKeyPress}
+          />
+        </div>
+      </div>
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>작성일</div>
         <DatePicker

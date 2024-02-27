@@ -149,6 +149,7 @@ export async function uploadData(
   newSpotifyAlbumData: SpotifyAlbumData,
   score: number,
   videos: Video[],
+  tagKeys: string[],
   password: string
 ) {
   if (newSpotifyAlbumData !== null) {
@@ -162,6 +163,7 @@ export async function uploadData(
           data: newSpotifyAlbumData,
           score: score,
           videos: videos,
+          tagKeys: tagKeys,
           password: password,
         }),
       });

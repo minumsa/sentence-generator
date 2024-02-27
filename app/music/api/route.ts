@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { newSpotifyAlbumData, score, videos, password } = await request.json();
+    const { data, score, videos, tagKeys, password } = await request.json();
     const {
       id,
       imgUrl,
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
       uploadDate,
       duration,
       tracks,
-    } = newSpotifyAlbumData;
+    } = data;
 
     if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
@@ -95,6 +95,7 @@ export async function POST(request: Request) {
       tracks,
       score,
       videos,
+      tagKeys,
     });
     await newData.save();
     return NextResponse.json(newData.toJSON());
