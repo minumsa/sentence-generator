@@ -527,6 +527,7 @@
 
 .paragraph-container {
   position: relative;
+  width: 100%;
 }
 
 .paragraph {
