@@ -16,7 +16,7 @@ export const TagDisplay = () => {
       className={styles["container"]}
       style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
     >
-      {tags.map((tag, index) => (
+      {Object.values(tags).map((tag, index) => (
         <div
           key={index}
           className={styles["tag-item"]}
