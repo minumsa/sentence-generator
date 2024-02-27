@@ -189,7 +189,7 @@ export const updateData = async (
   newSpotifyAlbumData: SpotifyAlbumData,
   score: number,
   videos: Video[],
-  tagNames: string[],
+  tagKeys: string[],
   password: string
 ) => {
   if (newSpotifyAlbumData !== null) {
@@ -204,7 +204,7 @@ export const updateData = async (
           newSpotifyAlbumData,
           score,
           videos,
-          tagNames,
+          tagKeys,
           password,
         }),
       });

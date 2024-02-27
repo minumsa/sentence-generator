@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import styles from "./TagDisplay.module.css";
-import { tags } from "../modules/data";
+import { defaultTags } from "../modules/data";
 import { useState } from "react";
 
 export const TagDisplay = () => {
@@ -16,7 +16,7 @@ export const TagDisplay = () => {
       className={styles["container"]}
       style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
     >
-      {Object.values(tags).map((tag, index) => (
+      {Object.values(defaultTags).map((tag, index) => (
         <div
           key={index}
           className={styles["tag-item"]}

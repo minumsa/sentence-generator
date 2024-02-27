@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
 import { fetchDataById, fetchSpotify, searchSpotify, updateData } from "../modules/api";
-import { contents, tags } from "../modules/data";
+import { contents, defaultTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
@@ -47,9 +47,10 @@ export default function Update({ currentId }: UpdateProps) {
   const [searchData, setSearchData] = useState<SearchData[]>();
   const [showAlbumListModal, setShowAlbumListModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
-  const [tagNames, setTagNames] = useState<string[]>([]);
+  const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
+  const defaultTagKeys: string[] = Object.keys(defaultTags);
   const [showTagListModal, setShowTagListModal] = useState(false);
-  const [newTagName, setNewTagName] = useState("");
+  const [newTagKey, setNewTagKey] = useState("");
   const router = useRouter();
 
   // 수정 API
@@ -64,7 +65,7 @@ export default function Update({ currentId }: UpdateProps) {
 
     if (newSpotifyAlbumData) {
       try {
-        await updateData(currentId, newSpotifyAlbumData, score, videos, tagNames, password);
+        await updateData(currentId, newSpotifyAlbumData, score, videos, currentTagKeys, password);
         router.back();
       } catch (error) {
         console.error("updateData 호출에 실패했습니다:", error);
@@ -93,7 +94,7 @@ export default function Update({ currentId }: UpdateProps) {
         uploadDate,
         score,
         videos,
-        tagNames,
+        tagKeys,
         album,
         releaseDate,
       } = fetchData;
@@ -107,18 +108,17 @@ export default function Update({ currentId }: UpdateProps) {
       setScore(score);
       setUploadDate(new Date(uploadDate));
       setAlbumKeyword(album);
-      setTagNames(tagNames);
+      setCurrentTagKeys(tagKeys);
 
-      const albumReleaseYear =
-        "#" + Math.floor(Number(releaseDate.substring(0, 4)) / 10) * 10 + "년대";
+      const releaseYear =
+        "decade" + Math.floor(Number(releaseDate.substring(0, 4)) / 10) * 10 + "s";
 
-      if (!tagNames.includes(albumReleaseYear)) {
-        setTagNames(prevTagNames => [...prevTagNames, albumReleaseYear]);
+      if (!currentTagKeys.includes(releaseYear)) {
+        setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
       }
 
-      if (!tagNames.includes("#가사 없는 음악 🎻")) {
-        if (genre === "classic")
-          setTagNames(prevTagNames => [...prevTagNames, "#가사 없는 음악 🎻"]);
+      if (!currentTagKeys.includes("instrumental")) {
+        if (genre === "classic") setCurrentTagKeys(prevTagKeys => [...prevTagKeys, "instrumental"]);
       }
 
       if (videos.length > 0) {
@@ -159,7 +159,7 @@ export default function Update({ currentId }: UpdateProps) {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         setShowAlbumListModal(false);
         setShowTagListModal(false);
-        setNewTagName("");
+        setNewTagKey("");
       }
     };
 
@@ -170,7 +170,7 @@ export default function Update({ currentId }: UpdateProps) {
   }, [modalRef]);
 
   // useEffect(() => {
-  //   setTagNames([
+  //   setTags([
   //     "#한국대중음악상 🏆",
   //     "#한국대중음악 100대 명반 🏆",
   //     "#롤링스톤즈 500대 명반 👅",
@@ -179,20 +179,19 @@ export default function Update({ currentId }: UpdateProps) {
   //   ]);
   // }, []);
 
-  const handleTagItemDelete = (deleteIndex: number) => {
-    setTagNames(prevState => prevState.filter((_, index) => index !== deleteIndex));
-    tagNames.splice(deleteIndex, 1);
+  const handleTagItemDelete = (selectedKey: string) => {
+    setCurrentTagKeys(prevTagKeys => prevTagKeys.filter(prevTagKey => prevTagKey !== selectedKey));
   };
 
-  const handleTagItemAdd = (tag: string) => {
-    setTagNames(prevState => [...prevState, tag]);
+  const handleTagItemAdd = (selectedKey: string) => {
+    setCurrentTagKeys(prevTagKeys => [...prevTagKeys, selectedKey]);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const isExisingTag = tagNames.includes(newTagName);
+    const isExisingTag = currentTagKeys.includes(newTagKey);
 
     if (e.key === "Enter") {
-      if (!isExisingTag) setTagNames(prevTagNames => [...prevTagNames, newTagName]);
+      if (!isExisingTag) setCurrentTagKeys(prevTagKeys => [...prevTagKeys, newTagKey]);
     }
   };
 
@@ -414,16 +413,16 @@ export default function Update({ currentId }: UpdateProps) {
       <div ref={modalRef} className={styles["block-container"]}>
         <div className={styles["block-title"]}>태그</div>
         <div className={styles["tag-list-container"]}>
-          {tagNames.map((tagName, index) => {
+          {currentTagKeys.map((key, index) => {
             return (
               <div
                 className={styles["tag-item"]}
                 key={index}
                 onClick={() => {
-                  handleTagItemDelete(index);
+                  handleTagItemDelete(key);
                 }}
               >
-                <span>{tagName}</span>
+                <span>{defaultTags[key]}</span>
                 <button className={styles["tag-item-delete-button"]}>×</button>
               </div>
             );
@@ -433,18 +432,18 @@ export default function Update({ currentId }: UpdateProps) {
               <div className={styles["tag-list-modal"]}>
                 <div className={styles["tag-list-comment"]}>태그 선택해서 추가</div>
                 <div className={styles["tag-item-container"]}>
-                  {tags.map((tag, index) => {
-                    const isExisingTag = tagNames.includes(tag);
+                  {defaultTagKeys.map((defaultTagKey, index) => {
+                    const isExisingTag = currentTagKeys.includes(defaultTagKey);
                     return (
                       !isExisingTag && (
                         <div
                           className={styles["tag-item"]}
                           key={index}
                           onClick={() => {
-                            handleTagItemAdd(tag);
+                            handleTagItemAdd(defaultTagKey);
                           }}
                         >
-                          {tag}
+                          {defaultTags[defaultTagKey]}
                           <button className={styles["tag-item-delete-button"]}>+</button>
                         </div>
                       )
@@ -455,7 +454,7 @@ export default function Update({ currentId }: UpdateProps) {
             </div>
           )}
           <input
-            value={newTagName}
+            value={newTagKey}
             className={styles["tag-item-input"]}
             placeholder="태그 생성"
             onClick={() => {
@@ -464,14 +463,14 @@ export default function Update({ currentId }: UpdateProps) {
             onChange={e => {
               const tmp = e.target.value;
               if (tmp.startsWith("#")) {
-                setNewTagName(tmp);
+                setNewTagKey(tmp);
               } else {
-                setNewTagName("#" + tmp);
+                setNewTagKey("#" + tmp);
               }
             }}
             onKeyDown={handleKeyPress}
             // onMouseEnter={() => {
-            //   setTagNames(prevTagNames => [...prevTagNames, newTagName]);
+            //   setTags(prevTagNames => [...prevTagNames, newTagName]);
             // }}
           />
         </div>

@@ -74,7 +74,7 @@ export interface AlbumInfo {
   tracks: number;
   score: number;
   videos: Video[];
-  tagNames: string[];
+  tagKeys: string[];
 }
 
 export interface PageProps {
@@ -142,7 +142,11 @@ export const isAdminPage = (pathName: string) => {
   return pathName?.includes("admin");
 };
 
-export const tags = {
+export interface Tags {
+  [key: string]: string;
+}
+
+export const defaultTags: Tags = {
   clining: "#청소하면서 듣는 음악 🧹",
   workout: "#운동하면서 듣는 음악 🏋🏻‍♂️",
   writing: "#글 쓰면서 듣는 음악 ✍🏻",
@@ -160,6 +164,7 @@ export const tags = {
   christmas: "#크리스마스 🎅",
   diva: "#디바 🫅",
   laborSongs: "#노동요 👷",
+  decade2020s: "#2020년대",
   decade2010s: "#2010년대",
   decade2000s: "#2000년대",
   decade1990s: "#1990년대",

@@ -134,7 +134,7 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { currentId, newSpotifyAlbumData, score, videos, tagNames, password } =
+    const { currentId, newSpotifyAlbumData, score, videos, tagKeys, password } =
       await request.json();
     const {
       id,
@@ -181,7 +181,7 @@ export async function PUT(request: Request) {
       tracks,
       score,
       videos,
-      tagNames,
+      tagKeys,
     });
 
     await originalData.save();
