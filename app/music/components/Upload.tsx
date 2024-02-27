@@ -73,8 +73,6 @@ export default function Upload() {
       uploadDate,
     });
 
-    console.log("newSpotifyAlbumData", newSpotifyAlbumData);
-
     if (newSpotifyAlbumData) {
       try {
         await uploadData(newSpotifyAlbumData, score, videos, currentTagKeys, password);
