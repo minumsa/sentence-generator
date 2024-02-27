@@ -185,4 +185,5 @@ export const defaultTags: Tags = {
   decade1970s: "#1970년대",
   decade1960s: "#1960년대",
   decade1950s: "#1950년대",
+  "": "모두 보기",
 };

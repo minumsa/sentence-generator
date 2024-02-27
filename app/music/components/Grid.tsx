@@ -115,10 +115,14 @@ export const Grid = () => {
               key={index}
               className={styles["tag-display-item"]}
               onClick={() => {
-                // setData(data.filter(x => x.tagKeys.includes(key)));
                 setCurrentTagKey(key);
                 setScrollCount(1);
               }}
+              style={
+                currentTagKey === key || (currentTagKey === "" && key === "all")
+                  ? { border: "1px solid var(--text-color)" }
+                  : undefined
+              }
             >
               {defaultTags[key]}
             </div>

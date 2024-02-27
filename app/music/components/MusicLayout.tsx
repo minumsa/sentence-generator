@@ -28,7 +28,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </main>
         {/* 스크롤 바 추가 */}
-        <ScrollBar />
+        {/* <ScrollBar /> */}
       </div>
     </div>
   );
