@@ -1,24 +1,21 @@
 import { useRouter } from "next/navigation";
 import styles from "./TagDisplay.module.css";
+import { tags } from "../modules/data";
+import { useState } from "react";
 
 export const TagDisplay = () => {
   const router = useRouter();
-  const tags = [
-    "#청소하면서 듣는 음악 🧹",
-    "#운동하면서 듣는 음악 🏋🏻‍♂️",
-    "#글 쓰면서 듣는 음악 ✍🏻",
-    "#자기 전에 듣는 음악 😴",
-    "#산책하면서 듣는 음악 🚶",
-    "#춤추면서 듣는 음악 🕺",
-    "#가사 없는 음악 🎻",
-    "#코딩하면서 듣는 음악 👨‍💻",
-    "#샤워하면서 듣는 음악 🛀",
-    "#여행 갈 때 듣는 음악 ✈️",
-  ];
+  const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
+
   const colors = ["#A5494F", "#AD7E48", "#A7A15A", "#48864D", "#4A57BA", "#5F388B"];
 
+  const handleTagToggle = () => {};
+
   return (
-    <div className={styles["container"]}>
+    <div
+      className={styles["container"]}
+      style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
+    >
       {tags.map((tag, index) => (
         <div
           key={index}
@@ -31,6 +28,19 @@ export const TagDisplay = () => {
           {tag}
         </div>
       ))}
+      <div
+        className={styles["arrow-down-container"]}
+        // style={showAllTagItems ? { top: "9px" } : { top: "12px" }}
+        onClick={() => {
+          setShowAllTagItems(!showAllTagItems);
+        }}
+      >
+        <img
+          className={styles["arrow-down"]}
+          src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
+          alt="arrow-down"
+        />
+      </div>
     </div>
   );
 };
