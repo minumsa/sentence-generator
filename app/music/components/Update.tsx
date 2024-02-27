@@ -40,6 +40,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [score, setScore] = useState<number>(0);
+  const [albumReleaseDate, setAlbumReleaseDate] = useState("");
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
@@ -109,17 +110,7 @@ export default function Update({ currentId }: UpdateProps) {
       setUploadDate(new Date(uploadDate));
       setAlbumKeyword(album);
       setCurrentTagKeys(tagKeys);
-
-      const releaseYear =
-        "decade" + Math.floor(Number(releaseDate.substring(0, 4)) / 10) * 10 + "s";
-
-      if (!currentTagKeys.includes(releaseYear)) {
-        setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
-      }
-
-      if (!currentTagKeys.includes("instrumental")) {
-        if (genre === "classic") setCurrentTagKeys(prevTagKeys => [...prevTagKeys, "instrumental"]);
-      }
+      setAlbumReleaseDate(releaseDate);
 
       if (videos.length > 0) {
         setVideos(videos);
@@ -128,6 +119,17 @@ export default function Update({ currentId }: UpdateProps) {
     }
 
     getData();
+
+    const releaseYear =
+      "decade" + Math.floor(Number(albumReleaseDate.substring(0, 4)) / 10) * 10 + "s";
+
+    if (!currentTagKeys.includes(releaseYear)) {
+      setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
+    }
+
+    if (!currentTagKeys.includes("instrumental")) {
+      if (genre === "classic") setCurrentTagKeys(prevTagKeys => [...prevTagKeys, "instrumental"]);
+    }
   }, [currentId]);
 
   const handleSearch = async () => {
@@ -168,16 +170,6 @@ export default function Update({ currentId }: UpdateProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [modalRef]);
-
-  // useEffect(() => {
-  //   setTags([
-  //     "#한국대중음악상 🏆",
-  //     "#한국대중음악 100대 명반 🏆",
-  //     "#롤링스톤즈 500대 명반 👅",
-  //     "#크리스마스 🎅",
-  //     "#노동요 👨‍💻",
-  //   ]);
-  // }, []);
 
   const handleTagItemDelete = (selectedKey: string) => {
     setCurrentTagKeys(prevTagKeys => prevTagKeys.filter(prevTagKey => prevTagKey !== selectedKey));
@@ -283,7 +275,9 @@ export default function Update({ currentId }: UpdateProps) {
             </div>
           )}
         </div>
-        <div className={styles["block-title"]}>앨범 ID(Spotify)</div>
+        <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>
+          앨범 ID(Spotify)
+        </div>
         <input
           className={styles["input"]}
           value={albumId}
@@ -291,7 +285,9 @@ export default function Update({ currentId }: UpdateProps) {
             setAlbumId(e.target.value);
           }}
         />
-        <div className={styles["block-title"]}>아티스트 ID(Spotify)</div>
+        <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>
+          아티스트 ID(Spotify)
+        </div>
         <input
           className={styles["input"]}
           value={artistId}
@@ -311,7 +307,6 @@ export default function Update({ currentId }: UpdateProps) {
             setScore(value);
           }}
           className={styles["rc-rate"]}
-          style={{ fontSize: "45px", marginBottom: "30px" }}
         />
       </div>
       <div className={styles["block-container"]}>
@@ -339,7 +334,6 @@ export default function Update({ currentId }: UpdateProps) {
                   <a
                     href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
                     target="_blank"
-                    className={styles["block-title"]}
                   >
                     <div>{`영상 제목 ${videoNumber}`}</div>
                   </a>
@@ -398,7 +392,9 @@ export default function Update({ currentId }: UpdateProps) {
                   setVideos(tmpVideos);
                 }}
               />
-              <div className={styles["block-title"]}>{`영상 링크 ${videoNumber}`}</div>
+              <div
+                className={`${styles["block-title"]} ${styles["video-link-title"]}`}
+              >{`영상 링크 ${videoNumber}`}</div>
               <input
                 className={`${styles["input"]} ${styles["input-link"]}`}
                 value={videos[index].url}
@@ -469,9 +465,6 @@ export default function Update({ currentId }: UpdateProps) {
               }
             }}
             onKeyDown={handleKeyPress}
-            // onMouseEnter={() => {
-            //   setTags(prevTagNames => [...prevTagNames, newTagName]);
-            // }}
           />
         </div>
       </div>

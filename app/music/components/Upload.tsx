@@ -1,5 +1,5 @@
-import { forwardRef, useEffect, useState } from "react";
-import styles from "../music.module.css";
+import { useEffect, useState } from "react";
+import styles from "./update.module.css";
 import React from "react";
 import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
 import { contents } from "../modules/data";
@@ -93,38 +93,29 @@ export default function Upload() {
   };
 
   return (
-    <div
-      className={styles["album-container"]}
-      style={{
-        minWidth: 0,
-        width: "100%",
-        flexDirection: "column",
-        alignItems: "center",
-        paddingTop: "50px",
-      }}
-    >
-      <div className={styles["upload-container"]}>
-        <div className={styles["title"]}>업로드 페이지</div>
-        <div className={styles["upload-item-title"]}>장르</div>
-        <div className={styles["select-container"]}>
-          <select
-            className={styles["select"]}
-            value={genre}
-            onChange={e => {
-              setGenre(e.target.value);
-            }}
-          >
-            <option value="">--장르를 선택해주세요--</option>
-            {Object.entries(contents).map(([key, value]) => {
-              return (
-                <option value={key} key={key}>
-                  {value}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className={styles["upload-item-title"]}>앨범 제목</div>
+    <div className={styles["container"]}>
+      <div className={styles["page-title"]}>업로드 페이지</div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>장르</div>
+        <select
+          className={styles["select"]}
+          value={genre}
+          onChange={e => {
+            setGenre(e.target.value);
+          }}
+        >
+          <option value="">--장르를 선택해주세요--</option>
+          {Object.entries(contents).map(([key, value]) => {
+            return (
+              <option value={key} key={key}>
+                {value}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>앨범 제목</div>
         <div>
           <input
             className={styles["input"]}
@@ -172,9 +163,13 @@ export default function Upload() {
             })}
           </div>
         </div>
-        <div className={styles["upload-item-title"]}>앨범 ID</div>
+      </div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>앨범 ID</div>
         <input className={`${styles["input"]} ${styles["input-link"]}`} value={albumId} />
-        <div className={styles["upload-item-title"]}>링크(Apple Music)</div>
+      </div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>링크(Apple Music)</div>
         <input
           className={`${styles["input"]} ${styles["input-link"]}`}
           value={link}
@@ -182,7 +177,9 @@ export default function Upload() {
             setLink(e.target.value);
           }}
         />
-        <div className={styles["upload-item-title"]}>별점</div>
+      </div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>별점</div>
         <Rate
           defaultValue={3}
           count={5}
@@ -191,9 +188,10 @@ export default function Upload() {
             setScore(value);
           }}
           className={styles["rc-rate"]}
-          style={{ fontSize: "45px", marginBottom: "30px" }}
         />
-        <div className={styles["upload-item-title"]}>글</div>
+      </div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>글</div>
         <textarea
           className={`${styles["input"]} ${styles["input-text"]}`}
           value={text}
@@ -201,78 +199,105 @@ export default function Upload() {
             setText(e.target.value);
           }}
         />
-        {new Array(videoCount).fill(null).map((_, index) => {
-          const tmpVideos = [...videos];
-          const videoNumber = index + 1;
+      </div>
+      {new Array(videoCount).fill(null).map((_, index) => {
+        const tmpVideos = [...videos];
+        const videoNumber = index + 1;
 
-          return (
-            <div key={index}>
-              <div className={styles["upload-item-title"]}>
-                {index === 0 ? (
-                  <a
-                    href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
-                    target="_blank"
-                    style={{ color: "#cfcfcf" }}
-                  >
-                    <span>{`영상 제목 ${videoNumber}`}</span>
-                  </a>
-                ) : (
-                  <span>{`영상 제목 ${videoNumber}`}</span>
-                )}
-                {index === 0 && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      marginLeft: "10px",
-                      backgroundColor: "#eee",
-                      color: "#333",
-                      padding: "0 5px",
-                      borderRadius: "10px",
-                      fontWeight: 500,
-                      fontSize: "1rem",
-                      marginTop: "5.5px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      setVideoCount(prev => prev + 1);
-                      setVideos([...videos, { title: "", url: "" }]);
-                    }}
-                  >
-                    +
-                  </span>
-                )}
-              </div>
-              <input
-                className={`${styles["input"]} ${styles["input-link"]}`}
-                value={videos[index].title}
-                onChange={e => {
-                  // setMusicVideoTitle(e.target.value);
-                  tmpVideos[index] = { ...tmpVideos[index], title: e.target.value };
-                  setVideos(tmpVideos);
-                }}
-              />
-              <div className={styles["upload-item-title"]}>영상 링크</div>
-              <input
-                className={`${styles["input"]} ${styles["input-link"]}`}
-                value={videos[index].url}
-                onChange={e => {
-                  tmpVideos[index] = { ...tmpVideos[index], url: e.target.value };
-                  setVideos(tmpVideos);
-                }}
-              />
+        return (
+          <div key={index} className={styles["block-container"]}>
+            <div
+              className={styles["block-title"]}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              {index === 0 ? (
+                <a
+                  href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
+                  target="_blank"
+                >
+                  <div>{`영상 제목 ${videoNumber}`}</div>
+                </a>
+              ) : (
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div>{`영상 제목 ${videoNumber}`}</div>
+                  <div className={styles["video-block-button-container"]}>
+                    <div
+                      className={styles["video-block-button"]}
+                      onClick={() => {
+                        setVideoCount(prev => prev - 1);
+                        const tmpVideos = [...videos];
+                        tmpVideos.splice(index, 1);
+                        setVideos(tmpVideos);
+                      }}
+                    >
+                      −
+                    </div>
+                  </div>
+                </div>
+              )}
+              {index === 0 && (
+                <>
+                  <div className={styles["video-block-button-container"]}>
+                    <div
+                      className={styles["video-block-button"]}
+                      onClick={() => {
+                        setVideoCount(prev => prev + 1);
+                        setVideos([...videos, { title: "", url: "" }]);
+                      }}
+                    >
+                      +
+                    </div>
+                  </div>
+                  <div className={styles["video-block-button-container"]}>
+                    <div
+                      className={styles["video-block-button"]}
+                      onClick={() => {
+                        setVideoCount(prev => prev - 1);
+                        const tmpVideos = [...videos];
+                        tmpVideos.splice(index, 1);
+                        setVideos(tmpVideos);
+                      }}
+                    >
+                      −
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-          );
-        })}
-        <div className={styles["upload-item-title"]}>작성일</div>
+            <input
+              className={`${styles["input"]} ${styles["input-link"]}`}
+              value={videos[index].title}
+              onChange={e => {
+                // setMusicVideoTitle(e.target.value);
+                tmpVideos[index] = { ...tmpVideos[index], title: e.target.value };
+                setVideos(tmpVideos);
+              }}
+            />
+            <div
+              className={`${styles["block-title"]} ${styles["video-link-title"]}`}
+            >{`영상 링크 ${videoNumber}`}</div>
+            <input
+              className={`${styles["input"]} ${styles["input-link"]}`}
+              value={videos[index].url}
+              onChange={e => {
+                tmpVideos[index] = { ...tmpVideos[index], url: e.target.value };
+                setVideos(tmpVideos);
+              }}
+            />
+          </div>
+        );
+      })}
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>작성일</div>
         <DatePicker
           selected={uploadDate}
           onChange={date => date && setUploadDate(date)}
           dateFormat={"yyyy/MM/dd"}
           className={styles["date-input"]}
         />
-        <div className={styles["upload-item-title"]} style={{ marginTop: "50px" }}>
-          관리자 비밀번호
-        </div>
+      </div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>관리자 비밀번호</div>
         <input
           className={styles["input"]}
           value={password}
@@ -280,17 +305,17 @@ export default function Upload() {
             setPassword(e.target.value);
           }}
           onKeyDown={handlePasswordEnter}
-          style={{ width: "240px" }}
+          style={{ width: "300px" }}
         />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            className={`${styles["button"]} ${styles["submit"]}`}
-            onClick={() => {
-              handleUpload();
-            }}
-          >
-            제출하기
-          </div>
+      </div>
+      <div className={styles["submit-container"]}>
+        <div
+          className={`${styles["button"]} ${styles["submit"]}`}
+          onClick={() => {
+            handleUpload();
+          }}
+        >
+          제출하기
         </div>
       </div>
     </div>
