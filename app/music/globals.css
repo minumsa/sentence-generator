@@ -135,3 +135,9 @@ button {
   font-size: inherit;
   font-family: inherit;
 }
+
+@media (max-width: 525px) {
+  h2 {
+    text-align: center;
+  }
+}
