@@ -4,19 +4,20 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    require("dotenv").config();
+    // MongoDB 연결
     await connectMongoDB();
 
-    // 몽고DB에서 데이터 가져오기
+    // URL 파싱
     const url = new URL(request.url);
     const currentPage = Number(url.searchParams.get("currentPage"));
     const perPageCount = Number(url.searchParams.get("perPageCount"));
     const pathName = url.searchParams.get("pathName");
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
+    const currentTagKey = url.searchParams.get("currentTagKey");
 
+    // 정렬 키 설정
     let sortKey = {};
-
     if (currentMethod === "발매일") {
       sortKey = { releaseDate: currentCriteria };
     } else if (currentMethod === "작성일") {
@@ -29,19 +30,35 @@ export async function GET(request: Request) {
       sortKey = { score: currentCriteria, artist: 1 };
     }
 
-    // pathName이 장르(pop, kpop...)인 경우 해당 장르로 필터링
-    // 그렇지 않으면 모든 데이터 가져오기(query === {})
-    const query = pathName === "" ? {} : { genre: pathName };
+    // 쿼리 구성
+    let query: any = {};
+
+    // 메인 페이지인 경우
+    if (pathName === "") {
+      if (currentTagKey) {
+        query.tagKeys = currentTagKey;
+      }
+    } else {
+      query.genre = pathName;
+    }
+
+    // MongoDB 쿼리 실행
     const genreDataLength = await Music.find(query).count();
-
-    // 페이지, 정렬 상태에 따라 데이터 필터링해서 가져오기
-    // TODO: 몽고DB 메서드 skip, limit 등 나중에 블로그에 정리
     const startIndex = perPageCount * currentPage - perPageCount;
-    const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
 
+    let slicedData: any;
+
+    if (query.tagKeys) {
+      slicedData = await Music.find(query).sort(sortKey);
+    } else {
+      slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
+    }
+
+    // 결과 반환
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
     console.error(error);
+    // 클라이언트에게 더 유용한 에러 메시지를 반환
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
   }
 }

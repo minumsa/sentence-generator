@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAtomValue } from "jotai";
 import React from "react";
-import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
+import { AlbumInfo, criteriaAtom, defaultTags, methodAtom } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
-import { TagDisplay } from "./TagDisplay";
 
 export const Grid = () => {
+  const router = useRouter();
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);
@@ -28,6 +28,10 @@ export const Grid = () => {
   const criteria = useAtomValue(criteriaAtom);
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
+  const [currentTagKey, setCurrentTagKey] = useState<string>("");
+
+  console.log(totalScrollCount);
 
   useEffect(() => {
     Aos.init();
@@ -45,6 +49,7 @@ export const Grid = () => {
         currentPage: scrollCount,
         currentMethod: "별점",
         currentCriteria: criteria,
+        currentTagKey: currentTagKey,
       });
 
       if (scrollCount === 1) {
@@ -69,7 +74,7 @@ export const Grid = () => {
         setIsScrolling(true);
       }
     }
-  }, [method, criteria, scrollCount, perPageCount]);
+  }, [method, criteria, scrollCount, perPageCount, currentTagKey]);
 
   const [divWidth, setDivWidth] = useState(0);
   const myDivRef = useRef<any>(null);
@@ -100,7 +105,39 @@ export const Grid = () => {
         isLoading={isLoading}
         isScrolling={isScrolling}
       >
-        <TagDisplay />
+        {/* <TagDisplay /> */}
+        <div
+          className={styles["tag-display-container"]}
+          style={
+            showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
+          }
+        >
+          {Object.keys(defaultTags).map((key, index) => (
+            <div
+              key={index}
+              className={styles["tag-display-item"]}
+              onClick={() => {
+                // setData(data.filter(x => x.tagKeys.includes(key)));
+                setCurrentTagKey(key);
+                setScrollCount(1);
+              }}
+            >
+              {defaultTags[key]}
+            </div>
+          ))}
+          <div
+            className={styles["arrow-down-container"]}
+            onClick={() => {
+              setShowAllTagItems(!showAllTagItems);
+            }}
+          >
+            <img
+              className={styles["arrow-down"]}
+              src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
+              alt="arrow-down"
+            />
+          </div>
+        </div>
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {
             // FIXME: 코드 전체적으로 이런 식으로 정리하기

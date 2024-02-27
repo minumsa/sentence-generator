@@ -1,4 +1,4 @@
-import { AlbumInfo, CriteriaType, SpotifyAlbumData, MethodType, UpdateInfo } from "./data";
+import { CriteriaType, SpotifyAlbumData, MethodType, UpdateInfo } from "./data";
 
 interface FetchData {
   pathName: string;
@@ -6,6 +6,7 @@ interface FetchData {
   currentPage: number;
   currentMethod: MethodType;
   currentCriteria: CriteriaType;
+  currentTagKey: string;
 }
 
 interface SearchData {
@@ -32,9 +33,10 @@ export async function fetchData({
   currentPage,
   currentMethod,
   currentCriteria,
+  currentTagKey,
 }: FetchData) {
   try {
-    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
+    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
     const url = `/music/api${queryString}`;
 
     const response = await fetch(url, {

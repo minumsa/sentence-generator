@@ -9,17 +9,15 @@ export const TagDisplay = () => {
 
   const colors = ["#A5494F", "#AD7E48", "#A7A15A", "#48864D", "#4A57BA", "#5F388B"];
 
-  const handleTagToggle = () => {};
-
   return (
     <div
-      className={styles["container"]}
+      className={styles["tag-display-container"]}
       style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
     >
       {Object.values(defaultTags).map((tag, index) => (
         <div
           key={index}
-          className={styles["tag-item"]}
+          className={styles["tag-display-item"]}
           // style={{ backgroundColor: colors[index % colors.length] }}
           onClick={() => {
             router.push("/music/pop");

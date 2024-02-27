@@ -1,9 +1,9 @@
-.container {
+.tag-display-container {
   display: none;
 }
 
 @media (max-width: 525px) {
-  .container {
+  .tag-display-container {
     position: relative;
     display: flex;
     /* flex-wrap: wrap; */
@@ -19,7 +19,7 @@
     white-space: nowrap;
   }
 
-  .tag-item {
+  .tag-display-item {
     /* display: inline; */
     display: flex;
     align-items: center;
