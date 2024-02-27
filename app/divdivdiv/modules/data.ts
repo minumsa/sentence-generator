@@ -121,7 +121,7 @@ export const readme = {
   },
   music: {
     title: {
-      ko: "카버 차트",
+      ko: "카버차트",
       en: "Carver Chart",
     },
     text: {
@@ -183,7 +183,7 @@ export const iconTitle = {
   },
   music: {
     en: "Carver Chart",
-    ko: "카버 차트",
+    ko: "카버차트",
   },
   barbershop: {
     en: "Barbershop",
