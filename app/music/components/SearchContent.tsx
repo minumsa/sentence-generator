@@ -93,15 +93,13 @@ export default function SearchContent({ currentKeyword, currentPage }: PageProps
               alt="search-page-input-icon"
             ></img>
           </div>
-          {isLoading ? undefined : (
-            <div className={styles["search-result-container"]}>
-              {decodedKeyword
-                ? totalDataLength
-                  ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
-                  : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
-                : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
-            </div>
-          )}
+          <div className={styles["search-result-container"]}>
+            {decodedKeyword
+              ? totalDataLength
+                ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
+                : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
+              : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
+          </div>
           <div className={styles["search-tag-container"]}>
             {Object.keys(defaultTags).map((key, index) => (
               <div
