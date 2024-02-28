@@ -67,8 +67,12 @@ export const PostText = ({ albumData }: PostTextProps) => {
         );
       })}
       <div className={styles["post-divider"]}></div>
-      <div className={styles["post-date"]}>작성일</div>
-      <div>{formatDate(albumData.uploadDate.toString())}</div>
+      <div className={styles["post-date-container"]}>
+        <div className={styles["post-date"]} style={{ margin: "0 0 -4px 0" }}>
+          작성일
+        </div>
+        <div>{formatDate(albumData.uploadDate.toString())}</div>
+      </div>
     </article>
   );
 };

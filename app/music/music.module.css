@@ -466,6 +466,12 @@
   opacity: 70%;
 }
 
+.link-icon {
+  position: absolute;
+  margin: 6.5px 0 0 5px;
+  height: 18px;
+}
+
 .information {
   display: flex;
   border-bottom: 1px solid var(--text-color);
@@ -1151,6 +1157,21 @@
 }
 
 @media (max-width: 525px) {
+  .post-date-container {
+    font-size: 1.05rem;
+  }
+
+  .post-date {
+    font-size: 1.05rem;
+  }
+
+  .link-icon {
+    position: absolute;
+    margin-left: 4px;
+    margin-top: 5px;
+    height: 16px;
+  }
+
   .post-label {
     display: none;
   }
@@ -1598,13 +1619,13 @@
   }
 
   .select {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .input {
     height: 30px;
     padding: 0;
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 180%;
   }
 
@@ -1623,6 +1644,8 @@
 
   .album-metadata {
     z-index: 1;
+    width: 100%;
+    font-size: 1.05rem;
   }
 
   .artist-page-image-container {
@@ -1637,8 +1660,7 @@
   }
 
   .grid-album-image-container {
-    width: 280px;
-    height: 280px;
+    width: 100%;
   }
 
   .grid-div {

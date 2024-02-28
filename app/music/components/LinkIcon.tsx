@@ -1,18 +1,10 @@
 import { isMobile } from "react-device-detect";
+import styles from "../music.module.css";
 
 export const LinkIcon = () => {
   return (
     <span>
-      <img
-        src="/music/link.svg"
-        alt="link-icon"
-        style={{
-          position: "absolute",
-          marginLeft: "3px",
-          marginTop: isMobile ? "4px" : "6px",
-          height: "20px",
-        }}
-      ></img>
+      <img className={styles["link-icon"]} src="/music/link.svg" alt="link-icon" />
     </span>
   );
 };
