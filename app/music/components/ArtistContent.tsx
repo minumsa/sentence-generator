@@ -26,7 +26,7 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
   useEffect(() => {
     async function loadData() {
       const result = await FetchArtistData({
-        pathName: "",
+        pathName: "search",
         perPageCount,
         currentPage,
         artistId,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AlbumInfo, criteriaAtom, defaultTags, isAdminPage, methodAtom } from "../modules/data";
-import { SearchData } from "../modules/api";
+import { SearchData, fetchData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
@@ -9,10 +9,11 @@ import { usePathname, useRouter } from "next/navigation";
 
 interface PageProps {
   currentKeyword: string;
+  currentTagName: string;
   currentPage: number;
 }
 
-export default function SearchContent({ currentKeyword, currentPage }: PageProps) {
+export default function SearchContent({ currentKeyword, currentTagName, currentPage }: PageProps) {
   const router = useRouter();
   const pathName = usePathname();
   const [data, setData] = useState<AlbumInfo[]>([]);
@@ -68,43 +69,67 @@ export default function SearchContent({ currentKeyword, currentPage }: PageProps
       ? router.push(`/music/admin/search/${keyword}/1`)
       : router.push(`/music/search/${keyword}/1`);
   }
+  useEffect(() => {
+    async function loadTagData() {
+      const result = await fetchData({
+        pathName: "search",
+        perPageCount,
+        currentPage,
+        currentMethod: "별점",
+        currentCriteria: criteria,
+        currentTagKey: currentTagName,
+      });
+
+      setData(result?.slicedData);
+      const genreDataLength = result?.genreDataLength;
+      setTotalDataLength(genreDataLength);
+      setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
+    }
+
+    if (currentTagName) {
+      loadTagData();
+    }
+  }, [criteria, currentPage, currentTagName, perPageCount]);
 
   return (
-    <>
-      <ContentLayout
-        currentPage={currentPage}
-        perPageCount={perPageCount}
-        totalDataLength={totalDataLength}
-        isLoading={isLoading}
-      >
-        <div className={styles["search-input-container"]}>
-          <div className={styles["search-page-input-container"]}>
-            <input
-              className={styles["search-page-input"]}
-              placeholder="앨범, 아티스트, 키워드 검색"
-              onChange={e => {
-                setKeyword(e.target.value);
-              }}
-              onKeyDown={handleEnter}
-            />
-            <img
-              className={styles["search-page-input-icon"]}
-              src={"/music/magnifying-glass.svg"}
-              alt="search-page-input-icon"
-            ></img>
-          </div>
-          <div className={styles["search-result-container"]}>
-            {decodedKeyword
-              ? totalDataLength
-                ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과`
-                : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
-              : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
-          </div>
-          <div className={styles["search-tag-container"]}>
-            {Object.keys(defaultTags).map((key, index) => (
+    <ContentLayout
+      currentPage={currentPage}
+      perPageCount={perPageCount}
+      totalDataLength={totalDataLength}
+      isLoading={isLoading}
+    >
+      <div className={styles["search-input-container"]}>
+        <div className={styles["search-page-input-container"]}>
+          <input
+            className={styles["search-page-input"]}
+            placeholder="앨범, 아티스트, 키워드 검색"
+            onChange={e => {
+              setKeyword(e.target.value);
+            }}
+            onKeyDown={handleEnter}
+          />
+          <img
+            className={styles["search-page-input-icon"]}
+            src={"/music/magnifying-glass.svg"}
+            alt="search-page-input-icon"
+          ></img>
+        </div>
+        <div className={styles["search-result-container"]}>
+          {decodedKeyword
+            ? totalDataLength
+              ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과`
+              : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
+            : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
+        </div>
+        <div className={styles["search-tag-container"]}>
+          {Object.keys(defaultTags).map((key, index) => {
+            return (
               <div
                 key={index}
                 className={styles["search-tag-display-item"]}
+                onClick={() => {
+                  router.push(`/music/tag/${key}/1`);
+                }}
                 // onClick={() => {
                 //   setCurrentTagKey(key);
                 //   setScrollCount(1);
@@ -117,11 +142,11 @@ export default function SearchContent({ currentKeyword, currentPage }: PageProps
               >
                 {defaultTags[key]}
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-        {isEmptyResult ? undefined : <AlbumContents albumData={data} perPageCount={perPageCount} />}
-      </ContentLayout>
-    </>
+      </div>
+      {isEmptyResult ? undefined : <AlbumContents albumData={data} perPageCount={perPageCount} />}
+    </ContentLayout>
   );
 }

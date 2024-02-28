@@ -83,6 +83,7 @@ export interface PageProps {
     keyword: string;
     page: number;
     genre: string;
+    tagName: string;
   };
 }
 

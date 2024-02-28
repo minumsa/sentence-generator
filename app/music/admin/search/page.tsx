@@ -9,7 +9,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <MusicLayout>
-      <SearchContent currentKeyword={""} currentPage={currentPage} />
+      <SearchContent currentKeyword={""} currentTagName={""} currentPage={currentPage} />
     </MusicLayout>
   );
 }

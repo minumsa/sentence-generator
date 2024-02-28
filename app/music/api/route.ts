@@ -34,7 +34,12 @@ export async function GET(request: Request) {
     let query: any = {};
 
     // 메인 페이지인 경우
-    if (pathName === "") {
+    const isMainPage = pathName === "";
+
+    // 검색, 태그, 아티스트 페이지인 경우
+    const isSearchPage = pathName === "search";
+
+    if (isMainPage || isSearchPage) {
       if (currentTagKey) {
         query.tagKeys = currentTagKey;
       }
@@ -48,7 +53,7 @@ export async function GET(request: Request) {
 
     let slicedData: any;
 
-    if (query.tagKeys) {
+    if (isMainPage) {
       slicedData = await Music.find(query).sort(sortKey);
     } else {
       slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
