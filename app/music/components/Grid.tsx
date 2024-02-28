@@ -112,23 +112,25 @@ export const Grid = () => {
               showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
             }
           >
-            {Object.keys(defaultTags).map((key, index) => (
-              <div
-                key={index}
-                className={styles["tag-display-item"]}
-                onClick={() => {
-                  setCurrentTagKey(key);
-                  setScrollCount(1);
-                }}
-                style={
-                  currentTagKey === key || (currentTagKey === "" && key === "all")
-                    ? { border: "1px solid var(--text-color)" }
-                    : undefined
-                }
-              >
-                {defaultTags[key]}
-              </div>
-            ))}
+            {Object.keys(defaultTags).map((key, index) => {
+              return (
+                <div
+                  key={index}
+                  className={styles["tag-display-item"]}
+                  onClick={() => {
+                    setCurrentTagKey(key);
+                    setScrollCount(1);
+                  }}
+                  style={
+                    currentTagKey === key || (currentTagKey === "" && key === "all")
+                      ? { border: "1px solid var(--text-color)" }
+                      : undefined
+                  }
+                >
+                  {defaultTags[key]}
+                </div>
+              );
+            })}
             <div
               className={styles["arrow-down-container"]}
               onClick={() => {
@@ -145,6 +147,10 @@ export const Grid = () => {
         )}
         <div className={styles["grid-div"]}>
           {data.map((item, index) => {
+            const currentDataLength = data.length;
+            const isLastDataAndOddNumber =
+              index === currentDataLength - 1 && currentDataLength % 2 === 1;
+
             // FIXME: 코드 전체적으로 이런 식으로 정리하기
             const isFirstLine = index < 2;
             const isEvenIndex = (index + 1) % 2 == 0;
@@ -158,7 +164,7 @@ export const Grid = () => {
               borderTop: isFirstLine ? "none" : undefined,
               borderRight: isEvenIndex ? "none" : undefined,
             };
-            return (
+            return isLastDataAndOddNumber ? null : (
               <div
                 data-aos="fade-up"
                 data-aos-duration={800}
