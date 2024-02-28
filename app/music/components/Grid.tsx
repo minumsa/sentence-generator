@@ -105,115 +105,124 @@ export const Grid = () => {
         isScrolling={isScrolling}
       >
         {/* Tag Display */}
-        {totalDataLength && (
-          <div
-            className={styles["tag-display-container"]}
-            style={
-              showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
-            }
-          >
-            {Object.keys(defaultTags).map((key, index) => {
-              return (
-                <div
-                  key={index}
-                  className={styles["tag-display-item"]}
-                  onClick={() => {
-                    setCurrentTagKey(key);
-                    setScrollCount(1);
-                  }}
-                  style={
-                    currentTagKey === key || (currentTagKey === "" && key === "all")
-                      ? { border: "1px solid var(--text-color)" }
-                      : undefined
-                  }
-                >
-                  {defaultTags[key]}
-                </div>
-              );
-            })}
+        {totalDataLength > 0 && (
+          <>
             <div
-              className={styles["arrow-down-container"]}
-              onClick={() => {
-                setShowAllTagItems(!showAllTagItems);
-              }}
+              className={styles["tag-display-container"]}
+              style={
+                showAllTagItems
+                  ? { flexWrap: "wrap", paddingRight: "31px" }
+                  : { flexWrap: "nowrap" }
+              }
             >
-              <img
-                className={styles["arrow-down"]}
-                src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
-                alt="arrow-down"
-              />
-            </div>
-          </div>
-        )}
-        <div className={styles["grid-div"]}>
-          {data.map((item, index) => {
-            const currentDataLength = data.length;
-            const isLastDataAndOddNumber =
-              index === currentDataLength - 1 && currentDataLength % 2 === 1;
-
-            // FIXME: 코드 전체적으로 이런 식으로 정리하기
-            const isFirstLine = index < 2;
-            const isEvenIndex = (index + 1) % 2 == 0;
-            const isLastItem = index + 1 === data.length;
-            const postPath = isAdminPage ? `/music/admin/post` : `/music/post`;
-            const postHref = `${postPath}/${item.id}`;
-            const artistPath = isAdminPage ? "/music/admin/artist" : "/music/artist";
-            const artistHref = `${artistPath}/${item.artistId}/1`;
-
-            const mobileStyle = {
-              borderTop: isFirstLine ? "none" : undefined,
-              borderRight: isEvenIndex ? "none" : undefined,
-            };
-            return isLastDataAndOddNumber ? null : (
+              {Object.keys(defaultTags).map((key, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={styles["tag-display-item"]}
+                    onClick={() => {
+                      setCurrentTagKey(key);
+                      setScrollCount(1);
+                    }}
+                    style={
+                      currentTagKey === key || (currentTagKey === "" && key === "all")
+                        ? { border: "1px solid var(--text-color)" }
+                        : undefined
+                    }
+                  >
+                    {defaultTags[key]}
+                  </div>
+                );
+              })}
               <div
-                data-aos="fade-up"
-                data-aos-duration={800}
-                data-aos-offset={isMobile ? 40 : 90}
-                data-aos-once="true"
-                key={index}
-                className={`${styles["grid-item-container"]}`}
-                style={isMobile ? mobileStyle : undefined}
-                ref={isLastItem ? ref : undefined}
+                className={styles["arrow-down-container"]}
+                onClick={() => {
+                  setShowAllTagItems(!showAllTagItems);
+                }}
               >
-                <Link
-                  href={postHref}
-                  onClick={() => {
-                    setIsLoading(true);
-                  }}
-                >
-                  <img className={styles["grid-album-image"]} src={item.imgUrl} alt={item.album} />
-                </Link>
-                <div className={styles["grid-album-title"]}>
-                  <Link
-                    href={postHref}
-                    onClick={() => {
-                      setIsLoading(true);
-                    }}
-                  >
-                    <button
-                      className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                    >
-                      {`${item.album}`}
-                    </button>
-                  </Link>
-                  <br />
-                  <Link
-                    href={artistHref}
-                    onClick={() => {
-                      setIsLoading(true);
-                    }}
-                  >
-                    <button
-                      className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                    >
-                      {`${item.artist}`}
-                    </button>
-                  </Link>
-                </div>
+                <img
+                  className={styles["arrow-down"]}
+                  src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
+                  alt="arrow-down"
+                />
               </div>
-            );
-          })}
-        </div>
+            </div>
+
+            <div className={styles["grid-div"]}>
+              {data.map((item, index) => {
+                const currentDataLength = data.length;
+                const isLastDataAndOddNumber =
+                  index === currentDataLength - 1 && currentDataLength % 2 === 1;
+
+                // FIXME: 코드 전체적으로 이런 식으로 정리하기
+                const isFirstLine = index < 2;
+                const isEvenIndex = (index + 1) % 2 == 0;
+                const isLastItem = index + 1 === data.length;
+                const postPath = isAdminPage ? `/music/admin/post` : `/music/post`;
+                const postHref = `${postPath}/${item.id}`;
+                const artistPath = isAdminPage ? "/music/admin/artist" : "/music/artist";
+                const artistHref = `${artistPath}/${item.artistId}/1`;
+
+                const mobileStyle = {
+                  borderTop: isFirstLine ? "none" : undefined,
+                  borderRight: isEvenIndex ? "none" : undefined,
+                };
+                return isLastDataAndOddNumber ? null : (
+                  <div
+                    data-aos="fade-up"
+                    data-aos-duration={800}
+                    data-aos-offset={isMobile ? 40 : 90}
+                    data-aos-once="true"
+                    key={index}
+                    className={`${styles["grid-item-container"]}`}
+                    style={isMobile ? mobileStyle : undefined}
+                    ref={isLastItem ? ref : undefined}
+                  >
+                    <Link
+                      href={postHref}
+                      onClick={() => {
+                        setIsLoading(true);
+                      }}
+                    >
+                      <img
+                        className={styles["grid-album-image"]}
+                        src={item.imgUrl}
+                        alt={item.album}
+                      />
+                    </Link>
+                    <div className={styles["grid-album-title"]}>
+                      <Link
+                        href={postHref}
+                        onClick={() => {
+                          setIsLoading(true);
+                        }}
+                      >
+                        <button
+                          className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                        >
+                          {`${item.album}`}
+                        </button>
+                      </Link>
+                      <br />
+                      <Link
+                        href={artistHref}
+                        onClick={() => {
+                          setIsLoading(true);
+                        }}
+                      >
+                        <button
+                          className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                        >
+                          {`${item.artist}`}
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
       </ContentLayout>
     </>
   );

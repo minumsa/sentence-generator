@@ -69,9 +69,11 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         <div>
           <span className={styles["black-masking"]}>{albumData.album}</span>
         </div>
-        <div className={styles["post-date"]}>레이블</div>
-        <div>
-          <span className={styles["black-masking"]}>{albumData.label}</span>
+        <div className={styles["post-label"]}>
+          <div className={styles["post-date"]}>레이블</div>
+          <div>
+            <span className={styles["black-masking"]}>{albumData.label}</span>
+          </div>
         </div>
         <div className={styles["post-date"]}>발매일</div>
         <div>

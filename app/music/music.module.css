@@ -1082,6 +1082,7 @@
     margin: 1px 0 0 0;
     color: var(--text-color);
     box-sizing: border-box;
+    border-radius: 0;
   }
 
   .search-page-input-icon {
@@ -1150,6 +1151,10 @@
 }
 
 @media (max-width: 525px) {
+  .post-label {
+    display: none;
+  }
+
   .search-tag-container {
     display: none;
   }
