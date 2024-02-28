@@ -16,7 +16,7 @@ export default function Content({ pathName, currentPage }: PageProps) {
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setPerPageCount] = useState(5);
-  const [totalDataLength, setTotalDataLength] = useState(undefined);
+  const [totalDataLength, setTotalDataLength] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

@@ -20,7 +20,7 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
-  const [totalDataLength, setTotalDataLength] = useState(undefined);
+  const [totalDataLength, setTotalDataLength] = useState(0);
   const [totalPage, setTotalPage] = useState(1);
 
   useEffect(() => {
