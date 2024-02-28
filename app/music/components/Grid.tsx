@@ -16,6 +16,7 @@ export const Grid = () => {
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);
+  const [totalDataLength, setTotalDataLength] = useState(0);
   const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
   const [perPageCount, setPerPageCount] = useState(isMobile ? 40 : 60);
   const [scrollCount, setScrollCount] = useState(1);
@@ -60,6 +61,7 @@ export const Grid = () => {
       }
 
       const dataLength = result?.genreDataLength;
+      setTotalDataLength(dataLength);
       setTotalScrollCount(Math.max(1, Math.ceil(dataLength / perPageCount)) + 1);
     }
 
@@ -103,7 +105,7 @@ export const Grid = () => {
         isScrolling={isScrolling}
       >
         {/* Tag Display */}
-        {!isLoading && (
+        {totalDataLength && (
           <div
             className={styles["tag-display-container"]}
             style={

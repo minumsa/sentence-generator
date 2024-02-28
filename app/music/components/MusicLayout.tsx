@@ -17,8 +17,9 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
         {/* FIXME: 나중에 TopNav 살리기 */}
         {/* <TopNav isVisible={isUploadPage(pathName) || isPostPage(pathName) ? false : true} /> */}
         <header className={styles["category-container"]}>
+          {/* <MobileHamburgerMenu />
           <MobileTitle />
-          <MobileHamburgerMenu />
+          <MobileHamburgerMenu /> */}
           <Category />
         </header>
         <main

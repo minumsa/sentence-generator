@@ -24,7 +24,6 @@ export const DesktopHamburgerMenu = () => {
       </button>
       {showCategory ? (
         <ul className={styles["desktop-genre-category"]}>
-          <li className={styles["hamburger-item-title"]}>장르</li>
           {Object.keys(contents).map(category => {
             return (
               <li
