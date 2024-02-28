@@ -126,8 +126,8 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         </div>
         {isAdminPage(pathName) && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
-            <DeleteButton data={albumData} />
             <EditButton data={albumData} />
+            <DeleteButton data={albumData} />
           </div>
         )}
       </div>

@@ -161,7 +161,7 @@ export const defaultTags: Tags = {
   // traveling: "#여행 ✈️",
   christmas: "#크리스마스 🎅",
   diva: "#디바 🫅",
-  love: "#사랑 ❤️‍🔥",
+  love: "#사랑 ❤️",
   happy: "#행복 😄",
   relaxing: "#휴식 😌",
   morning: "#아침 🌞",
