@@ -4,18 +4,17 @@ import { SearchData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
-import { Loading } from "./Loading";
 import styles from "../music.module.css";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface PageProps {
-  pathName: string;
   currentKeyword: string;
   currentPage: number;
 }
 
-export default function SearchContent({ pathName, currentKeyword, currentPage }: PageProps) {
+export default function SearchContent({ currentKeyword, currentPage }: PageProps) {
   const router = useRouter();
+  const pathName = usePathname();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
@@ -26,8 +25,6 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
   const [isEmptyResult, setIsEmptyResult] = useState(false);
   const decodedKeyword = decodeURIComponent(currentKeyword);
   const [keyword, setKeyword] = useState("");
-
-  console.log(decodedKeyword);
 
   useEffect(() => {
     async function loadData() {
@@ -97,15 +94,17 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
             ></img>
           </div>
         </div>
-        <div className={styles["search-result-container"]}>
-          <div>
-            {decodedKeyword
-              ? totalDataLength
-                ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
-                : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
-              : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
+        {isLoading ? undefined : (
+          <div className={styles["search-result-container"]}>
+            <div>
+              {decodedKeyword
+                ? totalDataLength
+                  ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
+                  : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
+                : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
+            </div>
           </div>
-        </div>
+        )}
         {isEmptyResult ? undefined : <AlbumContents albumData={data} perPageCount={perPageCount} />}
       </ContentLayout>
     </>

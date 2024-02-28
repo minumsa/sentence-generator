@@ -34,7 +34,7 @@ export const Category = () => {
       >
         카버차트
       </Link>
-      <Link href={"/music/search"}>
+      <Link href={isAdminPage(pathName) ? "/music/admin/search" : "/music/search"}>
         <nav
           className={styles["top-magnifying-glass"]}
           // FIXME: input 클릭하면 사라지는 이슈 해결

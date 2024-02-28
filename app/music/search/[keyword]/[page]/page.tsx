@@ -10,11 +10,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <MusicLayout>
-      <SearchContent
-        pathName={"search"}
-        currentKeyword={currentKeyword}
-        currentPage={currentPage}
-      />
+      <SearchContent currentKeyword={currentKeyword} currentPage={currentPage} />
     </MusicLayout>
   );
 }
