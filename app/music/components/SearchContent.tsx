@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AlbumInfo, criteriaAtom, isAdminPage, methodAtom } from "../modules/data";
+import { AlbumInfo, criteriaAtom, defaultTags, isAdminPage, methodAtom } from "../modules/data";
 import { SearchData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
@@ -93,18 +93,35 @@ export default function SearchContent({ currentKeyword, currentPage }: PageProps
               alt="search-page-input-icon"
             ></img>
           </div>
-        </div>
-        {isLoading ? undefined : (
-          <div className={styles["search-result-container"]}>
-            <div>
+          {isLoading ? undefined : (
+            <div className={styles["search-result-container"]}>
               {decodedKeyword
                 ? totalDataLength
                   ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
                   : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
                 : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
             </div>
+          )}
+          <div className={styles["search-tag-container"]}>
+            {Object.keys(defaultTags).map((key, index) => (
+              <div
+                key={index}
+                className={styles["search-tag-display-item"]}
+                // onClick={() => {
+                //   setCurrentTagKey(key);
+                //   setScrollCount(1);
+                // }}
+                // style={
+                //   currentTagKey === key || (currentTagKey === "" && key === "all")
+                //     ? { border: "1px solid var(--text-color)" }
+                //     : undefined
+                // }
+              >
+                {defaultTags[key]}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
         {isEmptyResult ? undefined : <AlbumContents albumData={data} perPageCount={perPageCount} />}
       </ContentLayout>
     </>

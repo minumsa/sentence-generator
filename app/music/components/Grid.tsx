@@ -98,11 +98,11 @@ export const Grid = () => {
       <ContentLayout
         currentPage={scrollCount}
         perPageCount={perPageCount}
-        totalDataLength={undefined}
+        totalDataLength={0}
         isLoading={isLoading}
         isScrolling={isScrolling}
       >
-        {/* <TagDisplay /> */}
+        {/* Tag Display */}
         {!isLoading && (
           <div
             className={styles["tag-display-container"]}
