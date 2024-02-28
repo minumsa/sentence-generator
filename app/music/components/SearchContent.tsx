@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
+import { AlbumInfo, criteriaAtom, isAdminPage, methodAtom } from "../modules/data";
 import { SearchData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { Loading } from "./Loading";
 import styles from "../music.module.css";
+import { useRouter } from "next/navigation";
 
 interface PageProps {
   pathName: string;
@@ -14,15 +15,19 @@ interface PageProps {
 }
 
 export default function SearchContent({ pathName, currentKeyword, currentPage }: PageProps) {
+  const router = useRouter();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
-  const [totalDataLength, setTotalDataLength] = useState(undefined);
+  const [totalDataLength, setTotalDataLength] = useState<number>(0);
   const [totalPage, setTotalPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isEmptyResult, setIsEmptyResult] = useState(false);
   const decodedKeyword = decodeURIComponent(currentKeyword);
+  const [keyword, setKeyword] = useState("");
+
+  console.log(decodedKeyword);
 
   useEffect(() => {
     async function loadData() {
@@ -47,36 +52,62 @@ export default function SearchContent({ pathName, currentKeyword, currentPage }:
       }
     }
 
-    setIsLoading(true);
-    loadData();
+    if (currentKeyword.length > 0) {
+      setIsLoading(true);
+      loadData();
+    } else {
+      setIsLoading(false);
+    }
   }, [pathName, currentKeyword, method, criteria, perPageCount, currentPage, data.length]);
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  async function handleSearch() {
+    isAdminPage(pathName)
+      ? router.push(`/music/admin/search/${keyword}/1`)
+      : router.push(`/music/search/${keyword}/1`);
+  }
 
   return (
     <>
-      {isEmptyResult ? (
-        <>
-          <Loading isEmpty={true} hasNoResult={isEmptyResult} keyword={decodedKeyword} />
-        </>
-      ) : (
-        <ContentLayout
-          currentPage={currentPage}
-          perPageCount={perPageCount}
-          totalDataLength={totalDataLength}
-          isLoading={isLoading}
-        >
-          <div
-            className={styles["search-result-container"]}
-            // style={{ display: isLoading ? "none" : undefined }}
-          >
-            <div>
-              {totalDataLength
-                ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
-                : ""}
-            </div>
+      <ContentLayout
+        currentPage={currentPage}
+        perPageCount={perPageCount}
+        totalDataLength={totalDataLength}
+        isLoading={isLoading}
+      >
+        <div className={styles["search-input-container"]}>
+          <div className={styles["search-page-input-container"]}>
+            <input
+              className={styles["search-page-input"]}
+              placeholder="앨범, 아티스트, 키워드 검색"
+              onChange={e => {
+                setKeyword(e.target.value);
+              }}
+              onKeyDown={handleEnter}
+            />
+            <img
+              className={styles["search-page-input-icon"]}
+              src={"/music/magnifying-glass.svg"}
+              alt="search-page-input-icon"
+            ></img>
           </div>
-          <AlbumContents albumData={data} perPageCount={perPageCount} />
-        </ContentLayout>
-      )}
+        </div>
+        <div className={styles["search-result-container"]}>
+          <div>
+            {decodedKeyword
+              ? totalDataLength
+                ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과가 있습니다.`
+                : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
+              : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
+          </div>
+        </div>
+        {isEmptyResult ? undefined : <AlbumContents albumData={data} perPageCount={perPageCount} />}
+      </ContentLayout>
     </>
   );
 }

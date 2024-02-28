@@ -34,14 +34,12 @@ export const Category = () => {
       >
         카버차트
       </Link>
-      <nav
-        className={styles["top-magnifying-glass"]}
-        // FIXME: input 클릭하면 사라지는 이슈 해결
-        onClick={() => {
-          setIsSearching(true);
-        }}
-      >
-        {isSearching && (
+      <Link href={"/music/search"}>
+        <nav
+          className={styles["top-magnifying-glass"]}
+          // FIXME: input 클릭하면 사라지는 이슈 해결
+        >
+          {/* {isSearching && (
           <div className={styles["top-search-container"]}>
             <div style={{ display: "flex", alignItems: "center" }}>
               <input
@@ -55,8 +53,9 @@ export const Category = () => {
               />
             </div>
           </div>
-        )}
-      </nav>
+        )} */}
+        </nav>
+      </Link>
     </header>
   );
 };

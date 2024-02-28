@@ -177,6 +177,7 @@ export const defaultTags: Tags = {
   love: "#사랑 ❤️‍🔥",
   happy: "#행복 😄",
   relaxing: "#휴식 😌",
+  morning: "#아침 🌞",
   drink: "#술 🥃",
   laborSongs: "#노동요 👷",
   decade2020s: "#2020년대",

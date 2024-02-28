@@ -10,6 +10,7 @@ import {
   sortItems,
 } from "../modules/data";
 import { useAtom } from "jotai";
+import Link from "next/link";
 
 interface TopNavProps {
   isVisible?: boolean;
@@ -31,17 +32,17 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
     pathName.includes("admin") && setIsAdminPage(true);
   }, [pathName]);
 
-  async function handleSearch() {
-    isAdminPage
-      ? router.push(`/music/admin/search/${keyword}/1`)
-      : router.push(`/music/search/${keyword}/1`);
-  }
+  // async function handleSearch() {
+  //   isAdminPage
+  //     ? router.push(`/music/admin/search/${keyword}/1`)
+  //     : router.push(`/music/search/${keyword}/1`);
+  // }
 
-  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
+  // const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === "Enter") {
+  //     handleSearch();
+  //   }
+  // };
 
   const handleMouseEnter = (type: OrderType) => {
     if (type === "method") {
@@ -117,7 +118,7 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
       className={styles["top-menu-container"]}
       style={{ display: isVisible ? undefined : "none" }}
     >
-      <div className={styles["top-search-container"]}>
+      {/* <div className={styles["top-search-container"]}>
         {isSearching && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <input
@@ -129,18 +130,17 @@ export const TopNav = ({ isVisible }: TopNavProps) => {
               }}
               onKeyDown={handleEnter}
             />
-            {/* <div className={styles["top-search-button"]}>
-              <div>검색</div>
-            </div> */}
           </div>
         )}
-      </div>
-      <div
-        className={styles["top-magnifying-glass"]}
-        onClick={() => {
-          setIsSearching(!isSearching);
-        }}
-      ></div>
+      </div> */}
+      <Link href={"/search"}>
+        <div
+          className={styles["top-magnifying-glass"]}
+          onClick={() => {
+            // setIsSearching(!isSearching);
+          }}
+        ></div>
+      </Link>
       {isMainPage ? undefined : (
         <>
           <SortButton

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../music.module.css";
 import { fetchData } from "../modules/api";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAtomValue } from "jotai";
 import React from "react";
 import { AlbumInfo, criteriaAtom, defaultTags, methodAtom } from "../modules/data";
@@ -13,7 +13,6 @@ import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
 
 export const Grid = () => {
-  const router = useRouter();
   const fullPathName = usePathname();
   const isAdminPage = fullPathName.includes("admin");
   const [data, setData] = useState<AlbumInfo[]>([]);

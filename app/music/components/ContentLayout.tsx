@@ -5,7 +5,7 @@ interface ContentLayoutProps {
   children: React.ReactNode;
   currentPage: number;
   perPageCount: number;
-  totalDataLength: number | undefined;
+  totalDataLength: number;
   isLoading?: boolean;
   isScrolling?: boolean;
 }
@@ -24,7 +24,7 @@ export const ContentLayout = ({
       {
         <>
           {children}
-          {totalDataLength && (
+          {totalDataLength > 0 && (
             <PageNumbers
               currentPage={currentPage}
               perPageCount={perPageCount}
