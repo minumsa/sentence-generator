@@ -27,7 +27,7 @@ interface FetchArtistData {
   currentCriteria: CriteriaType;
 }
 
-export async function fetchData({
+export async function fetchAlbumData({
   pathName,
   perPageCount,
   currentPage,
@@ -120,7 +120,7 @@ export async function SearchData({
   }
 }
 
-export async function fetchDataById(id: string) {
+export async function fetchAlbumById(id: string) {
   try {
     const url = `/music/api/update?id=${id}`;
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useWindowScroll } from "react-use";
-import styles from "./scrollbar.module.css";
+import styles from "./ScrollBar.module.css";
 
 const ScrollBar = () => {
   const { y: pageYOffset } = useWindowScroll();

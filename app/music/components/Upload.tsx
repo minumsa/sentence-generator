@@ -2,20 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
 import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
-import { contents, defaultTags, groupTags } from "../modules/data";
+import { AlbumInfo, contents, defaultTags, groupTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 
-// FIXME: 타입 any 없애기
+type Artist = { name: string };
+type Image = { url: string };
+
 interface SearchData {
-  albums: any;
-  items: any;
-  artists: any;
+  albums: AlbumInfo[];
+  artists: Artist[];
   name: string;
   release_date: string;
-  images: any[];
+  images: Image[];
   id: string;
 }
 

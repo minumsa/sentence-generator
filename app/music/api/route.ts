@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    // MongoDB 연결
     await connectMongoDB();
 
     // URL 파싱
@@ -30,7 +29,6 @@ export async function GET(request: Request) {
       sortKey = { score: currentCriteria, artist: 1 };
     }
 
-    // 쿼리 구성
     let query: any = {};
 
     // 메인 페이지인 경우

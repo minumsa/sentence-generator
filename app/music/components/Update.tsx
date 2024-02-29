@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./update.module.css";
+import styles from "./Update.module.css";
 import React from "react";
-import { fetchDataById, fetchSpotify, searchSpotify, updateData } from "../modules/api";
-import { contents, defaultTags, groupTags } from "../modules/data";
+import { fetchAlbumById, fetchSpotify, searchSpotify, updateData } from "../modules/api";
+import { AlbumInfo, contents, defaultTags, groupTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
@@ -18,13 +18,15 @@ interface Video {
   url: string;
 }
 
+type Artist = { name: string };
+type Image = { url: string };
+
 interface SearchData {
-  albums: any;
-  items: any;
-  artists: any;
+  albums: AlbumInfo[];
+  artists: Artist[];
   name: string;
   release_date: string;
-  images: any[];
+  images: Image[];
   id: string;
 }
 
@@ -81,19 +83,9 @@ export default function Update({ currentId }: UpdateProps) {
     }
   };
 
-  // const autoFillData = () => {
-  //   console.log(albumReleaseDate);
-
-  //   const releaseYear = "decade" + albumReleaseDate?.substring(0, 4) + "s";
-
-  //   if (currentTagKeys.length === 0) {
-  //     setCurrentTagKeys(prevTagKeys => [...prevTagKeys, releaseYear]);
-  //   }
-  // };
-
   useEffect(() => {
     async function getData() {
-      const fetchData = await fetchDataById(currentId);
+      const fetchData = await fetchAlbumById(currentId);
       setAlbumData(fetchData);
 
       const {
@@ -507,12 +499,7 @@ export default function Update({ currentId }: UpdateProps) {
         />
       </div>
       <div className={styles["submit-container"]}>
-        <div
-          className={`${styles["button"]} ${styles["submit"]}`}
-          onClick={() => {
-            handleUpdate();
-          }}
-        >
+        <div className={`${styles["button"]} ${styles["submit"]}`} onClick={handleUpdate}>
           제출하기
         </div>
       </div>

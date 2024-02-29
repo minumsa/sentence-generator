@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchDataById } from "../modules/api";
+import { fetchAlbumById } from "../modules/api";
 import { AlbumInfo } from "../modules/data";
-import { PostAlbum } from "./PostAlbum";
 import { Loading } from "./Loading";
+import styles from "../music.module.css";
+import { PostAlbumMetadata } from "./PostAlbumMetadata";
+import { PostText } from "./PostAlbumText";
 
 interface PostProps {
   albumId: string;
@@ -16,7 +18,7 @@ export const Post = ({ albumId }: PostProps) => {
 
   useEffect(() => {
     async function getData() {
-      const result = await fetchDataById(albumId);
+      const result = await fetchAlbumById(albumId);
       setAlbumData(result);
       setIsLoading(false);
     }
@@ -26,7 +28,12 @@ export const Post = ({ albumId }: PostProps) => {
   return (
     <>
       {isLoading && <Loading isEmpty={false} />}
-      {albumData && <PostAlbum albumData={albumData} />}
+      {albumData && (
+        <section className={styles["album-container"]}>
+          <PostAlbumMetadata albumData={albumData} />
+          <PostText albumData={albumData} />
+        </section>
+      )}
     </>
   );
 };

@@ -8,20 +8,17 @@ import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
 
-interface PageProps {
+interface ArtistContentProps {
   artistId: string;
   currentPage: number;
 }
 
-export default function ArtistContent({ artistId, currentPage }: PageProps) {
+export default function ArtistContent({ artistId, currentPage }: ArtistContentProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
-  // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
-  // FIXME: jotai 타입 오류 해결해야 함 MethodType 또는 Criteria 타입으로
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(0);
-  const [totalPage, setTotalPage] = useState(1);
 
   useEffect(() => {
     async function loadData() {
@@ -36,7 +33,6 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
       setTotalDataLength(genreDataLength);
-      setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
     }
 
     loadData();
@@ -48,7 +44,7 @@ export default function ArtistContent({ artistId, currentPage }: PageProps) {
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
     >
-      <ArtistPageImage data={data} />
+      <ArtistPageImage albumData={data} />
       <AlbumContents albumData={data} perPageCount={perPageCount} />
     </ContentLayout>
   );

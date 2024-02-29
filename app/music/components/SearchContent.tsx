@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AlbumInfo, criteriaAtom, defaultTags, isAdminPage, methodAtom } from "../modules/data";
-import { SearchData, fetchData } from "../modules/api";
+import { SearchData, fetchAlbumData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
@@ -71,7 +71,7 @@ export default function SearchContent({ currentKeyword, currentTagName, currentP
   }
   useEffect(() => {
     async function loadTagData() {
-      const result = await fetchData({
+      const result = await fetchAlbumData({
         pathName: "search",
         perPageCount,
         currentPage,

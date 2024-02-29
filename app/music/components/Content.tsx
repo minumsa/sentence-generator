@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
-import { fetchData } from "../modules/api";
+import { fetchAlbumData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 
-interface PageProps {
+interface ContentProps {
   pathName: string;
   currentPage: number;
 }
 
-export default function Content({ pathName, currentPage }: PageProps) {
+export default function Content({ pathName, currentPage }: ContentProps) {
   const [data, setData] = useState<AlbumInfo[]>([]);
-  // TODO: 타입(유니언)으로 빼기 - 발매일, 앨범, 아티스트...
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setPerPageCount] = useState(5);
@@ -21,7 +20,7 @@ export default function Content({ pathName, currentPage }: PageProps) {
 
   useEffect(() => {
     async function loadData() {
-      const result = await fetchData({
+      const result = await fetchAlbumData({
         pathName,
         perPageCount,
         currentPage,
