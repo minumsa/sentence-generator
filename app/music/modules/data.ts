@@ -182,6 +182,7 @@ export const defaultTags: Tags = {
 
   // 앨범 스타일
   diva: "#디바 🫅",
+  idol: "#아이돌 🐰",
   instrumental: "#가사 없음 🎻",
   goodLyrics: "좋은 가사 📝",
   citypop: "#시티팝 🌃",
@@ -248,6 +249,7 @@ export const groupTags: GroupTags = {
 
   스타일: {
     citypop: "#시티팝 🌃",
+    idol: "#아이돌 🐰",
     instrumental: "#가사 없음 🎻",
     goodLyrics: "좋은 가사 📝",
     diva: "#디바 🫅",
