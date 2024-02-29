@@ -65,11 +65,12 @@ export default function Upload() {
   }, [albumKeyword, isTyping]);
 
   const handleUpload = async () => {
+    const filteredText = text.replace(/\[\d+\]/g, "");
     const newSpotifyAlbumData = await fetchSpotify({
       albumId,
       genre,
       link,
-      text,
+      text: filteredText,
       uploadDate,
     });
 

@@ -56,11 +56,12 @@ export default function Update({ currentId }: UpdateProps) {
 
   // 수정 API
   const handleUpdate = async () => {
+    const filteredText = text.replace(/\[\d+\]/g, "");
     const newSpotifyAlbumData = await fetchSpotify({
       albumId,
       genre,
       link,
-      text,
+      text: filteredText,
       uploadDate,
     });
 

@@ -123,25 +123,23 @@ export default function SearchContent({ currentKeyword, currentTagName, currentP
         </div>
         <div className={styles["search-tag-container"]}>
           {Object.keys(defaultTags).map((key, index) => {
+            // "모두 보기" 태그(버튼)은 모바일 메인 화면에서만 표시
+            const isAllItemKey = key === "";
             return (
-              <div
-                key={index}
-                className={styles["search-tag-display-item"]}
-                onClick={() => {
-                  router.push(`/music/tag/${key}/1`);
-                }}
-                // onClick={() => {
-                //   setCurrentTagKey(key);
-                //   setScrollCount(1);
-                // }}
-                // style={
-                //   currentTagKey === key || (currentTagKey === "" && key === "all")
-                //     ? { border: "1px solid var(--text-color)" }
-                //     : undefined
-                // }
-              >
-                {defaultTags[key]}
-              </div>
+              !isAllItemKey && (
+                <div
+                  key={index}
+                  className={styles["search-tag-display-item"]}
+                  onClick={() => {
+                    router.push(`/music/tag/${key}/1`);
+                  }}
+                  style={
+                    currentTagName === key ? { border: "1px solid var(--text-color)" } : undefined
+                  }
+                >
+                  {defaultTags[key]}
+                </div>
+              )
             );
           })}
         </div>

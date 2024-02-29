@@ -137,9 +137,13 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                 <div className={styles["album-tag-container"]}>
                   {albumData.tagKeys.map((tagKey: string, index: number) => {
                     return (
-                      <div key={index} className={styles["tag-item"]}>
+                      <Link
+                        href={`/music/tag/${tagKey}/1`}
+                        key={index}
+                        className={styles["tag-item"]}
+                      >
                         {defaultTags[tagKey]}
-                      </div>
+                      </Link>
                     );
                   })}
                 </div>

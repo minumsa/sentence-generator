@@ -53,6 +53,7 @@ export const PostText = ({ albumData }: PostTextProps) => {
           (text.length < 50 && !text.includes(".") && !text.includes("[")) ||
           text.includes("feat.");
         const isHTMLText = text.includes("<div>");
+        // text에 포함된 [숫자] 형태의 문자열을 정규 표현식을 통해 제거
 
         return isLineBreak ? (
           <p key={index}></p>
