@@ -131,7 +131,9 @@ export default function SearchContent({ currentKeyword, currentTagName, currentP
                   key={index}
                   className={styles["search-tag-display-item"]}
                   onClick={() => {
-                    router.push(`/music/tag/${key}/1`);
+                    isAdminPage(pathName)
+                      ? router.push(`/music/admin/search/tag/${key}/1`)
+                      : router.push(`/music/search/tag/${key}/1`);
                   }}
                   style={
                     currentTagName === key ? { border: "1px solid var(--text-color)" } : undefined

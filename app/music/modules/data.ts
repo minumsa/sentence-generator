@@ -180,6 +180,8 @@ export const defaultTags: Tags = {
   // 감정
   love: "#사랑 ❤️",
   happy: "#기분 좋아지는 😌",
+  energy: "에너지 업 ⚡️",
+  sad: "#슬픔 😢",
   relaxing: "#휴식 🌴",
   morning: "#아침 🌞",
 
@@ -241,6 +243,8 @@ export const groupTags: GroupTags = {
   감정: {
     love: "#사랑 ❤️",
     happy: "#기분 좋아지는 😌",
+    energy: "에너지 업 ⚡️",
+    sad: "#슬픔 😢",
     relaxing: "#휴식 🌴",
     morning: "#아침 🌞",
   },

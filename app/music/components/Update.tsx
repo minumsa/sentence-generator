@@ -195,7 +195,10 @@ export default function Update({ currentId }: UpdateProps) {
   };
 
   return (
-    <div className={styles["container"]}>
+    <div
+      className={styles["container"]}
+      style={showTagListModal ? { marginBottom: "150px" } : undefined}
+    >
       <div className={styles["page-title"]}>수정 페이지</div>
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>장르</div>
