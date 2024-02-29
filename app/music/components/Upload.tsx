@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
 import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
-import { contents, defaultTags } from "../modules/data";
+import { contents, defaultTags, groupTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useRouter } from "next/navigation";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 
@@ -41,12 +40,10 @@ export default function Upload() {
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
-  const router = useRouter();
 
   const modalRef = useRef<HTMLDivElement>(null);
   const [showTagListModal, setShowTagListModal] = useState(false);
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
-  const defaultTagKeys: string[] = Object.keys(defaultTags);
   const [newTagKey, setNewTagKey] = useState("");
 
   const handleSearch = async () => {
@@ -129,7 +126,10 @@ export default function Upload() {
   };
 
   return (
-    <div className={styles["container"]}>
+    <div
+      className={styles["container"]}
+      style={showTagListModal ? { marginBottom: "150px" } : undefined}
+    >
       <div className={styles["page-title"]}>업로드 페이지</div>
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>장르</div>
@@ -307,7 +307,6 @@ export default function Upload() {
               className={`${styles["input"]} ${styles["input-link"]}`}
               value={videos[index].title}
               onChange={e => {
-                // setMusicVideoTitle(e.target.value);
                 tmpVideos[index] = { ...tmpVideos[index], title: e.target.value };
                 setVideos(tmpVideos);
               }}
@@ -346,22 +345,33 @@ export default function Upload() {
           {showTagListModal && (
             <div className={styles["tag-list-modal-container"]}>
               <div className={styles["tag-list-modal"]}>
-                <div className={styles["tag-list-comment"]}>태그 선택해서 추가</div>
                 <div className={styles["tag-item-container"]}>
-                  {defaultTagKeys.map((defaultTagKey, index) => {
-                    const isExisingTag = currentTagKeys.includes(defaultTagKey);
+                  {Object.keys(groupTags).map((tagGroup, index) => {
+                    const isNormalTagGroup = tagGroup !== "모두보기";
                     return (
-                      !isExisingTag && (
-                        <div
-                          className={styles["tag-item"]}
-                          key={index}
-                          onClick={() => {
-                            handleTagItemAdd(defaultTagKey);
-                          }}
-                        >
-                          {defaultTags[defaultTagKey]}
-                          <button className={styles["tag-item-delete-button"]}>+</button>
-                        </div>
+                      isNormalTagGroup && (
+                        <React.Fragment key={index}>
+                          <div className={styles["tag-list-comment"]}>{tagGroup}</div>
+                          <div className={styles["tag-group-container"]} key={index}>
+                            {Object.keys(groupTags[tagGroup]).map(tagKey => {
+                              const isExistingTag = currentTagKeys.includes(tagKey);
+                              return (
+                                !isExistingTag && (
+                                  <div
+                                    className={styles["tag-item"]}
+                                    key={tagKey}
+                                    onClick={() => {
+                                      handleTagItemAdd(tagKey);
+                                    }}
+                                  >
+                                    {groupTags[tagGroup][tagKey]}
+                                    <button className={styles["tag-item-delete-button"]}>+</button>
+                                  </div>
+                                )
+                              );
+                            })}
+                          </div>
+                        </React.Fragment>
                       )
                     );
                   })}

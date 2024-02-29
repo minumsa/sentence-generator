@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
 import { fetchDataById, fetchSpotify, searchSpotify, updateData } from "../modules/api";
-import { contents, defaultTags } from "../modules/data";
+import { contents, defaultTags, groupTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
@@ -429,22 +429,33 @@ export default function Update({ currentId }: UpdateProps) {
           {showTagListModal && (
             <div className={styles["tag-list-modal-container"]}>
               <div className={styles["tag-list-modal"]}>
-                <div className={styles["tag-list-comment"]}>태그 선택해서 추가</div>
                 <div className={styles["tag-item-container"]}>
-                  {defaultTagKeys.map((defaultTagKey, index) => {
-                    const isExisingTag = currentTagKeys.includes(defaultTagKey);
+                  {Object.keys(groupTags).map((tagGroup, index) => {
+                    const isNormalTagGroup = tagGroup !== "모두보기";
                     return (
-                      !isExisingTag && (
-                        <div
-                          className={styles["tag-item"]}
-                          key={index}
-                          onClick={() => {
-                            handleTagItemAdd(defaultTagKey);
-                          }}
-                        >
-                          {defaultTags[defaultTagKey]}
-                          <button className={styles["tag-item-delete-button"]}>+</button>
-                        </div>
+                      isNormalTagGroup && (
+                        <React.Fragment key={index}>
+                          <div className={styles["tag-list-comment"]}>{tagGroup}</div>
+                          <div className={styles["tag-group-container"]} key={index}>
+                            {Object.keys(groupTags[tagGroup]).map(tagKey => {
+                              const isExistingTag = currentTagKeys.includes(tagKey);
+                              return (
+                                !isExistingTag && (
+                                  <div
+                                    className={styles["tag-item"]}
+                                    key={tagKey}
+                                    onClick={() => {
+                                      handleTagItemAdd(tagKey);
+                                    }}
+                                  >
+                                    {groupTags[tagGroup][tagKey]}
+                                    <button className={styles["tag-item-delete-button"]}>+</button>
+                                  </div>
+                                )
+                              );
+                            })}
+                          </div>
+                        </React.Fragment>
                       )
                     );
                   })}

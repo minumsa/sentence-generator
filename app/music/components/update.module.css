@@ -172,9 +172,9 @@
 }
 
 .tag-list-modal-container {
+  width: 880px;
   position: absolute;
   display: flex;
-  width: 500px;
   background-color: var(--input-background-color);
   padding: 30px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -183,6 +183,7 @@
   flex-wrap: wrap;
   top: calc(100% + 1px);
   left: -1px;
+  box-sizing: border-box;
 }
 
 .tag-list-modal {
@@ -192,13 +193,20 @@
 }
 
 .tag-list-comment {
-  font-size: 1rem;
-  margin-bottom: 15px;
+  font-size: 1.05rem;
+  margin: 0 0 5px 3px;
+  font-weight: 500;
 }
 
 .tag-item-container {
   display: flex;
+  flex-direction: column;
+}
+
+.tag-group-container {
+  display: flex;
   flex-wrap: wrap;
+  margin: 0 0 10px 0;
 }
 
 .tag-item,

@@ -168,7 +168,7 @@ export const defaultTags: Tags = {
   // 상황
   workout: "#운동 🏋🏻‍♂️",
   dancing: "#춤 🕺",
-  clining: "#청소 🧹",
+  cleaning: "#청소 🧹",
   walking: "#산책 🚶",
   writing: "#글쓰기 ✍🏻",
   reading: "#독서 📚",
@@ -197,4 +197,69 @@ export const defaultTags: Tags = {
 
   // 모두 보기
   "": "모두 보기",
+};
+
+interface GroupTags {
+  [groupName: string]: {
+    [tagName: string]: string;
+  };
+}
+
+export const groupTags: GroupTags = {
+  연대: {
+    decade2020s: "#2020년대",
+    decade2010s: "#2010년대",
+    decade2000s: "#2000년대",
+    decade1990s: "#1990년대",
+    decade1980s: "#1980년대",
+    decade1970s: "#1970년대",
+    decade1960s: "#1960년대",
+    decade1950s: "#1950년대",
+    decade1940s: "#1940년대",
+  },
+
+  계절: {
+    spring: "#봄 🌸",
+    summer: "#여름 🏄‍♂️",
+    fall: "#가을 🍂",
+    winter: "#겨울 ☃️",
+  },
+
+  상황: {
+    workout: "#운동 🏋🏻‍♂️",
+    dancing: "#춤 🕺",
+    cleaning: "#청소 🧹",
+    walking: "#산책 🚶",
+    writing: "#글쓰기 ✍🏻",
+    reading: "#독서 📚",
+    coding: "#코딩 👨‍💻",
+    shower: "#샤워 🛀",
+    drink: "#술 🥃",
+    sleeping: "#잠들기 전 😴",
+  },
+
+  감정: {
+    love: "#사랑 ❤️",
+    happy: "#기분 좋아지는 😌",
+    relaxing: "#휴식 🌴",
+    morning: "#아침 🌞",
+  },
+
+  스타일: {
+    diva: "#디바 🫅",
+    instrumental: "#가사 없음 🎻",
+    citypop: "#시티팝 🌃",
+    christmas: "#크리스마스 🎅",
+  },
+
+  수상: {
+    grammyAwards: "#그래미 수상 🏆",
+    koreanTop100Albums: "#한국대중음악 100대 명반 💿",
+    rollingStonesTop500Albums: "#롤링스톤 500대 명반 👅",
+    rollingStonesTop100AlbumsJapan: "#롤링스톤 재팬 100대 명반 👅",
+  },
+
+  모두보기: {
+    "": "모두 보기",
+  },
 };
