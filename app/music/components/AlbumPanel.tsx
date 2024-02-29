@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import { formatDuration } from "../modules/utils";
 import styles from "../music.module.css";
-import { AlbumInfo, album, defaultTags } from "../modules/data";
+import { AlbumInfo, defaultTags, isAdminPage } from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
 import { DeleteButton } from "./DeleteButton";
@@ -13,17 +13,21 @@ interface AlbumProps {
 }
 
 export const AlbumPanel = ({ albumData }: AlbumProps) => {
+  const pathName = usePathname();
   const albumDuration = formatDuration(albumData.duration);
   const divRef = useRef<HTMLDivElement>(null);
   const fullPathName = usePathname();
-  const isAdminPage = fullPathName.includes("admin");
 
   return (
     <>
       <Link
         className={styles["album-information-container"]}
         style={{ textDecoration: "none" }}
-        href={isAdminPage ? `/music/admin/post/${albumData.id}` : `/music/post/${albumData.id}`}
+        href={
+          isAdminPage(pathName)
+            ? `/music/admin/post/${albumData.id}`
+            : `/music/post/${albumData.id}`
+        }
       >
         <img
           className={styles["album-art"]}
@@ -48,13 +52,15 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                 <div className={styles["post-album-title"]}>
                   <Link
                     href={
-                      isAdminPage
+                      isAdminPage(pathName)
                         ? `/music/admin/post/${albumData.id}`
                         : `/music/post/${albumData.id}`
                     }
                     style={{ textDecoration: "none", display: "flex" }}
                   >
-                    <h2 style={{ padding: isAdminPage ? 0 : undefined }}>{albumData.album}</h2>
+                    <h2 style={{ padding: isAdminPage(pathName) ? 0 : undefined }}>
+                      {albumData.album}
+                    </h2>
                   </Link>
                   <div className={styles["star-container"]}>
                     <img
@@ -82,7 +88,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   <Link
                     className={styles["category-meta-image-container"]}
                     href={
-                      isAdminPage
+                      isAdminPage(pathName)
                         ? `/music/admin/artist/${albumData.artistId}/1`
                         : `/music/artist/${albumData.artistId}/1`
                     }
@@ -98,7 +104,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                     <Link
                       style={{ textDecoration: "none" }}
                       href={
-                        isAdminPage
+                        isAdminPage(pathName)
                           ? `/music/admin/artist/${albumData.artistId}/1`
                           : `/music/artist/${albumData.artistId}/1`
                       }
@@ -125,7 +131,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                     <Link
                       style={{ textDecoration: "none" }}
                       href={
-                        isAdminPage
+                        isAdminPage(pathName)
                           ? `/music/admin/post/${albumData.id}`
                           : `/music/post/${albumData.id}`
                       }
@@ -138,7 +144,11 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   {albumData.tagKeys.map((tagKey: string, index: number) => {
                     return (
                       <Link
-                        href={`/music/tag/${tagKey}/1`}
+                        href={
+                          isAdminPage(pathName)
+                            ? `/music/admin/search/tag/${tagKey}/1`
+                            : `/music/search/tag/${tagKey}/1`
+                        }
                         key={index}
                         className={styles["tag-item"]}
                       >
@@ -148,7 +158,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   })}
                 </div>
                 {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
-                {isAdminPage && (
+                {isAdminPage(pathName) && (
                   <div className={styles["admin-button-container"]}>
                     <EditButton data={albumData} />
                     <DeleteButton data={albumData} />

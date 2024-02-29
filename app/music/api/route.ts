@@ -39,11 +39,14 @@ export async function GET(request: Request) {
     // 검색, 태그, 아티스트 페이지인 경우
     const isSearchPage = pathName === "search";
 
+    // 장르 페이지인 경우
+    const isGenrePage = !isMainPage && !isSearchPage;
+
     if (isMainPage || isSearchPage) {
       if (currentTagKey) {
         query.tagKeys = currentTagKey;
       }
-    } else {
+    } else if (isGenrePage) {
       query.genre = pathName;
     }
 
@@ -51,13 +54,7 @@ export async function GET(request: Request) {
     const genreDataLength = await Music.find(query).count();
     const startIndex = perPageCount * currentPage - perPageCount;
 
-    let slicedData: any;
-
-    if (isMainPage) {
-      slicedData = await Music.find(query).sort(sortKey);
-    } else {
-      slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
-    }
+    const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
 
     // 결과 반환
     return NextResponse.json({ slicedData, genreDataLength });

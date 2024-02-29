@@ -1,10 +1,10 @@
 import { renderToString } from "react-dom/server";
-import { AlbumInfo } from "../modules/data";
+import { AlbumInfo, defaultTags, isAdminPage } from "../modules/data";
 import { formatDate } from "../modules/utils";
 import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
-// import DOMPurify from "isomorphic-dompurify";
+import Link from "next/link";
 
 interface PostTextProps {
   albumData: AlbumInfo;
@@ -67,6 +67,26 @@ export const PostText = ({ albumData }: PostTextProps) => {
           </p>
         );
       })}
+      <div
+        className={styles["album-tag-container"]}
+        style={{ margin: "20px 0 0 0", justifyContent: "flex-end" }}
+      >
+        {albumData.tagKeys.map((tagKey: string, index: number) => {
+          return (
+            <Link
+              href={
+                isAdminPage(pathName)
+                  ? `/music/admin/search/tag/${tagKey}/1`
+                  : `/music/search/tag/${tagKey}/1`
+              }
+              key={index}
+              className={styles["tag-item"]}
+            >
+              {defaultTags[tagKey]}
+            </Link>
+          );
+        })}
+      </div>
       <div className={styles["post-divider"]}></div>
       <div className={styles["post-date-container"]}>
         <div className={styles["post-date"]} style={{ margin: "0 0 -4px 0" }}>

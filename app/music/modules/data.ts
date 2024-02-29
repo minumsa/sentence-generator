@@ -188,11 +188,13 @@ export const defaultTags: Tags = {
   // 앨범 스타일
   diva: "#디바 🫅",
   instrumental: "#가사 없음 🎻",
+  goodLyrics: "좋은 가사 📝",
   citypop: "#시티팝 🌃",
   christmas: "#크리스마스 🎅",
 
   // 수상 기록
   grammyAwards: "#그래미 수상 🏆",
+  koreanMusicAwards: "#한국대중음악상 수상 🏆",
   koreanTop100Albums: "#한국대중음악 100대 명반 💿",
   rollingStonesTop500Albums: "#롤링스톤 500대 명반 👅",
   rollingStonesTop100AlbumsJapan: "#롤링스톤 재팬 100대 명반 👅",
@@ -250,14 +252,16 @@ export const groupTags: GroupTags = {
   },
 
   스타일: {
-    diva: "#디바 🫅",
-    instrumental: "#가사 없음 🎻",
     citypop: "#시티팝 🌃",
+    instrumental: "#가사 없음 🎻",
+    goodLyrics: "좋은 가사 📝",
+    diva: "#디바 🫅",
     christmas: "#크리스마스 🎅",
   },
 
   수상: {
     grammyAwards: "#그래미 수상 🏆",
+    koreanMusicAwards: "#한국대중음악상 수상 🏆",
     koreanTop100Albums: "#한국대중음악 100대 명반 💿",
     rollingStonesTop500Albums: "#롤링스톤 500대 명반 👅",
     rollingStonesTop100AlbumsJapan: "#롤링스톤 재팬 100대 명반 👅",
