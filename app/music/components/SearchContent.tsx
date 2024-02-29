@@ -85,7 +85,6 @@ export default function SearchContent({
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
       setTotalDataLength(genreDataLength);
-      setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
     }
 
     if (currentTagName) {

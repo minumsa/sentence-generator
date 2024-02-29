@@ -63,7 +63,7 @@ export default function Update({ currentId }: UpdateProps) {
     if (newSpotifyAlbumData) {
       try {
         await updateData({
-          id,
+          id: albumId,
           newSpotifyAlbumData,
           genre,
           link,
