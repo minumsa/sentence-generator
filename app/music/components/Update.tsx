@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./Update.module.css";
+import styles from "./update.module.css";
 import React from "react";
 import { fetchAlbumById, fetchSpotify, searchSpotify, updateData } from "../modules/api";
 import { AlbumInfo, contents, defaultTags, groupTags } from "../modules/data";
@@ -51,7 +51,6 @@ export default function Update({ currentId }: UpdateProps) {
   const [showAlbumListModal, setShowAlbumListModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
-  const defaultTagKeys: string[] = Object.keys(defaultTags);
   const [showTagListModal, setShowTagListModal] = useState(false);
   const [newTagKey, setNewTagKey] = useState("");
   const router = useRouter();
@@ -59,17 +58,22 @@ export default function Update({ currentId }: UpdateProps) {
   // 수정 API
   const handleUpdate = async () => {
     const filteredText = text.replace(/\[\d+\]/g, "");
-    const newSpotifyAlbumData = await fetchSpotify({
-      albumId,
-      genre,
-      link,
-      text: filteredText,
-      uploadDate,
-    });
+    const newSpotifyAlbumData = await fetchSpotify(albumId);
 
     if (newSpotifyAlbumData) {
       try {
-        await updateData(currentId, newSpotifyAlbumData, score, videos, currentTagKeys, password);
+        await updateData({
+          id,
+          newSpotifyAlbumData,
+          genre,
+          link,
+          text: filteredText,
+          uploadDate,
+          score,
+          videos,
+          tagKeys: currentTagKeys,
+          password,
+        });
         router.back();
       } catch (error) {
         console.error("updateData 호출에 실패했습니다:", error);
@@ -119,13 +123,6 @@ export default function Update({ currentId }: UpdateProps) {
         setVideos(videos);
         setVideoCount(videos.length);
       }
-
-      // FIXME: 중복으로 입력되는 문제 때문에 지워놓음. 추후에 손보기.
-
-      // if (!currentTagKeys.includes("instrumental")) {
-      //   if (genre === "classic") setCurrentTagKeys(prevTagKeys => [...prevTagKeys, "instrumental"]);
-      // }
-      // currentTagKeys에 releaseYear이 없으면 추가
     }
 
     getData();

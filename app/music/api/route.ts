@@ -68,23 +68,20 @@ export async function POST(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { data, score, videos, tagKeys, password } = await request.json();
     const {
       id,
-      imgUrl,
-      artistImgUrl,
-      artistId,
-      artist,
-      album,
-      label,
-      releaseDate,
+      newSpotifyAlbumData,
       genre,
       link,
       text,
       uploadDate,
-      duration,
-      tracks,
-    } = data;
+      score,
+      videos,
+      tagKeys,
+      password,
+    } = await request.json();
+    const { imgUrl, artistImgUrl, artistId, artist, album, label, releaseDate, duration, tracks } =
+      newSpotifyAlbumData;
 
     if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
@@ -152,36 +149,31 @@ export async function PUT(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { currentId, newSpotifyAlbumData, score, videos, tagKeys, password } =
-      await request.json();
     const {
       id,
-      imgUrl,
-      artistImgUrl,
-      artistId,
-      artist,
-      album,
-      label,
-      releaseDate,
+      newSpotifyAlbumData,
       genre,
       link,
       text,
       uploadDate,
-      duration,
-      tracks,
-    } = newSpotifyAlbumData;
+      score,
+      videos,
+      tagKeys,
+      password,
+    } = await request.json();
+    const { imgUrl, artistImgUrl, artistId, artist, album, label, releaseDate, duration, tracks } =
+      newSpotifyAlbumData;
 
     if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
 
-    // 수정할 데이터를 id로 찾아 originalData라는 변수에 할당
-    const originalData = await Music.findOne({ id: currentId });
+    // 수정할 데이터를 id로 찾아 originalData에 할당
+    const originalData = await Music.findOne({ id });
 
     if (!originalData) {
       return NextResponse.json({ message: "Data not found. Cannot update." }, { status: 404 });
     }
 
-    // TODO: Object.assign 메서드 나중에 블로그에 정리
     Object.assign(originalData, {
       id,
       imgUrl,

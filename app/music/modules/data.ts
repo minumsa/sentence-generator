@@ -49,10 +49,10 @@ export interface SpotifyAlbumData {
   album: string;
   label: string;
   releaseDate: string;
-  genre: string;
-  link: string;
-  text: string;
-  uploadDate: Date;
+  // genre: string;
+  // link: string;
+  // text: string;
+  // uploadDate: Date;
   duration: number;
   tracks: number;
 }
@@ -89,12 +89,12 @@ export interface PageProps {
 
 export interface UpdateInfo {
   albumId: string;
-  genre: string;
-  link: string;
-  text: string;
+  // genre: string;
+  // link: string;
+  // text: string;
   musicVideoTitle?: string;
   musicVideoUrl?: string;
-  uploadDate: Date;
+  // uploadDate: Date;
 }
 
 export const album = {
@@ -104,11 +104,6 @@ export const album = {
     width: 250,
     height: 250,
   },
-};
-
-export const activeStyle = {
-  // color: "#949494",
-  backgroundColor: "#333",
 };
 
 export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범" | "별점";

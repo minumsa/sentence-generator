@@ -7,13 +7,17 @@ import { ContentLayout } from "./ContentLayout";
 import styles from "../music.module.css";
 import { usePathname, useRouter } from "next/navigation";
 
-interface PageProps {
+interface SearchContentProps {
   currentKeyword: string;
   currentTagName: string;
   currentPage: number;
 }
 
-export default function SearchContent({ currentKeyword, currentTagName, currentPage }: PageProps) {
+export default function SearchContent({
+  currentKeyword,
+  currentTagName,
+  currentPage,
+}: SearchContentProps) {
   const router = useRouter();
   const pathName = usePathname();
   const [data, setData] = useState<AlbumInfo[]>([]);
@@ -21,7 +25,6 @@ export default function SearchContent({ currentKeyword, currentTagName, currentP
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState<number>(0);
-  const [totalPage, setTotalPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmptyResult, setIsEmptyResult] = useState(false);
   const decodedKeyword = decodeURIComponent(currentKeyword);
@@ -40,7 +43,6 @@ export default function SearchContent({ currentKeyword, currentTagName, currentP
       setData(result?.slicedData);
       const genreDataLength = result?.genreDataLength;
       setTotalDataLength(genreDataLength);
-      setTotalPage(Math.max(1, Math.ceil(genreDataLength / 5)));
       setIsLoading(false);
 
       if (result?.slicedData.length > 0) {

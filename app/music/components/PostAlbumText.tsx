@@ -1,9 +1,7 @@
-import { renderToString } from "react-dom/server";
 import { AlbumInfo, defaultTags, isAdminPage } from "../modules/data";
 import { formatDate } from "../modules/utils";
 import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
 import Link from "next/link";
 
 interface PostTextProps {
