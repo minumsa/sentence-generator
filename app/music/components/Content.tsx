@@ -44,7 +44,7 @@ export default function Content({ pathName, currentPage }: ContentProps) {
       totalDataLength={totalDataLength}
       isLoading={isLoading}
     >
-      <AlbumContents albumData={data} perPageCount={perPageCount} />
+      <AlbumContents artistData={data} perPageCount={perPageCount} />
     </ContentLayout>
   );
 }

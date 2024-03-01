@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { AlbumInfo, criteriaAtom, methodAtom } from "../modules/data";
+import { AlbumInfo } from "../modules/data";
 import { FetchArtistData } from "../modules/api";
-import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
@@ -14,38 +13,39 @@ interface ArtistContentProps {
 }
 
 export default function ArtistContent({ artistId, currentPage }: ArtistContentProps) {
-  const [data, setData] = useState<AlbumInfo[]>([]);
-  const method = useAtomValue(methodAtom);
-  const criteria = useAtomValue(criteriaAtom);
+  const [artistData, setArtistData] = useState<AlbumInfo[]>([]);
   const [perPageCount, setDataPerPage] = useState(5);
-  const [totalDataLength, setTotalDataLength] = useState(0);
+  const [artistDataCount, setArtistDataCount] = useState(0);
 
   useEffect(() => {
     async function loadData() {
-      const result = await FetchArtistData({
-        pathName: "search",
-        perPageCount,
-        currentPage,
-        artistId,
-        currentMethod: method,
-        currentCriteria: criteria,
-      });
-      setData(result?.slicedData);
-      const genreDataLength = result?.genreDataLength;
-      setTotalDataLength(genreDataLength);
+      try {
+        const tmp = await FetchArtistData({ artistId, currentPage, perPageCount });
+
+        if (tmp) {
+          setArtistData(tmp.artistData);
+          setArtistDataCount(tmp.artistDataCount);
+        }
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
     }
 
     loadData();
-  }, [artistId, method, criteria, currentPage, perPageCount]);
+  }, [artistId, currentPage, perPageCount]);
 
   return (
     <ContentLayout
       currentPage={currentPage}
       perPageCount={perPageCount}
-      totalDataLength={totalDataLength}
+      totalDataLength={artistDataCount}
     >
-      <ArtistPageImage albumData={data} />
-      <AlbumContents albumData={data} perPageCount={perPageCount} />
+      {artistDataCount > 0 && (
+        <>
+          <ArtistPageImage artistData={artistData} />
+          <AlbumContents artistData={artistData} perPageCount={perPageCount} />
+        </>
+      )}
     </ContentLayout>
   );
 }

@@ -16,13 +16,11 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
   const pathName = usePathname();
   const albumDuration = formatDuration(albumData.duration);
   const divRef = useRef<HTMLDivElement>(null);
-  const fullPathName = usePathname();
 
   return (
     <>
       <Link
         className={styles["album-information-container"]}
-        style={{ textDecoration: "none" }}
         href={
           isAdminPage(pathName)
             ? `/music/admin/post/${albumData.id}`

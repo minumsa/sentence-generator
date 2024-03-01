@@ -147,7 +147,7 @@ export default function SearchContent({
           })}
         </div>
       </div>
-      {isEmptyResult ? undefined : <AlbumContents albumData={data} perPageCount={perPageCount} />}
+      {isEmptyResult ? undefined : <AlbumContents artistData={data} perPageCount={perPageCount} />}
     </ContentLayout>
   );
 }

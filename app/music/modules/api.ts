@@ -19,12 +19,9 @@ interface SearchData {
 }
 
 interface FetchArtistData {
-  pathName: string;
   perPageCount: number;
   currentPage: number;
   artistId: string;
-  currentMethod: MethodType;
-  currentCriteria: CriteriaType;
 }
 
 export async function fetchAlbumData({
@@ -58,16 +55,9 @@ export async function fetchAlbumData({
   }
 }
 
-export async function FetchArtistData({
-  pathName,
-  perPageCount,
-  currentPage,
-  artistId,
-  currentMethod,
-  currentCriteria,
-}: FetchArtistData) {
+export async function FetchArtistData({ artistId, perPageCount, currentPage }: FetchArtistData) {
   try {
-    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&artistId=${artistId}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
+    const queryString = `?artistId=${artistId}&perPageCount=${perPageCount}&currentPage=${currentPage}`;
     const url = `/music/api/artist${queryString}`;
 
     const response = await fetch(url, {
@@ -81,9 +71,9 @@ export async function FetchArtistData({
       throw new Error("Failed to fetch artist data");
     }
 
-    let { slicedData, genreDataLength } = await response.json();
+    const { artistData, artistDataCount } = await response.json();
 
-    return { slicedData, genreDataLength };
+    return { artistData, artistDataCount };
   } catch (error) {
     console.error(error);
   }
