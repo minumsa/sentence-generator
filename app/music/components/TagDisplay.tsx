@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import styles from "./TagDisplay.module.css";
+import styles from "./tagdisplay.module.css";
 import { defaultTags } from "../modules/data";
 import { useState } from "react";
 

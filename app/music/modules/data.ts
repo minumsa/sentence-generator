@@ -149,6 +149,9 @@ export const artistPath = (pathName: string, artistId: string) =>
 export const tagPath = (pathName: string, tagKey: string) =>
   isAdmin(pathName) ? `/music/admin/search/tag/${tagKey}/1` : `/music/search/tag/${tagKey}/1`;
 
+export const categoryPath = (pathName: string, category: string) =>
+  isAdmin(pathName) ? `music/admin/${category}/1` : `music/${category}/1`;
+
 export interface Tags {
   [key: string]: string;
 }
@@ -189,7 +192,6 @@ export const defaultTags: Tags = {
   energy: "에너지 업 ⚡️",
   sad: "#슬픔 😢",
   relaxing: "#휴식 🌴",
-  morning: "#아침 🌞",
 
   // 앨범 스타일
   diva: "#디바 🫅",
@@ -255,7 +257,6 @@ export const groupTags: GroupTags = {
     energy: "에너지 업 ⚡️",
     sad: "#슬픔 😢",
     relaxing: "#휴식 🌴",
-    morning: "#아침 🌞",
   },
 
   스타일: {

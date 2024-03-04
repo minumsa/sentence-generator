@@ -6,7 +6,7 @@ export const Snow = () => {
   return (
     <NoSSR>
       <div className={styles["snowfall-container"]}>
-        <Snowfall snowflakeCount={100} speed={[0, 2.5]} />
+        <Snowfall snowflakeCount={50} speed={[0, 2.5]} />
       </div>
     </NoSSR>
   );

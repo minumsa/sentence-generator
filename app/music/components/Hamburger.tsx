@@ -1,7 +1,8 @@
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { contents, isAdminPage } from "../modules/data";
-import { useState } from "react";
+import { categoryPath, contents, isAdminPage } from "../modules/data";
+import React, { useState } from "react";
+import Link from "next/link";
 
 export const Hamburger = () => {
   const pathName = usePathname();
@@ -26,17 +27,11 @@ export const Hamburger = () => {
         <ul className={styles["desktop-genre-category"]}>
           {Object.keys(contents).map(category => {
             return (
-              <li
-                key={category}
-                className={styles["hamburger-item"]}
-                onClick={() => {
-                  isAdminPage(pathName)
-                    ? router.push(`/music/admin/${category}/1`)
-                    : router.push(`/music/${category}/1`);
-                }}
-              >
-                {contents[category]}
-              </li>
+              <React.Fragment key={category}>
+                <Link href={categoryPath(pathName, category)}>
+                  <li className={styles["hamburger-item"]}>{contents[category]}</li>
+                </Link>
+              </React.Fragment>
             );
           })}
         </ul>
