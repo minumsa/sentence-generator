@@ -136,6 +136,8 @@ export default function Upload() {
       style={showTagListModal ? { marginBottom: "150px" } : undefined}
     >
       <div className={styles["page-title"]}>업로드 페이지</div>
+
+      {/* 장르 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>장르</div>
         <select
@@ -155,6 +157,8 @@ export default function Upload() {
           })}
         </select>
       </div>
+
+      {/* 앨범 제목 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>앨범 제목</div>
         <div style={{ position: "relative" }}>
@@ -205,6 +209,8 @@ export default function Upload() {
           </div>
         </div>
       </div>
+
+      {/* 앨범 ID */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>앨범 ID</div>
         <input
@@ -212,6 +218,8 @@ export default function Upload() {
           defaultValue={albumId}
         ></input>
       </div>
+
+      {/* 링크(Apple Music) */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>링크(Apple Music)</div>
         <input
@@ -222,6 +230,8 @@ export default function Upload() {
           }}
         />
       </div>
+
+      {/* 별점 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>별점</div>
         <Rate
@@ -234,6 +244,8 @@ export default function Upload() {
           className={styles["rc-rate"]}
         />
       </div>
+
+      {/* 글 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>글</div>
         <textarea
@@ -244,17 +256,19 @@ export default function Upload() {
           }}
         />
       </div>
+
+      {/* 비디오 링크 */}
       {new Array(videoCount).fill(null).map((_, index) => {
         const tmpVideos = [...videos];
         const videoNumber = index + 1;
-
+        const isFirstVideo = index === 0;
         return (
           <div key={index} className={styles["block-container"]}>
             <div
               className={styles["block-title"]}
               style={{ display: "flex", alignItems: "center" }}
             >
-              {index === 0 ? (
+              {isFirstVideo ? (
                 <a
                   href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
                   target="_blank"
@@ -279,7 +293,7 @@ export default function Upload() {
                   </div>
                 </div>
               )}
-              {index === 0 && (
+              {isFirstVideo && (
                 <>
                   <div className={styles["video-block-button-container"]}>
                     <div
@@ -330,6 +344,8 @@ export default function Upload() {
           </div>
         );
       })}
+
+      {/* 태그 */}
       <div ref={modalRef} className={styles["block-container"]}>
         <div className={styles["block-title"]}>태그</div>
         <div className={styles["tag-list-container"]}>
@@ -403,6 +419,8 @@ export default function Upload() {
           />
         </div>
       </div>
+
+      {/* 작성일 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>작성일</div>
         <DatePicker
@@ -412,6 +430,8 @@ export default function Upload() {
           className={styles["date-input"]}
         />
       </div>
+
+      {/* 관리자 비밀번호 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>관리자 비밀번호</div>
         <input
@@ -424,6 +444,8 @@ export default function Upload() {
           style={{ width: "300px" }}
         />
       </div>
+
+      {/* 제출 버튼 */}
       <div className={styles["submit-container"]}>
         <div
           className={`${styles["button"]} ${styles["submit"]}`}

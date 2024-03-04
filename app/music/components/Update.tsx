@@ -189,6 +189,8 @@ export default function Update({ currentId }: UpdateProps) {
       style={showTagListModal ? { marginBottom: "150px" } : undefined}
     >
       <div className={styles["page-title"]}>수정 페이지</div>
+
+      {/* 장르 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>장르</div>
         <div className={styles["select-container"]}>
@@ -220,6 +222,8 @@ export default function Update({ currentId }: UpdateProps) {
           }}
         />
       </div>
+
+      {/* 앨범 제목 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>앨범 제목</div>
         <div>
@@ -274,15 +278,23 @@ export default function Update({ currentId }: UpdateProps) {
             </div>
           )}
         </div>
-        <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>
-          앨범 ID(Spotify)
-        </div>
+      </div>
+
+      {/* 앨범 ID */}
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>앨범 ID(Spotify)</div>
         <div className={styles["input"]}>{albumId}</div>
-        <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>발매일</div>
+      </div>
+
+      {/* 발매일 */}
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>발매일</div>
         <div className={styles["input"]}>{albumReleaseDate}</div>
-        <div className={`${styles["block-title"]} ${styles["video-link-title"]}`}>
-          아티스트 ID(Spotify)
-        </div>
+      </div>
+
+      {/* 아티스트 ID */}
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>아티스트 ID(Spotify)</div>
         <input
           className={styles["input"]}
           value={artistId}
@@ -291,6 +303,8 @@ export default function Update({ currentId }: UpdateProps) {
           }}
         />
       </div>
+
+      {/* 별점 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>별점</div>
         <Rate
@@ -304,6 +318,8 @@ export default function Update({ currentId }: UpdateProps) {
           className={styles["rc-rate"]}
         />
       </div>
+
+      {/* 글 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>글</div>
         <textarea
@@ -314,18 +330,20 @@ export default function Update({ currentId }: UpdateProps) {
           }}
         />
       </div>
+
+      {/* 비디오 링크 */}
       {albumData &&
         new Array(videoCount).fill(null).map((_, index) => {
           const tmpVideos = [...videos];
           const videoNumber = index + 1;
-
+          const isFirstVideo = index === 0;
           return (
             <div key={index} className={styles["block-container"]}>
               <div
                 className={styles["block-title"]}
                 style={{ display: "flex", alignItems: "center" }}
               >
-                {index === 0 ? (
+                {isFirstVideo ? (
                   <a
                     href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
                     target="_blank"
@@ -350,7 +368,7 @@ export default function Update({ currentId }: UpdateProps) {
                     </div>
                   </div>
                 )}
-                {index === 0 && (
+                {isFirstVideo && (
                   <>
                     <div className={styles["video-block-button-container"]}>
                       <div
@@ -401,6 +419,8 @@ export default function Update({ currentId }: UpdateProps) {
             </div>
           );
         })}
+
+      {/* 태그 */}
       <div ref={modalRef} className={styles["block-container"]}>
         <div className={styles["block-title"]}>태그</div>
         <div className={styles["tag-list-container"]}>
@@ -474,6 +494,8 @@ export default function Update({ currentId }: UpdateProps) {
           />
         </div>
       </div>
+
+      {/* 작성일 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>작성일</div>
         <DatePicker
@@ -483,6 +505,8 @@ export default function Update({ currentId }: UpdateProps) {
           className={`${styles["date-input"]} ${styles["input"]}`}
         />
       </div>
+
+      {/* 관리자 비밀번호 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>관리자 비밀번호</div>
         <input
@@ -495,6 +519,8 @@ export default function Update({ currentId }: UpdateProps) {
           style={{ width: "300px" }}
         />
       </div>
+
+      {/* 제출 버튼 */}
       <div className={styles["submit-container"]}>
         <div className={`${styles["button"]} ${styles["submit"]}`} onClick={handleUpdate}>
           제출하기
