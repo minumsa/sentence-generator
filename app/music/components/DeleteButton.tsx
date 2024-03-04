@@ -10,7 +10,7 @@ export const DeleteButton = ({ data }: DeleteButtonProps) => {
   return (
     <div
       className={styles["admin-button"]}
-      onClick={async () => {
+      onClick={() => {
         deleteData(data.id);
       }}
     >

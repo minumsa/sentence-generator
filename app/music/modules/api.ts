@@ -19,15 +19,12 @@ interface SearchData {
 }
 
 interface FetchArtistData {
-  pathName: string;
   perPageCount: number;
   currentPage: number;
   artistId: string;
-  currentMethod: MethodType;
-  currentCriteria: CriteriaType;
 }
 
-export async function fetchData({
+export async function fetchAlbumData({
   pathName,
   perPageCount,
   currentPage,
@@ -58,16 +55,9 @@ export async function fetchData({
   }
 }
 
-export async function FetchArtistData({
-  pathName,
-  perPageCount,
-  currentPage,
-  artistId,
-  currentMethod,
-  currentCriteria,
-}: FetchArtistData) {
+export async function FetchArtistData({ artistId, perPageCount, currentPage }: FetchArtistData) {
   try {
-    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&artistId=${artistId}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
+    const queryString = `?artistId=${artistId}&perPageCount=${perPageCount}&currentPage=${currentPage}`;
     const url = `/music/api/artist${queryString}`;
 
     const response = await fetch(url, {
@@ -81,9 +71,9 @@ export async function FetchArtistData({
       throw new Error("Failed to fetch artist data");
     }
 
-    let { slicedData, genreDataLength } = await response.json();
+    const { artistData, artistDataCount } = await response.json();
 
-    return { slicedData, genreDataLength };
+    return { artistData, artistDataCount };
   } catch (error) {
     console.error(error);
   }
@@ -120,7 +110,7 @@ export async function SearchData({
   }
 }
 
-export async function fetchDataById(id: string) {
+export async function fetchAlbumById(id: string) {
   try {
     const url = `/music/api/update?id=${id}`;
 
@@ -147,13 +137,31 @@ interface Video {
   url: string;
 }
 
-export async function uploadData(
-  newSpotifyAlbumData: SpotifyAlbumData,
-  score: number,
-  videos: Video[],
-  tagKeys: string[],
-  password: string
-) {
+export interface UpdateDataParams {
+  id: string;
+  newSpotifyAlbumData: SpotifyAlbumData | null;
+  genre: string;
+  link: string;
+  text: string;
+  uploadDate: Date;
+  score: number;
+  videos: Video[];
+  tagKeys: string[];
+  password: string;
+}
+
+export async function uploadData({
+  id,
+  newSpotifyAlbumData,
+  genre,
+  link,
+  text,
+  uploadDate,
+  score,
+  videos,
+  tagKeys,
+  password,
+}: UpdateDataParams) {
   if (newSpotifyAlbumData !== null) {
     try {
       const response = await fetch("/music/api", {
@@ -162,7 +170,12 @@ export async function uploadData(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          data: newSpotifyAlbumData,
+          id,
+          newSpotifyAlbumData,
+          genre,
+          link,
+          text,
+          uploadDate,
           score: score,
           videos: videos,
           tagKeys: tagKeys,
@@ -188,14 +201,18 @@ export async function uploadData(
   }
 }
 
-export const updateData = async (
-  currentId: string,
-  newSpotifyAlbumData: SpotifyAlbumData,
-  score: number,
-  videos: Video[],
-  tagKeys: string[],
-  password: string
-) => {
+export const updateData = async ({
+  id,
+  newSpotifyAlbumData,
+  genre,
+  link,
+  text,
+  uploadDate,
+  score,
+  videos,
+  tagKeys,
+  password,
+}: UpdateDataParams) => {
   if (newSpotifyAlbumData !== null) {
     try {
       const response = await fetch("/music/api", {
@@ -204,8 +221,12 @@ export const updateData = async (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          currentId,
+          id,
           newSpotifyAlbumData,
+          genre,
+          link,
+          text,
+          uploadDate,
           score,
           videos,
           tagKeys,
@@ -284,18 +305,14 @@ const fetchSpotifyAccessToken = async () => {
   }
 };
 
-export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: UpdateInfo) => {
-  if (!albumId || !genre || !link || !text) {
+export const fetchSpotify = async (albumId: string) => {
+  if (!albumId) {
     alert("모든 항목을 채워주세요.");
     return;
   }
 
   const item = {
     albumId: albumId,
-    genre: genre,
-    link: link,
-    text: text,
-    uploadDate: uploadDate,
   };
 
   try {
@@ -327,6 +344,11 @@ export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: U
     }
 
     const artistData = await artistDataResponse.json();
+    const duration = Math.floor(
+      albumData.tracks.items
+        .map((data: any) => data.duration_ms)
+        .reduce((a: number, b: number) => a + b) / 1000
+    );
 
     const fetchedData: SpotifyAlbumData = {
       id: albumData.id,
@@ -337,16 +359,12 @@ export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: U
       album: albumData.name,
       label: albumData.label,
       releaseDate: albumData.release_date,
-      text: item.text,
-      genre: item.genre,
-      link: item.link,
-      uploadDate: item.uploadDate,
+      // text: item.text,
+      // genre: item.genre,
+      // link: item.link,
+      // uploadDate: item.uploadDate,
       tracks: albumData.tracks.items.length,
-      duration: Math.floor(
-        albumData.tracks.items
-          .map((data: any) => data.duration_ms)
-          .reduce((a: number, b: number) => a + b) / 1000
-      ),
+      duration: duration,
     };
 
     return fetchedData;
@@ -355,14 +373,14 @@ export const fetchSpotify = async ({ albumId, genre, link, text, uploadDate }: U
   }
 };
 
-export const searchSpotify = async (albumKeyword: string) => {
+export const searchSpotify = async (searchKeyword: string) => {
   try {
     const accessToken = await fetchSpotifyAccessToken();
     if (!accessToken) {
       console.error("Error: Access token is not available");
     }
 
-    const searchUrl = `https://api.spotify.com/v1/search?q=${albumKeyword}&type=album`;
+    const searchUrl = `https://api.spotify.com/v1/search?q=${searchKeyword}&type=album`;
 
     const headers = {
       Authorization: `Bearer ${accessToken}`,

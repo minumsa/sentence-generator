@@ -5,7 +5,6 @@ import { formatDuration } from "../modules/utils";
 import { useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
-import { LinkIcon } from "./LinkIcon";
 import Link from "next/link";
 
 interface PostAlbumMetadataProps {
@@ -67,9 +66,15 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             {albumData.artist}
           </span>
         </Link>
+<<<<<<< HEAD
         <LinkIcon />
 
         {/* 앨범 정보 */}
+=======
+        <span>
+          <img className={styles["link-icon"]} src="/music/link.svg" alt="link-icon" />
+        </span>
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
         <div className={styles["post-date"]}>앨범</div>
         <div>
           <span className={styles["black-masking"]}>{albumData.album}</span>
@@ -109,7 +114,9 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
                       {videoData.title}
                     </span>
                   </a>
-                  <LinkIcon />
+                  <span>
+                    <img className={styles["link-icon"]} src="/music/link.svg" alt="link-icon" />
+                  </span>
                 </div>
               );
             })}

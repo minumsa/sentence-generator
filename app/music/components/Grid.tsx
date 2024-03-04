@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../music.module.css";
-import { fetchData } from "../modules/api";
+import { fetchAlbumData } from "../modules/api";
 import { usePathname } from "next/navigation";
 import { useAtomValue } from "jotai";
 import React from "react";
@@ -31,6 +31,8 @@ export const Grid = () => {
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
 
+  console.log(data);
+
   useEffect(() => {
     Aos.init();
   }, []);
@@ -41,7 +43,7 @@ export const Grid = () => {
 
   useEffect(() => {
     async function loadData() {
-      const result = await fetchData({
+      const result = await fetchAlbumData({
         pathName: "",
         perPageCount,
         currentPage: scrollCount,
@@ -75,6 +77,7 @@ export const Grid = () => {
     }
   }, [method, criteria, scrollCount, perPageCount, currentTagKey]);
 
+<<<<<<< HEAD
   const [divWidth, setDivWidth] = useState(0);
   const myDivRef = useRef<HTMLDivElement>(null);
 
@@ -95,35 +98,94 @@ export const Grid = () => {
     };
   }, []);
 
+=======
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
   return (
-    <>
-      <ContentLayout
-        currentPage={scrollCount}
-        perPageCount={perPageCount}
-        totalDataLength={0}
-        isLoading={isLoading}
-        isScrolling={isScrolling}
-      >
-        {/* Tag Display */}
-        {totalDataLength > 0 && (
-          <>
+    <ContentLayout
+      currentPage={scrollCount}
+      perPageCount={perPageCount}
+      totalDataLength={0}
+      isLoading={isLoading}
+      isScrolling={isScrolling}
+    >
+      {totalDataLength > 0 && (
+        <>
+          {/* Mobile Tag Display */}
+          <div
+            className={styles["tag-display-container"]}
+            style={
+              showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
+            }
+          >
+            {Object.keys(defaultTags).map((key, index) => {
+              return (
+                <div
+                  key={index}
+                  className={styles["tag-display-item"]}
+                  onClick={() => {
+                    setCurrentTagKey(key);
+                    setScrollCount(1);
+                  }}
+                  style={
+                    currentTagKey === key || (currentTagKey === "" && key === "all")
+                      ? { border: "1px solid var(--text-color)" }
+                      : undefined
+                  }
+                >
+                  {defaultTags[key]}
+                </div>
+              );
+            })}
             <div
-              className={styles["tag-display-container"]}
-              style={
-                showAllTagItems
-                  ? { flexWrap: "wrap", paddingRight: "31px" }
-                  : { flexWrap: "nowrap" }
-              }
+              className={styles["arrow-down-container"]}
+              onClick={() => {
+                setShowAllTagItems(!showAllTagItems);
+              }}
             >
-              {Object.keys(defaultTags).map((key, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={styles["tag-display-item"]}
+              <img
+                className={styles["arrow-down"]}
+                src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
+                alt="arrow-down"
+              />
+            </div>
+          </div>
+          {/* Grid Items */}
+          <div className={styles["grid-div"]}>
+            {data.map((item, index) => {
+              const currentDataLength = data.length;
+              const isLastDataAndOddNumber =
+                index === currentDataLength - 1 && currentDataLength % 2 === 1;
+
+              // FIXME: 코드 전체적으로 이런 식으로 정리하기
+              const isFirstLine = index < 2;
+              const isEvenIndex = (index + 1) % 2 == 0;
+              const isLastItem = index + 1 === data.length;
+              const postPath = isAdminPage ? `/music/admin/post` : `/music/post`;
+              const postHref = `${postPath}/${item.id}`;
+              const artistPath = isAdminPage ? "/music/admin/artist" : "/music/artist";
+              const artistHref = `${artistPath}/${item.artistId}/1`;
+              const mobileStyle = {
+                borderTop: isFirstLine ? "none" : undefined,
+                borderRight: isEvenIndex ? "none" : undefined,
+              };
+
+              return isLastDataAndOddNumber ? null : (
+                <div
+                  data-aos="fade-up"
+                  data-aos-duration={800}
+                  data-aos-offset={isMobile ? 40 : 90}
+                  data-aos-once="true"
+                  key={index}
+                  className={`${styles["grid-item-container"]}`}
+                  style={isMobile ? mobileStyle : undefined}
+                  ref={isLastItem ? ref : undefined}
+                >
+                  <Link
+                    href={postHref}
                     onClick={() => {
-                      setCurrentTagKey(key);
-                      setScrollCount(1);
+                      setIsLoading(true);
                     }}
+<<<<<<< HEAD
                     style={
                       currentTagKey === key || (currentTagKey === "" && key === "all")
                         ? { boxShadow: "inset 0 0 0 1px var(--text-color)" }
@@ -176,53 +238,48 @@ export const Grid = () => {
                     className={`${styles["grid-item-container"]}`}
                     style={isMobile ? mobileStyle : undefined}
                     ref={isLastItem ? ref : undefined}
+=======
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                   >
+                    <img
+                      className={styles["grid-album-image"]}
+                      src={item.imgUrl}
+                      alt={item.album}
+                    />
+                  </Link>
+                  <div className={styles["grid-album-title"]}>
                     <Link
                       href={postHref}
                       onClick={() => {
                         setIsLoading(true);
                       }}
                     >
-                      <img
-                        className={styles["grid-album-image"]}
-                        src={item.imgUrl}
-                        alt={item.album}
-                      />
+                      <button
+                        className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                      >
+                        {`${item.album}`}
+                      </button>
                     </Link>
-                    <div className={styles["grid-album-title"]}>
-                      <Link
-                        href={postHref}
-                        onClick={() => {
-                          setIsLoading(true);
-                        }}
+                    <br />
+                    <Link
+                      href={artistHref}
+                      onClick={() => {
+                        setIsLoading(true);
+                      }}
+                    >
+                      <button
+                        className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
                       >
-                        <button
-                          className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        >
-                          {`${item.album}`}
-                        </button>
-                      </Link>
-                      <br />
-                      <Link
-                        href={artistHref}
-                        onClick={() => {
-                          setIsLoading(true);
-                        }}
-                      >
-                        <button
-                          className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                        >
-                          {`${item.artist}`}
-                        </button>
-                      </Link>
-                    </div>
+                        {`${item.artist}`}
+                      </button>
+                    </Link>
                   </div>
-                );
-              })}
-            </div>
-          </>
-        )}
-      </ContentLayout>
-    </>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </ContentLayout>
   );
 };

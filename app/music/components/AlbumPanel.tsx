@@ -16,6 +16,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
   const pathName = usePathname();
   const albumDuration = formatDuration(albumData.duration);
   const divRef = useRef<HTMLDivElement>(null);
+<<<<<<< HEAD
   const isAdmin = isAdminPage(pathName);
   const adminPostPath = isAdmin
     ? `/music/admin/post/${albumData.id}`
@@ -29,6 +30,19 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
   return (
     <>
       <Link className={styles["album-information-container"]} href={adminPostPath}>
+=======
+
+  return (
+    <>
+      <Link
+        className={styles["album-information-container"]}
+        href={
+          isAdminPage(pathName)
+            ? `/music/admin/post/${albumData.id}`
+            : `/music/post/${albumData.id}`
+        }
+      >
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
         <img
           className={styles["album-art"]}
           src={albumData.imgUrl}
@@ -46,7 +60,18 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
               <div key={index} className={styles["paragraph-container"]}>
                 {/* 앨범 타이틀 */}
                 <div className={styles["post-album-title"]}>
+<<<<<<< HEAD
                   <Link href={adminPostPath} style={{ textDecoration: "none", display: "flex" }}>
+=======
+                  <Link
+                    href={
+                      isAdminPage(pathName)
+                        ? `/music/admin/post/${albumData.id}`
+                        : `/music/post/${albumData.id}`
+                    }
+                    style={{ textDecoration: "none", display: "flex" }}
+                  >
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                     <h2 style={{ padding: isAdminPage(pathName) ? 0 : undefined }}>
                       {albumData.album}
                     </h2>
@@ -75,8 +100,19 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   </div>
                 </div>
                 <div className={styles["category-meta"]}>
+<<<<<<< HEAD
                   {/* 아티스트 이미지 */}
                   <Link className={styles["category-meta-image-container"]} href={adminArtistPath}>
+=======
+                  <Link
+                    className={styles["category-meta-image-container"]}
+                    href={
+                      isAdminPage(pathName)
+                        ? `/music/admin/artist/${albumData.artistId}/1`
+                        : `/music/artist/${albumData.artistId}/1`
+                    }
+                  >
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                     <img
                       src={albumData.artistImgUrl}
                       alt="test"
@@ -85,8 +121,19 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                     />
                   </Link>
                   <div>
+<<<<<<< HEAD
                     {/* 아티스트 이름 */}
                     <Link style={{ textDecoration: "none" }} href={adminArtistPath}>
+=======
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      href={
+                        isAdminPage(pathName)
+                          ? `/music/admin/artist/${albumData.artistId}/1`
+                          : `/music/artist/${albumData.artistId}/1`
+                      }
+                    >
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                       {albumData.artist}
                     </Link>
                     {/* 발매일, 트랙 개수, 러닝타임 */}
@@ -108,7 +155,18 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                     {text}
                   </p>
                   {isLongText && (
+<<<<<<< HEAD
                     <Link style={{ textDecoration: "none" }} href={adminPostPath}>
+=======
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      href={
+                        isAdminPage(pathName)
+                          ? `/music/admin/post/${albumData.id}`
+                          : `/music/post/${albumData.id}`
+                      }
+                    >
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                       <div className={styles["more-button"]}>더 보기</div>
                     </Link>
                   )}
@@ -117,13 +175,29 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                 <div className={styles["album-tag-container"]}>
                   {albumData.tagKeys.map((tagKey: string, index: number) => {
                     return (
+<<<<<<< HEAD
                       <Link href={adminTagPath(tagKey)} key={index} className={styles["tag-item"]}>
+=======
+                      <Link
+                        href={
+                          isAdminPage(pathName)
+                            ? `/music/admin/search/tag/${tagKey}/1`
+                            : `/music/search/tag/${tagKey}/1`
+                        }
+                        key={index}
+                        className={styles["tag-item"]}
+                      >
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                         {defaultTags[tagKey]}
                       </Link>
                     );
                   })}
                 </div>
+<<<<<<< HEAD
                 {/* 관리자 페이지 - 수정 및 삭제 버튼 */}
+=======
+                {/* 관리자 페이지일 때만 삭제, 수정 버튼 표시 */}
+>>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                 {isAdminPage(pathName) && (
                   <div className={styles["admin-button-container"]}>
                     <EditButton data={albumData} />

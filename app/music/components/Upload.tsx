@@ -2,20 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
 import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
-import { contents, defaultTags, groupTags } from "../modules/data";
+import { AlbumInfo, contents, defaultTags, groupTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 
-// FIXME: 타입 any 없애기
+type Artist = { name: string };
+type Image = { url: string };
+
 interface SearchData {
-  albums: any;
-  items: any;
-  artists: any;
+  albums: AlbumInfo[];
+  artists: Artist[];
   name: string;
   release_date: string;
-  images: any[];
+  images: Image[];
   id: string;
 }
 
@@ -40,7 +41,6 @@ export default function Upload() {
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
-
   const modalRef = useRef<HTMLDivElement>(null);
   const [showTagListModal, setShowTagListModal] = useState(false);
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
@@ -63,17 +63,22 @@ export default function Upload() {
 
   const handleUpload = async () => {
     const filteredText = text.replace(/\[\d+\]/g, "");
-    const newSpotifyAlbumData = await fetchSpotify({
-      albumId,
-      genre,
-      link,
-      text: filteredText,
-      uploadDate,
-    });
+    const newSpotifyAlbumData = await fetchSpotify(albumId);
 
     if (newSpotifyAlbumData) {
       try {
-        await uploadData(newSpotifyAlbumData, score, videos, currentTagKeys, password);
+        await uploadData({
+          id: albumId,
+          newSpotifyAlbumData,
+          genre,
+          link,
+          text: filteredText,
+          uploadDate,
+          score,
+          videos,
+          tagKeys: currentTagKeys,
+          password,
+        });
       } catch (error) {
         console.error("uploadData 호출에 실패했습니다:", error);
       }

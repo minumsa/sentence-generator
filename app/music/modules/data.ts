@@ -49,10 +49,10 @@ export interface SpotifyAlbumData {
   album: string;
   label: string;
   releaseDate: string;
-  genre: string;
-  link: string;
-  text: string;
-  uploadDate: Date;
+  // genre: string;
+  // link: string;
+  // text: string;
+  // uploadDate: Date;
   duration: number;
   tracks: number;
 }
@@ -89,12 +89,12 @@ export interface PageProps {
 
 export interface UpdateInfo {
   albumId: string;
-  genre: string;
-  link: string;
-  text: string;
+  // genre: string;
+  // link: string;
+  // text: string;
   musicVideoTitle?: string;
   musicVideoUrl?: string;
-  uploadDate: Date;
+  // uploadDate: Date;
 }
 
 export const album = {
@@ -104,11 +104,6 @@ export const album = {
     width: 250,
     height: 250,
   },
-};
-
-export const activeStyle = {
-  // color: "#949494",
-  backgroundColor: "#333",
 };
 
 export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범" | "별점";
@@ -187,12 +182,15 @@ export const defaultTags: Tags = {
 
   // 앨범 스타일
   diva: "#디바 🫅",
+  idol: "#아이돌 🐰",
   instrumental: "#가사 없음 🎻",
+  goodLyrics: "좋은 가사 📝",
   citypop: "#시티팝 🌃",
   christmas: "#크리스마스 🎅",
 
   // 수상 기록
   grammyAwards: "#그래미 수상 🏆",
+  koreanMusicAwards: "#한국대중음악상 수상 🏆",
   koreanTop100Albums: "#한국대중음악 100대 명반 💿",
   rollingStonesTop500Albums: "#롤링스톤 500대 명반 👅",
   rollingStonesTop100AlbumsJapan: "#롤링스톤 재팬 100대 명반 👅",
@@ -250,14 +248,17 @@ export const groupTags: GroupTags = {
   },
 
   스타일: {
-    diva: "#디바 🫅",
-    instrumental: "#가사 없음 🎻",
     citypop: "#시티팝 🌃",
+    idol: "#아이돌 🐰",
+    instrumental: "#가사 없음 🎻",
+    goodLyrics: "좋은 가사 📝",
+    diva: "#디바 🫅",
     christmas: "#크리스마스 🎅",
   },
 
   수상: {
     grammyAwards: "#그래미 수상 🏆",
+    koreanMusicAwards: "#한국대중음악상 수상 🏆",
     koreanTop100Albums: "#한국대중음악 100대 명반 💿",
     rollingStonesTop500Albums: "#롤링스톤 500대 명반 👅",
     rollingStonesTop100AlbumsJapan: "#롤링스톤 재팬 100대 명반 👅",

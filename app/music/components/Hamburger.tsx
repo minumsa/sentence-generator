@@ -41,15 +41,19 @@ export const Hamburger = () => {
           })}
         </ul>
       ) : null}
-      {/* TODO: 게시판 더 추가할지 말지 결정 */}
-      {/* {showCategory && (
+      {showCategory && isAdminPage(pathName) && (
         <div className={styles["desktop-introduction-category"]}>
-          <div className={styles["hamburger-item-title"]}>소개</div>
-          <div className={styles["hamburger-item"]}>카버</div>
-          <div className={styles["hamburger-item"]}>카버차트</div>
-          <div className={styles["hamburger-item"]}>연락처</div>
+          <div className={styles["hamburger-item-title"]}>관리자 메뉴</div>
+          <div
+            className={styles["hamburger-item"]}
+            onClick={() => {
+              router.push("/music/admin/upload");
+            }}
+          >
+            글쓰기
+          </div>
         </div>
-      )} */}
+      )}
     </nav>
   );
 };

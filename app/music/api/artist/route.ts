@@ -10,24 +10,14 @@ export async function GET(request: Request) {
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
     const artistId = url.searchParams.get("artistId");
-    const currentMethod = url.searchParams.get("currentMethod");
-    const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
 
-    let sortKey = {};
-    if (currentMethod === "발매일") {
-      sortKey = { releaseDate: currentCriteria };
-    } else if (currentMethod === "작성일") {
-      sortKey = { uploadDate: currentCriteria };
-    } else if (currentMethod === "아티스트") {
-      sortKey = { artist: currentCriteria };
-    } else if (currentMethod === "앨범") {
-      sortKey = { album: currentCriteria };
-    }
+    type ReleaseDate = 1 | -1;
+    const sortKey: { [key: string]: ReleaseDate } = { releaseDate: -1 };
 
-    const genreDataLength = await Music.find({ artistId: artistId }).count();
-    const slicedData = await Music.find({ artistId: artistId });
+    const artistData = await Music.find({ artistId: artistId }).sort(sortKey);
+    const artistDataCount = await Music.find({ artistId: artistId }).count();
 
-    return NextResponse.json({ slicedData, genreDataLength });
+    return NextResponse.json({ artistData, artistDataCount });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
