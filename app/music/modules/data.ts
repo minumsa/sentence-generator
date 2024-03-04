@@ -138,6 +138,17 @@ export const isAdminPage = (pathName: string) => {
   return pathName?.includes("admin");
 };
 
+const isAdmin = (pathName: string) => isAdminPage(pathName);
+
+export const postPath = (pathName: string, albumId: string) =>
+  isAdmin(pathName) ? `/music/admin/post/${albumId}` : `/music/post/${albumId}`;
+
+export const artistPath = (pathName: string, artistId: string) =>
+  isAdmin(pathName) ? `/music/admin/artist/${artistId}/1` : `/music/artist/${artistId}/1`;
+
+export const tagPath = (pathName: string, tagKey: string) =>
+  isAdmin(pathName) ? `/music/admin/search/tag/${tagKey}/1` : `/music/search/tag/${tagKey}/1`;
+
 export interface Tags {
   [key: string]: string;
 }

@@ -263,7 +263,7 @@
 }
 
 /* Media Queries */
-@media (max-width: 800px) {
+@media (max-width: 920px) {
   .container {
     width: 100%;
     align-items: center;

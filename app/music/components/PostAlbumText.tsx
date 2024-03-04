@@ -1,30 +1,14 @@
-<<<<<<< HEAD
-import { AlbumInfo } from "../modules/data";
-import { formatDate } from "../modules/utils";
-import styles from "../music.module.css";
-=======
 import { AlbumInfo, defaultTags, isAdminPage } from "../modules/data";
 import { formatDate } from "../modules/utils";
 import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
->>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
 
 interface PostTextProps {
   albumData: AlbumInfo;
 }
 
 export const PostText = ({ albumData }: PostTextProps) => {
-<<<<<<< HEAD
-  return (
-    <article className={styles["post-content-container"]}>
-      {albumData.text.split("\n").map((text, index) => {
-        const isLineBreak = text === "";
-        const isParagraphTitle =
-          (text.length < 50 && !text.includes(".") && !text.includes("[")) ||
-          text.includes("feat.");
-
-=======
   const pathName = usePathname();
   const paragraphArray = albumData.text.split("\n");
 
@@ -35,7 +19,6 @@ export const PostText = ({ albumData }: PostTextProps) => {
         const isParagraphTitle =
           (paragraph.length < 50 && !paragraph.includes(".") && !paragraph.includes("[")) ||
           paragraph.includes("feat.");
->>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
         return isLineBreak ? (
           <p key={index}></p>
         ) : (

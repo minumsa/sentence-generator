@@ -4,7 +4,14 @@ import { fetchAlbumData } from "../modules/api";
 import { usePathname } from "next/navigation";
 import { useAtomValue } from "jotai";
 import React from "react";
-import { AlbumInfo, criteriaAtom, defaultTags, methodAtom } from "../modules/data";
+import {
+  AlbumInfo,
+  artistPath,
+  criteriaAtom,
+  defaultTags,
+  methodAtom,
+  postPath,
+} from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
@@ -13,8 +20,7 @@ import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
 
 export const Grid = () => {
-  const fullPathName = usePathname();
-  const isAdminPage = fullPathName.includes("admin");
+  const pathName = usePathname();
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalDataLength, setTotalDataLength] = useState(0);
   const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
@@ -30,8 +36,6 @@ export const Grid = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
-
-  console.log(data);
 
   useEffect(() => {
     Aos.init();
@@ -77,29 +81,6 @@ export const Grid = () => {
     }
   }, [method, criteria, scrollCount, perPageCount, currentTagKey]);
 
-<<<<<<< HEAD
-  const [divWidth, setDivWidth] = useState(0);
-  const myDivRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (myDivRef.current) {
-        const width = myDivRef.current.offsetWidth;
-        setDivWidth(width);
-      }
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-=======
->>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
   return (
     <ContentLayout
       currentPage={scrollCount}
@@ -155,19 +136,7 @@ export const Grid = () => {
               const currentDataLength = data.length;
               const isLastDataAndOddNumber =
                 index === currentDataLength - 1 && currentDataLength % 2 === 1;
-
-              // FIXME: 코드 전체적으로 이런 식으로 정리하기
-              const isFirstLine = index < 2;
-              const isEvenIndex = (index + 1) % 2 == 0;
               const isLastItem = index + 1 === data.length;
-              const postPath = isAdminPage ? `/music/admin/post` : `/music/post`;
-              const postHref = `${postPath}/${item.id}`;
-              const artistPath = isAdminPage ? "/music/admin/artist" : "/music/artist";
-              const artistHref = `${artistPath}/${item.artistId}/1`;
-              const mobileStyle = {
-                borderTop: isFirstLine ? "none" : undefined,
-                borderRight: isEvenIndex ? "none" : undefined,
-              };
 
               return isLastDataAndOddNumber ? null : (
                 <div
@@ -177,69 +146,13 @@ export const Grid = () => {
                   data-aos-once="true"
                   key={index}
                   className={`${styles["grid-item-container"]}`}
-                  style={isMobile ? mobileStyle : undefined}
                   ref={isLastItem ? ref : undefined}
                 >
                   <Link
-                    href={postHref}
+                    href={postPath(pathName, item.id)}
                     onClick={() => {
                       setIsLoading(true);
                     }}
-<<<<<<< HEAD
-                    style={
-                      currentTagKey === key || (currentTagKey === "" && key === "all")
-                        ? { boxShadow: "inset 0 0 0 1px var(--text-color)" }
-                        : undefined
-                    }
-                  >
-                    {defaultTags[key]}
-                  </div>
-                );
-              })}
-              <div
-                className={styles["arrow-down-container"]}
-                onClick={() => {
-                  setShowAllTagItems(!showAllTagItems);
-                }}
-              >
-                <img
-                  className={styles["arrow-down"]}
-                  src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
-                  alt="arrow-down"
-                />
-              </div>
-            </div>
-
-            <div className={styles["grid-div"]}>
-              {data.map((item, index) => {
-                const currentDataLength = data.length;
-                const isLastDataAndOddNumber =
-                  index === currentDataLength - 1 && currentDataLength % 2 === 1;
-
-                const isFirstLine = index < 2;
-                const isEvenIndex = (index + 1) % 2 == 0;
-                const isLastItem = index + 1 === data.length;
-                const postPath = isAdminPage ? `/music/admin/post` : `/music/post`;
-                const postHref = `${postPath}/${item.id}`;
-                const artistPath = isAdminPage ? "/music/admin/artist" : "/music/artist";
-                const artistHref = `${artistPath}/${item.artistId}/1`;
-
-                const mobileStyle = {
-                  borderTop: isFirstLine ? "none" : undefined,
-                  borderRight: isEvenIndex ? "none" : undefined,
-                };
-                return isLastDataAndOddNumber ? null : (
-                  <div
-                    data-aos="fade-up"
-                    data-aos-duration={800}
-                    data-aos-offset={isMobile ? 40 : 90}
-                    data-aos-once="true"
-                    key={index}
-                    className={`${styles["grid-item-container"]}`}
-                    style={isMobile ? mobileStyle : undefined}
-                    ref={isLastItem ? ref : undefined}
-=======
->>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
                   >
                     <img
                       className={styles["grid-album-image"]}
@@ -249,7 +162,7 @@ export const Grid = () => {
                   </Link>
                   <div className={styles["grid-album-title"]}>
                     <Link
-                      href={postHref}
+                      href={postPath(pathName, item.id)}
                       onClick={() => {
                         setIsLoading(true);
                       }}
@@ -262,7 +175,7 @@ export const Grid = () => {
                     </Link>
                     <br />
                     <Link
-                      href={artistHref}
+                      href={artistPath(pathName, item.artistId)}
                       onClick={() => {
                         setIsLoading(true);
                       }}

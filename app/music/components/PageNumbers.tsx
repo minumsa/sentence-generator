@@ -49,33 +49,18 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
       )}
       {pageNumbers.map((page, index) => {
         const minPageNumber = maxPageNumber - perPageCount + 1;
-<<<<<<< HEAD
-        const currentPageNumber = index + 1;
-        const isPageNumberInRange =
-          currentPageNumber >= minPageNumber && currentPageNumber <= maxPageNumber;
-
+        const pageNumber = index + 1;
+        const isPageNumberInRange = pageNumber >= minPageNumber && pageNumber <= maxPageNumber;
+        const isCurrentPage = currentPage == pageNumber;
         if (isPageNumberInRange) {
-=======
-        const pageButtonNumber = index + 1;
-        const isPageInRange =
-          pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber;
-
-        if (isPageInRange)
->>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
           return (
             <div
               key={index}
               className={styles["page"]}
               onClick={() => {
-<<<<<<< HEAD
-                router.push(`${pathNameWithoutPageNumber}/${currentPageNumber}`);
+                router.push(`${pathNameWithoutPageNumber}/${pageNumber}`);
               }}
-              style={currentPage === currentPageNumber ? { color: "#cfcfcf" } : undefined}
-=======
-                handlePageClick(pageButtonNumber);
-              }}
-              style={currentPage === pageButtonNumber ? { color: "#cfcfcf" } : undefined}
->>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
+              style={isCurrentPage ? { color: "#cfcfcf" } : undefined}
             >
               {page}
             </div>

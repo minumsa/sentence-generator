@@ -6,6 +6,7 @@ import { useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import Link from "next/link";
+import { LinkIcon } from "./LinkIcon";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -66,15 +67,8 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             {albumData.artist}
           </span>
         </Link>
-<<<<<<< HEAD
         <LinkIcon />
-
         {/* 앨범 정보 */}
-=======
-        <span>
-          <img className={styles["link-icon"]} src="/music/link.svg" alt="link-icon" />
-        </span>
->>>>>>> c1dec4e915c170bee55af068b2c2484c0e76621d
         <div className={styles["post-date"]}>앨범</div>
         <div>
           <span className={styles["black-masking"]}>{albumData.album}</span>

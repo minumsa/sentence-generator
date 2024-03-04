@@ -90,6 +90,7 @@ export default function Update({ currentId }: UpdateProps) {
   useEffect(() => {
     async function getData() {
       const fetchData = await fetchAlbumById(currentId);
+
       setAlbumData(fetchData);
 
       const {
@@ -344,32 +345,13 @@ export default function Update({ currentId }: UpdateProps) {
                 style={{ display: "flex", alignItems: "center" }}
               >
                 {isFirstVideo ? (
-                  <a
-                    href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
-                    target="_blank"
-                  >
-                    <div>{`영상 제목 ${videoNumber}`}</div>
-                  </a>
-                ) : (
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <div>{`영상 제목 ${videoNumber}`}</div>
-                    <div className={styles["video-block-button-container"]}>
-                      <div
-                        className={styles["video-block-button"]}
-                        onClick={() => {
-                          setVideoCount(prev => prev - 1);
-                          const tmpVideos = [...videos];
-                          tmpVideos.splice(index, 1);
-                          setVideos(tmpVideos);
-                        }}
-                      >
-                        −
-                      </div>
-                    </div>
-                  </div>
-                )}
-                {isFirstVideo && (
                   <>
+                    <a
+                      href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
+                      target="_blank"
+                    >
+                      <div>{`영상 제목 ${videoNumber}`}</div>
+                    </a>
                     <div className={styles["video-block-button-container"]}>
                       <div
                         className={styles["video-block-button"]}
@@ -395,6 +377,23 @@ export default function Update({ currentId }: UpdateProps) {
                       </div>
                     </div>
                   </>
+                ) : (
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <div>{`영상 제목 ${videoNumber}`}</div>
+                    <div className={styles["video-block-button-container"]}>
+                      <div
+                        className={styles["video-block-button"]}
+                        onClick={() => {
+                          setVideoCount(prev => prev - 1);
+                          const tmpVideos = [...videos];
+                          tmpVideos.splice(index, 1);
+                          setVideos(tmpVideos);
+                        }}
+                      >
+                        −
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
               <input
