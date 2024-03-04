@@ -21,18 +21,14 @@ export const ContentLayout = ({
   return (
     <>
       {isLoading && <Loading isEmpty={isScrolling ? !isScrolling : false} />}
-      {
-        <>
-          {children}
-          {totalDataLength > 0 && (
-            <PageNumbers
-              currentPage={currentPage}
-              perPageCount={perPageCount}
-              totalDataLength={totalDataLength}
-            />
-          )}
-        </>
-      }
+      {children}
+      {totalDataLength > 0 && (
+        <PageNumbers
+          currentPage={currentPage}
+          perPageCount={perPageCount}
+          totalDataLength={totalDataLength}
+        />
+      )}
     </>
   );
 };

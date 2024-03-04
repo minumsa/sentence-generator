@@ -8,8 +8,6 @@ export default function Page({ params }: PageProps) {
   const currentTagName: string = params.tagName;
   const currentPage: number = params.page;
 
-  console.log(currentPage, currentPage);
-
   return (
     <MusicLayout>
       <SearchContent

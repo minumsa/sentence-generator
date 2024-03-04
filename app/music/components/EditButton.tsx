@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { AlbumInfo, isAdminPage } from "../modules/data";
+import { AlbumInfo } from "../modules/data";
 import styles from "../music.module.css";
 import Link from "next/link";
 

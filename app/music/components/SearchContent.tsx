@@ -136,7 +136,9 @@ export default function SearchContent({ currentKeyword, currentTagName, currentP
                       : router.push(`/music/search/tag/${key}/1`);
                   }}
                   style={
-                    currentTagName === key ? { border: "1px solid var(--text-color)" } : undefined
+                    currentTagName === key
+                      ? { boxShadow: "inset 0 0 0 1px var(--text-color)" }
+                      : undefined
                   }
                 >
                   {defaultTags[key]}

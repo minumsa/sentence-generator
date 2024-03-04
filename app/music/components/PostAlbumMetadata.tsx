@@ -28,6 +28,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
 
   return (
     <header className={styles["album-information-container"]}>
+      {/* 이미지 관련 코드 */}
       <div className={styles["grid-album-image-container"]}>
         <a href={albumData.link} target="_blank">
           <div
@@ -50,7 +51,9 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
           />
         </a>
       </div>
+
       <div className={styles["album-metadata"]}>
+        {/* 아티스트 정보 */}
         <div className={styles["post-date"]}>아티스트</div>
         <Link
           href={
@@ -65,26 +68,36 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
           </span>
         </Link>
         <LinkIcon />
+
+        {/* 앨범 정보 */}
         <div className={styles["post-date"]}>앨범</div>
         <div>
           <span className={styles["black-masking"]}>{albumData.album}</span>
         </div>
+
+        {/* 레이블 정보 */}
         <div className={styles["post-label"]}>
           <div className={styles["post-date"]}>레이블</div>
           <div>
             <span className={styles["black-masking"]}>{albumData.label}</span>
           </div>
         </div>
+
+        {/* 발매일 정보 */}
         <div className={styles["post-date"]}>발매일</div>
         <div>
           <span className={styles["black-masking"]}>{formattedDate}</span>
         </div>
+
+        {/* 러닝타임 정보 */}
         <div className={styles["post-date"]}>러닝타임</div>
         <div>
           <span className={styles["black-masking"]}>
             {albumDuration}, {albumData.tracks}곡
           </span>
         </div>
+
+        {/* 비디오 정보 */}
         {hasVideo && (
           <>
             <div className={styles["post-date"]}>비디오</div>
@@ -102,28 +115,19 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             })}
           </>
         )}
+
+        {/* 스트리밍 정보 */}
         <div className={styles["post-date"]}>스트리밍</div>
         <div style={{ height: "30px" }}>
           <a href={albumData.link} target="_blank">
-            <img
-              src="/music/apple.svg"
-              alt="link-icon"
-              style={{ position: "absolute", marginTop: "6px", height: "20px" }}
-            ></img>
+            <img src="/music/apple.svg" alt="link-icon" className={styles["apple-icon"]}></img>
           </a>
           <a href={`https://open.spotify.com/album/${albumData.id}`} target="_blank">
-            <img
-              src="/music/spotify.svg"
-              alt="link-icon"
-              style={{
-                position: "absolute",
-                marginLeft: "29px",
-                marginTop: "7px",
-                height: "20px",
-              }}
-            ></img>
+            <img src="/music/spotify.svg" alt="link-icon" className={styles["spotify-icon"]}></img>
           </a>
         </div>
+
+        {/* 관리자 페이지 정보 */}
         {isAdminPage(pathName) && (
           <div className={styles["admin-button-container"]} style={{ justifyContent: "center" }}>
             <EditButton data={albumData} />

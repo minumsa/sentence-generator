@@ -41,21 +41,26 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
       )}
       {pageNumberToArray.map((page, index) => {
         const minPageNumber = maxPageNumber - perPageCount + 1;
-        const pageButtonNumber = index + 1;
+        const currentPageNumber = index + 1;
+        const isPageNumberInRange =
+          currentPageNumber >= minPageNumber && currentPageNumber <= maxPageNumber;
 
-        if (pageButtonNumber >= minPageNumber && pageButtonNumber <= maxPageNumber)
+        if (isPageNumberInRange) {
           return (
             <div
               key={index}
               className={styles["page"]}
               onClick={() => {
-                router.push(`${pathNameWithoutPageNumber}/${pageButtonNumber}`);
+                router.push(`${pathNameWithoutPageNumber}/${currentPageNumber}`);
               }}
-              style={currentPage == pageButtonNumber ? { color: "#cfcfcf" } : undefined}
+              style={currentPage === currentPageNumber ? { color: "#cfcfcf" } : undefined}
             >
               {page}
             </div>
           );
+        } else {
+          return null; // 페이지 버튼을 렌더링하지 않음
+        }
       })}
       {totalPage - maxPageNumber > 0 && (
         <div

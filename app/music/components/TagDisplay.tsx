@@ -18,7 +18,6 @@ export const TagDisplay = () => {
         <div
           key={index}
           className={styles["tag-display-item"]}
-          // style={{ backgroundColor: colors[index % colors.length] }}
           onClick={() => {
             router.push("/music/pop");
           }}
@@ -28,7 +27,6 @@ export const TagDisplay = () => {
       ))}
       <div
         className={styles["arrow-down-container"]}
-        // style={showAllTagItems ? { top: "9px" } : { top: "12px" }}
         onClick={() => {
           setShowAllTagItems(!showAllTagItems);
         }}

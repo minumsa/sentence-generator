@@ -3,7 +3,7 @@ import styles from "../music.module.css";
 import { contents, isAdminPage } from "../modules/data";
 import { useState } from "react";
 
-export const DesktopHamburgerMenu = () => {
+export const Hamburger = () => {
   const pathName = usePathname();
   const router = useRouter();
   const [showCategory, setShowCategory] = useState<boolean>(false);

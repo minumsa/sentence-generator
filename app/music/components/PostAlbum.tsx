@@ -1,6 +1,5 @@
 import styles from "../music.module.css";
 import { AlbumInfo } from "../modules/data";
-import { Loading } from "./Loading";
 import { PostAlbumMetadata } from "./PostAlbumMetadata";
 import { PostText } from "./PostAlbumText";
 

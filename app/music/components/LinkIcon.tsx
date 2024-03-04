@@ -1,4 +1,3 @@
-import { isMobile } from "react-device-detect";
 import styles from "../music.module.css";
 
 export const LinkIcon = () => {

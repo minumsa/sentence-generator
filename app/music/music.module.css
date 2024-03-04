@@ -1,16 +1,11 @@
 .search-tag-display-item {
-  /* display: inline; */
   display: flex;
   align-items: center;
   color: var(--text-color);
-  /* line-height: 250%; */
   font-size: 0.92rem;
   width: fit-content;
   height: 20px;
-  /* border: 1px solid var(--border-color); */
-  /* background-color: var(--border-color); */
   background-color: #ffffff1a;
-  /* border-radius: 20px; */
   padding: 7px 10px;
   margin: 3px;
   word-break: normal;
@@ -45,8 +40,7 @@
   justify-content: center;
   height: 23px;
   width: 24px;
-  margin-right: 2px;
-  margin-top: 4px;
+  margin: 4px 2px 0 0;
   z-index: 100;
   cursor: pointer;
 }
@@ -59,7 +53,7 @@
   left: -26px;
   height: -moz-fit-content;
   height: fit-content;
-  background-color: #000;
+  background-color: var(--background-color);
   width: 150px;
   font-size: 1.1rem;
   padding: 5px 20px 20px 30px;
@@ -71,14 +65,13 @@
 
 .desktop-introduction-category {
   position: absolute;
-
   display: flex;
   flex-direction: column;
   top: 44.5px;
   left: 170px;
   height: -moz-fit-content;
   height: fit-content;
-  background-color: #000;
+  background-color: var(--background-color);
   width: 150px;
   font-size: 1.1rem;
   padding: 5px 20px 20px 30px;
@@ -111,7 +104,7 @@
 .hamburger-icon {
   width: 20px;
   height: 1px;
-  margin-top: 3px;
+  margin: 3px 0 0 0;
   background-color: var(--text-color);
   box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
 }
@@ -122,8 +115,7 @@
   align-items: center;
   font-size: 2rem;
   font-weight: 100;
-  padding-left: 4px;
-  padding-bottom: 4px;
+  padding: 0 0 4px 4px;
 }
 
 .snowfall-container {
@@ -137,9 +129,6 @@
   -ms-use-select: none;
   user-select: none;
   z-index: -1;
-  /* background-image: linear-gradient(90deg, #000, #242424, #1c1c1c, #242424, #000);
-  background-size: 2000% 100%;
-  animation: animateBg 20s linear infinite; */
 }
 
 .loading-background {
@@ -220,13 +209,10 @@
   position: fixed;
   top: 0;
   left: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: var(--background-color);
-
   border-bottom: 1px solid var(--border-color);
   width: 100%;
   height: 70px;
@@ -237,23 +223,23 @@
 
   /* top-menu-container와 영역 겹쳐서 지정 */
   z-index: 10000;
-  /* border-right: 1px solid black; */
 }
 
 .desktop-category {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   max-width: 1280px;
   padding: 0 15px;
   box-sizing: border-box;
+  font-size: 1.15rem;
 }
 
 .category {
   cursor: pointer;
   display: flex;
   padding: 10px 20px;
-  /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
   text-decoration: none;
   color: var(--text-color);
   align-items: center;
@@ -261,15 +247,14 @@
 
 .sup {
   line-height: 0;
-  margin-left: 3px;
+  margin: 0 0 0 3px;
   font-size: 0.8rem;
   vertical-align: top;
   top: 20px;
 }
 
 .content-container {
-  margin-top: 70px;
-
+  margin: 70px 0 0 0;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -336,7 +321,7 @@
   display: flex;
   align-items: center;
   height: 49.5px;
-  margin-right: 5px;
+  margin: 0 5px 0 0;
   right: 26px;
   top: -13px;
 }
@@ -349,14 +334,14 @@
   box-shadow: none;
   border: 1px solid #454545;
   padding: 0 10px;
-  margin-top: 1px;
+  margin: 1px 0 0 0;
   color: var(--text-color);
 }
 
 .top-search-button {
   width: 50px;
   height: 30px;
-  background-color: #000;
+  background-color: var(--background-color);
   font-size: 1rem;
   display: flex;
   justify-content: center;
@@ -391,7 +376,7 @@
 .admin-button-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin: 20px 0 0 0;
 }
 
 .admin-button {
@@ -406,7 +391,7 @@
 }
 
 .button:hover {
-  color: #000;
+  color: var(--background-color);
   font-weight: bold;
   border-radius: 0;
   background-color: #fff;
@@ -416,12 +401,12 @@
   display: flex;
   flex-direction: column;
   width: 300px;
-  margin-right: 100px;
+  margin: 0 100px 0 0;
   line-height: 200%;
 }
 
 .album-metadata {
-  margin-top: 10px;
+  margin: 10px 0 0 0;
   font-weight: 500;
   line-height: 160%;
 }
@@ -430,7 +415,7 @@
   display: none;
   flex-direction: column;
   justify-content: center;
-  margin-left: 60px;
+  margin: 0 0 0 60px;
 }
 
 .album-art {
@@ -445,8 +430,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 45px;
-  margin-bottom: 30px;
+  margin: 45px 0 30px 0;
 }
 
 .artist-page-image {
@@ -512,8 +496,8 @@
 .date-input {
   width: 250px;
   font-size: 1.2rem;
-  margin-top: 15px;
-  padding-right: 20px;
+  margin: 15px 0 0 0;
+  padding: 0 20px 0 0;
 }
 
 .select-container {
@@ -579,12 +563,18 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: var(--lines-count);
 
-  mask: linear-gradient(0deg, transparent, transparent var(--blur-height), #000 var(--blur-height)),
+  mask: linear-gradient(
+      0deg,
+      transparent,
+      transparent var(--blur-height),
+      var(--background-color) var(--blur-height)
+    ),
     linear-gradient(
       270deg,
       transparent,
       transparent calc((var(--blur-length) * var(--fade-length)) + var(--blur-height)),
-      #000 calc((var(--blur-length) * var(--fade-length)) + (var(--blur-height) * 2))
+      var(--background-color)
+        calc((var(--blur-length) * var(--fade-length)) + (var(--blur-height) * 2))
     );
 }
 
@@ -612,7 +602,7 @@
   width: fit-content;
   height: 41px;
   padding: 5px;
-  margin-right: 5px;
+  margin: 0 5px 0 0;
 }
 
 .close-button {
@@ -641,7 +631,7 @@
   border-bottom: 1px solid black;
   padding: 5px 10px 10px 10px;
   background-color: #fff;
-  color: #000;
+  color: var(--background-color);
   width: fit-content;
 }
 
@@ -683,7 +673,7 @@
   flex-direction: column;
   width: 500px;
   background-color: #fff;
-  margin-top: -50px;
+  margin: -50px 0 0 0;
   border-radius: 6px;
   padding: 30px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -691,7 +681,7 @@
 
 .search-album-modal {
   display: flex;
-  color: #000;
+  color: var(--background-color);
   cursor: pointer;
   padding: 5px;
 }
@@ -770,8 +760,7 @@
 .page-container {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin: 50px 0;
 }
 
 .page {
@@ -783,8 +772,7 @@
 
 .post-date {
   font-weight: 600;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin: 15px 0 5px 0;
 }
 
 .grid-div {
@@ -794,7 +782,7 @@
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  margin-top: 30px;
+  margin: 30px 0 0 0;
 }
 
 .grid-item-container {
@@ -807,12 +795,6 @@
   padding: 15px;
   box-sizing: border-box;
 }
-
-/* .grid-album-container {
-  width: 100%;
-  box-sizing: border-box;
-  z-index: 500;
-} */
 
 .grid-album-image-container {
   position: relative;
@@ -830,17 +812,15 @@
 .grid-album-image::after {
   display: block;
   content: "";
-  padding-bottom: 100%;
 }
 
 .post-album-image {
-  box-shadow: 0 10px 20px 0 #0000005e;
+  box-shadow: 0 10px 20px 0 var(--background-color) 0005e;
 }
 
 .grid-album-title {
   font-size: 0.95rem;
   font-weight: 500;
-  /* FIXME: 향후에 바꿀 수 있음 */
   z-index: 100;
   text-decoration: none;
 }
@@ -854,19 +834,18 @@
 }
 
 .post-title {
-  margin-bottom: 50px;
+  margin: 0 0 50px 0;
 }
 
 .post-title-album {
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin: 0 0 5px 0;
 }
 
 .black-masking {
-  background-color: #000;
+  background-color: var(--background-color);
   color: var(--text-color);
-  /* padding: 3px 0; */
   line-height: 155%;
   text-indent: 0;
   font-weight: 400;
@@ -879,16 +858,13 @@
   cursor: pointer;
   text-decoration: none;
   color: var(--text-color);
-
   text-align: start;
   word-break: break-all;
-
   width: 100%;
   height: 42px;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* white-space: nowrap; */
 }
 
 .artist-page-title {
@@ -903,7 +879,7 @@
   display: flex;
   align-items: center;
   font-size: 1rem;
-  margin-bottom: 5px;
+  margin: 0 0 5px 0;
 }
 
 .category-meta-image-container {
@@ -911,7 +887,7 @@
   height: 30px;
   inset-inline-start: 0px;
   user-select: auto;
-  margin-right: 10px;
+  margin: 0 10px 0 0;
   cursor: pointer;
 }
 
@@ -926,7 +902,7 @@
 
 .last-updated {
   margin: 0 0 30px 0;
-  padding-top: 10px;
+  padding: 10px 0 0 0;
 }
 
 .loading-container {
@@ -947,13 +923,10 @@
   width: 40px;
   height: 40px;
   margin: -25px 0 0 -25px;
-
   border: 10px solid #e3e3e3;
   border-bottom: 10px solid black;
   border-radius: 50%;
-
   animation: load 1.5s linear infinite;
-
   z-index: 10000;
 }
 
@@ -970,8 +943,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-left: 10px;
-  margin-top: 2px;
+  margin: 2px 0 0 10px;
 }
 
 .star-color {
@@ -1011,7 +983,6 @@
 }
 
 .tag-item {
-  /* display: inline; */
   display: flex;
   align-items: center;
   color: var(--text-color);
@@ -1019,10 +990,7 @@
   font-size: 0.95rem;
   width: fit-content;
   height: 20px;
-  /* border: 1px solid var(--border-color); */
-  /* background-color: var(--border-color); */
   background-color: #ffffff1a;
-  /* border-radius: 20px; */
   padding: 7px 11px;
   margin: 0 3px 3px 0;
   word-break: normal;
@@ -1032,6 +1000,18 @@
 
 .tag-display-container {
   display: none;
+}
+
+.apple-icon {
+  position: absolute;
+  margin: 6px 0 0 0;
+  height: 20px;
+}
+
+.spotify-icon {
+  position: absolute;
+  margin: 7px 0 0 29px;
+  height: 20px;
 }
 
 /* TODO: 미디어쿼리로 앨범 개수 변경될 때 크기 변화 최대한 없게 맞추기 */
@@ -1072,11 +1052,9 @@
   .search-page-input {
     width: 100%;
     height: 100%;
-
     margin: 0 0 0 8px;
     font-size: 1.3rem;
     font-weight: 300;
-
     background-color: var(--input-background-color);
     box-shadow: none;
     border: 1px solid var(--text-color);
@@ -1163,8 +1141,7 @@
 
   .link-icon {
     position: absolute;
-    margin-left: 4px;
-    margin-top: 6px;
+    margin: 6px 0 0 4px;
     height: 16px;
   }
 
@@ -1201,32 +1178,24 @@
   .tag-display-container {
     position: relative;
     display: flex;
-    /* flex-wrap: wrap; */
-
     width: 100%;
     padding: 11px 15px;
     border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
 
     /* 가로 스크롤 */
-    /* overflow-x: scroll; */
     overflow: hidden;
     white-space: nowrap;
   }
 
   .tag-display-item {
-    /* display: inline; */
     display: flex;
     align-items: center;
     color: var(--text-color);
-    /* line-height: 250%; */
     font-size: 0.92rem;
     width: fit-content;
     height: 20px;
-    /* border: 1px solid var(--border-color); */
-    /* background-color: var(--border-color); */
     background-color: #ffffff1a;
-    /* border-radius: 20px; */
     padding: 7px 10px;
     margin: 3px;
     word-break: normal;
@@ -1240,13 +1209,10 @@
     right: 0;
     justify-content: center;
     align-items: center;
-
     width: 40px;
     height: 40px;
-
     background-color: black;
-
-    padding-right: 6px;
+    padding: 0 6px 0 0;
   }
 
   .arrow-down {
@@ -1275,7 +1241,7 @@
   }
 
   .post-album-title {
-    padding-bottom: 0;
+    padding: 0;
   }
 
   .album-container {
@@ -1305,13 +1271,13 @@
     display: flex;
     justify-content: center;
     font-size: 1.4rem;
-    padding-bottom: 5px;
+    padding: 0 0 5px 0;
     text-align: center;
   }
 
   .loading {
     height: calc(100vh - 40px);
-    padding-bottom: 80px;
+    padding: 0 0 80px 0;
     box-sizing: border-box;
     z-index: 1;
   }
@@ -1333,7 +1299,7 @@
   }
 
   .container {
-    padding-left: 0;
+    padding: 0;
   }
 
   .link:hover {
@@ -1352,16 +1318,12 @@
 
   .grid-div {
     padding: 5px 0 30px 0;
-    margin-top: 0;
+    margin: 0;
   }
 
   .grid-album-title {
     font-size: 0.95rem;
   }
-
-  /* .grid-album-container:hover {
-    opacity: 1;
-  } */
 
   .grid-album-title:hover {
     opacity: 1;
@@ -1379,7 +1341,6 @@
   }
 
   .category {
-    border-bottom: none;
     padding: 10px;
   }
 
@@ -1402,7 +1363,7 @@
     overflow: hidden;
     border-left: none;
     z-index: 1;
-    margin-top: 45px;
+    margin: 45px 0 0 0;
   }
 
   .sort-criteria-container {
@@ -1421,7 +1382,7 @@
   }
 
   .paragraph-blank {
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem 0;
   }
 
   .paragraph-category {
@@ -1467,8 +1428,7 @@
     justify-content: center;
     height: 23px;
     width: fit-content;
-    margin-right: 15px;
-    margin-top: 4px;
+    margin: 4px 15px 0 0;
     cursor: pointer;
     z-index: 100;
   }
@@ -1480,7 +1440,7 @@
   .hamburger-icon {
     width: 20px;
     height: 1px;
-    margin-top: 3px;
+    margin: 3px 0 0 0;
     background-color: var(--text-color);
     box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
   }
@@ -1491,8 +1451,7 @@
     align-items: center;
     font-size: 22px;
     font-weight: 100;
-    padding-left: 4px;
-    padding-bottom: 4px;
+    padding: 0 0 4px 4px;
   }
 
   .mobile-bottom-container {
@@ -1533,15 +1492,15 @@
 
   .mobile-criteria {
     text-align: center;
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
   }
 
   .mobile-criteria:first-child {
-    margin-top: 10px;
+    margin: 10px 0 0 0;
   }
 
   .mobile-criteria:last-child {
-    margin-bottom: 5px;
+    margin: 0 0 5px 0;
   }
 
   .hamburger-category {
@@ -1549,7 +1508,7 @@
     display: flex;
     flex-direction: column;
     height: fit-content;
-    background-color: #000;
+    background-color: var(--background-color);
     width: 150px;
     display: flex;
     flex-direction: column;
@@ -1557,11 +1516,10 @@
     top: 32px;
     right: 0;
     height: fit-content;
-    background-color: #000;
+    background-color: var(--background-color);
     width: 120px;
     font-size: 1rem;
-    padding-top: 7px;
-    padding-bottom: 12px;
+    padding: 7px 0 12px 0;
     z-index: 1;
   }
 
@@ -1571,8 +1529,7 @@
     align-items: center;
     font-size: 2.2rem;
     font-weight: 100;
-    margin-left: 4px;
-    margin-bottom: 6px;
+    margin: 0 6px 4px 0;
   }
 
   .hamburger-item {
@@ -1580,7 +1537,7 @@
   }
 
   .page-container {
-    margin-top: 20px;
+    margin: 20px 0 0 0;
   }
 
   .blur-end {
@@ -1594,7 +1551,7 @@
     font-size: 0.9rem;
     font-weight: 600;
     bottom: 0.5px;
-    margin-right: 15px;
+    margin: 0 15px 0 0;
   }
 
   .divider {
@@ -1602,8 +1559,7 @@
   }
 
   .upload-container {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0 15px;
     box-sizing: border-box;
   }
 
@@ -1645,8 +1601,7 @@
 
   .artist-page-image-container {
     display: flex;
-    margin-top: 70px;
-    margin-bottom: 0;
+    margin: 70px 0 0 0;
   }
 
   .artist-page-image {

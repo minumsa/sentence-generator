@@ -6,32 +6,24 @@
   .tag-display-container {
     position: relative;
     display: flex;
-    /* flex-wrap: wrap; */
-
     width: 100%;
     padding: 11px 15px;
     border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
 
     /* 가로 스크롤 */
-    /* overflow-x: scroll; */
     overflow: hidden;
     white-space: nowrap;
   }
 
   .tag-display-item {
-    /* display: inline; */
     display: flex;
     align-items: center;
     color: var(--text-color);
-    /* line-height: 250%; */
     font-size: 0.92rem;
     width: fit-content;
     height: 20px;
-    /* border: 1px solid var(--border-color); */
-    /* background-color: var(--border-color); */
     background-color: #ffffff1a;
-    /* border-radius: 20px; */
     padding: 7px 10px;
     margin: 3px;
     word-break: normal;
@@ -45,13 +37,10 @@
     right: 0;
     justify-content: center;
     align-items: center;
-
     width: 40px;
     height: 40px;
-
     background-color: black;
-
-    padding-right: 6px;
+    padding: 0 6px 0 0;
   }
 
   .arrow-down {

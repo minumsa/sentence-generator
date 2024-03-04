@@ -76,7 +76,7 @@ export const Grid = () => {
   }, [method, criteria, scrollCount, perPageCount, currentTagKey]);
 
   const [divWidth, setDivWidth] = useState(0);
-  const myDivRef = useRef<any>(null);
+  const myDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -126,7 +126,7 @@ export const Grid = () => {
                     }}
                     style={
                       currentTagKey === key || (currentTagKey === "" && key === "all")
-                        ? { border: "1px solid var(--text-color)" }
+                        ? { boxShadow: "inset 0 0 0 1px var(--text-color)" }
                         : undefined
                     }
                   >
@@ -154,7 +154,6 @@ export const Grid = () => {
                 const isLastDataAndOddNumber =
                   index === currentDataLength - 1 && currentDataLength % 2 === 1;
 
-                // FIXME: 코드 전체적으로 이런 식으로 정리하기
                 const isFirstLine = index < 2;
                 const isEvenIndex = (index + 1) % 2 == 0;
                 const isLastItem = index + 1 === data.length;

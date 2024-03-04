@@ -1,7 +1,6 @@
 import styles from "../music.module.css";
 
 interface LoadingProps {
-  // dataLength: number | undefined;
   isEmpty: boolean;
   hasNoResult?: boolean;
   keyword?: string;
@@ -12,7 +11,6 @@ export const Loading = ({ isEmpty, hasNoResult, keyword }: LoadingProps) => {
   const noDataText = `"${keyword}"에 대한 검색 결과가 없습니다.`;
 
   return (
-    // <div className={styles["loading-circle"]}></div>
     <>
       <div
         className={styles["loading-background"]}
