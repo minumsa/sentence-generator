@@ -85,7 +85,7 @@ export const Grid = () => {
         setIsScrolling(true);
       }
     }
-  }, [method, criteria, scrollCount, perPageCount, currentTagKey]);
+  }, [method, criteria, scrollCount, perPageCount, currentTagKey, totalScrollCount]);
 
   return (
     <ContentLayout

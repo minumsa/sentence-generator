@@ -6,59 +6,60 @@ export async function GET(request: Request) {
   try {
     await connectMongoDB();
 
-    // URL 파싱
     const url = new URL(request.url);
     const currentPage = Number(url.searchParams.get("currentPage"));
     const perPageCount = Number(url.searchParams.get("perPageCount"));
-    const pathName = url.searchParams.get("pathName");
+    const pathName = url.searchParams.get("pathName") ?? "";
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
     const currentTagKey = url.searchParams.get("currentTagKey");
 
-    // 정렬 키 설정
     let sortKey = {};
-    if (currentMethod === "발매일") {
-      sortKey = { releaseDate: currentCriteria };
-    } else if (currentMethod === "작성일") {
-      sortKey = { uploadDate: currentCriteria };
-    } else if (currentMethod === "아티스트") {
-      sortKey = { artist: currentCriteria };
-    } else if (currentMethod === "앨범") {
-      sortKey = { album: currentCriteria };
-    } else if (currentMethod === "별점") {
-      sortKey = { score: currentCriteria, artist: 1 };
+    switch (currentMethod) {
+      case "발매일":
+        sortKey = { releaseDate: currentCriteria };
+        break;
+      case "작성일":
+        sortKey = { uploadDate: currentCriteria };
+        break;
+      case "아티스트":
+        sortKey = { artist: currentCriteria };
+        break;
+      case "앨범":
+        sortKey = { album: currentCriteria };
+        break;
+      case "별점":
+        sortKey = { score: currentCriteria, artist: 1 };
+        break;
+      default:
+        break;
     }
 
-    let query: any = {};
+    interface Query {
+      tagKeys?: string;
+      genre?: string;
+    }
 
-    // 메인 페이지인 경우
+    let query: Query = {};
+
     const isMainPage = pathName === "";
-
-    // 검색, 태그, 아티스트 페이지인 경우
     const isSearchPage = pathName === "search";
-
-    // 장르 페이지인 경우
-    const isGenrePage = !isMainPage && !isSearchPage;
 
     if (isMainPage || isSearchPage) {
       if (currentTagKey) {
         query.tagKeys = currentTagKey;
       }
-    } else if (isGenrePage) {
+    } else {
       query.genre = pathName;
     }
 
-    // MongoDB 쿼리 실행
     const genreDataLength = await Music.find(query).count();
     const startIndex = perPageCount * currentPage - perPageCount;
-
     const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
 
-    // 결과 반환
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
     console.error(error);
-    // 클라이언트에게 더 유용한 에러 메시지를 반환
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
   }
 }

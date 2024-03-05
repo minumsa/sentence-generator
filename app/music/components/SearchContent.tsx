@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AlbumInfo, criteriaAtom, defaultTags, isAdminPage, methodAtom } from "../modules/data";
+import { AlbumInfo, criteriaAtom, defaultTags, isAdminPage } from "../modules/data";
 import { AlbumFilters, SearchData, SearchFilters, fetchAlbumData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
@@ -21,7 +21,6 @@ export default function SearchContent({
   const router = useRouter();
   const pathName = usePathname();
   const [data, setData] = useState<AlbumInfo[]>([]);
-  const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState<number>(0);
@@ -50,7 +49,7 @@ export default function SearchContent({
       }
     }
 
-    if (currentKeyword.length > 0) {
+    if (currentKeyword) {
       setIsLoading(true);
       loadData();
     } else {
