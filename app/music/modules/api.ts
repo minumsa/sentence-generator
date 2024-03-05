@@ -1,7 +1,6 @@
 import { CriteriaType, SpotifyAlbumData, MethodType, UpdateInfo } from "./data";
 
-interface FetchData {
-  pathName: string;
+export interface AlbumFilters {
   perPageCount: number;
   currentPage: number;
   currentMethod: MethodType;
@@ -9,13 +8,15 @@ interface FetchData {
   currentTagKey: string;
 }
 
-interface SearchData {
+interface FetchData {
   pathName: string;
+  albumFilters: AlbumFilters;
+}
+
+export interface SearchFilters {
   perPageCount: number;
   currentPage: number;
   currentKeyword: string;
-  currentMethod: MethodType;
-  currentCriteria: CriteriaType;
 }
 
 interface FetchArtistData {
@@ -24,16 +25,11 @@ interface FetchArtistData {
   artistId: string;
 }
 
-export async function fetchAlbumData({
-  pathName,
-  perPageCount,
-  currentPage,
-  currentMethod,
-  currentCriteria,
-  currentTagKey,
-}: FetchData) {
+export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
+  const { perPageCount, currentPage, currentMethod, currentCriteria, currentTagKey } = albumFilters;
+
   try {
-    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
+    const queryString = `?pathName=${pathName}&perPageCount=${perPageCount}&currentPage=${currentPage}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
     const url = `/music/api${queryString}`;
 
     const response = await fetch(url, {
@@ -79,16 +75,11 @@ export async function FetchArtistData({ artistId, perPageCount, currentPage }: F
   }
 }
 
-export async function SearchData({
-  pathName,
-  perPageCount,
-  currentPage,
-  currentKeyword,
-  currentMethod,
-  currentCriteria,
-}: SearchData) {
+export async function SearchData(searchFilters: SearchFilters) {
+  const { perPageCount, currentPage, currentKeyword } = searchFilters;
+
   try {
-    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&currentKeyword=${currentKeyword}&pathName=${pathName}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}`;
+    const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&currentKeyword=${currentKeyword}`;
     const url = `/music/api/search${queryString}`;
 
     const response = await fetch(url, {

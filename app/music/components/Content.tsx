@@ -19,19 +19,25 @@ export default function Content({ pathName, currentPage }: ContentProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const albumFilters = {
+      perPageCount,
+      currentPage,
+      currentMethod: method,
+      currentCriteria: criteria,
+      currentTagKey: "",
+    };
+
     async function loadData() {
-      const result = await fetchAlbumData({
+      const albumResult = await fetchAlbumData({
         pathName,
-        perPageCount,
-        currentPage,
-        currentMethod: method,
-        currentCriteria: criteria,
-        currentTagKey: "",
+        albumFilters,
       });
-      setData(result?.slicedData);
-      const genreDataLength = result?.genreDataLength;
-      setTotalDataLength(genreDataLength);
-      setIsLoading(false);
+
+      if (albumResult) {
+        setData(albumResult.slicedData);
+        setTotalDataLength(albumResult.genreDataLength);
+        setIsLoading(false);
+      }
     }
 
     loadData();

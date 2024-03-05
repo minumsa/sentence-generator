@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AlbumInfo, criteriaAtom, defaultTags, isAdminPage, methodAtom } from "../modules/data";
-import { SearchData, fetchAlbumData } from "../modules/api";
+import { AlbumFilters, SearchData, SearchFilters, fetchAlbumData } from "../modules/api";
 import { useAtomValue } from "jotai";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
@@ -32,20 +32,18 @@ export default function SearchContent({
 
   useEffect(() => {
     async function loadData() {
-      const result = await SearchData({
-        pathName,
+      const searchFilters: SearchFilters = {
         perPageCount,
         currentPage,
         currentKeyword,
-        currentMethod: method,
-        currentCriteria: criteria,
-      });
-      setData(result?.slicedData);
-      const genreDataLength = result?.genreDataLength;
-      setTotalDataLength(genreDataLength);
-      setIsLoading(false);
+      };
 
-      if (result?.slicedData.length > 0) {
+      const searchResult = await SearchData(searchFilters);
+
+      if (searchResult) {
+        setData(searchResult.slicedData);
+        setTotalDataLength(searchResult.genreDataLength);
+        setIsLoading(false);
         setIsEmptyResult(false);
       } else {
         setIsEmptyResult(true);
@@ -58,7 +56,7 @@ export default function SearchContent({
     } else {
       setIsLoading(false);
     }
-  }, [pathName, currentKeyword, method, criteria, perPageCount, currentPage, data.length]);
+  }, [pathName, currentKeyword, perPageCount, currentPage]);
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -72,19 +70,24 @@ export default function SearchContent({
       : router.push(`/music/search/${keyword}/1`);
   }
   useEffect(() => {
+    const albumFilters: AlbumFilters = {
+      perPageCount,
+      currentPage,
+      currentMethod: "별점",
+      currentCriteria: criteria,
+      currentTagKey: currentTagName,
+    };
+
     async function loadTagData() {
-      const result = await fetchAlbumData({
+      const albumResult = await fetchAlbumData({
         pathName: "search",
-        perPageCount,
-        currentPage,
-        currentMethod: "별점",
-        currentCriteria: criteria,
-        currentTagKey: currentTagName,
+        albumFilters,
       });
 
-      setData(result?.slicedData);
-      const genreDataLength = result?.genreDataLength;
-      setTotalDataLength(genreDataLength);
+      if (albumResult) {
+        setData(albumResult.slicedData);
+        setTotalDataLength(albumResult.genreDataLength);
+      }
     }
 
     if (currentTagName) {

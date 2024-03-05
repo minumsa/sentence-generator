@@ -10,32 +10,21 @@ export async function GET(request: Request) {
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
     const perPageCount = Number(url.searchParams.get("perPageCount"));
-    const pathName = url.searchParams.get("pathName");
-    const currentMethod = url.searchParams.get("currentMethod");
-    const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
     const currentPage = Number(url.searchParams.get("currentPage"));
     const currentKeyword: any = url.searchParams.get("currentKeyword");
 
-    let sortKey = {};
-    if (currentMethod === "발매일") {
-      sortKey = { releaseDate: currentCriteria };
-    } else if (currentMethod === "작성일") {
-      sortKey = { uploadDate: currentCriteria };
-    } else if (currentMethod === "아티스트") {
-      sortKey = { artist: currentCriteria };
-    } else if (currentMethod === "앨범") {
-      sortKey = { album: currentCriteria };
-    }
-
+    type SortOrder = 1 | -1;
+    const sortKey: { [key: string]: SortOrder } = { artist: 1, releaseDate: 1 };
     const query = {};
 
-    let dataLength = await Music.find(query).count();
+    let totalDataLength = await Music.find(query).count();
     let startIndex = perPageCount * currentPage - perPageCount;
     let slicedData = undefined;
 
+    // 'i' 옵션은 대소문자를 구별하지 않도록 설정
     slicedData = await Music.find({
       $or: [
-        { text: { $regex: new RegExp(currentKeyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
+        { text: { $regex: new RegExp(currentKeyword, "i") } },
         { artist: { $regex: new RegExp(currentKeyword, "i") } },
         { album: { $regex: new RegExp(currentKeyword, "i") } },
       ],
@@ -43,7 +32,7 @@ export async function GET(request: Request) {
       .sort(sortKey)
       .skip(startIndex)
       .limit(perPageCount);
-    dataLength = await Music.find({
+    totalDataLength = await Music.find({
       $or: [
         { text: { $regex: new RegExp(currentKeyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
         { artist: { $regex: new RegExp(currentKeyword, "i") } },
@@ -51,7 +40,7 @@ export async function GET(request: Request) {
       ],
     }).count();
 
-    return NextResponse.json({ slicedData, genreDataLength: dataLength });
+    return NextResponse.json({ slicedData, genreDataLength: totalDataLength });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

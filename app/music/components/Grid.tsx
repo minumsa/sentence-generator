@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../music.module.css";
-import { fetchAlbumData } from "../modules/api";
+import { AlbumFilters, fetchAlbumData } from "../modules/api";
 import { usePathname } from "next/navigation";
 import { useAtomValue } from "jotai";
 import React from "react";
@@ -46,29 +46,35 @@ export const Grid = () => {
   }, [inView]);
 
   useEffect(() => {
+    const albumFilters: AlbumFilters = {
+      perPageCount,
+      currentPage: scrollCount,
+      currentMethod: "별점",
+      currentCriteria: criteria,
+      currentTagKey: currentTagKey,
+    };
+
     async function loadData() {
-      const result = await fetchAlbumData({
+      const albumResult = await fetchAlbumData({
         pathName: "",
-        perPageCount,
-        currentPage: scrollCount,
-        currentMethod: "별점",
-        currentCriteria: criteria,
-        currentTagKey: currentTagKey,
+        albumFilters,
       });
 
-      if (scrollCount === 1) {
-        setData(result?.slicedData);
-        data && setIsLoading(false);
-      } else {
-        // 페이지가 2 이상이면 기존 데이터 배열에 새로운 데이터 추가
-        setData(prevData => [...prevData, ...result?.slicedData]);
-        setIsLoading(false);
-        setIsScrolling(false);
+      if (albumResult) {
+        if (scrollCount === 1) {
+          const calculateScrollCount =
+            Math.max(1, Math.ceil(albumResult.genreDataLength / perPageCount)) + 1;
+          setIsLoading(false);
+          setData(albumResult.slicedData);
+          setTotalDataLength(albumResult.genreDataLength);
+          setTotalScrollCount(calculateScrollCount);
+        } else {
+          // 무한 스크롤 횟수가 2번 이상이면 기존 데이터 배열에 새로운 데이터 추가
+          setData(prevData => [...prevData, ...albumResult.slicedData]);
+          setIsLoading(false);
+          setIsScrolling(false);
+        }
       }
-
-      const dataLength = result?.genreDataLength;
-      setTotalDataLength(dataLength);
-      setTotalScrollCount(Math.max(1, Math.ceil(dataLength / perPageCount)) + 1);
     }
 
     if (scrollCount < totalScrollCount) {
