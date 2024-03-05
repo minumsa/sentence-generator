@@ -28,7 +28,7 @@ interface Video {
 export default function Upload() {
   const [albumKeyword, setAlbumKeyword] = useState<string>("");
   const [albumId, setAlbumId] = useState<string>("");
-  const [album, setAlbum] = useState("");
+  const [album, setAlbum] = useState<string>("");
   const [searchData, setSearchData] = useState<SearchData[]>();
   const [isTyping, setIsTyping] = useState(false);
   const [genre, setGenre] = useState<string>("");
@@ -176,10 +176,11 @@ export default function Upload() {
             style={{ display: albumKeyword && searchData ? "flex" : "none" }}
           >
             {searchData?.map((data, index) => {
-              const artist = data.artists[0].name;
-              const album = data.name;
-              const releaseYear = data.release_date.slice(0, 4);
-              const imageUrl = data.images[2].url;
+              const { artists, name, release_date, images } = data;
+              const artist = artists[0].name;
+              const album = name;
+              const releaseYear = release_date.slice(0, 4);
+              const imageUrl = images[2].url;
               return (
                 <div
                   className={styles["search-album-modal"]}

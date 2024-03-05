@@ -42,7 +42,6 @@ export default function Update({ currentId }: UpdateProps) {
   const [albumId, setAlbumId] = useState("");
   const [artist, setArtist] = useState("");
   const [artistId, setArtistId] = useState("");
-  const [album, setAlbum] = useState("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
@@ -118,7 +117,6 @@ export default function Update({ currentId }: UpdateProps) {
         album,
         releaseDate,
       } = fetchData;
-      setAlbum(album);
       setAlbumId(id);
       setArtist(artist);
       setArtistId(artistId);
@@ -159,10 +157,10 @@ export default function Update({ currentId }: UpdateProps) {
   }, [albumKeyword, showAlbumListModal]);
 
   const handleModal = (data: SearchData) => {
-    setArtist(data.artists[0].name);
-    setAlbum(data.name);
-    setAlbumId(data.id);
-    setAlbumKeyword(data.name);
+    const { name, id, artists } = data;
+    setArtist(artists[0].name);
+    setAlbumId(id);
+    setAlbumKeyword(name);
     setSearchData(undefined);
     setShowAlbumListModal(false);
   };
@@ -258,10 +256,11 @@ export default function Update({ currentId }: UpdateProps) {
               style={{ display: albumKeyword && searchData ? "flex" : "none" }}
             >
               {searchData?.map((data, index) => {
-                const artist = data.artists[0].name;
-                const album = data.name;
-                const releaseYear = data.release_date.slice(0, 4);
-                const imageUrl = data.images[2].url;
+                const { artists, name, release_date, images } = data;
+                const artist = artists[0].name;
+                const album = name;
+                const releaseYear = release_date.slice(0, 4);
+                const imageUrl = images[2].url;
                 return (
                   <div
                     className={styles["search-album-modal"]}
@@ -361,7 +360,7 @@ export default function Update({ currentId }: UpdateProps) {
                 {isFirstVideo ? (
                   <>
                     <a
-                      href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
+                      href={`https://www.youtube.com/results?search_query=${artist} ${albumKeyword} MV 자막`}
                       target="_blank"
                     >
                       <div>{`영상 제목 ${videoNumber}`}</div>
