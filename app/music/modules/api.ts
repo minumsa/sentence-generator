@@ -128,9 +128,8 @@ interface Video {
   url: string;
 }
 
-export interface UpdateDataParams {
-  id: string;
-  newSpotifyAlbumData: SpotifyAlbumData | null;
+export interface UploadData {
+  newSpotifyAlbumData: SpotifyAlbumData;
   genre: string;
   link: string;
   text: string;
@@ -138,22 +137,17 @@ export interface UpdateDataParams {
   score: number;
   videos: Video[];
   tagKeys: string[];
+}
+
+export interface UpdateDataParams {
+  newData: UploadData;
   password: string;
 }
 
-export async function uploadData({
-  id,
-  newSpotifyAlbumData,
-  genre,
-  link,
-  text,
-  uploadDate,
-  score,
-  videos,
-  tagKeys,
-  password,
-}: UpdateDataParams) {
-  if (newSpotifyAlbumData !== null) {
+export async function uploadData({ newData, password }: UpdateDataParams) {
+  const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys } = newData;
+
+  if (newData !== null) {
     try {
       const response = await fetch("/music/api", {
         method: "POST",
@@ -161,15 +155,14 @@ export async function uploadData({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id,
           newSpotifyAlbumData,
           genre,
           link,
           text,
           uploadDate,
-          score: score,
-          videos: videos,
-          tagKeys: tagKeys,
+          score,
+          videos,
+          tagKeys,
           password: password,
         }),
       });
@@ -192,19 +185,10 @@ export async function uploadData({
   }
 }
 
-export const updateData = async ({
-  id,
-  newSpotifyAlbumData,
-  genre,
-  link,
-  text,
-  uploadDate,
-  score,
-  videos,
-  tagKeys,
-  password,
-}: UpdateDataParams) => {
-  if (newSpotifyAlbumData !== null) {
+export const updateData = async ({ newData, password }: UpdateDataParams) => {
+  const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys } = newData;
+
+  if (newData !== null) {
     try {
       const response = await fetch("/music/api", {
         method: "PUT",
@@ -212,7 +196,6 @@ export const updateData = async ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id,
           newSpotifyAlbumData,
           genre,
           link,

@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
-import { fetchAlbumById, fetchSpotify, searchSpotify, updateData } from "../modules/api";
-import { AlbumInfo, contents, defaultTags, groupTags } from "../modules/data";
+import {
+  UploadData,
+  fetchAlbumById,
+  fetchSpotify,
+  searchSpotify,
+  updateData,
+} from "../modules/api";
+import { AlbumInfo, SpotifyAlbumData, contents, defaultTags, groupTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
@@ -32,7 +38,7 @@ interface SearchData {
 
 // FIXME: Upload 컴포넌트와 겹치는 부분 리팩토링
 export default function Update({ currentId }: UpdateProps) {
-  const [albumData, setAlbumData] = useState<any>();
+  const [albumData, setAlbumData] = useState<AlbumInfo>();
   const [albumId, setAlbumId] = useState("");
   const [artist, setArtist] = useState("");
   const [artistId, setArtistId] = useState("");
@@ -42,7 +48,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [text, setText] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [score, setScore] = useState<number>(0);
-  const [albumReleaseDate, setAlbumReleaseDate] = useState<any>();
+  const [albumReleaseDate, setAlbumReleaseDate] = useState<string>("");
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
@@ -58,20 +64,23 @@ export default function Update({ currentId }: UpdateProps) {
   // 수정 API
   const handleUpdate = async () => {
     const filteredText = text.replace(/\[\d+\]/g, "");
-    const newSpotifyAlbumData = await fetchSpotify(albumId);
+    const newSpotifyAlbumData: SpotifyAlbumData | undefined = await fetchSpotify(albumId);
 
     if (newSpotifyAlbumData) {
+      const newData: UploadData = {
+        newSpotifyAlbumData,
+        genre,
+        link,
+        text: filteredText,
+        uploadDate,
+        score,
+        videos,
+        tagKeys: currentTagKeys,
+      };
+
       try {
         await updateData({
-          id: albumId,
-          newSpotifyAlbumData,
-          genre,
-          link,
-          text: filteredText,
-          uploadDate,
-          score,
-          videos,
-          tagKeys: currentTagKeys,
+          newData,
           password,
         });
         router.back();
@@ -79,6 +88,9 @@ export default function Update({ currentId }: UpdateProps) {
         console.error("updateData 호출에 실패했습니다:", error);
       }
     }
+
+    console.log("albumId", albumId);
+    console.log("newSpotifyAlbumData", newSpotifyAlbumData);
   };
 
   const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -90,7 +102,6 @@ export default function Update({ currentId }: UpdateProps) {
   useEffect(() => {
     async function getData() {
       const fetchData = await fetchAlbumById(currentId);
-
       setAlbumData(fetchData);
 
       const {
@@ -120,7 +131,9 @@ export default function Update({ currentId }: UpdateProps) {
       setCurrentTagKeys(tagKeys);
       setAlbumReleaseDate(new Date(releaseDate).toString());
 
-      if (videos.length > 0) {
+      const hasVideo = videos.length > 0;
+
+      if (hasVideo) {
         setVideos(videos);
         setVideoCount(videos.length);
       }
@@ -135,7 +148,8 @@ export default function Update({ currentId }: UpdateProps) {
   };
 
   useEffect(() => {
-    if (showAlbumListModal && albumKeyword.length > 0) {
+    const isTyping = showAlbumListModal && albumKeyword.length > 0;
+    if (isTyping) {
       const typingTimer = setTimeout(() => {
         handleSearch();
       }, 1000);

@@ -27,7 +27,6 @@ interface Video {
 
 export default function Upload() {
   const [albumKeyword, setAlbumKeyword] = useState<string>("");
-  // FIXME: albumKeyword로 가져온 정보에서 albumId 넘겨줘야 함
   const [albumId, setAlbumId] = useState<string>("");
   const [album, setAlbum] = useState("");
   const [searchData, setSearchData] = useState<SearchData[]>();
@@ -66,19 +65,19 @@ export default function Upload() {
     const newSpotifyAlbumData = await fetchSpotify(albumId);
 
     if (newSpotifyAlbumData) {
+      const newData = {
+        newSpotifyAlbumData,
+        genre,
+        link,
+        text: filteredText,
+        uploadDate,
+        score,
+        videos,
+        tagKeys: currentTagKeys,
+      };
+
       try {
-        await uploadData({
-          id: albumId,
-          newSpotifyAlbumData,
-          genre,
-          link,
-          text: filteredText,
-          uploadDate,
-          score,
-          videos,
-          tagKeys: currentTagKeys,
-          password,
-        });
+        await uploadData({ newData, password });
       } catch (error) {
         console.error("uploadData 호출에 실패했습니다:", error);
       }
@@ -92,10 +91,11 @@ export default function Upload() {
   };
 
   const handleModal = (data: SearchData) => {
-    setAlbumKeyword(data.name);
-    setAlbumId(data.id);
-    setArtist(data.artists[0].name);
-    setAlbum(data.name);
+    const { name, id, artists } = data;
+    setAlbumKeyword(name);
+    setAlbumId(id);
+    setArtist(artists[0].name);
+    setAlbum(name);
     setSearchData(undefined);
     setIsTyping(false);
   };

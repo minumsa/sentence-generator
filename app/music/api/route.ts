@@ -69,20 +69,20 @@ export async function POST(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
+    const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys, password } =
+      await request.json();
     const {
       id,
-      newSpotifyAlbumData,
-      genre,
-      link,
-      text,
-      uploadDate,
-      score,
-      videos,
-      tagKeys,
-      password,
-    } = await request.json();
-    const { imgUrl, artistImgUrl, artistId, artist, album, label, releaseDate, duration, tracks } =
-      newSpotifyAlbumData;
+      imgUrl,
+      artistImgUrl,
+      artistId,
+      artist,
+      album,
+      label,
+      releaseDate,
+      duration,
+      tracks,
+    } = newSpotifyAlbumData;
 
     if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
@@ -120,50 +120,26 @@ export async function POST(request: Request) {
   }
 }
 
-export async function DELETE(request: Request) {
-  try {
-    require("dotenv").config();
-    await connectMongoDB();
-
-    const { id, password } = await request.json();
-
-    if (password !== process.env.UPLOAD_PASSWORD)
-      return NextResponse.json({ message: "password is not correct" }, { status: 401 });
-
-    const existingData = await Music.findOne({ id });
-
-    if (!existingData) {
-      return NextResponse.json({ message: "Data not found" }, { status: 404 });
-    }
-
-    await existingData.deleteOne();
-
-    return NextResponse.json({ message: "Data deleted successfully" });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Server Error" }, { status: 500 });
-  }
-}
-
+// 수정 API
 export async function PUT(request: Request) {
   try {
     require("dotenv").config();
     await connectMongoDB();
 
+    const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys, password } =
+      await request.json();
     const {
       id,
-      newSpotifyAlbumData,
-      genre,
-      link,
-      text,
-      uploadDate,
-      score,
-      videos,
-      tagKeys,
-      password,
-    } = await request.json();
-    const { imgUrl, artistImgUrl, artistId, artist, album, label, releaseDate, duration, tracks } =
-      newSpotifyAlbumData;
+      imgUrl,
+      artistImgUrl,
+      artistId,
+      artist,
+      album,
+      label,
+      releaseDate,
+      duration,
+      tracks,
+    } = newSpotifyAlbumData;
 
     if (password !== process.env.UPLOAD_PASSWORD)
       return NextResponse.json({ message: "password is not correct" }, { status: 401 });
@@ -197,6 +173,31 @@ export async function PUT(request: Request) {
 
     await originalData.save();
     return NextResponse.json(originalData.toJSON());
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: "Server Error" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    require("dotenv").config();
+    await connectMongoDB();
+
+    const { id, password } = await request.json();
+
+    if (password !== process.env.UPLOAD_PASSWORD)
+      return NextResponse.json({ message: "password is not correct" }, { status: 401 });
+
+    const existingData = await Music.findOne({ id });
+
+    if (!existingData) {
+      return NextResponse.json({ message: "Data not found" }, { status: 404 });
+    }
+
+    await existingData.deleteOne();
+
+    return NextResponse.json({ message: "Data deleted successfully" });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

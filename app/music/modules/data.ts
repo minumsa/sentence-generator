@@ -49,10 +49,6 @@ export interface SpotifyAlbumData {
   album: string;
   label: string;
   releaseDate: string;
-  // genre: string;
-  // link: string;
-  // text: string;
-  // uploadDate: Date;
   duration: number;
   tracks: number;
 }
