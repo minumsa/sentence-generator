@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { AlbumInfo } from "../modules/data";
-import { FetchArtistData } from "../modules/api";
+import { ArtistFilters, FetchArtistData } from "../modules/api";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
@@ -14,13 +14,18 @@ interface ArtistContentProps {
 
 export default function ArtistContent({ artistId, currentPage }: ArtistContentProps) {
   const [artistData, setArtistData] = useState<AlbumInfo[]>([]);
-  const [perPageCount, setDataPerPage] = useState(5);
-  const [artistDataCount, setArtistDataCount] = useState(0);
+  const [perPageCount, setDataPerPage] = useState<number>(5);
+  const [artistDataCount, setArtistDataCount] = useState<number>(0);
 
   useEffect(() => {
     async function loadData() {
+      const artistFilters: ArtistFilters = {
+        currentPage,
+        perPageCount,
+      };
+
       try {
-        const tmp = await FetchArtistData({ artistId, currentPage, perPageCount });
+        const tmp = await FetchArtistData({ artistId, artistFilters });
 
         if (tmp) {
           setArtistData(tmp.artistData);

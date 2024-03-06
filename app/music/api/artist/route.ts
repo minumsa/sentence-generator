@@ -7,14 +7,19 @@ export async function GET(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
     const artistId = url.searchParams.get("artistId");
+    const perPageCount = Number(url.searchParams.get("perPageCount"));
+    const currentPage = Number(url.searchParams.get("currentPage"));
+    const startIndex = perPageCount * currentPage - perPageCount;
 
     type ReleaseDate = 1 | -1;
     const sortKey: { [key: string]: ReleaseDate } = { releaseDate: -1 };
 
-    const artistData = await Music.find({ artistId: artistId }).sort(sortKey);
+    const artistData = await Music.find({ artistId: artistId })
+      .sort(sortKey)
+      .skip(startIndex)
+      .limit(perPageCount);
     const artistDataCount = await Music.find({ artistId: artistId }).count();
 
     return NextResponse.json({ artistData, artistDataCount });

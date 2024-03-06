@@ -19,10 +19,14 @@ export interface SearchFilters {
   currentKeyword: string;
 }
 
-interface FetchArtistData {
+export interface ArtistFilters {
   perPageCount: number;
   currentPage: number;
+}
+
+export interface ArtistDataParams {
   artistId: string;
+  artistFilters: ArtistFilters;
 }
 
 export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
@@ -51,7 +55,8 @@ export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
   }
 }
 
-export async function FetchArtistData({ artistId, perPageCount, currentPage }: FetchArtistData) {
+export async function FetchArtistData({ artistId, artistFilters }: ArtistDataParams) {
+  const { perPageCount, currentPage } = artistFilters;
   try {
     const queryString = `?artistId=${artistId}&perPageCount=${perPageCount}&currentPage=${currentPage}`;
     const url = `/music/api/artist${queryString}`;
