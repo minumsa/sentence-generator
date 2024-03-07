@@ -21,7 +21,7 @@ export const Hamburger = () => {
         style={{ display: showCategory ? "none" : "flex" }}
       ></button>
       <button className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
-        <div style={{ fontWeight: 100 }}>×</div>
+        <div style={{ fontWeight: 100, marginTop: "1px" }}>×</div>
       </button>
       {showCategory ? (
         <ul className={styles["desktop-genre-category"]}>
