@@ -8,7 +8,7 @@ export const Category = () => {
   const pathName = usePathname();
 
   return (
-    <header className={styles["category-container"]}>
+    <div style={{ width: "1280px" }}>
       <div className={styles["desktop-category"]}>
         {/* 햄버거 메뉴 */}
         <Hamburger />
@@ -24,6 +24,6 @@ export const Category = () => {
           <nav className={styles["top-magnifying-glass"]}></nav>
         </Link>
       </div>
-    </header>
+    </div>
   );
 };
