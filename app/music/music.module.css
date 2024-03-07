@@ -216,7 +216,7 @@
 }
 
 .backdrop-filtered {
-  background-color: rgb(0 0 0 / 50%);
+  background-color: rgb(0 0 0 / 40%);
   backdrop-filter: blur(18px);
 }
 
@@ -1245,8 +1245,10 @@
   }
 
   .search-input-container {
-    padding: 50px 0 0 0;
-    margin: 0 15px;
+    width: 100%;
+    padding: 0 50px;
+    margin: 30px 0 0 0;
+    box-sizing: border-box;
   }
 
   .category-meta-title {
