@@ -8,7 +8,11 @@ interface EditButtonProps {
 
 export const EditButton = ({ data }: EditButtonProps) => {
   return (
-    <Link href={`/music/admin/upload/${data.id}`} className={styles["admin-button"]}>
+    <Link
+      href={`/music/admin/upload/${data.id}`}
+      className={styles["admin-button"]}
+      style={{ marginRight: "-1px" }}
+    >
       수정
     </Link>
   );
