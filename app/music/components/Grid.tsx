@@ -96,7 +96,7 @@ export const Grid = () => {
       isLoading={isLoading}
       isScrolling={isScrolling}
     >
-      {isLoading && <Loading isEmpty={isScrolling ? !isScrolling : false} />}
+      {isLoading && !isScrolling && <Loading isEmpty={false} />}
       {totalDataLength > 0 && (
         <>
           {/* Mobile Tag Display */}
