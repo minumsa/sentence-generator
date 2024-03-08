@@ -20,7 +20,6 @@ export const ContentLayout = ({
 }: ContentLayoutProps) => {
   return (
     <>
-      {isLoading && <Loading isEmpty={isScrolling ? !isScrolling : false} />}
       {children}
       {totalDataLength > 0 && (
         <PageNumbers

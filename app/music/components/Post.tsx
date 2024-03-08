@@ -27,7 +27,6 @@ export const Post = ({ albumId }: PostProps) => {
 
   return (
     <>
-      {isLoading && <Loading isEmpty={false} />}
       {albumData && (
         <section className={styles["album-container"]}>
           <PostAlbumMetadata albumData={albumData} />

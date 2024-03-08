@@ -18,6 +18,7 @@ import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
+import { Loading } from "./Loading";
 
 export const Grid = () => {
   const pathName = usePathname();
@@ -95,6 +96,7 @@ export const Grid = () => {
       isLoading={isLoading}
       isScrolling={isScrolling}
     >
+      {isLoading && <Loading isEmpty={isScrolling ? !isScrolling : false} />}
       {totalDataLength > 0 && (
         <>
           {/* Mobile Tag Display */}
