@@ -11,7 +11,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center" }}>
-      {/* <Snow /> */}
+      <Snow />
       <div className={styles["container"]}>
         <header className={styles["category-container"]}>
           <Category />

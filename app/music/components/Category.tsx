@@ -8,11 +8,11 @@ export const Category = () => {
   const pathName = usePathname();
 
   return (
-    <div style={{ position: "relative", width: "1280px", height: "100%" }}>
+    <div className={styles["header-container"]}>
       <Hamburger />
       <div
-        className={styles["backdrop-filtered"]}
         style={{ width: "100%", height: "100%", display: "flex", alignItems: "center" }}
+        className={styles["backdrop-filtered"]}
       >
         <div className={styles["desktop-category"]}>
           {/* 햄버거 메뉴 */}

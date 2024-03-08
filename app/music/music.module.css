@@ -48,8 +48,10 @@
 }
 
 .header-container {
-  display: flex;
-  align-items: center;
+  position: relative;
+  width: 1280px;
+  height: 100%;
+  background-color: var(--background-color);
 }
 
 .desktop-genre-category {
@@ -60,9 +62,8 @@
   left: -26px;
   height: -moz-fit-content;
   height: fit-content;
-  /* background-color: var(--background-color); */
-  background-color: rgb(0 0 0 / 50%);
-  backdrop-filter: blur(18px);
+  background-color: var(--background-color);
+  /* background-color: rgb(0 0 0 / 50%); */
 
   width: 120px;
   font-size: 1.1rem;
@@ -77,8 +78,8 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 44.5px;
-  left: 170px;
+  top: 42.5px;
+  left: 145px;
   height: -moz-fit-content;
   height: fit-content;
   background-color: var(--background-color);
@@ -104,7 +105,6 @@
   z-index: 3;
   padding: 7px 0;
   font-weight: 600;
-  margin-bottom: 10px;
 }
 
 .hamburger-item-title:hover {
@@ -213,11 +213,6 @@
   opacity: 0;
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
-}
-
-.backdrop-filtered {
-  background-color: rgb(0 0 0 / 40%);
-  backdrop-filter: blur(18px);
 }
 
 .category-container {
@@ -1143,6 +1138,23 @@
 }
 
 @media (max-width: 525px) {
+  .header-container {
+    background-color: unset;
+  }
+
+  .backdrop-filtered {
+    background-color: rgb(0 0 0 / 50%);
+    backdrop-filter: blur(18px);
+  }
+
+  .desktop-introduction-category {
+    width: 125px;
+    top: 32.5px;
+    left: 139px;
+    font-size: 1.05rem;
+    padding: 5px 20px 20px 15px;
+  }
+
   .post-date-container {
     font-size: 1.05rem;
   }
@@ -1187,12 +1199,14 @@
   }
 
   .desktop-genre-category {
-    padding: 5px 20px 20px 2px;
+    background-color: unset;
+    padding: 5px 10px 20px 20px;
     width: 125px;
     left: -16px;
-    top: 32px;
+    top: 32.5px;
     font-size: 1.05rem;
     border-left: none;
+    border-bottom: none;
   }
 
   .category {
@@ -1360,6 +1374,8 @@
 
   .category-container {
     height: 45px;
+    border-bottom: none;
+    top: -1px;
   }
 
   .category {
@@ -1552,10 +1568,6 @@
     font-size: 2.2rem;
     font-weight: 100;
     margin: 0 6px 4px 0;
-  }
-
-  .hamburger-item {
-    padding: 6px 18px;
   }
 
   .page-container {

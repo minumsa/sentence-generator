@@ -24,7 +24,7 @@ export const Hamburger = () => {
         <div style={{ fontWeight: 100, marginTop: "1px" }}>×</div>
       </button>
       {showCategory ? (
-        <ul className={styles["desktop-genre-category"]}>
+        <ul className={`${styles["desktop-genre-category"]} ${styles["backdrop-filtered"]}`}>
           {Object.keys(contents).map(category => {
             return (
               <React.Fragment key={category}>
@@ -37,7 +37,9 @@ export const Hamburger = () => {
         </ul>
       ) : null}
       {showCategory && isAdminPage(pathName) && (
-        <div className={styles["desktop-introduction-category"]}>
+        <div
+          className={`${styles["desktop-introduction-category"]} ${styles["backdrop-filtered"]}`}
+        >
           <div className={styles["hamburger-item-title"]}>관리자 메뉴</div>
           <div
             className={styles["hamburger-item"]}
