@@ -25,6 +25,7 @@ interface MusicData extends Document {
   musicVideoUrl: string;
   videos: Video[];
   tagKeys: string[];
+  blurHash: string;
 }
 
 const videoSchema = new mongoose.Schema({
@@ -52,6 +53,7 @@ const musicSchema = new mongoose.Schema({
   musicVideoUrl: String,
   videos: [videoSchema],
   tagKeys: [String],
+  blurHash: String,
 });
 
 const Music: Model<MusicData> =

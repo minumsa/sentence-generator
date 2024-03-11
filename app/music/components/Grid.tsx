@@ -18,7 +18,7 @@ import "aos/dist/aos.css";
 import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
-import { Loading } from "./Loading";
+import { BlurImg } from "./BlurImage";
 
 export const Grid = () => {
   const pathName = usePathname();
@@ -37,6 +37,8 @@ export const Grid = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
+
+  console.log(data);
 
   useEffect(() => {
     Aos.init();
@@ -96,7 +98,7 @@ export const Grid = () => {
       isLoading={isLoading}
       isScrolling={isScrolling}
     >
-      {isLoading && !isScrolling && <Loading isEmpty={false} />}
+      {/* {isLoading && !isScrolling && <Loading isEmpty={false} />} */}
       {totalDataLength > 0 && (
         <>
           {/* Mobile Tag Display */}
@@ -145,6 +147,8 @@ export const Grid = () => {
               const isLastDataAndOddNumber =
                 index === currentDataLength - 1 && currentDataLength % 2 === 1;
               const isLastItem = index + 1 === data.length;
+              const imgSrc = item.imgUrl;
+              const blurhash = item.blurHash ?? "";
 
               return isLastDataAndOddNumber ? null : (
                 <div
@@ -162,11 +166,17 @@ export const Grid = () => {
                       setIsLoading(true);
                     }}
                   >
-                    <img
+                    <BlurImg
+                      className={styles["grid-album-image"]}
+                      blurhash={blurhash}
+                      src={imgSrc}
+                      punch={1}
+                    />
+                    {/* <img
                       className={styles["grid-album-image"]}
                       src={item.imgUrl}
                       alt={item.album}
-                    />
+                    /> */}
                   </Link>
                   <div className={styles["grid-album-title"]}>
                     <Link

@@ -71,6 +71,7 @@ export interface AlbumInfo {
   score: number;
   videos: Video[];
   tagKeys: string[];
+  blurHash: string;
 }
 
 export interface PageProps {
