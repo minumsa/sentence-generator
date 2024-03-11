@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./update.module.css";
 import React from "react";
-import { fetchSpotify, searchSpotify, uploadData } from "../modules/api";
+import { UploadData, fetchSpotify, searchSpotify, uploadData } from "../modules/api";
 import { AlbumInfo, contents, defaultTags, groupTags } from "../modules/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -44,6 +44,7 @@ export default function Upload() {
   const [showTagListModal, setShowTagListModal] = useState(false);
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
   const [newTagKey, setNewTagKey] = useState("");
+  const [blurHash, setBlurHash] = useState("");
 
   const handleSearch = async () => {
     const result = await searchSpotify(albumKeyword);
@@ -65,7 +66,7 @@ export default function Upload() {
     const newSpotifyAlbumData = await fetchSpotify(albumId);
 
     if (newSpotifyAlbumData) {
-      const newData = {
+      const newData: UploadData = {
         newSpotifyAlbumData,
         genre,
         link,
@@ -74,6 +75,7 @@ export default function Upload() {
         score,
         videos,
         tagKeys: currentTagKeys,
+        blurHash,
       };
 
       try {
@@ -228,6 +230,18 @@ export default function Upload() {
           value={link}
           onChange={e => {
             setLink(e.target.value);
+          }}
+        />
+      </div>
+
+      {/* BlurHash String */}
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>BlurHash String</div>
+        <input
+          className={styles["input"]}
+          value={blurHash}
+          onChange={e => {
+            setBlurHash(e.target.value);
           }}
         />
       </div>

@@ -45,7 +45,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
-  const [password, setPassword] = useState<string>("yooil1004");
+  const [password, setPassword] = useState<string>("");
   const [score, setScore] = useState<number>(0);
   const [albumReleaseDate, setAlbumReleaseDate] = useState<string>("");
   const [uploadDate, setUploadDate] = useState(new Date());
@@ -319,7 +319,7 @@ export default function Update({ currentId }: UpdateProps) {
         />
       </div>
 
-      {/* 아티스트 ID */}
+      {/* BlurHash String */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>BlurHash String</div>
         <input

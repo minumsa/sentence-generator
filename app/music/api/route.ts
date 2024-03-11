@@ -69,8 +69,18 @@ export async function POST(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys, password } =
-      await request.json();
+    const {
+      newSpotifyAlbumData,
+      genre,
+      link,
+      text,
+      uploadDate,
+      score,
+      videos,
+      tagKeys,
+      blurHash,
+      password,
+    } = await request.json();
     const {
       id,
       imgUrl,
@@ -111,6 +121,7 @@ export async function POST(request: Request) {
       score,
       videos,
       tagKeys,
+      blurHash,
     });
     await newData.save();
     return NextResponse.json(newData.toJSON());
