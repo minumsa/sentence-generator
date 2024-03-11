@@ -1,7 +1,7 @@
 import styles from "../music.module.css";
 
 interface LoadingProps {
-  isEmpty: boolean;
+  isEmpty?: boolean;
 }
 
 export const Loading = ({ isEmpty }: LoadingProps) => {
@@ -9,11 +9,12 @@ export const Loading = ({ isEmpty }: LoadingProps) => {
 
   return (
     <>
-      <div
+      {/* <div
         className={`${styles["loading-background"]} ${
           isEmpty ? styles["loading-backdrop-filtered"] : undefined
         }`}
-      ></div>
+      > */}
+      <div className={styles["loading-background"]}></div>
       <div className={styles["loading-text"]}>{loadingText}</div>
     </>
   );

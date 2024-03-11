@@ -38,6 +38,7 @@ export const Grid = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
+  const [hasNoData, setHasNoData] = useState(true);
 
   useEffect(() => {
     Aos.init();
@@ -67,6 +68,8 @@ export const Grid = () => {
           const calculateScrollCount =
             Math.max(1, Math.ceil(albumResult.genreDataLength / perPageCount)) + 1;
           setIsLoading(false);
+          setHasNoData(false);
+
           setData(albumResult.slicedData);
           setTotalDataLength(albumResult.genreDataLength);
           setTotalScrollCount(calculateScrollCount);
@@ -97,7 +100,7 @@ export const Grid = () => {
       isLoading={isLoading}
       isScrolling={isScrolling}
     >
-      {isLoading && !isScrolling && <Loading isEmpty={false} />}
+      {hasNoData && <Loading />}
       {totalDataLength > 0 && (
         <>
           {/* Mobile Tag Display */}
