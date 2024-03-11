@@ -101,118 +101,114 @@ export const Grid = () => {
       isScrolling={isScrolling}
     >
       {hasNoData && <Loading />}
-      {
-        <>
-          {/* Mobile Tag Display */}
-          <div
-            className={styles["tag-display-container"]}
-            style={
-              showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
-            }
-          >
-            {Object.keys(defaultTags).map((key, index) => {
-              return (
-                <div
-                  key={index}
-                  className={styles["tag-display-item"]}
-                  onClick={() => {
-                    setCurrentTagKey(key);
-                    setScrollCount(1);
-                  }}
-                  style={
-                    currentTagKey === key || (currentTagKey === "" && key === "all")
-                      ? { border: "1px solid var(--text-color)" }
-                      : undefined
-                  }
-                >
-                  {defaultTags[key]}
-                </div>
-              );
-            })}
-            <div
-              className={styles["arrow-down-container"]}
-              onClick={() => {
-                setShowAllTagItems(!showAllTagItems);
-              }}
-            >
-              <img
-                className={styles["arrow-down"]}
-                src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
-                alt="arrow-down"
-              />
-            </div>
-          </div>
-          {/* Grid Items */}
-          <div className={styles["grid-div"]}>
-            {data.map((item, index) => {
-              const currentDataLength = data.length;
-              const isLastDataAndOddNumber =
-                index === currentDataLength - 1 && currentDataLength % 2 === 1;
-              const isLastItem = index + 1 === data.length;
-              const imgSrc = item.imgUrl;
-              const blurhash = item.blurHash ?? "";
 
-              return isLastDataAndOddNumber ? null : (
-                <div
-                  data-aos="fade-up"
-                  data-aos-duration={800}
-                  data-aos-offset={isMobile ? 40 : 90}
-                  data-aos-once="true"
-                  key={index}
-                  className={`${styles["grid-item-container"]}`}
-                  ref={isLastItem ? ref : undefined}
-                >
-                  <Link
-                    href={postPath(pathName, item.id)}
-                    onClick={() => {
-                      setIsLoading(true);
-                    }}
-                  >
-                    <BlurImg
-                      className={styles["grid-album-image"]}
-                      blurhash={blurhash}
-                      src={imgSrc}
-                      punch={1}
-                    />
-                    {/* <img
+      <div
+        className={styles["tag-display-container"]}
+        style={
+          showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
+        }
+      >
+        {Object.keys(defaultTags).map((key, index) => {
+          return (
+            <div
+              key={index}
+              className={styles["tag-display-item"]}
+              onClick={() => {
+                setCurrentTagKey(key);
+                setScrollCount(1);
+              }}
+              style={
+                currentTagKey === key || (currentTagKey === "" && key === "all")
+                  ? { border: "1px solid var(--text-color)" }
+                  : undefined
+              }
+            >
+              {defaultTags[key]}
+            </div>
+          );
+        })}
+        <div
+          className={styles["arrow-down-container"]}
+          onClick={() => {
+            setShowAllTagItems(!showAllTagItems);
+          }}
+        >
+          <img
+            className={styles["arrow-down"]}
+            src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
+            alt="arrow-down"
+          />
+        </div>
+      </div>
+      {/* Grid Items */}
+      <div className={styles["grid-div"]}>
+        {data.map((item, index) => {
+          const currentDataLength = data.length;
+          const isLastDataAndOddNumber =
+            index === currentDataLength - 1 && currentDataLength % 2 === 1;
+          const isLastItem = index + 1 === data.length;
+          const imgSrc = item.imgUrl;
+          const blurhash = item.blurHash ?? "";
+
+          return isLastDataAndOddNumber ? null : (
+            <div
+              data-aos="fade-up"
+              data-aos-duration={800}
+              data-aos-offset={isMobile ? 40 : 90}
+              data-aos-once="true"
+              key={index}
+              className={`${styles["grid-item-container"]}`}
+              ref={isLastItem ? ref : undefined}
+            >
+              <Link
+                href={postPath(pathName, item.id)}
+                onClick={() => {
+                  setIsLoading(true);
+                }}
+              >
+                <BlurImg
+                  className={styles["grid-album-image"]}
+                  blurhash={blurhash}
+                  src={imgSrc}
+                  punch={1}
+                />
+                {/* <img
                       className={styles["grid-album-image"]}
                       src={item.imgUrl}
                       alt={item.album}
                     /> */}
-                  </Link>
-                  <div className={styles["grid-album-title"]}>
-                    <Link
-                      href={postPath(pathName, item.id)}
-                      onClick={() => {
-                        setIsLoading(true);
-                      }}
-                    >
-                      <button
-                        className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                      >
-                        {`${item.album}`}
-                      </button>
-                    </Link>
-                    <br />
-                    <Link
-                      href={artistPath(pathName, item.artistId)}
-                      onClick={() => {
-                        setIsLoading(true);
-                      }}
-                    >
-                      <button
-                        className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
-                      >
-                        {`${item.artist}`}
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      }
+              </Link>
+              <div className={styles["grid-album-title"]}>
+                <Link
+                  href={postPath(pathName, item.id)}
+                  onClick={() => {
+                    setIsLoading(true);
+                  }}
+                >
+                  <button
+                    className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                  >
+                    {`${item.album}`}
+                  </button>
+                </Link>
+                <br />
+                <Link
+                  href={artistPath(pathName, item.artistId)}
+                  onClick={() => {
+                    setIsLoading(true);
+                  }}
+                >
+                  <button
+                    className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                  >
+                    {`${item.artist}`}
+                  </button>
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </ContentLayout>
   );
 };
