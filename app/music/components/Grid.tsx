@@ -19,6 +19,7 @@ import Aos from "aos";
 import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
 import { BlurImg } from "./BlurImage";
+import { Loading } from "./Loading";
 
 export const Grid = () => {
   const pathName = usePathname();
@@ -37,8 +38,6 @@ export const Grid = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
-
-  console.log(data);
 
   useEffect(() => {
     Aos.init();
@@ -98,7 +97,7 @@ export const Grid = () => {
       isLoading={isLoading}
       isScrolling={isScrolling}
     >
-      {/* {isLoading && !isScrolling && <Loading isEmpty={false} />} */}
+      {isLoading && !isScrolling && <Loading isEmpty={false} />}
       {totalDataLength > 0 && (
         <>
           {/* Mobile Tag Display */}
