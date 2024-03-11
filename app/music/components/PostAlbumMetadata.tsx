@@ -7,6 +7,7 @@ import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import Link from "next/link";
 import { LinkIcon } from "./LinkIcon";
+import { BlurImg } from "./BlurImage";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -31,24 +32,18 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
       {/* 이미지 관련 코드 */}
       <div className={styles["grid-album-image-container"]}>
         <a href={albumData.link} target="_blank">
-          <div
+          <BlurImg
             className={`${styles["grid-album-image"]} ${styles["post-album-image"]}`}
-            style={
-              imageLoaded
-                ? {
-                    backgroundImage: `url(${albumData.imgUrl})`,
-                    backgroundSize: "cover",
-                    backgroundColor: "undefined",
-                  }
-                : undefined
-            }
+            blurhash={albumData.blurHash}
+            src={albumData.imgUrl}
+            punch={1}
           />
-          <img
+          {/* <img
             src={albumData.imgUrl}
             alt={albumData.album}
             style={{ display: "none" }}
             onLoad={handleImageLoad}
-          />
+          /> */}
         </a>
       </div>
 

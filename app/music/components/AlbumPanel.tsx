@@ -14,6 +14,7 @@ import { useRef } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import Link from "next/link";
+import { BlurImg } from "./BlurImage";
 
 interface AlbumProps {
   albumData: AlbumInfo;
@@ -30,12 +31,18 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
         className={styles["album-information-container"]}
         href={postPath(pathName, albumData.id)}
       >
-        <img
+        <BlurImg
+          className={styles["album-art"]}
+          blurhash={albumData.blurHash}
+          src={albumData.imgUrl}
+          punch={1}
+        />
+        {/* <img
           className={styles["album-art"]}
           src={albumData.imgUrl}
           alt={albumData.album}
           loading="lazy"
-        />
+        /> */}
       </Link>
       <div className={styles["album-panel-metadata-container"]}>
         {albumData.text.split("\n").map((text, index) => {
