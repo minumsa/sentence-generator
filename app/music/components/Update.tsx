@@ -45,7 +45,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>("yooil1004");
   const [score, setScore] = useState<number>(0);
   const [albumReleaseDate, setAlbumReleaseDate] = useState<string>("");
   const [uploadDate, setUploadDate] = useState(new Date());
@@ -58,6 +58,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
   const [showTagListModal, setShowTagListModal] = useState(false);
   const [newTagKey, setNewTagKey] = useState("");
+  const [blurHash, setBlurHash] = useState("");
   const router = useRouter();
 
   // 수정 API
@@ -75,6 +76,7 @@ export default function Update({ currentId }: UpdateProps) {
         score,
         videos,
         tagKeys: currentTagKeys,
+        blurHash,
       };
 
       try {
@@ -87,9 +89,6 @@ export default function Update({ currentId }: UpdateProps) {
         console.error("updateData 호출에 실패했습니다:", error);
       }
     }
-
-    console.log("albumId", albumId);
-    console.log("newSpotifyAlbumData", newSpotifyAlbumData);
   };
 
   const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -116,6 +115,7 @@ export default function Update({ currentId }: UpdateProps) {
         tagKeys,
         album,
         releaseDate,
+        blurHash,
       } = fetchData;
       setAlbumId(id);
       setArtist(artist);
@@ -128,6 +128,7 @@ export default function Update({ currentId }: UpdateProps) {
       setAlbumKeyword(album);
       setCurrentTagKeys(tagKeys);
       setAlbumReleaseDate(new Date(releaseDate).toString());
+      setBlurHash(blurHash);
 
       const hasVideo = videos.length > 0;
 
@@ -314,6 +315,18 @@ export default function Update({ currentId }: UpdateProps) {
           value={artistId}
           onChange={e => {
             setArtistId(e.target.value);
+          }}
+        />
+      </div>
+
+      {/* 아티스트 ID */}
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>BlurHash String</div>
+        <input
+          className={styles["input"]}
+          value={blurHash}
+          onChange={e => {
+            setBlurHash(e.target.value);
           }}
         />
       </div>

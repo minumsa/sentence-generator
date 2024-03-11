@@ -142,6 +142,7 @@ export interface UploadData {
   score: number;
   videos: Video[];
   tagKeys: string[];
+  blurHash: string;
 }
 
 export interface UpdateDataParams {
@@ -191,7 +192,8 @@ export async function uploadData({ newData, password }: UpdateDataParams) {
 }
 
 export const updateData = async ({ newData, password }: UpdateDataParams) => {
-  const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys } = newData;
+  const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys, blurHash } =
+    newData;
 
   if (newData !== null) {
     try {
@@ -209,6 +211,7 @@ export const updateData = async ({ newData, password }: UpdateDataParams) => {
           score,
           videos,
           tagKeys,
+          blurHash,
           password,
         }),
       });
