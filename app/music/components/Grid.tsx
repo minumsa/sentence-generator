@@ -101,7 +101,7 @@ export const Grid = () => {
       isScrolling={isScrolling}
     >
       {hasNoData && <Loading />}
-      {totalDataLength > 0 && (
+      {
         <>
           {/* Mobile Tag Display */}
           <div
@@ -212,7 +212,7 @@ export const Grid = () => {
             })}
           </div>
         </>
-      )}
+      }
     </ContentLayout>
   );
 };
