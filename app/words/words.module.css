@@ -1,23 +1,23 @@
 .container {
   background-color: #000000;
+  width: 100vw;
+  height: 100vh;
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  width: 100vw;
-  height: 100vh;
 }
 
 .sentence-container {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 5rem;
   font-weight: 900;
-  background-color: #000000;
 }
 
 .sentence {
@@ -35,8 +35,8 @@
   position: fixed;
   top: 30px;
   right: 30px;
-  cursor: pointer;
   z-index: 2000;
+  cursor: pointer;
   color: #fff;
 }
 
@@ -44,12 +44,15 @@
   0% {
     transform: translateY(0%);
   }
+
   30% {
     transform: translateY(150%);
   }
+
   80% {
     transform: translateY(150%);
   }
+
   100% {
     transform: translateY(-200%);
   }
@@ -57,11 +60,11 @@
 
 .download-container {
   display: flex;
-  justify-content: center;
-  width: 100%;
   position: fixed;
   top: -30px;
+  justify-content: center;
   z-index: 3000;
+  width: 100%;
 }
 
 .download-animation {
@@ -70,10 +73,10 @@
 }
 
 .download-text {
-  width: fit-content;
-  background-color: #fff;
   border-radius: 5px;
+  background-color: #fff;
   padding: 5px 10px;
+  width: fit-content;
   height: 20px;
 }
 
@@ -82,20 +85,23 @@
     0% {
       transform: translateY(0%);
     }
+
     30% {
       transform: translateY(200%);
     }
+
     80% {
       transform: translateY(200%);
     }
+
     100% {
       transform: translateY(-200%);
     }
   }
 
   .sentence-container {
-    height: 92%;
     width: 100%;
+    height: 92%;
     font-size: 2rem;
   }
 
@@ -106,12 +112,6 @@
   }
 
   .capture-icon {
-    top: 20px;
-    right: 20px;
-  }
-
-  .capture-icon {
     font-size: 1rem;
-    /* display: none; */
   }
 }
