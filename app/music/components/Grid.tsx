@@ -44,9 +44,9 @@ export const Grid = () => {
     Aos.init();
   }, []);
 
-  // useEffect(() => {
-  //   if (inView) setScrollCount(prevCount => prevCount + 1);
-  // }, [inView]);
+  useEffect(() => {
+    if (inView) setScrollCount(prevCount => prevCount + 1);
+  }, [inView]);
 
   useEffect(() => {
     const albumFilters: AlbumFilters = {
