@@ -19,6 +19,7 @@ import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
 import { BlurImg } from "./BlurImage";
 import { Loading } from "./Loading";
+import { isMobile } from "react-device-detect";
 
 export const Grid = () => {
   const pathName = usePathname();
@@ -153,8 +154,8 @@ export const Grid = () => {
             <div
               data-aos="fade-up"
               data-aos-duration={800}
-              // data-aos-offset={isMobile ? 40 : 90}
-              data-aos-offset={90}
+              data-aos-offset={isMobile ? 40 : 90}
+              // data-aos-offset={90}
               data-aos-once="true"
               key={index}
               className={`${styles["grid-item-container"]}`}
