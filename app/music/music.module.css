@@ -1,100 +1,96 @@
 .search-tag-display-item {
   display: flex;
   align-items: center;
-  color: var(--text-color);
-  font-size: 0.92rem;
+  margin: 3px;
+  background-color: #ffffff1a;
+  cursor: pointer;
+  padding: 7px 10px;
   width: fit-content;
   height: 20px;
-  background-color: #ffffff1a;
-  padding: 7px 10px;
-  margin: 3px;
   word-break: normal;
-  cursor: pointer;
+  color: var(--text-color);
+  font-size: 0.92rem;
 }
 
 .container {
   display: flex;
+  position: relative;
   flex-direction: column;
-  font-weight: 400;
-  color: var(--text-color);
-  font-size: 1.2rem;
   width: 100%;
   max-width: 1280px;
-
-  position: relative;
   overflow: auto;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 400;
 }
 
 @keyframes animateBg {
   0% {
     background-position: 0% 50%;
   }
+
   100% {
     background-position: 100% 50%;
   }
 }
 
 .desktop-hamburger-container {
-  position: absolute;
-  left: 15px;
-  top: calc(50% + 1px);
-  transform: translate(0, -50%);
   display: flex;
+  position: absolute;
+  top: calc(50% + 1px);
+  left: 15px;
   justify-content: center;
-  height: 23px;
-  width: 24px;
+  transform: translate(0, -50%);
   z-index: 100;
   cursor: pointer;
+  width: 24px;
+  height: 23px;
 }
 
 .header-container {
   position: relative;
+  background-color: var(--background-color);
   width: 1280px;
   height: 100%;
-  background-color: var(--background-color);
 }
 
 .desktop-genre-category {
-  position: absolute;
   display: flex;
-  flex-direction: column;
+  position: absolute;
   top: 43px;
   left: -26px;
-  height: -moz-fit-content;
-  height: fit-content;
-  background-color: var(--background-color);
-  /* background-color: rgb(0 0 0 / 50%); */
-
-  width: 120px;
-  font-size: 1.1rem;
-  padding: 5px 20px 20px 30px;
+  flex-direction: column;
   z-index: 10000;
-  border-left: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  background-color: var(--background-color);
   cursor: default;
+  padding: 5px 20px 20px 30px;
+  width: 120px;
+  height: fit-content;
+  font-size: 1.1rem;
 }
 
 .desktop-introduction-category {
-  position: absolute;
   display: flex;
-  flex-direction: column;
+  position: absolute;
   top: 42.5px;
   left: 145px;
-  height: -moz-fit-content;
-  height: fit-content;
-  background-color: var(--background-color);
-  width: 150px;
-  font-size: 1.1rem;
-  padding: 5px 20px 20px 30px;
+  flex-direction: column;
   z-index: 1;
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
   cursor: default;
+  padding: 5px 20px 20px 30px;
+  width: 150px;
+  height: fit-content;
+  font-size: 1.1rem;
 }
 
 .hamburger-item {
   z-index: 3;
-  padding: 7px 0;
   cursor: pointer;
+  padding: 7px 0;
 }
 
 .hamburger-item:hover {
@@ -112,69 +108,69 @@
 }
 
 .hamburger-icon {
+  margin: 3px 0 0 0;
+  box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
+  background-color: var(--text-color);
   width: 20px;
   height: 1px;
-  margin: 3px 0 0 0;
-  background-color: var(--text-color);
-  box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
 }
 
 .close-icon {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 0 0 4px 4px;
   font-size: 2rem;
   font-weight: 100;
-  padding: 0 0 4px 4px;
 }
 
 .snowfall-container {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -1;
   width: 100%;
   height: 100%;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-use-select: none;
   user-select: none;
-  z-index: -1;
 }
 
 .loading-background {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background-color: rgb(0 0 0 / 50%);
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9999;
-  background-color: rgb(0 0 0 / 50%);
   backdrop-filter: blur(7px);
 }
 
 .loading-text {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 10000;
 }
 
 @keyframes fadeInUp {
@@ -217,15 +213,13 @@
 }
 
 .category-container {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  /* background-color: var(--background-color); */
-  /* background-color: rgb(0 0 0 / 50%); */
-
+  justify-content: center;
+  z-index: 10000;
   border-bottom: 1px solid var(--border-color);
   width: 100%;
   height: 65px;
@@ -233,79 +227,73 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
-  /* top-menu-container와 영역 겹쳐서 지정 */
-  z-index: 10000;
 }
 
 .desktop-category {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  align-items: center;
+  padding: 0 15px;
   width: 100%;
   max-width: 1280px;
-  padding: 0 15px;
-  box-sizing: border-box;
   font-size: 1.15rem;
 }
 
 .category {
-  cursor: pointer;
   display: flex;
+  align-items: center;
+  cursor: pointer;
   padding: 10px 20px;
   text-decoration: none;
   color: var(--text-color);
-  align-items: center;
 }
 
 .sup {
-  line-height: 0;
-  margin: 0 0 0 3px;
-  font-size: 0.8rem;
-  vertical-align: top;
   top: 20px;
+  margin: 0 0 0 3px;
+  vertical-align: top;
+  line-height: 0;
+  font-size: 0.8rem;
 }
 
 .content-container {
-  margin: 65px 0 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 100;
+  margin: 65px 0 0 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 100;
 }
 
 .album-container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   padding: 50px 15px;
-  box-sizing: border-box;
   width: 100%;
 }
 
 .album-panel-metadata-container {
   display: flex;
-  width: 100%;
   align-items: center;
-  line-height: 210%;
-  word-break: normal;
-  text-align: justify;
   width: 100%;
   max-width: 1050px;
+  text-align: justify;
+  line-height: 210%;
+  word-break: normal;
 }
 
 .post-content-container {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 1050px;
+  text-align: justify;
   line-height: 210%;
   word-break: normal;
-  text-align: justify;
-  width: 100%;
-  max-width: 1050px;
 }
 
 .text-wide {
@@ -333,60 +321,60 @@
 }
 
 .top-search-container {
-  position: absolute;
   display: flex;
-  align-items: center;
-  height: 49.5px;
-  margin: 0 5px 0 0;
-  right: 26px;
+  position: absolute;
   top: -13px;
+  right: 26px;
+  align-items: center;
+  margin: 0 5px 0 0;
+  height: 49.5px;
 }
 
 .top-search-input {
-  font-size: 1rem;
+  margin: 1px 0 0 0;
+  border: 1px solid #454545;
+  box-shadow: none;
+  background-color: #272727;
+  padding: 0 10px;
   width: 200px;
   height: 30px;
-  background-color: #272727;
-  box-shadow: none;
-  border: 1px solid #454545;
-  padding: 0 10px;
-  margin: 1px 0 0 0;
   color: var(--text-color);
+  font-size: 1rem;
 }
 
 .top-search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
   width: 50px;
   height: 30px;
-  background-color: var(--background-color);
   font-size: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .top-magnifying-glass {
   position: relative;
-  width: 20px;
-  height: 24.5px;
   background-image: url(/music/magnifying-glass.svg);
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
+  width: 20px;
+  height: 24.5px;
 }
 
 .sort {
-  height: 30px;
   margin: 2px;
   padding: 5px 10px;
+  height: 30px;
 }
 
 .button {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   border: 1px solid black;
+  cursor: pointer;
 }
 
 .admin-button-container {
@@ -396,35 +384,35 @@
 }
 
 .admin-button {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  border: 1px solid var(--text-color);
+  cursor: pointer;
   width: 70px;
   height: 45px;
-  border: 1px solid var(--text-color);
 }
 
 .button:hover {
-  color: var(--background-color);
-  font-weight: bold;
   border-radius: 0;
   background-color: #fff;
+  color: var(--background-color);
+  font-weight: bold;
 }
 
 .album-information-container {
   display: flex;
   flex-direction: column;
-  width: 300px;
   margin: 0 100px 0 0;
+  width: 300px;
   line-height: 200%;
 }
 
 .album-metadata {
   margin: 10px 0 0 0;
-  font-weight: 500;
   line-height: 160%;
+  font-weight: 500;
 }
 
 .album-information {
@@ -442,11 +430,11 @@
 }
 
 .artist-page-image-container {
-  width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   margin: 45px 0 30px 0;
+  width: 100%;
 }
 
 .artist-page-image {
@@ -460,8 +448,8 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
-  color: var(--text-color);
   text-decoration: none;
+  color: var(--text-color);
 }
 
 .link:hover {
@@ -476,76 +464,74 @@
 
 .information {
   display: flex;
+  margin-bottom: 3px;
   border-bottom: 1px solid var(--text-color);
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
-  margin-bottom: 3px;
+  white-space: nowrap;
 }
 
 .input {
-  /* FIXME: vertical align 방법 알아내기. 지금은 height, padding으로 임시로 맞춰놓음. */
-  width: 100%;
   margin: 15px 0 50px 0;
   background-color: #fff;
+  width: 100%;
   font-size: 1.2rem;
 }
 
 .input,
 .date-input,
 .select {
-  background-color: #333;
-  color: var(--text-color);
-  box-shadow: none;
   border: 1px solid var(--text-color);
+  box-shadow: none;
+  background-color: #333;
+  padding: 30px 15px;
   height: 40px;
+  color: var(--text-color);
   /* box-sizing: padding으로 인한 width 증가 현상 억제 */
   box-sizing: border-box;
-  padding: 30px 15px;
 }
 
 .input-text {
-  line-height: 180%;
   height: 400px;
+  line-height: 180%;
 }
 
 .date-input {
-  width: 250px;
-  font-size: 1.2rem;
   margin: 15px 0 0 0;
   padding: 0 20px 0 0;
+  width: 250px;
+  font-size: 1.2rem;
 }
 
 .select-container {
+  margin: 15px 0 50px 0;
   width: calc(100% + 20px);
   height: 50px;
-  margin: 15px 0 50px 0;
 }
 
 .calendar-input {
+  margin: 15px 0 0 0;
   width: calc(100% + 20px);
   height: 50px;
-  margin: 15px 0 0 0;
   text-align: left;
   font-size: 1.2rem;
 }
 
 .select {
-  font-size: 1.2rem;
   padding: 0 15px;
   width: auto;
-  height: 100%;
   height: 60px;
+  font-size: 1.2rem;
 }
 
 .submit {
-  padding: 10px 30px;
   border-color: var(--text-color);
+  padding: 10px 30px;
 }
 
 .title {
-  text-align: center;
   margin-bottom: 100px;
+  text-align: center;
   font-style: italic;
 }
 
@@ -559,26 +545,24 @@
 }
 
 .post-divider {
-  height: 1px;
-  width: 100%;
-
-  background-color: var(--border-color);
   margin: 50px 0 50px 0;
+  background-color: var(--border-color);
+  width: 100%;
+  height: 1px;
 }
 
 .blur-end {
-  word-break: normal;
+  display: -webkit-box;
+  overflow: hidden;
   text-align: justify;
+  word-break: normal;
   --lines-count: 3;
   --blur-height: 40px;
   --blur-length: 5px;
   --fade-length: 5;
   --fade-direction: 270deg;
-  overflow: hidden;
-  display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: var(--lines-count);
-
   mask: linear-gradient(
       0deg,
       transparent,
@@ -598,11 +582,11 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  font-weight: 450;
-  font-size: 1.2rem;
+  z-index: 200;
   cursor: pointer;
   color: var(--text-color);
-  z-index: 200;
+  font-size: 1.2rem;
+  font-weight: 450;
 }
 
 .paragraph-blank {
@@ -614,18 +598,18 @@
 }
 
 .upload-button {
+  margin: 0 5px 0 0;
   border: none;
+  padding: 5px;
   width: fit-content;
   height: 41px;
-  padding: 5px;
-  margin: 0 5px 0 0;
 }
 
 .close-button {
-  width: fit-content;
-  padding: 0 5px;
   margin: 10px;
   border: none;
+  padding: 0 5px;
+  width: fit-content;
   font-size: 1.5rem;
 }
 
@@ -634,21 +618,21 @@
 }
 
 .sort-criteria-container {
-  width: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
   padding: 10px 0;
+  width: 100px;
 }
 
 .sort-criteria {
-  border-left: 1px solid black;
   border-bottom: 1px solid black;
-  padding: 5px 10px 10px 10px;
+  border-left: 1px solid black;
   background-color: #fff;
-  color: var(--background-color);
+  padding: 5px 10px 10px 10px;
   width: fit-content;
+  color: var(--background-color);
 }
 
 .criteria {
@@ -684,22 +668,22 @@
 }
 
 .search-album-modal-container {
-  position: absolute;
   display: flex;
+  position: absolute;
   flex-direction: column;
-  width: 500px;
-  background-color: #fff;
   margin: -50px 0 0 0;
   border-radius: 6px;
-  padding: 30px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  padding: 30px;
+  width: 500px;
 }
 
 .search-album-modal {
   display: flex;
-  color: var(--background-color);
   cursor: pointer;
   padding: 5px;
+  color: var(--background-color);
 }
 
 .search-album-text {
@@ -725,8 +709,8 @@
 .search-result-container {
   display: flex;
   justify-content: center;
-  text-align: center;
   padding: 30px 0 40px 0;
+  text-align: center;
   font-style: italic;
 }
 
@@ -751,19 +735,16 @@
 }
 
 .search-page-input {
+  box-sizing: border-box;
+  margin: 1px 0 0 0;
+  border: 1px solid var(--text-color);
+  box-shadow: none;
+  background-color: var(--input-background-color);
+  padding: 0 40px 0 50px;
   width: 100%;
   height: 100%;
-
-  margin: 0 0 0 8px;
-  font-size: 1.3rem;
-
-  background-color: var(--input-background-color);
-  box-shadow: none;
-  border: 1px solid var(--text-color);
-  padding: 0 40px 0 50px;
-  margin: 1px 0 0 0;
   color: var(--text-color);
-  box-sizing: border-box;
+  font-size: 1.3rem;
 }
 
 .search-page-input-icon {
@@ -781,35 +762,34 @@
 
 .page {
   cursor: pointer;
-  color: #949494;
   padding: 5px 18px;
+  color: #949494;
   font-weight: 500;
 }
 
 .post-date {
-  font-weight: 600;
   margin: 15px 0 5px 0;
+  font-weight: 600;
 }
 
 .grid-div {
   display: flex;
-  justify-content: space-between;
-  align-content: flex-start;
   flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-between;
+  margin: 15px 0 0 0;
   width: 100%;
   height: 100%;
-  margin: 15px 0 0 0;
 }
 
 .grid-item-container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin: -1px 0 0 -1px;
-  /* FIXME: 계산 제대로 해서 수정하기 */
-  --grid-item-width: calc(100% / 8);
-  width: var(--grid-item-width);
   padding: 15px;
-  box-sizing: border-box;
+  width: var(--grid-item-width);
+  --grid-item-width: calc(100% / 8);
 }
 
 .grid-album-image-container {
@@ -819,10 +799,9 @@
 }
 
 .grid-album-image {
-  aspect-ratio: 1 / 1;
-  width: 100%;
   cursor: pointer;
-  /* background-color: var(--border-color); */
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
 .grid-album-image::after {
@@ -835,10 +814,10 @@
 }
 
 .grid-album-title {
-  font-size: 0.95rem;
-  font-weight: 500;
   z-index: 100;
   text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .grid-album-title-masking {
@@ -854,57 +833,57 @@
 }
 
 .post-title-album {
+  margin: 0 0 5px 0;
   font-size: 2rem;
   font-weight: 600;
-  margin: 0 0 5px 0;
 }
 
 .black-masking {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 155%;
-  text-indent: 0;
-  font-weight: 400;
   z-index: 2;
+  background-color: var(--background-color);
+  text-indent: 0;
+  line-height: 155%;
+  color: var(--text-color);
+  font-weight: 400;
 }
 
 .category-meta-title {
-  font-weight: 600;
-  font-size: 2.2rem;
+  display: inline-block;
   cursor: pointer;
-  text-decoration: none;
-  color: var(--text-color);
-  text-align: start;
-  word-break: break-all;
   width: 100%;
   height: 42px;
-  display: inline-block;
   overflow: hidden;
+  text-align: start;
+  text-decoration: none;
   text-overflow: ellipsis;
+  word-break: break-all;
+  color: var(--text-color);
+  font-size: 2.2rem;
+  font-weight: 600;
 }
 
 .artist-page-title {
-  font-weight: 600;
-  font-size: 2.2rem;
   cursor: pointer;
   text-decoration: none;
   color: var(--text-color);
+  font-size: 2.2rem;
+  font-weight: 600;
 }
 
 .category-meta {
   display: flex;
   align-items: center;
-  font-size: 1rem;
   margin: 0 0 5px 0;
+  font-size: 1rem;
 }
 
 .category-meta-image-container {
+  margin: 0 10px 0 0;
+  cursor: pointer;
   width: 30px;
   height: 30px;
   inset-inline-start: 0px;
   user-select: auto;
-  margin: 0 10px 0 0;
-  cursor: pointer;
 }
 
 .category-meta-image {
@@ -922,42 +901,43 @@
 }
 
 .loading-container {
-  position: fixed;
   display: flex;
+  position: fixed;
   flex-direction: column;
   justify-content: center;
-  width: -webkit-fill-available;
-  height: 100%;
   z-index: 10000;
   background-color: transparent;
+  width: -webkit-fill-available;
+  height: 100%;
 }
 
 .loading-circle {
   position: fixed;
   top: 48%;
   left: calc(50% + 125px);
-  width: 40px;
-  height: 40px;
+  z-index: 10000;
   margin: -25px 0 0 -25px;
   border: 10px solid #e3e3e3;
   border-bottom: 10px solid black;
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
   animation: load 1.5s linear infinite;
-  z-index: 10000;
 }
 
 @keyframes load {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
 .star-container {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
   margin: 2px 0 0 10px;
 }
@@ -977,13 +957,13 @@
 }
 
 .upload-container {
-  max-width: 880px;
   width: 100%;
+  max-width: 880px;
 }
 
 .upload-item-container {
-  border-bottom: 1px dashed var(--border-color);
   margin: 0 0 30px 0;
+  border-bottom: 1px dashed var(--border-color);
 }
 
 .post-album-title {
@@ -1001,17 +981,16 @@
 .tag-item {
   display: flex;
   align-items: center;
-  color: var(--text-color);
-  line-height: 250%;
-  font-size: 0.95rem;
+  margin: 0 3px 3px 0;
+  background-color: #ffffff1a;
+  cursor: pointer;
+  padding: 7px 11px;
   width: fit-content;
   height: 20px;
-  background-color: #ffffff1a;
-  padding: 7px 11px;
-  margin: 0 3px 3px 0;
+  line-height: 250%;
   word-break: normal;
-
-  cursor: pointer;
+  color: var(--text-color);
+  font-size: 0.95rem;
 }
 
 .tag-display-container {
@@ -1052,25 +1031,24 @@
   }
 
   .search-page-input-container {
-    max-width: 480px;
     width: 100%;
+    max-width: 480px;
     height: 60px;
   }
 
   .search-page-input {
+    box-sizing: border-box;
+    margin: 1px 0 0 0;
+    border: 1px solid var(--text-color);
+    border-radius: 0;
+    box-shadow: none;
+    background-color: var(--input-background-color);
+    padding: 0 40px 0 50px;
     width: 100%;
     height: 100%;
-    margin: 0 0 0 8px;
+    color: var(--text-color);
     font-size: 1.3rem;
     font-weight: 300;
-    background-color: var(--input-background-color);
-    box-shadow: none;
-    border: 1px solid var(--text-color);
-    padding: 0 40px 0 50px;
-    margin: 1px 0 0 0;
-    color: var(--text-color);
-    box-sizing: border-box;
-    border-radius: 0;
   }
 
   .search-page-input-icon {
@@ -1084,32 +1062,32 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 850px;
     width: 100%;
+    max-width: 850px;
   }
 }
 
 @media (max-width: 800px) {
   .album-container {
-    width: 100%;
-    align-items: center;
-    padding: 70px 30px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
+    align-items: center;
     margin: 0;
+    padding: 70px 30px;
+    width: 100%;
   }
 
   .album-panel-metadata-container {
-    height: fit-content;
-    padding: 0;
     box-sizing: border-box;
+    padding: 0;
+    height: fit-content;
     line-height: 200%;
   }
 
   .post-content-container {
-    word-break: keep-all;
     text-align: left;
+    word-break: keep-all;
   }
 
   .album-metadata {
@@ -1119,8 +1097,8 @@
   .album-information-container {
     flex-direction: column;
     align-items: center;
-    height: fit-content;
     margin: 0 0 20px 0;
+    height: fit-content;
   }
 
   .album-information {
@@ -1149,11 +1127,11 @@
   }
 
   .desktop-introduction-category {
-    width: 125px;
     top: 32.5px;
     left: 139px;
-    font-size: 1.05rem;
     padding: 5px 20px 20px 15px;
+    width: 125px;
+    font-size: 1.05rem;
   }
 
   .post-date-container {
@@ -1183,15 +1161,18 @@
   }
 
   .search-page-input-container {
-    position: relative;
     display: flex;
+    position: relative;
     justify-content: center;
     width: 100%;
   }
 
   .search-page-input {
-    width: 100%;
-    height: 40px;
+    box-sizing: border-box;
+    margin: 0 15px;
+    padding: 0 30px 0 40px;
+    height: 50px;
+    font-size: 1.1rem;
   }
 
   .search-result-container {
@@ -1200,29 +1181,27 @@
   }
 
   .desktop-genre-category {
+    top: 32.5px;
+    left: -16px;
+    border-bottom: none;
+    border-left: none;
     background-color: unset;
     padding: 5px 10px 20px 20px;
     width: 125px;
-    left: -16px;
-    top: 32.5px;
     font-size: 1.05rem;
-    border-left: none;
-    border-bottom: none;
   }
 
   .category {
-    font-size: 1.05rem;
+    padding: 10px;
   }
 
   .tag-display-container {
-    position: relative;
-    display: flex;
-    width: 100%;
-    padding: 11px 15px;
-    border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
-
-    /* 가로 스크롤 */
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+    padding: 11px 15px;
+    width: 100%;
     overflow: hidden;
     white-space: nowrap;
   }
@@ -1230,15 +1209,15 @@
   .tag-display-item {
     display: flex;
     align-items: center;
-    color: var(--text-color);
-    font-size: 0.92rem;
+    margin: 3px;
+    background-color: #ffffff1a;
+    cursor: pointer;
+    padding: 7px 10px;
     width: fit-content;
     height: 20px;
-    background-color: #ffffff1a;
-    padding: 7px 10px;
-    margin: 3px;
     word-break: normal;
-    cursor: pointer;
+    color: var(--text-color);
+    font-size: 0.92rem;
   }
 
   .arrow-down-container {
@@ -1246,12 +1225,12 @@
     position: absolute;
     top: 12px;
     right: 0;
-    justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    justify-content: center;
     background-color: black;
     padding: 0 6px 0 0;
+    width: 40px;
+    height: 40px;
   }
 
   .arrow-down {
@@ -1264,17 +1243,12 @@
     transform: translate(-50%, -50%);
   }
 
-  .search-page-input {
-    height: 50px;
-    font-size: 1.1rem;
-    box-sizing: border-box;
-    margin: 0 15px;
-    padding: 0 30px 0 40px;
-  }
-
   .category-meta-title {
-    font-size: 2.2rem;
-    height: fit-content;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 5px 0;
+    text-align: center;
+    font-size: 1.4rem;
   }
 
   .post-album-title {
@@ -1304,39 +1278,34 @@
     height: 25px;
   }
 
-  .category-meta-title {
-    display: flex;
-    justify-content: center;
-    font-size: 1.4rem;
-    padding: 0 0 5px 0;
-    text-align: center;
-  }
-
   .loading {
-    height: calc(100vh - 40px);
-    padding: 0 0 80px 0;
     box-sizing: border-box;
     z-index: 1;
+    padding: 0 0 80px 0;
+    height: calc(100vh - 40px);
   }
 
   .snowfall-container {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: -1;
+    background-image: none;
+    background-size: 100%;
     width: 100%;
     height: 100%;
+    animation: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-use-select: none;
     user-select: none;
-    z-index: -1;
-    background-image: none;
-    background-size: 100%;
-    animation: none;
   }
 
   .container {
-    padding: 0;
+    flex-direction: column;
+    width: 100vw;
+    height: 100%;
+    font-size: 1.125rem;
   }
 
   .link:hover {
@@ -1348,14 +1317,14 @@
   }
 
   .grid-item-container {
-    --width-large: 100vw / 2;
-    width: calc(var(--width-large) - 1px);
-    z-index: 0;
+    margin: 17px 0 0 0;
+    padding: 0;
+    width: var(--grid-item-width);
+    --grid-item-width: calc(100vw / 2 - 30px);
   }
 
   .grid-div {
-    padding: 5px 0 30px 0;
-    margin: 0;
+    justify-content: space-evenly;
   }
 
   .grid-album-title {
@@ -1366,21 +1335,10 @@
     opacity: 1;
   }
 
-  .container {
-    width: 100vw;
-    height: 100%;
-    flex-direction: column;
-    font-size: 1.125rem;
-  }
-
   .category-container {
-    height: 45px;
-    border-bottom: none;
     top: -1px;
-  }
-
-  .category {
-    padding: 10px;
+    border-bottom: none;
+    height: 45px;
   }
 
   .category:first-child {
@@ -1389,20 +1347,20 @@
 
   .top-menu-container {
     display: none;
-    width: 100%;
-    left: 0;
     bottom: 0;
-    background-color: #fff;
+    left: 0;
     border-top: 1px solid black;
+    background-color: #fff;
+    width: 100%;
   }
 
   .content-container {
+    z-index: 1;
+    margin: 45px 0 0 0;
+    border-left: none;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border-left: none;
-    z-index: 1;
-    margin: 45px 0 0 0;
   }
 
   .sort-criteria-container {
@@ -1416,8 +1374,8 @@
   }
 
   .sort-criteria {
-    border-left: none;
     border-bottom: none;
+    border-left: none;
   }
 
   .paragraph-blank {
@@ -1435,26 +1393,25 @@
   }
 
   .artist-page-image {
-    width: 280px;
-    height: 280px;
+    width: 130px;
+    height: 130px;
   }
 
-  /* FIXME: 왜 ellipsis 적용 안 될까? */
   .information {
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .mobile-title,
   .mobile-category {
     display: flex;
-    font-size: 1.05rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     width: 25%;
     height: 100%;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+    font-size: 1.05rem;
   }
 
   .mobile-title {
@@ -1465,11 +1422,11 @@
   .hamburger-container {
     display: flex;
     justify-content: center;
-    height: 23px;
-    width: fit-content;
+    z-index: 100;
     margin: 4px 15px 0 0;
     cursor: pointer;
-    z-index: 100;
+    width: fit-content;
+    height: 23px;
   }
 
   .hamburger-item {
@@ -1477,30 +1434,30 @@
   }
 
   .hamburger-icon {
+    margin: 3px 0 0 0;
+    box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
+    background-color: var(--text-color);
     width: 20px;
     height: 1px;
-    margin: 3px 0 0 0;
-    background-color: var(--text-color);
-    box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
   }
 
   .close-icon {
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 22px;
+    justify-content: center;
+    margin: 0 6px 4px 0;
+    font-size: 2.2rem;
     font-weight: 100;
-    padding: 0 0 4px 4px;
   }
 
   .mobile-bottom-container {
     display: flex;
     align-items: center;
-    font-size: 0.9rem;
-    width: 100%;
-    height: 33px;
     border-top: 1px solid black;
     background-color: #fff;
+    width: 100%;
+    height: 33px;
+    font-size: 0.9rem;
   }
 
   .mobile-sort-criteria-container {
@@ -1511,27 +1468,27 @@
 
   .mobile-sort-criteria-left {
     position: absolute;
-    width: 50%;
-    height: fit-content;
-    left: 0;
     bottom: 33px;
+    left: 0;
     border-top: 1px solid black;
     background-color: #fff;
+    width: 50%;
+    height: fit-content;
   }
 
   .mobile-sort-criteria-right {
     position: absolute;
-    width: 50%;
-    height: fit-content;
     right: 0;
     bottom: 33px;
     border-top: 1px solid black;
     background-color: #fff;
+    width: 50%;
+    height: fit-content;
   }
 
   .mobile-criteria {
-    text-align: center;
     margin: 0 0 10px 0;
+    text-align: center;
   }
 
   .mobile-criteria:first-child {
@@ -1543,32 +1500,17 @@
   }
 
   .hamburger-category {
-    position: absolute;
     display: flex;
-    flex-direction: column;
-    height: fit-content;
-    background-color: var(--background-color);
-    width: 150px;
-    display: flex;
-    flex-direction: column;
     position: fixed;
     top: 32px;
     right: 0;
-    height: fit-content;
-    background-color: var(--background-color);
-    width: 120px;
-    font-size: 1rem;
-    padding: 7px 0 12px 0;
+    flex-direction: column;
     z-index: 1;
-  }
-
-  .close-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.2rem;
-    font-weight: 100;
-    margin: 0 6px 4px 0;
+    background-color: var(--background-color);
+    padding: 7px 0 12px 0;
+    width: 120px;
+    height: fit-content;
+    font-size: 1rem;
   }
 
   .page-container {
@@ -1583,10 +1525,10 @@
   }
 
   .more-button {
-    font-size: 0.9rem;
-    font-weight: 600;
     bottom: 0.5px;
     margin: 0 15px 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .divider {
@@ -1594,14 +1536,14 @@
   }
 
   .upload-container {
-    padding: 0 15px;
     box-sizing: border-box;
+    padding: 0 15px;
   }
 
   .select-container {
-    height: 30px;
-    padding: 0 8px;
     box-sizing: border-box;
+    padding: 0 8px;
+    height: 30px;
   }
 
   .select {
@@ -1609,10 +1551,10 @@
   }
 
   .input {
-    height: 30px;
     padding: 0;
-    font-size: 1.05rem;
+    height: 30px;
     line-height: 180%;
+    font-size: 1.05rem;
   }
 
   .input-text {
@@ -1624,8 +1566,8 @@
   }
 
   .calendar-input {
-    height: 30px;
     width: 100%;
+    height: 30px;
   }
 
   .album-metadata {
@@ -1639,23 +1581,7 @@
     margin: 70px 0 0 0;
   }
 
-  .artist-page-image {
-    width: 130px;
-    height: 130px;
-  }
-
   .grid-album-image-container {
     width: 100%;
-  }
-
-  .grid-div {
-    justify-content: space-evenly;
-  }
-
-  .grid-item-container {
-    --grid-item-width: calc(100vw / 2 - 30px);
-    width: var(--grid-item-width);
-    margin: 17px 0 0 0;
-    padding: 0;
   }
 }
