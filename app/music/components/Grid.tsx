@@ -12,7 +12,6 @@ import {
   methodAtom,
   postPath,
 } from "../modules/data";
-import { isMobile } from "react-device-detect";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
 import Aos from "aos";
@@ -26,7 +25,7 @@ export const Grid = () => {
   const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalDataLength, setTotalDataLength] = useState(0);
   const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
-  const [perPageCount, setPerPageCount] = useState(isMobile ? 40 : 60);
+  const [perPageCount, setPerPageCount] = useState(40);
   const [scrollCount, setScrollCount] = useState(1);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -44,9 +43,9 @@ export const Grid = () => {
     Aos.init();
   }, []);
 
-  useEffect(() => {
-    if (inView) setScrollCount(prevCount => prevCount + 1);
-  }, [inView]);
+  // useEffect(() => {
+  //   if (inView) setScrollCount(prevCount => prevCount + 1);
+  // }, [inView]);
 
   useEffect(() => {
     const albumFilters: AlbumFilters = {
@@ -154,7 +153,8 @@ export const Grid = () => {
             <div
               data-aos="fade-up"
               data-aos-duration={800}
-              data-aos-offset={isMobile ? 40 : 90}
+              // data-aos-offset={isMobile ? 40 : 90}
+              data-aos-offset={90}
               data-aos-once="true"
               key={index}
               className={`${styles["grid-item-container"]}`}
