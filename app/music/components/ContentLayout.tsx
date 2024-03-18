@@ -6,8 +6,6 @@ interface ContentLayoutProps {
   currentPage: number;
   perPageCount: number;
   totalDataLength: number;
-  isLoading?: boolean;
-  isScrolling?: boolean;
 }
 
 export const ContentLayout = ({
@@ -15,8 +13,6 @@ export const ContentLayout = ({
   currentPage,
   perPageCount,
   totalDataLength,
-  isLoading,
-  isScrolling,
 }: ContentLayoutProps) => {
   return (
     <>

@@ -14,13 +14,11 @@ interface PostProps {
 
 export const Post = ({ albumId }: PostProps) => {
   const [albumData, setAlbumData] = useState<AlbumInfo | undefined>();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
       const result = await fetchAlbumById(albumId);
       setAlbumData(result);
-      setIsLoading(false);
     }
     getData();
   }, [albumId]);

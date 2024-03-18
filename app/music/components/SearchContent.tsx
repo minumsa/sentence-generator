@@ -99,7 +99,6 @@ export default function SearchContent({
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
-      isLoading={isLoading}
     >
       <div className={styles["search-input-container"]}>
         <div className={styles["search-page-input-container"]}>

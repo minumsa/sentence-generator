@@ -16,7 +16,6 @@ export default function Content({ pathName, currentPage }: ContentProps) {
   const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setPerPageCount] = useState(5);
   const [totalDataLength, setTotalDataLength] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const albumFilters = {
@@ -36,7 +35,6 @@ export default function Content({ pathName, currentPage }: ContentProps) {
       if (albumResult) {
         setData(albumResult.slicedData);
         setTotalDataLength(albumResult.genreDataLength);
-        setIsLoading(false);
       }
     }
 
@@ -48,7 +46,6 @@ export default function Content({ pathName, currentPage }: ContentProps) {
       currentPage={currentPage}
       perPageCount={perPageCount}
       totalDataLength={totalDataLength}
-      isLoading={isLoading}
     >
       <AlbumContents artistData={data} perPageCount={perPageCount} />
     </ContentLayout>

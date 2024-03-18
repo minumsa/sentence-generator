@@ -1,8 +1,10 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { AlbumFilters, fetchAlbumData } from "../modules/api";
 import { usePathname } from "next/navigation";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import React from "react";
 import {
   AlbumInfo,
@@ -11,7 +13,6 @@ import {
   defaultTags,
   methodAtom,
   postPath,
-  scrollCountAtom,
 } from "../modules/data";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
@@ -22,21 +23,22 @@ import { BlurImg } from "./BlurImage";
 import { isMobile } from "react-device-detect";
 
 interface GridProps {
-  data: AlbumInfo[];
+  initialData: AlbumInfo[];
 }
 
-export const Grid = ({ data }: GridProps) => {
+export const Grid = ({ initialData }: GridProps) => {
   const pathName = usePathname();
+  const [data, setData] = useState<AlbumInfo[]>([]);
   const [totalDataLength, setTotalDataLength] = useState(0);
   const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
   const [perPageCount, setPerPageCount] = useState(40);
-  const [scrollCount, setScrollCount] = useAtom(scrollCountAtom);
+  const [scrollCount, setScrollCount] = useState(1);
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
   });
-  const [isLoading, setIsLoading] = useState(true);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const method = useAtomValue(methodAtom);
+  const criteria = useAtomValue(criteriaAtom);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
 
@@ -48,14 +50,36 @@ export const Grid = ({ data }: GridProps) => {
     if (inView) setScrollCount(prevCount => prevCount + 1);
   }, [inView]);
 
+  useEffect(() => {
+    const albumFilters: AlbumFilters = {
+      perPageCount,
+      currentPage: scrollCount,
+      currentMethod: "별점",
+      currentCriteria: criteria,
+      currentTagKey: currentTagKey,
+    };
+
+    async function loadData() {
+      const albumResult = await fetchAlbumData({
+        pathName: "",
+        albumFilters,
+      });
+
+      if (albumResult) {
+        setData(prevData => [...prevData, ...albumResult.slicedData]);
+        setTotalDataLength(Math.max(1, Math.ceil(albumResult.genreDataLength / perPageCount)) + 1);
+      }
+    }
+
+    if (scrollCount === 1) {
+      setData(initialData);
+    } else if (scrollCount < totalScrollCount) {
+      loadData();
+    }
+  }, [method, criteria, scrollCount, perPageCount, currentTagKey, totalScrollCount, initialData]);
+
   return (
-    <ContentLayout
-      currentPage={scrollCount}
-      perPageCount={perPageCount}
-      totalDataLength={0}
-      isLoading={isLoading}
-      isScrolling={isScrolling}
-    >
+    <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
       <div
         className={styles["tag-display-container"]}
         style={
@@ -115,12 +139,7 @@ export const Grid = ({ data }: GridProps) => {
               className={`${styles["grid-item-container"]}`}
               ref={isLastItem ? ref : undefined}
             >
-              <Link
-                href={postPath(pathName, item.id)}
-                onClick={() => {
-                  setIsLoading(true);
-                }}
-              >
+              <Link href={postPath(pathName, item.id)}>
                 <BlurImg
                   className={styles["grid-album-image"]}
                   blurhash={blurhash}
@@ -134,12 +153,7 @@ export const Grid = ({ data }: GridProps) => {
                     /> */}
               </Link>
               <div className={styles["grid-album-title"]}>
-                <Link
-                  href={postPath(pathName, item.id)}
-                  onClick={() => {
-                    setIsLoading(true);
-                  }}
-                >
+                <Link href={postPath(pathName, item.id)}>
                   <button
                     className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
                   >
@@ -147,12 +161,7 @@ export const Grid = ({ data }: GridProps) => {
                   </button>
                 </Link>
                 <br />
-                <Link
-                  href={artistPath(pathName, item.artistId)}
-                  onClick={() => {
-                    setIsLoading(true);
-                  }}
-                >
+                <Link href={artistPath(pathName, item.artistId)}>
                   <button
                     className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
                   >

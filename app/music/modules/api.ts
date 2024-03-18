@@ -47,7 +47,7 @@ export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
       throw new Error("Failed to fetch music data");
     }
 
-    let { slicedData, genreDataLength } = await response.json();
+    const { slicedData, genreDataLength } = await response.json();
 
     return { slicedData, genreDataLength };
   } catch (error) {
