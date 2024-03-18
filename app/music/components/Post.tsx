@@ -10,6 +10,8 @@ interface PostProps {
 }
 
 export const Post = ({ albumData }: PostProps) => {
+  console.log("albumData", albumData);
+
   return (
     <>
       {albumData && (

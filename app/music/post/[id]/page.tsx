@@ -14,20 +14,17 @@ export default async function Page({ params }: PageProps) {
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "force-cache",
     });
 
     if (!response.ok) {
       throw new Error("Failed to fetch music data");
     }
 
-    const { slicedData } = await response.json();
-
-    console.log("slicedData", slicedData);
+    const data = await response.json();
 
     return (
       <MusicLayout>
-        <Post albumData={slicedData} />
+        <Post albumData={data} />
       </MusicLayout>
     );
   } catch (error) {
