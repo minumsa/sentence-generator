@@ -8,11 +8,13 @@ import { useAtom, useAtomValue } from "jotai";
 import React from "react";
 import {
   AlbumInfo,
+  albumDataAtom,
   artistPath,
   criteriaAtom,
   defaultTags,
   methodAtom,
   postPath,
+  scrollCountArrayAtom,
   scrollCountAtom,
   scrollPositionAtom,
 } from "../modules/data";
@@ -27,15 +29,15 @@ import { Loading } from "./Loading";
 
 interface GridProps {
   initialData: AlbumInfo[];
-  genreDataLength: number;
+  totalScrollCount: number;
 }
 
-export const Grid = ({ initialData, genreDataLength }: GridProps) => {
+export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const pathName = usePathname();
-  const [data, setData] = useState<AlbumInfo[]>([]);
-  const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
-  const [perPageCount, setPerPageCount] = useState(40);
+  const [data, setData] = useAtom(albumDataAtom);
+  const [perPageCount, setPerPageCount] = useState(50);
   const [scrollCount, setScrollCount] = useAtom(scrollCountAtom);
+  // const [scrollCountArray, setScrollCountArray] = useAtom(scrollCountArrayAtom);
   const [scrollPosition, setScrollPosition] = useAtom(scrollPositionAtom);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -51,7 +53,12 @@ export const Grid = ({ initialData, genreDataLength }: GridProps) => {
   }, []);
 
   useEffect(() => {
-    if (inView) setScrollCount(prevCount => prevCount + 1);
+    if (inView) {
+      if (scrollCount < totalScrollCount) {
+        setScrollCount(prevCount => prevCount + 1);
+        // setScrollCountArray(prevArray => [...prevArray, String(scrollCount + 1)]);
+      }
+    }
   }, [inView]);
 
   useEffect(() => {
@@ -77,32 +84,17 @@ export const Grid = ({ initialData, genreDataLength }: GridProps) => {
     // 메인화면으로 진입한 경우
     if (scrollCount === 1) {
       setData(initialData);
-      setTotalScrollCount(Math.max(1, Math.ceil(genreDataLength / perPageCount)) + 1);
     } else if (data.length >= 2 && scrollCount > 1 && scrollCount < totalScrollCount) {
       loadData(perPageCount, scrollCount);
     }
-
-    // 뒤로 가기 시 : 데이터가 없고 scrollCount가 2 이상
-    if (data.length < 1 && scrollCount >= 2) {
-      loadData(perPageCount * scrollCount, 1);
-    }
-  }, [
-    method,
-    criteria,
-    scrollCount,
-    perPageCount,
-    currentTagKey,
-    totalScrollCount,
-    initialData,
-    genreDataLength,
-  ]);
+  }, [method, criteria, scrollCount, perPageCount, currentTagKey, initialData]);
 
   useEffect(() => {
-    if (data.length >= perPageCount * (scrollCount - 1) + 1 && scrollPosition > 0) {
+    if (scrollPosition > 0) {
       window.scrollTo(0, scrollPosition);
       setScrollPosition(0);
     }
-  }, [data]);
+  }, []);
 
   return (
     <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>

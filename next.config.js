@@ -4,6 +4,7 @@ module.exports = {
   experimental: {
     appDir: true,
     serverComponentsExternalPackages: ["mongoose"],
+    scrollRestoration: false,
   },
   webpack(config) {
     config.experiments = { ...config.experiments, topLevelAwait: true };
