@@ -23,6 +23,7 @@ import { ContentLayout } from "./ContentLayout";
 import Link from "next/link";
 import { BlurImg } from "./BlurImage";
 import { isMobile } from "react-device-detect";
+import { Loading } from "./Loading";
 
 interface GridProps {
   initialData: AlbumInfo[];
@@ -105,6 +106,7 @@ export const Grid = ({ initialData, genreDataLength }: GridProps) => {
 
   return (
     <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
+      {data.length < 1 && <Loading />}
       <div
         className={styles["tag-display-container"]}
         style={
