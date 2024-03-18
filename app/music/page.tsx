@@ -19,7 +19,8 @@ async function getData(albumFilters: AlbumFilters) {
   const currentTagKey = "";
 
   const queryString = `?pathName=${pathName}&perPageCount=${perPageCount}&currentPage=${scrollCount}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
-  const url = `/music/api/${queryString}`;
+  // const url = `https://divdivdiv.com/music/api/update${queryString}`;
+  const url = `https://divdivdiv.com/music/api/${queryString}`;
   const result = await fetch(url);
 
   if (!result.ok) {
