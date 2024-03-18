@@ -3,7 +3,7 @@ import { MusicLayout } from "../components/MusicLayout";
 
 export default async function Page() {
   try {
-    const perPageCount = 40;
+    const perPageCount = 50;
     const scrollCount = 1;
     const pathName = "";
     const currentMethod = "별점";
@@ -26,10 +26,11 @@ export default async function Page() {
     }
 
     const { slicedData, genreDataLength } = await response.json();
+    const totalScrollCount = Math.max(1, Math.ceil(genreDataLength / perPageCount));
 
     return (
       <MusicLayout>
-        <Grid initialData={slicedData} genreDataLength={genreDataLength} />
+        <Grid initialData={slicedData} totalScrollCount={totalScrollCount} />
       </MusicLayout>
     );
   } catch (error) {
