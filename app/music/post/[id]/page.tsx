@@ -3,14 +3,36 @@ import { Post } from "../../components/Post";
 import { MusicLayout } from "../../components/MusicLayout";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
-export default function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps) {
   const currentId = params.id;
 
-  return (
-    <MusicLayout>
-      <Post albumId={currentId} />
-    </MusicLayout>
-  );
+  try {
+    const url = `https://divdivdiv.com/music/api/update?id=${currentId}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "force-cache",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch music data");
+    }
+
+    const { slicedData } = await response.json();
+
+    console.log("slicedData", slicedData);
+
+    return (
+      <MusicLayout>
+        <Post albumData={slicedData} />
+      </MusicLayout>
+    );
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

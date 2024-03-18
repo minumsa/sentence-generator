@@ -1,28 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { fetchAlbumById } from "../modules/api";
 import { AlbumInfo } from "../modules/data";
-import { Loading } from "./Loading";
 import styles from "../music.module.css";
 import { PostAlbumMetadata } from "./PostAlbumMetadata";
 import { PostText } from "./PostAlbumText";
 
 interface PostProps {
-  albumId: string;
+  albumData: AlbumInfo;
 }
 
-export const Post = ({ albumId }: PostProps) => {
-  const [albumData, setAlbumData] = useState<AlbumInfo | undefined>();
-
-  useEffect(() => {
-    async function getData() {
-      const result = await fetchAlbumById(albumId);
-      setAlbumData(result);
-    }
-    getData();
-  }, [albumId]);
-
+export const Post = ({ albumData }: PostProps) => {
   return (
     <>
       {albumData && (
