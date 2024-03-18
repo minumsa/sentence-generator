@@ -25,11 +25,11 @@ export default async function Page() {
       throw new Error("Failed to fetch music data");
     }
 
-    const { slicedData } = await response.json();
+    const { slicedData, genreDataLength } = await response.json();
 
     return (
       <MusicLayout>
-        <Grid initialData={slicedData} />
+        <Grid initialData={slicedData} genreDataLength={genreDataLength} />
       </MusicLayout>
     );
   } catch (error) {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "../music.module.css";
 import { AlbumFilters, fetchAlbumData } from "../modules/api";
 import { usePathname } from "next/navigation";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import React from "react";
 import {
   AlbumInfo,
@@ -13,6 +13,8 @@ import {
   defaultTags,
   methodAtom,
   postPath,
+  scrollCountAtom,
+  scrollPositionAtom,
 } from "../modules/data";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
@@ -24,15 +26,16 @@ import { isMobile } from "react-device-detect";
 
 interface GridProps {
   initialData: AlbumInfo[];
+  genreDataLength: number;
 }
 
-export const Grid = ({ initialData }: GridProps) => {
+export const Grid = ({ initialData, genreDataLength }: GridProps) => {
   const pathName = usePathname();
   const [data, setData] = useState<AlbumInfo[]>([]);
-  const [totalDataLength, setTotalDataLength] = useState(0);
   const [totalScrollCount, setTotalScrollCount] = useState<number>(10000);
   const [perPageCount, setPerPageCount] = useState(40);
-  const [scrollCount, setScrollCount] = useState(1);
+  const [scrollCount, setScrollCount] = useAtom(scrollCountAtom);
+  const [scrollPosition, setScrollPosition] = useAtom(scrollPositionAtom);
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
@@ -51,15 +54,15 @@ export const Grid = ({ initialData }: GridProps) => {
   }, [inView]);
 
   useEffect(() => {
-    const albumFilters: AlbumFilters = {
-      perPageCount,
-      currentPage: scrollCount,
-      currentMethod: "별점",
-      currentCriteria: criteria,
-      currentTagKey: currentTagKey,
-    };
+    async function loadData(perPageCount: number, scrollCount: number) {
+      const albumFilters: AlbumFilters = {
+        perPageCount: perPageCount,
+        currentPage: scrollCount,
+        currentMethod: "별점",
+        currentCriteria: criteria,
+        currentTagKey: currentTagKey,
+      };
 
-    async function loadData() {
       const albumResult = await fetchAlbumData({
         pathName: "",
         albumFilters,
@@ -67,16 +70,38 @@ export const Grid = ({ initialData }: GridProps) => {
 
       if (albumResult) {
         setData(prevData => [...prevData, ...albumResult.slicedData]);
-        setTotalDataLength(Math.max(1, Math.ceil(albumResult.genreDataLength / perPageCount)) + 1);
       }
     }
 
+    // 메인화면으로 진입한 경우
     if (scrollCount === 1) {
       setData(initialData);
-    } else if (scrollCount < totalScrollCount) {
-      loadData();
+      setTotalScrollCount(Math.max(1, Math.ceil(genreDataLength / perPageCount)) + 1);
+    } else if (data.length >= 2 && scrollCount > 1 && scrollCount < totalScrollCount) {
+      loadData(perPageCount, scrollCount);
     }
-  }, [method, criteria, scrollCount, perPageCount, currentTagKey, totalScrollCount, initialData]);
+
+    // 뒤로 가기 시 : 데이터가 없고 scrollCount가 2 이상
+    if (data.length < 1 && scrollCount >= 2) {
+      loadData(perPageCount * scrollCount, 1);
+    }
+  }, [
+    method,
+    criteria,
+    scrollCount,
+    perPageCount,
+    currentTagKey,
+    totalScrollCount,
+    initialData,
+    genreDataLength,
+  ]);
+
+  useEffect(() => {
+    if (data.length >= perPageCount * (scrollCount - 1) + 1 && scrollPosition > 0) {
+      window.scrollTo(0, scrollPosition);
+      setScrollPosition(0);
+    }
+  }, [data]);
 
   return (
     <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
@@ -139,7 +164,12 @@ export const Grid = ({ initialData }: GridProps) => {
               className={`${styles["grid-item-container"]}`}
               ref={isLastItem ? ref : undefined}
             >
-              <Link href={postPath(pathName, item.id)}>
+              <Link
+                href={postPath(pathName, item.id)}
+                onClick={() => {
+                  setScrollPosition(window.scrollY);
+                }}
+              >
                 <BlurImg
                   className={styles["grid-album-image"]}
                   blurhash={blurhash}
