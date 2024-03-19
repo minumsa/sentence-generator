@@ -6,6 +6,8 @@ interface ArtistPageImageProps {
 }
 
 export const ArtistPageImage = ({ artistData }: ArtistPageImageProps) => {
+  console.log("artistData", artistData);
+
   const firstData = artistData[0];
   return (
     <div className={styles["artist-page-image-container"]}>

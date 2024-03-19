@@ -1,5 +1,4 @@
 import { PageNumbers } from "./PageNumbers";
-import { Loading } from "./Loading";
 
 interface ContentLayoutProps {
   children: React.ReactNode;
