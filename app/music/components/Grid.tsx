@@ -142,7 +142,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
               }}
               style={
                 currentTagKey === key || (currentTagKey === "" && key === "all")
-                  ? { boxShadow: "inset 0 0 0 1px var(--text-color)" }
+                  ? { boxShadow: "inset 0 0 0 1px var(--text-color)", order: -1 }
                   : undefined
               }
             >
