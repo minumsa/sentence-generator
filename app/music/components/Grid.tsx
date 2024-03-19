@@ -46,17 +46,13 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
 
-  console.log("data", data);
-
   useEffect(() => {
     Aos.init();
   }, []);
 
   useEffect(() => {
     if (inView) {
-      if (scrollCount < totalScrollCount) {
-        setScrollCount(prevCount => prevCount + 1);
-      }
+      setScrollCount(prevCount => prevCount + 1);
     }
   }, [inView]);
 
@@ -81,17 +77,20 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     }
 
     // 메인화면으로 진입한 경우
-
     if (currentTagKey === "" && scrollCount === 1) {
       setData(initialData);
-    } else if (data.length >= 2 && scrollCount > 1 && scrollCount < totalScrollCount) {
+    } else if (data.length >= 2 && scrollCount > 1 && scrollCount <= totalScrollCount) {
       loadData(perPageCount, scrollCount);
     }
 
+    // 모바일 화면에서 태그 버튼을 클릭하는 경우 태그 데이터 api 호출
     if (currentTagKey.length > 0 && scrollCount === 1) {
-      console.log("yes!!");
-
       loadData(perPageCount, scrollCount);
+    }
+
+    // scrollCount가 한계치에 도달하는 경우, 더 이상 스크롤 이벤트가 발생하지 않도록 처리
+    if (scrollCount === totalScrollCount) {
+      setScrollCount(10000);
     }
   }, [method, criteria, scrollCount, perPageCount, currentTagKey, initialData]);
 

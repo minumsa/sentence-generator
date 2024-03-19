@@ -54,7 +54,7 @@ export async function GET(request: Request) {
     }
 
     const genreDataLength = await Music.find(query).count();
-    const startIndex = perPageCount * currentPage - perPageCount;
+    const startIndex = perPageCount * currentPage - perPageCount + 1;
     const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
 
     return NextResponse.json({ slicedData, genreDataLength });
