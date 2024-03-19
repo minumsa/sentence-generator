@@ -8,7 +8,7 @@ import { EditButton } from "./EditButton";
 import Link from "next/link";
 import { BlurImg } from "./BlurImage";
 import { AlbumInfo } from "../modules/types";
-import { artistPath, tagPath, toPostPath } from "../modules/paths";
+import { toArtistPage, toTagPage, toPostPage } from "../modules/paths";
 import { defaultTags } from "../modules/constants";
 
 interface AlbumProps {
@@ -24,7 +24,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
     <>
       <Link
         className={styles["album-information-container"]}
-        href={toPostPath(pathName, albumData.id)}
+        href={toPostPage(pathName, albumData.id)}
       >
         <BlurImg
           className={styles["album-art"]}
@@ -50,7 +50,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                 {/* 앨범 타이틀 */}
                 <div className={styles["post-album-title"]}>
                   <Link
-                    href={toPostPath(pathName, albumData.id)}
+                    href={toPostPage(pathName, albumData.id)}
                     style={{ textDecoration: "none", display: "flex" }}
                   >
                     <h2 style={{ padding: isAdminPage(pathName) ? 0 : undefined }}>
@@ -84,7 +84,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   {/* 아티스트 이미지 */}
                   <Link
                     className={styles["category-meta-image-container"]}
-                    href={artistPath(pathName, albumData.artistId)}
+                    href={toArtistPage(pathName, albumData.artistId)}
                   >
                     <img
                       src={albumData.artistImgUrl}
@@ -97,7 +97,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                     {/* 아티스트 이름 */}
                     <Link
                       style={{ textDecoration: "none" }}
-                      href={artistPath(pathName, albumData.artistId)}
+                      href={toArtistPage(pathName, albumData.artistId)}
                     >
                       {albumData.artist}
                     </Link>
@@ -122,7 +122,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   {isLongText && (
                     <Link
                       style={{ textDecoration: "none" }}
-                      href={toPostPath(pathName, albumData.id)}
+                      href={toPostPage(pathName, albumData.id)}
                     >
                       <div className={styles["more-button"]}>더 보기</div>
                     </Link>
@@ -133,7 +133,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   {albumData.tagKeys.map((tagKey: string, index: number) => {
                     return (
                       <Link
-                        href={tagPath(pathName, tagKey)}
+                        href={toTagPage(pathName, tagKey)}
                         key={index}
                         className={styles["tag-item"]}
                       >

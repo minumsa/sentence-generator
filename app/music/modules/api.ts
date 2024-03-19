@@ -343,10 +343,6 @@ export const fetchSpotify = async (albumId: string) => {
       album: albumData.name,
       label: albumData.label,
       releaseDate: albumData.release_date,
-      // text: item.text,
-      // genre: item.genre,
-      // link: item.link,
-      // uploadDate: item.uploadDate,
       tracks: albumData.tracks.items.length,
       duration: duration,
     };

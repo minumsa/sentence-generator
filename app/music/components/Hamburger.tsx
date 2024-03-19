@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useAtom } from "jotai";
 import { CurrentTagKeyAtom } from "../modules/atoms";
 import { contents } from "../modules/types";
-import { categoryPath } from "../modules/paths";
+import { toGenrePage } from "../modules/paths";
 import { isAdminPage } from "../modules/utils";
 
 export const Hamburger = () => {
@@ -34,7 +34,7 @@ export const Hamburger = () => {
             return (
               <React.Fragment key={category}>
                 <Link
-                  href={categoryPath(pathName, category)}
+                  href={toGenrePage(pathName, category)}
                   onClick={() => {
                     setCurrentTagKey("");
                   }}

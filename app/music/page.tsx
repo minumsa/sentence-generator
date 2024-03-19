@@ -5,14 +5,23 @@ import { MusicLayout } from "./components/MusicLayout";
 export default async function Page() {
   try {
     const perPageCount = 50;
-    const scrollCount = 1;
+    const currentPage = 1;
     const pathName = "";
     const currentMethod = "별점";
     const currentCriteria = "내림차순";
     const currentTagKey = "";
 
-    const queryString = `?pathName=${pathName}&perPageCount=${perPageCount}&currentPage=${scrollCount}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
-    const url = `https://divdivdiv.com/music/api${queryString}`;
+    // queryString 상수로 정의
+    const queryString = new URLSearchParams({
+      pathName,
+      perPageCount: String(perPageCount),
+      currentPage: String(currentPage),
+      currentMethod,
+      currentCriteria,
+      currentTagKey,
+    }).toString();
+
+    const url = `https://divdivdiv.com/music/api?${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -31,11 +40,7 @@ export default async function Page() {
 
     return (
       <MusicLayout>
-        {slicedData ? (
-          <Grid initialData={slicedData} totalScrollCount={totalScrollCount} />
-        ) : (
-          <Loading />
-        )}
+        <Grid initialData={slicedData} totalScrollCount={totalScrollCount} />
       </MusicLayout>
     );
   } catch (error) {
