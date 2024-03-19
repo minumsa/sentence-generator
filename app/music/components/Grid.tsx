@@ -25,6 +25,7 @@ import Link from "next/link";
 import { BlurImg } from "./BlurImage";
 import { isMobile } from "react-device-detect";
 import { Loading } from "./Loading";
+import { SpinningCircles } from "react-loading-icons";
 
 interface GridProps {
   initialData: AlbumInfo[];
@@ -45,6 +46,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const criteria = useAtomValue(criteriaAtom);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     Aos.init();
@@ -53,6 +55,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   useEffect(() => {
     if (inView) {
       setScrollCount(prevCount => prevCount + 1);
+      setIsScrolling(true);
     }
   }, [inView]);
 
@@ -73,6 +76,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
 
       if (albumResult) {
         setData(prevData => [...prevData, ...albumResult.slicedData]);
+        setIsScrolling(false);
       }
     }
 
@@ -104,6 +108,9 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   return (
     <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
       {data.length < 1 && <Loading />}
+      {isScrolling && (
+        <SpinningCircles style={{ position: "fixed", bottom: "70px", zIndex: "1000" }} />
+      )}
       {/* Mobile Tag Items */}
       <div
         className={styles["tag-display-container"]}
