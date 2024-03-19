@@ -7,6 +7,13 @@ import { usePathname } from "next/navigation";
 export const Category = () => {
   const pathName = usePathname();
 
+  // 메인 페이지일 때 사이트 로고를 누르면 최상단으로 이동
+  const scrollToTop = () => {
+    if (pathName === "/music") {
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
     <div className={styles["header-container"]}>
       {/* 햄버거 메뉴 */}
@@ -21,6 +28,9 @@ export const Category = () => {
           <Link
             className={`${styles["category"]} ${styles["site-title"]}`}
             href={isAdminPage(pathName) ? "/music/admin" : "/music"}
+            onClick={() => {
+              scrollToTop();
+            }}
           >
             <nav>카버차트</nav>
           </Link>

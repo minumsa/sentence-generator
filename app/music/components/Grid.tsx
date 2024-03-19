@@ -108,9 +108,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   return (
     <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
       {data.length < 1 && <Loading />}
-      {isScrolling && (
-        <SpinningCircles style={{ position: "fixed", bottom: "70px", zIndex: "1000" }} />
-      )}
+      {isScrolling && <SpinningCircles className={styles["spinning-circles"]} />}
       {/* Mobile Tag Items */}
       <div
         className={styles["tag-display-container"]}
