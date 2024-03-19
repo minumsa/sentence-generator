@@ -17,7 +17,7 @@ export default async function Page({ params }: PageProps) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch music data");
+      throw new Error("Failed to fetch post data");
     }
 
     const data = await response.json();

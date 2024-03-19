@@ -14,7 +14,6 @@ import {
   defaultTags,
   methodAtom,
   postPath,
-  scrollCountArrayAtom,
   scrollCountAtom,
   scrollPositionAtom,
 } from "../modules/data";
@@ -37,7 +36,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const [data, setData] = useAtom(albumDataAtom);
   const [perPageCount, setPerPageCount] = useState(50);
   const [scrollCount, setScrollCount] = useAtom(scrollCountAtom);
-  // const [scrollCountArray, setScrollCountArray] = useAtom(scrollCountArrayAtom);
   const [scrollPosition, setScrollPosition] = useAtom(scrollPositionAtom);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -48,6 +46,8 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
 
+  console.log("data", data);
+
   useEffect(() => {
     Aos.init();
   }, []);
@@ -56,7 +56,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     if (inView) {
       if (scrollCount < totalScrollCount) {
         setScrollCount(prevCount => prevCount + 1);
-        // setScrollCountArray(prevArray => [...prevArray, String(scrollCount + 1)]);
       }
     }
   }, [inView]);
@@ -82,9 +81,16 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     }
 
     // 메인화면으로 진입한 경우
-    if (scrollCount === 1) {
+
+    if (currentTagKey === "" && scrollCount === 1) {
       setData(initialData);
     } else if (data.length >= 2 && scrollCount > 1 && scrollCount < totalScrollCount) {
+      loadData(perPageCount, scrollCount);
+    }
+
+    if (currentTagKey.length > 0 && scrollCount === 1) {
+      console.log("yes!!");
+
       loadData(perPageCount, scrollCount);
     }
   }, [method, criteria, scrollCount, perPageCount, currentTagKey, initialData]);
@@ -99,6 +105,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   return (
     <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
       {data.length < 1 && <Loading />}
+      {/* Mobile Tag Items */}
       <div
         className={styles["tag-display-container"]}
         style={
@@ -111,12 +118,15 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
               key={index}
               className={styles["tag-display-item"]}
               onClick={() => {
+                setData([]);
                 setCurrentTagKey(key);
                 setScrollCount(1);
+                window.scrollTo(0, scrollPosition);
+                setScrollPosition(0);
               }}
               style={
                 currentTagKey === key || (currentTagKey === "" && key === "all")
-                  ? { border: "1px solid var(--text-color)" }
+                  ? { boxShadow: "inset 0 0 0 1px var(--text-color)" }
                   : undefined
               }
             >
@@ -152,7 +162,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
               data-aos="fade-up"
               data-aos-duration={800}
               data-aos-offset={isMobile ? 40 : 90}
-              // data-aos-offset={90}
               data-aos-once="true"
               key={index}
               className={`${styles["grid-item-container"]}`}
@@ -170,11 +179,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                   src={imgSrc}
                   punch={1}
                 />
-                {/* <img
-                      className={styles["grid-album-image"]}
-                      src={item.imgUrl}
-                      alt={item.album}
-                    /> */}
               </Link>
               <div className={styles["grid-album-title"]}>
                 <Link href={postPath(pathName, item.id)}>
