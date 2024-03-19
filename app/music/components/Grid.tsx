@@ -179,7 +179,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
             return isLastDataAndOddNumber ? null : (
               <div
                 data-aos="fade-up"
-                data-aos-duration={800}
+                data-aos-duration={400}
                 data-aos-offset={isMobile ? 40 : 90}
                 data-aos-once="true"
                 key={index}
