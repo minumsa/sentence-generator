@@ -40,32 +40,6 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
       : router.push(`/music/search/${keyword}/1`);
   }
 
-  // useEffect(() => {
-  //   const albumFilters: AlbumFilters = {
-  //     perPageCount,
-  //     currentPage,
-  //     currentMethod: "별점",
-  //     currentCriteria: criteria,
-  //     currentTagKey: currentTagName,
-  //   };
-
-  //   async function loadTagData() {
-  //     const albumResult = await fetchAlbumData({
-  //       pathName: "search",
-  //       albumFilters,
-  //     });
-
-  //     if (albumResult) {
-  //       setData(albumResult.slicedData);
-  //       setTotalDataLength(albumResult.genreDataLength);
-  //     }
-  //   }
-
-  //   if (currentTagName) {
-  //     loadTagData();
-  //   }
-  // }, [criteria, currentPage, currentTagName, perPageCount]);
-
   return (
     <ContentLayout
       currentPage={currentPage}
