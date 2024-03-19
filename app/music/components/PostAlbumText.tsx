@@ -25,7 +25,7 @@ export const PostText = ({ albumData }: PostTextProps) => {
           <p
             key={index}
             className={styles["paragraph"]}
-            style={isParagraphTitle ? { fontWeight: 600, marginTop: "40px" } : undefined}
+            style={isParagraphTitle ? { fontWeight: 600 } : undefined}
           >
             {paragraph}
           </p>

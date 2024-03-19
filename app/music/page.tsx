@@ -1,4 +1,5 @@
 import { Grid } from "./components/Grid";
+import { Loading } from "./components/Loading";
 import { MusicLayout } from "./components/MusicLayout";
 
 export default async function Page() {
@@ -30,7 +31,11 @@ export default async function Page() {
 
     return (
       <MusicLayout>
-        <Grid initialData={slicedData} totalScrollCount={totalScrollCount} />
+        {slicedData ? (
+          <Grid initialData={slicedData} totalScrollCount={totalScrollCount} />
+        ) : (
+          <Loading />
+        )}
       </MusicLayout>
     );
   } catch (error) {
