@@ -66,7 +66,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
             </div>
           );
         } else {
-          return null; // 페이지 버튼을 렌더링하지 않음
+          return null;
         }
       })}
       {totalPage - maxPageNumber > 0 && (

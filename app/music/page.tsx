@@ -1,5 +1,4 @@
 import { Grid } from "./components/Grid";
-import { Loading } from "./components/Loading";
 import { MusicLayout } from "./components/MusicLayout";
 
 export default async function Page() {

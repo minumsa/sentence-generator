@@ -55,7 +55,7 @@ export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
   }
 }
 
-export async function FetchArtistData({ artistId, artistFilters }: ArtistDataParams) {
+export async function fetchArtistData({ artistId, artistFilters }: ArtistDataParams) {
   const { perPageCount, currentPage } = artistFilters;
   try {
     const queryString = `?artistId=${artistId}&perPageCount=${perPageCount}&currentPage=${currentPage}`;
@@ -80,7 +80,7 @@ export async function FetchArtistData({ artistId, artistFilters }: ArtistDataPar
   }
 }
 
-export async function SearchData(searchFilters: SearchFilters) {
+export async function fetchSearchedData(searchFilters: SearchFilters) {
   const { perPageCount, currentPage, currentKeyword } = searchFilters;
 
   try {
@@ -259,6 +259,7 @@ export const deleteData = async (id: string) => {
   }
 };
 
+// Spotify API
 const fetchSpotifyAccessToken = async () => {
   try {
     const url = "https://accounts.spotify.com/api/token";
