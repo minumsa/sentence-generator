@@ -1,13 +1,15 @@
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { categoryPath, contents, isAdminPage } from "../modules/data";
+import { CurrentTagKeyAtom, categoryPath, contents, isAdminPage } from "../modules/data";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAtom } from "jotai";
 
 export const Hamburger = () => {
   const pathName = usePathname();
   const router = useRouter();
   const [showCategory, setShowCategory] = useState<boolean>(false);
+  const [currentTagKey, setCurrentTagKey] = useAtom(CurrentTagKeyAtom);
 
   return (
     <nav
@@ -28,7 +30,12 @@ export const Hamburger = () => {
           {Object.keys(contents).map(category => {
             return (
               <React.Fragment key={category}>
-                <Link href={categoryPath(pathName, category)}>
+                <Link
+                  href={categoryPath(pathName, category)}
+                  onClick={() => {
+                    setCurrentTagKey("");
+                  }}
+                >
                   <li className={styles["hamburger-item"]}>{contents[category]}</li>
                 </Link>
               </React.Fragment>

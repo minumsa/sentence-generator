@@ -123,6 +123,7 @@ export const perPageCountAtom = atom<number>(40);
 export const scrollPositionAtom = atom<number>(0);
 export const scrollCountArrayAtom = atom<string[]>([]);
 export const albumDataAtom = atom<AlbumInfo[]>([]);
+export const CurrentTagKeyAtom = atom<string>("");
 
 export const isUploadPage = (pathName: string) => {
   return pathName.includes("upload");

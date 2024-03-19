@@ -8,6 +8,7 @@ import { useAtom, useAtomValue } from "jotai";
 import React from "react";
 import {
   AlbumInfo,
+  CurrentTagKeyAtom,
   albumDataAtom,
   artistPath,
   criteriaAtom,
@@ -45,7 +46,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
-  const [currentTagKey, setCurrentTagKey] = useState<string>("");
+  const [currentTagKey, setCurrentTagKey] = useAtom(CurrentTagKeyAtom);
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {

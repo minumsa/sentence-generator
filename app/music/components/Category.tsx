@@ -1,16 +1,19 @@
 import styles from "../music.module.css";
-import { isAdminPage } from "../modules/data";
+import { CurrentTagKeyAtom, isAdminPage } from "../modules/data";
 import Link from "next/link";
 import { Hamburger } from "./Hamburger";
 import { usePathname } from "next/navigation";
+import { useAtom } from "jotai";
 
 export const Category = () => {
   const pathName = usePathname();
+  const [currentTagKey, setCurrentTagKey] = useAtom(CurrentTagKeyAtom);
 
   // 메인 페이지일 때 사이트 로고를 누르면 최상단으로 이동
   const scrollToTop = () => {
     if (pathName === "/music") {
       window.scrollTo(0, 0);
+      setCurrentTagKey("");
     }
   };
 
@@ -35,7 +38,12 @@ export const Category = () => {
             <nav>카버차트</nav>
           </Link>
           {/* 검색 아이콘 */}
-          <Link href={isAdminPage(pathName) ? "/music/admin/search" : "/music/search"}>
+          <Link
+            href={isAdminPage(pathName) ? "/music/admin/search" : "/music/search"}
+            onClick={() => {
+              setCurrentTagKey("");
+            }}
+          >
             <nav className={styles["top-magnifying-glass"]}></nav>
           </Link>
         </div>
