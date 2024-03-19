@@ -185,7 +185,12 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                 />
               </Link>
               <div className={styles["grid-album-title"]}>
-                <Link href={postPath(pathName, item.id)}>
+                <Link
+                  href={postPath(pathName, item.id)}
+                  onClick={() => {
+                    setScrollPosition(window.scrollY);
+                  }}
+                >
                   <button
                     className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
                   >
@@ -193,7 +198,12 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                   </button>
                 </Link>
                 <br />
-                <Link href={artistPath(pathName, item.artistId)}>
+                <Link
+                  href={artistPath(pathName, item.artistId)}
+                  onClick={() => {
+                    setScrollPosition(window.scrollY);
+                  }}
+                >
                   <button
                     className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
                   >
