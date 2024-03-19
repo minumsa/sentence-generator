@@ -1,7 +1,7 @@
 import { Post } from "@/app/music/components/Post";
-import { PageProps } from "@/app/music/modules/data";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
 import { Metadata } from "next";
+import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
   const currentId = params.id;

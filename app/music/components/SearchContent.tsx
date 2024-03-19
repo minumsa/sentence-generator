@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { AlbumInfo, defaultTags, isAdminPage } from "../modules/data";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import styles from "../music.module.css";
 import { usePathname, useRouter } from "next/navigation";
+import { AlbumInfo } from "../modules/types";
+import { isAdminPage } from "../modules/utils";
+import { defaultTags } from "../modules/constants";
 
 interface SearchInfo {
   currentKeyword: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import { AlbumInfo } from "../modules/data";
+import { AlbumInfo } from "../modules/types";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 

@@ -1,13 +1,13 @@
 import { usePathname } from "next/navigation";
-import { AlbumInfo, isAdminPage } from "../modules/data";
 import styles from "../music.module.css";
-import { formatDuration } from "../modules/utils";
+import { formatDuration, isAdminPage } from "../modules/utils";
 import { useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import Link from "next/link";
 import { LinkIcon } from "./LinkIcon";
 import { BlurImg } from "./BlurImage";
+import { AlbumInfo } from "../modules/types";
 
 interface PostAlbumMetadataProps {
   albumData: AlbumInfo;
@@ -38,12 +38,6 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
             src={albumData.imgUrl}
             punch={1}
           />
-          {/* <img
-            src={albumData.imgUrl}
-            alt={albumData.album}
-            style={{ display: "none" }}
-            onLoad={handleImageLoad}
-          /> */}
         </a>
       </div>
 

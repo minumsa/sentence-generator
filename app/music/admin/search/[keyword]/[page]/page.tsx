@@ -1,8 +1,8 @@
 "use client";
 
 import SearchContent from "@/app/music/components/SearchContent";
-import { PageProps } from "@/app/music/modules/data";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
+import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
   const currentKeyword: string = params.keyword;

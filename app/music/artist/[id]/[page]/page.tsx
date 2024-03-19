@@ -1,6 +1,6 @@
-import { PageProps } from "../../../modules/data";
 import ArtistContent from "../../../components/ArtistContent";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
+import { PageProps } from "@/app/music/modules/types";
 import { Metadata } from "next";
 
 export default async function Page({ params }: PageProps) {

@@ -1,6 +1,7 @@
 import connectMongoDB from "@/app/music/modules/mongodb";
 import Music from "@/models/music";
 import { NextResponse } from "next/server";
+import { isMainPage, isSearchPage } from "../modules/utils";
 
 export async function GET(request: Request) {
   try {
@@ -42,10 +43,7 @@ export async function GET(request: Request) {
 
     let query: Query = {};
 
-    const isMainPage = pathName === "";
-    const isSearchPage = pathName === "search";
-
-    if (isMainPage || isSearchPage) {
+    if (isMainPage(pathName) || isSearchPage(pathName)) {
       if (currentTagKey) {
         query.tagKeys = currentTagKey;
       }

@@ -1,8 +1,8 @@
 "use client";
 
-import { PageProps } from "@/app/music/modules/data";
 import Update from "@/app/music/components/Update";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
+import { PageProps } from "@/app/music/modules/types";
 
 export default function Page({ params }: PageProps) {
   const currentId = params.id;

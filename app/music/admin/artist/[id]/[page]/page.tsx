@@ -1,8 +1,8 @@
 "use client";
 
-import { PageProps } from "@/app/music/modules/data";
 import ArtistContent from "@/app/music/components/ArtistContent";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
+import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
   const artistId = params.id;

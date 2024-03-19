@@ -1,3 +1,19 @@
+export const isAdminPage = (pathName: string) => {
+  return pathName.includes("admin");
+};
+
+export const isUploadPage = (pathName: string) => {
+  return pathName.includes("upload");
+};
+
+export const isMainPage = (pathName: string) => {
+  return pathName === "";
+};
+
+export const isSearchPage = (pathName: string) => {
+  return pathName === "search";
+};
+
 export const formatDuration = (seconds: number) => {
   const hours = Math.floor(Math.floor(seconds / 60) / 60);
   const minutes = Math.floor(seconds / 60) % 60;

@@ -1,9 +1,11 @@
 import styles from "../music.module.css";
-import { CurrentTagKeyAtom, isAdminPage } from "../modules/data";
 import Link from "next/link";
 import { Hamburger } from "./Hamburger";
 import { usePathname } from "next/navigation";
 import { useAtom } from "jotai";
+import { CurrentTagKeyAtom } from "../modules/atoms";
+import { isAdminPage } from "../modules/utils";
+import { toSearchPath } from "../modules/paths";
 
 export const Category = () => {
   const pathName = usePathname();
@@ -36,7 +38,7 @@ export const Category = () => {
           </Link>
           {/* 검색 아이콘 */}
           <Link
-            href={isAdminPage(pathName) ? "/music/admin/search" : "/music/search"}
+            href={toSearchPath(pathName)}
             onClick={() => {
               setCurrentTagKey("");
             }}

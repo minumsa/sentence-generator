@@ -1,5 +1,5 @@
+import { AlbumInfo } from "../modules/types";
 import styles from "../music.module.css";
-import { AlbumInfo } from "../modules/data";
 import { PostAlbumMetadata } from "./PostAlbumMetadata";
 import { PostText } from "./PostAlbumText";
 

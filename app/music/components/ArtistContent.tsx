@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { AlbumInfo } from "../modules/data";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
+import { AlbumInfo } from "../modules/types";
 
 interface ArtistContentProps {
   artistData: AlbumInfo[];

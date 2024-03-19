@@ -1,4 +1,4 @@
-import { CriteriaType, SpotifyAlbumData, MethodType, UpdateInfo } from "./data";
+import { CriteriaType, MethodType, SpotifyAlbumData } from "./types";
 
 export interface AlbumFilters {
   perPageCount: number;

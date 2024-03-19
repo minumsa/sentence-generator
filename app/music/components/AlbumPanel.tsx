@@ -1,20 +1,15 @@
 import { usePathname } from "next/navigation";
-import { formatDuration } from "../modules/utils";
+import { formatDuration, isAdminPage } from "../modules/utils";
 import styles from "../music.module.css";
-import {
-  AlbumInfo,
-  artistPath,
-  defaultTags,
-  isAdminPage,
-  postPath,
-  tagPath,
-} from "../modules/data";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import Link from "next/link";
 import { BlurImg } from "./BlurImage";
+import { AlbumInfo } from "../modules/types";
+import { artistPath, tagPath, toPostPath } from "../modules/paths";
+import { defaultTags } from "../modules/constants";
 
 interface AlbumProps {
   albumData: AlbumInfo;
@@ -29,7 +24,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
     <>
       <Link
         className={styles["album-information-container"]}
-        href={postPath(pathName, albumData.id)}
+        href={toPostPath(pathName, albumData.id)}
       >
         <BlurImg
           className={styles["album-art"]}
@@ -55,7 +50,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                 {/* 앨범 타이틀 */}
                 <div className={styles["post-album-title"]}>
                   <Link
-                    href={postPath(pathName, albumData.id)}
+                    href={toPostPath(pathName, albumData.id)}
                     style={{ textDecoration: "none", display: "flex" }}
                   >
                     <h2 style={{ padding: isAdminPage(pathName) ? 0 : undefined }}>
@@ -127,7 +122,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   {isLongText && (
                     <Link
                       style={{ textDecoration: "none" }}
-                      href={postPath(pathName, albumData.id)}
+                      href={toPostPath(pathName, albumData.id)}
                     >
                       <div className={styles["more-button"]}>더 보기</div>
                     </Link>

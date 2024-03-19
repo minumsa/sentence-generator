@@ -1,13 +1,11 @@
 import { useRouter } from "next/navigation";
 import styles from "./tagdisplay.module.css";
-import { defaultTags } from "../modules/data";
 import { useState } from "react";
+import { defaultTags } from "../modules/constants";
 
 export const TagDisplay = () => {
   const router = useRouter();
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
-
-  const colors = ["#A5494F", "#AD7E48", "#A7A15A", "#48864D", "#4A57BA", "#5F388B"];
 
   return (
     <div

@@ -6,19 +6,6 @@ import { AlbumFilters, fetchAlbumData } from "../modules/api";
 import { usePathname } from "next/navigation";
 import { useAtom, useAtomValue } from "jotai";
 import React from "react";
-import {
-  AlbumInfo,
-  CurrentTagKeyAtom,
-  albumDataAtom,
-  artistPath,
-  criteriaAtom,
-  currentTotalScrollCountAtom,
-  defaultTags,
-  methodAtom,
-  postPath,
-  scrollCountAtom,
-  scrollPositionAtom,
-} from "../modules/data";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
 import Aos from "aos";
@@ -28,6 +15,18 @@ import { BlurImg } from "./BlurImage";
 import { isMobile } from "react-device-detect";
 import { Loading } from "./Loading";
 import { SpinningCircles } from "react-loading-icons";
+import { AlbumInfo } from "../modules/types";
+import {
+  CurrentTagKeyAtom,
+  albumDataAtom,
+  criteriaAtom,
+  currentTotalScrollCountAtom,
+  methodAtom,
+  scrollCountAtom,
+  scrollPositionAtom,
+} from "../modules/atoms";
+import { defaultTags } from "../modules/constants";
+import { artistPath, toPostPath } from "../modules/paths";
 
 interface GridProps {
   initialData: AlbumInfo[];
@@ -187,7 +186,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                 ref={isLastItem ? ref : undefined}
               >
                 <Link
-                  href={postPath(pathName, item.id)}
+                  href={toPostPath(pathName, item.id)}
                   onClick={() => {
                     setScrollPosition(window.scrollY);
                   }}
@@ -201,7 +200,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                 </Link>
                 <div className={styles["grid-album-title"]}>
                   <Link
-                    href={postPath(pathName, item.id)}
+                    href={toPostPath(pathName, item.id)}
                     onClick={() => {
                       setScrollPosition(window.scrollY);
                     }}

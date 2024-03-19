@@ -1,6 +1,6 @@
-import { AlbumInfo } from "../modules/data";
 import { AlbumPanel } from "./AlbumPanel";
 import styles from "../music.module.css";
+import { AlbumInfo } from "../modules/types";
 
 interface AlbumContentsProps {
   artistData: AlbumInfo[];

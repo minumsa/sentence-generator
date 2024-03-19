@@ -1,9 +1,12 @@
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../music.module.css";
-import { CurrentTagKeyAtom, categoryPath, contents, isAdminPage } from "../modules/data";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAtom } from "jotai";
+import { CurrentTagKeyAtom } from "../modules/atoms";
+import { contents } from "../modules/types";
+import { categoryPath } from "../modules/paths";
+import { isAdminPage } from "../modules/utils";
 
 export const Hamburger = () => {
   const pathName = usePathname();

@@ -1,8 +1,8 @@
 "use client";
 
-import { PageProps } from "@/app/music/modules/data";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
 import Content from "@/app/music/components/Content";
+import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
   const currentGenre = params.genre;

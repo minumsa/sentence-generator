@@ -3,8 +3,8 @@
 import { usePathname } from "next/navigation";
 import { Category } from "./Category";
 import styles from "../music.module.css";
-import { isUploadPage } from "../modules/data";
 import { Snow } from "./Snow";
+import { isUploadPage } from "../modules/utils";
 
 export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
