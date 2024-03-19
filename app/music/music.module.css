@@ -145,7 +145,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 9000;
   background-color: rgb(0 0 0 / 50%);
   width: 100%;
   height: 100%;
@@ -164,7 +164,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 9000;
   width: 100%;
   height: 100%;
   -webkit-user-select: none;
@@ -227,6 +227,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  background-color: var(--background-color);
 }
 
 .desktop-category {
@@ -1012,9 +1013,9 @@
 .spinning-circles {
   position: fixed;
   bottom: 70px;
-  z-index: 1000;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 
 @media (max-width: 1300px) {
@@ -1039,8 +1040,8 @@
   }
 
   .content-container {
-    padding: 0 15px;
     box-sizing: border-box;
+    padding: 0 15px;
   }
 }
 
@@ -1143,7 +1144,7 @@
 
 @media (max-width: 525px) {
   .album-container {
-    padding: 50px 15px;
+    padding: 40px 20px;
   }
 
   .desktop-category {
@@ -1159,8 +1160,8 @@
   }
 
   .backdrop-filtered {
-    background-color: rgb(0 0 0 / 50%);
-    backdrop-filter: blur(18px);
+    background-color: rgb(0 0 0 / 60%);
+    backdrop-filter: blur(20px);
   }
 
   .desktop-introduction-category {
@@ -1194,8 +1195,8 @@
   }
 
   .search-input-container {
-    width: 100%;
     padding: 20px 0 0 0;
+    width: 100%;
   }
 
   .search-page-input-container {
@@ -1222,9 +1223,7 @@
   .desktop-genre-category {
     top: 32.5px;
     left: -16px;
-    border-bottom: none;
     border-left: none;
-    background-color: unset;
     padding: 5px 10px 20px 20px;
     width: 125px;
     font-size: 1.05rem;
@@ -1237,12 +1236,15 @@
   .tag-display-container {
     box-sizing: border-box;
     display: flex;
-    position: relative;
+    position: fixed;
+    top: 42.5px;
     border-bottom: 1px solid var(--border-color);
+    background-color: var(--background-color);
     padding: 11px 15px;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
+    z-index: 10000;
   }
 
   .tag-display-item {
@@ -1292,10 +1294,6 @@
 
   .post-album-title {
     padding: 0;
-  }
-
-  .album-container {
-    padding: 40px 20px;
   }
 
   .album-container:first-child {
@@ -1368,7 +1366,7 @@
 
   .grid-div {
     justify-content: space-evenly;
-    margin: 5px 0 0 0;
+    margin: 75px 0 20px 0;
   }
 
   .grid-album-title {
@@ -1400,12 +1398,12 @@
 
   .content-container {
     z-index: 1;
-    margin: 45px 0 0 0;
+    margin: 30px 0 0 0;
     border-left: none;
+    padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    padding: 0;
   }
 
   .sort-criteria-container {

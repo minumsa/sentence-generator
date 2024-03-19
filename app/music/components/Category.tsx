@@ -21,10 +21,7 @@ export const Category = () => {
     <div className={styles["header-container"]}>
       {/* 햄버거 메뉴 */}
       <Hamburger />
-      <div
-        style={{ width: "100%", height: "100%", display: "flex", alignItems: "center" }}
-        className={styles["backdrop-filtered"]}
-      >
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center" }}>
         <div className={styles["desktop-category"]}>
           <div style={{ width: "20px" }}></div>
           {/* 사이트 제목 */}

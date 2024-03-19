@@ -9,11 +9,6 @@ export const Loading = ({ isEmpty }: LoadingProps) => {
 
   return (
     <>
-      {/* <div
-        className={`${styles["loading-background"]} ${
-          isEmpty ? styles["loading-backdrop-filtered"] : undefined
-        }`}
-      > */}
       <div className={styles["loading-background"]}></div>
       <div className={styles["loading-text"]}>{loadingText}</div>
     </>

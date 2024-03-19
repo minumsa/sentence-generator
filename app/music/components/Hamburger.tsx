@@ -26,7 +26,7 @@ export const Hamburger = () => {
         <div style={{ fontWeight: 100, marginTop: "1px" }}>×</div>
       </button>
       {showCategory ? (
-        <ul className={`${styles["desktop-genre-category"]} ${styles["backdrop-filtered"]}`}>
+        <ul className={styles["desktop-genre-category"]}>
           {Object.keys(contents).map(category => {
             return (
               <React.Fragment key={category}>
