@@ -95,10 +95,10 @@ export async function SearchData(searchFilters: SearchFilters) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to search music data");
+      throw new Error("Failed to search data");
     }
 
-    let { slicedData, genreDataLength } = await response.json();
+    const { slicedData, genreDataLength } = await response.json();
 
     return { slicedData, genreDataLength };
   } catch (error) {

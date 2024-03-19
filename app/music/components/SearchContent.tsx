@@ -1,61 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { AlbumInfo, criteriaAtom, defaultTags, isAdminPage } from "../modules/data";
-import { AlbumFilters, SearchData, SearchFilters, fetchAlbumData } from "../modules/api";
-import { useAtomValue } from "jotai";
+"use client";
+
+import React, { useState } from "react";
+import { AlbumInfo, defaultTags, isAdminPage } from "../modules/data";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import styles from "../music.module.css";
 import { usePathname, useRouter } from "next/navigation";
 
-interface SearchContentProps {
+interface SearchInfo {
   currentKeyword: string;
-  currentTagName: string;
   currentPage: number;
+  currentTagName: string;
+  totalDataLength: number;
 }
 
-export default function SearchContent({
-  currentKeyword,
-  currentTagName,
-  currentPage,
-}: SearchContentProps) {
+interface SearchContentProps {
+  data: AlbumInfo[];
+  searchInfo: SearchInfo;
+}
+
+export default function SearchContent({ data, searchInfo }: SearchContentProps) {
+  const { currentKeyword, currentPage, currentTagName, totalDataLength } = searchInfo;
   const router = useRouter();
   const pathName = usePathname();
-  const [data, setData] = useState<AlbumInfo[]>([]);
-  const criteria = useAtomValue(criteriaAtom);
   const [perPageCount, setDataPerPage] = useState(5);
-  const [totalDataLength, setTotalDataLength] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [isEmptyResult, setIsEmptyResult] = useState(false);
   const decodedKeyword = decodeURIComponent(currentKeyword);
   const [keyword, setKeyword] = useState("");
-
-  useEffect(() => {
-    async function loadData() {
-      const searchFilters: SearchFilters = {
-        perPageCount,
-        currentPage,
-        currentKeyword,
-      };
-
-      const searchResult = await SearchData(searchFilters);
-
-      if (searchResult) {
-        setData(searchResult.slicedData);
-        setTotalDataLength(searchResult.genreDataLength);
-        setIsLoading(false);
-        setIsEmptyResult(false);
-      } else {
-        setIsEmptyResult(true);
-      }
-    }
-
-    if (currentKeyword) {
-      setIsLoading(true);
-      loadData();
-    } else {
-      setIsLoading(false);
-    }
-  }, [pathName, currentKeyword, perPageCount, currentPage]);
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -68,31 +39,32 @@ export default function SearchContent({
       ? router.push(`/music/admin/search/${keyword}/1`)
       : router.push(`/music/search/${keyword}/1`);
   }
-  useEffect(() => {
-    const albumFilters: AlbumFilters = {
-      perPageCount,
-      currentPage,
-      currentMethod: "별점",
-      currentCriteria: criteria,
-      currentTagKey: currentTagName,
-    };
 
-    async function loadTagData() {
-      const albumResult = await fetchAlbumData({
-        pathName: "search",
-        albumFilters,
-      });
+  // useEffect(() => {
+  //   const albumFilters: AlbumFilters = {
+  //     perPageCount,
+  //     currentPage,
+  //     currentMethod: "별점",
+  //     currentCriteria: criteria,
+  //     currentTagKey: currentTagName,
+  //   };
 
-      if (albumResult) {
-        setData(albumResult.slicedData);
-        setTotalDataLength(albumResult.genreDataLength);
-      }
-    }
+  //   async function loadTagData() {
+  //     const albumResult = await fetchAlbumData({
+  //       pathName: "search",
+  //       albumFilters,
+  //     });
 
-    if (currentTagName) {
-      loadTagData();
-    }
-  }, [criteria, currentPage, currentTagName, perPageCount]);
+  //     if (albumResult) {
+  //       setData(albumResult.slicedData);
+  //       setTotalDataLength(albumResult.genreDataLength);
+  //     }
+  //   }
+
+  //   if (currentTagName) {
+  //     loadTagData();
+  //   }
+  // }, [criteria, currentPage, currentTagName, perPageCount]);
 
   return (
     <ContentLayout
@@ -152,7 +124,7 @@ export default function SearchContent({
           })}
         </div>
       </div>
-      {isEmptyResult ? undefined : <AlbumContents artistData={data} perPageCount={perPageCount} />}
+      <AlbumContents artistData={data} perPageCount={perPageCount} />
     </ContentLayout>
   );
 }

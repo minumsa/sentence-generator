@@ -48,8 +48,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useState<string>("");
 
-  console.log(scrollCount);
-
   useEffect(() => {
     Aos.init();
   }, []);

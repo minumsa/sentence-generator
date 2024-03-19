@@ -57,7 +57,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
     const { artistData } = response;
     const firstArtistData = artistData && artistData[0];
     if (!firstArtistData) {
-      // 예외 처리: artistData가 없는 경우
       throw new Error("No artist data found");
     }
 
