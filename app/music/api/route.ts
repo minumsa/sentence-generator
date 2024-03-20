@@ -17,9 +17,17 @@ export async function GET(request: Request) {
     let perPageCount: number;
 
     if (pathName === "") {
-      perPageCount = PER_PAGE_COUNT;
+      if (currentPage === 1) {
+        perPageCount = PER_PAGE_COUNT - 1;
+      } else {
+        perPageCount = PER_PAGE_COUNT;
+      }
     } else {
-      perPageCount = SUB_PER_PAGE_COUNT;
+      if (currentPage === 1) {
+        perPageCount = PER_PAGE_COUNT - 1;
+      } else {
+        perPageCount = PER_PAGE_COUNT;
+      }
     }
 
     interface SortKey {
@@ -46,19 +54,8 @@ export async function GET(request: Request) {
     const genreDataLength = await Music.find(query).count();
 
     const skipCount = (currentPage - 1) * perPageCount;
-    const slicedData = await Music.find(query)
-      .sort(sortKey)
-      .skip(skipCount + 1)
-      .limit(perPageCount);
 
-    // if (skipCount > 1) {
-    //   slicedData = await Music.find(query)
-    //     .sort(sortKey)
-    //     .skip(skipCount + 1)
-    //     .limit(perPageCount);
-    // } else {
-    //   slicedData = await Music.find(query).sort(sortKey).limit(perPageCount);
-    // }
+    const slicedData = await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
