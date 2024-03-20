@@ -51,7 +51,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
         const minPageNumber = maxPageNumber - perPageCount + 1;
         const pageNumber = index + 1;
         const isPageNumberInRange = pageNumber >= minPageNumber && pageNumber <= maxPageNumber;
-        const isCurrentPage = currentPage == pageNumber;
+        const isCurrentPageEqualPageNumber = currentPage == pageNumber;
         if (isPageNumberInRange) {
           return (
             <div
@@ -60,7 +60,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
               onClick={() => {
                 router.push(`${pathNameWithoutPageNumber}/${pageNumber}`);
               }}
-              style={isCurrentPage ? { color: "#cfcfcf" } : undefined}
+              style={isCurrentPageEqualPageNumber ? { color: "#cfcfcf" } : undefined}
             >
               {page}
             </div>

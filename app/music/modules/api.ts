@@ -154,7 +154,7 @@ export async function uploadData({ newData, password }: UpdateDataParams) {
   const { newSpotifyAlbumData, genre, link, text, uploadDate, score, videos, tagKeys, blurHash } =
     newData;
 
-  if (newData !== null) {
+  if (newData) {
     try {
       const response = await fetch("/music/api", {
         method: "POST",

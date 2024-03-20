@@ -5,11 +5,12 @@ import { MusicLayout } from "@/app/music/components/MusicLayout";
 import { PageProps } from "../../modules/types";
 
 export default function Page({ params }: PageProps) {
-  const currentPage: number = params.page;
-  const currentKeyword = "";
-  const currentTagName = "";
-  const totalDataLength = 0;
-  const searchInfo = { currentKeyword, currentPage, currentTagName, totalDataLength };
+  const searchInfo = {
+    currentKeyword: "",
+    currentPage: params.page,
+    currentTagName: "",
+    totalDataLength: 0,
+  };
 
   return (
     <MusicLayout>

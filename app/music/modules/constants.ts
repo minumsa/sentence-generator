@@ -1,4 +1,4 @@
-import { ContentsType, CriteriaType, MethodType } from "./types";
+import { ContentsType } from "./types";
 
 export const contents: ContentsType = {
   pop: "팝",

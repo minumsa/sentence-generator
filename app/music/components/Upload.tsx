@@ -53,7 +53,8 @@ export default function Upload() {
   };
 
   useEffect(() => {
-    if (isTyping && albumKeyword.length > 0) {
+    const isSearching = isTyping && albumKeyword.length > 0;
+    if (isSearching) {
       const typingTimer = setTimeout(() => {
         handleSearch();
       }, 1000);
@@ -105,7 +106,9 @@ export default function Upload() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      const isClickedOutsideModal =
+        modalRef.current && !modalRef.current.contains(event.target as Node);
+      if (isClickedOutsideModal) {
         setShowTagListModal(false);
         setNewTagKey("");
       }

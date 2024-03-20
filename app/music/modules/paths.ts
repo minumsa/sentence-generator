@@ -1,5 +1,3 @@
-import { isAdminPage } from "./utils";
-
 const isAdmin = (pathName: string) => {
   return pathName.includes("admin");
 };

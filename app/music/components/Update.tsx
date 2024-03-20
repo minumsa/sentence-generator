@@ -169,7 +169,9 @@ export default function Update({ currentId }: UpdateProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      const isClickedOutsideModal =
+        modalRef.current && !modalRef.current.contains(event.target as Node);
+      if (isClickedOutsideModal) {
         setShowAlbumListModal(false);
         setShowTagListModal(false);
         setNewTagKey("");

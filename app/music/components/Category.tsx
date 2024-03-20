@@ -10,10 +10,11 @@ import { toSearchPage } from "../modules/paths";
 export const Category = () => {
   const pathName = usePathname();
   const [currentTagKey, setCurrentTagKey] = useAtom(CurrentTagKeyAtom);
+  const isMainPage = pathName === "/music" || pathName === "/music/admin";
 
   // 메인 페이지일 때 사이트 로고를 누르면 최상단으로 이동
   const scrollToTop = () => {
-    if (pathName === "/music") {
+    if (isMainPage) {
       window.scrollTo(0, 0);
       setCurrentTagKey("");
     }
