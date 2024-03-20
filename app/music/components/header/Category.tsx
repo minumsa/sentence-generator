@@ -1,11 +1,11 @@
-import styles from "../music.module.css";
+import styles from "../../music.module.css";
 import Link from "next/link";
 import { Hamburger } from "./Hamburger";
 import { usePathname } from "next/navigation";
 import { useAtom } from "jotai";
-import { CurrentTagKeyAtom } from "../modules/atoms";
-import { isAdminPage } from "../modules/utils";
-import { toSearchPage } from "../modules/paths";
+import { CurrentTagKeyAtom } from "../../modules/atoms";
+import { isAdminPage } from "../../modules/utils";
+import { toSearchPage } from "../../modules/paths";
 
 export const Category = () => {
   const pathName = usePathname();

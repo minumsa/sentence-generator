@@ -25,7 +25,7 @@ import {
 } from "../modules/atoms";
 
 import { toArtistPage, toPostPage } from "../modules/paths";
-import { MobileTagDisplay } from "./MobileTagDisplay";
+import { MobileTagDisplay } from "./header/MobileTagDisplay";
 import { PER_PAGE_COUNT } from "../modules/constants";
 
 interface GridProps {

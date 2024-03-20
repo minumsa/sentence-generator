@@ -13,7 +13,7 @@ interface ContentProps {
 export default function Content({ data, totalDataLength, currentPage }: ContentProps) {
   return (
     <ContentLayout currentPage={currentPage} totalDataLength={totalDataLength}>
-      <AlbumContents artistData={data} />
+      <AlbumContents albumData={data} />
     </ContentLayout>
   );
 }

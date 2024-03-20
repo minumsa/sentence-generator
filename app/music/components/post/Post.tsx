@@ -1,7 +1,7 @@
 "use client";
 
-import { AlbumInfo } from "../modules/types";
-import styles from "../music.module.css";
+import { AlbumInfo } from "../../modules/types";
+import styles from "../../music.module.css";
 import { PostAlbumMetadata } from "./PostAlbumMetadata";
 import { PostText } from "./PostAlbumText";
 

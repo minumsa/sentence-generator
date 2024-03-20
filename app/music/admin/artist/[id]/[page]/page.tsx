@@ -1,4 +1,4 @@
-import ArtistContent from "@/app/music/components/ArtistContent";
+import ArtistContent from "@/app/music/components/artist/ArtistContent";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
 

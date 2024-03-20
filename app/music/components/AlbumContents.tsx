@@ -4,13 +4,13 @@ import { AlbumInfo } from "../modules/types";
 import { SUB_PER_PAGE_COUNT } from "../modules/constants";
 
 interface AlbumContentsProps {
-  artistData: AlbumInfo[];
+  albumData: AlbumInfo[];
 }
 
-export const AlbumContents = ({ artistData }: AlbumContentsProps) => {
-  return artistData.map((item, index) => {
+export const AlbumContents = ({ albumData }: AlbumContentsProps) => {
+  return albumData.map((item, index) => {
     const itemIndex = index + 1;
-    const isLastData = index === artistData.length - 1;
+    const isLastData = index === albumData.length - 1;
     const isLastDataPerPage = itemIndex % SUB_PER_PAGE_COUNT === 0;
 
     return (

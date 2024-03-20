@@ -1,10 +1,9 @@
 "use client";
 
-import { AlbumContents } from "./AlbumContents";
-import { ContentLayout } from "./ContentLayout";
+import { AlbumContents } from "../AlbumContents";
+import { ContentLayout } from "../ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
-import { AlbumInfo } from "../modules/types";
-import { SUB_PER_PAGE_COUNT } from "../modules/constants";
+import { AlbumInfo } from "../../modules/types";
 
 interface ArtistContentProps {
   artistData: AlbumInfo[];
@@ -20,7 +19,7 @@ export default function ArtistContent({
   return (
     <ContentLayout currentPage={currentPage} totalDataLength={artistDataCount}>
       <ArtistPageImage artistData={artistData} />
-      <AlbumContents artistData={artistData} />
+      <AlbumContents albumData={artistData} />
     </ContentLayout>
   );
 }

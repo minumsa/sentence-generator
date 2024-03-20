@@ -1,9 +1,9 @@
-import { formatDate, isAdminPage } from "../modules/utils";
-import styles from "../music.module.css";
+import { formatDate, isAdminPage } from "../../modules/utils";
+import styles from "../../music.module.css";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { AlbumInfo } from "../modules/types";
-import { DEFAULT_TAGS } from "../modules/constants";
+import { AlbumInfo } from "../../modules/types";
+import { DEFAULT_TAGS } from "../../modules/constants";
 
 interface PostTextProps {
   albumData: AlbumInfo;

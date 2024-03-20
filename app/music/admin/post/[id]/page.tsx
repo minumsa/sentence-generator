@@ -1,4 +1,4 @@
-import { Post } from "@/app/music/components/Post";
+import { Post } from "@/app/music/components/post/Post";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
 import { Metadata } from "next";
 import { PageProps } from "@/app/music/modules/types";

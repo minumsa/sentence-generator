@@ -95,7 +95,7 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
           })}
         </div>
       </div>
-      <AlbumContents artistData={data} />
+      <AlbumContents albumData={data} />
     </ContentLayout>
   );
 }
