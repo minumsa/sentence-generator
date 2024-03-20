@@ -1,11 +1,11 @@
 import { usePathname } from "next/navigation";
 import styles from "../../music.module.css";
 import { formatDuration, isAdminPage } from "../../modules/utils";
-import { DeleteButton } from "../assets/DeleteButton";
-import { EditButton } from "../assets/EditButton";
+import { DeleteButton } from "./assets/DeleteButton";
+import { EditButton } from "./assets/EditButton";
 import Link from "next/link";
-import { LinkIcon } from "../assets/LinkIcon";
-import { BlurImg } from "../BlurImage";
+import { LinkIcon } from "./assets/LinkIcon";
+import { BlurImg } from "../@common/BlurImage";
 import { AlbumInfo } from "../../modules/types";
 
 interface PostAlbumMetadataProps {

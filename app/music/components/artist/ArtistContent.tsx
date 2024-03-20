@@ -1,7 +1,7 @@
 "use client";
 
-import { AlbumContents } from "../AlbumContents";
-import { ContentLayout } from "../ContentLayout";
+import { AlbumContents } from "../@common/album/AlbumContents";
+import { ContentLayout } from "../@common/ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
 import { AlbumInfo } from "../../modules/types";
 

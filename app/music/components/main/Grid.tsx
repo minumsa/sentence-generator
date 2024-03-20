@@ -1,32 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "../music.module.css";
-import { AlbumFilters, fetchAlbumData } from "../modules/api";
+import styles from "../../music.module.css";
+import { AlbumFilters, fetchAlbumData } from "../../modules/api";
 import { usePathname } from "next/navigation";
 import { useAtom, useAtomValue } from "jotai";
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import "aos/dist/aos.css";
 import Aos from "aos";
-import { ContentLayout } from "./ContentLayout";
+import { ContentLayout } from "../@common/ContentLayout";
 import Link from "next/link";
-import { BlurImg } from "./BlurImage";
+import { BlurImg } from "../@common/BlurImage";
 import { isMobile } from "react-device-detect";
-import { Loading } from "./Loading";
+import { Loading } from "../@common/Loading";
 import { SpinningCircles } from "react-loading-icons";
-import { AlbumInfo } from "../modules/types";
+import { AlbumInfo } from "../../modules/types";
 import {
   CurrentTagKeyAtom,
   albumDataAtom,
   currentTotalScrollCountAtom,
   scrollCountAtom,
   scrollPositionAtom,
-} from "../modules/atoms";
+} from "../../modules/atoms";
 
-import { toArtistPage, toPostPage } from "../modules/paths";
-import { MobileTagDisplay } from "./header/MobileTagDisplay";
-import { PER_PAGE_COUNT } from "../modules/constants";
+import { toArtistPage, toPostPage } from "../../modules/paths";
+import { MobileTagDisplay } from "../@common/header/MobileTagDisplay";
+import { PER_PAGE_COUNT } from "../../modules/constants";
 
 interface GridProps {
   initialData: AlbumInfo[];

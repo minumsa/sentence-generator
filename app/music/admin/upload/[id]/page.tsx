@@ -1,7 +1,7 @@
 "use client";
 
 import Update from "@/app/music/components/Update";
-import { MusicLayout } from "@/app/music/components/MusicLayout";
+import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
 
 export default function Page({ params }: PageProps) {

@@ -1,5 +1,5 @@
-import Content from "../components/Content";
-import { MusicLayout } from "../components/MusicLayout";
+import Content from "../components/@common/Content";
+import { MusicLayout } from "../components/@common/MusicLayout";
 import { PageProps } from "../modules/types";
 
 export default async function Page({ params }: PageProps) {

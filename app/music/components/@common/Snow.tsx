@@ -1,5 +1,5 @@
 import Snowfall from "react-snowfall";
-import styles from "../music.module.css";
+import styles from "../../music.module.css";
 import NoSSR from "@/app/divdivdiv/modules/NoSSR";
 
 export const Snow = () => {

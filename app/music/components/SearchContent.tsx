@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { AlbumContents } from "./AlbumContents";
-import { ContentLayout } from "./ContentLayout";
+import { AlbumContents } from "./@common/album/AlbumContents";
+import { ContentLayout } from "./@common/ContentLayout";
 import styles from "../music.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import { AlbumInfo } from "../modules/types";

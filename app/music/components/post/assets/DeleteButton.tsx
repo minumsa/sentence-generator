@@ -1,6 +1,6 @@
-import { deleteData } from "../../modules/api";
-import { AlbumInfo } from "../../modules/types";
-import styles from "../../music.module.css";
+import { deleteData } from "../../../modules/api";
+import { AlbumInfo } from "../../../modules/types";
+import styles from "../../../music.module.css";
 
 interface DeleteButtonProps {
   data: AlbumInfo;

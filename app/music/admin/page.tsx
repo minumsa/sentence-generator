@@ -1,5 +1,5 @@
-import { Grid } from "../components/Grid";
-import { MusicLayout } from "../components/MusicLayout";
+import { Grid } from "../components/main/Grid";
+import { MusicLayout } from "../components/@common/MusicLayout";
 import { PER_PAGE_COUNT } from "../modules/constants";
 
 export default async function Page() {

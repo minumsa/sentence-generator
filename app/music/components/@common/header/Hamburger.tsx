@@ -1,12 +1,12 @@
 import { usePathname, useRouter } from "next/navigation";
-import styles from "../../music.module.css";
+import styles from "../../../music.module.css";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAtom } from "jotai";
-import { CurrentTagKeyAtom } from "../../modules/atoms";
-import { toGenrePage } from "../../modules/paths";
-import { isAdminPage } from "../../modules/utils";
-import { CONTENTS } from "../../modules/constants";
+import { CurrentTagKeyAtom } from "../../../modules/atoms";
+import { toGenrePage } from "../../../modules/paths";
+import { isAdminPage } from "../../../modules/utils";
+import { CONTENTS } from "../../../modules/constants";
 
 export const Hamburger = () => {
   const pathName = usePathname();

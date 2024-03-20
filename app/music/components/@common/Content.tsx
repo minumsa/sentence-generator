@@ -1,7 +1,7 @@
 "use client";
 
-import { AlbumInfo } from "../modules/types";
-import { AlbumContents } from "./AlbumContents";
+import { AlbumInfo } from "../../modules/types";
+import { AlbumContents } from "./album/AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 
 interface ContentProps {

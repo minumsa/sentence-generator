@@ -1,15 +1,15 @@
 import { usePathname } from "next/navigation";
-import { formatDuration, isAdminPage } from "../modules/utils";
-import styles from "../music.module.css";
+import { formatDuration, isAdminPage } from "../../../modules/utils";
+import styles from "../../../music.module.css";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
-import { DeleteButton } from "./assets/DeleteButton";
-import { EditButton } from "./assets/EditButton";
+import { DeleteButton } from "../../post/assets/DeleteButton";
+import { EditButton } from "../../post/assets/EditButton";
 import Link from "next/link";
-import { BlurImg } from "./BlurImage";
-import { AlbumInfo } from "../modules/types";
-import { toArtistPage, toTagPage, toPostPage } from "../modules/paths";
-import { DEFAULT_TAGS } from "../modules/constants";
+import { BlurImg } from "../BlurImage";
+import { AlbumInfo } from "../../../modules/types";
+import { toArtistPage, toTagPage, toPostPage } from "../../../modules/paths";
+import { DEFAULT_TAGS } from "../../../modules/constants";
 
 interface AlbumProps {
   albumData: AlbumInfo;

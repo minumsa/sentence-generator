@@ -1,4 +1,4 @@
-import { PageNumbers } from "./post/PageNumbers";
+import { PageNumbers } from "../post/assets/PageNumbers";
 
 interface ContentLayoutProps {
   children: React.ReactNode;
