@@ -20,7 +20,7 @@ export default async function Page({ params }: PageProps) {
     const currentCriteria = "내림차순";
     const currentTagKey = "";
 
-    const queryString = `?pathName=${pathName}&perPageCount=${SUB_PER_PAGE_COUNT}&currentPage=${currentPage}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
+    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
     const url = `https://divdivdiv.com/music/api${queryString}`;
 
     const response = await fetch(url, {

@@ -18,13 +18,9 @@ export default function ArtistContent({
   currentPage,
 }: ArtistContentProps) {
   return (
-    <ContentLayout
-      currentPage={currentPage}
-      perPageCount={SUB_PER_PAGE_COUNT}
-      totalDataLength={artistDataCount}
-    >
+    <ContentLayout currentPage={currentPage} totalDataLength={artistDataCount}>
       <ArtistPageImage artistData={artistData} />
-      <AlbumContents artistData={artistData} perPageCount={SUB_PER_PAGE_COUNT} />
+      <AlbumContents artistData={artistData} />
     </ContentLayout>
   );
 }

@@ -1,7 +1,6 @@
 import SearchContent from "@/app/music/components/SearchContent";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
-import { SUB_PER_PAGE_COUNT } from "@/app/music/modules/constants";
 
 export default async function Page({ params }: PageProps) {
   const pathName = "search";
@@ -11,7 +10,7 @@ export default async function Page({ params }: PageProps) {
   const currentPage: number = params.page;
 
   try {
-    const queryString = `?pathName=${pathName}&perPageCount=${SUB_PER_PAGE_COUNT}&currentPage=${currentPage}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
+    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
     const url = `https://divdivdiv.com/music/api${queryString}`;
 
     const response = await fetch(url, {

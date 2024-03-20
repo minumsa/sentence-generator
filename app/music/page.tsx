@@ -13,7 +13,6 @@ export default async function Page() {
     // queryString 상수로 정의
     const queryString = new URLSearchParams({
       pathName,
-      perPageCount: String(PER_PAGE_COUNT),
       currentPage: String(currentPage),
       currentMethod,
       currentCriteria,

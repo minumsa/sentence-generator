@@ -8,7 +8,7 @@ export default async function Page({ params }: PageProps) {
   const currentPage: number = params.page;
 
   try {
-    const queryString = `?perPageCount=${SUB_PER_PAGE_COUNT}&currentPage=${currentPage}&currentKeyword=${currentKeyword}`;
+    const queryString = `?currentPage=${currentPage}&currentKeyword=${currentKeyword}`;
     const url = `https://divdivdiv.com/music/api/search${queryString}`;
 
     const response = await fetch(url, {

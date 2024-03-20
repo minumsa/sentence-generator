@@ -1,6 +1,7 @@
 import connectMongoDB from "@/app/music/modules/mongodb";
 import Music from "@/models/music";
 import { NextResponse } from "next/server";
+import { SUB_PER_PAGE_COUNT } from "../../modules/constants";
 
 export async function GET(request: Request) {
   try {
@@ -9,7 +10,6 @@ export async function GET(request: Request) {
 
     // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
-    const perPageCount = Number(url.searchParams.get("perPageCount"));
     const currentPage = Number(url.searchParams.get("currentPage"));
     const currentKeyword: any = url.searchParams.get("currentKeyword");
 
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     const query = {};
 
     let totalDataLength = await Music.find(query).count();
-    let startIndex = perPageCount * currentPage - perPageCount;
+    let startIndex = SUB_PER_PAGE_COUNT * currentPage - SUB_PER_PAGE_COUNT;
     let slicedData = undefined;
 
     // 'i' 옵션은 대소문자를 구별하지 않도록 설정
@@ -31,7 +31,7 @@ export async function GET(request: Request) {
     })
       .sort(sortKey)
       .skip(startIndex)
-      .limit(perPageCount);
+      .limit(SUB_PER_PAGE_COUNT);
     totalDataLength = await Music.find({
       $or: [
         { text: { $regex: new RegExp(currentKeyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정

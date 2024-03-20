@@ -52,6 +52,8 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const currentTagKey = useAtomValue(CurrentTagKeyAtom);
   const [isScrolling, setIsScrolling] = useState(false);
 
+  console.log(data);
+
   useEffect(() => {
     Aos.init();
     setNewTotalScrollCount(totalScrollCount);
@@ -70,7 +72,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   useEffect(() => {
     async function loadData(scrollCount: number) {
       const albumFilters: AlbumFilters = {
-        perPageCount: PER_PAGE_COUNT,
         currentPage: scrollCount,
         currentMethod: "별점",
         currentCriteria: criteria,
@@ -134,7 +135,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     <>
       {/* Mobile Tag Items */}
       <MobileTagDisplay />
-      <ContentLayout currentPage={scrollCount} perPageCount={PER_PAGE_COUNT} totalDataLength={0}>
+      <ContentLayout currentPage={scrollCount} totalDataLength={0}>
         {data.length < 1 && <Loading />}
         {isScrolling && <SpinningCircles className={styles["spinning-circles"]} />}
         {/* Grid Items */}

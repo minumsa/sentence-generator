@@ -1,14 +1,14 @@
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./pagenumbers.module.css";
 import { useEffect, useState } from "react";
+import { SUB_PER_PAGE_COUNT } from "../modules/constants";
 
 interface PageNumbersProps {
   currentPage: number;
-  perPageCount: number;
   totalDataLength: number;
 }
 
-export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: PageNumbersProps) => {
+export const PageNumbers = ({ currentPage, totalDataLength }: PageNumbersProps) => {
   const router = useRouter();
   const [totalPage, setTotalPage] = useState(1);
   const pageNumbers = Array.from({ length: totalPage }, (_, i) => i + 1);
@@ -17,8 +17,8 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
   const [maxPageNumber, setMaxPageNumber] = useState<number>(5);
 
   useEffect(() => {
-    setMaxPageNumber(Math.ceil(currentPage / perPageCount) * perPageCount);
-  }, [currentPage, perPageCount]);
+    setMaxPageNumber(Math.ceil(currentPage / SUB_PER_PAGE_COUNT) * SUB_PER_PAGE_COUNT);
+  }, [currentPage]);
 
   useEffect(() => {
     if (totalDataLength) setTotalPage(Math.max(1, Math.ceil(totalDataLength / 5)));
@@ -48,7 +48,7 @@ export const PageNumbers = ({ currentPage, perPageCount, totalDataLength }: Page
         </div>
       )}
       {pageNumbers.map((page, index) => {
-        const minPageNumber = maxPageNumber - perPageCount + 1;
+        const minPageNumber = maxPageNumber - SUB_PER_PAGE_COUNT + 1;
         const pageNumber = index + 1;
         const isPageNumberInRange = pageNumber >= minPageNumber && pageNumber <= maxPageNumber;
         const isCurrentPageEqualPageNumber = currentPage == pageNumber;

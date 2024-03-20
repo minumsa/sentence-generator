@@ -7,7 +7,7 @@ import styles from "../music.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import { AlbumInfo } from "../modules/types";
 import { isAdminPage } from "../modules/utils";
-import { DEFAULT_TAGS, SUB_PER_PAGE_COUNT } from "../modules/constants";
+import { DEFAULT_TAGS } from "../modules/constants";
 
 interface SearchInfo {
   currentKeyword: string;
@@ -42,11 +42,7 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
   }
 
   return (
-    <ContentLayout
-      currentPage={currentPage}
-      perPageCount={SUB_PER_PAGE_COUNT}
-      totalDataLength={totalDataLength}
-    >
+    <ContentLayout currentPage={currentPage} totalDataLength={totalDataLength}>
       <div className={styles["search-input-container"]}>
         <div className={styles["search-page-input-container"]}>
           <input
@@ -99,7 +95,7 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
           })}
         </div>
       </div>
-      <AlbumContents artistData={data} perPageCount={SUB_PER_PAGE_COUNT} />
+      <AlbumContents artistData={data} />
     </ContentLayout>
   );
 }

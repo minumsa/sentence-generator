@@ -2,6 +2,7 @@ import connectMongoDB from "@/app/music/modules/mongodb";
 import Music from "@/models/music";
 import { NextResponse } from "next/server";
 import { isMainPage, isSearchPage } from "../modules/utils";
+import { PER_PAGE_COUNT } from "../modules/constants";
 
 export async function GET(request: Request) {
   try {
@@ -9,7 +10,6 @@ export async function GET(request: Request) {
 
     const url = new URL(request.url);
     const currentPage = Number(url.searchParams.get("currentPage"));
-    const perPageCount = Number(url.searchParams.get("perPageCount"));
     const pathName = url.searchParams.get("pathName") ?? "";
     const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
@@ -52,8 +52,8 @@ export async function GET(request: Request) {
     }
 
     const genreDataLength = await Music.find(query).count();
-    const startIndex = perPageCount * currentPage - perPageCount + 1;
-    const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(perPageCount);
+    const startIndex = PER_PAGE_COUNT * currentPage - PER_PAGE_COUNT + 1;
+    const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(PER_PAGE_COUNT);
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {

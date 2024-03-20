@@ -1,8 +1,5 @@
-"use client";
-
 import ArtistContent from "@/app/music/components/ArtistContent";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
-import { SUB_PER_PAGE_COUNT } from "@/app/music/modules/constants";
 import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
@@ -10,7 +7,7 @@ export default async function Page({ params }: PageProps) {
   const currentPage = params.page;
 
   try {
-    const queryString = `?artistId=${artistId}&perPageCount=${SUB_PER_PAGE_COUNT}&currentPage=${currentPage}`;
+    const queryString = `?artistId=${artistId}&currentPage=${currentPage}`;
     const url = `https://divdivdiv.com/music/api/artist${queryString}`;
 
     const response = await fetch(url, {
