@@ -63,9 +63,9 @@ export async function GET(request: Request) {
     let slicedData;
 
     if (skipCount > 1) {
-      await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
+      slicedData = await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
     } else {
-      await Music.find(query).sort(sortKey).limit(perPageCount);
+      slicedData = await Music.find(query).sort(sortKey).limit(perPageCount);
     }
 
     return NextResponse.json({ slicedData, genreDataLength });
