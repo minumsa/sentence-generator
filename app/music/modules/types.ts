@@ -69,7 +69,3 @@ export interface UpdateInfo {
   musicVideoTitle?: string;
   musicVideoUrl?: string;
 }
-
-export type MethodType = "작성일" | "발매일" | "아티스트" | "앨범" | "별점";
-export type CriteriaType = "오름차순" | "내림차순";
-export type OrderType = "method" | "criteria";

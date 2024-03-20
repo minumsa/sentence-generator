@@ -1,4 +1,4 @@
-import { CriteriaType, MethodType, SpotifyAlbumData } from "./types";
+import { SpotifyAlbumData } from "./types";
 
 export interface AlbumFilters {
   currentPage: number;

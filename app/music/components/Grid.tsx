@@ -19,9 +19,7 @@ import { AlbumInfo } from "../modules/types";
 import {
   CurrentTagKeyAtom,
   albumDataAtom,
-  criteriaAtom,
   currentTotalScrollCountAtom,
-  methodAtom,
   scrollCountAtom,
   scrollPositionAtom,
 } from "../modules/atoms";
@@ -47,8 +45,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     threshold: 0,
     triggerOnce: true,
   });
-  const method = useAtomValue(methodAtom);
-  const criteria = useAtomValue(criteriaAtom);
   const currentTagKey = useAtomValue(CurrentTagKeyAtom);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -104,12 +100,11 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     }
 
     // scrollCount가 한계치에 도달하는 경우, 더 이상 스크롤 이벤트가 발생하지 않도록 처리
-
     const hasReachedScrollLimit = scrollCount === newTotalScrollCount;
     if (hasReachedScrollLimit) {
       setScrollCount(UNREACHABLE_SCROLL_LIMIT);
     }
-  }, [method, criteria, scrollCount, PER_PAGE_COUNT, currentTagKey, initialData]);
+  }, [scrollCount, PER_PAGE_COUNT, currentTagKey, initialData]);
 
   function updateScrollPosition() {
     setScrollPosition(window.scrollY);
