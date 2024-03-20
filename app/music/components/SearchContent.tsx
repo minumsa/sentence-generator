@@ -7,7 +7,7 @@ import styles from "../music.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import { AlbumInfo } from "../modules/types";
 import { isAdminPage } from "../modules/utils";
-import { defaultTags } from "../modules/constants";
+import { DEFAULT_TAGS, SUB_PER_PAGE_COUNT } from "../modules/constants";
 
 interface SearchInfo {
   currentKeyword: string;
@@ -25,7 +25,6 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
   const { currentKeyword, currentPage, currentTagName, totalDataLength } = searchInfo;
   const router = useRouter();
   const pathName = usePathname();
-  const [perPageCount, setDataPerPage] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
   const decodedKeyword = decodeURIComponent(currentKeyword);
   const [keyword, setKeyword] = useState("");
@@ -45,7 +44,7 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
   return (
     <ContentLayout
       currentPage={currentPage}
-      perPageCount={perPageCount}
+      perPageCount={SUB_PER_PAGE_COUNT}
       totalDataLength={totalDataLength}
     >
       <div className={styles["search-input-container"]}>
@@ -74,7 +73,7 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
             : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}
         </div>
         <div className={styles["search-tag-container"]}>
-          {Object.keys(defaultTags).map((key, index) => {
+          {Object.keys(DEFAULT_TAGS).map((key, index) => {
             // "모두 보기" 태그(버튼)은 모바일 메인 화면에서만 표시
             const isAllItemKey = key === "";
             return (
@@ -93,14 +92,14 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
                       : undefined
                   }
                 >
-                  {defaultTags[key]}
+                  {DEFAULT_TAGS[key]}
                 </div>
               )
             );
           })}
         </div>
       </div>
-      <AlbumContents artistData={data} perPageCount={perPageCount} />
+      <AlbumContents artistData={data} perPageCount={SUB_PER_PAGE_COUNT} />
     </ContentLayout>
   );
 }

@@ -3,7 +3,7 @@ import styles from "../music.module.css";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AlbumInfo } from "../modules/types";
-import { defaultTags } from "../modules/constants";
+import { DEFAULT_TAGS } from "../modules/constants";
 
 interface PostTextProps {
   albumData: AlbumInfo;
@@ -47,7 +47,7 @@ export const PostText = ({ albumData }: PostTextProps) => {
               key={index}
               className={styles["tag-item"]}
             >
-              {defaultTags[tagKey]}
+              {DEFAULT_TAGS[tagKey]}
             </Link>
           );
         })}

@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { defaultTags } from "../modules/constants";
+import { DEFAULT_TAGS } from "../modules/constants";
 import styles from "../music.module.css";
 import {
   CurrentTagKeyAtom,
@@ -21,7 +21,7 @@ export const MobileTagDisplay = () => {
       className={styles["tag-display-container"]}
       style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
     >
-      {Object.keys(defaultTags).map((key, index) => {
+      {Object.keys(DEFAULT_TAGS).map((key, index) => {
         return (
           <div
             key={index}
@@ -39,7 +39,7 @@ export const MobileTagDisplay = () => {
                 : undefined
             }
           >
-            {defaultTags[key]}
+            {DEFAULT_TAGS[key]}
           </div>
         );
       })}

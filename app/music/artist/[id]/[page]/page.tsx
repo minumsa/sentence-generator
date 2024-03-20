@@ -1,15 +1,15 @@
 import ArtistContent from "../../../components/ArtistContent";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
+import { SUB_PER_PAGE_COUNT } from "@/app/music/modules/constants";
 import { PageProps } from "@/app/music/modules/types";
 import { Metadata } from "next";
 
 export default async function Page({ params }: PageProps) {
   const artistId = params.id;
-  const perPageCount = 5;
   const currentPage = params.page;
 
   try {
-    const queryString = `?artistId=${artistId}&perPageCount=${perPageCount}&currentPage=${currentPage}`;
+    const queryString = `?artistId=${artistId}&perPageCount=${SUB_PER_PAGE_COUNT}&currentPage=${currentPage}`;
     const url = `https://divdivdiv.com/music/api/artist${queryString}`;
 
     const response = await fetch(url, {
@@ -41,10 +41,9 @@ export default async function Page({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata | undefined> {
   const artistId = params.id;
-  const perPageCount = 5;
   const currentPage = params.page;
 
-  const queryString = `?perPageCount=${perPageCount}&currentPage=${currentPage}&artistId=${artistId}&pathName=${""}&currentMethod=${"발매일"}&currentCriteria=${"내림차순"}`;
+  const queryString = `?perPageCount=${SUB_PER_PAGE_COUNT}&currentPage=${currentPage}&artistId=${artistId}&pathName=${""}&currentMethod=${"발매일"}&currentCriteria=${"내림차순"}`;
   const url = `https://divdivdiv.com/music/api/artist${queryString}`;
 
   try {

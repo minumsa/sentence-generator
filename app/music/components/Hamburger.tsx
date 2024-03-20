@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { CurrentTagKeyAtom } from "../modules/atoms";
 import { toGenrePage } from "../modules/paths";
 import { isAdminPage } from "../modules/utils";
-import { contents } from "../modules/constants";
+import { CONTENTS } from "../modules/constants";
 
 export const Hamburger = () => {
   const pathName = usePathname();
@@ -30,7 +30,7 @@ export const Hamburger = () => {
       </button>
       {showCategory ? (
         <ul className={styles["desktop-genre-category"]}>
-          {Object.keys(contents).map(category => {
+          {Object.keys(CONTENTS).map(category => {
             return (
               <React.Fragment key={category}>
                 <Link
@@ -39,7 +39,7 @@ export const Hamburger = () => {
                     setCurrentTagKey("");
                   }}
                 >
-                  <li className={styles["hamburger-item"]}>{contents[category]}</li>
+                  <li className={styles["hamburger-item"]}>{CONTENTS[category]}</li>
                 </Link>
               </React.Fragment>
             );

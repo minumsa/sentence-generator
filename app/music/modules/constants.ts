@@ -1,6 +1,9 @@
 import { ContentsType } from "./types";
 
-export const contents: ContentsType = {
+export const PER_PAGE_COUNT = 50;
+export const SUB_PER_PAGE_COUNT = 5;
+
+export const CONTENTS: ContentsType = {
   pop: "팝",
   "k-pop": "케이팝",
   "j-pop": "제이팝",
@@ -21,7 +24,7 @@ export interface Tags {
   [key: string]: string;
 }
 
-export const defaultTags: Tags = {
+export const DEFAULT_TAGS: Tags = {
   // 연도별
   decade2020s: "#2020년대",
   decade2010s: "#2010년대",
@@ -83,7 +86,7 @@ interface GroupTags {
   };
 }
 
-export const groupTags: GroupTags = {
+export const GROUP_TAGS: GroupTags = {
   연대: {
     decade2020s: "#2020년대",
     decade2010s: "#2010년대",
@@ -146,7 +149,7 @@ export const groupTags: GroupTags = {
   },
 };
 
-export const album = {
+export const ALBUM = {
   width: 300,
   height: 300,
   mobile: {

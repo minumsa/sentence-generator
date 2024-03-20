@@ -28,16 +28,18 @@ import {
 
 import { toArtistPage, toPostPage } from "../modules/paths";
 import { MobileTagDisplay } from "./MobileTagDisplay";
+import { PER_PAGE_COUNT } from "../modules/constants";
 
 interface GridProps {
   initialData: AlbumInfo[];
   totalScrollCount: number;
 }
 
+const UNREACHABLE_SCROLL_LIMIT = 10000;
+
 export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const pathName = usePathname();
   const [data, setData] = useAtom(albumDataAtom);
-  const [perPageCount, setPerPageCount] = useState(50);
   const [scrollCount, setScrollCount] = useAtom(scrollCountAtom);
   const [scrollPosition, setScrollPosition] = useAtom(scrollPositionAtom);
   const [newTotalScrollCount, setNewTotalScrollCount] = useAtom(currentTotalScrollCountAtom);
@@ -47,7 +49,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   });
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
-  const [currentTagKey, setCurrentTagKey] = useAtom(CurrentTagKeyAtom);
+  const currentTagKey = useAtomValue(CurrentTagKeyAtom);
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
@@ -66,9 +68,9 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   }, [inView]);
 
   useEffect(() => {
-    async function loadData(perPageCount: number, scrollCount: number) {
+    async function loadData(scrollCount: number) {
       const albumFilters: AlbumFilters = {
-        perPageCount: perPageCount,
+        perPageCount: PER_PAGE_COUNT,
         currentPage: scrollCount,
         currentMethod: "별점",
         currentCriteria: criteria,
@@ -86,7 +88,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
       }
 
       if (currentTagKey) {
-        const tmp = Math.max(1, Math.ceil(albumResult?.genreDataLength / perPageCount));
+        const tmp = Math.max(1, Math.ceil(albumResult?.genreDataLength / PER_PAGE_COUNT));
         setNewTotalScrollCount(tmp);
       }
     }
@@ -101,17 +103,16 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
       setData(initialData);
       // 데이터가 있는 상태에서 뒤로 가기 시 또는 태그 버튼을 클릭한 경우
     } else if (scrollDetected || tagButtonClicked) {
-      loadData(perPageCount, scrollCount);
+      loadData(scrollCount);
     }
 
     // scrollCount가 한계치에 도달하는 경우, 더 이상 스크롤 이벤트가 발생하지 않도록 처리
 
     const hasReachedScrollLimit = scrollCount === newTotalScrollCount;
     if (hasReachedScrollLimit) {
-      const unreachableScrollLimit = 10000;
-      setScrollCount(unreachableScrollLimit);
+      setScrollCount(UNREACHABLE_SCROLL_LIMIT);
     }
-  }, [method, criteria, scrollCount, perPageCount, currentTagKey, initialData]);
+  }, [method, criteria, scrollCount, PER_PAGE_COUNT, currentTagKey, initialData]);
 
   function updateScrollPosition() {
     setScrollPosition(window.scrollY);
@@ -133,7 +134,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     <>
       {/* Mobile Tag Items */}
       <MobileTagDisplay />
-      <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
+      <ContentLayout currentPage={scrollCount} perPageCount={PER_PAGE_COUNT} totalDataLength={0}>
         {data.length < 1 && <Loading />}
         {isScrolling && <SpinningCircles className={styles["spinning-circles"]} />}
         {/* Grid Items */}

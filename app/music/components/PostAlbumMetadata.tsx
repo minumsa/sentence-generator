@@ -1,7 +1,6 @@
 import { usePathname } from "next/navigation";
 import styles from "../music.module.css";
 import { formatDuration, isAdminPage } from "../modules/utils";
-import { useState } from "react";
 import { DeleteButton } from "./DeleteButton";
 import { EditButton } from "./EditButton";
 import Link from "next/link";
@@ -15,17 +14,12 @@ interface PostAlbumMetadataProps {
 
 export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
   const albumDuration = formatDuration(albumData.duration);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const pathName = usePathname();
   const hasVideo = albumData.videos[0]?.title.length > 0;
   const releaseDate = albumData.releaseDate;
   const dateObj = new Date(releaseDate);
   const formattedDate =
     dateObj.getFullYear() + "년 " + (dateObj.getMonth() + 1) + "월 " + dateObj.getDate() + "일";
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
 
   return (
     <header className={styles["album-information-container"]}>

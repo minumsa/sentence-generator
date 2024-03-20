@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
 import { ArtistPageImage } from "./ArtistPageImage";
 import { AlbumInfo } from "../modules/types";
+import { SUB_PER_PAGE_COUNT } from "../modules/constants";
 
 interface ArtistContentProps {
   artistData: AlbumInfo[];
@@ -17,16 +17,14 @@ export default function ArtistContent({
   artistDataCount,
   currentPage,
 }: ArtistContentProps) {
-  const [perPageCount, setDataPerPage] = useState<number>(5);
-
   return (
     <ContentLayout
       currentPage={currentPage}
-      perPageCount={perPageCount}
+      perPageCount={SUB_PER_PAGE_COUNT}
       totalDataLength={artistDataCount}
     >
       <ArtistPageImage artistData={artistData} />
-      <AlbumContents artistData={artistData} perPageCount={perPageCount} />
+      <AlbumContents artistData={artistData} perPageCount={SUB_PER_PAGE_COUNT} />
     </ContentLayout>
   );
 }

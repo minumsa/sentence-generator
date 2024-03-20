@@ -9,7 +9,7 @@ import Link from "next/link";
 import { BlurImg } from "./BlurImage";
 import { AlbumInfo } from "../modules/types";
 import { toArtistPage, toTagPage, toPostPage } from "../modules/paths";
-import { defaultTags } from "../modules/constants";
+import { DEFAULT_TAGS } from "../modules/constants";
 
 interface AlbumProps {
   albumData: AlbumInfo;
@@ -32,12 +32,6 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
           src={albumData.imgUrl}
           punch={1}
         />
-        {/* <img
-          className={styles["album-art"]}
-          src={albumData.imgUrl}
-          alt={albumData.album}
-          loading="lazy"
-        /> */}
       </Link>
       <div className={styles["album-panel-metadata-container"]}>
         {albumData.text.split("\n").map((text, index) => {
@@ -137,7 +131,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                         key={index}
                         className={styles["tag-item"]}
                       >
-                        {defaultTags[tagKey]}
+                        {DEFAULT_TAGS[tagKey]}
                       </Link>
                     );
                   })}

@@ -6,19 +6,21 @@ interface ArtistPageImageProps {
 }
 
 export const ArtistPageImage = ({ artistData }: ArtistPageImageProps) => {
-  const firstData = artistData[0];
+  const firstArtistData = artistData[0];
+  const { artist, artistImgUrl } = firstArtistData;
+
   return (
     <div className={styles["artist-page-image-container"]}>
       <div className={styles["artist-page-image"]}>
         <img
           className={styles["category-meta-image"]}
-          src={firstData.artistImgUrl}
-          alt={firstData.artist}
+          src={artistImgUrl}
+          alt={artist}
           loading="lazy"
         />
       </div>
       <div className={styles["artist-page-title"]} style={{ marginTop: "10px", cursor: "default" }}>
-        {firstData.artist}
+        {artist}
       </div>
     </div>
   );

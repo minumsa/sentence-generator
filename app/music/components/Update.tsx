@@ -14,7 +14,7 @@ import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 import { useRouter } from "next/navigation";
 import { AlbumInfo, SpotifyAlbumData } from "../modules/types";
-import { contents, defaultTags, groupTags } from "../modules/constants";
+import { CONTENTS, DEFAULT_TAGS, GROUP_TAGS } from "../modules/constants";
 
 interface UpdateProps {
   currentId: string;
@@ -219,7 +219,7 @@ export default function Update({ currentId }: UpdateProps) {
             }}
           >
             <option value="">--장르를 선택해주세요--</option>
-            {Object.entries(contents).map(([key, value]) => {
+            {Object.entries(CONTENTS).map(([key, value]) => {
               return (
                 <option value={key} key={key}>
                   {value}
@@ -461,7 +461,7 @@ export default function Update({ currentId }: UpdateProps) {
                   handleTagItemDelete(key);
                 }}
               >
-                <span>{defaultTags[key]}</span>
+                <span>{DEFAULT_TAGS[key]}</span>
                 <button className={styles["tag-item-delete-button"]}>×</button>
               </div>
             );
@@ -470,14 +470,14 @@ export default function Update({ currentId }: UpdateProps) {
             <div className={styles["tag-list-modal-container"]}>
               <div className={styles["tag-list-modal"]}>
                 <div className={styles["tag-item-container"]}>
-                  {Object.keys(groupTags).map((tagGroup, index) => {
+                  {Object.keys(GROUP_TAGS).map((tagGroup, index) => {
                     const isNormalTagGroup = tagGroup !== "모두보기";
                     return (
                       isNormalTagGroup && (
                         <React.Fragment key={index}>
                           <div className={styles["tag-list-comment"]}>{tagGroup}</div>
                           <div className={styles["tag-group-container"]} key={index}>
-                            {Object.keys(groupTags[tagGroup]).map(tagKey => {
+                            {Object.keys(GROUP_TAGS[tagGroup]).map(tagKey => {
                               const isExistingTag = currentTagKeys.includes(tagKey);
                               return (
                                 !isExistingTag && (
@@ -488,7 +488,7 @@ export default function Update({ currentId }: UpdateProps) {
                                       handleTagItemAdd(tagKey);
                                     }}
                                   >
-                                    {groupTags[tagGroup][tagKey]}
+                                    {GROUP_TAGS[tagGroup][tagKey]}
                                     <button className={styles["tag-item-delete-button"]}>+</button>
                                   </div>
                                 )

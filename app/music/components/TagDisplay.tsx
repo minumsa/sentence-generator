@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import styles from "./tagdisplay.module.css";
 import { useState } from "react";
-import { defaultTags } from "../modules/constants";
+import { DEFAULT_TAGS } from "../modules/constants";
 
 export const TagDisplay = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ export const TagDisplay = () => {
       className={styles["tag-display-container"]}
       style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
     >
-      {Object.values(defaultTags).map((tag, index) => (
+      {Object.values(DEFAULT_TAGS).map((tag, index) => (
         <div
           key={index}
           className={styles["tag-display-item"]}

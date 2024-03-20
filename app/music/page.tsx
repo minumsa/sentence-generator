@@ -1,9 +1,9 @@
 import { Grid } from "./components/Grid";
 import { MusicLayout } from "./components/MusicLayout";
+import { PER_PAGE_COUNT } from "./modules/constants";
 
 export default async function Page() {
   try {
-    const perPageCount = 50;
     const currentPage = 1;
     const pathName = "";
     const currentMethod = "별점";
@@ -13,7 +13,7 @@ export default async function Page() {
     // queryString 상수로 정의
     const queryString = new URLSearchParams({
       pathName,
-      perPageCount: String(perPageCount),
+      perPageCount: String(PER_PAGE_COUNT),
       currentPage: String(currentPage),
       currentMethod,
       currentCriteria,
@@ -35,7 +35,7 @@ export default async function Page() {
     }
 
     const { slicedData, genreDataLength } = await response.json();
-    const totalScrollCount = Math.max(1, Math.ceil(genreDataLength / perPageCount));
+    const totalScrollCount = Math.max(1, Math.ceil(genreDataLength / PER_PAGE_COUNT));
 
     return (
       <MusicLayout>

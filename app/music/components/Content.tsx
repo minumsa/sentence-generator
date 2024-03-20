@@ -1,5 +1,6 @@
 "use client";
 
+import { SUB_PER_PAGE_COUNT } from "../modules/constants";
 import { AlbumInfo } from "../modules/types";
 import { AlbumContents } from "./AlbumContents";
 import { ContentLayout } from "./ContentLayout";
@@ -11,14 +12,13 @@ interface ContentProps {
 }
 
 export default function Content({ data, totalDataLength, currentPage }: ContentProps) {
-  const perPageCount = 5;
   return (
     <ContentLayout
       currentPage={currentPage}
-      perPageCount={perPageCount}
+      perPageCount={SUB_PER_PAGE_COUNT}
       totalDataLength={totalDataLength}
     >
-      <AlbumContents artistData={data} perPageCount={perPageCount} />
+      <AlbumContents artistData={data} perPageCount={SUB_PER_PAGE_COUNT} />
     </ContentLayout>
   );
 }
