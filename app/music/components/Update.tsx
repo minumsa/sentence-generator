@@ -13,8 +13,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 import { useRouter } from "next/navigation";
-import { AlbumInfo, SpotifyAlbumData, contents } from "../modules/types";
-import { defaultTags, groupTags } from "../modules/constants";
+import { AlbumInfo, SpotifyAlbumData } from "../modules/types";
+import { contents, defaultTags, groupTags } from "../modules/constants";
 
 interface UpdateProps {
   currentId: string;

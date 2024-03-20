@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useAtom } from "jotai";
 import { CurrentTagKeyAtom } from "../modules/atoms";
-import { contents } from "../modules/types";
 import { toGenrePage } from "../modules/paths";
 import { isAdminPage } from "../modules/utils";
+import { contents } from "../modules/constants";
 
 export const Hamburger = () => {
   const pathName = usePathname();

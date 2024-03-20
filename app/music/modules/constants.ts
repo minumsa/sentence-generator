@@ -1,4 +1,21 @@
-import { CriteriaType, MethodType } from "./types";
+import { ContentsType, CriteriaType, MethodType } from "./types";
+
+export const contents: ContentsType = {
+  pop: "팝",
+  "k-pop": "케이팝",
+  "j-pop": "제이팝",
+  rock: "록",
+  alternative: "얼터너티브",
+  disco: "디스코",
+  electronic: "일렉트로닉",
+  jazz: "재즈",
+  soul: "알앤비/소울",
+  hiphop: "힙합/랩",
+  folk: "포크",
+  country: "컨트리",
+  classic: "클래식",
+  soundtrack: "사운드트랙",
+};
 
 export interface Tags {
   [key: string]: string;
@@ -136,12 +153,4 @@ export const album = {
     width: 250,
     height: 250,
   },
-};
-
-export const sortItems: {
-  method: MethodType[];
-  criteria: CriteriaType[];
-} = {
-  method: ["작성일", "발매일", "아티스트", "앨범", "별점"],
-  criteria: ["오름차순", "내림차순"],
 };
