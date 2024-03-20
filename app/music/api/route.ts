@@ -12,7 +12,6 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const currentPage = Number(url.searchParams.get("currentPage"));
     const pathName = url.searchParams.get("pathName") ?? "";
-    const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
     const currentTagKey = url.searchParams.get("currentTagKey");
     let perPageCount: number;
 
@@ -26,7 +25,7 @@ export async function GET(request: Request) {
       [key: string]: SortOrder;
     }
 
-    const sortKey: SortKey = { score: currentCriteria, artist: 1 };
+    const sortKey: SortKey = { score: -1, artist: 1 };
 
     interface Query {
       tagKeys?: string;

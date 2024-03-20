@@ -71,8 +71,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     async function loadData(scrollCount: number) {
       const albumFilters: AlbumFilters = {
         currentPage: scrollCount,
-        currentMethod: "별점",
-        currentCriteria: criteria,
         currentTagKey: currentTagKey,
       };
 
@@ -142,7 +140,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
             const currentDataLength = data.length;
             const isLastDataAndOddNumber =
               index === currentDataLength - 1 && currentDataLength % 2 === 1;
-            const isLastItem = index + 1 === data.length;
+            const isLastItem = index + 2 === data.length;
             const imgSrc = item.imgUrl;
             const blurhash = item.blurHash ?? "";
 

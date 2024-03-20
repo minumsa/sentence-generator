@@ -2,8 +2,6 @@ import { CriteriaType, MethodType, SpotifyAlbumData } from "./types";
 
 export interface AlbumFilters {
   currentPage: number;
-  currentMethod: MethodType;
-  currentCriteria: CriteriaType;
   currentTagKey: string;
 }
 
@@ -27,10 +25,10 @@ export interface ArtistDataParams {
 }
 
 export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
-  const { currentPage, currentMethod, currentCriteria, currentTagKey } = albumFilters;
+  const { currentPage, currentTagKey } = albumFilters;
 
   try {
-    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
+    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentTagKey=${currentTagKey}`;
     const url = `/music/api${queryString}`;
 
     const response = await fetch(url, {

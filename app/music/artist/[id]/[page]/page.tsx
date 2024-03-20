@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
   const artistId = params.id;
   const currentPage = params.page;
 
-  const queryString = `?currentPage=${currentPage}&artistId=${artistId}&pathName=${""}&currentMethod=${"발매일"}&currentCriteria=${"내림차순"}`;
+  const queryString = `?currentPage=${currentPage}&artistId=${artistId}&pathName=${""}`;
   const url = `https://divdivdiv.com/music/api/artist${queryString}`;
 
   try {

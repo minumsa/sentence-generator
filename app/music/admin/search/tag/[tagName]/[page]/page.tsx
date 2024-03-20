@@ -4,13 +4,12 @@ import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
   const pathName = "search";
-  const currentMethod = "별점";
-  const currentCriteria = "내림차순";
+
   const currentTagKey: string = params.tagName;
   const currentPage: number = params.page;
 
   try {
-    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
+    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentTagKey=${currentTagKey}`;
     const url = `https://divdivdiv.com/music/api${queryString}`;
 
     const response = await fetch(url, {
