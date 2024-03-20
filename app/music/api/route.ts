@@ -43,10 +43,6 @@ export async function GET(request: Request) {
       query.genre = pathName;
     }
 
-    const genreDataLength = await Music.find(query).count();
-
-    // const skipCount = (currentPage - 1) * perPageCount;
-
     const skipCount = PER_PAGE_COUNT * currentPage - PER_PAGE_COUNT + 1;
     const slicedData =
       currentPage === 1
@@ -55,8 +51,9 @@ export async function GET(request: Request) {
             .skip(skipCount)
             .limit(PER_PAGE_COUNT - 1)
         : await Music.find(query).sort(sortKey).skip(skipCount).limit(PER_PAGE_COUNT);
+    const totalDataLength = await Music.find(query).count();
 
-    return NextResponse.json({ slicedData, genreDataLength });
+    return NextResponse.json({ slicedData, totalDataLength });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

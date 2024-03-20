@@ -40,7 +40,7 @@ export async function GET(request: Request) {
       ],
     }).count();
 
-    return NextResponse.json({ slicedData, genreDataLength: totalDataLength });
+    return NextResponse.json({ slicedData, totalDataLength: totalDataLength });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

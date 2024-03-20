@@ -25,8 +25,8 @@ export default async function Page() {
       throw new Error("Failed to fetch music data");
     }
 
-    const { slicedData, genreDataLength } = await response.json();
-    const totalScrollCount = Math.max(1, Math.ceil(genreDataLength / PER_PAGE_COUNT));
+    const { slicedData, totalDataLength } = await response.json();
+    const totalScrollCount = Math.max(1, Math.ceil(totalDataLength / PER_PAGE_COUNT));
 
     return (
       <MusicLayout>

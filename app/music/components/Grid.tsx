@@ -87,7 +87,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
       }
 
       if (currentTagKey) {
-        const tmp = Math.max(1, Math.ceil(albumResult?.genreDataLength / PER_PAGE_COUNT));
+        const tmp = Math.max(1, Math.ceil(albumResult?.totalDataLength / PER_PAGE_COUNT));
         setNewTotalScrollCount(tmp);
       }
     }

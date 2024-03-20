@@ -32,11 +32,11 @@ export default async function Page({ params }: PageProps) {
       throw new Error("Failed to fetch music data");
     }
 
-    const { slicedData, genreDataLength } = await response.json();
+    const { slicedData, totalDataLength } = await response.json();
 
     return (
       <MusicLayout>
-        <Content data={slicedData} totalDataLength={genreDataLength} currentPage={currentPage} />
+        <Content data={slicedData} totalDataLength={totalDataLength} currentPage={currentPage} />
       </MusicLayout>
     );
   } catch (error) {

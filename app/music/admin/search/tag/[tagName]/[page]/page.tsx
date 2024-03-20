@@ -24,13 +24,13 @@ export default async function Page({ params }: PageProps) {
       throw new Error("Failed to search data");
     }
 
-    const { slicedData, genreDataLength } = await response.json();
+    const { slicedData, totalDataLength } = await response.json();
     const currentKeyword = "";
     const searchInfo = {
       currentKeyword,
       currentPage,
       currentTagName: currentTagKey,
-      totalDataLength: genreDataLength,
+      totalDataLength: totalDataLength,
     };
 
     return (

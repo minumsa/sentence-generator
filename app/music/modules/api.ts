@@ -44,9 +44,9 @@ export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
       throw new Error("Failed to fetch music data");
     }
 
-    const { slicedData, genreDataLength } = await response.json();
+    const { slicedData, totalDataLength } = await response.json();
 
-    return { slicedData, genreDataLength };
+    return { slicedData, totalDataLength };
   } catch (error) {
     console.error(error);
   }
@@ -95,9 +95,9 @@ export async function fetchSearchedData(searchFilters: SearchFilters) {
       throw new Error("Failed to search data");
     }
 
-    const { slicedData, genreDataLength } = await response.json();
+    const { slicedData, totalDataLength } = await response.json();
 
-    return { slicedData, genreDataLength };
+    return { slicedData, totalDataLength };
   } catch (error) {
     console.error(error);
   }
