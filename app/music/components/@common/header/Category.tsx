@@ -1,4 +1,4 @@
-import styles from "../../../music.module.css";
+import styles from "./Category.module.css";
 import Link from "next/link";
 import { Hamburger } from "./Hamburger";
 import { usePathname } from "next/navigation";
@@ -29,7 +29,7 @@ export const Category = () => {
           <div style={{ width: "20px" }}></div>
           {/* 사이트 제목 */}
           <Link
-            className={`${styles["category"]} ${styles["site-title"]}`}
+            className={styles["category"]}
             href={isAdminPage(pathName) ? "/music/admin" : "/music"}
             onClick={() => {
               scrollToTop();

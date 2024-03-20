@@ -1,5 +1,5 @@
 import { usePathname, useRouter } from "next/navigation";
-import styles from "../../../music.module.css";
+import styles from "./Hamburger.module.css";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAtom } from "jotai";
@@ -47,9 +47,7 @@ export const Hamburger = () => {
         </ul>
       ) : null}
       {showCategory && isAdminPage(pathName) && (
-        <div
-          className={`${styles["desktop-introduction-category"]} ${styles["backdrop-filtered"]}`}
-        >
+        <div className={styles["desktop-introduction-category"]}>
           <div className={styles["hamburger-item-title"]}>관리자 메뉴</div>
           <div
             className={styles["hamburger-item"]}

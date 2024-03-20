@@ -1,0 +1,61 @@
+/* Category.tsx */
+.header-container {
+  position: relative;
+  background-color: var(--background-color);
+  width: 1280px;
+  height: 100%;
+}
+
+.desktop-category {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  width: 100%;
+  max-width: 1280px;
+  font-size: 1.15rem;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.top-magnifying-glass {
+  position: relative;
+  background-image: url(/music/magnifying-glass.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  width: 20px;
+  height: 24.5px;
+}
+
+@media (max-width: 1300px) {
+  .desktop-category {
+    padding: 0 30px;
+  }
+
+  .desktop-hamburger-container {
+    left: 30px;
+  }
+}
+
+@media (max-width: 525px) {
+  .header-container {
+    background-color: unset;
+  }
+
+  .desktop-category {
+    padding: 0 15px;
+  }
+
+  .category {
+    padding: 10px;
+  }
+}

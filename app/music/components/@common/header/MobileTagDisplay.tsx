@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { DEFAULT_TAGS } from "../../../modules/constants";
-import styles from "../../../music.module.css";
+import styles from "./MobileTagDisplay.module.css";
 import {
   CurrentTagKeyAtom,
   albumDataAtom,

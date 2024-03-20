@@ -1,0 +1,126 @@
+.desktop-hamburger-container {
+  display: flex;
+  position: absolute;
+  top: calc(50% + 1px);
+  left: 15px;
+  justify-content: center;
+  transform: translate(0, -50%);
+  z-index: 100;
+  cursor: pointer;
+  width: 24px;
+  height: 23px;
+}
+
+.hamburger-icon {
+  margin: 3px 0 0 0;
+  box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
+  background-color: var(--text-color);
+  width: 20px;
+  height: 1px;
+}
+
+.close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 4px 4px;
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+.desktop-genre-category {
+  display: flex;
+  position: absolute;
+  top: 43px;
+  left: -26px;
+  flex-direction: column;
+  z-index: 10000;
+  border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  cursor: default;
+  padding: 5px 20px 20px 30px;
+  width: 120px;
+  height: fit-content;
+  font-size: 1.1rem;
+}
+
+.hamburger-item {
+  z-index: 3;
+  cursor: pointer;
+  padding: 7px 0;
+}
+
+.hamburger-item:hover {
+  text-decoration: underline;
+}
+
+.hamburger-item-title {
+  z-index: 3;
+  padding: 7px 0;
+  font-weight: 600;
+}
+
+.hamburger-item-title:hover {
+  text-decoration: none;
+}
+
+.desktop-introduction-category {
+  display: flex;
+  position: absolute;
+  top: 42.5px;
+  left: 145px;
+  flex-direction: column;
+  z-index: 1;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  cursor: default;
+  padding: 5px 20px 20px 30px;
+  width: 150px;
+  height: fit-content;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 525px) {
+  .desktop-hamburger-container {
+    left: 15px;
+  }
+
+  .hamburger-icon {
+    margin: 3px 0 0 0;
+    box-shadow: 0 7px 0 var(--text-color), 0 14px 0 var(--text-color);
+    background-color: var(--text-color);
+    width: 20px;
+    height: 1px;
+  }
+
+  .close-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 6px 4px 0;
+    font-size: 2.2rem;
+    font-weight: 100;
+  }
+
+  .desktop-genre-category {
+    top: 32.5px;
+    left: -16px;
+    border-left: none;
+    padding: 5px 10px 20px 20px;
+    width: 125px;
+    font-size: 1.05rem;
+  }
+
+  .hamburger-item {
+    z-index: 3;
+  }
+
+  .desktop-introduction-category {
+    top: 32.5px;
+    left: 139px;
+    padding: 5px 20px 20px 15px;
+    width: 125px;
+    font-size: 1.05rem;
+  }
+}
