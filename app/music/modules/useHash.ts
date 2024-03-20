@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { decode } from "blurhash";
 
 export function useBlurhash(
@@ -11,7 +11,7 @@ export function useBlurhash(
 
   const [url, setUrl] = useState<string | null>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let isCancelled = false;
     width = 100;
     height = 100;
