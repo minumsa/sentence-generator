@@ -63,7 +63,10 @@ export async function GET(request: Request) {
     let slicedData;
 
     if (skipCount > 1) {
-      slicedData = await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
+      slicedData = await Music.find(query)
+        .sort(sortKey)
+        .skip(skipCount)
+        .limit(perPageCount - 1);
     } else {
       slicedData = await Music.find(query).sort(sortKey).limit(perPageCount);
     }
