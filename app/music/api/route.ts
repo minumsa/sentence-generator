@@ -45,18 +45,9 @@ export async function GET(request: Request) {
 
     const genreDataLength = await Music.find(query).count();
 
-    const skipCount = (currentPage - 1) * perPageCount;
-
-    let slicedData;
-
-    if (skipCount > 1) {
-      slicedData = await Music.find(query)
-        .sort(sortKey)
-        .skip(skipCount)
-        .limit(perPageCount - 1);
-    } else {
-      slicedData = await Music.find(query).sort(sortKey).limit(perPageCount);
-    }
+    // const skipCount = (currentPage - 1) * perPageCount;
+    const startIndex = PER_PAGE_COUNT * currentPage - PER_PAGE_COUNT + 1;
+    const slicedData = await Music.find(query).sort(sortKey).skip(startIndex).limit(PER_PAGE_COUNT);
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {

@@ -52,8 +52,6 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const currentTagKey = useAtomValue(CurrentTagKeyAtom);
   const [isScrolling, setIsScrolling] = useState(false);
 
-  console.log(data);
-
   useEffect(() => {
     Aos.init();
     setNewTotalScrollCount(totalScrollCount);

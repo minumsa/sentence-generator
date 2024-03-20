@@ -1,7 +1,7 @@
 import { ContentsType } from "./types";
 
-export const PER_PAGE_COUNT = 50;
-export const SUB_PER_PAGE_COUNT = 5;
+export const PER_PAGE_COUNT: number = 50;
+export const SUB_PER_PAGE_COUNT: number = 5;
 
 export const CONTENTS: ContentsType = {
   pop: "팝",
