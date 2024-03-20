@@ -1,6 +1,8 @@
 import { isAdminPage } from "./utils";
 
-const isAdmin = (pathName: string) => isAdminPage(pathName);
+const isAdmin = (pathName: string) => {
+  return pathName.includes("admin");
+};
 
 export const toPostPage = (pathName: string, albumId: string) =>
   isAdmin(pathName) ? `/music/admin/post/${albumId}` : `/music/post/${albumId}`;
