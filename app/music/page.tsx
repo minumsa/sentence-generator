@@ -4,22 +4,14 @@ import { PER_PAGE_COUNT } from "./modules/constants";
 
 export default async function Page() {
   try {
-    const currentPage = 1;
+    const scrollCount = 1;
     const pathName = "";
     const currentMethod = "별점";
     const currentCriteria = "내림차순";
     const currentTagKey = "";
 
-    // queryString 상수로 정의
-    const queryString = new URLSearchParams({
-      pathName,
-      currentPage: String(currentPage),
-      currentMethod,
-      currentCriteria,
-      currentTagKey,
-    }).toString();
-
-    const url = `https://divdivdiv.com/music/api?${queryString}`;
+    const queryString = `?pathName=${pathName}&currentPage=${scrollCount}&currentMethod=${currentMethod}&currentCriteria=${currentCriteria}&currentTagKey=${currentTagKey}`;
+    const url = `https://divdivdiv.com/music/api${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",

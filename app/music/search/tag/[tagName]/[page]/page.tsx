@@ -1,7 +1,6 @@
 import SearchContent from "@/app/music/components/SearchContent";
 import { MusicLayout } from "@/app/music/components/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
-import { SUB_PER_PAGE_COUNT } from "@/app/music/modules/constants";
 
 export default async function Page({ params }: PageProps) {
   const pathName = "search";
