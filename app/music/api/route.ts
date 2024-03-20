@@ -3,6 +3,7 @@ import Music from "@/models/music";
 import { NextResponse } from "next/server";
 import { isMainPage, isSearchPage } from "../modules/utils";
 import { PER_PAGE_COUNT, SUB_PER_PAGE_COUNT } from "../modules/constants";
+import { SortOrder } from "mongoose";
 
 export async function GET(request: Request) {
   try {
@@ -11,7 +12,6 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const currentPage = Number(url.searchParams.get("currentPage"));
     const pathName = url.searchParams.get("pathName") ?? "";
-    const currentMethod = url.searchParams.get("currentMethod");
     const currentCriteria = url.searchParams.get("currentCriteria") === "오름차순" ? 1 : -1;
     const currentTagKey = url.searchParams.get("currentTagKey");
     let perPageCount: number;
@@ -22,26 +22,11 @@ export async function GET(request: Request) {
       perPageCount = SUB_PER_PAGE_COUNT;
     }
 
-    let sortKey = {};
-    switch (currentMethod) {
-      case "발매일":
-        sortKey = { releaseDate: currentCriteria };
-        break;
-      case "작성일":
-        sortKey = { uploadDate: currentCriteria };
-        break;
-      case "아티스트":
-        sortKey = { artist: currentCriteria };
-        break;
-      case "앨범":
-        sortKey = { album: currentCriteria };
-        break;
-      case "별점":
-        sortKey = { score: currentCriteria, artist: 1 };
-        break;
-      default:
-        break;
+    interface SortKey {
+      [key: string]: SortOrder;
     }
+
+    const sortKey: SortKey = { score: currentCriteria, artist: 1 };
 
     interface Query {
       tagKeys?: string;
@@ -59,17 +44,21 @@ export async function GET(request: Request) {
     }
 
     const genreDataLength = await Music.find(query).count();
-    const skipCount = (currentPage - 1) * perPageCount;
-    let slicedData;
 
-    if (skipCount > 1) {
-      slicedData = await Music.find(query)
-        .sort(sortKey)
-        .skip(skipCount + 1)
-        .limit(perPageCount);
-    } else {
-      slicedData = await Music.find(query).sort(sortKey).limit(perPageCount);
-    }
+    const skipCount = (currentPage - 1) * perPageCount;
+    const slicedData = await Music.find(query)
+      .sort(sortKey)
+      .skip(skipCount + 1)
+      .limit(perPageCount);
+
+    // if (skipCount > 1) {
+    //   slicedData = await Music.find(query)
+    //     .sort(sortKey)
+    //     .skip(skipCount + 1)
+    //     .limit(perPageCount);
+    // } else {
+    //   slicedData = await Music.find(query).sort(sortKey).limit(perPageCount);
+    // }
 
     return NextResponse.json({ slicedData, genreDataLength });
   } catch (error) {
