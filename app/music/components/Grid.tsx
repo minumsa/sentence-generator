@@ -25,8 +25,9 @@ import {
   scrollCountAtom,
   scrollPositionAtom,
 } from "../modules/atoms";
-import { defaultTags } from "../modules/constants";
+
 import { toArtistPage, toPostPage } from "../modules/paths";
+import { MobileTagDisplay } from "./MobileTagDisplay";
 
 interface GridProps {
   initialData: AlbumInfo[];
@@ -38,17 +39,17 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   const [data, setData] = useAtom(albumDataAtom);
   const [perPageCount, setPerPageCount] = useState(50);
   const [scrollCount, setScrollCount] = useAtom(scrollCountAtom);
+  const [scrollPosition, setScrollPosition] = useAtom(scrollPositionAtom);
   const [currentTotalScrollCount, setCurrentTotalScrollCount] = useAtom(
     currentTotalScrollCountAtom
   );
-  const [scrollPosition, setScrollPosition] = useAtom(scrollPositionAtom);
+
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
   });
   const method = useAtomValue(methodAtom);
   const criteria = useAtomValue(criteriaAtom);
-  const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
   const [currentTagKey, setCurrentTagKey] = useAtom(CurrentTagKeyAtom);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -107,7 +108,8 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
 
     // scrollCount가 한계치에 도달하는 경우, 더 이상 스크롤 이벤트가 발생하지 않도록 처리
     if (scrollCount === currentTotalScrollCount) {
-      setScrollCount(10000);
+      const unreachableScrollLimit = 10000;
+      setScrollCount(unreachableScrollLimit);
     }
   }, [method, criteria, scrollCount, perPageCount, currentTagKey, initialData]);
 
@@ -121,47 +123,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   return (
     <>
       {/* Mobile Tag Items */}
-      <div
-        className={styles["tag-display-container"]}
-        style={
-          showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }
-        }
-      >
-        {Object.keys(defaultTags).map((key, index) => {
-          return (
-            <div
-              key={index}
-              className={styles["tag-display-item"]}
-              onClick={() => {
-                setData([]);
-                setCurrentTagKey(key);
-                setScrollCount(1);
-                window.scrollTo(0, scrollPosition);
-                setScrollPosition(0);
-              }}
-              style={
-                currentTagKey === key || (currentTagKey === "" && key === "all")
-                  ? { boxShadow: "inset 0 0 0 1px var(--text-color)", order: -1 }
-                  : undefined
-              }
-            >
-              {defaultTags[key]}
-            </div>
-          );
-        })}
-        <div
-          className={styles["arrow-down-container"]}
-          onClick={() => {
-            setShowAllTagItems(!showAllTagItems);
-          }}
-        >
-          <img
-            className={styles["arrow-down"]}
-            src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
-            alt="arrow-down"
-          />
-        </div>
-      </div>
+      <MobileTagDisplay />
       <ContentLayout currentPage={scrollCount} perPageCount={perPageCount} totalDataLength={0}>
         {data.length < 1 && <Loading />}
         {isScrolling && <SpinningCircles className={styles["spinning-circles"]} />}
