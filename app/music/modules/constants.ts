@@ -5,8 +5,8 @@ export const SUB_PER_PAGE_COUNT = 5;
 
 export const CONTENTS: ContentsType = {
   pop: "팝",
-  "k-pop": "케이팝",
-  "j-pop": "제이팝",
+  kpop: "케이팝",
+  jpop: "제이팝",
   rock: "록",
   alternative: "얼터너티브",
   disco: "디스코",

@@ -4,8 +4,13 @@ import { PageProps } from "@/app/music/modules/types";
 import { SUB_PER_PAGE_COUNT } from "@/app/music/modules/constants";
 
 export default async function Page({ params }: PageProps) {
-  const currentGenre = params.genre;
-  const currentPage = Number(params.page);
+  let currentGenre = params.genre;
+  const currentPage = params.page;
+
+  const genreFilters = currentGenre === "kpop" || currentGenre === "jpop";
+  if (genreFilters) {
+    currentGenre = currentGenre.slice(0, 1) + "-" + currentGenre.slice(1);
+  }
 
   try {
     const pathName = currentGenre;

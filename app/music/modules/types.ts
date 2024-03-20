@@ -1,7 +1,7 @@
 export interface ContentsType {
   pop: string;
-  "k-pop": string;
-  "j-pop": string;
+  kpop: string;
+  jpop: string;
   rock: string;
   alternative: string;
   disco: string;
