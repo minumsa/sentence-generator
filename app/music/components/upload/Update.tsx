@@ -212,7 +212,7 @@ export default function Update({ currentId }: UpdateProps) {
         <div className={styles["block-title"]}>장르</div>
         <div className={styles["select-container"]}>
           <select
-            className={styles["select"]}
+            className={styles["small-input"]}
             value={genre}
             onChange={e => {
               setGenre(e.target.value);
@@ -243,7 +243,7 @@ export default function Update({ currentId }: UpdateProps) {
       {/* 앨범 제목 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>앨범 제목</div>
-        <div>
+        <div style={{ position: "relative" }}>
           <input
             className={styles["input"]}
             value={albumKeyword}
@@ -252,49 +252,44 @@ export default function Update({ currentId }: UpdateProps) {
               setShowAlbumListModal(true);
             }}
             placeholder="검색어를 입력해주세요"
-          />
-          {showAlbumListModal && (
-            <div
-              ref={modalRef}
-              className={styles["album-search-result-modal"]}
-              style={{ display: albumKeyword && searchData ? "flex" : "none" }}
-            >
-              {searchData?.map((data, index) => {
-                const { artists, name, release_date, images } = data;
-                const artist = artists[0].name;
-                const album = name;
-                const releaseYear = release_date.slice(0, 4);
-                const imageUrl = images[2].url;
-                return (
-                  <div
-                    className={styles["search-album-modal"]}
-                    key={index}
-                    onClick={() => {
-                      handleModal(data);
-                    }}
-                  >
-                    <div className={styles["search-album-image-container"]}>
-                      <img
-                        className={styles["search-album-image"]}
-                        src={imageUrl}
-                        alt="search-album-image"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className={styles["search-album-text"]}>
-                      <div>
-                        <span>{album}</span>
-                        <span style={{ paddingLeft: "5px", color: "#757A84" }}>
-                          ({releaseYear})
-                        </span>
-                      </div>
-                      <div style={{ fontWeight: 400 }}>{artist}</div>
-                    </div>
+          />{" "}
+          <div
+            className={styles["search-album-modal-container"]}
+            style={{ display: searchData ? "flex" : "none" }}
+          >
+            {searchData?.map((data, index) => {
+              const { artists, name, release_date, images } = data;
+              const artist = artists[0].name;
+              const album = name;
+              const releaseYear = release_date.slice(0, 4);
+              const imageUrl = images[2].url;
+              return (
+                <div
+                  className={styles["search-album-modal"]}
+                  key={index}
+                  onClick={() => {
+                    handleModal(data);
+                  }}
+                >
+                  <div className={styles["search-album-image-container"]}>
+                    <img
+                      className={styles["search-album-image"]}
+                      src={imageUrl}
+                      alt="search-album-image"
+                      loading="lazy"
+                    />
                   </div>
-                );
-              })}
-            </div>
-          )}
+                  <div className={styles["search-album-text"]}>
+                    <div>
+                      <span className={styles["search-album-title"]}>{album}</span>
+                      <span className={styles["release-year"]}>({releaseYear})</span>
+                    </div>
+                    <div>{artist}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -369,10 +364,7 @@ export default function Update({ currentId }: UpdateProps) {
           const isFirstVideo = index === 0;
           return (
             <div key={index} className={styles["block-container"]}>
-              <div
-                className={styles["block-title"]}
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div className={styles["block-title"]}>
                 {isFirstVideo ? (
                   <>
                     <a
@@ -407,7 +399,7 @@ export default function Update({ currentId }: UpdateProps) {
                     </div>
                   </>
                 ) : (
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <>
                     <div>{`영상 제목 ${videoNumber}`}</div>
                     <div className={styles["video-block-button-container"]}>
                       <div
@@ -422,7 +414,7 @@ export default function Update({ currentId }: UpdateProps) {
                         −
                       </div>
                     </div>
-                  </div>
+                  </>
                 )}
               </div>
               <input
@@ -538,13 +530,12 @@ export default function Update({ currentId }: UpdateProps) {
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>관리자 비밀번호</div>
         <input
-          className={styles["input"]}
+          className={styles["small-input"]}
           value={password}
           onChange={e => {
             setPassword(e.target.value);
           }}
           onKeyDown={handlePasswordEnter}
-          style={{ width: "300px" }}
         />
       </div>
 

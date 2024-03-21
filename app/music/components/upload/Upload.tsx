@@ -147,7 +147,7 @@ export default function Upload() {
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>장르</div>
         <select
-          className={styles["select"]}
+          className={styles["small-input"]}
           value={genre}
           onChange={e => {
             setGenre(e.target.value);
@@ -179,7 +179,7 @@ export default function Upload() {
           />
           <div
             className={styles["search-album-modal-container"]}
-            style={{ display: albumKeyword && searchData ? "flex" : "none" }}
+            style={{ display: searchData ? "flex" : "none" }}
           >
             {searchData?.map((data, index) => {
               const { artists, name, release_date, images } = data;
@@ -205,10 +205,10 @@ export default function Upload() {
                   </div>
                   <div className={styles["search-album-text"]}>
                     <div>
-                      <span>{album}</span>
-                      <span style={{ paddingLeft: "5px" }}>({releaseYear})</span>
+                      <span className={styles["search-album-title"]}>{album}</span>
+                      <span className={styles["release-year"]}>({releaseYear})</span>
                     </div>
-                    <div style={{ fontWeight: 400, marginTop: "3px" }}>{artist}</div>
+                    <div>{artist}</div>
                   </div>
                 </div>
               );
@@ -283,10 +283,7 @@ export default function Upload() {
         const isFirstVideo = index === 0;
         return (
           <div key={index} className={styles["block-container"]}>
-            <div
-              className={styles["block-title"]}
-              style={{ display: "flex", alignItems: "center" }}
-            >
+            <div className={styles["block-title"]}>
               {isFirstVideo ? (
                 <>
                   <a
@@ -321,7 +318,7 @@ export default function Upload() {
                   </div>
                 </>
               ) : (
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <>
                   <div>{`영상 제목 ${videoNumber}`}</div>
                   <div className={styles["video-block-button-container"]}>
                     <div
@@ -336,7 +333,7 @@ export default function Upload() {
                       −
                     </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
             <input
@@ -452,13 +449,12 @@ export default function Upload() {
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>관리자 비밀번호</div>
         <input
-          className={styles["input"]}
+          className={styles["small-input"]}
           value={password}
           onChange={e => {
             setPassword(e.target.value);
           }}
           onKeyDown={handlePasswordEnter}
-          style={{ width: "300px" }}
         />
       </div>
 

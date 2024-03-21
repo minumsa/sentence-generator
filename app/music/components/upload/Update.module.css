@@ -24,6 +24,8 @@
 }
 
 .block-title {
+  display: flex;
+  align-items: center;
   color: var(--text-color);
   margin-bottom: 20px;
 }
@@ -37,7 +39,7 @@
 }
 
 /* Form Styles */
-.select,
+.small-input,
 .input,
 .date-input {
   width: 100%;
@@ -50,7 +52,7 @@
   box-sizing: border-box;
 }
 
-.select {
+.small-input {
   max-width: 300px;
 }
 
@@ -58,7 +60,7 @@
   width: 300px;
 }
 
-.select-container {
+.small-input-container {
   width: calc(100% + 20px);
   height: 50px;
 }
@@ -114,6 +116,7 @@
 
 .search-album-modal-container {
   position: absolute;
+
   display: flex;
   flex-direction: column;
   width: 500px;
@@ -149,7 +152,14 @@
   justify-content: center;
   padding: 0 10px;
   font-size: 1.1rem;
+}
+
+.search-album-title {
   font-weight: 500;
+}
+
+.release-year {
+  padding-left: 5px;
 }
 
 /* Tag Styles */
