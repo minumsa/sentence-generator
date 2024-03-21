@@ -16,104 +16,103 @@ interface AlbumProps {
 }
 
 export const AlbumPanel = ({ albumData }: AlbumProps) => {
+  const {
+    id,
+    album,
+    artist,
+    artistId,
+    artistImgUrl,
+    tracks,
+    releaseDate,
+    text,
+    blurHash,
+    duration,
+    imgUrl,
+    tagKeys,
+    score,
+  } = albumData;
   const pathName = usePathname();
-  const albumDuration = formatDuration(albumData.duration);
+  const albumDuration = formatDuration(duration);
   const divRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
-      <Link
-        className={styles["album-information-container"]}
-        href={toPostPage(pathName, albumData.id)}
-      >
-        <BlurImg
-          className={styles["album-art"]}
-          blurhash={albumData.blurHash}
-          src={albumData.imgUrl}
-          punch={1}
-        />
+      <Link className={styles["album-image-container"]} href={toPostPage(pathName, id)}>
+        <BlurImg className={styles["album-image"]} blurhash={blurHash} src={imgUrl} punch={1} />
       </Link>
-      <div className={styles["album-panel-metadata-container"]}>
-        {albumData.text.split("\n").map((text, index) => {
+      <div className={styles["album-metadata-container"]}>
+        {text.split("\n").map((text, index) => {
           const longTextStandard = isMobile ? 100 : 180;
           const isFirstParagraph = index === 0;
-          const isLongText = albumData.text.length > longTextStandard;
+          const isLongText = text.length > longTextStandard;
           if (isFirstParagraph)
             return (
-              <div key={index} className={styles["paragraph-container"]}>
+              <div key={index}>
                 {/* 앨범 타이틀 */}
-                <div className={styles["post-album-title"]}>
-                  <Link href={toPostPage(pathName, albumData.id)}>
-                    <h2>{albumData.album}</h2>
+                <div className={styles["album-title"]}>
+                  <Link href={toPostPage(pathName, id)}>
+                    <h2>{album}</h2>
                   </Link>
                   {/* 별점 */}
                   <div className={styles["star-container"]}>
                     <img
-                      className={styles["star-color"]}
+                      className={styles["colored-star"]}
                       src="/cinephile/star-color.webp"
-                      alt="star-color"
+                      alt="colored-star"
                       style={
-                        albumData.score
+                        score
                           ? {
-                              clipPath: `inset(0 ${100 - albumData.score * 20}% 0 0)`,
+                              clipPath: `inset(0 ${100 - score * 20}% 0 0)`,
                             }
                           : undefined
                       }
                       loading="lazy"
                     />
                     <img
-                      className={styles["star-mono"]}
+                      className={styles["mono-star"]}
                       src="/cinephile/star-mono.webp"
-                      alt="star-mono"
+                      alt="mono-star"
                       loading="lazy"
                     />
                   </div>
                 </div>
-                <div className={styles["category-meta"]}>
+                <div className={styles["metadata-preview"]}>
                   {/* 아티스트 이미지 */}
                   <Link
-                    className={styles["category-meta-image-container"]}
-                    href={toArtistPage(pathName, albumData.artistId)}
+                    className={styles["artist-image-container"]}
+                    href={toArtistPage(pathName, artistId)}
                   >
                     <img
-                      src={albumData.artistImgUrl}
-                      alt="test"
-                      className={styles["category-meta-image"]}
+                      src={artistImgUrl}
+                      alt={artist}
+                      className={styles["artist-image"]}
                       loading="lazy"
                     />
                   </Link>
                   <div>
                     {/* 아티스트 이름 */}
-                    <Link href={toArtistPage(pathName, albumData.artistId)}>
-                      {albumData.artist}
-                    </Link>
+                    <Link href={toArtistPage(pathName, artistId)}>{artist}</Link>
                     {/* 발매일, 트랙 개수, 러닝타임 */}
-                    <span>
-                      {` • ${albumData.releaseDate.slice(0, 4)} • ${
-                        albumData.tracks
-                      }곡, ${albumDuration}`}
-                    </span>
+                    <span>{` • ${releaseDate.slice(0, 4)} • ${tracks}곡, ${albumDuration}`}</span>
                   </div>
                 </div>
                 {/* 텍스트 미리보기 및 더 보기 링크 */}
-                <div className={styles["paragraph-container"]}>
+                <div className={styles["text-container"]}>
                   <p
                     ref={divRef}
-                    className={`${styles["paragraph"]} ${styles["paragraph-category"]} ${
-                      isLongText ? styles["blur-end"] : undefined
-                    }`}
+                    className={`${styles["text"]} ${isLongText ? styles["blur-end"] : undefined}`}
                   >
                     {text}
                   </p>
                   {isLongText && (
-                    <Link href={toPostPage(pathName, albumData.id)}>
+                    <Link href={toPostPage(pathName, id)}>
                       <div className={styles["more-button"]}>더 보기</div>
                     </Link>
                   )}
                 </div>
                 {/* 앨범 태그 */}
-                <div className={styles["album-tag-container"]}>
-                  {albumData.tagKeys.map((tagKey: string, index: number) => {
+                <div className={styles["tag-container"]}>
+                  {tagKeys.map((tagKey: string, index: number) => {
                     return (
                       <Link
                         href={toTagPage(pathName, tagKey)}
