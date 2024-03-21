@@ -52,9 +52,9 @@ export default function Update({ currentId }: UpdateProps) {
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
-  const [albumKeyword, setAlbumKeyword] = useState<string>("");
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [searchData, setSearchData] = useState<SearchData[]>();
-  const [showAlbumListModal, setShowAlbumListModal] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
   const [showTagsModal, setShowTagsModal] = useState(false);
@@ -102,7 +102,6 @@ export default function Update({ currentId }: UpdateProps) {
     async function getData() {
       const fetchData = await fetchAlbumById(currentId);
       setAlbumData(fetchData);
-
       const {
         id,
         artist,
@@ -126,7 +125,7 @@ export default function Update({ currentId }: UpdateProps) {
       setText(text);
       setScore(score);
       setUploadDate(new Date(uploadDate));
-      setAlbumKeyword(album);
+      setSearchKeyword(album);
       setCurrentTagKeys(tagKeys);
       setAlbumReleaseDate(new Date(releaseDate).toString());
       setBlurHash(blurHash);
@@ -143,28 +142,28 @@ export default function Update({ currentId }: UpdateProps) {
   }, [currentId]);
 
   const handleSearch = async () => {
-    const result = await searchSpotify(albumKeyword);
+    const result = await searchSpotify(searchKeyword);
     setSearchData(result);
   };
 
   useEffect(() => {
-    const isTyping = showAlbumListModal && albumKeyword.length > 0;
-    if (isTyping) {
+    const isSearching = isTyping && searchKeyword;
+    if (isSearching) {
       const typingTimer = setTimeout(() => {
         handleSearch();
       }, 1000);
 
       return () => clearTimeout(typingTimer);
     }
-  }, [albumKeyword, showAlbumListModal]);
+  }, [searchKeyword, isTyping]);
 
-  const handleModal = (data: SearchData) => {
+  const handleClickSearchData = (data: SearchData) => {
     const { name, id, artists } = data;
     setArtist(artists[0].name);
     setAlbumId(id);
-    setAlbumKeyword(name);
+    setSearchKeyword(name);
     setSearchData(undefined);
-    setShowAlbumListModal(false);
+    setIsTyping(false);
   };
 
   useEffect(() => {
@@ -172,7 +171,7 @@ export default function Update({ currentId }: UpdateProps) {
       const isClickedOutsideModal =
         modalRef.current && !modalRef.current.contains(event.target as Node);
       if (isClickedOutsideModal) {
-        setShowAlbumListModal(false);
+        setIsTyping(false);
         setShowTagsModal(false);
         setNewTagKey("");
       }
@@ -184,11 +183,11 @@ export default function Update({ currentId }: UpdateProps) {
     };
   }, [modalRef]);
 
-  const handleTagItemDelete = (selectedKey: string) => {
+  const deleteTagItem = (selectedKey: string) => {
     setCurrentTagKeys(prevTagKeys => prevTagKeys.filter(prevTagKey => prevTagKey !== selectedKey));
   };
 
-  const handleTagItemAdd = (selectedKey: string) => {
+  const addTagItem = (selectedKey: string) => {
     setCurrentTagKeys(prevTagKeys => [...prevTagKeys, selectedKey]);
   };
 
@@ -246,10 +245,10 @@ export default function Update({ currentId }: UpdateProps) {
         <div style={{ position: "relative" }}>
           <input
             className={styles["input"]}
-            value={albumKeyword}
+            value={searchKeyword}
             onChange={e => {
-              setAlbumKeyword(e.target.value);
-              setShowAlbumListModal(true);
+              setSearchKeyword(e.target.value);
+              setIsTyping(true);
             }}
             placeholder="검색어를 입력해주세요"
           />
@@ -268,7 +267,7 @@ export default function Update({ currentId }: UpdateProps) {
                   className={styles["search-album-modal"]}
                   key={index}
                   onClick={() => {
-                    handleModal(data);
+                    handleClickSearchData(data);
                   }}
                 >
                   <div className={styles["search-album-image-container"]}>
@@ -368,14 +367,14 @@ export default function Update({ currentId }: UpdateProps) {
                 {isFirstVideo ? (
                   <>
                     <a
-                      href={`https://www.youtube.com/results?search_query=${artist} ${albumKeyword} MV 자막`}
+                      href={`https://www.youtube.com/results?search_query=${artist} ${searchKeyword} MV 자막`}
                       target="_blank"
                     >
                       <div>{`영상 제목 ${videoNumber}`}</div>
                     </a>
-                    <div className={styles["video-block-button-container"]}>
+                    <div className={styles["video-button-container"]}>
                       <div
-                        className={styles["video-block-button"]}
+                        className={styles["video-button"]}
                         onClick={() => {
                           setVideoCount(prev => prev + 1);
                           setVideos([...videos, { title: "", url: "" }]);
@@ -384,9 +383,9 @@ export default function Update({ currentId }: UpdateProps) {
                         +
                       </div>
                     </div>
-                    <div className={styles["video-block-button-container"]}>
+                    <div className={styles["video-button-container"]}>
                       <div
-                        className={styles["video-block-button"]}
+                        className={styles["video-button"]}
                         onClick={() => {
                           setVideoCount(prev => prev - 1);
                           const copiedVideos = [...videos];
@@ -401,9 +400,9 @@ export default function Update({ currentId }: UpdateProps) {
                 ) : (
                   <>
                     <div>{`영상 제목 ${videoNumber}`}</div>
-                    <div className={styles["video-block-button-container"]}>
+                    <div className={styles["video-button-container"]}>
                       <div
-                        className={styles["video-block-button"]}
+                        className={styles["video-button"]}
                         onClick={() => {
                           setVideoCount(prev => prev - 1);
                           const copiedVideos = [...videos];
@@ -450,25 +449,25 @@ export default function Update({ currentId }: UpdateProps) {
                 className={styles["tag-item"]}
                 key={index}
                 onClick={() => {
-                  handleTagItemDelete(key);
+                  deleteTagItem(key);
                 }}
               >
                 <span>{DEFAULT_TAGS[key]}</span>
-                <button className={styles["tag-item-delete-button"]}>×</button>
+                <button className={styles["tag-delete-button"]}>×</button>
               </div>
             );
           })}
           {showTagsModal && (
-            <div className={styles["tag-list-modal-container"]}>
-              <div className={styles["tag-list-modal"]}>
+            <div className={styles["tag-modal-container"]}>
+              <div className={styles["tag-modal"]}>
                 <div className={styles["tag-item-container"]}>
                   {Object.keys(GROUP_TAGS).map((tag, index) => {
                     const isNormalTag = tag !== "모두보기";
                     return (
                       isNormalTag && (
                         <React.Fragment key={index}>
-                          <div className={styles["tag-list-comment"]}>{tag}</div>
-                          <div className={styles["tag-group-container"]} key={index}>
+                          <div className={styles["tag-block-title"]}>{tag}</div>
+                          <div className={styles["tag-block-item-container"]} key={index}>
                             {Object.keys(GROUP_TAGS[tag]).map(tagKey => {
                               const isExistingTag = currentTagKeys.includes(tagKey);
                               return (
@@ -477,11 +476,11 @@ export default function Update({ currentId }: UpdateProps) {
                                     className={styles["tag-item"]}
                                     key={tagKey}
                                     onClick={() => {
-                                      handleTagItemAdd(tagKey);
+                                      addTagItem(tagKey);
                                     }}
                                   >
                                     {GROUP_TAGS[tag][tagKey]}
-                                    <button className={styles["tag-item-delete-button"]}>+</button>
+                                    <button className={styles["tag-delete-button"]}>+</button>
                                   </div>
                                 )
                               );

@@ -99,7 +99,7 @@
 
 /* Modal Styles */
 .album-search-result-modal,
-.tag-list-modal-container {
+.tag-modal-container {
   position: absolute;
   display: flex;
   width: 500px;
@@ -109,7 +109,7 @@
   z-index: 1;
 }
 
-.tag-list-modal-container {
+.tag-modal-container {
   top: calc(100% + 1px);
   left: -1px;
 }
@@ -181,7 +181,7 @@
   box-sizing: border-box;
 }
 
-.tag-list-modal-container {
+.tag-modal-container {
   width: 880px;
   position: absolute;
   display: flex;
@@ -196,13 +196,13 @@
   box-sizing: border-box;
 }
 
-.tag-list-modal {
+.tag-modal {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.tag-list-comment {
+.tag-block-title {
   font-size: 1.05rem;
   margin: 0 0 5px 3px;
   font-weight: 500;
@@ -213,7 +213,7 @@
   flex-direction: column;
 }
 
-.tag-group-container {
+.tag-block-item-container {
   display: flex;
   flex-wrap: wrap;
   margin: 0 0 10px 0;
@@ -242,7 +242,7 @@
   background-color: black;
 }
 
-.tag-item-delete-button {
+.tag-delete-button {
   background-color: unset;
   margin-left: 5px;
   padding: 0 1px 2px 0;
@@ -250,7 +250,7 @@
 }
 
 /* Other Styles */
-.video-block-button-container {
+.video-button-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -261,7 +261,7 @@
   margin: 2px 0 0 5px;
 }
 
-.video-block-button {
+.video-button {
   color: var(--input-background-color);
   font-weight: 500;
   font-size: 1rem;

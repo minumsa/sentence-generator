@@ -27,7 +27,7 @@ interface Video {
 }
 
 export default function Upload() {
-  const [albumKeyword, setAlbumKeyword] = useState<string>("");
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [albumId, setAlbumId] = useState<string>("");
   const [album, setAlbum] = useState<string>("");
   const [searchData, setSearchData] = useState<SearchData[]>();
@@ -48,12 +48,12 @@ export default function Upload() {
   const [blurHash, setBlurHash] = useState("");
 
   const handleSearch = async () => {
-    const result = await searchSpotify(albumKeyword);
+    const result = await searchSpotify(searchKeyword);
     setSearchData(result);
   };
 
   useEffect(() => {
-    const isSearching = isTyping && albumKeyword.length > 0;
+    const isSearching = isTyping && searchKeyword;
     if (isSearching) {
       const typingTimer = setTimeout(() => {
         handleSearch();
@@ -61,7 +61,7 @@ export default function Upload() {
 
       return () => clearTimeout(typingTimer);
     }
-  }, [albumKeyword, isTyping]);
+  }, [searchKeyword, isTyping]);
 
   const handleUpload = async () => {
     const filteredText = text.replace(/\[\d+\]/g, "");
@@ -94,9 +94,9 @@ export default function Upload() {
     }
   };
 
-  const handleModal = (data: SearchData) => {
+  const handleClickSearchData = (data: SearchData) => {
     const { name, id, artists } = data;
-    setAlbumKeyword(name);
+    setSearchKeyword(name);
     setAlbumId(id);
     setArtist(artists[0].name);
     setAlbum(name);
@@ -120,11 +120,11 @@ export default function Upload() {
     };
   }, [modalRef]);
 
-  const handleTagItemDelete = (selectedKey: string) => {
+  const deleteTagItem = (selectedKey: string) => {
     setCurrentTagKeys(prevTagKeys => prevTagKeys.filter(prevTagKey => prevTagKey !== selectedKey));
   };
 
-  const handleTagItemAdd = (selectedKey: string) => {
+  const addTagItem = (selectedKey: string) => {
     setCurrentTagKeys(prevTagKeys => [...prevTagKeys, selectedKey]);
   };
 
@@ -170,9 +170,9 @@ export default function Upload() {
         <div style={{ position: "relative" }}>
           <input
             className={styles["input"]}
-            value={albumKeyword}
+            value={searchKeyword}
             onChange={e => {
-              setAlbumKeyword(e.target.value);
+              setSearchKeyword(e.target.value);
               setIsTyping(true);
             }}
             placeholder="검색어를 입력해주세요"
@@ -192,7 +192,7 @@ export default function Upload() {
                   className={styles["search-album-modal"]}
                   key={index}
                   onClick={() => {
-                    handleModal(data);
+                    handleClickSearchData(data);
                   }}
                 >
                   <div className={styles["search-album-image-container"]}>
@@ -292,9 +292,9 @@ export default function Upload() {
                   >
                     <div>{`영상 제목 ${videoNumber}`}</div>
                   </a>{" "}
-                  <div className={styles["video-block-button-container"]}>
+                  <div className={styles["video-button-container"]}>
                     <div
-                      className={styles["video-block-button"]}
+                      className={styles["video-button"]}
                       onClick={() => {
                         setVideoCount(prev => prev + 1);
                         setVideos([...videos, { title: "", url: "" }]);
@@ -303,9 +303,9 @@ export default function Upload() {
                       +
                     </div>
                   </div>
-                  <div className={styles["video-block-button-container"]}>
+                  <div className={styles["video-button-container"]}>
                     <div
-                      className={styles["video-block-button"]}
+                      className={styles["video-button"]}
                       onClick={() => {
                         setVideoCount(prev => prev - 1);
                         const copiedVideos = [...videos];
@@ -320,9 +320,9 @@ export default function Upload() {
               ) : (
                 <>
                   <div>{`영상 제목 ${videoNumber}`}</div>
-                  <div className={styles["video-block-button-container"]}>
+                  <div className={styles["video-button-container"]}>
                     <div
-                      className={styles["video-block-button"]}
+                      className={styles["video-button"]}
                       onClick={() => {
                         setVideoCount(prev => prev - 1);
                         const copiedVideos = [...videos];
@@ -369,25 +369,25 @@ export default function Upload() {
                 className={styles["tag-item"]}
                 key={index}
                 onClick={() => {
-                  handleTagItemDelete(key);
+                  deleteTagItem(key);
                 }}
               >
                 <span>{DEFAULT_TAGS[key]}</span>
-                <button className={styles["tag-item-delete-button"]}>×</button>
+                <button className={styles["tag-delete-button"]}>×</button>
               </div>
             );
           })}
           {showTagsModal && (
-            <div className={styles["tag-list-modal-container"]}>
-              <div className={styles["tag-list-modal"]}>
+            <div className={styles["tag-modal-container"]}>
+              <div className={styles["tag-modal"]}>
                 <div className={styles["tag-item-container"]}>
                   {Object.keys(GROUP_TAGS).map((tag, index) => {
                     const isNormalTag = tag !== "모두보기";
                     return (
                       isNormalTag && (
                         <React.Fragment key={index}>
-                          <div className={styles["tag-list-comment"]}>{tag}</div>
-                          <div className={styles["tag-group-container"]} key={index}>
+                          <div className={styles["tag-block-title"]}>{tag}</div>
+                          <div className={styles["tag-block-item-container"]} key={index}>
                             {Object.keys(GROUP_TAGS[tag]).map(tagKey => {
                               const isExistingTag = currentTagKeys.includes(tagKey);
                               return (
@@ -396,11 +396,11 @@ export default function Upload() {
                                     className={styles["tag-item"]}
                                     key={tagKey}
                                     onClick={() => {
-                                      handleTagItemAdd(tagKey);
+                                      addTagItem(tagKey);
                                     }}
                                   >
                                     {GROUP_TAGS[tag][tagKey]}
-                                    <button className={styles["tag-item-delete-button"]}>+</button>
+                                    <button className={styles["tag-delete-button"]}>+</button>
                                   </div>
                                 )
                               );
