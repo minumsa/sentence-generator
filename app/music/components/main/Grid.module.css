@@ -45,9 +45,16 @@
   content: "";
 }
 
+.album-image {
+  transition: transform 0.2s ease-in-out;
+}
+
 .album-image:hover {
-  transform: scale(1.2, 1.2);
-  transition-duration: 0.3s;
+  transform: scale(1.1);
+}
+
+.album-image:not(:hover) {
+  transform: scale(1);
 }
 
 .album-metadata {
