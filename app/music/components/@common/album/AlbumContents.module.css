@@ -1,0 +1,7 @@
+.album-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  padding: 50px 15px;
+  width: 100%;
+}

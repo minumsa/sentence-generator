@@ -1,5 +1,5 @@
 import { AlbumPanel } from "./AlbumPanel";
-import styles from "../../../music.module.css";
+import styles from "./AlbumContents.module.css";
 import { AlbumInfo } from "../../../modules/types";
 import { SUB_PER_PAGE_COUNT } from "../../../modules/constants";
 

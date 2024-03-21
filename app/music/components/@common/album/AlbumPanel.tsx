@@ -1,6 +1,6 @@
 import { usePathname } from "next/navigation";
 import { formatDuration, isAdminPage } from "../../../modules/utils";
-import styles from "../../../music.module.css";
+import styles from "./AlbumPanel.module.css";
 import { isMobile } from "react-device-detect";
 import { useRef } from "react";
 import { DeleteButton } from "../../post/assets/DeleteButton";
