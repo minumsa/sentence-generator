@@ -130,7 +130,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
         {data.length < 1 && <Loading />}
         {isScrolling && <SpinningCircles className={styles["spinning-circles"]} />}
         {/* Grid Items */}
-        <div className={styles["grid-div"]}>
+        <div className={styles["container"]}>
           {data.map((item, index) => {
             const currentDataLength = data.length;
             const isLastDataAndOddNumber =
@@ -146,21 +146,23 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                 data-aos-offset={isMobile ? 40 : 90}
                 data-aos-once="true"
                 key={index}
-                className={`${styles["grid-item-container"]}`}
+                className={`${styles["item-container"]}`}
                 ref={isLastItem ? ref : undefined}
               >
                 <Link href={toPostPage(pathName, item.id)} onClick={updateScrollPosition}>
-                  <BlurImg
-                    className={styles["grid-album-image"]}
-                    blurhash={blurhash}
-                    src={imgSrc}
-                    punch={1}
-                  />
+                  <div className={styles["album-image-container"]}>
+                    <BlurImg
+                      className={styles["album-image"]}
+                      blurhash={blurhash}
+                      src={imgSrc}
+                      punch={1}
+                    />
+                  </div>
                 </Link>
-                <div className={styles["grid-album-title"]}>
+                <div className={styles["album-metadata"]}>
                   <Link href={toPostPage(pathName, item.id)} onClick={updateScrollPosition}>
                     <button
-                      className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                      className={`${styles["black-masking"]}  ${styles["album-title-masking"]}`}
                     >
                       {`${item.album}`}
                     </button>
@@ -168,7 +170,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                   <br />
                   <Link href={toArtistPage(pathName, item.artistId)} onClick={updateScrollPosition}>
                     <button
-                      className={`${styles["black-masking"]}  ${styles["grid-album-title-masking"]}`}
+                      className={`${styles["black-masking"]}  ${styles["album-title-masking"]}`}
                     >
                       {`${item.artist}`}
                     </button>
