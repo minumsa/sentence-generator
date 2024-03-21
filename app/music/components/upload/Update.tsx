@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./update.module.css";
+import styles from "./Update.module.css";
 import React from "react";
 import {
   UploadData,
@@ -7,14 +7,14 @@ import {
   fetchSpotify,
   searchSpotify,
   updateData,
-} from "../modules/api";
+} from "../../modules/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 import { useRouter } from "next/navigation";
-import { AlbumInfo, SpotifyAlbumData } from "../modules/types";
-import { CONTENTS, DEFAULT_TAGS, GROUP_TAGS } from "../modules/constants";
+import { AlbumInfo, SpotifyAlbumData } from "../../modules/types";
+import { CONTENTS, DEFAULT_TAGS, GROUP_TAGS } from "../../modules/constants";
 
 interface UpdateProps {
   currentId: string;

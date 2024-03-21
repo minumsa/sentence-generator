@@ -1,5 +1,5 @@
 import { usePathname } from "next/navigation";
-import styles from "../../music.module.css";
+import styles from "./PostAlbumMetadata.module.css";
 import { formatDuration, isAdminPage } from "../../modules/utils";
 import { DeleteButton } from "./assets/DeleteButton";
 import { EditButton } from "./assets/EditButton";

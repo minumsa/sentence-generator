@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./update.module.css";
+import styles from "./Update.module.css";
 import React from "react";
-import { UploadData, fetchSpotify, searchSpotify, uploadData } from "../modules/api";
+import { UploadData, fetchSpotify, searchSpotify, uploadData } from "../../modules/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
-import { AlbumInfo } from "../modules/types";
-import { CONTENTS, DEFAULT_TAGS, GROUP_TAGS } from "../modules/constants";
+import { AlbumInfo } from "../../modules/types";
+import { CONTENTS, DEFAULT_TAGS, GROUP_TAGS } from "../../modules/constants";
 
 type Artist = { name: string };
 type Image = { url: string };

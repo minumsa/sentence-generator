@@ -43,13 +43,8 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
               <div key={index} className={styles["paragraph-container"]}>
                 {/* 앨범 타이틀 */}
                 <div className={styles["post-album-title"]}>
-                  <Link
-                    href={toPostPage(pathName, albumData.id)}
-                    style={{ textDecoration: "none", display: "flex" }}
-                  >
-                    <h2 style={{ padding: isAdminPage(pathName) ? 0 : undefined }}>
-                      {albumData.album}
-                    </h2>
+                  <Link href={toPostPage(pathName, albumData.id)}>
+                    <h2>{albumData.album}</h2>
                   </Link>
                   {/* 별점 */}
                   <div className={styles["star-container"]}>
@@ -89,10 +84,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   </Link>
                   <div>
                     {/* 아티스트 이름 */}
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      href={toArtistPage(pathName, albumData.artistId)}
-                    >
+                    <Link href={toArtistPage(pathName, albumData.artistId)}>
                       {albumData.artist}
                     </Link>
                     {/* 발매일, 트랙 개수, 러닝타임 */}
@@ -104,7 +96,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                   </div>
                 </div>
                 {/* 텍스트 미리보기 및 더 보기 링크 */}
-                <div style={{ position: "relative" }}>
+                <div className={styles["paragraph-container"]}>
                   <p
                     ref={divRef}
                     className={`${styles["paragraph"]} ${styles["paragraph-category"]} ${
@@ -114,10 +106,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
                     {text}
                   </p>
                   {isLongText && (
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      href={toPostPage(pathName, albumData.id)}
-                    >
+                    <Link href={toPostPage(pathName, albumData.id)}>
                       <div className={styles["more-button"]}>더 보기</div>
                     </Link>
                   )}

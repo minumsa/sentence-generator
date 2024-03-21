@@ -1,4 +1,3 @@
-/* Category.tsx */
 .header-container {
   position: relative;
   background-color: var(--background-color);
@@ -6,11 +5,18 @@
   height: 100%;
 }
 
+.category-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 .desktop-category {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 15px;
   width: 100%;
   max-width: 1280px;
@@ -27,7 +33,10 @@
 }
 
 .top-magnifying-glass {
-  position: relative;
+  position: absolute;
+  top: calc(50% + 1px);
+  right: 15px;
+  transform: translate(0, -50%);
   background-image: url(/music/magnifying-glass.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -36,17 +45,21 @@
   height: 24.5px;
 }
 
-@media (max-width: 1300px) {
-  .desktop-category {
-    padding: 0 30px;
-  }
+.blank-for-hamburger-space {
+  width: 20px;
+}
 
-  .desktop-hamburger-container {
-    left: 30px;
+@media (max-width: 1300px) {
+  .top-magnifying-glass {
+    right: 30px;
   }
 }
 
 @media (max-width: 525px) {
+  .top-magnifying-glass {
+    right: 15px;
+  }
+
   .header-container {
     background-color: unset;
   }

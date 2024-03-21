@@ -24,9 +24,9 @@ export const Category = () => {
     <div className={styles["header-container"]}>
       {/* 햄버거 메뉴 */}
       <Hamburger />
-      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center" }}>
+      <div className={styles["category-container"]}>
         <div className={styles["desktop-category"]}>
-          <div style={{ width: "20px" }}></div>
+          <div className={styles["blank-for-hamburger-space"]} />
           {/* 사이트 제목 */}
           <Link
             className={styles["category"]}

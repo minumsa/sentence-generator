@@ -1,4 +1,4 @@
-import SearchContent from "@/app/music/components/SearchContent";
+import SearchContent from "@/app/music/components/search/SearchContent";
 import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
 

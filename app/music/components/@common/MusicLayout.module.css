@@ -19,13 +19,13 @@
   justify-content: center;
   z-index: 10000;
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
   width: 100%;
   height: 65px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: var(--background-color);
 }
 
 .content-container {
@@ -37,6 +37,13 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.layout-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 1300px) {

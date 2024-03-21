@@ -10,7 +10,7 @@ export const MusicLayout = ({ children }: { children: React.ReactNode }) => {
   const pathName = usePathname();
 
   return (
-    <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center" }}>
+    <div className={styles["layout-container"]}>
       {/* <Snow /> */}
       <div className={styles["container"]}>
         <header className={styles["category-container"]}>
