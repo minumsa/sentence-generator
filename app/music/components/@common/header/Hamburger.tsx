@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { CurrentTagKeyAtom } from "../../../modules/atoms";
 import { toGenrePage } from "../../../modules/paths";
 import { isAdminPage } from "../../../modules/utils";
-import { CONTENTS } from "../../../modules/constants";
+import { CATEGORY } from "../../../modules/constants";
 
 export const Hamburger = () => {
   const pathName = usePathname();
@@ -16,7 +16,7 @@ export const Hamburger = () => {
 
   return (
     <nav
-      className={styles["desktop-hamburger-container"]}
+      className={styles["hamburger-container"]}
       onClick={() => {
         setShowCategory(!showCategory);
       }}
@@ -25,12 +25,15 @@ export const Hamburger = () => {
         className={styles["hamburger-icon"]}
         style={{ display: showCategory ? "none" : "flex" }}
       ></button>
-      <button className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
-        <div style={{ fontWeight: 100, marginTop: "1px" }}>×</div>
+      <button
+        className={styles["close-container"]}
+        style={{ display: showCategory ? "flex" : "none" }}
+      >
+        <div className={styles["close"]}>×</div>
       </button>
       {showCategory ? (
-        <ul className={styles["desktop-genre-category"]}>
-          {Object.keys(CONTENTS).map(category => {
+        <ul className={styles["category"]}>
+          {Object.keys(CATEGORY).map(category => {
             return (
               <React.Fragment key={category}>
                 <Link
@@ -39,7 +42,7 @@ export const Hamburger = () => {
                     setCurrentTagKey("");
                   }}
                 >
-                  <li className={styles["hamburger-item"]}>{CONTENTS[category]}</li>
+                  <li className={styles["category-item"]}>{CATEGORY[category]}</li>
                 </Link>
               </React.Fragment>
             );
@@ -47,10 +50,10 @@ export const Hamburger = () => {
         </ul>
       ) : null}
       {showCategory && isAdminPage(pathName) && (
-        <div className={styles["desktop-introduction-category"]}>
-          <div className={styles["hamburger-item-title"]}>관리자 메뉴</div>
+        <div className={styles["admin-category"]}>
+          <div className={styles["category-item-title"]}>관리자 메뉴</div>
           <div
-            className={styles["hamburger-item"]}
+            className={styles["category-item"]}
             onClick={() => {
               router.push("/music/admin/upload");
             }}

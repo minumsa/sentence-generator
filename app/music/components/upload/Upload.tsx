@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 import { AlbumInfo } from "../../modules/types";
-import { CONTENTS, DEFAULT_TAGS, GROUP_TAGS } from "../../modules/constants";
+import { CATEGORY, DEFAULT_TAGS, GROUP_TAGS } from "../../modules/constants";
 
 type Artist = { name: string };
 type Image = { url: string };
@@ -154,7 +154,7 @@ export default function Upload() {
           }}
         >
           <option value="">--장르를 선택해주세요--</option>
-          {Object.entries(CONTENTS).map(([key, value]) => {
+          {Object.entries(CATEGORY).map(([key, value]) => {
             return (
               <option value={key} key={key}>
                 {value}

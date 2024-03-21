@@ -3,7 +3,7 @@ import { ContentsType } from "./types";
 export const PER_PAGE_COUNT: number = 50;
 export const SUB_PER_PAGE_COUNT: number = 5;
 
-export const CONTENTS: ContentsType = {
+export const CATEGORY: ContentsType = {
   pop: "팝",
   kpop: "케이팝",
   jpop: "제이팝",
