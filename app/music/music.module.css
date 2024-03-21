@@ -34,55 +34,6 @@
   }
 }
 
-.snowfall-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-use-select: none;
-  user-select: none;
-}
-
-.loading-background {
-  display: flex;
-  position: fixed;
-  top: 0;
-  right: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9000;
-  background-color: rgb(0 0 0 / 50%);
-  width: 100%;
-  height: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  backdrop-filter: blur(7px);
-}
-
-.loading-text {
-  display: flex;
-  position: fixed;
-  top: 0;
-  right: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9000;
-  width: 100%;
-  height: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 @keyframes fadeInUp {
   from {
     transform: translate3d(0, 30px, 0);
@@ -781,31 +732,6 @@
   padding: 10px 0 0 0;
 }
 
-.loading-container {
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 10000;
-  background-color: transparent;
-  width: -webkit-fill-available;
-  height: 100%;
-}
-
-.loading-circle {
-  position: fixed;
-  top: 48%;
-  left: calc(50% + 125px);
-  z-index: 10000;
-  margin: -25px 0 0 -25px;
-  border: 10px solid #e3e3e3;
-  border-bottom: 10px solid black;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: load 1.5s linear infinite;
-}
-
 @keyframes load {
   0% {
     transform: rotate(0deg);
@@ -884,14 +810,6 @@
   position: absolute;
   margin: 7px 0 0 29px;
   height: 20px;
-}
-
-.spinning-circles {
-  position: fixed;
-  bottom: 70px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
 }
 
 @media (max-width: 1300px) {
@@ -1098,38 +1016,9 @@
     display: none;
   }
 
-  .loading-background,
-  .loading-text {
-    width: 100%;
-    font-size: 1.1rem;
-  }
-
   .category-meta-image-container {
     width: 25px;
     height: 25px;
-  }
-
-  .loading {
-    box-sizing: border-box;
-    z-index: 1;
-    padding: 0 0 80px 0;
-    height: calc(100vh - 40px);
-  }
-
-  .snowfall-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-image: none;
-    background-size: 100%;
-    width: 100%;
-    height: 100%;
-    animation: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-use-select: none;
-    user-select: none;
   }
 
   .container {

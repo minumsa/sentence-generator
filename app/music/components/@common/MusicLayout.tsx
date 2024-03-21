@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Category } from "./header/Category";
-import styles from "../../music.module.css";
+import styles from "./MusicLayout.module.css";
 import { Snow } from "./Snow";
 import { isUploadPage } from "../../modules/utils";
 

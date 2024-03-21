@@ -1,12 +1,12 @@
 import { useAtom } from "jotai";
-import { DEFAULT_TAGS } from "../../../modules/constants";
+import { DEFAULT_TAGS } from "../../modules/constants";
 import styles from "./MobileTagDisplay.module.css";
 import {
   CurrentTagKeyAtom,
   albumDataAtom,
   scrollCountAtom,
   scrollPositionAtom,
-} from "../../../modules/atoms";
+} from "../../modules/atoms";
 import { useState } from "react";
 
 export const MobileTagDisplay = () => {

@@ -1,5 +1,5 @@
 import { AlbumInfo } from "../../modules/types";
-import styles from "../../music.module.css";
+import styles from "./ArtistPageImage.module.css";
 
 interface ArtistPageImageProps {
   artistData: AlbumInfo[];

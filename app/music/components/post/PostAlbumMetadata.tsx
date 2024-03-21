@@ -51,6 +51,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
           </span>
         </Link>
         <LinkIcon />
+
         {/* 앨범 정보 */}
         <div className={styles["post-date"]}>앨범</div>
         <div>
@@ -91,9 +92,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
                       {videoData.title}
                     </span>
                   </a>
-                  <span>
-                    <img className={styles["link-icon"]} src="/music/link.svg" alt="link-icon" />
-                  </span>
+                  <LinkIcon />
                 </div>
               );
             })}

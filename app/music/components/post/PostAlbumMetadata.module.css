@@ -1,0 +1,115 @@
+.album-information-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 100px 0 0;
+  width: 300px;
+  line-height: 200%;
+}
+
+.grid-album-image-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.grid-album-image {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.grid-album-image::after {
+  display: block;
+  content: "";
+}
+
+.post-album-image {
+  box-shadow: 0 10px 20px 0 var(--background-color) 0005e;
+}
+
+.album-metadata {
+  margin: 10px 0 0 0;
+  line-height: 160%;
+  font-weight: 500;
+}
+
+.post-date {
+  margin: 15px 0 5px 0;
+  font-weight: 600;
+}
+
+.black-masking {
+  z-index: 2;
+  background-color: var(--background-color);
+  text-indent: 0;
+  line-height: 155%;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.link-icon {
+  position: absolute;
+  margin: 6.5px 0 0 5px;
+  height: 18px;
+}
+
+.apple-icon {
+  position: absolute;
+  margin: 6px 0 0 0;
+  height: 20px;
+}
+
+.spotify-icon {
+  position: absolute;
+  margin: 7px 0 0 29px;
+  height: 20px;
+}
+
+.admin-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0 0 0;
+}
+
+@media (max-width: 800px) {
+  .album-information-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 20px 0;
+    height: fit-content;
+  }
+
+  .album-metadata {
+    max-width: 400px;
+  }
+
+  .link-icon {
+    position: absolute;
+    margin: 6px 0 0 4px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 525px) {
+  .grid-album-image-container {
+    width: 100%;
+  }
+
+  .grid-album-image-container {
+    width: 100%;
+  }
+
+  .album-metadata {
+    z-index: 1;
+    width: 100%;
+    font-size: 1.05rem;
+  }
+
+  .post-date {
+    font-size: 1.05rem;
+  }
+
+  .admin-button-container {
+    justify-content: center;
+  }
+}

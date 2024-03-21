@@ -1,5 +1,5 @@
 import { usePathname, useRouter } from "next/navigation";
-import styles from "./pagenumbers.module.css";
+import styles from "./PageNumbers.module.css";
 import { useEffect, useState } from "react";
 import { SUB_PER_PAGE_COUNT } from "../../../modules/constants";
 

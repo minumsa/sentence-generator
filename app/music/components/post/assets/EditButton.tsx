@@ -1,5 +1,5 @@
 import { AlbumInfo } from "../../../modules/types";
-import styles from "../../../music.module.css";
+import styles from "./Button.module.css";
 import Link from "next/link";
 
 interface EditButtonProps {

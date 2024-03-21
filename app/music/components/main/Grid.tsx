@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "../../music.module.css";
+import styles from "./Grid.module.css";
 import { AlbumFilters, fetchAlbumData } from "../../modules/api";
 import { usePathname } from "next/navigation";
 import { useAtom, useAtomValue } from "jotai";
@@ -25,7 +25,7 @@ import {
 } from "../../modules/atoms";
 
 import { toArtistPage, toPostPage } from "../../modules/paths";
-import { MobileTagDisplay } from "../@common/header/MobileTagDisplay";
+import { MobileTagDisplay } from "./MobileTagDisplay";
 import { PER_PAGE_COUNT } from "../../modules/constants";
 
 interface GridProps {

@@ -1,5 +1,5 @@
 import { formatDate, isAdminPage } from "../../modules/utils";
-import styles from "../../music.module.css";
+import styles from "./PostAlbumText.module.css";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { AlbumInfo } from "../../modules/types";
@@ -32,10 +32,7 @@ export const PostText = ({ albumData }: PostTextProps) => {
           </p>
         );
       })}
-      <div
-        className={styles["album-tag-container"]}
-        style={{ margin: "20px 0 0 0", justifyContent: "flex-end" }}
-      >
+      <div className={styles["album-tag-container"]}>
         {albumData.tagKeys.map((tagKey: string, index: number) => {
           return (
             <Link
@@ -54,9 +51,7 @@ export const PostText = ({ albumData }: PostTextProps) => {
       </div>
       <div className={styles["post-divider"]}></div>
       <div className={styles["post-date-container"]}>
-        <div className={styles["post-date"]} style={{ margin: "0 0 -4px 0" }}>
-          작성일
-        </div>
+        <div className={styles["post-date"]}>작성일</div>
         <div>{formatDate(albumData.uploadDate.toString())}</div>
       </div>
     </article>
