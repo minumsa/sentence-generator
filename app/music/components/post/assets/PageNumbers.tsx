@@ -1,7 +1,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SUB_PER_PAGE_COUNT } from "../../../modules/constants";
-import styles from "./PageNumbers.module.css";
 
 interface PageNumbersProps {
   currentPage: number;
