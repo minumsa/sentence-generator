@@ -57,21 +57,17 @@
   font-weight: 500;
 }
 
-.album-title-masking {
-  cursor: pointer;
-}
-
-.album-title-masking:hover {
-  opacity: 70%;
-}
-
-.black-masking {
+.album-item {
   z-index: 2;
-  background-color: var(--background-color);
   text-indent: 0;
   line-height: 155%;
   color: var(--text-color);
   font-weight: 400;
+  /* background-color: var(--background-color); */
+}
+
+.album-item:hover {
+  opacity: 70%;
 }
 
 @media (max-width: 1300px) {

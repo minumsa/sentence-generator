@@ -13,8 +13,7 @@ import { ContentLayout } from "../@common/ContentLayout";
 import Link from "next/link";
 import { BlurImg } from "../@common/BlurImage";
 import { isMobile } from "react-device-detect";
-import { Loading } from "../@common/Loading";
-import { SpinningCircles } from "react-loading-icons";
+import { InitialLoadingView } from "../@common/InitialLoadingView";
 import { AlbumInfo } from "../../modules/types";
 import {
   CurrentTagKeyAtom,
@@ -27,6 +26,7 @@ import {
 import { toArtistPage, toPostPage } from "../../modules/paths";
 import { MobileTagDisplay } from "./MobileTagDisplay";
 import { PER_PAGE_COUNT } from "../../modules/constants";
+import { ScrollingIcon } from "./ScrollingIcon";
 
 interface GridProps {
   initialData: AlbumInfo[];
@@ -124,22 +124,20 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
 
   return (
     <>
-      {/* Mobile Tag Items */}
+      {/* 모바일 - 태그 컴포넌트 */}
       <MobileTagDisplay />
+
       <ContentLayout currentPage={scrollCount} totalDataLength={0}>
-        {data.length < 1 && <Loading />}
-        {isScrolling && <SpinningCircles className={styles["spinning-circles"]} />}
-        {/* Grid Items */}
+        <InitialLoadingView totalScrollCount={totalScrollCount} />
+        <ScrollingIcon isScrolling={isScrolling} />
         <div className={styles["container"]}>
           {data.map((item, index) => {
-            const currentDataLength = data.length;
-            const isLastDataAndOddNumber =
-              index === currentDataLength - 1 && currentDataLength % 2 === 1;
+            const totalItemCount = data.length;
+            const isLastDataOdd = index === totalItemCount - 1 && totalItemCount % 2 === 1;
             const isLastItem = index + 2 === data.length;
-            const imgSrc = item.imgUrl;
+            const imgUrl = item.imgUrl;
             const blurhash = item.blurHash ?? "";
-
-            return isLastDataAndOddNumber ? null : (
+            return isLastDataOdd ? null : (
               <div
                 data-aos="fade-up"
                 data-aos-duration={500}
@@ -154,26 +152,18 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                     <BlurImg
                       className={styles["album-image"]}
                       blurhash={blurhash}
-                      src={imgSrc}
+                      src={imgUrl}
                       punch={1}
                     />
                   </div>
                 </Link>
                 <div className={styles["album-metadata"]}>
                   <Link href={toPostPage(pathName, item.id)} onClick={updateScrollPosition}>
-                    <button
-                      className={`${styles["black-masking"]}  ${styles["album-title-masking"]}`}
-                    >
-                      {`${item.album}`}
-                    </button>
+                    <button className={styles["album-item"]}>{`${item.album}`}</button>
                   </Link>
                   <br />
                   <Link href={toArtistPage(pathName, item.artistId)} onClick={updateScrollPosition}>
-                    <button
-                      className={`${styles["black-masking"]}  ${styles["album-title-masking"]}`}
-                    >
-                      {`${item.artist}`}
-                    </button>
+                    <button className={styles["album-item"]}>{`${item.artist}`}</button>
                   </Link>
                 </div>
               </div>
