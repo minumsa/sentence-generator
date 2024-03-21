@@ -28,7 +28,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         <a href={albumData.link} target="_blank">
           <BlurImg
             className={styles["album-image"]}
-            blurhash={albumData.blurHash}
+            blurHash={albumData.blurHash}
             src={albumData.imgUrl}
             punch={1}
           />

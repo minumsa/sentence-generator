@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 
 interface BlurImgProps {
   loading?: "lazy" | "eager" | undefined;
-  blurhash: string | null;
+  blurHash: string | null;
   style?: React.CSSProperties;
   width?: number;
   height?: number;
@@ -13,13 +13,18 @@ interface BlurImgProps {
 
 export function BlurImg({
   loading = "lazy",
-  blurhash,
+  blurHash,
   style,
   ...props
 }: BlurImgProps): JSX.Element {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [ref, inView] = useInView({ rootMargin: "110%" });
-  const blurUrl = useBlurhash(blurhash ? blurhash : "", props.width || 100, props.height || 100);
+  // const blurUrl = useBlurhash(blurHash ? blurHash : "", props.width || 100, props.height || 100);
+  const blurUrl = useBlurhash(
+    !imgLoaded && blurHash ? blurHash : "",
+    props.width || 100,
+    props.height || 100
+  );
 
   const handleOnLoad = useCallback(() => {
     setImgLoaded(true);

@@ -1,4 +1,4 @@
-.hamburger-container {
+.container {
   display: flex;
   position: absolute;
   top: calc(50% + 1px);
@@ -19,7 +19,7 @@
   height: 1px;
 }
 
-.close-container {
+.close-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@
   font-weight: 100;
 }
 
-.close {
+.close-text {
   font-weight: 100;
   margin-top: 1px;
 }
@@ -87,13 +87,13 @@
 }
 
 @media (max-width: 1300px) {
-  .hamburger-container {
+  .container {
     left: 27px;
   }
 }
 
 @media (max-width: 525px) {
-  .hamburger-container {
+  .container {
     left: 15px;
   }
 
@@ -105,7 +105,7 @@
     height: 1px;
   }
 
-  .close-container {
+  .close-icon {
     display: flex;
     align-items: center;
     justify-content: center;

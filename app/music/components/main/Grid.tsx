@@ -136,7 +136,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
             const isLastDataOdd = index === totalItemCount - 1 && totalItemCount % 2 === 1;
             const isLastItem = index + 2 === data.length;
             const imgUrl = item.imgUrl;
-            const blurhash = item.blurHash ?? "";
+            const blurHash = item.blurHash ?? "";
             return isLastDataOdd ? null : (
               <div
                 data-aos="fade-up"
@@ -151,7 +151,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
                   <div className={styles["album-image-container"]}>
                     <BlurImg
                       className={styles["album-image"]}
-                      blurhash={blurhash}
+                      blurHash={blurHash}
                       src={imgUrl}
                       punch={1}
                     />

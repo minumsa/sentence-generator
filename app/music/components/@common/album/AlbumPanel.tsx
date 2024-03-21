@@ -38,7 +38,7 @@ export const AlbumPanel = ({ albumData }: AlbumProps) => {
   return (
     <>
       <Link className={styles["album-image-container"]} href={toPostPage(pathName, id)}>
-        <BlurImg className={styles["album-image"]} blurhash={blurHash} src={imgUrl} punch={1} />
+        <BlurImg className={styles["album-image"]} blurHash={blurHash} src={imgUrl} punch={1} />
       </Link>
       <div className={styles["album-metadata-container"]}>
         {text.split("\n").map((text, index) => {

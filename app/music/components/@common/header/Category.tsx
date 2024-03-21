@@ -21,33 +21,30 @@ export const Category = () => {
   };
 
   return (
-    <div className={styles["header-container"]}>
+    <div className={styles["container"]}>
       {/* 햄버거 메뉴 */}
       <Hamburger />
-      <div className={styles["category-container"]}>
-        <div className={styles["desktop-category"]}>
-          <div className={styles["blank-for-hamburger-space"]} />
+      <div className={styles["nav-container"]}>
+        <div className={styles["nav-wrapper"]}>
           {/* 사이트 제목 */}
           <Link
-            className={styles["category"]}
+            className={styles["title"]}
             href={isAdminPage(pathName) ? "/music/admin" : "/music"}
-            onClick={() => {
-              scrollToTop();
-            }}
+            onClick={scrollToTop}
           >
             <nav>카버차트</nav>
           </Link>
-          {/* 검색 아이콘 */}
-          <Link
-            href={toSearchPage(pathName)}
-            onClick={() => {
-              setCurrentTagKey("");
-            }}
-          >
-            <nav className={styles["top-magnifying-glass"]}></nav>
-          </Link>
         </div>
       </div>
+      {/* 검색 아이콘 */}
+      <Link
+        href={toSearchPage(pathName)}
+        onClick={() => {
+          setCurrentTagKey("");
+        }}
+      >
+        <nav className={styles["search-icon"]}></nav>
+      </Link>
     </div>
   );
 };

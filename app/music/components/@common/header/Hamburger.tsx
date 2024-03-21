@@ -16,7 +16,7 @@ export const Hamburger = () => {
 
   return (
     <nav
-      className={styles["hamburger-container"]}
+      className={styles["container"]}
       onClick={() => {
         setShowCategory(!showCategory);
       }}
@@ -25,11 +25,8 @@ export const Hamburger = () => {
         className={styles["hamburger-icon"]}
         style={{ display: showCategory ? "none" : "flex" }}
       ></button>
-      <button
-        className={styles["close-container"]}
-        style={{ display: showCategory ? "flex" : "none" }}
-      >
-        <div className={styles["close"]}>×</div>
+      <button className={styles["close-icon"]} style={{ display: showCategory ? "flex" : "none" }}>
+        <div className={styles["close-text"]}>×</div>
       </button>
       {showCategory ? (
         <ul className={styles["category"]}>

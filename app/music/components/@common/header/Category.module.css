@@ -1,18 +1,18 @@
-.header-container {
+.container {
   position: relative;
   background-color: var(--background-color);
   width: 1280px;
   height: 100%;
 }
 
-.category-container {
+.nav-container {
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
 }
 
-.desktop-category {
+.nav-wrapper {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -23,7 +23,7 @@
   font-size: 1.15rem;
 }
 
-.category {
+.title {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -32,9 +32,9 @@
   color: var(--text-color);
 }
 
-.top-magnifying-glass {
+.search-icon {
   position: absolute;
-  top: calc(50% + 1px);
+  top: calc(50%);
   right: 15px;
   transform: translate(0, -50%);
   background-image: url(/music/magnifying-glass.svg);
@@ -50,21 +50,21 @@
 }
 
 @media (max-width: 1300px) {
-  .top-magnifying-glass {
+  .search-icon {
     right: 30px;
   }
 }
 
 @media (max-width: 525px) {
-  .top-magnifying-glass {
+  .search-icon {
     right: 15px;
   }
 
-  .header-container {
+  .container {
     background-color: unset;
   }
 
-  .desktop-category {
+  .nav-wrapper {
     padding: 0 15px;
   }
 
