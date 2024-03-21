@@ -44,15 +44,15 @@ export const MobileTagDisplay = () => {
         );
       })}
       <div
-        className={styles["arrow-down-container"]}
+        className={styles["arrow-container"]}
         onClick={() => {
           setShowAllTagItems(!showAllTagItems);
         }}
       >
         <img
-          className={styles["arrow-down"]}
+          className={styles["arrow"]}
           src={showAllTagItems ? "/music/arrow-up.svg" : "/music/arrow-down.svg"}
-          alt="arrow-down"
+          alt="arrow"
         />
       </div>
     </div>

@@ -57,7 +57,7 @@ export default function Update({ currentId }: UpdateProps) {
   const [showAlbumListModal, setShowAlbumListModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
-  const [showTagListModal, setShowTagListModal] = useState(false);
+  const [showTagsModal, setShowTagsModal] = useState(false);
   const [newTagKey, setNewTagKey] = useState("");
   const [blurHash, setBlurHash] = useState("");
   const router = useRouter();
@@ -173,7 +173,7 @@ export default function Update({ currentId }: UpdateProps) {
         modalRef.current && !modalRef.current.contains(event.target as Node);
       if (isClickedOutsideModal) {
         setShowAlbumListModal(false);
-        setShowTagListModal(false);
+        setShowTagsModal(false);
         setNewTagKey("");
       }
     };
@@ -203,7 +203,7 @@ export default function Update({ currentId }: UpdateProps) {
   return (
     <div
       className={styles["container"]}
-      style={showTagListModal ? { marginBottom: "150px" } : undefined}
+      style={showTagsModal ? { marginBottom: "150px" } : undefined}
     >
       <div className={styles["page-title"]}>수정 페이지</div>
 
@@ -252,7 +252,7 @@ export default function Update({ currentId }: UpdateProps) {
               setShowAlbumListModal(true);
             }}
             placeholder="검색어를 입력해주세요"
-          />{" "}
+          />
           <div
             className={styles["search-album-modal-container"]}
             style={{ display: searchData ? "flex" : "none" }}
@@ -262,7 +262,7 @@ export default function Update({ currentId }: UpdateProps) {
               const artist = artists[0].name;
               const album = name;
               const releaseYear = release_date.slice(0, 4);
-              const imageUrl = images[2].url;
+              const imgUrl = images[2].url;
               return (
                 <div
                   className={styles["search-album-modal"]}
@@ -274,7 +274,7 @@ export default function Update({ currentId }: UpdateProps) {
                   <div className={styles["search-album-image-container"]}>
                     <img
                       className={styles["search-album-image"]}
-                      src={imageUrl}
+                      src={imgUrl}
                       alt="search-album-image"
                       loading="lazy"
                     />
@@ -359,7 +359,7 @@ export default function Update({ currentId }: UpdateProps) {
       {/* 비디오 링크 */}
       {albumData &&
         new Array(videoCount).fill(null).map((_, index) => {
-          const tmpVideos = [...videos];
+          const copiedVideos = [...videos];
           const videoNumber = index + 1;
           const isFirstVideo = index === 0;
           return (
@@ -389,9 +389,9 @@ export default function Update({ currentId }: UpdateProps) {
                         className={styles["video-block-button"]}
                         onClick={() => {
                           setVideoCount(prev => prev - 1);
-                          const tmpVideos = [...videos];
-                          tmpVideos.splice(index, 1);
-                          setVideos(tmpVideos);
+                          const copiedVideos = [...videos];
+                          copiedVideos.splice(index, 1);
+                          setVideos(copiedVideos);
                         }}
                       >
                         −
@@ -406,9 +406,9 @@ export default function Update({ currentId }: UpdateProps) {
                         className={styles["video-block-button"]}
                         onClick={() => {
                           setVideoCount(prev => prev - 1);
-                          const tmpVideos = [...videos];
-                          tmpVideos.splice(index, 1);
-                          setVideos(tmpVideos);
+                          const copiedVideos = [...videos];
+                          copiedVideos.splice(index, 1);
+                          setVideos(copiedVideos);
                         }}
                       >
                         −
@@ -421,8 +421,8 @@ export default function Update({ currentId }: UpdateProps) {
                 className={`${styles["input"]} ${styles["input-link"]}`}
                 value={videos[index].title}
                 onChange={e => {
-                  tmpVideos[index] = { ...tmpVideos[index], title: e.target.value };
-                  setVideos(tmpVideos);
+                  copiedVideos[index] = { ...copiedVideos[index], title: e.target.value };
+                  setVideos(copiedVideos);
                 }}
               />
               <div
@@ -432,8 +432,8 @@ export default function Update({ currentId }: UpdateProps) {
                 className={`${styles["input"]} ${styles["input-link"]}`}
                 value={videos[index].url}
                 onChange={e => {
-                  tmpVideos[index] = { ...tmpVideos[index], url: e.target.value };
-                  setVideos(tmpVideos);
+                  copiedVideos[index] = { ...copiedVideos[index], url: e.target.value };
+                  setVideos(copiedVideos);
                 }}
               />
             </div>
@@ -458,18 +458,18 @@ export default function Update({ currentId }: UpdateProps) {
               </div>
             );
           })}
-          {showTagListModal && (
+          {showTagsModal && (
             <div className={styles["tag-list-modal-container"]}>
               <div className={styles["tag-list-modal"]}>
                 <div className={styles["tag-item-container"]}>
-                  {Object.keys(GROUP_TAGS).map((tagGroup, index) => {
-                    const isNormalTagGroup = tagGroup !== "모두보기";
+                  {Object.keys(GROUP_TAGS).map((tag, index) => {
+                    const isNormalTag = tag !== "모두보기";
                     return (
-                      isNormalTagGroup && (
+                      isNormalTag && (
                         <React.Fragment key={index}>
-                          <div className={styles["tag-list-comment"]}>{tagGroup}</div>
+                          <div className={styles["tag-list-comment"]}>{tag}</div>
                           <div className={styles["tag-group-container"]} key={index}>
-                            {Object.keys(GROUP_TAGS[tagGroup]).map(tagKey => {
+                            {Object.keys(GROUP_TAGS[tag]).map(tagKey => {
                               const isExistingTag = currentTagKeys.includes(tagKey);
                               return (
                                 !isExistingTag && (
@@ -480,7 +480,7 @@ export default function Update({ currentId }: UpdateProps) {
                                       handleTagItemAdd(tagKey);
                                     }}
                                   >
-                                    {GROUP_TAGS[tagGroup][tagKey]}
+                                    {GROUP_TAGS[tag][tagKey]}
                                     <button className={styles["tag-item-delete-button"]}>+</button>
                                   </div>
                                 )
@@ -500,7 +500,7 @@ export default function Update({ currentId }: UpdateProps) {
             className={styles["tag-item-input"]}
             placeholder="태그 생성"
             onClick={() => {
-              setShowTagListModal(true);
+              setShowTagsModal(true);
             }}
             onChange={e => {
               const tmp = e.target.value;

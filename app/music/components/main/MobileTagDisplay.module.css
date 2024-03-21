@@ -31,7 +31,7 @@
     font-size: 0.92rem;
   }
 
-  .arrow-down-container {
+  .arrow-container {
     display: flex;
     position: absolute;
     top: 6px;
@@ -44,7 +44,7 @@
     height: 40px;
   }
 
-  .arrow-down {
+  .arrow {
     width: auto;
   }
 }

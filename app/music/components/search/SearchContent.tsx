@@ -25,7 +25,6 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
   const { currentKeyword, currentPage, currentTagName, totalDataLength } = searchInfo;
   const router = useRouter();
   const pathName = usePathname();
-  const [isLoading, setIsLoading] = useState(false);
   const decodedKeyword = decodeURIComponent(currentKeyword);
   const [keyword, setKeyword] = useState("");
 
@@ -61,9 +60,7 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
         </div>
         <div className={styles["search-result-container"]}>
           {decodedKeyword
-            ? isLoading
-              ? "데이터를 가져오고 있습니다..."
-              : totalDataLength
+            ? totalDataLength
               ? `"${decodedKeyword}"에 관련된 총 ${totalDataLength}건의 검색 결과`
               : `"${decodedKeyword}"에 관련된 검색 결과가 없습니다.`
             : "앨범 제목, 아티스트 또는 키워드 등을 검색해보세요."}

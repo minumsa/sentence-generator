@@ -1,4 +1,4 @@
-.album-container {
+.container {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -7,13 +7,13 @@
 }
 
 @media (max-width: 1300px) {
-  .album-container {
+  .container {
     padding: 50px 30px;
   }
 }
 
 @media (max-width: 800px) {
-  .album-container {
+  .container {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -25,11 +25,11 @@
 }
 
 @media (max-width: 525px) {
-  .album-container {
+  .container {
     padding: 40px 20px;
   }
 
-  .album-container:first-child {
+  .container:first-child {
     padding: 30px 20px 40px 20px;
   }
 }

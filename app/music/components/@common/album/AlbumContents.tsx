@@ -9,9 +9,8 @@ interface AlbumContentsProps {
 
 export const AlbumContents = ({ albumData }: AlbumContentsProps) => {
   return albumData.map((item, index) => {
-    const itemIndex = index + 1;
     const isLastData = index === albumData.length - 1;
-    const isLastDataPerPage = itemIndex % SUB_PER_PAGE_COUNT === 0;
+    const isLastDataPerPage = (index + 1) % SUB_PER_PAGE_COUNT === 0;
 
     return (
       <article

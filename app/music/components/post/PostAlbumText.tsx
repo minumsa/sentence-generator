@@ -11,13 +11,14 @@ interface PostTextProps {
 
 export const PostText = ({ albumData }: PostTextProps) => {
   const pathName = usePathname();
-  const paragraphArray = albumData.text.split("\n");
+  const { text, tagKeys, uploadDate } = albumData;
+  const paragraphs = text.split("\n");
 
   return (
-    <article className={styles["post-content-container"]}>
-      {paragraphArray.map((paragraph, index) => {
+    <article className={styles["container"]}>
+      {paragraphs.map((paragraph, index) => {
         const isLineBreak = paragraph === "";
-        const isParagraphTitle =
+        const isSubTitle =
           (paragraph.length < 50 && !paragraph.includes(".") && !paragraph.includes("[")) ||
           paragraph.includes("feat.");
         return isLineBreak ? (
@@ -26,14 +27,14 @@ export const PostText = ({ albumData }: PostTextProps) => {
           <p
             key={index}
             className={styles["paragraph"]}
-            style={isParagraphTitle ? { fontWeight: 600 } : undefined}
+            style={isSubTitle ? { fontWeight: 600 } : undefined}
           >
             {paragraph}
           </p>
         );
       })}
-      <div className={styles["album-tag-container"]}>
-        {albumData.tagKeys.map((tagKey: string, index: number) => {
+      <div className={styles["tag-container"]}>
+        {tagKeys.map((tagKey: string, index: number) => {
           return (
             <Link
               href={
@@ -52,7 +53,7 @@ export const PostText = ({ albumData }: PostTextProps) => {
       <div className={styles["post-divider"]}></div>
       <div className={styles["post-date-container"]}>
         <div className={styles["post-date"]}>작성일</div>
-        <div>{formatDate(albumData.uploadDate.toString())}</div>
+        <div>{formatDate(uploadDate)}</div>
       </div>
     </article>
   );

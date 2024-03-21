@@ -13,7 +13,7 @@ export const Post = ({ albumData }: PostProps) => {
   return (
     <>
       {albumData && (
-        <section className={styles["album-container"]}>
+        <section className={styles["container"]}>
           <PostAlbumMetadata albumData={albumData} />
           <PostText albumData={albumData} />
         </section>
