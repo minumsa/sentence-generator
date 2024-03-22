@@ -7,16 +7,9 @@ import { Metadata } from "next";
 export default async function Page({ params }: PageProps) {
   const artistId = params.id;
   const currentPage = params.page;
-  let artistData;
-  let artistDataCount;
 
   try {
-    const result = await fetchArtistData(artistId, currentPage);
-
-    if (result) {
-      artistData = result.artistData;
-      artistDataCount = result.artistDataCount;
-    }
+    const { artistData, artistDataCount } = await fetchArtistData(artistId, currentPage);
 
     return (
       <MusicLayout>
@@ -36,18 +29,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
   const artistId = params.id;
   const currentPage = params.page;
 
-  const queryString = `?artistId=${artistId}&currentPage=${currentPage}`;
-  const url = `https://divdivdiv.com/music/api/artist${queryString}`;
-
   try {
-    const response = await fetch(url).then(res => res.json());
+    const { artistData } = await fetchArtistData(artistId, currentPage);
+    const firstArtistData = artistData[0];
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch artist data");
-    }
-
-    const { artistData } = response;
-    const firstArtistData = artistData && artistData[0];
     if (!firstArtistData) {
       throw new Error("No artist data found");
     }

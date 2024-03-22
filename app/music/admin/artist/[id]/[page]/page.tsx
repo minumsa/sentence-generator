@@ -6,16 +6,9 @@ import { fetchArtistData } from "@/app/music/modules/api";
 export default async function Page({ params }: PageProps) {
   const artistId = params.id;
   const currentPage = params.page;
-  let artistData;
-  let artistDataCount;
 
   try {
-    const result = await fetchArtistData(artistId, currentPage);
-
-    if (result) {
-      artistData = result.artistData;
-      artistDataCount = result.artistDataCount;
-    }
+    const { artistData, artistDataCount } = await fetchArtistData(artistId, currentPage);
 
     return (
       <MusicLayout>

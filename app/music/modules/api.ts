@@ -1,4 +1,4 @@
-import { SpotifyAlbumData } from "./types";
+import { AlbumInfo, SpotifyAlbumData } from "./types";
 
 export interface AlbumFilters {
   scrollCount: number;
@@ -52,7 +52,7 @@ export async function fetchPostData(currentId: string) {
       throw new Error("Failed to fetch post data");
     }
 
-    const postData = await response.json();
+    const postData: AlbumInfo = await response.json();
 
     return postData;
   } catch (error) {
@@ -60,7 +60,12 @@ export async function fetchPostData(currentId: string) {
   }
 }
 
-export async function fetchArtistData(artistId: string, currentPage: number) {
+interface ArtistData {
+  artistData: AlbumInfo[];
+  artistDataCount: number;
+}
+
+export async function fetchArtistData(artistId: string, currentPage: number): Promise<ArtistData> {
   try {
     const queryString = `?artistId=${artistId}&currentPage=${currentPage}`;
     const url = `https://divdivdiv.com/music/api/artist${queryString}`;
@@ -77,10 +82,10 @@ export async function fetchArtistData(artistId: string, currentPage: number) {
     }
 
     const { artistData, artistDataCount } = await response.json();
-
     return { artistData, artistDataCount };
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
 
