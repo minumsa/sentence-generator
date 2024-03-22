@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     await connectMongoDB();
 
     const url = new URL(request.url);
-    const scrollCount = Number(url.searchParams.get("scrollCount"));
+    const scrollCount = Number(url.searchParams.get("scrollCount")) ?? 1;
     const currentTagKey = url.searchParams.get("currentTagKey");
 
     interface SortKey {
