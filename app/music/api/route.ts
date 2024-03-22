@@ -10,6 +10,7 @@ export async function GET(request: Request) {
 
     const url = new URL(request.url);
     const currentPage = Number(url.searchParams.get("currentPage"));
+    const currentScroll = Number(url.searchParams.get("currentScroll"));
     const currentTagKey = url.searchParams.get("currentTagKey");
 
     interface SortKey {
