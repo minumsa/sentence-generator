@@ -8,9 +8,9 @@ export async function GET(request: Request) {
     await connectMongoDB();
 
     const url = new URL(request.url);
-    const id = url.searchParams.get("id");
+    const albumId = url.searchParams.get("albumId");
 
-    const data = await Music.findOne({ id: id });
+    const data = await Music.findOne({ id: albumId });
 
     if (!data) {
       return NextResponse.json({ message: "데이터를 찾을 수 없습니다." }, { status: 404 });

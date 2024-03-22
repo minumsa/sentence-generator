@@ -7,7 +7,8 @@ export default async function Page({ params }: PageProps) {
   const currentId = params.id;
 
   try {
-    const url = `https://divdivdiv.com/music/api/update?id=${currentId}`;
+    const queryString = `?albumId=${currentId}`;
+    const url = `https://divdivdiv.com/music/api/post${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -34,8 +35,8 @@ export default async function Page({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const currentId = params.id;
-  const queryString = `?id=${currentId}`;
-  const url = `https://divdivdiv.com/music/api/update${queryString}`;
+  const queryString = `?albumId=${currentId}`;
+  const url = `https://divdivdiv.com/music/api/post${queryString}`;
   const data = await fetch(url).then(res => res.json());
   const { imgUrl, artist, album, text } = data;
   const firstSentence = text.split(". ")[0] + ".";

@@ -100,9 +100,10 @@ export async function fetchSearchedData(searchFilters: SearchFilters) {
   }
 }
 
-export async function fetchAlbumById(id: string) {
+export async function fetchAlbumById(albumId: string) {
   try {
-    const url = `/music/api/update?id=${id}`;
+    const queryString = `?albumId=${albumId}`;
+    const url = `/music/api/post${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",

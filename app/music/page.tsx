@@ -2,14 +2,13 @@ import { Grid } from "./components/main/Grid";
 import { MusicLayout } from "./components/@common/MusicLayout";
 import { PER_PAGE_COUNT } from "./modules/constants";
 
+const SCROLL_COUNT = 1;
+const CURRENT_TAG_KEY = "";
+
 export default async function Page() {
   try {
-    const scrollCount = 1;
-    const currentTagKey = "";
-
-    const queryString = `?scrollCount=${scrollCount}&currentTagKey=${currentTagKey}`;
+    const queryString = `?scrollCount=${SCROLL_COUNT}&currentTagKey=${CURRENT_TAG_KEY}`;
     const url = `https://divdivdiv.com/music/api${queryString}`;
-    // const url = `https://divdivdiv.com/music/api`;
 
     const response = await fetch(url, {
       method: "GET",
