@@ -6,12 +6,12 @@ import { AlbumInfo } from "../../modules/types";
 import { DEFAULT_TAGS } from "../../modules/constants";
 
 interface PostTextProps {
-  albumData: AlbumInfo;
+  postData: AlbumInfo;
 }
 
-export const PostText = ({ albumData }: PostTextProps) => {
+export const PostText = ({ postData }: PostTextProps) => {
   const pathName = usePathname();
-  const { text, tagKeys, uploadDate } = albumData;
+  const { text, tagKeys, uploadDate } = postData;
   const paragraphs = text.split("\n");
 
   return (

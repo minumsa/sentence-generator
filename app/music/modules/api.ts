@@ -36,6 +36,30 @@ export async function fetchAlbumData(albumFilters: AlbumFilters) {
   }
 }
 
+export async function fetchPostData(currentId: string) {
+  try {
+    const queryString = `?albumId=${currentId}`;
+    const url = `https://divdivdiv.com/music/api/post${queryString}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch post data");
+    }
+
+    const postData = await response.json();
+
+    return postData;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function fetchArtistData(artistId: string, currentPage: number) {
   try {
     const queryString = `?artistId=${artistId}&currentPage=${currentPage}`;

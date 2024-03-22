@@ -9,10 +9,10 @@ import { BlurImg } from "../@common/BlurImage";
 import { AlbumInfo } from "../../modules/types";
 
 interface PostAlbumMetadataProps {
-  albumData: AlbumInfo;
+  postData: AlbumInfo;
 }
 
-export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
+export const PostAlbumMetadata = ({ postData }: PostAlbumMetadataProps) => {
   const {
     id,
     videos,
@@ -26,7 +26,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
     artistId,
     label,
     tracks,
-  } = albumData;
+  } = postData;
   const albumDuration = formatDuration(duration);
   const pathName = usePathname();
   const hasVideo = videos[0]?.title.length > 0;
@@ -76,7 +76,7 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         {hasVideo && (
           <>
             <div className={styles["metadata-title"]}>비디오</div>
-            {albumData.videos.map(video => {
+            {postData.videos.map(video => {
               const { title, url } = video;
               return (
                 <div key={title}>
@@ -104,8 +104,8 @@ export const PostAlbumMetadata = ({ albumData }: PostAlbumMetadataProps) => {
         {/* 관리자 페이지 정보 */}
         {isAdminPage(pathName) && (
           <div className={styles["admin-button-container"]}>
-            <EditButton data={albumData} />
-            <DeleteButton data={albumData} />
+            <EditButton data={postData} />
+            <DeleteButton data={postData} />
           </div>
         )}
       </div>

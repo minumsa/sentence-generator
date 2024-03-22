@@ -6,16 +6,16 @@ import { PostAlbumMetadata } from "./PostAlbumMetadata";
 import { PostText } from "./PostAlbumText";
 
 interface PostProps {
-  albumData: AlbumInfo;
+  postData: AlbumInfo;
 }
 
-export const Post = ({ albumData }: PostProps) => {
+export const Post = ({ postData }: PostProps) => {
   return (
     <>
-      {albumData && (
+      {postData && (
         <section className={styles["container"]}>
-          <PostAlbumMetadata albumData={albumData} />
-          <PostText albumData={albumData} />
+          <PostAlbumMetadata postData={postData} />
+          <PostText postData={postData} />
         </section>
       )}
     </>

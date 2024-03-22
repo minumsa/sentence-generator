@@ -10,13 +10,13 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const albumId = url.searchParams.get("albumId");
 
-    const data = await Music.findOne({ id: albumId });
+    const postData = await Music.findOne({ id: albumId });
 
-    if (!data) {
+    if (!postData) {
       return NextResponse.json({ message: "데이터를 찾을 수 없습니다." }, { status: 404 });
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json(postData);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "서버 오류" }, { status: 500 });

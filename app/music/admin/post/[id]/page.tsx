@@ -2,30 +2,17 @@ import { Post } from "@/app/music/components/post/Post";
 import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import { Metadata } from "next";
 import { PageProps } from "@/app/music/modules/types";
+import { fetchPostData } from "@/app/music/modules/api";
 
 export default async function Page({ params }: PageProps) {
   const currentId = params.id;
 
   try {
-    const queryString = `?albumId=${currentId}`;
-    const url = `https://divdivdiv.com/music/api/post${queryString}`;
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch post data");
-    }
-
-    const data = await response.json();
+    const postData = await fetchPostData(currentId);
 
     return (
       <MusicLayout>
-        <Post albumData={data} />
+        <Post postData={postData} />
       </MusicLayout>
     );
   } catch (error) {
@@ -35,20 +22,18 @@ export default async function Page({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const currentId = params.id;
-  const queryString = `?albumId=${currentId}`;
-  const url = `https://divdivdiv.com/music/api/post${queryString}`;
-  const data = await fetch(url).then(res => res.json());
-  const { imgUrl, artist, album, text } = data;
-  const firstSentence = text.split(". ")[0] + ".";
+  const postData = await fetchPostData(currentId);
+  const { imgUrl, artist, album, text } = postData;
+  const textPreview = text.substring(0, 30) + "...";
   const currentUrl = `https://divdivdiv.com/music/post/${currentId}`;
 
   return {
     title: `${artist} - ${album}`,
-    description: firstSentence,
+    description: textPreview,
     openGraph: {
       title: `${artist} - ${album}`,
       images: [imgUrl],
-      description: firstSentence,
+      description: textPreview,
       url: currentUrl,
       type: "website",
       siteName: "divdivdiv",
