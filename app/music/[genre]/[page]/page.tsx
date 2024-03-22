@@ -6,11 +6,6 @@ export default async function Page({ params }: PageProps) {
   let currentGenre = params.genre;
   const currentPage = params.page;
 
-  const genreFilters = currentGenre === "kpop" || currentGenre === "jpop";
-  if (genreFilters) {
-    currentGenre = currentGenre.slice(0, 1) + "-" + currentGenre.slice(1);
-  }
-
   try {
     const pathName = currentGenre;
     const currentTagKey = "";

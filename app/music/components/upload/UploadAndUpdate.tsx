@@ -489,15 +489,15 @@ export default function UploadAndUpdate({ currentId }: UpdateProps) {
               <div className={styles["tag-modal"]}>
                 <div className={styles["tag-item-container"]}>
                   {/* 태그 종류 출력 */}
-                  {Object.keys(GROUP_TAGS).map((tag, index) => {
-                    const isNormalTag = tag !== "모두보기";
+                  {Object.keys(GROUP_TAGS).map((tagTheme, index) => {
+                    const isNormalTag = tagTheme !== "모두보기";
                     return (
                       isNormalTag && (
                         <React.Fragment key={index}>
-                          <div className={styles["tag-block-title"]}>{tag}</div>
+                          <div className={styles["tag-block-title"]}>{tagTheme}</div>
                           <div className={styles["tag-block-item-container"]} key={index}>
                             {/* 해당 종류의 태그 출력 */}
-                            {Object.keys(GROUP_TAGS[tag]).map(tag => {
+                            {Object.keys(GROUP_TAGS[tagTheme]).map(tag => {
                               const isExistingTag = currentTagKeys.includes(tag);
                               return (
                                 !isExistingTag && (
@@ -508,7 +508,7 @@ export default function UploadAndUpdate({ currentId }: UpdateProps) {
                                       addTagItem(tag);
                                     }}
                                   >
-                                    {GROUP_TAGS[tag][tag]}
+                                    {GROUP_TAGS[tagTheme][tag]}
                                     <button className={styles["tag-delete-button"]}>+</button>
                                   </div>
                                 )
