@@ -2,6 +2,18 @@
   display: none;
 }
 
+.tag-display-item {
+  display: none;
+}
+
+.arrow-container {
+  display: none;
+}
+
+.arrow {
+  display: none;
+}
+
 @media (max-width: 525px) {
   .tag-display-container {
     box-sizing: border-box;

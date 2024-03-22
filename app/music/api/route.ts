@@ -1,8 +1,7 @@
 import connectMongoDB from "@/app/music/modules/mongodb";
 import Music from "@/models/music";
 import { NextResponse } from "next/server";
-import { isMainPage, isSearchPage } from "../modules/utils";
-import { PER_PAGE_COUNT, SUB_PER_PAGE_COUNT } from "../modules/constants";
+import { PER_PAGE_COUNT } from "../modules/constants";
 import { SortOrder } from "mongoose";
 
 export async function GET(request: Request) {
@@ -10,16 +9,7 @@ export async function GET(request: Request) {
     await connectMongoDB();
 
     const url = new URL(request.url);
-    const currentPage = Number(url.searchParams.get("currentPage"));
-    const pathName = url.searchParams.get("pathName") ?? "";
-    const currentTagKey = url.searchParams.get("currentTagKey");
-    let perPageCount: number;
-
-    if (pathName === "") {
-      perPageCount = PER_PAGE_COUNT;
-    } else {
-      perPageCount = SUB_PER_PAGE_COUNT;
-    }
+    const scrollCount = Number(url.searchParams.get("scrollCount"));
 
     interface SortKey {
       [key: string]: SortOrder;
@@ -27,30 +17,13 @@ export async function GET(request: Request) {
 
     const sortKey: SortKey = { score: -1, artist: 1 };
 
-    interface Query {
-      tagKeys?: string;
-      genre?: string;
-    }
+    let query = {};
 
-    let query: Query = {};
-
-    if (isMainPage(pathName) || isSearchPage(pathName)) {
-      if (currentTagKey) {
-        query.tagKeys = currentTagKey;
-      }
-    } else {
-      query.genre = pathName;
-    }
-
-    // 50 * 1 - 50 + 1 = 1 49
-    // 50 * 2 - 50 + 1 = 51
-    // const skipCount = perPageCount * currentPage - perPageCount + 1;
-    const skipCount = perPageCount * currentPage - perPageCount;
-    // const slicedData = await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
+    const skipCount = PER_PAGE_COUNT * scrollCount - PER_PAGE_COUNT;
     const slicedData =
-      currentPage === 1
-        ? await Music.find(query).sort(sortKey).limit(perPageCount)
-        : await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
+      scrollCount === 1
+        ? await Music.find(query).sort(sortKey).limit(PER_PAGE_COUNT)
+        : await Music.find(query).sort(sortKey).skip(skipCount).limit(PER_PAGE_COUNT);
     const totalDataLength = await Music.find(query).count();
 
     return NextResponse.json({ slicedData, totalDataLength });

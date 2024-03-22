@@ -3,14 +3,12 @@ import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
-  const pathName = "search";
-
-  const currentTagKey: string = params.tagName;
+  const currentTag: string = params.tagName;
   const currentPage: number = params.page;
 
   try {
-    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentTagKey=${currentTagKey}`;
-    const url = `https://divdivdiv.com/music/api${queryString}`;
+    const queryString = `?currentPage=${currentPage}&currentTag=${currentTag}`;
+    const url = `https://divdivdiv.com/music/api/tag${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -28,7 +26,7 @@ export default async function Page({ params }: PageProps) {
     const searchInfo = {
       currentKeyword,
       currentPage,
-      currentTagName: currentTagKey,
+      currentTagName: currentTag,
       totalDataLength: totalDataLength,
     };
 
