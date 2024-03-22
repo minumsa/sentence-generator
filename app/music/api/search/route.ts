@@ -15,14 +15,11 @@ export async function GET(request: Request) {
 
     type SortOrder = 1 | -1;
     const sortKey: { [key: string]: SortOrder } = { artist: 1, releaseDate: 1 };
-    const query = {};
 
-    let totalDataLength = await Music.find(query).count();
-    let startIndex = SUB_PER_PAGE_COUNT * currentPage - SUB_PER_PAGE_COUNT;
-    let slicedData = undefined;
+    let skipCount = SUB_PER_PAGE_COUNT * currentPage - SUB_PER_PAGE_COUNT;
 
     // 'i' 옵션은 대소문자를 구별하지 않도록 설정
-    slicedData = await Music.find({
+    const slicedData = await Music.find({
       $or: [
         { text: { $regex: new RegExp(currentKeyword, "i") } },
         { artist: { $regex: new RegExp(currentKeyword, "i") } },
@@ -30,9 +27,10 @@ export async function GET(request: Request) {
       ],
     })
       .sort(sortKey)
-      .skip(startIndex)
+      .skip(skipCount)
       .limit(SUB_PER_PAGE_COUNT);
-    totalDataLength = await Music.find({
+
+    const totalDataLength = await Music.find({
       $or: [
         { text: { $regex: new RegExp(currentKeyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
         { artist: { $regex: new RegExp(currentKeyword, "i") } },
