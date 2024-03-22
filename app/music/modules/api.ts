@@ -1,12 +1,11 @@
 import { SpotifyAlbumData } from "./types";
 
 export interface AlbumFilters {
-  currentPage: number;
+  scrollCount: number;
   currentTagKey: string;
 }
 
 interface FetchData {
-  pathName: string;
   albumFilters: AlbumFilters;
 }
 
@@ -24,11 +23,11 @@ export interface ArtistDataParams {
   artistFilters: ArtistFilters;
 }
 
-export async function fetchAlbumData({ pathName, albumFilters }: FetchData) {
-  const { currentPage, currentTagKey } = albumFilters;
+export async function fetchAlbumData({ albumFilters }: FetchData) {
+  const { scrollCount, currentTagKey } = albumFilters;
 
   try {
-    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentTagKey=${currentTagKey}`;
+    const queryString = `?currentPage=${scrollCount}&currentTagKey=${currentTagKey}`;
     const url = `/music/api${queryString}`;
 
     const response = await fetch(url, {

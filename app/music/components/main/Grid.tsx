@@ -66,12 +66,11 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
   useEffect(() => {
     async function loadData(scrollCount: number) {
       const albumFilters: AlbumFilters = {
-        currentPage: scrollCount,
-        currentTagKey: currentTagKey,
+        scrollCount,
+        currentTagKey,
       };
 
       const albumResult = await fetchAlbumData({
-        pathName: "",
         albumFilters,
       });
 

@@ -9,7 +9,8 @@ export async function GET(request: Request) {
     await connectMongoDB();
 
     const url = new URL(request.url);
-    const scrollCount = Number(url.searchParams.get("scrollCount"));
+    const currentPage = Number(url.searchParams.get("currentPage"));
+    const currentTagKey = url.searchParams.get("currentTagKey");
 
     interface SortKey {
       [key: string]: SortOrder;
@@ -17,11 +18,19 @@ export async function GET(request: Request) {
 
     const sortKey: SortKey = { score: -1, artist: 1 };
 
-    let query = {};
+    interface Query {
+      tagKeys?: string;
+    }
 
-    const skipCount = PER_PAGE_COUNT * scrollCount - PER_PAGE_COUNT;
+    let query: Query = {};
+
+    if (currentTagKey) {
+      query.tagKeys = currentTagKey;
+    }
+
+    const skipCount = PER_PAGE_COUNT * currentPage - PER_PAGE_COUNT;
     const slicedData =
-      scrollCount === 1
+      currentPage === 1
         ? await Music.find(query).sort(sortKey).limit(PER_PAGE_COUNT)
         : await Music.find(query).sort(sortKey).skip(skipCount).limit(PER_PAGE_COUNT);
     const totalDataLength = await Music.find(query).count();
