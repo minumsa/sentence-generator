@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
     const url = new URL(request.url);
     const scrollCount = Number(url.searchParams.get("scrollCount")) ?? 1;
-    const currentTagKey = url.searchParams.get("currentTagKey");
+    const currentTagKey = url.searchParams.get("currentTagKey") ?? "";
 
     interface SortKey {
       [key: string]: SortOrder;
