@@ -4,11 +4,7 @@ import { PER_PAGE_COUNT } from "./modules/constants";
 
 export default async function Page() {
   try {
-    const scrollCount = 1;
-    const currentTagKey = "";
-
-    const queryString = `?scrollCount=${scrollCount}&currentTagKey=${currentTagKey}`;
-    const url = `https://divdivdiv.com/music/api${queryString}`;
+    const url = `https://divdivdiv.com/music/api`;
 
     const response = await fetch(url, {
       method: "GET",
