@@ -5,25 +5,12 @@ export interface AlbumFilters {
   currentTagKey: string;
 }
 
-interface FetchData {
-  albumFilters: AlbumFilters;
-}
-
 export interface SearchFilters {
   currentPage: number;
   currentKeyword: string;
 }
 
-export interface ArtistFilters {
-  currentPage: number;
-}
-
-export interface ArtistDataParams {
-  artistId: string;
-  artistFilters: ArtistFilters;
-}
-
-export async function fetchAlbumData({ albumFilters }: FetchData) {
+export async function fetchAlbumData(albumFilters: AlbumFilters) {
   const { scrollCount, currentTagKey } = albumFilters;
 
   try {
@@ -49,11 +36,10 @@ export async function fetchAlbumData({ albumFilters }: FetchData) {
   }
 }
 
-export async function fetchArtistData({ artistId, artistFilters }: ArtistDataParams) {
-  const { currentPage } = artistFilters;
+export async function fetchArtistData(artistId: string, currentPage: number) {
   try {
     const queryString = `?artistId=${artistId}&currentPage=${currentPage}`;
-    const url = `/music/api/artist${queryString}`;
+    const url = `https://divdivdiv.com/music/api/artist${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",

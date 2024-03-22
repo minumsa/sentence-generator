@@ -70,9 +70,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
         currentTagKey,
       };
 
-      const albumResult = await fetchAlbumData({
-        albumFilters,
-      });
+      const albumResult = await fetchAlbumData(albumFilters);
 
       if (albumResult) {
         setData(prevData => [...prevData, ...albumResult.slicedData]);

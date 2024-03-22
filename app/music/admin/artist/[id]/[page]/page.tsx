@@ -1,27 +1,21 @@
 import ArtistContent from "@/app/music/components/artist/ArtistContent";
 import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
+import { fetchArtistData } from "@/app/music/modules/api";
 
 export default async function Page({ params }: PageProps) {
   const artistId = params.id;
   const currentPage = params.page;
+  let artistData;
+  let artistDataCount;
 
   try {
-    const queryString = `?artistId=${artistId}&currentPage=${currentPage}`;
-    const url = `https://divdivdiv.com/music/api/artist${queryString}`;
+    const result = await fetchArtistData(artistId, currentPage);
 
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch artist data");
+    if (result) {
+      artistData = result.artistData;
+      artistDataCount = result.artistDataCount;
     }
-
-    const { artistData, artistDataCount } = await response.json();
 
     return (
       <MusicLayout>

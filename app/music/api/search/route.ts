@@ -8,7 +8,6 @@ export async function GET(request: Request) {
     require("dotenv").config();
     await connectMongoDB();
 
-    // 몽고DB에서 데이터 가져오기
     const url = new URL(request.url);
     const currentPage = Number(url.searchParams.get("currentPage"));
     const currentKeyword: any = url.searchParams.get("currentKeyword");
@@ -17,8 +16,6 @@ export async function GET(request: Request) {
     const sortKey: { [key: string]: SortOrder } = { artist: 1, releaseDate: 1 };
 
     let skipCount = SUB_PER_PAGE_COUNT * currentPage - SUB_PER_PAGE_COUNT;
-
-    // 'i' 옵션은 대소문자를 구별하지 않도록 설정
     const slicedData = await Music.find({
       $or: [
         { text: { $regex: new RegExp(currentKeyword, "i") } },
