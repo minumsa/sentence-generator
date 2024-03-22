@@ -1,12 +1,12 @@
 "use client";
 
-import Upload from "../../components/upload/Upload";
 import { MusicLayout } from "../../components/@common/MusicLayout";
+import UploadAndUpdate from "../../components/upload/UploadAndUpdate";
 
 export default function Page() {
   return (
     <MusicLayout>
-      <Upload />
+      <UploadAndUpdate currentId={""} />
     </MusicLayout>
   );
 }

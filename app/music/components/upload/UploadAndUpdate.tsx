@@ -7,6 +7,7 @@ import {
   fetchSpotify,
   searchSpotify,
   updateData,
+  uploadData,
 } from "../../modules/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -38,7 +39,8 @@ interface SearchData {
 }
 
 // FIXME: Upload 컴포넌트와 겹치는 부분 리팩토링
-export default function Update({ currentId }: UpdateProps) {
+export default function UploadAndUpdate({ currentId }: UpdateProps) {
+  const isUpdatePage = currentId.length > 0;
   const [albumData, setAlbumData] = useState<AlbumInfo>();
   const [albumId, setAlbumId] = useState("");
   const [artist, setArtist] = useState("");
@@ -62,7 +64,33 @@ export default function Update({ currentId }: UpdateProps) {
   const [blurHash, setBlurHash] = useState("");
   const router = useRouter();
 
-  // 수정 API
+  // 업로드 API
+  const handleUpload = async () => {
+    const filteredText = text.replace(/\[\d+\]/g, "");
+    const newSpotifyAlbumData = await fetchSpotify(albumId);
+
+    if (newSpotifyAlbumData) {
+      const newData: UploadData = {
+        newSpotifyAlbumData,
+        genre,
+        link,
+        text: filteredText,
+        uploadDate,
+        score,
+        videos,
+        tagKeys: currentTagKeys,
+        blurHash,
+      };
+
+      try {
+        await uploadData({ newData, password });
+      } catch (error) {
+        console.error("uploadData 호출에 실패했습니다:", error);
+      }
+    }
+  };
+
+  // 업데이트 API
   const handleUpdate = async () => {
     const filteredText = text.replace(/\[\d+\]/g, "");
     const newSpotifyAlbumData: SpotifyAlbumData | undefined = await fetchSpotify(albumId);
@@ -138,7 +166,7 @@ export default function Update({ currentId }: UpdateProps) {
       }
     }
 
-    getData();
+    if (isUpdatePage) getData();
   }, [currentId]);
 
   const handleSearch = async () => {
@@ -157,7 +185,7 @@ export default function Update({ currentId }: UpdateProps) {
     }
   }, [searchKeyword, isTyping]);
 
-  const handleClickSearchData = (data: SearchData) => {
+  const handleClickSearchResult = (data: SearchData) => {
     const { name, id, artists } = data;
     setArtist(artists[0].name);
     setAlbumId(id);
@@ -267,7 +295,7 @@ export default function Update({ currentId }: UpdateProps) {
                   className={styles["search-album-modal"]}
                   key={index}
                   onClick={() => {
-                    handleClickSearchData(data);
+                    handleClickSearchResult(data);
                   }}
                 >
                   <div className={styles["search-album-image-container"]}>
@@ -356,88 +384,87 @@ export default function Update({ currentId }: UpdateProps) {
       </div>
 
       {/* 비디오 링크 */}
-      {albumData &&
-        new Array(videoCount).fill(null).map((_, index) => {
-          const copiedVideos = [...videos];
-          const videoNumber = index + 1;
-          const isFirstVideo = index === 0;
-          return (
-            <div key={index} className={styles["block-container"]}>
-              <div className={styles["block-title"]}>
-                {isFirstVideo ? (
-                  <>
-                    <a
-                      href={`https://www.youtube.com/results?search_query=${artist} ${searchKeyword} MV 자막`}
-                      target="_blank"
-                    >
-                      <div>{`영상 제목 ${videoNumber}`}</div>
-                    </a>
-                    <div className={styles["video-button-container"]}>
-                      <div
-                        className={styles["video-button"]}
-                        onClick={() => {
-                          setVideoCount(prev => prev + 1);
-                          setVideos([...videos, { title: "", url: "" }]);
-                        }}
-                      >
-                        +
-                      </div>
-                    </div>
-                    <div className={styles["video-button-container"]}>
-                      <div
-                        className={styles["video-button"]}
-                        onClick={() => {
-                          setVideoCount(prev => prev - 1);
-                          const copiedVideos = [...videos];
-                          copiedVideos.splice(index, 1);
-                          setVideos(copiedVideos);
-                        }}
-                      >
-                        −
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <>
+      {new Array(videoCount).fill(null).map((_, index) => {
+        const copiedVideos = [...videos];
+        const videoNumber = index + 1;
+        const isFirstVideo = index === 0;
+        return (
+          <div key={index} className={styles["block-container"]}>
+            <div className={styles["block-title"]}>
+              {isFirstVideo ? (
+                <>
+                  <a
+                    href={`https://www.youtube.com/results?search_query=${artist} ${searchKeyword} MV 자막`}
+                    target="_blank"
+                  >
                     <div>{`영상 제목 ${videoNumber}`}</div>
-                    <div className={styles["video-button-container"]}>
-                      <div
-                        className={styles["video-button"]}
-                        onClick={() => {
-                          setVideoCount(prev => prev - 1);
-                          const copiedVideos = [...videos];
-                          copiedVideos.splice(index, 1);
-                          setVideos(copiedVideos);
-                        }}
-                      >
-                        −
-                      </div>
+                  </a>
+                  <div className={styles["video-button-container"]}>
+                    <div
+                      className={styles["video-button"]}
+                      onClick={() => {
+                        setVideoCount(prev => prev + 1);
+                        setVideos([...videos, { title: "", url: "" }]);
+                      }}
+                    >
+                      +
                     </div>
-                  </>
-                )}
-              </div>
-              <input
-                className={`${styles["input"]} ${styles["input-link"]}`}
-                value={videos[index].title}
-                onChange={e => {
-                  copiedVideos[index] = { ...copiedVideos[index], title: e.target.value };
-                  setVideos(copiedVideos);
-                }}
-              />
-              <div
-                className={`${styles["block-title"]} ${styles["video-link-title"]}`}
-              >{`영상 링크 ${videoNumber}`}</div>
-              <input
-                className={`${styles["input"]} ${styles["input-link"]}`}
-                value={videos[index].url}
-                onChange={e => {
-                  copiedVideos[index] = { ...copiedVideos[index], url: e.target.value };
-                  setVideos(copiedVideos);
-                }}
-              />
+                  </div>
+                  <div className={styles["video-button-container"]}>
+                    <div
+                      className={styles["video-button"]}
+                      onClick={() => {
+                        setVideoCount(prev => prev - 1);
+                        const copiedVideos = [...videos];
+                        copiedVideos.splice(index, 1);
+                        setVideos(copiedVideos);
+                      }}
+                    >
+                      −
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>{`영상 제목 ${videoNumber}`}</div>
+                  <div className={styles["video-button-container"]}>
+                    <div
+                      className={styles["video-button"]}
+                      onClick={() => {
+                        setVideoCount(prev => prev - 1);
+                        const copiedVideos = [...videos];
+                        copiedVideos.splice(index, 1);
+                        setVideos(copiedVideos);
+                      }}
+                    >
+                      −
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-          );
-        })}
+            <input
+              className={`${styles["input"]} ${styles["input-link"]}`}
+              value={videos[index].title}
+              onChange={e => {
+                copiedVideos[index] = { ...copiedVideos[index], title: e.target.value };
+                setVideos(copiedVideos);
+              }}
+            />
+            <div
+              className={`${styles["block-title"]} ${styles["video-link-title"]}`}
+            >{`영상 링크 ${videoNumber}`}</div>
+            <input
+              className={`${styles["input"]} ${styles["input-link"]}`}
+              value={videos[index].url}
+              onChange={e => {
+                copiedVideos[index] = { ...copiedVideos[index], url: e.target.value };
+                setVideos(copiedVideos);
+              }}
+            />
+          </div>
+        );
+      })}
 
       {/* 태그 */}
       <div ref={modalRef} className={styles["block-container"]}>
@@ -461,6 +488,7 @@ export default function Update({ currentId }: UpdateProps) {
             <div className={styles["tag-modal-container"]}>
               <div className={styles["tag-modal"]}>
                 <div className={styles["tag-item-container"]}>
+                  {/* 태그 종류 출력 */}
                   {Object.keys(GROUP_TAGS).map((tag, index) => {
                     const isNormalTag = tag !== "모두보기";
                     return (
@@ -468,18 +496,19 @@ export default function Update({ currentId }: UpdateProps) {
                         <React.Fragment key={index}>
                           <div className={styles["tag-block-title"]}>{tag}</div>
                           <div className={styles["tag-block-item-container"]} key={index}>
-                            {Object.keys(GROUP_TAGS[tag]).map(tagKey => {
-                              const isExistingTag = currentTagKeys.includes(tagKey);
+                            {/* 해당 종류의 태그 출력 */}
+                            {Object.keys(GROUP_TAGS[tag]).map(tag => {
+                              const isExistingTag = currentTagKeys.includes(tag);
                               return (
                                 !isExistingTag && (
                                   <div
                                     className={styles["tag-item"]}
-                                    key={tagKey}
+                                    key={tag}
                                     onClick={() => {
-                                      addTagItem(tagKey);
+                                      addTagItem(tag);
                                     }}
                                   >
-                                    {GROUP_TAGS[tag][tagKey]}
+                                    {GROUP_TAGS[tag][tag]}
                                     <button className={styles["tag-delete-button"]}>+</button>
                                   </div>
                                 )
@@ -540,7 +569,10 @@ export default function Update({ currentId }: UpdateProps) {
 
       {/* 제출 버튼 */}
       <div className={styles["submit-container"]}>
-        <div className={`${styles["button"]} ${styles["submit"]}`} onClick={handleUpdate}>
+        <div
+          className={`${styles["button"]} ${styles["submit"]}`}
+          onClick={isUpdatePage ? handleUpdate : handleUpload}
+        >
           제출하기
         </div>
       </div>

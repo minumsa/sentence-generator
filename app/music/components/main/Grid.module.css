@@ -35,15 +35,15 @@
 }
 
 .album-image {
-  position: absolute;
   width: 100%;
+  height: 100%;
   cursor: pointer;
 }
 
-.album-image::after {
+/* .album-image::after {
   display: block;
   content: "";
-}
+} */
 
 .album-image {
   transition: transform 0.2s ease-in-out;

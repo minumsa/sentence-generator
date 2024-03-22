@@ -63,6 +63,7 @@ export default function Upload() {
     }
   }, [searchKeyword, isTyping]);
 
+  // 업로드 API
   const handleUpload = async () => {
     const filteredText = text.replace(/\[\d+\]/g, "");
     const newSpotifyAlbumData = await fetchSpotify(albumId);
@@ -94,7 +95,7 @@ export default function Upload() {
     }
   };
 
-  const handleClickSearchData = (data: SearchData) => {
+  const handleClickSearchResult = (data: SearchData) => {
     const { name, id, artists } = data;
     setSearchKeyword(name);
     setAlbumId(id);
@@ -192,7 +193,7 @@ export default function Upload() {
                   className={styles["search-album-modal"]}
                   key={index}
                   onClick={() => {
-                    handleClickSearchData(data);
+                    handleClickSearchResult(data);
                   }}
                 >
                   <div className={styles["search-album-image-container"]}>
@@ -381,6 +382,7 @@ export default function Upload() {
             <div className={styles["tag-modal-container"]}>
               <div className={styles["tag-modal"]}>
                 <div className={styles["tag-item-container"]}>
+                  {/* 태그 종류 출력 */}
                   {Object.keys(GROUP_TAGS).map((tag, index) => {
                     const isNormalTag = tag !== "모두보기";
                     return (
@@ -388,6 +390,7 @@ export default function Upload() {
                         <React.Fragment key={index}>
                           <div className={styles["tag-block-title"]}>{tag}</div>
                           <div className={styles["tag-block-item-container"]} key={index}>
+                            {/* 해당 종류의 태그 출력 */}
                             {Object.keys(GROUP_TAGS[tag]).map(tagKey => {
                               const isExistingTag = currentTagKeys.includes(tagKey);
                               return (

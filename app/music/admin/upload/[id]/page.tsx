@@ -1,6 +1,6 @@
 "use client";
 
-import Update from "@/app/music/components/upload/Update";
+import UploadAndUpdate from "@/app/music/components/upload/UploadAndUpdate";
 import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
 
@@ -9,7 +9,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <MusicLayout>
-      <Update currentId={currentId} />
+      <UploadAndUpdate currentId={currentId} />
     </MusicLayout>
   );
 }

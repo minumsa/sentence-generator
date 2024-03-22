@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useBlurhash } from "../../modules/useHash";
 import { useInView } from "react-intersection-observer";
+import styles from "../main/Grid.module.css";
 
 interface BlurImgProps {
   loading?: "lazy" | "eager" | undefined;
@@ -19,12 +20,7 @@ export function BlurImg({
 }: BlurImgProps): JSX.Element {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [ref, inView] = useInView({ rootMargin: "110%" });
-  // const blurUrl = useBlurhash(blurHash ? blurHash : "", props.width || 100, props.height || 100);
-  const blurUrl = useBlurhash(
-    !imgLoaded && blurHash ? blurHash : "",
-    props.width || 100,
-    props.height || 100
-  );
+  const blurUrl = useBlurhash(blurHash ? blurHash : "", props.width || 100, props.height || 100);
 
   const handleOnLoad = useCallback(() => {
     setImgLoaded(true);
