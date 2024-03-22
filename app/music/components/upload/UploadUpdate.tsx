@@ -1,13 +1,30 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./Update.module.css";
+import styles from "./UploadUpdate.module.css";
 import React from "react";
-import { UploadData, fetchSpotify, searchSpotify, uploadData } from "../../modules/api";
+import {
+  UploadData,
+  fetchAlbumById,
+  fetchSpotify,
+  searchSpotify,
+  updateData,
+  uploadData,
+} from "../../modules/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
-import { AlbumInfo } from "../../modules/types";
+import { useRouter } from "next/navigation";
+import { AlbumInfo, SpotifyAlbumData } from "../../modules/types";
 import { CATEGORY, DEFAULT_TAGS, GROUP_TAGS } from "../../modules/constants";
+
+interface UpdateProps {
+  currentId: string;
+}
+
+interface Video {
+  title: string;
+  url: string;
+}
 
 type Artist = { name: string };
 type Image = { url: string };
@@ -21,47 +38,31 @@ interface SearchData {
   id: string;
 }
 
-interface Video {
-  title: string;
-  url: string;
-}
-
-export default function Upload() {
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
-  const [albumId, setAlbumId] = useState<string>("");
-  const [album, setAlbum] = useState<string>("");
-  const [searchData, setSearchData] = useState<SearchData[]>();
-  const [isTyping, setIsTyping] = useState(false);
+// FIXME: Upload 컴포넌트와 겹치는 부분 리팩토링
+export default function UploadUpdate({ currentId }: UpdateProps) {
+  const isUpdatePage = currentId.length > 0;
+  const [albumData, setAlbumData] = useState<AlbumInfo>();
+  const [albumId, setAlbumId] = useState("");
+  const [artist, setArtist] = useState("");
+  const [artistId, setArtistId] = useState("");
   const [genre, setGenre] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [text, setText] = useState<string>("");
-  const [artist, setArtist] = useState("");
-  const [score, setScore] = useState<number>(0);
   const [password, setPassword] = useState<string>("");
+  const [score, setScore] = useState<number>(0);
+  const [albumReleaseDate, setAlbumReleaseDate] = useState<string>("");
   const [uploadDate, setUploadDate] = useState(new Date());
   const [videoCount, setVideoCount] = useState(1);
   const [videos, setVideos] = useState<Video[]>([{ title: "", url: "" }]);
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const [searchData, setSearchData] = useState<SearchData[]>();
+  const [isTyping, setIsTyping] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
-  const [showTagsModal, setShowTagsModal] = useState(false);
   const [currentTagKeys, setCurrentTagKeys] = useState<string[]>([]);
+  const [showTagsModal, setShowTagsModal] = useState(false);
   const [newTagKey, setNewTagKey] = useState("");
   const [blurHash, setBlurHash] = useState("");
-
-  const handleSearch = async () => {
-    const result = await searchSpotify(searchKeyword);
-    setSearchData(result);
-  };
-
-  useEffect(() => {
-    const isSearching = isTyping && searchKeyword;
-    if (isSearching) {
-      const typingTimer = setTimeout(() => {
-        handleSearch();
-      }, 1000);
-
-      return () => clearTimeout(typingTimer);
-    }
-  }, [searchKeyword, isTyping]);
+  const router = useRouter();
 
   // 업로드 API
   const handleUpload = async () => {
@@ -89,18 +90,106 @@ export default function Upload() {
     }
   };
 
-  const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleUpload();
+  // 업데이트 API
+  const handleUpdate = async () => {
+    const filteredText = text.replace(/\[\d+\]/g, "");
+    const newSpotifyAlbumData: SpotifyAlbumData | undefined = await fetchSpotify(albumId);
+
+    if (newSpotifyAlbumData) {
+      const newData: UploadData = {
+        newSpotifyAlbumData,
+        genre,
+        link,
+        text: filteredText,
+        uploadDate,
+        score,
+        videos,
+        tagKeys: currentTagKeys,
+        blurHash,
+      };
+
+      try {
+        await updateData({
+          newData,
+          password,
+        });
+        router.back();
+      } catch (error) {
+        console.error("updateData 호출에 실패했습니다:", error);
+      }
     }
   };
 
+  const handlePasswordEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleUpdate();
+    }
+  };
+
+  useEffect(() => {
+    async function getData() {
+      const fetchData = await fetchAlbumById(currentId);
+      setAlbumData(fetchData);
+      const {
+        id,
+        artist,
+        artistId,
+        genre,
+        link,
+        text,
+        uploadDate,
+        score,
+        videos,
+        tagKeys,
+        album,
+        releaseDate,
+        blurHash,
+      } = fetchData;
+      setAlbumId(id);
+      setArtist(artist);
+      setArtistId(artistId);
+      setGenre(genre);
+      setLink(link);
+      setText(text);
+      setScore(score);
+      setUploadDate(new Date(uploadDate));
+      setSearchKeyword(album);
+      setCurrentTagKeys(tagKeys);
+      setAlbumReleaseDate(new Date(releaseDate).toString());
+      setBlurHash(blurHash);
+
+      const hasVideo = videos.length > 0;
+
+      if (hasVideo) {
+        setVideos(videos);
+        setVideoCount(videos.length);
+      }
+    }
+
+    if (isUpdatePage) getData();
+  }, [currentId]);
+
+  const handleSearch = async () => {
+    const result = await searchSpotify(searchKeyword);
+    setSearchData(result);
+  };
+
+  useEffect(() => {
+    const isSearching = isTyping && searchKeyword;
+    if (isSearching) {
+      const typingTimer = setTimeout(() => {
+        handleSearch();
+      }, 1000);
+
+      return () => clearTimeout(typingTimer);
+    }
+  }, [searchKeyword, isTyping]);
+
   const handleClickSearchResult = (data: SearchData) => {
     const { name, id, artists } = data;
-    setSearchKeyword(name);
-    setAlbumId(id);
     setArtist(artists[0].name);
-    setAlbum(name);
+    setAlbumId(id);
+    setSearchKeyword(name);
     setSearchData(undefined);
     setIsTyping(false);
   };
@@ -110,6 +199,7 @@ export default function Upload() {
       const isClickedOutsideModal =
         modalRef.current && !modalRef.current.contains(event.target as Node);
       if (isClickedOutsideModal) {
+        setIsTyping(false);
         setShowTagsModal(false);
         setNewTagKey("");
       }
@@ -142,27 +232,39 @@ export default function Upload() {
       className={styles["container"]}
       style={showTagsModal ? { marginBottom: "150px" } : undefined}
     >
-      <div className={styles["page-title"]}>업로드 페이지</div>
+      <div className={styles["page-title"]}>수정 페이지</div>
 
       {/* 장르 */}
       <div className={styles["block-container"]}>
         <div className={styles["block-title"]}>장르</div>
-        <select
-          className={styles["small-input"]}
-          value={genre}
+        <div className={styles["select-container"]}>
+          <select
+            className={styles["small-input"]}
+            value={genre}
+            onChange={e => {
+              setGenre(e.target.value);
+            }}
+          >
+            <option value="">--장르를 선택해주세요--</option>
+            {Object.entries(CATEGORY).map(([key, value]) => {
+              return (
+                <option value={key} key={key}>
+                  {value}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>링크(Apple Music)</div>
+        <input
+          className={styles["input"]}
+          value={link}
           onChange={e => {
-            setGenre(e.target.value);
+            setLink(e.target.value);
           }}
-        >
-          <option value="">--장르를 선택해주세요--</option>
-          {Object.entries(CATEGORY).map(([key, value]) => {
-            return (
-              <option value={key} key={key}>
-                {value}
-              </option>
-            );
-          })}
-        </select>
+        />
       </div>
 
       {/* 앨범 제목 */}
@@ -220,21 +322,24 @@ export default function Upload() {
 
       {/* 앨범 ID */}
       <div className={styles["block-container"]}>
-        <div className={styles["block-title"]}>앨범 ID</div>
-        <input
-          className={`${styles["input"]} ${styles["input-link"]}`}
-          defaultValue={albumId}
-        ></input>
+        <div className={styles["block-title"]}>앨범 ID(Spotify)</div>
+        <div className={styles["input"]}>{albumId}</div>
       </div>
 
-      {/* 링크(Apple Music) */}
+      {/* 발매일 */}
       <div className={styles["block-container"]}>
-        <div className={styles["block-title"]}>링크(Apple Music)</div>
+        <div className={styles["block-title"]}>발매일</div>
+        <div className={styles["input"]}>{albumReleaseDate}</div>
+      </div>
+
+      {/* 아티스트 ID */}
+      <div className={styles["block-container"]}>
+        <div className={styles["block-title"]}>아티스트 ID(Spotify)</div>
         <input
-          className={`${styles["input"]} ${styles["input-link"]}`}
-          value={link}
+          className={styles["input"]}
+          value={artistId}
           onChange={e => {
-            setLink(e.target.value);
+            setArtistId(e.target.value);
           }}
         />
       </div>
@@ -256,6 +361,7 @@ export default function Upload() {
         <div className={styles["block-title"]}>별점</div>
         <Rate
           defaultValue={3}
+          value={score}
           count={5}
           allowHalf={true}
           onChange={(value: number) => {
@@ -288,11 +394,11 @@ export default function Upload() {
               {isFirstVideo ? (
                 <>
                   <a
-                    href={`https://www.youtube.com/results?search_query=${artist} ${album} MV 자막`}
+                    href={`https://www.youtube.com/results?search_query=${artist} ${searchKeyword} MV 자막`}
                     target="_blank"
                   >
                     <div>{`영상 제목 ${videoNumber}`}</div>
-                  </a>{" "}
+                  </a>
                   <div className={styles["video-button-container"]}>
                     <div
                       className={styles["video-button"]}
@@ -383,26 +489,26 @@ export default function Upload() {
               <div className={styles["tag-modal"]}>
                 <div className={styles["tag-item-container"]}>
                   {/* 태그 종류 출력 */}
-                  {Object.keys(GROUP_TAGS).map((tag, index) => {
-                    const isNormalTag = tag !== "모두보기";
+                  {Object.keys(GROUP_TAGS).map((tagTheme, index) => {
+                    const isNormalTag = tagTheme !== "모두보기";
                     return (
                       isNormalTag && (
                         <React.Fragment key={index}>
-                          <div className={styles["tag-block-title"]}>{tag}</div>
+                          <div className={styles["tag-block-title"]}>{tagTheme}</div>
                           <div className={styles["tag-block-item-container"]} key={index}>
                             {/* 해당 종류의 태그 출력 */}
-                            {Object.keys(GROUP_TAGS[tag]).map(tagKey => {
-                              const isExistingTag = currentTagKeys.includes(tagKey);
+                            {Object.keys(GROUP_TAGS[tagTheme]).map(tag => {
+                              const isExistingTag = currentTagKeys.includes(tag);
                               return (
                                 !isExistingTag && (
                                   <div
                                     className={styles["tag-item"]}
-                                    key={tagKey}
+                                    key={tag}
                                     onClick={() => {
-                                      addTagItem(tagKey);
+                                      addTagItem(tag);
                                     }}
                                   >
-                                    {GROUP_TAGS[tag][tagKey]}
+                                    {GROUP_TAGS[tagTheme][tag]}
                                     <button className={styles["tag-delete-button"]}>+</button>
                                   </div>
                                 )
@@ -444,7 +550,7 @@ export default function Upload() {
           selected={uploadDate}
           onChange={date => date && setUploadDate(date)}
           dateFormat={"yyyy/MM/dd"}
-          className={styles["date-input"]}
+          className={`${styles["date-input"]} ${styles["input"]}`}
         />
       </div>
 
@@ -465,9 +571,7 @@ export default function Upload() {
       <div className={styles["submit-container"]}>
         <div
           className={`${styles["button"]} ${styles["submit"]}`}
-          onClick={() => {
-            handleUpload();
-          }}
+          onClick={isUpdatePage ? handleUpdate : handleUpload}
         >
           제출하기
         </div>
