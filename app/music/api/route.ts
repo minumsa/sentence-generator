@@ -42,13 +42,14 @@ export async function GET(request: Request) {
       query.genre = pathName;
     }
 
-    const skipCount = perPageCount * currentPage - perPageCount + 1;
+    // 50 * 1 - 50 + 1 = 1 49
+    // 50 * 2 - 50 + 1 = 51
+    // const skipCount = perPageCount * currentPage - perPageCount + 1;
+    const skipCount = perPageCount * currentPage - perPageCount;
+    // const slicedData = await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
     const slicedData =
       currentPage === 1
-        ? await Music.find(query)
-            .sort(sortKey)
-            .skip(skipCount)
-            .limit(perPageCount - 1)
+        ? await Music.find(query).sort(sortKey).limit(perPageCount)
         : await Music.find(query).sort(sortKey).skip(skipCount).limit(perPageCount);
     const totalDataLength = await Music.find(query).count();
 
