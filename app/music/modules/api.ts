@@ -27,7 +27,7 @@ export async function fetchAlbumData({ albumFilters }: FetchData) {
   const { scrollCount, currentTagKey } = albumFilters;
 
   try {
-    const queryString = `?currentPage=${scrollCount}&currentTagKey=${currentTagKey}`;
+    const queryString = `?scrollCount=${scrollCount}&currentTagKey=${currentTagKey}`;
     const url = `/music/api${queryString}`;
 
     const response = await fetch(url, {
