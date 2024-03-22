@@ -2,7 +2,6 @@
 
 import Content from "../../components/@common/Content";
 import { MusicLayout } from "../../components/@common/MusicLayout";
-import { SUB_PER_PAGE_COUNT } from "../../modules/constants";
 import { PageProps } from "../../modules/types";
 
 export default async function Page({ params }: PageProps) {

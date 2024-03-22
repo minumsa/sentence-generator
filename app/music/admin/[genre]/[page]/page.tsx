@@ -3,15 +3,13 @@ import Content from "@/app/music/components/@common/Content";
 import { PageProps } from "@/app/music/modules/types";
 
 export default async function Page({ params }: PageProps) {
-  let currentGenre = params.genre;
+  const currentGenre = params.genre;
   const currentPage = params.page;
 
   try {
-    const pathName = currentGenre;
-
     const currentTagKey = "";
 
-    const queryString = `?pathName=${pathName}&currentPage=${currentPage}&currentTagKey=${currentTagKey}`;
+    const queryString = `?pathName=${currentGenre}&currentPage=${currentPage}&currentTagKey=${currentTagKey}`;
     const url = `https://divdivdiv.com/music/api${queryString}`;
 
     const response = await fetch(url, {

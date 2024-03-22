@@ -4,7 +4,7 @@ import { PageProps } from "../modules/types";
 
 export default async function Page({ params }: PageProps) {
   let currentGenre = params.genre;
-  const currentPage = Number(params.page);
+  const currentPage = 1;
 
   try {
     const pathName = currentGenre;
