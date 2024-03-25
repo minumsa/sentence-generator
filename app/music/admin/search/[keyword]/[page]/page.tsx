@@ -1,38 +1,24 @@
 import SearchContent from "@/app/music/components/search/SearchContent";
 import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import { PageProps } from "@/app/music/modules/types";
+import { fetchSearchData } from "@/app/music/modules/api";
 
 export default async function Page({ params }: PageProps) {
   const currentKeyword: string = params.keyword;
   const currentPage: number = params.page;
 
   try {
-    const queryString = `?currentPage=${currentPage}&currentKeyword=${currentKeyword}`;
-    const url = `https://divdivdiv.com/music/api/search${queryString}`;
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to search data");
-    }
-
-    const { slicedData, totalDataLength } = await response.json();
-    const currentTagName = "";
+    const { searchData, searchDataCount } = await fetchSearchData(currentKeyword, currentPage);
     const searchInfo = {
       currentKeyword,
       currentPage,
-      currentTagName,
-      totalDataLength: totalDataLength,
+      currentTagName: "",
+      totalDataLength: searchDataCount,
     };
 
     return (
       <MusicLayout>
-        <SearchContent data={slicedData} searchInfo={searchInfo} />
+        <SearchContent data={searchData} searchInfo={searchInfo} />
       </MusicLayout>
     );
   } catch (error) {

@@ -153,12 +153,18 @@ export async function fetchTagData(
   }
 }
 
-export async function fetchSearchedData(searchFilters: SearchFilters) {
-  const { currentPage, currentKeyword } = searchFilters;
+interface SearchDataResult {
+  searchData: AlbumInfo[];
+  searchDataCount: number;
+}
 
+export async function fetchSearchData(
+  currentKeyword: string,
+  currentPage: number
+): Promise<SearchDataResult> {
   try {
-    const queryString = `?currentPage=${currentPage}&currentKeyword=${currentKeyword}`;
-    const url = `/music/api/search${queryString}`;
+    const queryString = `?currentKeyword=${currentKeyword}&currentPage=${currentPage}`;
+    const url = `https://divdivdiv.com/music/api/search${queryString}`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -171,11 +177,10 @@ export async function fetchSearchedData(searchFilters: SearchFilters) {
       throw new Error("Failed to search data");
     }
 
-    const { slicedData, totalDataLength } = await response.json();
-
-    return { slicedData, totalDataLength };
+    const { searchData, searchDataCount } = await response.json();
+    return { searchData, searchDataCount };
   } catch (error) {
-    console.error(error);
+    throw new Error("Failed to search data");
   }
 }
 

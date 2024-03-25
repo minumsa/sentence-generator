@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     const sortKey: { [key: string]: SortOrder } = { artist: 1, releaseDate: 1 };
 
     let skipCount = SUB_PER_PAGE_COUNT * currentPage - SUB_PER_PAGE_COUNT;
-    const slicedData = await Music.find({
+    const searchData = await Music.find({
       $or: [
         { text: { $regex: new RegExp(currentKeyword, "i") } },
         { artist: { $regex: new RegExp(currentKeyword, "i") } },
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
       .skip(skipCount)
       .limit(SUB_PER_PAGE_COUNT);
 
-    const totalDataLength = await Music.find({
+    const searchDataCount = await Music.find({
       $or: [
         { text: { $regex: new RegExp(currentKeyword, "i") } }, // 'i' 옵션은 대소문자를 구별하지 않도록 설정
         { artist: { $regex: new RegExp(currentKeyword, "i") } },
@@ -35,7 +35,7 @@ export async function GET(request: Request) {
       ],
     }).count();
 
-    return NextResponse.json({ slicedData, totalDataLength: totalDataLength });
+    return NextResponse.json({ searchData, searchDataCount });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
