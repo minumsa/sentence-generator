@@ -25,6 +25,7 @@ async function connectMongoDB() {
   if (cached.conn) {
     return cached.conn;
   }
+
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
@@ -33,6 +34,7 @@ async function connectMongoDB() {
       return mongoose;
     });
   }
+
   try {
     cached.conn = await cached.promise;
   } catch (e) {

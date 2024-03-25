@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { DEFAULT_TAGS } from "../../modules/constants";
 import styles from "./MobileTagDisplay.module.css";
 import {
@@ -8,10 +8,11 @@ import {
   scrollPositionAtom,
 } from "../../modules/atoms";
 import { useState } from "react";
+import { isMobile } from "react-device-detect";
 
 export const MobileTagDisplay = () => {
-  const [data, setData] = useAtom(albumDataAtom);
-  const [scrollCount, setScrollCount] = useAtom(scrollCountAtom);
+  const setData = useSetAtom(albumDataAtom);
+  const setScrollCount = useSetAtom(scrollCountAtom);
   const [currentTagKey, setCurrentTagKey] = useAtom(CurrentTagKeyAtom);
   const [scrollPosition, setScrollPosition] = useAtom(scrollPositionAtom);
   const [showAllTagItems, setShowAllTagItems] = useState<boolean>(false);
@@ -19,7 +20,10 @@ export const MobileTagDisplay = () => {
   return (
     <div
       className={styles["tag-display-container"]}
-      style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
+      style={{
+        display: isMobile ? "flex" : "none",
+        ...(showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }),
+      }}
     >
       {Object.keys(DEFAULT_TAGS).map((key, index) => {
         return (
