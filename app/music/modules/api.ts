@@ -1,17 +1,12 @@
 import { FIRST_SCROLL, PER_PAGE_COUNT } from "./constants";
 import { AlbumInfo, SpotifyAlbumData } from "./types";
 
-export interface AlbumFilters {
-  scrollCount: number;
-  currentTagKey: string;
-}
-
-interface AlbumDataResult {
+interface InitialAlbumDataResult {
   albumData: AlbumInfo[];
   totalScrollCount: number;
 }
 
-export async function fetchInitialAlbumData(): Promise<AlbumDataResult> {
+export async function fetchInitialAlbumData(): Promise<InitialAlbumDataResult> {
   try {
     const queryString = `?scrollCount=${FIRST_SCROLL}&currentTagKey=${""}`;
     const url = `https://divdivdiv.com/music/api${queryString}`;
@@ -33,6 +28,16 @@ export async function fetchInitialAlbumData(): Promise<AlbumDataResult> {
   } catch (error) {
     throw new Error("Failed to fetch music data");
   }
+}
+
+export interface AlbumFilters {
+  scrollCount: number;
+  currentTagKey: string;
+}
+
+interface AlbumDataResult {
+  albumData: AlbumInfo[];
+  albumDataCount: number;
 }
 
 export async function fetchAlbumData(albumFilters: AlbumFilters): Promise<AlbumDataResult> {
