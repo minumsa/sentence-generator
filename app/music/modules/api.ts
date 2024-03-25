@@ -122,6 +122,37 @@ export async function fetchArtistData(
   }
 }
 
+interface TagDataResult {
+  tagData: AlbumInfo[];
+  tagDataCount: number;
+}
+
+export async function fetchTagData(
+  currentTag: string,
+  currentPage: number
+): Promise<TagDataResult> {
+  try {
+    const queryString = `?currentTag=${currentTag}&currentPage=${currentPage}`;
+    const url = `https://divdivdiv.com/music/api/tag${queryString}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch artist data");
+    }
+
+    const { tagData, tagDataCount } = await response.json();
+    return { tagData, tagDataCount };
+  } catch (error) {
+    throw new Error("Failed to fetch tag data");
+  }
+}
+
 export async function fetchSearchedData(searchFilters: SearchFilters) {
   const { currentPage, currentKeyword } = searchFilters;
 

@@ -25,7 +25,7 @@ export default async function Page({ params }: PageProps) {
   }
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const artistId = params.id;
   const currentPage = params.page;
 
@@ -38,14 +38,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
     }
 
     const { artistImgUrl, artist, text } = firstArtistData;
+    const title = artist;
     const currentUrl = `https://divdivdiv.com/music/artist/${artistId}/1`;
-    const textPreview = text.substring(0, 30) + "...";
+    const textPreview = text.length > 30 ? text.substring(0, 30) + "..." : text;
 
     return {
-      title: artist,
+      title: title,
       description: textPreview,
       openGraph: {
-        title: `${artist}`,
+        title: title,
         images: [artistImgUrl],
         url: currentUrl,
         type: "website",
@@ -54,6 +55,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
       },
     };
   } catch (error) {
-    console.error(error);
+    throw new Error(`Failed to generate artist metadata for artist ID: ${artistId}`);
   }
 }

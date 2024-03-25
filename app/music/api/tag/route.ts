@@ -25,13 +25,13 @@ export async function GET(request: Request) {
     let query: Query = { tagKeys: currentTag };
 
     const skipCount = SUB_PER_PAGE_COUNT * currentPage - SUB_PER_PAGE_COUNT;
-    const slicedData =
+    const tagData =
       currentPage === 1
         ? await Music.find(query).sort(sortKey).limit(SUB_PER_PAGE_COUNT)
         : await Music.find(query).sort(sortKey).skip(skipCount).limit(SUB_PER_PAGE_COUNT);
-    const totalDataLength = await Music.find(query).count();
+    const tagDataCount = await Music.find(query).count();
 
-    return NextResponse.json({ slicedData, totalDataLength });
+    return NextResponse.json({ tagData, tagDataCount });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
