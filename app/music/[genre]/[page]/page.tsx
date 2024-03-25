@@ -4,8 +4,8 @@ import { fetchGenreData } from "../../modules/api";
 import { PageProps } from "../../modules/types";
 
 export default async function Page({ params }: PageProps) {
-  let currentGenre = params.genre;
-  let currentPage = params.page;
+  const currentGenre = params.genre;
+  const currentPage = params.page;
 
   try {
     const { genreData, genreDataCount } = await fetchGenreData(currentGenre, currentPage);

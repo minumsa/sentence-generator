@@ -1,5 +1,6 @@
 import { Genres } from "./types";
 
+export const FIRST_PAGE: number = 1;
 export const PER_PAGE_COUNT: number = 50;
 export const SUB_PER_PAGE_COUNT: number = 5;
 

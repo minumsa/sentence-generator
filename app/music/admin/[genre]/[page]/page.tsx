@@ -1,32 +1,18 @@
 import { MusicLayout } from "@/app/music/components/@common/MusicLayout";
 import Content from "@/app/music/components/@common/Content";
 import { PageProps } from "@/app/music/modules/types";
+import { fetchGenreData } from "@/app/music/modules/api";
 
 export default async function Page({ params }: PageProps) {
-  let currentGenre = params.genre;
-  let currentPage = params.page;
+  const currentGenre = params.genre;
+  const currentPage = params.page;
 
   try {
-    const queryString = `?currentGenre=${currentGenre}&currentPage=${currentPage}`;
-    const url = `https://divdivdiv.com/music/api/genre${queryString}`;
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "force-cache",
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch music data");
-    }
-
-    const { slicedData, totalDataLength } = await response.json();
+    const { genreData, genreDataCount } = await fetchGenreData(currentGenre, currentPage);
 
     return (
       <MusicLayout>
-        <Content data={slicedData} dataCount={totalDataLength} currentPage={currentPage} />
+        <Content data={genreData} dataCount={genreDataCount} currentPage={currentPage} />
       </MusicLayout>
     );
   } catch (error) {
