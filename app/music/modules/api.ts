@@ -1,16 +1,41 @@
-import { AlbumInfo, Genres, SpotifyAlbumData } from "./types";
+import { FIRST_SCROLL, PER_PAGE_COUNT } from "./constants";
+import { AlbumInfo, SpotifyAlbumData } from "./types";
 
 export interface AlbumFilters {
   scrollCount: number;
   currentTagKey: string;
 }
 
-export interface SearchFilters {
-  currentPage: number;
-  currentKeyword: string;
+interface AlbumDataResult {
+  albumData: AlbumInfo[];
+  totalScrollCount: number;
 }
 
-export async function fetchAlbumData(albumFilters: AlbumFilters) {
+export async function fetchInitialAlbumData(): Promise<AlbumDataResult> {
+  try {
+    const queryString = `?scrollCount=${FIRST_SCROLL}&currentTagKey=${""}`;
+    const url = `https://divdivdiv.com/music/api${queryString}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch music data");
+    }
+
+    const { albumData, albumDataCount } = await response.json();
+    const totalScrollCount = Math.max(1, Math.ceil(albumDataCount / PER_PAGE_COUNT));
+    return { albumData, totalScrollCount };
+  } catch (error) {
+    throw new Error("Failed to fetch music data");
+  }
+}
+
+export async function fetchAlbumData(albumFilters: AlbumFilters): Promise<AlbumDataResult> {
   const { scrollCount, currentTagKey } = albumFilters;
 
   try {
@@ -28,11 +53,10 @@ export async function fetchAlbumData(albumFilters: AlbumFilters) {
       throw new Error("Failed to fetch music data");
     }
 
-    const { slicedData, totalDataLength } = await response.json();
-
-    return { slicedData, totalDataLength };
+    const { albumData, albumDataCount } = await response.json();
+    return { albumData, albumDataCount };
   } catch (error) {
-    console.error(error);
+    throw new Error("Failed to fetch music data");
   }
 }
 

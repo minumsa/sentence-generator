@@ -29,13 +29,13 @@ export async function GET(request: Request) {
     }
 
     const skipCount = PER_PAGE_COUNT * scrollCount - PER_PAGE_COUNT;
-    const slicedData =
+    const albumData =
       scrollCount === 1
         ? await Music.find(query).sort(sortKey).limit(PER_PAGE_COUNT)
         : await Music.find(query).sort(sortKey).skip(skipCount).limit(PER_PAGE_COUNT);
-    const totalDataLength = await Music.find(query).count();
+    const albumDataCount = await Music.find(query).count();
 
-    return NextResponse.json({ slicedData, totalDataLength });
+    return NextResponse.json({ albumData, albumDataCount });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });

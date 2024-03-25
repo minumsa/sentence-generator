@@ -70,25 +70,22 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
         currentTagKey,
       };
 
-      const albumResult = await fetchAlbumData(albumFilters);
-
-      if (albumResult) {
-        setData(prevData => [...prevData, ...albumResult.slicedData]);
-        setIsScrolling(false);
-      }
+      const { albumData, albumDataCount } = await fetchAlbumData(albumFilters);
+      setData(prevData => [...prevData, ...albumData]);
+      setIsScrolling(false);
 
       if (currentTagKey) {
-        const tmp = Math.max(1, Math.ceil(albumResult?.totalDataLength / PER_PAGE_COUNT));
+        const tmp = Math.max(1, Math.ceil(albumDataCount / PER_PAGE_COUNT));
         setNewTotalScrollCount(tmp);
       }
     }
 
-    // 메인화면으로 진입한 경우
     const isInitialScroll = currentTagKey === "" && scrollCount === 1;
     const scrollDetected =
       data.length >= 1 && scrollCount > 1 && scrollCount <= newTotalScrollCount;
     const tagButtonClicked = currentTagKey.length > 0 && scrollCount === 1;
 
+    // 메인화면으로 진입한 경우
     if (isInitialScroll) {
       setData(initialData);
       // 데이터가 있는 상태에서 뒤로 가기 시 또는 태그 버튼을 클릭한 경우
@@ -101,7 +98,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     if (hasReachedScrollLimit) {
       setScrollCount(UNREACHABLE_SCROLL_LIMIT);
     }
-  }, [scrollCount, PER_PAGE_COUNT, currentTagKey, initialData]);
+  }, [initialData, scrollCount, currentTagKey]);
 
   function updateScrollPosition() {
     setScrollPosition(window.scrollY);
