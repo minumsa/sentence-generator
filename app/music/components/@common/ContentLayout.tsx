@@ -3,16 +3,14 @@ import { PageNumbers } from "../post/assets/PageNumbers";
 interface ContentLayoutProps {
   children: React.ReactNode;
   currentPage: number;
-  totalDataLength: number;
+  dataCount: number;
 }
 
-export const ContentLayout = ({ children, currentPage, totalDataLength }: ContentLayoutProps) => {
+export const ContentLayout = ({ children, currentPage, dataCount }: ContentLayoutProps) => {
   return (
     <>
       {children}
-      {totalDataLength > 0 && (
-        <PageNumbers currentPage={currentPage} totalDataLength={totalDataLength} />
-      )}
+      {dataCount > 0 && <PageNumbers currentPage={currentPage} dataCount={dataCount} />}
     </>
   );
 };

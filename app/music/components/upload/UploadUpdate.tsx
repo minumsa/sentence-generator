@@ -15,7 +15,7 @@ import Rate from "rc-rate";
 import "rc-rate/assets/index.css";
 import { useRouter } from "next/navigation";
 import { AlbumInfo, SpotifyAlbumData } from "../../modules/types";
-import { CATEGORY, DEFAULT_TAGS, GROUP_TAGS } from "../../modules/constants";
+import { GENRES, DEFAULT_TAGS, GROUP_TAGS } from "../../modules/constants";
 
 interface UpdateProps {
   currentId: string;
@@ -246,7 +246,7 @@ export default function UploadUpdate({ currentId }: UpdateProps) {
             }}
           >
             <option value="">--장르를 선택해주세요--</option>
-            {Object.entries(CATEGORY).map(([key, value]) => {
+            {Object.entries(GENRES).map(([key, value]) => {
               return (
                 <option value={key} key={key}>
                   {value}

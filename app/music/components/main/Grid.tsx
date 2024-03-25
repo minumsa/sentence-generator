@@ -123,7 +123,7 @@ export const Grid = ({ initialData, totalScrollCount }: GridProps) => {
     <>
       {/* 모바일 - 태그 컴포넌트 */}
       <MobileTagDisplay />
-      <ContentLayout currentPage={scrollCount} totalDataLength={0}>
+      <ContentLayout currentPage={scrollCount} dataCount={0}>
         <InitialLoadingView totalScrollCount={totalScrollCount} />
         <ScrollingIcon isScrolling={isScrolling} />
         <div className={styles["container"]}>

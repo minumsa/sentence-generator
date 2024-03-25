@@ -1,4 +1,4 @@
-import { AlbumInfo, SpotifyAlbumData } from "./types";
+import { AlbumInfo, Genres, SpotifyAlbumData } from "./types";
 
 export interface AlbumFilters {
   scrollCount: number;
@@ -36,7 +36,7 @@ export async function fetchAlbumData(albumFilters: AlbumFilters) {
   }
 }
 
-export async function fetchPostData(currentId: string) {
+export async function fetchPostData(currentId: string): Promise<AlbumInfo> {
   try {
     const queryString = `?albumId=${currentId}`;
     const url = `https://divdivdiv.com/music/api/post${queryString}`;
@@ -56,16 +56,50 @@ export async function fetchPostData(currentId: string) {
 
     return postData;
   } catch (error) {
-    console.error(error);
+    throw new Error("Failed to fetch post data");
   }
 }
 
-interface ArtistData {
+interface GenreDataResult {
+  genreData: AlbumInfo[];
+  genreDataCount: number;
+}
+
+export async function fetchGenreData(
+  currentGenre: string,
+  currentPage: number
+): Promise<GenreDataResult> {
+  try {
+    const queryString = `?currentGenre=${currentGenre}&currentPage=${currentPage}`;
+    const url = `https://divdivdiv.com/music/api/genre${queryString}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch genre data");
+    }
+
+    const { genreData, genreDataCount } = await response.json();
+    return { genreData, genreDataCount };
+  } catch (error) {
+    throw new Error("Failed to fetch genre data");
+  }
+}
+
+interface ArtistDataResult {
   artistData: AlbumInfo[];
   artistDataCount: number;
 }
 
-export async function fetchArtistData(artistId: string, currentPage: number): Promise<ArtistData> {
+export async function fetchArtistData(
+  artistId: string,
+  currentPage: number
+): Promise<ArtistDataResult> {
   try {
     const queryString = `?artistId=${artistId}&currentPage=${currentPage}`;
     const url = `https://divdivdiv.com/music/api/artist${queryString}`;
@@ -84,8 +118,7 @@ export async function fetchArtistData(artistId: string, currentPage: number): Pr
     const { artistData, artistDataCount } = await response.json();
     return { artistData, artistDataCount };
   } catch (error) {
-    console.error(error);
-    throw error;
+    throw new Error("Failed to fetch artist data");
   }
 }
 

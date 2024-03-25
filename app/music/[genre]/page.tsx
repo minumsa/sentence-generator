@@ -27,7 +27,7 @@ export default async function Page({ params }: PageProps) {
 
     return (
       <MusicLayout>
-        <Content data={slicedData} totalDataLength={totalDataLength} currentPage={CURRENT_PAGE} />
+        <Content data={slicedData} dataCount={totalDataLength} currentPage={CURRENT_PAGE} />
       </MusicLayout>
     );
   } catch (error) {

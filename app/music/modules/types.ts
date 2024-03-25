@@ -1,4 +1,4 @@
-export interface ContentsType {
+export interface Genres {
   pop: string;
   kpop: string;
   jpop: string;

@@ -5,32 +5,34 @@ import styles from "./Test.module.css";
 
 interface PageNumbersProps {
   currentPage: number;
-  totalDataLength: number;
+  dataCount: number;
 }
 
-export const PageNumbers = ({ currentPage, totalDataLength }: PageNumbersProps) => {
+const PAGE_SIZE = 5;
+
+export const PageNumbers = ({ currentPage, dataCount }: PageNumbersProps) => {
   const router = useRouter();
   const [totalPageCount, setTotalPageCount] = useState(1);
   const pageArray = Array.from({ length: totalPageCount }, (_, i) => i + 1);
   const pathName = usePathname();
   const pathNameWithoutPageNumber = pathName.replace(/\/\d+$/, "");
-  const [maxPage, setMaxPage] = useState<number>(5);
+  const [maxPage, setMaxPage] = useState<number>(PAGE_SIZE);
 
   useEffect(() => {
     setMaxPage(Math.ceil(currentPage / SUB_PER_PAGE_COUNT) * SUB_PER_PAGE_COUNT);
   }, [currentPage]);
 
   useEffect(() => {
-    if (totalDataLength) setTotalPageCount(Math.max(1, Math.ceil(totalDataLength / 5)));
-  }, [totalDataLength]);
+    if (dataCount) setTotalPageCount(Math.max(1, Math.ceil(dataCount / SUB_PER_PAGE_COUNT)));
+  }, [dataCount]);
 
   const handlePageClick = (pageNumber: number) => {
     router.push(`${pathNameWithoutPageNumber}/${pageNumber}`);
   };
 
   const goToPrevPage = () => {
-    if (maxPage > 5) {
-      const prevPageBlock = maxPage - 5;
+    if (maxPage > PAGE_SIZE) {
+      const prevPageBlock = maxPage - PAGE_SIZE;
       handlePageClick(prevPageBlock);
     }
   };
@@ -42,7 +44,7 @@ export const PageNumbers = ({ currentPage, totalDataLength }: PageNumbersProps) 
 
   return (
     <footer className={styles["page-container"]}>
-      {currentPage > 5 && (
+      {currentPage > PAGE_SIZE && (
         <div className={styles["page"]} onClick={goToPrevPage}>
           〈
         </div>

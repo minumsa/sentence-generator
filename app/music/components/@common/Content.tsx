@@ -6,13 +6,13 @@ import { ContentLayout } from "./ContentLayout";
 
 interface ContentProps {
   data: AlbumInfo[];
-  totalDataLength: number;
+  dataCount: number;
   currentPage: number;
 }
 
-export default function Content({ data, totalDataLength, currentPage }: ContentProps) {
+export default function Content({ data, dataCount, currentPage }: ContentProps) {
   return (
-    <ContentLayout currentPage={currentPage} totalDataLength={totalDataLength}>
+    <ContentLayout currentPage={currentPage} dataCount={dataCount}>
       <AlbumContents albumData={data} />
     </ContentLayout>
   );

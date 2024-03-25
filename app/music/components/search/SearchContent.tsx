@@ -41,7 +41,7 @@ export default function SearchContent({ data, searchInfo }: SearchContentProps) 
   }
 
   return (
-    <ContentLayout currentPage={currentPage} totalDataLength={totalDataLength}>
+    <ContentLayout currentPage={currentPage} dataCount={totalDataLength}>
       <div className={styles["search-input-container"]}>
         <div className={styles["search-page-input-container"]}>
           <input
