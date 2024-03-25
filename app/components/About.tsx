@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { Language, languageAtom } from "../modules/data";
+import { languageAtom } from "../modules/data";
 import styles from "../divdivdiv.module.css";
 
 export default function About() {

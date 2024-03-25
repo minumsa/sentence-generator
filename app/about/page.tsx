@@ -1,7 +1,7 @@
 "use client";
 
-import About from "../divdivdiv/components/About";
-import { FunctionalLayout } from "../divdivdiv/components/FunctionalLayout";
+import About from "../components/About";
+import { FunctionalLayout } from "../components/FunctionalLayout";
 
 export default function Page() {
   return (

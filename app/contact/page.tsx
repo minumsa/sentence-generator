@@ -1,7 +1,7 @@
 "use client";
 
-import Contact from "../divdivdiv/components/Contact";
-import { FunctionalLayout } from "../divdivdiv/components/FunctionalLayout";
+import Contact from "../components/Contact";
+import { FunctionalLayout } from "../components/FunctionalLayout";
 
 export default function Page() {
   return (
