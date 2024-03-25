@@ -8,7 +8,6 @@ import {
   scrollPositionAtom,
 } from "../../modules/atoms";
 import { useState } from "react";
-import { isMobile } from "react-device-detect";
 
 export const MobileTagDisplay = () => {
   const setData = useSetAtom(albumDataAtom);
@@ -20,10 +19,7 @@ export const MobileTagDisplay = () => {
   return (
     <div
       className={styles["tag-display-container"]}
-      style={{
-        display: isMobile ? "flex" : "none",
-        ...(showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }),
-      }}
+      style={showAllTagItems ? { flexWrap: "wrap", paddingRight: "31px" } : { flexWrap: "nowrap" }}
     >
       {Object.keys(DEFAULT_TAGS).map((key, index) => {
         return (
