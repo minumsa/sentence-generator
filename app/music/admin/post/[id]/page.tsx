@@ -22,21 +22,26 @@ export default async function Page({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const currentId = params.id;
-  const postData = await fetchPostData(currentId);
-  const { imgUrl, artist, album, text } = postData;
-  const textPreview = text.substring(0, 30) + "...";
-  const currentUrl = `https://divdivdiv.com/music/post/${currentId}`;
 
-  return {
-    title: `${artist} - ${album}`,
-    description: textPreview,
-    openGraph: {
+  try {
+    const postData = await fetchPostData(currentId);
+    const { imgUrl, artist, album, text } = postData;
+    const textPreview = text.substring(0, 30) + "...";
+    const currentUrl = `https://divdivdiv.com/music/post/${currentId}`;
+
+    return {
       title: `${artist} - ${album}`,
-      images: [imgUrl],
       description: textPreview,
-      url: currentUrl,
-      type: "website",
-      siteName: "divdivdiv",
-    },
-  };
+      openGraph: {
+        title: `${artist} - ${album}`,
+        images: [imgUrl],
+        description: textPreview,
+        url: currentUrl,
+        type: "website",
+        siteName: "divdivdiv",
+      },
+    };
+  } catch (error) {
+    throw new Error("Failed to generate post metadata");
+  }
 }
