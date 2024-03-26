@@ -95,34 +95,34 @@ export default function RandomSentenceGenerator() {
   };
 
   return (
-    <div className={styles["container"]}>
-      <div
-        className={`${styles["download-container"]} ${
-          isAnimating ? styles["download-animation"] : undefined
-        }`}
-      >
-        <div className={styles["download-text"]}>
-          <NoSSR>
+    <NoSSR>
+      <div className={styles["container"]}>
+        <div
+          className={`${styles["download-container"]} ${
+            isAnimating ? styles["download-animation"] : undefined
+          }`}
+        >
+          <div className={styles["download-text"]}>
             {isMobile ? "이미지 파일이 생성되었습니다!" : "이미지가 클립보드에 저장되었습니다!"}
-          </NoSSR>
+          </div>
+        </div>
+        <div className={styles["capture-icon"]} onClick={handleCapture}>
+          <FontAwesomeIcon icon={faCamera} />
+        </div>
+        <div className={styles["sentence-container"]}>
+          <div className={styles["sentence"]} onClick={handleClick}>
+            <span className={styles["word1"]} style={{ color: sentence.color1 }}>
+              {sentence.word1}{" "}
+            </span>
+            <span className={styles["word3"]} style={{ color: sentence.color2 }}>
+              같은{" "}
+            </span>
+            <span className={styles["word2"]} style={{ color: sentence.color3 }}>
+              {sentence.word2}
+            </span>
+          </div>
         </div>
       </div>
-      <div className={styles["capture-icon"]} onClick={handleCapture}>
-        <FontAwesomeIcon icon={faCamera} />
-      </div>
-      <div className={styles["sentence-container"]}>
-        <div className={styles["sentence"]} onClick={handleClick}>
-          <span className={styles["word1"]} style={{ color: sentence.color1 }}>
-            {sentence.word1}{" "}
-          </span>
-          <span className={styles["word3"]} style={{ color: sentence.color2 }}>
-            같은{" "}
-          </span>
-          <span className={styles["word2"]} style={{ color: sentence.color3 }}>
-            {sentence.word2}
-          </span>
-        </div>
-      </div>
-    </div>
+    </NoSSR>
   );
 }

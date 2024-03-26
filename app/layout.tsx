@@ -1,4 +1,3 @@
-import React from "react";
 import "./globals.css";
 
 export const metadata = {
@@ -22,12 +21,12 @@ export const metadata = {
   },
 };
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const Layout = ({ children }: Props) => {
-  return <body>{children}</body>;
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
 };
 
 export default Layout;

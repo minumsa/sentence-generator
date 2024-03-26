@@ -9,6 +9,10 @@
   overflow: hidden;
   font-size: 5rem;
   font-weight: 900;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .sentence {
